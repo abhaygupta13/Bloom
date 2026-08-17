@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Integration_Records</fullName>
+    <columns>NAME</columns>
+    <columns>Action__c</columns>
+    <columns>ObjectAPIName__c</columns>
+    <columns>RecordId__c</columns>
+    <columns>Param1__c</columns>
+    <columns>Param2__c</columns>
+    <columns>Param34__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Integration Records</label>
+</ListView>

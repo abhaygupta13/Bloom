@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PaymentPlanDiscount__c</fullName>
+    <description>Captures the discount percentage that needs to be applied when the payment plan is applied</description>
+    <inlineHelpText>Capture the discount percentage that needs to be applied when the payment plan is applied</inlineHelpText>
+    <label>Payment Plan Discount %</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

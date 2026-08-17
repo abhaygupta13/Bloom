@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Abu Dhabi Commercial Bank</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Commercial Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Finance</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Finance</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Islamic Bank</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Islamic Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Ajman Bank</fullName>
+        <default>false</default>
+        <label>Ajman Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Ahli Bank of Kuwait</fullName>
+        <default>false</default>
+        <label>Al Ahli Bank of Kuwait</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Hilal Bank</fullName>
+        <default>false</default>
+        <label>Al Hilal Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Maryah Community Bank</fullName>
+        <default>false</default>
+        <label>Al Maryah Community Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Masraf</fullName>
+        <default>false</default>
+        <label>Al Masraf</label>
+    </customValue>
+    <customValue>
+        <fullName>ARAB BANK</fullName>
+        <default>false</default>
+        <label>ARAB BANK</label>
+    </customValue>
+    <customValue>
+        <fullName>Bank of Baroda</fullName>
+        <default>false</default>
+        <label>Bank of Baroda</label>
+    </customValue>
+    <customValue>
+        <fullName>Bank of Sharjah</fullName>
+        <default>false</default>
+        <label>Bank of Sharjah</label>
+    </customValue>
+    <customValue>
+        <fullName>Banque Misr</fullName>
+        <default>false</default>
+        <label>Banque Misr</label>
+    </customValue>
+    <customValue>
+        <fullName>CBI</fullName>
+        <default>false</default>
+        <label>CBI</label>
+    </customValue>
+    <customValue>
+        <fullName>Citibank</fullName>
+        <default>false</default>
+        <label>Citibank</label>
+    </customValue>
+    <customValue>
+        <fullName>Commercial Bank Of Dubai</fullName>
+        <default>false</default>
+        <label>Commercial Bank Of Dubai</label>
+    </customValue>
+    <customValue>
+        <fullName>Dubai Islamic Bank</fullName>
+        <default>false</default>
+        <label>Dubai Islamic Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>EL NILEIN BANK</fullName>
+        <default>false</default>
+        <label>EL NILEIN BANK</label>
+    </customValue>
+    <customValue>
+        <fullName>Emirates Development Bank</fullName>
+        <default>false</default>
+        <label>Emirates Development Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Emirates Islamic Bank</fullName>
+        <default>false</default>
+        <label>Emirates Islamic Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Emirates NBD</fullName>
+        <default>false</default>
+        <label>Emirates NBD</label>
+    </customValue>
+    <customValue>
+        <fullName>First Abudhabi Bank</fullName>
+        <default>false</default>
+        <label>First Abudhabi Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>HABIB BANK LIMITED</fullName>
+        <default>false</default>
+        <label>HABIB BANK LIMITED</label>
+    </customValue>
+    <customValue>
+        <fullName>HSBC</fullName>
+        <default>false</default>
+        <label>HSBC</label>
+    </customValue>
+    <customValue>
+        <fullName>Janata Bank Limited</fullName>
+        <default>false</default>
+        <label>Janata Bank Limited</label>
+    </customValue>
+    <customValue>
+        <fullName>Mashreq Bank</fullName>
+        <default>false</default>
+        <label>Mashreq Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>National Bank of Fujairah</fullName>
+        <default>false</default>
+        <label>National Bank of Fujairah</label>
+    </customValue>
+    <customValue>
+        <fullName>NBAD</fullName>
+        <default>false</default>
+        <label>NBAD</label>
+    </customValue>
+    <customValue>
+        <fullName>Noor Bank</fullName>
+        <default>false</default>
+        <label>Noor Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>RAK Bank</fullName>
+        <default>false</default>
+        <label>RAK Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>SAMBADIAMOND – Samba Financial Group UAE</fullName>
+        <default>false</default>
+        <label>SAMBADIAMOND – Samba Financial Group UAE</label>
+    </customValue>
+    <customValue>
+        <fullName>Saudi Arab Bank</fullName>
+        <default>false</default>
+        <label>Saudi Arab Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Saudi National Bank</fullName>
+        <default>false</default>
+        <label>Saudi National Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Sharjah Islamic Bank</fullName>
+        <default>false</default>
+        <label>Sharjah Islamic Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Standard Chartered Bank</fullName>
+        <default>false</default>
+        <label>Standard Chartered Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>United Arab Bank</fullName>
+        <default>false</default>
+        <label>United Arab Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>United Bank LTD</fullName>
+        <default>false</default>
+        <label>United Bank LTD</label>
+    </customValue>
+    <customValue>
+        <fullName>WIO Bank PJSC</fullName>
+        <default>false</default>
+        <label>WIO Bank PJSC</label>
+    </customValue>
+    <customValue>
+        <fullName>UBS</fullName>
+        <default>false</default>
+        <label>UBS</label>
+    </customValue>
+    <customValue>
+        <fullName>Other</fullName>
+        <default>false</default>
+        <label>Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Disclosed</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Not Disclosed</label>
+    </customValue>
+    <description>Mortgage/Bank Name Picklist</description>
+    <masterLabel>Bank Name</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

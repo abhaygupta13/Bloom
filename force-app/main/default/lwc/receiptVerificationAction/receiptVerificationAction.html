@@ -1,0 +1,32 @@
+<template>
+    <lightning-quick-action-panel header="Confirm">
+
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass"></lightning-spinner>
+        </template>
+
+        <template if:true={allocationMissing}>
+            <div class="slds-align_absolute-center slds-text-heading_small slds-text-color_error">
+                <h2>{allocationMessage}</h2>
+            </div>
+        </template>
+
+        <template if:false={allocationMissing}>
+            <div class="slds-align_absolute-center slds-text-heading_small slds-text-color_error">
+                Please ensure that you have thoroughly reviewed the Receipt Acknowledgement and the respective Allocation.
+            </div>
+        </template>
+
+        <div slot="footer">
+            <lightning-button onclick={handleCancel} variant="neutral" label="Cancel"></lightning-button>
+            &nbsp;&nbsp;
+
+            <lightning-button 
+                onclick={handleConfirm} 
+                variant="brand" 
+                label="Confirm">
+            </lightning-button>
+        </div>
+
+    </lightning-quick-action-panel>
+</template>

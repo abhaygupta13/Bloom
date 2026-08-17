@@ -1,0 +1,114 @@
+<template>
+    <lightning-quick-action-panel header="Request Original Document" class="outer-div">
+        <lightning-spinner if:true={isLoading} class="customSpinner" alternative-text="Loading..."></lightning-spinner>
+
+        <template if:false={isLoading}>
+            <div class="content-container">
+                <!-- Tile Container -->
+                <div class="tile-container">
+                    
+                    <!-- Collection Tile -->
+                    <div class="tile">
+                        <div class="tile-header">Collection</div>
+                        <div class="checkbox-grid">
+                            <template for:each={collectionOptions} for:item="option">
+                                <div key={option.value} class="checkbox-item">
+                                    <lightning-input
+                                        type="checkbox"
+                                        label={option.label}
+                                        value={option.value}
+                                        onchange={handleCheckboxChange}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Finance Tile -->
+                    <div class="tile">
+                        <div class="tile-header">Finance</div>
+                        <div class="checkbox-grid">
+                            <template for:each={financeOptions} for:item="option">
+                                <div key={option.value} class="checkbox-item">
+                                    <lightning-input
+                                        type="checkbox"
+                                        label={option.label}
+                                        value={option.value}
+                                        onchange={handleCheckboxChange}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Operation Tile -->
+                    <div class="tile">
+                        <div class="tile-header">Operation</div>
+                        <div class="checkbox-grid">
+                            <template for:each={operationOptions} for:item="option">
+                                <div key={option.value} class="checkbox-item">
+                                    <lightning-input
+                                        type="checkbox"
+                                        label={option.label}
+                                        value={option.value}
+                                        onchange={handleCheckboxChange}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Government Relation Tile -->
+                    <div class="tile">
+                        <div class="tile-header">Government Relation</div>
+                        <div class="checkbox-grid">
+                            <template for:each={governmentRelationOptions} for:item="option">
+                                <div key={option.value} class="checkbox-item">
+                                    <lightning-input
+                                        type="checkbox"
+                                        label={option.label}
+                                        value={option.value}
+                                        onchange={handleCheckboxChange}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Broker Management Tile -->
+                    <div class="tile">
+                        <div class="tile-header">Broker Management</div>
+                        <div class="checkbox-grid">
+                            <template for:each={brokerManagementOptions} for:item="option">
+                                <div key={option.value} class="checkbox-item">
+                                    <lightning-input
+                                        type="checkbox"
+                                        label={option.label}
+                                        value={option.value}
+                                        onchange={handleCheckboxChange}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Remarks Section -->
+                <div class="remarks-section">
+                    <lightning-textarea
+                        label="Remarks"
+                        value={remarks}
+                        onchange={handleRemarksChange}
+                        class="remarks-input">
+                    </lightning-textarea>
+                </div>
+            </div>
+        </template>
+
+        <div class="center-buttons"><!--slot="footer">-->
+            <lightning-button variant="brand" label="Submit" onclick={handleSubmit}></lightning-button>
+            &nbsp;&nbsp;
+            <lightning-button onclick={handleCancel} variant="neutral" label="Cancel"></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

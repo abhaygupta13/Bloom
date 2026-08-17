@@ -1,0 +1,276 @@
+<template>
+    <lightning-card variant="Narrow" title="Documents" icon-name="standard:document_reference">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+            aria-label="Example default base table of Opportunities">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Document Name">Document Name</div>
+                    </th>
+                    <!--<th class="" scope="col">
+                        <div class="slds-truncate" title="Created Date">Created Date</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Created By">Created By</div>
+                    </th>-->
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Last Modified Date">Last Modified Date</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Last Modified By">Last Modified By</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Stage">Action</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={documents} for:item="item" for:index="index">
+                    <tr class="slds-hint-parent" key={item.Id}>
+                        <td data-label="Document Name">
+                            <div class="slds-truncate" title={item.Document_Name__c}>{item.Document_Name__c}</div>
+                        </td>
+                        <!--<td data-label="Created Date">
+                            <div class="slds-truncate">
+
+                                <lightning-formatted-date-time value={item.CreatedDate} year="numeric" month="numeric"
+                                    day="numeric" hour="2-digit" minute="2-digit">
+                                </lightning-formatted-date-time>
+                            </div>
+                        </td>
+                        <td data-label="Created By">
+                            <div class="slds-truncate" title={item.CreatedBy.Name}>{item.CreatedBy.Name}</div>
+                        </td> -->
+                        <td data-label="Last Modified Date">
+                            <div class="slds-truncate">
+                                <lightning-formatted-date-time value={item.LastModifiedDate} year="numeric" month="numeric"
+                                    day="numeric" hour="2-digit" minute="2-digit">
+                                </lightning-formatted-date-time>
+                            </div>
+                        </td>
+                        <td data-label="Last Modified By">
+                            <div class="slds-truncate" title={item.LastModifiedBy.Name}>{item.LastModifiedBy.Name}</div>
+                        </td>
+                        <td data-label="Action">
+                            <template if:false={item.DocumentType__r.IsSystemUpload__c}>
+                                <lightning-icon data-id={item.Id} icon-name="utility:upload" onclick={handleOpenModal}
+                                    title="Upload Document" variant="success" size="small">
+                                </lightning-icon>
+                                &nbsp;&nbsp;
+                            </template>
+                            <template if:true={item.DocumentType__r.ShareWithCustomer__c}>
+                                <template if:true={item.ContentDocumentId__c}>
+                                    <lightning-icon data-id={item.Id} icon-name="utility:share"
+                                        onclick={handleOpenShareModal} title="Share with Customer" variant="success"
+                                        size="small">
+                                    </lightning-icon>
+                                </template>
+                                <template if:false={item.ContentDocumentId__c}>
+                                    <lightning-icon data-id={item.Id} icon-name="utility:share"
+                                        title="Generate document to share with Customer" variant="error" size="small">
+                                    </lightning-icon>
+                                </template>
+                                &nbsp;&nbsp;
+                            </template>
+                            <template if:true={item.ContentDocumentId__c}>
+                                <lightning-icon icon-name="utility:document_preview" variant="success" size="small"
+                                    title="Preview" data-id={item.ContentDocumentId__c} onclick={handleFilePreview}>
+                                </lightning-icon>
+                                &nbsp;&nbsp;
+                            </template>
+                            <template if:false={item.ContentDocumentId__c}>
+                                <lightning-icon title="No Document" icon-name="utility:document_preview" variant="error"
+                                    size="small">
+                                </lightning-icon>
+                                &nbsp;&nbsp;
+                            </template>
+
+                            <!-- Archive icon (Added By Ranjan)-->
+                            <template if:true={item.ContentDocumentId__c}>
+                                <lightning-icon icon-name="utility:archive" variant="success"
+                                    size="small" title="Archive History" data-id={item.Id}
+                                    onclick={handleFileArchive}>
+                                </lightning-icon>
+                                &nbsp;&nbsp;
+                            </template>
+                            <template if:false={item.ContentDocumentId__c}>
+                                <lightning-icon title="No Archive" icon-name="utility:archive"
+                                    variant="error" size="small">
+                                </lightning-icon>
+                                &nbsp;&nbsp;
+                            </template>
+
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </lightning-card>
+
+    <template if:true={isShowModal}>
+
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={handleCloseModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="brand"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Document</h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+                    <template if:true={showLoading}>
+                        <lightning-spinner alternative-text="Loading..." size="medium"
+                            class="spinnerClass"></lightning-spinner>
+                    </template>
+
+                    <div class="slds-grid slds-wrap slds-p-around_medium">
+                        <div class="slds-p-horizontal_large">
+                        <lightning-layout multiple-rows="false">
+                          
+                          <!--   <lightning-layout-item size="12" padding="horizontal-large">
+                                <div class="slds-align_absolute-center">
+                                    <lightning-input type="file" accept=".png, .jpg, .jpeg, .pdf" multiple="false"
+                                        label="Document" onchange={handleFileUploadChange}></lightning-input>
+                                </div>
+                                <div class="slds-align_absolute-center">
+                                    <template if:true={fileData}>
+                                        <p>{fileData.filename}</p>
+                                    </template>
+                                </div>
+                                <br />
+                            </lightning-layout-item -->
+                            <lightning-file-upload
+        label="Document"
+        name="fileUploader"
+        accept={acceptedFormats}
+        record-id={documentId}
+        onuploadfinished={handleUploadFinished}
+        multiple
+    >
+    </lightning-file-upload>
+                        </lightning-layout>
+                    </div>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button onclick={handleCloseModal} variant="neutral" label="Cancel"></lightning-button>
+                    <!-- &nbsp;&nbsp;
+                    <lightning-button onclick={handleFileUpload} variant="brand" label="Submit"></lightning-button> -->
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <template if:true={isShowShareModal}>
+
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={handleShareCloseModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="brand"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Confirm</h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="slds-grid slds-wrap slds-p-around_medium">
+                        <div class="slds-align_absolute-center slds-text-heading_small slds-text-color_error">
+                            Please ensure that you have thoroughly reviewed and verified the document before sharing
+                            it with the customer.
+                        </div>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button onclick={handleShareCloseModal} variant="neutral"
+                        label="Cancel"></lightning-button>
+                    &nbsp;&nbsp;
+                    <lightning-button onclick={handleShareConfirm} variant="brand" label="Submit"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Archive Modal(Added By Ranjan) -->
+    <template if:true={showArchiveModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={handleArchiveCloseModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close"
+                            variant="brand" size="small">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Archived Documents</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <template if:true={showLoading}>
+                        <lightning-spinner alternative-text="Loading..." size="medium">
+                        </lightning-spinner>
+                    </template>
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Archived Date">Archived Date</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Archived By">Archived By</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Action">Action</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={archiveDocuments} for:item="item" for:index="index">
+                                <tr class="slds-hint-parent" key={item.Id}>
+                                    <td data-label="Archived Date">
+                                        <div class="slds-truncate">
+                                            <lightning-formatted-date-time value={item.LastModifiedDate}
+                                                year="numeric" month="numeric" day="numeric"
+                                                hour="2-digit" minute="2-digit">
+                                            </lightning-formatted-date-time>
+                                        </div>
+                                    </td>
+                                    <td data-label="Archived By">
+                                        <div class="slds-truncate" title={item.LastModifiedBy.Name}>
+                                            {item.LastModifiedBy.Name}
+                                        </div>
+                                    </td>
+                                    <td data-label="Action">
+                                        <lightning-icon icon-name="utility:document_preview"
+                                            variant="success" size="small" title="Preview"
+                                            data-id={item.ContentDocumentId__c}
+                                            onclick={handleFilePreview}>
+                                        </lightning-icon>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button onclick={handleArchiveCloseModal} variant="neutral"
+                        label="Close">
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+</template>

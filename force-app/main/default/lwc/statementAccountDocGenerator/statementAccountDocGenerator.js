@@ -1,0 +1,59 @@
+import { LightningElement, track, api, wire } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { CurrentPageReference } from 'lightning/navigation';
+import generateAndAttachPdf from '@salesforce/apex/DocumentGenerationPDFHandler.generateAndAttachPdf';
+import { CloseActionScreenEvent } from 'lightning/actions';
+export default class StatementAccountDocGenerator extends LightningElement {
+  @api recordId;
+    fullUrl ='';
+    identifier='generateStatement';
+
+    @wire(CurrentPageReference)
+    getStateParameters(currentPageReference) {
+
+        if (currentPageReference) {
+            this.recordId = currentPageReference.state.recordId;
+        }
+    }
+    closeTheAction(event) {
+
+       // this.dispatchEvent(new CloseActionScreenEvent());
+
+    }
+
+    connectedCallback() {
+        this.fullUrl = '/apex/StatementOfAccountPDF?id=' + this.recordId 
+       this. attachedGeneratedFile();
+    }
+
+    attachedGeneratedFile(){
+      
+        generateAndAttachPdf({salesOrderId:this.recordId,identifier:this.identifier})
+        .then(result=>{
+            this.result = result;
+         
+          this.dispatchEvent(
+            new ShowToastEvent({
+              title: 'success',
+              message: 'Document Generated Successfully!',
+              variant: 'success'
+            })
+          );
+
+        }).catch(error=>{
+          this.error = error;
+          this.dispatchEvent(
+            new ShowToastEvent({
+              title: 'error',
+              message: this.error,
+              variant: 'error'
+            })
+          );
+
+
+        })
+    }
+
+
+
+}

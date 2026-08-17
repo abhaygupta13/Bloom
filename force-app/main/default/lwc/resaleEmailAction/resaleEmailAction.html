@@ -1,0 +1,95 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading" aria-modal="true"
+             class="slds-modal slds-fade-in-open">
+        
+        <div class="slds-modal__container modal-container">
+
+            <!-- Header -->
+            <header class="slds-modal__header">
+                <h2 id="modal-heading" class="slds-text-title_bold slds-text-align_center">
+                    Email Composer
+                </h2>
+
+                <button class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={handleCloseModal}>
+                    <lightning-icon icon-name="utility:close" alternative-text="Close" size="small"></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            </header>
+
+            <!-- Scrollable Body -->
+            <div class="slds-modal__content modal-body">
+
+                <!-- Loader -->
+                <template if:true={isLoading}>
+                    <div class="slds-align_absolute-center slds-m-bottom_medium">
+                        <lightning-spinner alternative-text="Loading" variant="brand" size="large"></lightning-spinner>
+                    </div>
+                </template>
+
+                <!-- Template Selection -->
+                <lightning-combobox
+                    name="template"
+                    label="Email Template"
+                    value={selectedTemplateId}
+                    placeholder="Select a template"
+                    options={templateOptions}
+                    onchange={handleTemplateChange}
+                    class="slds-m-bottom_medium"
+                    style="width:100%;">
+                </lightning-combobox>
+
+                <!-- To / CC / Subject -->
+                <template if:true={selectedTemplateId}>
+                    <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input
+                                type="text"
+                                label="To"
+                                placeholder="Enter emails separated by commas"
+                                value={toAddress}
+                                onchange={handleToChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input
+                                type="text"
+                                label="CC"
+                                placeholder="Enter emails separated by commas"
+                                value={ccAddress}
+                                onchange={handleCcChange}>
+                            </lightning-input>
+                        </div>
+                    </div>
+
+                    <!-- Disabled Subject -->
+                    <lightning-input
+                        type="text"
+                        label="Subject"
+                        value={emailSubject}
+                        class="slds-m-bottom_small"
+                        disabled>
+                    </lightning-input>
+                </template>
+
+                <!-- Email Body -->
+                <template if:true={emailBody}>
+                    <h3 class="email-body-title slds-m-bottom_xx-small">Body</h3>
+                    <div class="email-body slds-box slds-theme_default slds-p-around_small" lwc:dom="manual"></div>
+                </template>
+
+            </div>
+
+            <!-- Footer -->
+            <footer class="slds-modal__footer slds-grid slds-grid_align-end">
+                <template if:true={selectedTemplateId}>
+                    <lightning-button label="Send" variant="brand" onclick={handleSend}></lightning-button>
+                    <lightning-button variant="neutral" label="Cancel" onclick={handleCloseModal} class="slds-m-left_x-small"></lightning-button>
+                </template>
+                <template if:false={selectedTemplateId}>
+                    <lightning-button variant="neutral" label="Cancel" onclick={handleCloseModal}></lightning-button>
+                </template>
+            </footer>
+
+        </div>
+    </section>
+</template>

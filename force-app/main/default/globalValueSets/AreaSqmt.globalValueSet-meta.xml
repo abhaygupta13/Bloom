@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>35-65 SQM</fullName>
+        <default>false</default>
+        <label>35-65 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>65-110 SQM</fullName>
+        <default>false</default>
+        <label>65-110 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>110-150 SQM</fullName>
+        <default>false</default>
+        <label>110-150 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>150-200 SQM</fullName>
+        <default>false</default>
+        <label>150-200 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>200-250 SQM</fullName>
+        <default>false</default>
+        <label>200-250 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>250-300 SQM</fullName>
+        <default>false</default>
+        <label>250-300 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>300-350 SQM</fullName>
+        <default>false</default>
+        <label>300-350 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>350-400 SQM</fullName>
+        <default>false</default>
+        <label>350-400 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>400-500 SQM</fullName>
+        <default>false</default>
+        <label>400-500 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>500-1,000 SQM</fullName>
+        <default>false</default>
+        <label>500-1,000 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>1,000-1,500 SQM</fullName>
+        <default>false</default>
+        <label>1,000-1,500 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>1,500-2,000 SQM</fullName>
+        <default>false</default>
+        <label>1,500-2,000 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>2,000-2,500 SQM</fullName>
+        <default>false</default>
+        <label>2,000-2,500 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>2,500-5,000 SQM</fullName>
+        <default>false</default>
+        <label>2,500-5,000 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>5,000-10,000 SQM</fullName>
+        <default>false</default>
+        <label>5,000-10,000 SQM</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Disclosed</fullName>
+        <default>false</default>
+        <label>Not Disclosed</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Applicable</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Not Applicable</label>
+    </customValue>
+    <customValue>
+        <fullName>100-150 SQM</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>100-150 SQM</label>
+    </customValue>
+    <description>Area(Sqmt) Picklist</description>
+    <masterLabel>Area (Sqmt)</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

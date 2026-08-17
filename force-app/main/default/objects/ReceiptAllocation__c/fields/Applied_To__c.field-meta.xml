@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Applied_To__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  NOT(ISBLANK(SalesOrderOtherCharges__c)),
+  IF(
+    CONTAINS(TEXT(TypeOfInvoice__c), &quot;_&quot;),
+    LEFT(TEXT(TypeOfInvoice__c), FIND(&quot;_&quot;, TEXT(TypeOfInvoice__c)) - 1),
+    TEXT(TypeOfInvoice__c)
+  ),
+  TEXT(TypeOfInvoice__c) + &quot; &quot; + InstallmentNumberOrChargeType__c
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Applied To</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

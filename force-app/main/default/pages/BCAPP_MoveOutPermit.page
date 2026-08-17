@@ -1,0 +1,101 @@
+<apex:page renderAs="PDF" standardcontroller="case">
+  
+  
+  <div style="text-align: center;">
+      <apex:image value="{!$Resource.BloomLogo}" width="200px"/> <br/><br/>
+      <font style="font-size: 36px;"> Move Out Permit </font>
+  </div>
+  <br/><br/>
+  
+  <table width="100%" >
+      <tr >
+        <th align="center" bgcolor="#B62025" colspan="2"><font style="font-size: 24px;color:white;font-family:Arial Unicode MS"> MOVE OUT DETAILS </font></th>        
+      </tr>
+             
+       <tr>
+          
+           <td width="20%" height="30">               
+               <font style="font-size: 18px;color:black;font-family:Arial Unicode MS"> Move Out Date : </font> 
+           </td>
+           <td  width="80%" height="30" style="border-bottom: 1px solid #000; " > 
+          <font style="font-size: 18px;color:black;font-family:Arial Unicode MS">            
+            <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                <apex:param value="{!Case.Move_Out_Date__c}" /> 
+            </apex:outputText>              
+              </font>
+           </td>
+       </tr>
+       <tr>
+           <td width="25%" height="30">               
+               <font style="font-size: 18px;color:black;font-family:Arial Unicode MS"> Community :  </font> 
+           </td>
+           <td  width="75%" height="30" style="border-bottom: 1px solid #000;" >               
+            <font style="font-size: 18px;color:black;font-family:Arial Unicode MS"> {!Case.Projectname__c}</font>
+           </td>
+       </tr>
+        <tr >
+           <td  width="25%" height="30" >               
+               <font style="font-size: 18px;color:black;font-family:Arial Unicode MS"> Tower :  </font> 
+           </td>
+            <td   height="30" width="50%" style="border-bottom: 1px solid #000;display:inline-block">               
+             <font style="font-size: 18px;color:black;font-family:Arial Unicode MS">{!Case.Building_Phase__c}</font>
+           </td>
+           
+            <td width="10%" height="30" style="display:inline-block">               
+               <font style="font-size: 18px;color:black;font-family:Arial Unicode MS"> Unit :  </font> 
+           </td>
+            <td  height="30" width="37%" style="border-bottom: 1px solid #000;display:inline-block">               
+             <font style="font-size: 18px;color:black;font-family:Arial Unicode MS">{!Case.Unit_Name_Formula__c}</font>
+           </td>
+           
+       </tr>
+       
+      
+       
+       <tr>
+           <td width="25%" height="30">               
+               <font style="font-size: 18px;color:black;font-family:Arial Unicode MS"> Customer Name : </font> 
+           </td>
+            <td  height="30" width="75%" style="border-bottom: 1px solid #000;" >               
+              <font style="font-size: 18px;color:black;font-family:Arial Unicode MS"> {!Case.Customer_Name__c}</font>
+              
+           </td>
+       </tr>
+       <tr>
+           <td width="25%" height="30">               
+               <font style="font-size: 18px;color:black;font-family:Arial Unicode MS"> Customer Mobile :</font> 
+           </td>
+            <td  height="30" width="75%" style="border-bottom: 1px solid #000;" >               
+              <font style="font-size: 18px;color:black;font-family:Arial Unicode MS"> <apex:outputLabel rendered="{!(Case.User_Type__c != 'Holiday Homes')}" > {!Case.Mobile_Number__c}</apex:outputLabel>
+                <apex:outputLabel rendered="{!(Case.User_Type__c == 'Holiday Homes')}" > {!Case.HHO_Mobile__c} </apex:outputLabel></font>
+           </td>
+       </tr>
+      
+  </table>
+  <br/>
+  <font style="font-size: 20px;color:black;font-family:Arial Unicode MS">This permit is valid for the period of 2 weeks from the date of permit </font>
+  <br/><br/>
+  <table width="100%" >
+      <tr >
+        <th  align="center" bgcolor="#B62025" colspan="2"><font style="font-size: 24px;color:white;font-family:Arial Unicode MS"> TERMS AND CONDITIONS </font></th>        
+      </tr>
+      
+       <tr width="100%">
+           <td bgcolor= "#E5E4E2 ;">
+                <font style="font-size: 22px;color:black;font-family:Arial Unicode MS">
+                    <ul>
+                        <li> Move out request must be submitted at least 3 days prior to moving out date.</li>
+                        <li> Cancellation of Chilled water account and Gas account (as applicable)</li>
+                        <li> Moving company must arrange to protect the common area (floors, walls, doors, lifts) to avoid. damages. Customer is responsible for damages caused to the common area.</li>
+                        <li> No disturbance should be caused to other residents which include but not limited to blocking driveway, unassigned lift for shifting, noise.</li>
+                        <li> Move out timing is between 09:00 am and 07:00 pm</li>
+                        <li> Management shall not accept any liabilities, whatsoever, for loss or damage of goods or items, for any injury, accident or losses sustained / incurred by the resident(s) in any part of the building and / or the common areas / shared facilities within the development at any time</li>
+                        <li> Personal belonging must not be placed and / or stored at any part of the community and / or the common area / shared facilities.</li>
+                        <li> All waste generated during the move in that includes but not limited to, carton, boxes, plastic sheets, protection etc. is the responsibility of the customer and must be disposed off the premises.</li>
+                                              
+                    </ul>                 
+                </font>
+           </td>
+       </tr>
+    </table>
+</apex:page>

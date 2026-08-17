@@ -1,0 +1,125 @@
+<template>
+    <div class="slds-is-relative" style="min-height: 30vh;">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+        </template>
+
+        <template if:true={isParentVisible}>
+            <lightning-quick-action-panel header="New Request/Complaint">
+                <lightning-layout multiple-rows>
+
+                    <!-- Row 1: Type & Origin -->
+                    <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                        <lightning-combobox name="Type" label="Request Type" placeholder="Select Request Type"
+                            options={typeOptions} onchange={onChangeType} value={selectedType} required>
+                        </lightning-combobox>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                        <lightning-combobox name="Origin" label="Origin" placeholder="Select Origin"
+                            options={originOptions} onchange={onChangeOrigin} value={selectedOrigin} required>
+                        </lightning-combobox>
+                    </lightning-layout-item>
+
+                    <!-- Row 2: Category & Sub-Category -->
+                    <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                        <lightning-combobox name="Category" label="Type" value={selectedCategory}
+                            placeholder="Select Type" options={categoryOptions} onchange={onChangeCategory}
+                            disabled={disabledCategory} required>
+                        </lightning-combobox>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                        <lightning-combobox name="SubCategory" label="Sub-Type" value={selectedSubCategory}
+                            placeholder="Select Sub-Type" options={subCategoryOptions} onchange={onChangeSubCategory}
+                            disabled={disabledSubCategory} required>
+                        </lightning-combobox>
+                    </lightning-layout-item>
+
+                    <!-- Row 3: Account & Unit -->
+                    <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                        <lightning-record-picker label="Account" value={selectedAccount} placeholder="Search Accounts"
+                            object-api-name="Account" onchange={onChangeAccount} disabled={disabledAccount}>
+                        </lightning-record-picker>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                        <lightning-combobox name="Unit" label="Unit" value={selectedUnit} placeholder="Select Unit"
+                            options={unitOptions} onchange={onChangeUnit} disabled={disabledUnit}>
+                        </lightning-combobox>
+                    </lightning-layout-item>
+
+                    <!-- Broker fields (conditional on Sub-Type) -->
+                    <template lwc:if={showBrokerContactRole}>
+                        <lightning-layout-item size="12" class="slds-p-horizontal_small">
+                            <lightning-dual-listbox name="BrokerContactRole" label="Broker Contact Role"
+                                source-label="Available" selected-label="Selected" options={brokerContactRoleOptions}
+                                value={selectedBrokerContactRoles} onchange={onChangeBrokerContactRole} required>
+                            </lightning-dual-listbox>
+                        </lightning-layout-item>
+                    </template>
+
+                    <template lwc:if={showContact}>
+                        <lightning-layout-item size="12" class="slds-p-horizontal_small">
+                            <lightning-combobox name="Contact" label="Contact" value={selectedContact}
+                                placeholder="Select Contact" options={contactOptions} onchange={onChangeContact}
+                                disabled={isContactDisabled} required>
+                            </lightning-combobox>
+                        </lightning-layout-item>
+                    </template>
+                    <!-- Row 4: Checkbox -->
+                    <lightning-layout-item size="12" class="slds-p-horizontal_small slds-m-top_medium">
+                        <!--<lightning-input type="checkbox" name="stopEmailsToCustomer" 
+                            label="Stop Email Communications To Customer" 
+                            checked={stopEmailsToCustomer} 
+                            onchange={onChangeStopEmailsToCustomer}>
+                        </lightning-input>-->
+                        <!--<lightning-input type="checkbox"
+                            name="stopEmailsToCustomer"
+                            label="Stop Email Communications To Customer"
+                            class="slds-form-element__label"
+                            checked={stopEmailsToCustomer}
+                            onchange={onChangeStopEmailsToCustomer}>
+                        </lightning-input>-->
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="stopEmailsToCustomer">
+                                Stop Email Communications To Customer
+                            </label>
+                            <lightning-input type="checkbox" 
+                                name="stopEmailsToCustomer" 
+                                checked={stopEmailsToCustomer} 
+                                onchange={onChangeStopEmailsToCustomer}>
+                            </lightning-input>
+                        </div>
+                    </lightning-layout-item>
+
+                    <!-- Row 5: Full-width Description -->
+                    <lightning-layout-item size="12" class="slds-p-horizontal_small">
+                        <lightning-textarea name="Description" label="Description" value={description}
+                            placeholder="Enter a description" onchange={onChangeDescription}>
+                        </lightning-textarea>
+                    </lightning-layout-item>
+
+                </lightning-layout>
+
+                <!-- Footer Buttons (Right Aligned) -->
+                <div slot="footer" class="slds-grid slds-grid_align-end">
+                    <lightning-button variant="neutral" label="Cancel" onclick={closeModal}>
+                    </lightning-button>
+
+                    <template lwc:if={showNext}>
+                        <lightning-button variant="brand" label="Submit" class="slds-m-left_x-small"
+                            onclick={handleNext} disabled={disableNextButton}>
+                        </lightning-button>
+                    </template>
+
+                    <template lwc:else>
+                        <lightning-button variant="brand" label="Submit" class="slds-m-left_x-small"
+                            onclick={handleSubmit} disabled={disableNextButton}>
+                        </lightning-button>
+                    </template>
+                </div>
+            </lightning-quick-action-panel>
+        </template>
+    </div>
+</template>

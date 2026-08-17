@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Broker_RFI_Awaiting</fullName>
+    <booleanFilter>1 AND 2</booleanFilter>
+    <columns>NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ApprovalStatus__c</field>
+        <operation>equals</operation>
+        <value>RFI</value>
+    </filters>
+    <filters>
+        <field>IsRFIUpdated__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>Broker – RFI Awaiting</label>
+    <sharedTo>
+        <group>BAPP_Draft_RFI_Team</group>
+        <group>Sales_Lead_Manager</group>
+    </sharedTo>
+</ListView>

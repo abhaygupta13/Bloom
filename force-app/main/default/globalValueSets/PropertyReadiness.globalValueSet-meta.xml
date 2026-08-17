@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Offplan</fullName>
+        <default>false</default>
+        <label>Offplan</label>
+    </customValue>
+    <customValue>
+        <fullName>2 years</fullName>
+        <default>false</default>
+        <label>2 years</label>
+    </customValue>
+    <customValue>
+        <fullName>1 year</fullName>
+        <default>false</default>
+        <label>1 year</label>
+    </customValue>
+    <customValue>
+        <fullName>0-3 months</fullName>
+        <default>false</default>
+        <label>0-3 months</label>
+    </customValue>
+    <customValue>
+        <fullName>3-6 months</fullName>
+        <default>false</default>
+        <label>3-6 months</label>
+    </customValue>
+    <customValue>
+        <fullName>6-9 months</fullName>
+        <default>false</default>
+        <label>6-9 months</label>
+    </customValue>
+    <customValue>
+        <fullName>Ready</fullName>
+        <default>false</default>
+        <label>Ready</label>
+    </customValue>
+    <customValue>
+        <fullName>0-12 months</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>0-12 months</label>
+    </customValue>
+    <customValue>
+        <fullName>Over one year</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Over one year</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Applicable</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Not Applicable</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Disclosed</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Not Disclosed</label>
+    </customValue>
+    <customValue>
+        <fullName>3-9 months</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>3-9 months</label>
+    </customValue>
+    <description>Property Readiness Picklist</description>
+    <masterLabel>Property Readiness</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

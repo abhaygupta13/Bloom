@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Handover_PHPP</fullName>
+    <active>true</active>
+    <label>Handover-PHPP</label>
+    <picklistValues>
+        <picklist>Bank_Name__c</picklist>
+        <values>
+            <fullName>ADCB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ADIB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Abu Dhabi Finance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Al Hilal Bank</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arab Bank</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CBI</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Commercial Bank of Dubai</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DIB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>EDB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Emirates Islamic Bank</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Emirates NBD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>FAB</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mashreq Bank</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Noor Bank</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>RAK Bank</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sharjah Islamic Bank</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Standard Chartered</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Customer_Availability_for_CHO__c</picklist>
+        <values>
+            <fullName>Customer Available</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Delegate to BLoom</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Not available</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Doc__c</picklist>
+        <values>
+            <fullName>Customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Developer</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Early_Settlement__c</picklist>
+        <values>
+            <fullName>Resale</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Settlement</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>HandoverType__c</picklist>
+        <values>
+            <fullName>Non PHPP</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PHPP</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Is_Manual__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Is_Re_Snag_Needed__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Lease_Type__c</picklist>
+        <values>
+            <fullName>3rd Party Property Management Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No Yet Decided</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Owner Occupied</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Mortgage_Fee_Rate_Paid_by__c</picklist>
+        <values>
+            <fullName>Customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Developer</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Mortgage_Status__c</picklist>
+        <values>
+            <fullName>Checking Mortgage Offers</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mortgage Contract %26 Cheque Copy Received %28Attach documents%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending Evaluation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending Mortgage Contract %26 Cheque Copy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre-approval Received</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Orientation_Appointment_Status__c</picklist>
+        <values>
+            <fullName>Cancelled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>ReScheduled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scheduled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Payment_Type__c</picklist>
+        <values>
+            <fullName>Cash</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mortgage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PHPP</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>PendingWithDepartment__c</picklist>
+        <values>
+            <fullName>CRM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Collection</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contact Centre</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Finance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Government Relation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Handover Team</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Leasing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Legal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Operations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Treasury Team</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Step__c</picklist>
+        <values>
+            <fullName>0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>10</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>11</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>12</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>13</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>14</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>16</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>17</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>18</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>19</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>21</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>22</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>23</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>24</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>4</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>5</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>7</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>8</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>9</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Final</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Sub_Status__c</picklist>
+        <values>
+            <fullName>ADREC Approval and Mortgage Release</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Appointment Booked with Customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Await PHPP Completion</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Book Appointment with Customer</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CHO De-Snagging</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>CHO Snagging</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancelled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Clear PHPP Finances</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Default -Under Discussion</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Generate Bank NOC</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>HO Undertaking Letter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Handover Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Handover Keys to BAM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Handover Signing Document %28KHO%29 Appointment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Home Orientation Sent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Initiate Cancellation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Initiate Mortgage Release</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Keys Handedover to BAM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Lease Agreement</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Notice of Completion sent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PHPP - KHO Appointment Scheduled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PHPP Handover Keys</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Potential Defaulter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre CHO Check</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA De-Snagging</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>QA Snagging</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Register Title Deed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Send Handover Notice</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Settlement Confirmation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Settlement Follow up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Tawtheeq Enrollment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Transfer Utilities</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Under Resale</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Upload Mortgage Release Documents</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Upload SOA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Upload SPA</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>UnitCategory__c</picklist>
+        <values>
+            <fullName>New Sale</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Sale with Mortgage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Registered Unit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Registered Unit with Mortgage</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resale Unit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Resale with Mortgage</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

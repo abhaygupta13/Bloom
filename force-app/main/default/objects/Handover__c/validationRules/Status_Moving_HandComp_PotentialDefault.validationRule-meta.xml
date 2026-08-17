@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Moving_HandComp_PotentialDefault</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+ISCHANGED(Sub_Status__c),
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Handover Completed&quot;),
+OR(
+ISPICKVAL(Sub_Status__c, &quot;Potential Defaulter&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Default -Under Discussion&quot;)
+)
+)</errorConditionFormula>
+    <errorMessage>After handover is complete, you cannot move to the forward status.</errorMessage>
+</ValidationRule>

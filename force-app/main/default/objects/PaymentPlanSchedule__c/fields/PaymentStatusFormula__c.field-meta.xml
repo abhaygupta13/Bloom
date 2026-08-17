@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PaymentStatusFormula__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  ISPICKVAL(PaymentStatus__c, &quot;Paid&quot;),
+  IMAGE(&quot;/resource/1693905638000/GreenCircle&quot;, &quot;Green&quot;, 15, 15) &amp; &quot; Paid&quot;,
+  
+  IF(
+    ISPICKVAL(PaymentStatus__c, &quot;Un Paid&quot;),
+    IMAGE(&quot;/resource/1693905638000/RedCircle&quot;, &quot;Red&quot;, 15, 15) &amp; &quot; Unpaid&quot;,
+    
+    IF(
+      ISPICKVAL(PaymentStatus__c, &quot;Not Invoiced&quot;),
+      IMAGE(&quot;/resource/1693905638000/OrangeCircle&quot;, &quot;Orange&quot;, 15, 15) &amp; &quot; Not Invoiced&quot;,
+   IF(
+      ISPICKVAL(PaymentStatus__c, &quot;Reversed&quot;),
+      IMAGE(&quot;/resource/1693905638000/OrangeCircle&quot;, &quot;Orange&quot;, 15, 15) &amp; &quot; Reversed&quot;,
+        &quot;&quot;
+    )
+  )
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Payment Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

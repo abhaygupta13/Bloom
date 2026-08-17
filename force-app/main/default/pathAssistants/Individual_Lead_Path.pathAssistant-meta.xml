@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Lead</entityName>
+    <fieldName>Status</fieldName>
+    <masterLabel>Individual Lead Path</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>ContactCenterAssignedDate__c</fieldNames>
+        <fieldNames>ContactCentreLeadStatus__c</fieldNames>
+        <fieldNames>LeadManagerAssignedDate__c</fieldNames>
+        <fieldNames>LeadManagerStatus__c</fieldNames>
+        <picklistValueName>Closed</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ContactCenterAssignedDate__c</fieldNames>
+        <fieldNames>ContactCentreLeadStatus__c</fieldNames>
+        <fieldNames>LeadManagerAssignedDate__c</fieldNames>
+        <fieldNames>LeadManagerStatus__c</fieldNames>
+        <picklistValueName>Converted</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ContactCenterAssignedDate__c</fieldNames>
+        <fieldNames>ContactCentreLeadStatus__c</fieldNames>
+        <fieldNames>LeadManagerAssignedDate__c</fieldNames>
+        <fieldNames>LeadManagerStatus__c</fieldNames>
+        <picklistValueName>In Progress</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>ContactCenterAssignedDate__c</fieldNames>
+        <fieldNames>ContactCentreLeadStatus__c</fieldNames>
+        <fieldNames>LeadManagerAssignedDate__c</fieldNames>
+        <fieldNames>LeadManagerStatus__c</fieldNames>
+        <picklistValueName>New</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>IndividualLead</recordTypeName>
+</PathAssistant>

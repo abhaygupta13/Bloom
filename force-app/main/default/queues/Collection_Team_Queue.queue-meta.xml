@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Collection Team</name>
+    <queueMembers>
+        <users>
+            <user>helmasri@bloomholding.com</user>
+            <user>myousef@bloomholding.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Action_Items__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>CaseAssignmentHistory__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>FollowUp__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Handover__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>ServiceAction__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>ServiceCatalog__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Task</sobjectType>
+    </queueSobject>
+</Queue>

@@ -1,0 +1,59 @@
+<template>
+    <lightning-card title="Other Charges Posting">
+
+        <!-- Filters -->
+        <div class="slds-grid slds-gutters slds-p-around_medium">
+
+            <div class="slds-col">
+                <lightning-input type="date" label="From Date" onchange={handleFromDate}>
+                </lightning-input>
+            </div>
+
+           <div class="slds-col">
+                <lightning-input 
+                    type="date" 
+                    label="To Date" 
+                    max={maxDate} 
+                    onchange={handleToDate}>
+                </lightning-input>
+            </div>
+
+            <div class="slds-col slds-align_absolute-center">
+                <lightning-button label="Fetch Other Charges" variant="brand" onclick={handleSearch}>
+                </lightning-button>
+            </div>
+        </div>
+
+        <!-- Posting Date -->
+        <div class="slds-grid slds-p-horizontal_medium slds-p-bottom_medium">
+
+            <div class="slds-col slds-size_1-of-3">
+                <lightning-input type="date" label="Posting Date" value={postingDate} onchange={handlePostingDate}>
+                </lightning-input>
+            </div>
+
+        </div>
+
+        <!-- Datatable -->
+        <template if:true={data.length}>
+            <lightning-datatable key-field="Id" data={data} columns={columns} onrowselection={handleRowSelection}
+                selected-rows={selectedIds}>
+            </lightning-datatable>
+
+            <div class="slds-align_absolute-center slds-p-around_medium">
+                <lightning-button label="Post" variant="success" onclick={handleSave} disabled={isPostDisabled}>
+                </lightning-button>
+            </div>
+        </template>
+
+        <!-- No Data -->
+        <template if:true={hasSearched}>
+            <template if:false={data.length}>
+                <p class="slds-text-align_center slds-p-around_medium">
+                    No records found
+                </p>
+            </template>
+        </template>
+
+    </lightning-card>
+</template>

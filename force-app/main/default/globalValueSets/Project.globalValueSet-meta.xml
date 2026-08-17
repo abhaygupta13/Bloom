@@ -1,0 +1,1045 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Abu Dhabi Hills</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Hills</label>
+    </customValue>
+    <customValue>
+        <fullName>Ace Hardware</fullName>
+        <default>false</default>
+        <label>Ace Hardware</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Ain Portfolio</fullName>
+        <default>false</default>
+        <label>Al Ain Portfolio</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Dhay</fullName>
+        <default>false</default>
+        <label>Al Dhay</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Falah</fullName>
+        <default>false</default>
+        <label>Al Falah</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Falah Mall</fullName>
+        <default>false</default>
+        <label>Al Falah Mall</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Falah Plaza</fullName>
+        <default>false</default>
+        <label>Al Falah Plaza</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Ghadeer</fullName>
+        <default>false</default>
+        <label>Al Ghadeer</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Ghadeer Boutik</fullName>
+        <default>false</default>
+        <label>Al Ghadeer Boutik</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Gurm Phase2</fullName>
+        <default>false</default>
+        <label>Al Gurm Phase2</label>
+    </customValue>
+    <customValue>
+        <fullName>All</fullName>
+        <default>false</default>
+        <label>All</label>
+    </customValue>
+    <customValue>
+        <fullName>Almeria</fullName>
+        <default>false</default>
+        <label>Almeria</label>
+    </customValue>
+    <customValue>
+        <fullName>AlReemanRetail</fullName>
+        <default>false</default>
+        <label>AlReemanRetail</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Nahyan</fullName>
+        <default>false</default>
+        <label>Al Nahyan</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Reem Buildings</fullName>
+        <default>false</default>
+        <label>Al Reem Buildings</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Waha Tower</fullName>
+        <default>false</default>
+        <label>Al Waha Tower</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Arjaan</fullName>
+        <default>false</default>
+        <label>Bloom Arjaan</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Central</fullName>
+        <default>false</default>
+        <label>Bloom Central</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Gardens</fullName>
+        <default>false</default>
+        <label>Bloom Gardens</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Heights</fullName>
+        <default>false</default>
+        <label>Bloom Heights</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Living</fullName>
+        <default>false</default>
+        <label>Bloom Living</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Marina</fullName>
+        <default>false</default>
+        <label>Bloom Marina</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Towers</fullName>
+        <default>false</default>
+        <label>Bloom Towers</label>
+    </customValue>
+    <customValue>
+        <fullName>Central Market Car Park</fullName>
+        <default>false</default>
+        <label>Central Market Car Park</label>
+    </customValue>
+    <customValue>
+        <fullName>Carmona</fullName>
+        <default>false</default>
+        <label>Carmona</label>
+    </customValue>
+    <customValue>
+        <fullName>Casares</fullName>
+        <default>false</default>
+        <label>Casares</label>
+    </customValue>
+    <customValue>
+        <fullName>Citibank Building</fullName>
+        <default>false</default>
+        <label>Citibank Building</label>
+    </customValue>
+    <customValue>
+        <fullName>Cordoba</fullName>
+        <default>false</default>
+        <label>Cordoba</label>
+    </customValue>
+    <customValue>
+        <fullName>Faya</fullName>
+        <default>false</default>
+        <label>Faya</label>
+    </customValue>
+    <customValue>
+        <fullName>O General Building</fullName>
+        <default>false</default>
+        <label>O General Building</label>
+    </customValue>
+    <customValue>
+        <fullName>Ghanada Tower</fullName>
+        <default>false</default>
+        <label>Ghanada Tower</label>
+    </customValue>
+    <customValue>
+        <fullName>Grove Beach Views</fullName>
+        <default>false</default>
+        <label>Grove Beach Views</label>
+    </customValue>
+    <customValue>
+        <fullName>Grove Gallery Views</fullName>
+        <default>false</default>
+        <label>Grove Gallery Views</label>
+    </customValue>
+    <customValue>
+        <fullName>Grove Museum Views</fullName>
+        <default>false</default>
+        <label>Grove Museum Views</label>
+    </customValue>
+    <customValue>
+        <fullName>Grove Uptown Views</fullName>
+        <default>false</default>
+        <label>Grove Uptown Views</label>
+    </customValue>
+    <customValue>
+        <fullName>Heel Tower</fullName>
+        <default>false</default>
+        <label>Heel Tower</label>
+    </customValue>
+    <customValue>
+        <fullName>International Tower</fullName>
+        <default>false</default>
+        <label>International Tower</label>
+    </customValue>
+    <customValue>
+        <fullName>Jawaher Al Saadiyat</fullName>
+        <default>false</default>
+        <label>Jawaher Al Saadiyat</label>
+    </customValue>
+    <customValue>
+        <fullName>June</fullName>
+        <default>false</default>
+        <label>June</label>
+    </customValue>
+    <customValue>
+        <fullName>Karmell</fullName>
+        <default>false</default>
+        <label>Karmell</label>
+    </customValue>
+    <customValue>
+        <fullName>Khalidiya Village</fullName>
+        <default>false</default>
+        <label>Khalidiya Village</label>
+    </customValue>
+    <customValue>
+        <fullName>Lagoons</fullName>
+        <default>false</default>
+        <label>Lagoons</label>
+    </customValue>
+    <customValue>
+        <fullName>Lea Yas Island</fullName>
+        <default>false</default>
+        <label>Lea Yas Island</label>
+    </customValue>
+    <customValue>
+        <fullName>Louvre Abu Dhabi Residences</fullName>
+        <default>false</default>
+        <label>Louvre Abu Dhabi Residences</label>
+    </customValue>
+    <customValue>
+        <fullName>Malaga</fullName>
+        <default>false</default>
+        <label>Malaga</label>
+    </customValue>
+    <customValue>
+        <fullName>Mamsha Al Saadiyat</fullName>
+        <default>false</default>
+        <label>Mamsha Al Saadiyat</label>
+    </customValue>
+    <customValue>
+        <fullName>Mankhool Building</fullName>
+        <default>false</default>
+        <label>Mankhool Building</label>
+    </customValue>
+    <customValue>
+        <fullName>Marbella</fullName>
+        <default>false</default>
+        <label>Marbella</label>
+    </customValue>
+    <customValue>
+        <fullName>Marsa Al Bateen</fullName>
+        <default>false</default>
+        <label>Marsa Al Bateen</label>
+    </customValue>
+    <customValue>
+        <fullName>Mayan</fullName>
+        <default>false</default>
+        <label>Mayan</label>
+    </customValue>
+    <customValue>
+        <fullName>Meera</fullName>
+        <default>false</default>
+        <label>Meera</label>
+    </customValue>
+    <customValue>
+        <fullName>Mina Zayed</fullName>
+        <default>false</default>
+        <label>Mina Zayed</label>
+    </customValue>
+    <customValue>
+        <fullName>Motorworld</fullName>
+        <default>false</default>
+        <label>Motorworld</label>
+    </customValue>
+    <customValue>
+        <fullName>Mushrif Gardens</fullName>
+        <default>false</default>
+        <label>Mushrif Gardens</label>
+    </customValue>
+    <customValue>
+        <fullName>Nareel Island</fullName>
+        <default>false</default>
+        <label>Nareel Island</label>
+    </customValue>
+    <customValue>
+        <fullName>North Park</fullName>
+        <default>false</default>
+        <label>North Park</label>
+    </customValue>
+    <customValue>
+        <fullName>Noya</fullName>
+        <default>false</default>
+        <label>Noya</label>
+    </customValue>
+    <customValue>
+        <fullName>NoyaLuma</fullName>
+        <default>false</default>
+        <label>NoyaLuma</label>
+    </customValue>
+    <customValue>
+        <fullName>NoyaViva</fullName>
+        <default>false</default>
+        <label>NoyaViva</label>
+    </customValue>
+    <customValue>
+        <fullName>Park View</fullName>
+        <default>false</default>
+        <label>Park View</label>
+    </customValue>
+    <customValue>
+        <fullName>Reem</fullName>
+        <default>false</default>
+        <label>Reem</label>
+    </customValue>
+    <customValue>
+        <fullName>Reeman2Retail</fullName>
+        <default>false</default>
+        <label>Reeman2Retail</label>
+    </customValue>
+    <customValue>
+        <fullName>Reem Central Park</fullName>
+        <default>false</default>
+        <label>Reem Central Park</label>
+    </customValue>
+    <customValue>
+        <fullName>Reem Island Shams</fullName>
+        <default>false</default>
+        <label>Reem Island Shams</label>
+    </customValue>
+    <customValue>
+        <fullName>Reflection II</fullName>
+        <default>false</default>
+        <label>Reflection II</label>
+    </customValue>
+    <customValue>
+        <fullName>Reflections</fullName>
+        <default>false</default>
+        <label>Reflections</label>
+    </customValue>
+    <customValue>
+        <fullName>Remal Mall</fullName>
+        <default>false</default>
+        <label>Remal Mall</label>
+    </customValue>
+    <customValue>
+        <fullName>Repton-2</fullName>
+        <default>false</default>
+        <label>Repton-2</label>
+    </customValue>
+    <customValue>
+        <fullName>Riffa Building</fullName>
+        <default>false</default>
+        <label>Riffa Building</label>
+    </customValue>
+    <customValue>
+        <fullName>Saadiyat</fullName>
+        <default>false</default>
+        <label>Saadiyat</label>
+    </customValue>
+    <customValue>
+        <fullName>Saadiyat Beach Plot</fullName>
+        <default>false</default>
+        <label>Saadiyat Beach Plot</label>
+    </customValue>
+    <customValue>
+        <fullName>Saadiyat Beach Retail</fullName>
+        <default>false</default>
+        <label>Saadiyat Beach Retail</label>
+    </customValue>
+    <customValue>
+        <fullName>Saadiyat Grove</fullName>
+        <default>false</default>
+        <label>Saadiyat Grove</label>
+    </customValue>
+    <customValue>
+        <fullName>Saddiyyat Island</fullName>
+        <default>false</default>
+        <label>Saddiyyat Island</label>
+    </customValue>
+    <customValue>
+        <fullName>Saadiyat Operative Village</fullName>
+        <default>false</default>
+        <label>Saadiyat Operative Village</label>
+    </customValue>
+    <customValue>
+        <fullName>Saadiyat Reserve</fullName>
+        <default>false</default>
+        <label>Saadiyat Reserve</label>
+    </customValue>
+    <customValue>
+        <fullName>Saadiyat Reserve The Dunes</fullName>
+        <default>false</default>
+        <label>Saadiyat Reserve The Dunes</label>
+    </customValue>
+    <customValue>
+        <fullName>Saraya</fullName>
+        <default>false</default>
+        <label>Saraya</label>
+    </customValue>
+    <customValue>
+        <fullName>Sas Al Nakhl</fullName>
+        <default>false</default>
+        <label>Sas Al Nakhl</label>
+    </customValue>
+    <customValue>
+        <fullName>Shabhat Plaza</fullName>
+        <default>false</default>
+        <label>Shabhat Plaza</label>
+    </customValue>
+    <customValue>
+        <fullName>Shams</fullName>
+        <default>false</default>
+        <label>Shams</label>
+    </customValue>
+    <customValue>
+        <fullName>Shams Boutik</fullName>
+        <default>false</default>
+        <label>Shams Boutik</label>
+    </customValue>
+    <customValue>
+        <fullName>Sky Tower Commercial</fullName>
+        <default>false</default>
+        <label>Sky Tower Commercial</label>
+    </customValue>
+    <customValue>
+        <fullName>SODIC Project 2</fullName>
+        <default>false</default>
+        <label>SODIC Project 2</label>
+    </customValue>
+    <customValue>
+        <fullName>SODIC Project 3</fullName>
+        <default>false</default>
+        <label>SODIC Project 3</label>
+    </customValue>
+    <customValue>
+        <fullName>Soho Square</fullName>
+        <default>false</default>
+        <label>Soho Square</label>
+    </customValue>
+    <customValue>
+        <fullName>Sun and Sky Towers</fullName>
+        <default>false</default>
+        <label>Sun and Sky Towers</label>
+    </customValue>
+    <customValue>
+        <fullName>Sun Tower</fullName>
+        <default>false</default>
+        <label>Sun Tower</label>
+    </customValue>
+    <customValue>
+        <fullName>The Bridges</fullName>
+        <default>false</default>
+        <label>The Bridges</label>
+    </customValue>
+    <customValue>
+        <fullName>The Burj Mohamed Bin Rashid</fullName>
+        <default>false</default>
+        <label>The Burj Mohamed Bin Rashid</label>
+    </customValue>
+    <customValue>
+        <fullName>The Estates</fullName>
+        <default>false</default>
+        <label>The Estates</label>
+    </customValue>
+    <customValue>
+        <fullName>The Gate Towers</fullName>
+        <default>false</default>
+        <label>The Gate Towers</label>
+    </customValue>
+    <customValue>
+        <fullName>The Wing</fullName>
+        <default>false</default>
+        <label>The Wing</label>
+    </customValue>
+    <customValue>
+        <fullName>V Residences</fullName>
+        <default>false</default>
+        <label>V Residences</label>
+    </customValue>
+    <customValue>
+        <fullName>Vye</fullName>
+        <default>false</default>
+        <label>Vye</label>
+    </customValue>
+    <customValue>
+        <fullName>WatersEdge</fullName>
+        <default>false</default>
+        <label>WatersEdge</label>
+    </customValue>
+    <customValue>
+        <fullName>WestYas</fullName>
+        <default>false</default>
+        <label>WestYas</label>
+    </customValue>
+    <customValue>
+        <fullName>WestYasPlot</fullName>
+        <default>false</default>
+        <label>WestYasPlot</label>
+    </customValue>
+    <customValue>
+        <fullName>World Trade Center</fullName>
+        <default>false</default>
+        <label>World Trade Center</label>
+    </customValue>
+    <customValue>
+        <fullName>WTC Souk</fullName>
+        <default>false</default>
+        <label>WTC Souk</label>
+    </customValue>
+    <customValue>
+        <fullName>YasAcres</fullName>
+        <default>false</default>
+        <label>YasAcres</label>
+    </customValue>
+    <customValue>
+        <fullName>YasAcresPlot</fullName>
+        <default>false</default>
+        <label>YasAcresPlot</label>
+    </customValue>
+    <customValue>
+        <fullName>YasAcres The Dahlias</fullName>
+        <default>false</default>
+        <label>YasAcres The Dahlias</label>
+    </customValue>
+    <customValue>
+        <fullName>YasAcres The Magnolias</fullName>
+        <default>false</default>
+        <label>YasAcres The Magnolias</label>
+    </customValue>
+    <customValue>
+        <fullName>Yas Golf Collection</fullName>
+        <default>false</default>
+        <label>Yas Golf Collection</label>
+    </customValue>
+    <customValue>
+        <fullName>Yas Ikea</fullName>
+        <default>false</default>
+        <label>Yas Ikea</label>
+    </customValue>
+    <customValue>
+        <fullName>Yas Island</fullName>
+        <default>false</default>
+        <label>Yas Island</label>
+    </customValue>
+    <customValue>
+        <fullName>Yas Mall</fullName>
+        <default>false</default>
+        <label>Yas Mall</label>
+    </customValue>
+    <customValue>
+        <fullName>Yas Office</fullName>
+        <default>false</default>
+        <label>Yas Office</label>
+    </customValue>
+    <customValue>
+        <fullName>Yas Park Gate New</fullName>
+        <default>false</default>
+        <label>Yas Park Gate New</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi</fullName>
+        <default>false</default>
+        <label>Abu Dhabi</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Heights/Towers</fullName>
+        <default>false</default>
+        <label>Bloom Heights/Towers</label>
+    </customValue>
+    <customValue>
+        <fullName>Jumeirah Village Circle</fullName>
+        <default>false</default>
+        <label>Jumeirah Village Circle</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Heel</fullName>
+        <default>false</default>
+        <label>Al Heel</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Reem Complex</fullName>
+        <default>false</default>
+        <label>Al Reem Complex</label>
+    </customValue>
+    <customValue>
+        <fullName>Mushrif Garden</fullName>
+        <default>false</default>
+        <label>Mushrif Garden</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Mankhool</fullName>
+        <default>false</default>
+        <label>Al Mankhool</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Heel Tower</fullName>
+        <default>false</default>
+        <label>Al Heel Tower</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Reem</fullName>
+        <default>false</default>
+        <label>Al Reem</label>
+    </customValue>
+    <customValue>
+        <fullName>Citi Bank</fullName>
+        <default>false</default>
+        <label>Citi Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>O General</fullName>
+        <default>false</default>
+        <label>O General</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Reffa Building</fullName>
+        <default>false</default>
+        <label>Al Reffa Building</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Waha</fullName>
+        <default>false</default>
+        <label>Al Waha</label>
+    </customValue>
+    <customValue>
+        <fullName>Ganadah towers</fullName>
+        <default>false</default>
+        <label>Ganadah towers</label>
+    </customValue>
+    <customValue>
+        <fullName>ADNEC Land</fullName>
+        <default>false</default>
+        <label>ADNEC Land</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Mowgee Land Al Ain</fullName>
+        <default>false</default>
+        <label>Al Mowgee Land Al Ain</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Garden Retail B</fullName>
+        <default>false</default>
+        <label>Bloom Garden Retail B</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Gardens Phase1 Leasing</fullName>
+        <default>false</default>
+        <label>Bloom Gardens Phase1 Leasing</label>
+    </customValue>
+    <customValue>
+        <fullName>Brighton College Dubai</fullName>
+        <default>false</default>
+        <label>Brighton College Dubai</label>
+    </customValue>
+    <customValue>
+        <fullName>Musaffah Lands 1 &amp; 2</fullName>
+        <default>false</default>
+        <label>Musaffah Lands 1 &amp; 2</label>
+    </customValue>
+    <customValue>
+        <fullName>Musaffah Lands 118</fullName>
+        <default>false</default>
+        <label>Musaffah Lands 118</label>
+    </customValue>
+    <customValue>
+        <fullName>Brighton College Abu Dhabi</fullName>
+        <default>false</default>
+        <label>Brighton College Abu Dhabi</label>
+    </customValue>
+    <customValue>
+        <fullName>ECC</fullName>
+        <default>false</default>
+        <label>ECC</label>
+    </customValue>
+    <customValue>
+        <fullName>Brighton College Al Ain</fullName>
+        <default>false</default>
+        <label>Brighton College Al Ain</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Garden Retail</fullName>
+        <default>false</default>
+        <label>Bloom Garden Retail</label>
+    </customValue>
+    <customValue>
+        <fullName>Dwight School Dubai</fullName>
+        <default>false</default>
+        <label>Dwight School Dubai</label>
+    </customValue>
+    <customValue>
+        <fullName>SOHO SQUARE LEASING</fullName>
+        <default>false</default>
+        <label>SOHO SQUARE LEASING</label>
+    </customValue>
+    <customValue>
+        <fullName>PARK VIEW LEASING</fullName>
+        <default>false</default>
+        <label>PARK VIEW LEASING</label>
+    </customValue>
+    <customValue>
+        <fullName>Toledo</fullName>
+        <default>false</default>
+        <label>Toledo</label>
+    </customValue>
+    <customValue>
+        <fullName>Granada</fullName>
+        <default>false</default>
+        <label>Granada</label>
+    </customValue>
+    <customValue>
+        <fullName>Seville</fullName>
+        <default>false</default>
+        <label>Seville</label>
+    </customValue>
+    <customValue>
+        <fullName>Olvera</fullName>
+        <default>false</default>
+        <label>Olvera</label>
+    </customValue>
+    <customValue>
+        <fullName>Granada 2</fullName>
+        <default>false</default>
+        <label>Granada 2</label>
+    </customValue>
+    <customValue>
+        <fullName>ALG2</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ALG2</label>
+    </customValue>
+    <customValue>
+        <fullName>Jawaher</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Jawaher</label>
+    </customValue>
+    <customValue>
+        <fullName>Sas Al Nakhl Village</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Sas Al Nakhl Village</label>
+    </customValue>
+    <customValue>
+        <fullName>ALG</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>ALG</label>
+    </customValue>
+    <customValue>
+        <fullName>YasGolfJA</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>YasGolfJA</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Bandar</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Bandar</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Hadeel</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Hadeel</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Muneera</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Muneera</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Rayyana</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Rayyana</label>
+    </customValue>
+    <customValue>
+        <fullName>Bridges</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Bridges</label>
+    </customValue>
+    <customValue>
+        <fullName>Khalidiya</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Khalidiya</label>
+    </customValue>
+    <customValue>
+        <fullName>Motor World</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Motor World</label>
+    </customValue>
+    <customValue>
+        <fullName>Nareeel Island</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Nareeel Island</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Disclosed</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Not Disclosed</label>
+    </customValue>
+    <customValue>
+        <fullName>Grove</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Grove</label>
+    </customValue>
+    <customValue>
+        <fullName>AlGhadeer Plot</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AlGhadeer Plot</label>
+    </customValue>
+    <customValue>
+        <fullName>SODIC Project 1</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>SODIC Project 1</label>
+    </customValue>
+    <customValue>
+        <fullName>Saadiyat Groove</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Saadiyat Groove</label>
+    </customValue>
+    <customValue>
+        <fullName>Golf Gardens</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Golf Gardens</label>
+    </customValue>
+    <customValue>
+        <fullName>Gate Arc</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Gate Arc</label>
+    </customValue>
+    <customValue>
+        <fullName>Gate</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Gate</label>
+    </customValue>
+    <customValue>
+        <fullName>Gardens Plaza</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Gardens Plaza</label>
+    </customValue>
+    <customValue>
+        <fullName>Fay Alreeman</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Fay Alreeman</label>
+    </customValue>
+    <customValue>
+        <fullName>Etihad Plaza</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Etihad Plaza</label>
+    </customValue>
+    <customValue>
+        <fullName>Etihad Airways Centre</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Etihad Airways Centre</label>
+    </customValue>
+    <customValue>
+        <fullName>Eastern Mangroves</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Eastern Mangroves</label>
+    </customValue>
+    <customValue>
+        <fullName>Daman House</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Daman House</label>
+    </customValue>
+    <customValue>
+        <fullName>Cranleigh Staff Accommodation</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Cranleigh Staff Accommodation</label>
+    </customValue>
+    <customValue>
+        <fullName>Baniyas Tower</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Baniyas Tower</label>
+    </customValue>
+    <customValue>
+        <fullName>Arc Towers</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Arc Towers</label>
+    </customValue>
+    <customValue>
+        <fullName>Ansam</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Ansam</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Zeina</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Zeina</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Reem Island</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Reem Island</label>
+    </customValue>
+    <customValue>
+        <fullName>AlReeman2</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AlReeman2</label>
+    </customValue>
+    <customValue>
+        <fullName>AlReeman</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AlReeman</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Rayyana Plaza</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Rayyana Plaza</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Raha Gardens</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Raha Gardens</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Raha Beach</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Raha Beach</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Oyoun Village</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Oyoun Village</label>
+    </customValue>
+    <customValue>
+        <fullName>Almutaredh – Al Ain</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Almutaredh – Al Ain</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Muneera Beach Plaza</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Muneera Beach Plaza</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Merief</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Merief</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Mamoura</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Mamoura</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Jimi Mall</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Jimi Mall</label>
+    </customValue>
+    <customValue>
+        <fullName>AlHadeel</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AlHadeel</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Gurm</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Gurm</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Ghadeer 2</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Ghadeer 2</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Falah Village</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Falah Village</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar HQ</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Aldar HQ</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Bateen Park</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Bateen Park</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Bandar Plaza</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Al Bandar Plaza</label>
+    </customValue>
+    <customValue>
+        <fullName>AlGurm-Phase2</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>AlGurm-Phase2</label>
+    </customValue>
+    <customValue>
+        <fullName>West Yas</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>West Yas</label>
+    </customValue>
+    <customValue>
+        <fullName>Waters Edge</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Waters Edge</label>
+    </customValue>
+    <description>Projects</description>
+    <masterLabel>Project</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

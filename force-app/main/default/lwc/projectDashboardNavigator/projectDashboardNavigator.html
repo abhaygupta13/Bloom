@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Project Dashboard Selector" icon-name="standard:dashboard">
+        <div class="slds-p-around_medium">
+            <lightning-combobox
+                name="projectSelect"
+                label="Select Project"
+                placeholder="Choose a project..."
+                options={projectOptions}
+                onchange={handleProjectChange}>
+            </lightning-combobox>
+        </div>
+    </lightning-card>
+</template>

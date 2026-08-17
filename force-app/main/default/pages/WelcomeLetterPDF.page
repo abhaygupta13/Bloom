@@ -1,0 +1,844 @@
+<apex:page controller="WelcomeLetterPDFController"
+           renderAs="pdf"
+           showHeader="false"
+           sidebar="false"
+           applyBodyTag="false"
+           applyHtmlTag="false">
+    
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        
+        <head>
+            
+            <style>
+                
+                .retailText { width: 200px; text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 15pt; font-weight: bold; margin-top: 5px; }
+        
+                @page {
+                size: A4;
+                margin: 30mm 18mm 25mm 18mm;
+                
+                @top-left {
+                content: element(pageHeader);
+                }
+                
+                @bottom-left {
+                content: element(footerAddress);
+                }
+                
+                @bottom-right {
+                content: element(footerWebsite);
+                }
+                }
+                
+                .footerAddress {
+                position: running(footerAddress);
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 7pt;
+                color: #666666;
+                line-height: 1.15;
+                text-align: left;
+                }
+                
+                .footerWebsite {
+                position: running(footerWebsite);
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 7pt;
+                color: #666666;
+                text-align: right;
+                white-space: nowrap;
+                }
+                
+                .dateDay {
+                font-size: 10pt;
+                }
+                
+                .dateSuffix {
+                font-size: 6pt;
+                vertical-align: super;
+                line-height: 0;
+                position: relative;
+                top: -0.2em;
+                }
+                
+                .pageHeader {
+                position: running(pageHeader);
+                width: 200px;
+                text-align: left;
+                }
+                
+                .pageHeader img {
+                width: 165px;
+                }
+                
+                body{
+                
+                font-family:Arial,Helvetica,sans-serif;
+                font-size:10pt;
+                color:#000000;
+                line-height:1.35;
+                
+                }
+                
+                table{
+                
+                border-collapse:collapse;
+                width:100%;
+                
+                }
+                
+                .logo{
+                
+                width:165px;
+                
+                }
+                
+                .header td{
+                
+                vertical-align:top;
+                
+                }
+                
+                .details{
+                
+                margin-top:15px;
+                
+                }
+                
+                .details td{
+                
+                padding:3px 0;
+                
+                }
+                
+                .label{
+                
+                width:160px;
+                
+                }
+                
+                .subject {
+                margin-top: 15px;
+                font-weight: bold;
+                font-size: 12pt;
+                text-decoration: underline;
+                }
+                
+                .text{
+                
+                margin-top:10px;
+                text-align:justify;
+                
+                }
+                
+                .itemTable{
+                
+                margin-top:6px;
+                
+                }
+                
+                .itemTable td{
+                
+                vertical-align:top;
+                padding-bottom:6px;
+                
+                }
+                
+                .bullet {
+                width: 25px;
+                vertical-align: top;
+                }
+                
+                
+                .subBullet {
+                width: 25px;
+                padding-left: 18px;
+                vertical-align: top;
+                font-weight: normal;
+                }
+                
+                .helpTable{
+                
+                width:55%;
+                margin-top:10px;
+                
+                }
+                
+                .helpTable td{
+                
+                padding:3px 0;
+                
+                }
+                
+                .signatureTable {
+                width: 100%;
+                margin-top: 25px;
+                border-collapse: collapse;
+                table-layout: fixed;
+                }
+                
+                .signatureTable td {
+                padding-top: 12px;
+                vertical-align: bottom;
+                font-size: 10pt;
+                }
+                
+                .signatureLabel,
+                .signatureLabelRight {
+                width: 22%;
+                font-weight: bold;
+                white-space: normal;   /* allow label wrapping */
+                }
+                
+                .signatureLabelRight {
+                padding-left: 18px;
+                }
+                
+                .signatureValue,
+                .signatureValueRight {
+                width: 28%;
+                border-bottom: 1px solid #000;
+                height: 18px;
+                padding: 0 4px 2px 4px;
+                white-space: normal;   /* allow long values to wrap */
+                word-wrap: break-word;
+                }
+                
+                .pageBreak{
+                
+                page-break-before:always;
+                
+                }
+                
+            </style>
+            
+        </head>
+        
+        <body>
+            
+            <!-- Header that repeats on every PDF page -->
+            <div class="pageHeader">
+                <apex:image value="{!URLFOR($Resource.BloomLogo)}"
+                            styleClass="logo"/>
+                <div class="retailText">RETAIL</div>
+            </div>
+            
+            <!-- Footer Address -->
+            <div class="footerAddress">
+                <b>Bloom Retail Management Services L.L.C.</b> <br/>
+                7th Floor, Bloom Central, Sheikh Rashid Bin Saeed St. Rd 18<br/>
+                P.O. Box 28928, Abu Dhabi, UAE | T. +971 2 6969500<br/>
+                A National Holding Company
+            </div>
+            
+            <!-- Footer Website -->
+            <div class="footerWebsite">
+               <b>www.bloomholding.com</b> 
+            </div>
+            
+            <!-- Your actual document content starts here -->
+            <table style="margin-top:0px; width:100%;">
+                <tr>
+                    <td>
+                        <span class="dateDay">
+                            <apex:outputText value="{!todayDay}"/>
+                            <sup class="dateSuffix">
+                                <apex:outputText value="{!todaySuffix}"/>
+                            </sup>
+                        </span>
+                        &nbsp;
+                        <apex:outputText value="{!todayMonthYear}"/>
+                    </td>
+                </tr>
+            </table>
+            
+            
+            <table class="details">
+                
+                <tr>
+                    
+                    <td>
+                        
+                        <apex:outputText value="{!accountName}"/>
+                        
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    
+                    <td>
+                        
+                        <apex:outputText value="{!companyName}"/>
+                        
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    <td>
+                        <apex:outputText value="{!unitNumber}"/>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <apex:outputText value="{!address}" escape="false"/>
+                    </td>
+                    <td></td>
+                </tr>
+                
+                <tr>
+    <td>
+       Reference No.:&nbsp;
+        <apex:outputText value="{!referenceNumber}"/>
+    </td>
+</tr>
+                
+            </table>
+            
+            <p class="subject">
+                
+                Subject: New Shop Opening Mandatory Requirements:
+                
+            </p>
+            
+            <p>
+                Dear&nbsp;
+                <apex:outputText value="{!accountName}"/>,
+            </p>
+            
+            <p class="text">
+                
+                We would like to thank you for choosing Bloom Holding as your business partner. Below is a short summary of key points that will be discussed during our meeting 15 days prior to the opening.
+                
+            </p>
+            <table class="itemTable">
+                
+                <tr>
+                    <td class="bullet">1.</td>
+                    <td>
+                        Trade License (Valid)
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">2.</td>
+                    <td>
+                        
+                        Insurance Policy – All 4 Insurance documents in full as per signed Lease Agreement: (Entire Leased and Licensed Area / Store Room):
+                        
+                    </td>
+                </tr>
+                
+                <!-- Sub-bullet -->
+                <tr>
+                    <td colspan="2" style="padding-left:50px;">
+                        <span style="padding-right:8px;">&#8226;</span>
+                        Property All Risk Insurance:
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="padding-left:50px;">
+                        <span style="padding-right:8px;">&#8226;</span>
+                        Business Interruption Insurance
+                        (With a minimum indemnity period of at least twelve (12) months):
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="padding-left:50px;">
+                        <span style="padding-right:8px;">&#8226;</span>
+                        Public Liability Insurance: 5 Million AED.
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="padding-left:50px;">
+                        <span style="padding-right:8px;">&#8226;</span>
+                        Workmen's Compensation and Employers Liability Insurance:
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">3.</td>
+                    <td>
+                        
+                        Fire Alarm Maintenance Contract Agreement (AMC),
+                        by ADCD approved contractor.
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">4.</td>
+                    <td>
+                        
+                        Fire Fighting System Maintenance Contract Agreement (AMC),
+                        by ADCD approved contractor.
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">5.</td>
+                    <td>
+                        
+                        General Maintenance Contract for Air Conditioning,
+                        Electrical,
+                        Mechanical,
+                        Plumbing,
+                        Civil and Carpentry Works.
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">6.</td>
+                    <td>
+                        
+                        Pest Control Contract for the entire leased area and licensed area - 
+                        Pest Control must be completed prior to opening for trade.
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">7.</td>
+                    <td>
+                        
+                        Housekeeping Maintenance Contract.
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">8.</td>
+                    <td>
+                        
+                        Retailers Contact Information Form completed in Excel
+                        (not handwritten)
+                        and returned via email to
+                        
+                        
+                        <a href="mailto:{!$Label.TenantEnquiryEmail}">
+                            <apex:outputText value="{!$Label.TenantEnquiryEmail}"/>;_
+                        </a>
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">9.</td>
+                    <td>
+                        
+                        Late Opening Penalty to be settled in full prior to removal of hoarding
+                        and store permitted to trade.
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">10.</td>
+                    <td>
+                        
+                        Casual reports of monthly sale figures need to be emailed to
+                        
+                        
+                        <a href="mailto:{!$Label.TenantEnquiryEmail}">
+                            <apex:outputText value="{!$Label.TenantEnquiryEmail}"/>;_
+                        </a>
+                        by the 7th of every month until Tenant Portal is activated.
+                        
+                        This is a requirement as per your signed Lease Agreement.
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">11.</td>
+                    <td>
+                        
+                        Certified audited sales report must be submitted 60 days after the end of each lease term. 
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">12.</td>
+                    <td>
+                        
+                        Provide proof of account setup with ADDC
+                        for electricity meter and water
+                        (if applicable).
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">13.</td>
+                    <td>
+                        
+                        Ista NOC for Chilled Water Connection
+                        (if applicable)
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">14.</td>
+                    <td>
+                        
+                        Store trading hours are as per asset operating hours.
+                        Please assure your store opening hours are updated on google search accordingly. 
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="bullet">15.</td>
+                    <td>
+                        
+                        Brand Images and Logo
+                        
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="padding-left:50px;">
+                        <span style="padding-right:8px;">&#8226;</span>
+                        High Resolution Logo 
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="padding-left:50px;">
+                        <span style="padding-right:8px;">&#8226;</span>
+                        Brand Definition: 1080 characters including spaces
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="padding-left:50px;">
+                        <span style="padding-right:8px;">&#8226;</span>
+                        Business/Brand Images: 16x9 | 1920x1080 | High resolution images (4 images) 
+                    </td>
+                </tr>
+                
+            </table>
+            
+            <!-- ================= ITEM 15 ================= -->
+            
+            <table class="itemTable">
+                
+                <tr>
+                    <td class="bullet">16.</td>
+                    <td>
+                        For marketing support, please contact my colleagues, particularly for:
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="padding-left:50px;">
+                        <span style="padding-right:8px;">&#8226;</span>
+                        Opening Event: &nbsp;
+                        <apex:outputText value="{!$Label.OpeningEventContactName}"/>
+                        (
+                        <a href="mailto:{!$Label.OpeningEventEmail}">
+                            <apex:outputText value="{!$Label.OpeningEventEmail}"/>
+                        </a>
+                        )
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="padding-left:50px;">
+                        <span style="padding-right:8px;">&#8226;</span>
+                        Marketing NOC for events and in store activity, social media, &amp; website:&nbsp;
+                        <apex:outputText value="{!$Label.MarketingNOCName}"/>
+                        (
+                        <a href="mailto:{!$Label.MarketingNOCEmail}">
+                            <apex:outputText value="{!$Label.MarketingNOCEmail}"/>
+                        </a>
+                        ;)
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2" style="padding-left:50px;">
+                        <span style="padding-right:8px;">&#8226;</span>
+                        Roll up Banner &amp; Leaflet Hand Out is not permitted at all.
+                    </td>
+                </tr>
+                
+                
+                
+                
+                <!-- Digital Screens -->
+                <tr>
+                    <td colspan="2" style="padding-left:50px;">
+                        <span style="padding-right:8px;">&#8226;</span>
+                        Digital Screens: 2 Weeks FOC Exposure.
+                    </td>
+                </tr>
+                
+            </table>
+            
+            
+            
+            <!-- ================= ITEM 16 ================= -->
+            
+            <table class="itemTable">
+                
+                <tr>
+                    <td class="bullet">17.</td>
+                    <td>
+                        There will be a Tenant Satisfaction Survey conducted during the year.
+                        A team from Bloom will contact you to acquire your valuable feedback,
+                        and we request your full participation in this activity.
+                    </td>
+                </tr>
+                
+                <!-- ================= ITEM 17 ================= -->
+                
+                <tr>
+                    <td class="bullet">18.</td>
+                    <td>
+                        Help Line Numbers Reminder:
+                    </td>
+                </tr>
+                
+            </table>
+            
+            <table class="helpTable">
+                
+                <tr>
+                    
+                    <td>
+                        
+                        Abu Dhabi Police Hotline:
+                        
+                    </td>
+                    
+                    <td>
+                        
+                        <b style="text-decoration: underline;">999</b>
+                        
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    
+                    <td>
+                        
+                        Ambulance Service Hotline:
+                        
+                    </td>
+                    
+                    <td>
+                        
+                        <b style="text-decoration: underline;">998</b>
+                        
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    
+                    <td>
+                        
+                        Fire Fighting Hotline:
+                        
+                    </td>
+                    
+                    <td>
+                        
+                        <b style="text-decoration: underline;">997</b>
+                        
+                    </td>
+                    
+                </tr>
+                
+            </table>
+            <br/><br/><br/>
+            
+            <h3 style="margin-top:0px; font-size:12pt;">
+                
+                <b style="text-decoration: underline;"> For F&amp;B Units</b>
+                
+            </h3>
+            
+            <table class="itemTable">
+                
+                <tr>
+                    
+                    
+                    
+                    <td class="bullet">1.</td>
+                    
+                    <td>
+                        
+                        Water Meter Transfer – Proof.
+                        
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    
+                    <td class="bullet">2.</td>
+                    
+                    <td>
+                        
+                        Discard Oil Contract.
+                        
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    
+                    <td class="bullet">3.</td>
+                    
+                    <td>
+                        
+                        LPG - Maintenance Contract.
+                        
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    
+                    <td class="bullet">4.</td>
+                    
+                    <td>
+                        
+                        Exhaust Cleaning Contract – Annual
+                        (with Bloom approved contractor).
+                        
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    
+                    <td class="bullet">5.</td>
+                    
+                    <td>
+                        
+                        Grease Trap and Live Bacteria Dosing System 
+                        
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    
+                    <td class="bullet">6.</td>
+                    
+                    <td>
+                        
+                        Health Card for all employees - 
+                        must/Valid Visa for employee working in the tenancy.
+                        
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    
+                    <td class="bullet">7.</td>
+                    
+                    <td>
+                        
+                        Food Safety and Hygiene Training &amp; PIC
+                        (Basic for all employees and Intermediate / Advanced for Managers, Supervisors and Head Chef).
+                        
+                    </td>
+                    
+                </tr>
+                
+            </table>
+            
+            <p class="text">
+                
+                Please do not hesitate to contact us via email
+                
+                
+                <a href="mailto:{!$Label.TenantEnquiryEmail}">
+                    <apex:outputText value="{!$Label.TenantEnquiryEmail}"/>
+                </a>
+                should you require clarification or assistance.
+                
+            </p>
+            
+            <p>
+                
+                Yours Sincerely,
+                
+            </p>
+            
+            <p>
+                
+                <b>
+                    
+                    Atif Chaudhary
+                    
+                </b>
+                <br/>
+                
+                General Manager - Malls &amp; Retail
+                
+            </p>
+            
+            <hr style="margin-top:25px; margin-bottom:15px; border:0; border-top:1px solid #000;"/>
+            
+            <p>
+                
+                <b>
+                    
+                    I acknowledge receipt of this letter
+                    
+                </b>
+                
+            </p>
+            
+            <!-- Signature section -->
+            <table class="signatureTable">
+                <tr>
+                    <td class="signatureLabel">Signature:</td>
+                    <td class="signatureValue"></td>
+                    
+                    <td class="signatureLabelRight">Date:</td>
+                    <td class="signatureValueRight"></td>
+                </tr>
+                
+                <tr>
+                    <td class="signatureLabel">Name (in print letters):</td>
+                    <td class="signatureValue">
+                        <apex:outputText value="{!accountName}"/>
+                    </td>
+                    
+                    <td class="signatureLabelRight">Unit Number:</td>
+                    <td class="signatureValueRight">
+                        <apex:outputText value="{!unitNumber}"/>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="signatureLabel">Designation:</td>
+                    <td class="signatureValue"></td>
+                    
+                    <td class="signatureLabelRight">Company Name:</td>
+                    <td class="signatureValueRight">
+                        <apex:outputText value="{!companyName}"/>
+                    </td>
+                </tr>
+            </table>
+        </body>
+        
+    </html>
+    
+</apex:page>

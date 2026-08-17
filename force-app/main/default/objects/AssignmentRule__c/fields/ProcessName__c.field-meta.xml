@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProcessName__c</fullName>
+    <label>Process Name</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>RecordType__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Digital Lead Assignment</fullName>
+                <default>false</default>
+                <label>Digital Lead Assignment</label>
+            </value>
+            <value>
+                <fullName>Digital Case Assignment</fullName>
+                <default>false</default>
+                <label>Digital Case Assignment</label>
+            </value>
+            <value>
+                <fullName>Qualified Lead Assignment</fullName>
+                <default>false</default>
+                <label>Qualified Lead Assignment</label>
+            </value>
+            <value>
+                <fullName>General Complaint Case Assignment</fullName>
+                <default>false</default>
+                <label>General Complaint Case Assignment</label>
+            </value>
+            <value>
+                <fullName>Leasing Residential Qualified Lead Assignment</fullName>
+                <default>false</default>
+                <label>Leasing Residential Qualified Lead Assignment</label>
+            </value>
+            <value>
+                <fullName>Digital Leasing Lead Assignment</fullName>
+                <default>false</default>
+                <label>Digital Leasing Lead Assignment</label>
+            </value>
+            <value>
+                <fullName>Leasing Commercial Qualified Lead Assignment</fullName>
+                <default>false</default>
+                <label>Leasing Commercial Qualified Lead Assignment</label>
+            </value>
+            <value>
+                <fullName>CRM Case Assignment</fullName>
+                <default>false</default>
+                <label>CRM Case Assignment</label>
+            </value>
+            <value>
+                <fullName>ADHA Lead Assignment</fullName>
+                <default>false</default>
+                <label>ADHA Lead Assignment</label>
+            </value>
+            <value>
+                <fullName>BFM Email To Case Assignment</fullName>
+                <default>false</default>
+                <label>BFM Email To Case Assignment</label>
+            </value>
+            <value>
+                <fullName>ANPR Service Request Assignment</fullName>
+                <default>false</default>
+                <label>ANPR Service Request Assignment</label>
+            </value>
+            <value>
+                <fullName>Community App Service Request Assignment</fullName>
+                <default>false</default>
+                <label>Community App Service Request Assignment</label>
+            </value>
+            <value>
+                <fullName>Broker Case Assignment</fullName>
+                <default>false</default>
+                <label>Broker Case Assignment</label>
+            </value>
+            <value>
+                <fullName>CRM Resale Case Assignment</fullName>
+                <default>false</default>
+                <label>CRM Resale Case Assignment</label>
+            </value>
+            <value>
+                <fullName>Super App Registration Case Assignment</fullName>
+                <default>false</default>
+                <label>Super App Registration Case Assignment</label>
+            </value>
+            <value>
+                <fullName>Handover CRM Agent Assignment</fullName>
+                <default>false</default>
+                <label>Handover CRM Agent Assignment</label>
+            </value>
+            <value>
+                <fullName>BLC Common Area SR Assignment</fullName>
+                <default>false</default>
+                <label>BLC Common Area SR Assignment</label>
+            </value>
+            <value>
+                <fullName>DLP Common Area SR Assignment</fullName>
+                <default>false</default>
+                <label>DLP Common Area SR Assignment</label>
+            </value>
+            <value>
+                <fullName>Super App Operation Team Case Assignment</fullName>
+                <default>false</default>
+                <label>Super App Operation Team Case Assignment</label>
+            </value>
+            <value>
+                <fullName>CRM Complaint Case Assignment</fullName>
+                <default>false</default>
+                <label>CRM Complaint Case Assignment</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Lead</controllingFieldValue>
+            <valueName>Digital Lead Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead</controllingFieldValue>
+            <valueName>Qualified Lead Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead</controllingFieldValue>
+            <valueName>Leasing Residential Qualified Lead Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead</controllingFieldValue>
+            <valueName>Digital Leasing Lead Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead</controllingFieldValue>
+            <valueName>Leasing Commercial Qualified Lead Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Lead</controllingFieldValue>
+            <valueName>ADHA Lead Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>Digital Case Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>General Complaint Case Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>CRM Case Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>BFM Email To Case Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>ANPR Service Request Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>Community App Service Request Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>Broker Case Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>CRM Resale Case Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>Super App Registration Case Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>BLC Common Area SR Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>DLP Common Area SR Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>Super App Operation Team Case Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Case</controllingFieldValue>
+            <valueName>CRM Complaint Case Assignment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Handover</controllingFieldValue>
+            <valueName>Handover CRM Agent Assignment</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

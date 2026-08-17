@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approve_SPA_Validation</fullName>
+    <columns>NAME</columns>
+    <columns>AccountName__c</columns>
+    <columns>NetAmount__c</columns>
+    <columns>DP_ADM_Not_Cleared_amt__c</columns>
+    <columns>SalesManager__c</columns>
+    <columns>CustomerSignedSPADate__c</columns>
+    <columns>First_Installment_Cleared_Amount__c</columns>
+    <columns>BookingDate__c</columns>
+    <columns>Broker_Agencyy__c</columns>
+    <columns>Offer__c</columns>
+    <columns>PaymentPlan__c</columns>
+    <columns>OwnerSharePercentage__c</columns>
+    <columns>UnitNumber__c</columns>
+    <columns>ADM_Fee_Cleared_Amount__c</columns>
+    <columns>ADMFeeAmount__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>SubStatus__c</field>
+        <operation>equals</operation>
+        <value>Approved SPA Validation</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Booked,Book Cancelled,Sold,Cancelled</value>
+    </filters>
+    <label>Approve SPA Validation</label>
+    <sharedTo>
+        <group>Inventory_Management</group>
+    </sharedTo>
+</ListView>

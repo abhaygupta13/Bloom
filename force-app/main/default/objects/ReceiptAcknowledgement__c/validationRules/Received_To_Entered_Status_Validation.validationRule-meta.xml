@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Received_To_Entered_Status_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(PRIORVALUE(Status__c),&apos;Received&apos;) &amp;&amp; ISPICKVAL( Status__c ,&apos;Entered&apos;)</errorConditionFormula>
+    <errorMessage>Status Cannot be Changed from Received to Entered</errorMessage>
+</ValidationRule>

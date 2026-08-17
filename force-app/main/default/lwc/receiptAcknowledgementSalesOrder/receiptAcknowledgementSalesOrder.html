@@ -1,0 +1,207 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <template if:true={openModal}>
+
+        <!-- MODAL -->
+        <section role="dialog"
+                 tabindex="-1"
+                 aria-modal="true"
+                 class="slds-modal slds-fade-in-open">
+
+            <div class="slds-modal__container">
+
+                <!-- HEADER -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close"
+                            onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                                        alternative-text="close"
+                                        variant="inverse"
+                                        size="small">
+                        </lightning-icon>
+                    </button>
+
+                    <h2 class="slds-text-heading_medium">
+                        New Receipt Acknowledgement
+                    </h2>
+                </header>
+
+                <!-- BODY -->
+                <div class="slds-modal__content slds-p-around_medium">
+
+                    <!-- SPINNER -->
+                    <template if:true={showLoading}>
+                        <lightning-spinner alternative-text="Loading"
+                                           size="medium"
+                                           variant="brand">
+                        </lightning-spinner>
+                    </template>
+
+                    <!-- FORM -->
+                    <div class="slds-box slds-theme_default">
+
+                        <lightning-layout multiple-rows class="compact-layout">
+
+                            <!-- Payment Mode -->
+                            <lightning-layout-item size="4" class="compact-item">
+                                <lightning-combobox
+                                    label="Payment Mode"
+                                    value={paymentMode}
+                                    required
+                                    options={paymentModes}
+                                    onchange={handleChangePaymentMode}>
+                                </lightning-combobox>
+                            </lightning-layout-item>
+
+                            <!-- Reference -->
+                            <lightning-layout-item size="4" class="compact-item">
+                                <lightning-input
+                                    label="Cheque / CC / Wire Transfer #"
+                                    value={referenceNumber}
+                                    data-name="referenceNumber"
+                                    required
+                                    onchange={handleChange}>
+                                </lightning-input>
+                            </lightning-layout-item>
+
+                            <!-- Currency -->
+                            <lightning-layout-item size="4" class="compact-item">
+                                <lightning-combobox
+                                    label="Currency"
+                                    value={currencyISO}
+                                    required
+                                    options={currency}
+                                    onchange={handleChangeCurrency}>
+                                </lightning-combobox>
+                            </lightning-layout-item>
+
+                            <!-- Maturity Date -->
+                            <lightning-layout-item size="4" class="compact-item">
+                                <lightning-input
+                                    type="date"
+                                    label="Maturity Date"
+                                    value={maturityDate}
+                                    data-name="maturityDate"
+                                    required
+                                    onchange={handleChange}>
+                                </lightning-input>
+                            </lightning-layout-item>
+
+                            <!-- Posting Date -->
+                            <lightning-layout-item size="4" class="compact-item">
+                                <lightning-input
+                                    type="date"
+                                    label="Posting Date"
+                                    value={postingDate}
+                                    data-name="postingDate"
+                                    required
+                                    onchange={handleChange}>
+                                </lightning-input>
+                            </lightning-layout-item>
+
+                            <!-- Amount -->
+                            <lightning-layout-item size="4" class="compact-item">
+                                <lightning-input
+                                    type="number"
+                                    label="Amount"
+                                    value={amount}
+                                    data-name="amount"
+                                    required
+                                    onchange={handleChange}>
+                                </lightning-input>
+                            </lightning-layout-item>
+
+                            <!-- Bank Name -->
+                            <template if:true={bankNames}>
+                                <lightning-layout-item size="4" class="compact-item">
+                                    <lightning-combobox
+                                        label="Customer Bank Name"
+                                        value={customerBankName}
+                                        options={bankNames}
+                                        required
+                                        onchange={handleChangeCustomerBankName}>
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                            </template>
+
+                            <!-- Bank Account -->
+                            <lightning-layout-item size="4" class="compact-item">
+                                <lightning-combobox
+                                    label="Bloom Bank Account"
+                                    value={bankAccount}
+                                    options={bankAccounts}
+                                    required
+                                    onchange={handleBankAccountChange}>
+                                </lightning-combobox>
+                            </lightning-layout-item>
+
+                            <!-- Remitter -->
+                            <lightning-layout-item size="4" class="compact-item">
+                                <lightning-combobox
+                                    label="Remitter Name"
+                                    value={selectedRemitter}
+                                    options={remitterOptions}
+                                    required
+                                    onchange={handleRemitterChange}>
+                                </lightning-combobox>
+                            </lightning-layout-item>
+
+                            <!-- Installment/OtherCharges -->
+                            <lightning-layout-item size="4" class="compact-item">
+                                <lightning-combobox
+                                    label="Allocate To"
+                                    value={allocateTo}
+                                    options={allocateToOptions}
+                                    required
+                                    onchange={handleAllocateToChange}>
+                                </lightning-combobox>
+                            </lightning-layout-item>
+
+                            <!-- Remarks -->
+                            <lightning-layout-item size="4" class="compact-item">
+                                <lightning-textarea
+                                    label="Remarks"
+                                    value={remarks}
+                                    onchange={handleChange}>
+                                </lightning-textarea>
+                            </lightning-layout-item>
+
+                            <!-- Other Remitter -->
+                            <template if:true={showOtherRemitter}>
+                                <lightning-layout-item size="4" class="compact-item">
+                                    <lightning-input
+                                        label="Other Remitter Name"
+                                        value={otherRemitterName}
+                                        required
+                                        onchange={handleOtherRemitterChange}>
+                                    </lightning-input>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+
+                    </div>
+
+                </div>
+
+                <!-- FOOTER -->
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel"
+                                      onclick={closeModal}>
+                    </lightning-button>
+
+                    <lightning-button variant="brand"
+                                      label="Save"
+                                      disabled={disableSave}
+                                      onclick={handleSave}>
+                    </lightning-button>
+                </footer>
+
+            </div>
+        </section>
+
+        <!-- BACKDROP -->
+        <div class="slds-backdrop slds-backdrop_open"></div>
+
+    </template>
+</template>

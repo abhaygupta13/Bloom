@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Buy</fullName>
+        <default>false</default>
+        <label>Buy</label>
+    </customValue>
+    <customValue>
+        <fullName>Rent</fullName>
+        <default>false</default>
+        <label>Rent</label>
+    </customValue>
+    <customValue>
+        <fullName>RTO</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>RTO</label>
+    </customValue>
+    <description>Buy/Rent Picklist</description>
+    <masterLabel>Buy/Rent</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,10 @@
+<aura:component
+    implements="force:lightningQuickAction,force:hasRecordId,flexipage:availableForRecordHome,force:appHostable"
+    access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="Id"/>    
+    <c:clickToDialAction
+        recordId="{!v.recordId}"
+        onclose="{!c.handleClose}"/>
+
+</aura:component>

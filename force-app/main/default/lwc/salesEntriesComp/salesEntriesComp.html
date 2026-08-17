@@ -1,0 +1,431 @@
+<template>
+    <lightning-card title="Sales Entries" icon-name="standard:sales">
+
+        <template if:true={isLoading}>
+            <lightning-spinner
+                alternative-text="Loading"
+                size="medium">
+            </lightning-spinner>
+        </template>
+
+        <div class="slds-p-around_medium">
+
+        
+<!-- Master Leasing Order Sales Entries -->
+
+<template if:true={masterSalesEntries.length}>
+
+    <div class="slds-text-heading_small slds-m-bottom_small">
+        Master Leasing Order Sales Entries
+    </div>
+
+    <div class="table-container slds-m-bottom_large">
+
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_fixed-layout">
+
+            <colgroup>
+                <col style="width:10%">
+                <col style="width:10%">
+                <col style="width:28%">
+                <col style="width:7%">
+                <col style="width:28%">
+                <col style="width:7%">
+            </colgroup>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        <div class="slds-truncate slds-text-align_center">Year</div>
+                    </th>
+
+                    <th>
+                        <div class="slds-truncate slds-text-align_center">Month</div>
+                    </th>
+
+                    <th>
+                        <div class="slds-truncate slds-text-align_center">Actual Sales</div>
+                    </th>
+
+                    <th>
+                        <div class="slds-truncate slds-text-align_center">Lock</div>
+                    </th>
+
+                    <th>
+                        <div class="slds-truncate slds-text-align_center">Audited Sales</div>
+                    </th>
+
+                    <th>
+                        <div class="slds-truncate slds-text-align_center">Lock</div>
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <template for:each={masterSalesEntries} for:item="row">
+
+                    <tr key={row.Id}>
+
+                        <td class="slds-text-align_center">
+                            {row.Year__c}
+                        </td>
+
+                        <td class="slds-text-align_center">
+                            {row.Month__c}
+                        </td>
+
+                        <td>
+
+                            <lightning-formatted-number
+                                value={row.ActualSales__c}
+                                format-style="currency">
+                            </lightning-formatted-number>
+
+                        </td>
+
+                        <td class="slds-text-align_center">
+
+                            <lightning-input
+                                type="checkbox"
+                                checked={row.ActualSalesLock__c}
+                                disabled
+                                variant="label-hidden">
+                            </lightning-input>
+
+                        </td>
+
+                        <td>
+
+                            <lightning-formatted-number
+                                value={row.AuditedSales__c}
+                                format-style="currency">
+                            </lightning-formatted-number>
+
+                        </td>
+
+                        <td class="slds-text-align_center">
+
+                            <lightning-input
+                                type="checkbox"
+                                checked={row.AuditedSalesLock__c}
+                                disabled
+                                variant="label-hidden">
+                            </lightning-input>
+
+                        </td>
+
+                    </tr>
+
+                </template>
+
+            </tbody>
+
+            <tfoot>
+
+                <tr>
+
+                    <td colspan="2" class="slds-text-title_bold slds-text-align_right">
+                        Total
+                    </td>
+
+                    <td class="slds-text-title_bold">
+
+                        <lightning-formatted-number
+                            value={masterTotalActualSales}
+                            format-style="currency">
+                        </lightning-formatted-number>
+
+                    </td>
+
+                    <td></td>
+
+                    <td class="slds-text-title_bold">
+
+                        <lightning-formatted-number
+                            value={masterTotalAuditedSales}
+                            format-style="currency">
+                        </lightning-formatted-number>
+
+                    </td>
+
+                    <td></td>
+
+                </tr>
+
+            </tfoot>
+
+        </table>
+
+    </div>
+
+</template>
+
+<div class="slds-grid slds-grid_align-center slds-m-bottom_medium">
+
+    <lightning-button
+        label="Lock All Actual"
+        onclick={lockAllActual}>
+    </lightning-button>
+
+    <lightning-button
+        class="slds-m-left_small"
+        label="Unlock All Actual"
+        onclick={unlockAllActual}>
+    </lightning-button>
+
+    <lightning-button
+        class="slds-m-left_medium"
+        label="Lock All Audited"
+        onclick={lockAllAudited}>
+    </lightning-button>
+
+    <lightning-button
+        class="slds-m-left_small"
+        label="Unlock All Audited"
+        onclick={unlockAllAudited}>
+    </lightning-button>
+
+</div>
+
+<div class="slds-text-heading_small slds-m-bottom_small">
+    Current Leasing Order Sales Entries
+</div>
+
+            <template if:true={salesEntries.length}>
+
+                <div class="table-container">
+
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_fixed-layout">
+
+                        <colgroup>
+    <col style="width:10%">
+    <col style="width:10%">
+    <col style="width:28%">
+    <col style="width:7%">
+    <col style="width:28%">
+    <col style="width:7%">
+</colgroup>
+
+                       <thead>
+    <tr>
+
+        <th>
+            <div class="slds-truncate slds-text-align_center">Year</div>
+        </th>
+
+        <th>
+            <div class="slds-truncate slds-text-align_center">Month</div>
+        </th>
+
+        <th>
+            <div class="slds-truncate slds-text-align_center">Actual Sales</div>
+        </th>
+
+        <th>
+            <div class="slds-truncate slds-text-align_center">Lock</div>
+        </th>
+
+        <th>
+            <div class="slds-truncate slds-text-align_center">Audited Sales</div>
+        </th>
+
+        <th>
+            <div class="slds-truncate slds-text-align_center">Lock</div>
+        </th>
+
+    </tr>
+</thead>
+
+                        <tbody>
+
+                            <template for:each={salesEntries} for:item="row">
+
+                                <tr key={row.Id}>
+
+                                    <td class="slds-text-align_center">
+    {row.Year__c}
+</td>
+
+<td class="slds-text-align_center">
+    {row.Month__c}
+</td>
+
+                                    <!-- Actual Sales -->
+                                    <td>
+
+                                       <template lwc:if={row.isActualLocked}>
+
+                                            <lightning-formatted-number
+                                                value={row.ActualSales__c}
+                                                format-style="currency">
+                                            </lightning-formatted-number>
+
+                                        </template>
+
+                                        <template lwc:else>
+
+                                            <lightning-input
+                                                type="number"
+                                                variant="label-hidden"
+                                                step="0.01"
+                                                value={row.ActualSales__c}
+                                                data-id={row.Id}
+                                                data-field="ActualSales__c"
+                                                onchange={handleChange}>
+                                            </lightning-input>
+
+                                        </template>
+
+                                    </td>
+
+                                    <td class="slds-text-align_center">
+
+    <template lwc:if={row.isActualLocked}>
+        <lightning-input
+            type="checkbox"
+            checked
+            disabled
+            variant="label-hidden">
+        </lightning-input>
+    </template>
+
+    <template lwc:else>
+        <lightning-input
+            type="checkbox"
+            checked={row.ActualSalesLock__c}
+            data-id={row.Id}
+            data-field="ActualSalesLock__c"
+            variant="label-hidden"
+            onchange={handleChange}>
+        </lightning-input>
+    </template>
+
+</td>
+
+                                    <!-- Audited Sales -->
+                                    <td>
+
+                                       <template lwc:if={row.isAuditedLocked}>
+
+                                            <lightning-formatted-number
+                                                value={row.AuditedSales__c}
+                                                format-style="currency">
+                                            </lightning-formatted-number>
+
+                                        </template>
+
+                                        <template lwc:else>
+
+                                            <lightning-input
+                                                type="number"
+                                                variant="label-hidden"
+                                                step="0.01"
+                                                value={row.AuditedSales__c}
+                                                data-id={row.Id}
+                                                data-field="AuditedSales__c"
+                                                onchange={handleChange}>
+                                            </lightning-input>
+
+                                        </template>
+
+                                    </td>
+
+                                    <td class="slds-text-align_center">
+
+    <template lwc:if={row.isAuditedLocked}>
+        <lightning-input
+            type="checkbox"
+            checked
+            disabled
+            variant="label-hidden">
+        </lightning-input>
+    </template>
+
+    <template lwc:else>
+        <lightning-input
+            type="checkbox"
+            checked={row.AuditedSalesLock__c}
+            data-id={row.Id}
+            data-field="AuditedSalesLock__c"
+            variant="label-hidden"
+            onchange={handleChange}>
+        </lightning-input>
+    </template>
+
+</td>
+
+                                   
+                                </tr>
+
+                            </template>
+
+                        </tbody>
+
+                        <tfoot>
+    <tr class="total-row">
+
+        <td colspan="2" class="slds-text-title_bold slds-text-align_right">
+            Total
+        </td>
+
+        <td class="slds-text-title_bold">
+            <lightning-formatted-number
+                value={totalActualSales}
+                format-style="currency">
+            </lightning-formatted-number>
+        </td>
+
+        <td></td>
+
+        <td class="slds-text-title_bold">
+            <lightning-formatted-number
+                value={totalAuditedSales}
+                format-style="currency">
+            </lightning-formatted-number>
+        </td>
+
+        <td></td>
+
+    </tr>
+</tfoot>
+
+                    </table>
+
+                </div>
+
+            </template>
+
+            <template if:false={salesEntries.length}>
+
+                <div class="slds-align_absolute-center slds-p-around_large">
+                    No Sales Entries Found.
+                </div>
+
+            </template>
+
+<div class="slds-m-top_large slds-align_absolute-center">
+
+    <lightning-button
+        label="Cancel"
+        onclick={handleCancel}>
+    </lightning-button>
+
+    <lightning-button
+        class="slds-m-left_small"
+        variant="brand"
+        label="Save"
+        onclick={handleSave}
+        disabled={disableSave}>
+    </lightning-button>
+
+</div>
+
+        </div>
+
+    </lightning-card>
+
+</template>

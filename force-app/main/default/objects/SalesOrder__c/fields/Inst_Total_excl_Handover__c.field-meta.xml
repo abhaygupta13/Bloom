@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Inst_Total_excl_Handover__c</fullName>
+    <label>Inst. Total excl. Handover</label>
+    <summarizedField>InstallmentLines__c.InstallmentAmount__c</summarizedField>
+    <summaryFilterItems>
+        <field>InstallmentLines__c.Description__c</field>
+        <operation>notContain</operation>
+        <value>Upon Handover</value>
+    </summaryFilterItems>
+    <summaryForeignKey>InstallmentLines__c.SalesOrder__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

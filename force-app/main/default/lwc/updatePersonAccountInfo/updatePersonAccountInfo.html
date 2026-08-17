@@ -1,0 +1,63 @@
+<template>
+  <lightning-card variant="Narrow" title="Account Info" icon-name="standard:account">
+    <template if:false={isEditMode}>
+      <lightning-icon icon-name="action:edit" slot="actions" size="xx-small" onclick={enableEditMode}></lightning-icon>
+    </template>
+    <template if:true={isEditMode}>
+      <lightning-icon icon-name="action:approval" size="xx-small" onclick={customHandleSubmit}
+        slot="actions"></lightning-icon>
+      <lightning-icon icon-name="action:close" class="slds-m-left_x-small" size="xx-small" onclick={handleReset} slot="actions"></lightning-icon>
+
+    </template>
+
+    <div class="slds-m-around_medium">
+      <template if:true={isEditMode}>
+        <lightning-record-edit-form record-id={accountId} object-api-name="Account" record-type-name="PersonAccount"
+          onsuccess={handleSuccess} onsubmit={handleSubmit} onerror={handleError}>
+          <lightning-messages></lightning-messages>
+
+          <div class="slds-grid slds-wrap">
+            <template for:each={accountfieldList} for:item="item" for:index="index">
+               <template if:true={isOpportunity}>
+              <div key={item} class="slds-col slds-large-size_1-of-3"  >
+                <lightning-input-field field-name={item} key={item}></lightning-input-field>
+              </div>
+               </template>
+              <template if:false={isOpportunity}>
+                 <div key={item} class="slds-col slds-large-size_1-of-4">
+                <lightning-input-field field-name={item} key={item}></lightning-input-field>
+              </div>
+              </template>
+            </template>
+          </div>
+
+
+        </lightning-record-edit-form>
+      </template>
+
+      <template if:false={isEditMode}>
+        <lightning-record-view-form record-id={accountId} object-api-name="Account" record-type-name="PersonAccount">
+          <lightning-messages></lightning-messages>
+
+          <div class="slds-grid slds-wrap">
+            
+            <template for:each={accountfieldList} for:item="item" for:index="index">
+               <template if:true={isOpportunity}>
+              <div key={item} class="slds-col slds-large-size_1-of-3">
+                <lightning-output-field field-name={item} key={item}></lightning-output-field>
+              </div>
+               </template>
+               <template if:false={isOpportunity}>
+              <div key={item} class="slds-col slds-large-size_1-of-4">
+                <lightning-output-field field-name={item} key={item}></lightning-output-field>
+              </div>
+               </template>
+            </template>
+          </div>
+
+
+        </lightning-record-view-form>
+      </template>
+    </div>
+  </lightning-card>
+</template>

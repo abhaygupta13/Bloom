@@ -1,0 +1,45 @@
+<template>
+    <div class="slds-is-relative" style="min-height: 30vh;">
+        <lightning-quick-action-panel header="Create Legal Task">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+            <lightning-combobox
+                name="caseType"
+                label="Case Type"
+                value={selectedCaseType}
+                options={caseOptions}
+                onchange={handleCaseChange}
+                required>
+            </lightning-combobox>
+
+            <lightning-record-picker
+                label="Assigned to : "
+                object-api-name="User"
+                filter={filter}
+                onchange={handleFieldChange}
+                name="legalUser"
+                required>
+            </lightning-record-picker>
+
+            <!-- <lightning-input
+                type="search"
+                label="Assigned To"
+                value={assignedToName}
+                onchange={handleUserSearch}
+                placeholder="Search User">
+            </lightning-input>
+
+            <template if:true={showUserLookup}>
+                <lightning-record-edit-form object-api-name="User" onsuccess={handleUserSelect}>
+                    <lightning-input-field field-name="Name"></lightning-input-field>
+                </lightning-record-edit-form>
+            </template> -->
+
+            <div slot="footer">
+                <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+                <lightning-button variant="brand" label="Submit" onclick={handleSubmit} disabled={disableSubmitButton}></lightning-button>
+            </div>
+        </lightning-quick-action-panel>
+    </div>
+</template>

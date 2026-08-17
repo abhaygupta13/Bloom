@@ -1,0 +1,10 @@
+.dummy{
+	color : black;
+}
+.outer-div {
+    position: relative;
+}
+
+.customSpinner {
+   position: absolute;
+}

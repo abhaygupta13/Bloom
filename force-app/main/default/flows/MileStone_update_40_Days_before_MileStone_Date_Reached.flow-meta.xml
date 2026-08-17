@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Send_Email_for_Milestone_date_reached</name>
+        <label>Send Email for Milestone date reached</label>
+        <locationX>308</locationX>
+        <locationY>276</locationY>
+        <actionName>Milestone__c.Email_Alert_on_Milestone_Date_reached_before_40_Days</actionName>
+        <actionType>emailAlert</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>Milestone__c.Email_Alert_on_Milestone_Date_reached_before_40_Days</nameSegment>
+    </actionCalls>
+    <apiVersion>60.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <environments>Default</environments>
+    <formulas>
+        <name>CurrentDate</name>
+        <dataType>Date</dataType>
+        <expression>TODAY()</expression>
+    </formulas>
+    <interviewLabel>MileStone_update 40 Days before MileStone Date Reached {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>MileStone_update 40 Days before MileStone Date Reached</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <filterFormula>(
+    ({!$Record.Milestone_Date__c} &gt;= TODAY() + 40)
+ )</filterFormula>
+        <object>Milestone__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>Send_Alert_Before_40_Days_MileStone_Date_Reached</name>
+            <connector>
+                <targetReference>Send_Email_for_Milestone_date_reached</targetReference>
+            </connector>
+            <label>Send Alert Before 40 Days MileStone Date Reached</label>
+            <offsetNumber>-40</offsetNumber>
+            <offsetUnit>Days</offsetUnit>
+            <recordField>Milestone_Date__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

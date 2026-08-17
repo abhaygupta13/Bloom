@@ -1,0 +1,393 @@
+<apex:page controller="InstallmentLineController" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false">
+    <head>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Lora:wght@400;500;600&amp;display=swap');
+            
+            @page {
+            size: 300mm 500mm;
+            margin: 10mm;
+            }
+            
+            body {
+            font-family: 'Lora', serif;
+            font-size: 11pt;
+            color: #000;
+            line-height: 1.5;
+            letter-spacing: 0.2px;
+            padding-bottom: 60px;
+            }
+            
+            h1 {
+            font-family: 'Cormorant Garamond', serif;
+            text-align: center;
+            font-size: 20pt;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            margin-bottom: 15px;
+            }
+            
+            /* Header section */
+            .header-section {
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            }
+            
+            .header-section .alnleft {
+            width: 50%;
+            }
+            
+            .header-section .contact-info {
+            width: 45%;
+            font-size: 9.5pt;
+            text-align: right;
+            line-height: 1.3;
+            }
+            
+            /* Info Table */
+            .infoTable {
+            width: 70%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+            }
+            
+            .infoTable td:first-child {
+            background-color: #e6e6e6;
+            font-weight: 600;
+            width: 35%;
+            }
+            
+            .infoTable td:last-child {
+            font-weight: normal;
+            width: 65%;
+            }
+            
+            /* Invoice Table */
+            .invoiceTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            }
+            
+            .invoiceTable th {
+            background-color: #d9d9d9;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid #000;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 0.5px;
+            }
+            
+            .invoiceTable td {
+            border: 1px solid #000;
+            text-align: center;
+            word-wrap: break-word;
+            font-family: 'Lora', serif;
+            }
+            
+            .invoiceTable td:nth-child(4),
+            .invoiceTable td:nth-child(5),
+            .invoiceTable td:nth-child(7),
+            .invoiceTable td:nth-child(9),
+            .invoiceTable td:nth-child(10) {
+            text-align: right;
+            }
+            
+            .total-row td {
+            font-weight: 600;
+            background-color: #f2f2f2;
+            }
+            
+            .header-logo {
+            text-align: left;
+            margin-bottom: 5px;
+            }
+            
+            .company-address {
+            text-align: left;
+            font-size: 11pt;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            }
+            
+            .header-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+            }
+            
+            /* Left part stays normal */
+            .header-left {
+            width: 50%;
+            display: inline-block;
+            vertical-align: top;
+            }
+            
+            /* Tax invoice table on top right */
+            .invoice-meta {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 10.5pt;
+            border-collapse: collapse;
+            text-align: left;
+            }
+            .invoice-meta td {
+            padding: 4px 6px;
+            border: none;              /* remove border */
+            background-color: transparent; /* remove background */
+            font-weight: 600;
+            }
+            
+            
+            /* Customer Info Section */
+            .customer-section {
+            margin-top: 20px;
+            }
+            
+            .section-title {
+            font-weight: 600;
+            margin: 20px 0 10px 0;
+            font-size: 12pt;
+            }
+            
+            /* Footer */
+            .footer {
+            position: fixed;
+            left: 0;
+            bottom: 10mm;
+            width: 100%;
+            text-align: center;
+            font-size: 11pt;
+            font-family: 'Lora', serif;
+            }
+            
+            .footer td, .footer p {
+            font-weight: normal;
+            }
+            
+            /* Signature block */
+            .signature-block div {
+            border-top: 1px solid #000;
+            width: 60%;
+            margin: auto;
+            }
+            
+            .signature-block span {
+            margin-top: 5px;
+            display: block;
+            }
+            
+            /* Clarification box */
+            .clarification-box {
+            margin-top: 20px;
+            font-size: 11pt;
+            border: 1px solid #1a2e59;
+            padding: 12px;
+            }
+            
+            .tax-invoice-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22pt;      /* slightly larger for emphasis */
+            font-weight: 700;     /* bold */
+            letter-spacing: 1px;
+            text-align: center;   /* center the text */
+            margin-top: 10px;     /* space below header */
+            margin-bottom: 20px;  /* space before customer info table */
+            }
+            
+            .customer-flex-row {
+            position: relative;
+            width: 100%;
+            margin-top: 10px;
+            }
+            
+            .customer-left-block {
+            width: 60%;
+            }
+            
+            .customer-right-block {
+            position: absolute;
+            right: 0;
+            top: 75px;   
+            width: 40%;
+            display: flex;
+            justify-content: flex-end;
+            }
+            
+            .vat-label-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+            }
+            
+            .vat-text {
+            font-weight: 700;
+            white-space: nowrap;
+            margin-right: 6px;
+            }
+            
+            .bottom-underline {
+            width: 100%;
+            border-bottom: 1px solid black;
+            margin-top: 6px;
+            height: 2px;      /* important for PDF */
+            display: block;   /* ensures full width rendering */
+            }
+            
+            .bottom-underline2 {
+            width: 100%;
+            border-bottom: 1px solid black;
+            margin-bottom: 6px;
+            height: 2px;      /* important for PDF */
+            display: block;   /* ensures full width rendering */
+            }
+            
+        </style>
+    </head>
+    
+    <body>
+        <div class="header-container">
+            <!-- Left side: Logo and Address -->
+            <div class="header-left">
+                <apex:image alt="Logo" value="{!$Resource.BloomLogo}" width="150px" height="50px"/>
+                <div class="company-address">
+                    {!companyName}<br/>
+                    <apex:outputPanel rendered="{!NOT(ISBLANK(companyAddress))}">
+                        <apex:outputText value="{!companyAddress}" escape="false" /><br/>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel rendered="{!NOT(ISBLANK(companyTRN))}">
+                        OUR TRN : {!companyTRN}
+                    </apex:outputPanel>
+                </div>
+            </div>
+            
+            <!-- Right side: Tax Invoice Table -->
+            <table class="invoice-meta">
+                <tr><td>Tax Invoice No</td><td>{!taxInvoiceNo}</td></tr>
+                <tr><td>Tax Invoice Date</td><td>{!taxInvoiceDate}</td></tr>
+                <tr><td>Date of Supply</td><td>{!taxInvoiceDate}</td></tr>
+                <tr><td>Type of Supply</td><td>{!typeOfSupply}</td></tr>
+                <tr><td>Project Name and Location</td><td>{!projectName}</td></tr>
+            </table>
+        </div>
+        
+        <div class="tax-invoice-title">
+            TAX INVOICE
+        </div>
+        <div class="bottom-underline"></div>
+        <div class="section-title"
+             style="color:#c00000; font-size:12pt; font-weight:700; text-decoration:underline;">
+            Customer Information
+        </div>
+        
+        <div class="customer-flex-row">
+            
+            <!-- LEFT -->
+            <div class="customer-left-block">
+                To,<br/>
+                <b>{!customerName}</b><br/><br/>
+                
+                <b>Unit No. : {!unitNo}</b><br/><br/>
+                
+                <b>{!projectName}</b><br/><br/>
+            </div>
+            
+            <!-- RIGHT (Absolute, aligned with Unit No) -->
+            <div class="customer-right-block">
+                <div class="vat-label-container">
+                    <div class="vat-text">Customer VAT Registration No :</div>
+                </div>
+            </div>
+            
+        </div>
+        <!--<div class="bottom-underline2"></div>-->
+        <!-- Invoice Details Table -->
+        <table class="invoiceTable" style="margin-top:10px;">
+            <thead>
+                <tr>
+                    <th>SL No</th>
+                    <th>Description</th>
+                    <th>Unit No</th>
+                    <th>Qty</th>
+                    <th>Total Unit Price (AED)</th>
+                    <th>Installment No.</th>
+                    <th>Installment Amount (Excl. VAT) (AED)</th>
+                    <th>VAT Rate (%)</th>
+                    <th>VAT Amount (AED)</th>
+                    <th>Gross Amount (AED)</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>{!slNo}</td>
+                        <td>{!description}</td>
+                        <td>{!unitNo}</td>
+                        <td>{!qty}</td>
+                        <td>{!unitPrice}</td>
+                        <td>{!installmentNo}</td>
+                        <td>{!installmentAmt}</td>
+                        <td>{!IF(vatRate == 0, "0%", TEXT(vatRate) & "%")}</td>
+                        <td>{!vatAmt}</td>
+                        <td>{!grossAmt}</td>
+                    </tr>
+            </tbody>
+        </table>
+        
+        <!-- Summary Table -->
+        <table class="invoiceTable">
+            <tr class="total-row"><td width="80%">Net Taxable Amount</td><td>AED {!netTaxableAmount}</td></tr>
+            <tr class="total-row"><td>Total VAT Charged for the period</td><td>AED {!taxableAmount}</td></tr>
+            <tr class="total-row"><td>Total Amount due for payment</td><td>AED {!totalAmountDue}</td></tr>
+            <tr class="total-row"><td colspan="2" style="text-align:center; font-weight:600;">
+                {!totalAmountPayableInWords}
+                </td></tr>
+        </table>
+        
+        <!-- Bank Details -->
+        <div class="clarification-box">
+            Please make all cheques payable to:<b> {!beneficiaryName}</b><br/>
+            or you can remit to:<br/>
+            Bank Account Name: <b>{!bankAccName}</b><br/>
+            Bank Name: <b>{!bankName}</b><br/>
+            Account Number: <b>{!accNumber}</b><br/>
+            IBAN Number: <b>{!ibanNumber}</b><br/>
+            Swift Code: <b>{!swiftCode}</b>
+        </div>
+        
+        <!-- Clarification Box -->
+        <div class="clarification-box">
+            If you have any clarification concerning this Tax Invoice, please contact : 
+            <b>Bloom Central</b>, Tel: +800 25666
+            <br/><br/>
+            <b>THANK YOU FOR YOUR BUSINESS</b>
+        </div>
+        
+        <!-- Declaration -->
+        <div style="margin-top:15px;">
+            <b style="font-size:12pt;">Declaration:</b><br/>
+            <span style="font-size:11pt;">
+                This is a Tax Invoice issued as per the provisions of Federal Decree-Law No. (8) of 2017 
+                on Value Added Tax and its Executive Regulations.
+            </span>
+        </div>
+        
+        <!-- Signature -->
+        <table width="100%" class="signature-block" style="margin-top:50px; font-size:11pt;">
+            <tr>
+                <td width="50%" align="center">
+                    <div></div>
+                    <span>{!companyName}</span>
+                </td>
+                <td width="50%" align="center">
+                    <div></div>
+                    <span>Customer</span>
+                </td>
+            </tr>
+        </table>
+    </body>
+</apex:page>

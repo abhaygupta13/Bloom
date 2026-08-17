@@ -1,0 +1,45 @@
+<template>
+    <div>
+        <lightning-modal-header label="Submit For Approval"></lightning-modal-header>
+        <lightning-modal-body class="modal-body scrollable slds-modal__content slds-p-around_medium" data-scoped-scroll="true">
+            <template if:true={showLoading}>
+                <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass"></lightning-spinner>
+            </template>
+            <template if:true={showComments}>
+                <div class="slds-p-around_medium">
+                    <label class="uiLabel-top form-element__label uiLabel" data-aura-class="uiLabel">Comments</label>
+                    <textarea role="textbox" rows="10" cols="20" class="inputTextArea cuf-messageTextArea textarea"  placeholder="Enter your comment here ..." onchange={handleCommentChange}></textarea>
+                </div>
+            </template>
+            <template if:true={showErrorMsg}>
+                <p class="slds-align_absolute-center slds-text-heading_small slds-text-color_error">{errorMsg}</p>
+            </template>
+        </lightning-modal-body>
+        <lightning-modal-footer>
+            <lightning-button onclick={handleCancel} variant="neutral" label="Cancel"></lightning-button>
+                &nbsp;&nbsp;
+                <lightning-button if:true={showComments} onclick={handleSubmit} variant="brand" label="Submit"></lightning-button>
+        </lightning-modal-footer>
+    </div>
+</template>
+<!-- <template>
+    <lightning-quick-action-panel header="Submit For Approval">
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass"></lightning-spinner>
+        </template>
+
+        <template if:true={showComments}>
+            <div class="slds-p-around_medium">
+                <lightning-textarea label="Comments" value={comment} placeholder="Enter your comment here..." onchange={handleCommentChange}></lightning-textarea>
+            </div>
+        </template>
+        <template if:true={showErrorMsg}>
+            <p class="slds-align_absolute-center slds-text-heading_small slds-text-color_error">{errorMsg}</p>
+        </template>
+        <div slot="footer">
+            <lightning-button onclick={handleCancel} variant="neutral" label="Cancel"></lightning-button>
+            &nbsp;&nbsp;
+            <lightning-button if:true={showComments} onclick={handleSubmit} variant="brand" label="Submit"></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template> -->

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Representation_Type__c</fullName>
+    <label>Representation Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>GM</fullName>
+                <default>false</default>
+                <label>GM</label>
+            </value>
+            <value>
+                <fullName>POA</fullName>
+                <default>false</default>
+                <label>Power of attorney</label>
+            </value>
+            <value>
+                <fullName>Liquidator</fullName>
+                <default>false</default>
+                <label>Liquidator</label>
+            </value>
+            <value>
+                <fullName>Judicial Guard</fullName>
+                <default>false</default>
+                <label>Judicial Guard</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

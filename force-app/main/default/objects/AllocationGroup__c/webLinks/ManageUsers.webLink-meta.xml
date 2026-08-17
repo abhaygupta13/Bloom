@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebLink xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ManageUsers</fullName>
+    <availability>online</availability>
+    <displayType>button</displayType>
+    <encodingKey>UTF-8</encodingKey>
+    <linkType>url</linkType>
+    <masterLabel>Manage Users</masterLabel>
+    <openType>replace</openType>
+    <protected>false</protected>
+    <url>/lightning/n/Manage_Users?c__agid={!AllocationGroup__c.Id}</url>
+</WebLink>

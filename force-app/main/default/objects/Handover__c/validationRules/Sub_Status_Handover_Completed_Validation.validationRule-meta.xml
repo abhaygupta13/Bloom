@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Status_Handover_Completed_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+        ISCHANGED(Sub_Status__c),
+        OR(
+            	ISPICKVAL( Sub_Status__c ,&apos;Handover Completed&apos;),
+                ISPICKVAL( Sub_Status__c ,&apos;PHPP Handover Keys&apos;)
+        ),
+	OR(
+                NOT(Is_BCC_Announcement_Sent__c),
+		NOT(Is_Notice_of_Completion_Sent__c),
+		NOT(Is_Orientation_Letter_Sent__c),
+		NOT(Is_Access_Cards_given__c),
+		NOT(Is_Property_keys_given__c),
+		NOT(Is_Statement_of_Account_given__c),
+		NOT(Handover_Guidelines_Brief__c),
+                NOT(Service_Charges_Confirmed__c),
+		NOT(ADDC__c)
+	),
+	NOT(
+		OR(
+		  $Profile.Name = &quot;System Administrator&quot;,
+		  $Profile.Name = &quot;Handover Manager&quot;
+		)
+	)
+)</errorConditionFormula>
+    <errorMessage>Please complete the KHO Process first before moving to this stage.</errorMessage>
+</ValidationRule>

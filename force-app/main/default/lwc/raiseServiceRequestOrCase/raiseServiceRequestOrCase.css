@@ -1,0 +1,14 @@
+.dummy{
+	color : black;
+}
+.outer-div {
+    position: relative;
+}
+
+.customSpinner {
+   position: absolute;
+}
+.button-container {
+    display: inline-block;
+    margin-right: 10px; /* You can adjust the margin as needed */
+}

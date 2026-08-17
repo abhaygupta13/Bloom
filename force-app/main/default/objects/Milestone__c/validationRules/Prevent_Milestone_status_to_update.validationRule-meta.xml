@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Milestone_status_to_update</fullName>
+    <active>false</active>
+    <errorConditionFormula>(ISPICKVAL (PriorValue( Milestone_Status__c ),&apos;Reached&apos;))&amp;&amp;(ISCHANGED(Milestone_Status__c))</errorConditionFormula>
+    <errorMessage>Once status is Reached Not able to update</errorMessage>
+</ValidationRule>

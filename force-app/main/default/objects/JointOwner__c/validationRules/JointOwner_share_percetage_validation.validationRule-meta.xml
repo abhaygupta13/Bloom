@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>JointOwner_share_percetage_validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>SharePercentage__c &gt;1</errorConditionFormula>
+    <errorMessage>Percentage Should Not Exceed 100%</errorMessage>
+</ValidationRule>

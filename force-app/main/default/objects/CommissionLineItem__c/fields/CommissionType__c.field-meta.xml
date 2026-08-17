@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CommissionType__c</fullName>
+    <description>CommissionType Internal/External/Staff</description>
+    <label>Commission Type</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Referral</fullName>
+                <default>false</default>
+                <label>Referral</label>
+            </value>
+            <value>
+                <fullName>Executive Director Sales</fullName>
+                <default>false</default>
+                <label>Executive Director Sales</label>
+            </value>
+            <value>
+                <fullName>Non Sales Staff</fullName>
+                <default>false</default>
+                <label>Non Sales Staff</label>
+            </value>
+            <value>
+                <fullName>Pool</fullName>
+                <default>false</default>
+                <label>Pool</label>
+            </value>
+            <value>
+                <fullName>Sales Admin</fullName>
+                <default>false</default>
+                <label>Sales Admin</label>
+            </value>
+            <value>
+                <fullName>Sales Manager</fullName>
+                <default>false</default>
+                <label>Sales Manager</label>
+            </value>
+            <value>
+                <fullName>AD Sales</fullName>
+                <default>false</default>
+                <label>AD Sales</label>
+            </value>
+            <value>
+                <fullName>Internal</fullName>
+                <default>false</default>
+                <label>Internal</label>
+            </value>
+            <value>
+                <fullName>External</fullName>
+                <default>false</default>
+                <label>Broker Commission</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

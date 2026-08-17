@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Validation_For_Bloom_Signed_SPA</fullName>
+    <active>false</active>
+    <errorConditionFormula>ISPICKVAL(SubStatus__c ,&apos;SPA Counter Signed&apos;) &amp;&amp; (ISBLANK( Bloom_Signed_SPA_Date__c ) || NOT( Bloom_Signed_SPA__c ))</errorConditionFormula>
+    <errorMessage>Bloom Signed SPA  and Bloom Signed SPA Date are required.</errorMessage>
+</ValidationRule>

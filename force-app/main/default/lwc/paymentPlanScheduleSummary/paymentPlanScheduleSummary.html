@@ -1,0 +1,17 @@
+<template>
+    
+        <template if:true={summaryData}>
+            <lightning-datatable
+                key-field="id"
+                data={summaryData}
+                columns={columns}
+                hide-checkbox-column>
+            </lightning-datatable>
+        </template>
+
+        <template if:true={error}>
+            <div class="slds-p-around_medium slds-text-color_error">
+                {errorMessage}
+            </div>
+        </template>
+</template>

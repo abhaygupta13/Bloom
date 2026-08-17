@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Handover_Status__c</fullName>
+    <label>Handover Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Handed Over</fullName>
+                <default>false</default>
+                <label>Handed Over</label>
+            </value>
+            <value>
+                <fullName>Inspection under progress</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Inspection under progress</label>
+            </value>
+            <value>
+                <fullName>Keys with Bloom</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Keys with Bloom</label>
+            </value>
+            <value>
+                <fullName>Settlement Notice Sent</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Settlement Notice Sent</label>
+            </value>
+            <value>
+                <fullName>Under Process</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Under Process</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,400 @@
+<apex:page controller="PaymentPlanCreditInvoicePDFHandler"
+           renderAs="pdf"
+           showHeader="false"
+           sidebar="false">
+
+
+
+<!-- TITLE -->
+<table width="100%" style="border:none;">
+    <tr>
+        <td style="border:none; width:50%;">
+            <img src="{!URLFOR($Resource.BloomLogo)}"
+                 width="160"
+                 alt="Bloom Living Logo"/>
+        </td>
+        <td style="border:none; width:50%; text-align:right; font-size:16px; font-weight:bold;">
+            TAX CREDIT NOTE
+        </td>
+    </tr>
+</table>
+
+<br/><br/>
+
+<br/><br/><br/>
+
+<!-- COMPANY DETAILS (LEFT) + INVOICE META (RIGHT) -->
+<table width="100%" style="border:none;font-size:12px;">
+    <tr>
+        <!-- LEFT COLUMN -->
+        <td style="width:55%; border:none; vertical-align:top;">
+            <!-- <div class="bold">Bloom Emirates Properties LLC - Park View</div> -->
+             <div class="bold">{!leasingCompanyName}</div>
+            <div>Managed by: Emirates International Property Services LLC</div>
+            <div>PO Box: 28928</div>
+            <div>Abu Dhabi</div>
+            <div>United Arab Emirates</div>
+        </td>
+
+        <!-- RIGHT COLUMN -->
+        <td style="width:45%; border:none; vertical-align:top;">
+            <table width="100%" style="border:none;">
+                <tr>
+                    <td class="bold" style="width:30%;">Invoice No.</td>
+                    <td style="width:60%;text-align:left;word-wrap: break-word;">: {!invoiceNo}</td>
+                </tr>
+                <tr>
+                    <td class="bold" style="width:30%;">Invoice Date</td>
+                    <td style="width:60%;text-align:left;word-wrap: break-word;">: {!invoiceDate}</td>
+                </tr>
+                <tr>
+                    <td class="bold" style="width:30%;">Date of Supply</td>
+                    <td style="width:60%;text-align:left;word-wrap: break-word;">: {!supplyDate}</td>
+                </tr>
+                <tr>
+                    <td class="bold" style="width:30%;">Invoice Due Date</td>
+                    <td style="width:60%;text-align:left;word-wrap: break-word;">: {!dueDate}</td>
+                </tr>
+                <tr>
+                    <td class="bold" style="width:30%;">VAT Reg No</td>
+                    <td style="width:60%;text-align:left;word-wrap: break-word;">: </td>
+                </tr>
+                <tr>
+                    <td class="bold" style="width:30%;">Customer Account No.</td>
+                    <td style="width:60%;text-align:left;word-wrap: break-word;">: {!customerAccNumber}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<br/>
+
+
+<br/><br/><br/>
+    
+    <table width="100%" style="border-collapse:collapse;">
+    <tr>
+        <td style="border-top:1px solid black; height:5px;"></td>
+    </tr>
+</table>
+
+<br/>
+
+<!-- CUSTOMER BLOCK -->
+<!-- CUSTOMER BLOCK -->
+<table width="100%" style="border:none; font-size:12px;">
+    <tr>
+        <!-- LEFT SIDE -->
+        <td style="width:55%; border:none; vertical-align:top;">
+            <div class="bold">To</div>
+            <br/>
+            <div class="bold">{!customerName}</div>
+            <br/>
+            <div>Abu Dhabi </div>
+            <div>United Arab Emirates</div>
+            <div class="bold">Mobile No : </div>
+        </td>
+
+        <!-- RIGHT SIDE -->
+        <td style="width:45%; border:none; vertical-align:top;">
+            <table width="100%" style="border:none;">
+                <tr>
+                    <td class="bold" style="width:30%;">Customer VAT Reg No</td>
+                    <td class="right" style="width:60%;text-align:left;word-wrap: break-word;">: {!customerVat}</td>
+                </tr>
+                <tr>
+                    <td class="bold" style="width:30%;">Property</td>
+                    <td class="right" style="width:60%;text-align:left;word-wrap: break-word;">: {!propertyName}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<br/><br/>
+
+        <table width="100%" style="border-collapse:collapse;margin-top:-10px;">
+    <tr>
+        <td style="border-top:1px solid black; height:5px;"></td>
+    </tr>
+</table>
+    <br/><br/>
+
+<!-- LINE ITEMS TABLE -->
+<apex:outputPanel rendered="{!showVat}">
+<table width="100%" style="border-collapse:collapse; font-size:11px;">
+    <!-- HEADER -->
+    <tr style="background-color:#7f7f7f; color:black; font-weight:bold; text-align:center;">
+        <td style="border:1px solid black; width:6%;">SL.No</td>
+        <td style="border:1px solid black; width:34%;">Description</td>
+        <td style="border:1px solid black; width:6%;">Qty</td>
+        <td style="border:1px solid black; width:12%;">Unit Price</td>
+        <td style="border:1px solid black; width:12%;">Credit Amount</td>
+        <td style="border:1px solid black; width:8%;">VAT<br/>Rate</td>
+        <td style="border:1px solid black; width:10%;">VAT<br/>Amount</td>
+        <td style="border:1px solid black; width:12%;">Amount in<br/>AED</td>
+    </tr>
+
+    <!-- DATA ROW -->
+    <tr>
+        <td style="border:1px solid black; text-align:center;">1</td>
+        <td style="border:1px solid black;">{!description}</td>
+        <td style="border:1px solid black; text-align:center;">1</td>
+        <td style="border:1px solid black; text-align:right;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!amount}" />
+            </apex:outputText><!--{!amount}-->
+        </td>
+        <td style="border:1px solid black; text-align:right;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!amount}" />
+            </apex:outputText><!--{!amount}-->
+        </td>
+        <td style="border:1px solid black; text-align:center;">
+            <apex:outputText value="{0,number,##0.00}%">
+                <apex:param value="{!vatRate}" />
+            </apex:outputText>
+        </td>
+        <td style="border:1px solid black; text-align:right;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!vatAmount}" />
+            </apex:outputText><!--{!amount}-->
+        </td>
+        <td style="border:1px solid black; text-align:right;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!totalAmount}" />
+            </apex:outputText><!--{!amount}-->
+        </td>
+    </tr>
+
+    <!-- TOTAL ROW -->
+    <tr>
+        <td colspan="4" style="border:1px solid black; text-align:center; font-weight:bold;">
+            Total
+        </td>
+        <td style="border:1px solid black; text-align:right; font-weight:bold;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!amount}" />
+            </apex:outputText><!--{!amount}-->
+        </td>
+        <td style="border:1px solid black;"></td>
+        <td style="border:1px solid black; text-align:right; font-weight:bold;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!vatAmount}" />
+            </apex:outputText><!--{!amount}-->
+            <!-- {!vatAmount} -->
+        </td>
+        <td style="border:1px solid black; text-align:right; font-weight:bold;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!totalAmount}" />
+            </apex:outputText><!--{!amount}-->
+            <!-- {!totalAmount} -->
+        </td>
+    </tr>
+</table>
+    </apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(showVat)}">
+    <table width="100%" style="border-collapse:collapse; font-size:11px;">
+    <!-- HEADER -->
+    <tr style="background-color:#7f7f7f; color:black; font-weight:bold; text-align:center;">
+        <td style="border:1px solid black; width:6%;">SL.No</td>
+        <td style="border:1px solid black; width:36%;">Description</td>
+        <td style="border:1px solid black; width:6%;">Qty</td>
+        <td style="border:1px solid black; width:16%;">Unit Price</td>
+        <td style="border:1px solid black; width:16%;">Credit Amount</td>
+        <td style="border:1px solid black; width:16%;">Amount in<br/>AED</td>
+    </tr>
+
+    <!-- DATA ROW -->
+    <tr>
+        <td style="border:1px solid black; text-align:center;">1</td>
+        <td style="border:1px solid black;">{!description}</td>
+        <td style="border:1px solid black; text-align:center;">1</td>
+        <td style="border:1px solid black; text-align:right;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!amount}" />
+            </apex:outputText><!--{!amount}-->
+        </td>
+        <td style="border:1px solid black; text-align:right;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!amount}" />
+            </apex:outputText><!--{!amount}-->
+        </td>
+        
+        <td style="border:1px solid black; text-align:right;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!totalAmount}" />
+            </apex:outputText><!--{!amount}-->
+        </td>
+    </tr>
+
+    <!-- TOTAL ROW -->
+    <tr>
+        <td colspan="4" style="border:1px solid black; text-align:center; font-weight:bold;">
+            Total
+        </td>
+        <td style="border:1px solid black; text-align:right; font-weight:bold;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!amount}" />
+            </apex:outputText><!--{!amount}-->
+        </td>
+        
+        <td style="border:1px solid black; text-align:right; font-weight:bold;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!totalAmount}" />
+            </apex:outputText><!--{!amount}-->
+            <!-- {!totalAmount} -->
+        </td>
+    </tr>
+</table>
+    </apex:outputPanel>
+<br/>
+
+<!-- NET TOTALS (CENTERED LIKE TEMPLATE) -->
+<table width="100%" style="border-collapse:collapse;font-size:12px;">
+    <tr>
+        <td style="text-align:right; font-weight:bold;">
+            Net Credit Amount
+        </td>
+        <td style="text-align:right; font-weight:bold;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!amount}" />
+            </apex:outputText><!--{!amount}-->
+            <!-- {!amount} -->
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align:right; font-weight:bold;">
+            Net Balance
+        </td>
+        <td style="text-align:right; font-weight:bold;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!amount}" />
+            </apex:outputText><!--{!amount}-->
+            <!-- {!amount} -->
+        </td>
+    </tr>
+</table>
+
+<br/>
+<apex:outputPanel rendered="{!showVat}">
+<table width="100%" style="border-collapse:collapse;font-size:12px;">
+    <tr>
+        <td style="width:480px; border-top:1px solid black; text-align:right; font-weight:bold;">
+            Total VAT Charged for the period
+        </td>
+        <td style="border-top:1px solid black; text-align:right; font-weight:bold;">
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!vatAmount}" />
+            </apex:outputText><!--{!amount}-->
+            <!-- {!vatAmount} -->
+        </td>
+    </tr>
+</table>
+</apex:outputPanel>
+<br/>
+
+<!-- TOTAL AMOUNT (HIGHLIGHTED ROW) -->
+<table width="100%" style="border-collapse:collapse; background-color:#b7d1e5;font-size:12px;">
+    <tr>
+        <td style="width:480px; text-align:right; font-weight:bold;">
+            Total Amount
+        </td>
+       <!--  <td style="text-align:center; font-weight:bold;">
+           AED
+        </td> -->
+        <td style="text-align:right; font-weight:bold;">
+           AED &nbsp; 
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!totalAmount}" />
+            </apex:outputText><!--{!amount}-->
+            <!-- {!totalAmount} -->
+        </td>
+    </tr>
+</table>
+
+<br/>
+
+<!-- AMOUNT IN WORDS -->
+<table width="100%" style="font-size:12px;">
+    <tr>
+        <td style="border-top:1px solid black; text-align:center; font-weight:bold;">
+            <!-- AED {!amountInWords} -->
+             <!-- AED <apex:outputText value="{0,number,###,###.00}">
+    <apex:param value="{!totalAmount}" />
+</apex:outputText> -->
+            {!amountInWords}
+        </td>
+    </tr>
+</table>
+    
+            <table width="100%" style="border-collapse:collapse;">
+    <tr>
+        <td style="border-top:1px solid black; height:5px;"></td>
+    </tr>
+</table>
+    
+<br/><br/>
+<br/><br/>   
+<br/><br/>
+<br/><br/>
+<br/><br/><br/><br/>
+
+<div style="font-size:12px;">
+    <!-- BANK DETAILS -->
+    <div class="bold">
+    Please make all checks payable to: {!leasingCompanyName}. 
+    </div>
+        <div class="bold">
+    or you can remit to:
+    </div>
+    <br/>
+     <div>Bank Account Name: {!bankAccName}</div>
+    <div>Bank Name: {!bankName}</div>
+    <div>Account Number: {!accNumber}</div>
+    <div>IBAN Number: {!IBAN}</div>
+    <div>Swift Code: {!swiftCode}</div>
+
+    <br/><br/>
+
+    <!-- CONTACT -->
+    <div>
+    If you have any clarification concerning this invoice, please contact :
+    Bloom Communities, Tel: +9712 6969459
+    </div>
+        <div>Email: contactus@bloomcommunities.com
+    </div>
+
+    <br/><br/>
+
+    <div class="center bold">THANK YOU FOR YOUR BUSINESS</div>
+
+    <br/><br/>
+        
+    <table width="100%" style="border-collapse:collapse;">
+        <tr>
+            <td style="border-top:1px solid black; height:5px;"></td>
+        </tr>
+    </table><br/><br/><br/><br/>
+        
+    <table width="100%" style="border-collapse:collapse;">
+        <tr>
+            <td style="border-top:1px solid black; height:5px;"></td>
+        </tr>
+    </table>
+
+    <div class="center">
+    This is a computer generated document and does not require signature
+    </div>
+
+    <br/><br/>
+
+    <div class="center">
+    Emirates International Property Services LLC.<br/>
+    Abu Dhabi, United Arab Emirates.<br/>
+    PO Box # 28928 I Tel : +971 2 6969500 I F :+971 2 6431144<br/>
+    A National Holding Company.
+    </div>
+</div>
+</apex:page>

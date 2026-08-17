@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Assign Single Sign On permission to users which are not allowed to login using username/password</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Single Sign On Permission</label>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>IsSsoEnabled</name>
+    </userPermissions>
+</PermissionSet>

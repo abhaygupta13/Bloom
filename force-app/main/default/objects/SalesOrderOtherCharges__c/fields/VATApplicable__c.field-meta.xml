@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VATApplicable__c</fullName>
+    <formula>AND(
+    ISPICKVAL(TypeOfCharge__c, &quot;Cheque Bounce Fee&quot;),
+    Installment_Line__r.SalesOrder__r.Unit__r.Project__r.BounceChequeFeeVATApplicable__c
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>VAT Applicable</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

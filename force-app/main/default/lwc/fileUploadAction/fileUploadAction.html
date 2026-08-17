@@ -1,0 +1,87 @@
+<template>
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-align_absolute-center slds-modal slds-modal_large slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{modelHeader}</h2>
+                </header>
+                
+                <div class="slds-modal__content slds-p-around_medium" style="overflow-y: auto; max-height: 400px;" id="modal-content-id-1">
+                        <template if:true={showUploadAction}>
+                            <div class="slds-align_absolute-center slds-m-top_medium">
+                                <lightning-input class="slds-align_absolute-center" type="file" label = "Document" accept=".csv" onchange={handleUploadFinished} required></lightning-input>
+                            </div>
+                            <p class="slds-align_absolute-center slds-m-top_medium">{uploadedFileName}</p>
+                            <p class="slds-align_absolute-center slds-m-vertical_medium">
+                                <a onclick={downloadTemplate}>Download Quarterly Target Template</a>
+                            </p>
+                        </template>
+                        <template if:true={showLoading}>
+                            <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                        </template>
+                        
+                        
+                        <template if:true={showDataTable}>
+                                <div class="slds-align_absolute-center">
+                                    <div class="slds-scrollable_x">
+                                        <table class="slds-table slds-table_bordered slds-scrollable_x">
+                                          <thead>
+                                            <template for:each={templateHeaders} for:item="item">
+                                                <th key={index}>{item}</th>
+                                            </template>
+                                          </thead>
+                                          <tbody>
+                                            <template for:each={tableData} for:item="item">
+                                                <tr key={index}>
+                                                    <td class="slds-text-align_center">AED {item.directTarget}</td>
+                                                    <td class="slds-text-align_center">AED {item.indirectTarget}</td>
+                                                    <td class="slds-text-align_center">{item.quarter}</td>
+                                                    <td class="slds-text-align_center">{item.year}</td>
+                                                    <td class="slds-text-align_center">{item.email}</td>
+                                                    <td class="slds-text-align_center">{item.salesManagerName}</td>
+                                                    <td class="slds-text-align_center">{item.DCL_Not_Achieved_Commission_Percentage}%</td>
+                                                    <td class="slds-text-align_center">{item.DCL_Achieved_Commission_Percentage}%</td>
+                                                    <td class="slds-text-align_center">{item.DCL_Exceeded_Commission_Percentage}%</td>
+                                                    <td class="slds-text-align_center">{item.DCL_Doubled_Commission_Percentage}%</td>
+                                                    <td class="slds-text-align_center">{item.DSG_Not_Achieved_Commission_Percentage}%</td>
+                                                    <td class="slds-text-align_center">{item.DSG_Achieved_Commission_Percentage}%</td>
+                                                    <td class="slds-text-align_center">{item.DSG_Exceeded_Commission_Percentage}%</td>
+                                                    <td class="slds-text-align_center">{item.DSG_Doubled_Commission_Percentage}%</td>
+                                                    <td class="slds-text-align_center">{item.Indirect_Pre_Launch_Commission_Percentage}%</td>
+                                                    <td class="slds-text-align_center">{item.Indirect_Launch_Commission_Percentage}%</td>
+                                                    <td class="slds-text-align_center">{item.Indirect_Post_Launch_Commission_Percentage}%</td>
+                                                    <td class="slds-text-align_center">{item.Deductions_Percentage}%</td>
+                                                </tr>
+                                            </template>
+                                          </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                        </template>
+                        <template if:true={showErrorMsg}>
+                            <p class="slds-align_absolute-center slds-text-heading_medium slds-text-color_error">{errorMessage}</p>
+                        </template>
+                        <template if:true={showSuccessMsg}>
+                            <p class="slds-align_absolute-center slds-text-heading_medium slds-text-color_success">{successMsg}</p>
+                        </template>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button class="slds-m-left_x-small" onclick={closeModal} title="Cancel" label="Cancel"></lightning-button>
+                    <lightning-button if:true={showPrevious} class="slds-m-left_x-small" onclick={handlePrevious} title="Cancel" label="Previous"></lightning-button>
+                    <lightning-button if:true={showValidate} variant="destructive" class="slds-m-left_x-small" onclick={handleValidate} label="Validate" ></lightning-button>
+                    <lightning-button if:true={showNext} variant="destructive" class="slds-m-left_x-small" onclick={handleNext} title="Next" label="Next"></lightning-button>
+                    <lightning-button if:true={showSubmit} variant="destructive" class="slds-m-left_x-small" onclick={submitDetails} title="Submit" label="Submit"></lightning-button>
+                    <lightning-button if:true={showSubmitDisabled} variant="destructive" class="slds-m-left_x-small" onclick={submitDetails} title="Submit" disabled="" label="Submit"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+ </template>

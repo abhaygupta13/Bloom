@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Property_Management_Fee</fullName>
+    <active>true</active>
+    <errorConditionFormula>PropertyManagementFee__c  &lt; 0</errorConditionFormula>
+    <errorDisplayField>PropertyManagementFee__c</errorDisplayField>
+    <errorMessage>Property Management Fee cannot be negative.</errorMessage>
+</ValidationRule>

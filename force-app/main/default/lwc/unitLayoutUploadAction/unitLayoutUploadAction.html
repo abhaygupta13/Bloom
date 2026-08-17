@@ -1,0 +1,49 @@
+<template>
+    <lightning-quick-action-panel header="Upload Unit Layouts">
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+        </template>
+        <div class="slds-p-around_large">
+
+            <lightning-layout multiple-rows="false">
+
+                <lightning-layout-item size="12" padding="horizontal-large">
+                    <div class="slds-align_absolute-center">
+                        <lightning-file-upload label="Floor Plan" name="fileUploader" accept={acceptedFileFormats}
+                            multiple="false" record-id={_recordId} onuploadfinished={handleFloorPlanFileUploadChange}>
+                        </lightning-file-upload>
+                    </div>
+                    <br />
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" padding="horizontal-large">
+                    <div class="slds-align_absolute-center">
+                        <lightning-file-upload label="Marketing Plan" name="fileUploader" accept={acceptedFileFormats}
+                            multiple="false" record-id={_recordId}
+                            onuploadfinished={handleMarketingPlanFileUploadChange}>
+                        </lightning-file-upload>
+                    </div>
+                    <br />
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" padding="horizontal-large">
+                    <div class="slds-align_absolute-center">
+                        <lightning-layout-item size="12" padding="horizontal-large">
+                            <div class="slds-align_absolute-center">
+                                <lightning-file-upload label="Marketing Plan" name="fileUploader"
+                                    accept={acceptedFileFormats} multiple="false" record-id={_recordId}
+                                    onuploadfinished={handleAfectionPlanFileUploadChange}>
+                                </lightning-file-upload>
+                            </div>
+                        </lightning-layout-item>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div slot="footer">
+            <lightning-button onclick={handleCancel} variant="neutral" label="Cancel"></lightning-button>
+            &nbsp;&nbsp;
+            <lightning-button onclick={handleUpload} variant="brand" label="Upload"></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

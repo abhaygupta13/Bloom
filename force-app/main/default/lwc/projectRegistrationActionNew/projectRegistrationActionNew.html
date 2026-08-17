@@ -1,0 +1,81 @@
+<template>
+    <lightning-quick-action-panel header={header}>
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+        <template if:true={isConfirm}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" style="width:50% !important">
+                    <!-- modal header start -->
+                    <header class="slds-theme_alert-texture slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirm</h2>
+                    </header>
+
+                    <!-- modal body start -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1"
+                        style="text-align:center">
+                        <p>Please make sure you have entered correct information.</p>
+                    </div>
+
+                    <!-- modal footer start-->
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick={closeConfirmBox}>Cancel</button>
+                        <button class="slds-button slds-button_brand" onclick={confirmBoxYes}>Confirm</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4">
+
+            </lightning-layout-item>
+
+            <lightning-layout-item size="3" class="slds-p-left_small">
+                <lightning-input date-style="medium" type="date" name="RegDate" label="Project Registration Date"
+                    value={admRegDate} onchange={admRegDateChange} disabled={isAdmRegDateReadOnly} required="true">
+                </lightning-input>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="3" class="slds-p-left_small">
+                <lightning-input date-style="medium" type="number" name="RegNumber" label="Project Registration Number"
+                    value={projectRegNumber} onchange={projectRegNumberChange} disabled={isProjectRegNumberReadOnly} required="true">
+                </lightning-input>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="2">
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4">
+            </lightning-layout-item>
+            
+            <lightning-layout-item size="3" class="slds-p-left_small">
+                <template lwc:if={isAttachmentUpload}>
+                    <lightning-input type="file" accept={acceptedFormats} onchange={openfileUpload}
+                        label="Upload Attachment" required="true"></lightning-input>
+                    <template if:true={fileData}>
+                        <p>{fileData.filename}</p>
+                    </template>
+                </template>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="3" class="slds-p-left_small">
+                <lightning-textarea class="textAreaBody" name="RegRemark" label="Project Registration Remark"
+                    value={admRegRemark} onchange={admRemarkChange} disabled={isAdmRegRemarkReadOnly} required="true">
+                </lightning-textarea>
+            </lightning-layout-item>
+            <lightning-layout-item size="2">
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <div slot="footer">
+            <lightning-button variant="neutral" label="Cancel" onclick={closAction}></lightning-button>
+            <lightning-button variant="brand" label="Save" class="slds-m-left_x-small" onclick={handleSaveClick}>
+            </lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

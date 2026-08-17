@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Launch</fullName>
+        <default>false</default>
+        <label>Launch</label>
+    </customValue>
+    <customValue>
+        <fullName>Tempo</fullName>
+        <default>false</default>
+        <label>Tempo</label>
+    </customValue>
+    <customValue>
+        <fullName>Promotion</fullName>
+        <default>false</default>
+        <label>Promotion</label>
+    </customValue>
+    <customValue>
+        <fullName>Pre Launch</fullName>
+        <default>false</default>
+        <label>Pre Launch</label>
+    </customValue>
+    <customValue>
+        <fullName>Post Launch</fullName>
+        <default>false</default>
+        <label>Post Launch</label>
+    </customValue>
+    <customValue>
+        <fullName>Inventory</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Inventory</label>
+    </customValue>
+    <masterLabel>Inventory/Launch</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

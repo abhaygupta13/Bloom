@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Decision_Based_on_offset_type</name>
+        <label>Decision Based on offset type</label>
+        <locationX>446</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Days_Offset</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.PaymentInstallments__r.Offset_Period_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Days</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_by_days</targetReference>
+            </connector>
+            <label>Days Offset</label>
+        </rules>
+        <rules>
+            <name>Month_Count</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.PaymentInstallments__r.Offset_Period_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Months</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Months_Based_Update</targetReference>
+            </connector>
+            <label>Month Count</label>
+        </rules>
+        <rules>
+            <name>Year_Offset</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.PaymentInstallments__r.Offset_Period_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Years</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>update_by_years</targetReference>
+            </connector>
+            <label>Year Offset</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Installment_line_updation</name>
+        <label>Installment line updation</label>
+        <locationX>732</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Payment_plan_detail_check</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.PaymentInstallments__r.Offset_Count__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.PaymentInstallments__r.Offset_Period_Type__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.InstallmentNumber__c</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <numberValue>1.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Decision_Based_on_offset_type</targetReference>
+            </connector>
+            <label>Payment plan detail check</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <formulas>
+        <description>DaysInstallment</description>
+        <name>DaysInstallmentDAte</name>
+        <dataType>Date</dataType>
+        <expression>{!$Record.PaymentInstallments__r.Offset_Count__c} +TODAY()</expression>
+    </formulas>
+    <formulas>
+        <description>MonthsbasedDate</description>
+        <name>MonthsbasedDate</name>
+        <dataType>Date</dataType>
+        <expression>ADDMONTHS(TODAY(),{!$Record.PaymentInstallments__r.Offset_Count__c})</expression>
+    </formulas>
+    <formulas>
+        <name>YearsBased</name>
+        <dataType>Date</dataType>
+        <expression>TODAY() + {!$Record.PaymentInstallments__r.Offset_Count__c}*365</expression>
+    </formulas>
+    <interviewLabel>Installment lines Updation of Installment Date {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Installment lines Updation of Installment Date</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Months_Based_Update</name>
+        <label>Months Based Update</label>
+        <locationX>314</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>InstallmentDate__c</field>
+            <value>
+                <elementReference>MonthsbasedDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_by_days</name>
+        <label>Update by days</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>InstallmentDate__c</field>
+            <value>
+                <elementReference>DaysInstallmentDAte</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>update_by_years</name>
+        <label>update by years</label>
+        <locationX>578</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>InstallmentDate__c</field>
+            <value>
+                <elementReference>YearsBased</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>606</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Installment_line_updation</targetReference>
+        </connector>
+        <object>InstallmentLines__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

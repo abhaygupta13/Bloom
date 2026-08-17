@@ -1,0 +1,193 @@
+<template>
+    <!-- Card -->
+    <lightning-card
+        variant="brand"
+        title="Contact Center Schedule"
+        icon-name="standard:service_appointment">
+
+        <!-- Center Button -->
+        <div class="slds-align_absolute-center">
+            <lightning-button
+                variant="brand"
+                label="Upload Schedule"
+                title="Upload Schedule"
+                onclick={openModal}>
+            </lightning-button>
+        </div>
+
+        <!-- Subtitle -->
+        <div class="slds-align_absolute-center">
+
+            <br/>
+            <div>
+                Upload Contact Center Schedule File
+            </div>
+
+        </div>
+
+    </lightning-card>
+
+    <!-- Modal -->
+    <template if:true={showModal}>
+
+        <section
+            role="dialog"
+            tabindex="-1"
+            aria-modal="true"
+            class="slds-modal slds-fade-in-open">
+
+            <div class="slds-modal__container customModal">
+
+                <!-- Header -->
+                <header class="slds-modal__header">
+
+                    <button
+                        class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close"
+                        onclick={closeModal}>
+
+                        <lightning-icon
+                            icon-name="utility:close"
+                            alternative-text="close"
+                            variant="brand"
+                            size="small">
+                        </lightning-icon>
+
+                    </button>
+
+                    <h2 class="slds-text-heading_medium">
+                        Contact Center Schedule Upload
+                    </h2>
+
+                </header>
+
+                <!-- Body -->
+                <div class="slds-modal__content slds-p-around_medium">
+
+                    <!-- NEW CHANGE -->
+                    <!-- LOADER -->
+                    <template if:true={isUploading}>
+
+                        <lightning-spinner
+                            alternative-text="Uploading"
+                            size="medium">
+                        </lightning-spinner>
+
+                    </template>
+
+                    <lightning-layout multiple-rows="true">
+
+                       
+                
+                <!-- Upload + Download Section -->
+                <lightning-layout multiple-rows="false">
+
+                    <!-- Left Side -->
+                    <lightning-layout-item
+                        size="6"
+                        padding="around-small">
+
+                        <lightning-input
+                            type="file"
+                            accept=".csv"
+                            label="Upload Schedule File (CSV)"
+                            onchange={handleFileChange}>
+                        </lightning-input>
+
+                    </lightning-layout-item>
+
+                
+                    <lightning-layout-item
+                    size="6"
+                    padding="around-small"
+                    class="slds-align_absolute-center">
+                    <div class="downloadButtonContainer"> 
+                        <div style="width:350px;">
+                    <lightning-button
+                        label="Download Sample Schedule File"
+                        icon-name="utility:download"
+                        variant="neutral"
+                        onclick={downloadSampleFile}>
+                    </lightning-button>
+                    </div>
+                </div>
+                </lightning-layout-item>
+
+                </lightning-layout>
+
+                        <!-- Selected File -->
+                        <template if:true={fileName}>
+
+                            <lightning-layout-item
+                                size="12"
+                                padding="around-small">
+
+                                <div class="slds-text-color_success">
+                                        Selected File:
+                                        <span style="margin-left: 6px;">
+                                            <strong>{fileName}</strong>
+                                        </span>
+                                </div>
+
+                            </lightning-layout-item>
+
+                        </template>
+
+                        <!-- Instructions -->
+                        <lightning-layout-item
+                            size="12"
+                            padding="around-small">
+
+                            <div class="instructionBox">
+
+                              
+                            </div>
+
+                        </lightning-layout-item>
+
+                    </lightning-layout>
+
+                </div>
+
+                <!-- Footer -->
+                <footer class="slds-modal__footer">
+
+                    <!-- Cancel -->
+                    <lightning-button
+                        onclick={closeModal}
+                        variant="neutral"
+                        label="Cancel">
+                    </lightning-button>
+
+                    &nbsp;&nbsp;
+
+                    <!-- NEW CHANGE -->
+                    <!-- VALIDATE BUTTON -->
+                    <lightning-button
+                        onclick={validateFile}
+                        variant="brand"
+                        label="Validate"
+                        disabled={disableValidate}>
+                    </lightning-button>
+
+                    
+
+                    &nbsp;&nbsp;
+
+                    <!-- SUBMIT BUTTON -->
+                    <lightning-button
+                        onclick={uploadFile}
+                        variant="success"
+                        label="Submit"
+                        disabled={disableSubmit}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+
+        <!-- Backdrop -->
+        <div class="slds-backdrop slds-backdrop_open"></div>
+
+    </template>
+
+</template>

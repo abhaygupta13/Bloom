@@ -1,0 +1,31 @@
+<template>
+    <lightning-quick-action-panel header="Confirm">
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass"></lightning-spinner>
+        </template>
+        <div class="slds-align_absolute-center slds-m-top_small">
+            Please select one of the contact
+        </div>
+        
+        <div class="slds-align_absolute-center slds-m-top_xx-small">
+            <lightning-combobox
+                name="contact"
+                label=""
+                value={value}
+                placeholder="Select Contact"
+                options={contacts}
+                onchange={handleChange} >
+            </lightning-combobox>
+        </div>
+        <div if:true={showMsg} class="slds-align_absolute-center slds-text-heading_small slds-text-color_error slds-m-top_medium">
+            {msg}
+        </div>
+        <div slot="footer">
+            <lightning-button onclick={handleCancel} variant="neutral" label="Cancel"></lightning-button>
+            &nbsp;&nbsp;
+            <lightning-button if:false={showConfirmDisabled} onclick={handleConfirm} variant="brand" label="Confirm"></lightning-button>
+            &nbsp;&nbsp;
+            <lightning-button if:true={showConfirmDisabled} disabled variant="brand" label="Confirm"></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

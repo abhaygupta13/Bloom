@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Seville_Milestone</fullName>
+    <columns>NAME</columns>
+    <columns>Milestone_Start_Date__c</columns>
+    <columns>Milestone_Date__c</columns>
+    <columns>Project__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Project__c</field>
+        <operation>equals</operation>
+        <value>Seville</value>
+    </filters>
+    <label>Seville Milestone</label>
+</ListView>

@@ -1,0 +1,54 @@
+<template>
+    <lightning-quick-action-panel header="Complete My Task">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass"></lightning-spinner>
+        </template>
+    <lightning-modal-body class="modal-body scrollable slds-modal__content slds-p-around_medium" data-scoped-scroll="true">
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass"></lightning-spinner>
+        </template>
+        <div class="slds-p-around_medium">
+            <label class="uiLabel-top form-element__label uiLabel" data-aura-class="uiLabel">Comments</label>
+            <textarea role="textbox" rows="3" cols="20" maxlength="255" class="inputTextArea cuf-messageTextArea textarea"  placeholder="Enter your comment here ..." onchange={handleCommentChange}></textarea>
+        </div>
+    </lightning-modal-body>
+    <template if:true={showTeamSection}>
+     <lightning-quick-action-panel header='Select team to assign the task'>
+
+            <lightning-layout multiple-rows>
+
+                <!-- Row 1: Team & User -->
+                <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                    <lightning-combobox
+                        label="Team"
+                        value={selectedTeam}
+                        options={teamOptions}
+                        onchange={handleTeamChange}
+                        placeholder="Team">
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                    <lightning-combobox
+                        label="User"
+                        value={selectedUserId}
+                        options={userOptions}
+                        onchange={handleUserChange}
+                        placeholder="User">
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+               
+                
+
+            </lightning-layout>
+
+        </lightning-quick-action-panel>
+    </template>
+        <div slot="footer">
+            <lightning-button onclick={closeComponent} variant="neutral" label="Cancel"></lightning-button>
+            &nbsp;&nbsp;
+            <lightning-button onclick={checkDeferralStatus} variant="brand" label="Submit"></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

@@ -1,0 +1,141 @@
+<template>
+    <lightning-card variant="brand" title="Send Bulk Emails" icon-name="standard:Contact">
+        <div class="slds-align_absolute-center">
+            <lightning-button variant="brand" label="Send Email" title="Send Email" onclick={handleOpenModal}>
+            </lightning-button>
+            <br />
+        </div>
+    </lightning-card>
+    <template if:true={isShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={handleCloseModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="brand"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Bulk Email</h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div style={previewStyle}>
+                        <!-- Preview mode -->
+                        <div>
+                            <p><strong>Subject:</strong> {selectedEmailSubject}</p>
+                            <div style="margin-top: 16px;">
+                                <strong>Email Body:</strong>
+                                <div class="slds-box slds-theme_default">
+                                    <lightning-formatted-rich-text value={richTextValue}>
+                                    </lightning-formatted-rich-text>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <template if:true={showLoading}>
+                        <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass">
+                        </lightning-spinner>
+                    </template>
+                    <div style={editStyle}>
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item size="12" padding="around-small">
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item size="12">
+                                        <lightning-combobox label="Email Template" required options={emailTemplatesList}
+                                            onchange={handleEmailTemplateChange}></lightning-combobox>
+                                    </lightning-layout-item>
+
+                                    <lightning-radio-group name="TypeOfEmail" required label="Type of Email"
+                                        options={radioOptions} value={typeofEmailvalue} type="radio"
+                                        onchange={handleTypeOfEmailChange} class="slds-form-element_horizontal">
+                                    </lightning-radio-group>
+
+                                    <template if:true={showReport}>
+                                        <lightning-layout-item size="12">
+                                            <lightning-combobox label="Report" options={reportsList}
+                                                onchange={handleReportChange}></lightning-combobox>
+                                        </lightning-layout-item>
+                                    </template>
+                                     <lightning-layout-item size="12">
+                                        <template if:true={showfileUpload}>
+                                     <lightning-layout>
+                                        <lightning-layout-item size="3">
+                                             <lightning-input type="file" required label="Upload CSV File" accept=".csv"
+                                            onchange={handleFileChange}></lightning-input>
+                                            <template if:true={isFileUploaded}>
+                                            <ul class="slds-m-top_small">
+                                                <li class="slds-m-bottom_x-small">
+                                                    {fileName}
+                                                </li>
+                                            </ul>
+                                            </template>
+                                        </lightning-layout-item>
+                                         <lightning-layout-item size="6" style="padding-top: 2.5%;">
+                                            <a href={sampleCsvDownloadlink} target="_blank" download="SampleEmailFile.csv"
+                                                style="padding-top: 3%;" class="slds-m-top_small">
+                                                Sample Email File
+                                            </a>
+                                        </lightning-layout-item>
+                                     </lightning-layout>
+                                    </template>
+                                     </lightning-layout-item>
+                                    <lightning-layout-item size="12">
+                                        <lightning-combobox label="From Email" required options={orgWideAddressList}
+                                            onchange={handleFromEmailChange}></lightning-combobox>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12">
+                                        <lightning-input type="text" label="Subject" required value={selectedEmailSubject}
+                                            onchange={handleSubjectChange}>
+                                        </lightning-input>
+                                    </lightning-layout-item><br/>
+                                    <lightning-layout-item size="12">
+                                        <span>Email Body</span><br/>
+                                        <div class="rich-text-wrapper">
+                                            <lightning-input-rich-text data-id="emailBody" contenteditable
+                                                label="Email Body" onfocus={handleFocus} required oninput={handleBodyChange}>
+                                            </lightning-input-rich-text>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12">
+                                        <!-- Attachment Section -->
+                                        <lightning-input class="slds-m-top_medium" type="file" label="Attach Files"
+                                            multiple accept=".pdf,.doc,.docx,.jpg,.png,.txt,.csv"
+                                            onchange={handleAttachmentChange}>
+                                        </lightning-input>
+                                        <template if:true={attachments}>
+                                            <ul class="slds-m-top_small">
+                                                <template for:each={attachments} for:item="attachment">
+                                                    <li key={attachment.name} class="slds-m-bottom_x-small">
+                                                        {attachment.name} - {attachment.size}
+                                                    </li>
+                                                </template>
+                                            </ul>
+                                        </template>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <template if:true={isPreviewMode}>
+                        <lightning-button variant="neutral" label="Back" onclick={closePreview}>
+                        </lightning-button>
+                    </template>
+                    <template if:false={isPreviewMode}>
+                        <lightning-button onclick={handleCloseModal} variant="neutral" label="Cancel">
+                        </lightning-button>
+                        &nbsp;&nbsp;
+                        <lightning-button onclick={handlePreview} variant="neutral" label="Preview"></lightning-button>
+                        &nbsp;&nbsp;
+                        <lightning-button onclick={handleSave} variant="brand" label="Send"></lightning-button>
+                    </template>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

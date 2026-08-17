@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X7_Under_Booking_Cancellation</fullName>
+    <columns>NAME</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>SubStatus__c</field>
+        <operation>equals</operation>
+        <value>Cancellation Rejected,Cancellation Initiated</value>
+    </filters>
+    <label>7.Under Booking Cancellation</label>
+    <sharedTo>
+        <group>Operations_Team</group>
+        <group>Sales_Manager</group>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,21 @@
+.counters {
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 12px;
+}
+.textAreaBody {
+    --sds-c-textarea-sizing-min-height:80px;
+}
+.checkboxColumn{
+    width: 1rem;
+}
+.tableColumnWidth{
+    text-align: center;
+}
+.center{
+    text-align: center;
+    vertical-align: middle;
+}
+.file-input{
+	display: none;
+}

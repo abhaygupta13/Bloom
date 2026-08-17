@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <description>Evaluates whether the RFIComments__c field has been newly added or modified. Used to determine whether to reset the IsRFIUpdated flag on the related Broker Application.</description>
+        <name>Check_RFI_Comment_is_Created_or_Modified</name>
+        <label>Check RFI Comment is Created or Modified</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>RFI_Comment_Changed_or_Added</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RFIComments__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RFIComments__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Reset_IsRFIUpdated_on_BrokerApplication</targetReference>
+            </connector>
+            <label>RFI Comment Changed or Added</label>
+        </rules>
+    </decisions>
+    <description>This flow is triggered when an RFI__c record is created or updated. It resets the IsRFIUpdated__c field on the related BrokerApplication__c record to false. This enables a new RFI cycle to properly trigger alerts or processing when the frontend responds with updates.</description>
+    <environments>Default</environments>
+    <interviewLabel>Reset IsRFIUpdated Flag on New/Updated RFI {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Reset IsRFIUpdated Flag on New/Updated RFI</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Sets the IsRFIUpdated__c field to false on the BrokerApplication__c record related to the newly created RFI.</description>
+        <name>Reset_IsRFIUpdated_on_BrokerApplication</name>
+        <label>Reset IsRFIUpdated on BrokerApplication</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>IsRFIUpdated__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record.BrokerApplication__r</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_RFI_Comment_is_Created_or_Modified</targetReference>
+        </connector>
+        <filterFormula>NOT({!$Permission.BypassFlow})</filterFormula>
+        <object>RFI__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

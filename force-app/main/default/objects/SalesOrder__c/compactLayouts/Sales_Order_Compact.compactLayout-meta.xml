@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Order_Compact</fullName>
+    <fields>Unit__c</fields>
+    <fields>Account__c</fields>
+    <fields>BookingDate__c</fields>
+    <fields>NetAmount__c</fields>
+    <fields>SubStatus__c</fields>
+    <fields>SalesManager__c</fields>
+    <fields>Amount_Verified_Receipt__c</fields>
+    <fields>Count_Verified_Receipts__c</fields>
+    <label>Sales Order Compact</label>
+</CompactLayout>

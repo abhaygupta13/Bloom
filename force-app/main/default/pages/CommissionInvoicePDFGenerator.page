@@ -1,0 +1,191 @@
+<apex:page controller="CommissionPDFController" applyHtmlTag="false" showHeader="false" renderAs="PDF">
+  <head>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .top-table-double-tr{
+          height:80px;
+        }
+        .top-table-single-tr{
+          height:40px;
+        }
+        .top-table-double-tr td,th{
+          padding-left:5px;
+        }
+        .top-table-single-tr td,th{
+          padding-left:5px;
+        }
+
+        </style>
+      </head>
+  <div style="text-align: center; margin: 20px 0;">
+    <h1>Company Logo Here</h1>
+  </div>
+
+  <!-- Tax Invoice Banner -->
+  <div style="width: 50%; text-align: center; background-color: #8B0000; margin: 15px auto; padding: 5px;">
+    <p style="font-size: 18px; font-weight: bold; color: white; margin: 0;">Tax Invoice</p>
+  </div>
+
+  <div style="margin: 20px;">
+    <table style="width: 100%; border-collapse: collapse; margin: 0px ;">
+      <tr></tr>
+      <tr>
+        <td style="width: 49%; vertical-align: top; padding-right: 5px;">
+          <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+            <tr class="top-table-single-tr">
+              <th style="border: 1px solid black;background-color: #8B0000; color: white; text-align: left;width:120px">Bill To:</th>
+              <td style="border: 1px solid black;min-width:80px">{!invoiceLineItems[0].sellerName}</td>
+            </tr>
+            <tr class="top-table-double-tr">
+              <th style="border: 1px solid black;background-color: #8B0000; color: white; text-align: left;">Address:</th>
+              <td style="border: 1px solid black;">{!invoiceLineItems[0].address}</td>
+            </tr>
+            <tr class="top-table-single-tr">
+              <th style="border: 1px solid black;background-color: #8B0000; color: white; text-align: left;">TRN #:</th>
+              <td style="border: 1px solid black;">{!invoiceLineItems[0].TRN}</td>
+            </tr>
+            <tr class="top-table-single-tr">
+              <th style="border: 1px solid black;background-color: #8B0000; color: white; text-align: left;">Reference Number:</th>
+              <td style="border: 1px solid black;">{!invoiceLineItems[0].invoiceName}</td>
+            </tr>
+          </table>
+        </td>
+        <td style="width: 49%; vertical-align: top; padding-left: 5px;">
+          <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+            <tr class="top-table-single-tr">
+              <th style="border: 1px solid black;background-color: #8B0000; color: white; text-align: left;width:120px">Agency Name:</th>
+              <td style="border: 1px solid black;min-width:80px">{!invoiceLineItems[0].agency}</td>
+            </tr>
+            <tr class="top-table-single-tr">
+              <th style="border: 1px solid black;background-color: #8B0000; color: white; text-align: left;">Invoice Number:</th>
+              <td style="border: 1px solid black;"></td>
+            </tr>
+            <tr class="top-table-single-tr">
+              <th style="border: 1px solid black;background-color: #8B0000; color: white; text-align: left;">Invoice Date:</th>
+              <td style="border: 1px solid black;"></td>
+            </tr>
+            <tr class="top-table-single-tr">
+              <th style="border: 1px solid black;background-color: #8B0000; color: white; text-align: left;">Address:</th>
+              <td style="border: 1px solid black;"></td>
+            </tr>
+            <tr class="top-table-single-tr">
+              <th style="border: 1px solid black;background-color: #8B0000; color: white; text-align: left;">Broker TRN #:</th>
+              <td style="border: 1px solid black;">{!invoiceLineItems[0].brokerTRN}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+
+  <!-- Data Table -->
+  <div style="margin: 20px; font-size: 12px;">
+    <table style="width: 100%; border-collapse: collapse; border: 1px solid black; font-weight: bold;">
+      <thead>
+        <tr style="background-color: #8B0000; color: white; text-align: center;">
+          <th style="border: 1px solid black;">Sl. No</th>
+          <th style="border: 1px solid black;">Project Name</th>
+          <th style="border: 1px solid black;">Unit Number</th>
+          <th style="border: 1px solid black;">Description</th>
+          <th style="border: 1px solid black;">Selling Price (AED)</th>
+          <th style="border: 1px solid black;">Type of Payment</th>
+          <th style="border: 1px solid black;">Rate (%)</th>
+          <th style="border: 1px solid black;">Total Amount (AED)</th>
+          <th style="border: 1px solid black;">VAT ({!vatPercentage}%) (AED)</th>
+          <th style="border: 1px solid black;">Total Amount with Vat (AED)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <apex:repeat value="{!invoiceLineItems}" var="line" id="invoiceLine">
+          <tr>
+            <td style="border: 1px solid black; text-align: center;">{!line.invoiceLine}</td>
+            <td style="border: 1px solid black; text-align: center;">{!line.projectName}</td>
+            <td style="border: 1px solid black; text-align: center;">{!line.unitNumber}</td>
+            <td style="border: 1px solid black; text-align: center;">{!line.description}</td>
+            <td style="border: 1px solid black; text-align: center;">{!line.sellingPrice}</td>
+            <td style="border: 1px solid black; text-align: center;">{!line.typeOfPayment}</td>
+            <td style="border: 1px solid black; text-align: center;">{!line.commissionPercentage}</td>
+            <td style="border: 1px solid black; text-align: center;">{!line.totalAmount}</td>
+            <td style="border: 1px solid black; text-align: center;">{!line.vatAmount}</td>
+            <td style="border: 1px solid black; text-align: center;">{!line.totalWithVAT}</td>
+          </tr>
+        </apex:repeat>
+        <!-- Add more rows dynamically if needed -->
+        <tr>
+          <td colspan="4" style="border: 1px solid black; text-align: center; font-weight: bold;">Sub Total</td>
+          <td style="border: 1px solid black; text-align: center;">{!totalSellingPrice}</td>
+          <td colspan="2" style="border: 1px solid black;"></td>
+          <td style="border: 1px solid black; text-align: center;">{!totalAmount}</td>
+          <td style="border: 1px solid black; text-align: center;">{!totalvatAmount}</td>
+          <td style="border: 1px solid black; text-align: center;">{!totalAmountWithVAT}</td>
+        </tr>
+        <tr>
+          <td colspan="7" style="border: 1px solid black; text-align: center; background-color: #8B0000; color: white;">Total Amount Due:</td>
+          <td colspan="3" style="border: 1px solid black; text-align: center;"></td>
+        </tr>
+        <tr >
+          <td colspan="10" style="border: 1px solid black; text-align: left;">Amount in Words: {!amountInWords}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer Section -->
+  <div style="margin: 20px;">
+    <table style="width: 100%; border-collapse: collapse; border: 1px solid;">
+      <tr>
+        <th style="background-color: #8B0000;width:30% ; border: 1px solid black;  color: white; text-align: left; padding: 10px;">Bank Name:</th>
+        <td style="border: 1px solid ;  padding: 10px; width:70%;"></td>
+      </tr>
+      <tr>
+        <th style="background-color: #8B0000;width:30% ; border: 1px solid black; color: white; text-align: left; padding: 10px;">Account Name</th>
+        <td style="border: 1px solid ;  padding: 10px;width:70%;"></td>
+      </tr>
+      <tr>
+        <th style="background-color: #8B0000;width:30% ; border: 1px solid black; color: white; text-align: left; padding: 10px;">Account Number:</th>
+        <td style="border: 1px solid ;  padding: 10px;width:70%;"></td>
+      </tr>
+      <tr>
+        <th style="background-color: #8B0000;width:30% ;border: 1px solid black;  color: white; text-align: left; padding: 10px;">IBAN Number:</th>
+        <td style="border: 1px solid ;  padding: 10px;width:70%;"></td>
+      </tr>
+      <tr>
+        <th style="background-color: #8B0000; width:30% ; border: 1px solid black; color: white; text-align: left; padding: 10px;"> Swift Code:</th>
+        <td style="border: 1px solid ;  padding: 10px;width:70%;"></td>
+      </tr>
+    </table>
+  </div>
+
+
+
+  <div style=" margin:20px; font-size: 12px;">
+    <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+      <tr>
+        <th style="width: 40%; text-align: left; padding: 10px; border: 1px solid black;">Companies Representative/Authorised Signatory</th>
+        <td style="padding: 10px; width: 60%; border: 1px solid black;"></td>
+      </tr>
+      <tr>
+        <th style="width: 40%; text-align: left; padding: 10px; border: 1px solid black;">Name:</th>
+        <td style="padding: 10px; width: 60%; border: 1px solid black;"></td>
+      </tr>
+      <tr>
+        <th style="width: 30%; text-align: left; padding: 10px; border: 1px solid black;">Designation:</th>
+        <td style="padding: 10px; width: 60%; border: 1px solid black;"></td>
+      </tr>
+      <tr style="height: 50px; vertical-align: top;">
+        <th style="width: 40%; text-align: left; padding: 10px; border: 1px solid black;">Signature:</th>
+        <td style="padding: 10px; width: 60%; border: 1px solid black;"></td>
+      </tr>
+      <tr>
+        <th style="width: 40%; text-align: left; padding: 10px; border: 1px solid black;">Company Stamp:</th>
+        <td style="padding: 10px; width: 60%; border: 1px solid black;"></td>
+      </tr>
+  </table>
+</div>
+</apex:page>

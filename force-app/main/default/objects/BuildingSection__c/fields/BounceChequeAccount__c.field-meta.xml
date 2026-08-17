@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BounceChequeAccount__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Other Charges Account</label>
+    <referenceTo>BankAccount__c</referenceTo>
+    <relationshipLabel>Buildings/Phases (Bounce Cheque Account)</relationshipLabel>
+    <relationshipName>Buildings_Phases4</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AllocationGroup__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>For capturing the Allocation Group of the Unit</description>
+    <label>Allocation Group</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>AllocationGroup__c.IsActive__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>AllocationGroup__c</referenceTo>
+    <relationshipLabel>Units</relationshipLabel>
+    <relationshipName>PropertiesPropertyAllocationGroup</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

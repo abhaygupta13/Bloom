@@ -1,0 +1,25 @@
+# List built-in and custom ignores here.
+# For more info: https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_exclude_source.htm
+
+# Git
+.git
+.gitignore
+
+# LWC & Aura Jest testing
+**/__tests__/**
+
+# VS Code
+.vscode/
+
+# Project & local folders
+.sf/
+.sfdx/
+.localdevserver/
+config/
+manifest/
+unpackaged/
+README.md
+
+# OS Files
+.DS_Store
+Thumbs.db

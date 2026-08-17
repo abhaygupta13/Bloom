@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PaymentPlanType__c</fullName>
+    <description>Captures the payment plan type</description>
+    <inlineHelpText>Capture the payment plan type</inlineHelpText>
+    <label>Payment Plan Type</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Standard</fullName>
+                <default>true</default>
+                <label>Standard Uponhandover</label>
+            </value>
+            <value>
+                <fullName>Special</fullName>
+                <default>false</default>
+                <label>Special</label>
+            </value>
+            <value>
+                <fullName>Prelaunch</fullName>
+                <default>false</default>
+                <label>Prelaunch</label>
+            </value>
+            <value>
+                <fullName>Direct</fullName>
+                <default>false</default>
+                <label>Direct</label>
+            </value>
+            <value>
+                <fullName>PHPP</fullName>
+                <default>false</default>
+                <label>PHPP</label>
+            </value>
+            <value>
+                <fullName>Handover - Immediate</fullName>
+                <default>false</default>
+                <label>Handover- Immediate</label>
+            </value>
+            <value>
+                <fullName>Handover - PHPP</fullName>
+                <default>false</default>
+                <label>Handover - PHPP</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

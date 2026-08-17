@@ -1,0 +1,188 @@
+<template>
+    <template if:true={isModalOpen}>
+        <lightning-quick-action-panel header="Project Payment Plan Update">
+
+            <!-- Loader -->
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+            </template>
+
+            <!-- STEP 1 : UPDATE SCREEN -->
+
+                <!-- Filters -->
+                <lightning-layout multiple-rows horizontal-align="spread">
+
+                    <!-- Classification -->
+                    <lightning-layout-item size="4" padding="around-small">
+
+                        <lightning-combobox label="Classification" value={selectedClassification}
+                            options={classificationOptions} onchange={handleClassificationChange}>
+                        </lightning-combobox>
+
+                    </lightning-layout-item>
+
+                    <!-- Payment Plan -->
+                    <lightning-layout-item size="4" padding="around-small">
+
+                        <lightning-combobox label="Payment Plan" value={selectedPaymentPlan}
+                            options={paymentPlanOptions} onchange={handlePaymentPlanChange}
+                            disabled={isPaymentPlanDisabled}>
+                        </lightning-combobox>
+
+                    </lightning-layout-item>
+
+                    <!-- Created Date -->
+                    <lightning-layout-item size="2" padding="around-small">
+
+                        <template if:true={showCreatedDate}>
+                            <lightning-input label="Created Date" value={formattedPaymentPlanCreatedDate} readonly
+                                variant="label-stacked">
+                            </lightning-input>
+                        </template>
+
+                    </lightning-layout-item>
+
+                    <!-- Active Sales Order -->
+                    <lightning-layout-item size="2" padding="around-small">
+
+                        <template if:true={showSalesOrder}>
+                            <lightning-input label="Active Sales Order" value={noOfActiveSalesOrder} readonly
+                                variant="label-stacked">
+                            </lightning-input>
+                        </template>
+
+                    </lightning-layout-item>
+
+                </lightning-layout>
+
+                <!-- Table -->
+                <template if:true={hasInstallments}>
+
+                    <div class="slds-m-top_medium table-container">
+
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+
+                            <thead>
+                                <tr class="slds-line-height_reset">
+
+                                    <th style="width: 120px;">
+                                        <div class="slds-truncate slds-text-align_center">
+                                            Installment #
+                                        </div>
+                                    </th>
+
+                                    <th style="width: 260px;">
+                                        <div class="slds-truncate slds-text-align_center">
+                                            Milestone
+                                        </div>
+                                    </th>
+
+                                    <th style="width: 90px;">
+                                        <div class="slds-truncate slds-text-align_center">
+                                            %
+                                        </div>
+                                    </th>
+
+                                    <th style="width: 170px;">
+                                        <div class="slds-truncate slds-text-align_center">
+                                            Installment Date
+                                        </div>
+                                    </th>
+
+                                    <th style="width: 180px;">
+                                        <div class="slds-truncate slds-text-align_center">
+                                            Last Revised Date
+                                        </div>
+                                    </th>
+
+                                    <th style="width:150px;">
+                                        <div class="slds-truncate slds-text-align_center">
+                                            Cheque Replacement
+                                        </div>
+                                    </th>
+
+                                    <th style="width:220px;">
+                                        <div class="slds-truncate slds-text-align_center">
+                                            Revised Date
+                                        </div>
+                                    </th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <template for:each={lstInstallmentLine} for:item="row">
+
+                                    <tr key={row.Id}>
+
+                                        <td class="slds-text-align_center">
+                                            <div class="slds-truncate">
+                                                {row.InstallmentNumber__c}
+                                            </div>
+                                        </td>
+
+                                        <td class="slds-text-align_center">
+                                            <div class="slds-truncate">
+                                                {row.Description__c}
+                                            </div>
+                                        </td>
+
+                                        <td class="slds-text-align_center">
+                                            {row.InstallmentPercentage__c}
+                                        </td>
+
+                                        <td class="slds-text-align_center">
+                                            <div class="slds-truncate">
+                                                {row.InstallmentDate__c}
+                                            </div>
+                                        </td>
+
+                                        <td class="slds-text-align_center">
+                                            <div class="slds-truncate">
+                                                {row.RevisedDate__c}
+                                            </div>
+                                        </td>
+
+                                        <td class="slds-text-align_center">
+                                            <lightning-input type="checkbox" variant="label-hidden"
+                                                checked={row.ChequeReplacement__c} data-id={row.Id}
+                                                onchange={handleChequeReplacementChange} disabled={row.isReadOnly}>
+                                            </lightning-input>
+                                        </td>
+
+                                        <td class="slds-text-align_center">
+
+                                            <div style="max-width:180px; margin:0 auto;">
+
+                                                <lightning-input type="date" variant="label-hidden"
+                                                    value={row.NewRevisedDate__c} data-id={row.Id}
+                                                    onchange={handleRowDateChange} disabled={row.isReadOnly}
+                                                    min={todayDate}>
+                                                </lightning-input>
+
+                                            </div>
+
+                                        </td>
+
+                                    </tr>
+
+                                </template>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </template>
+
+            <!-- Footer -->
+            <div slot="footer">
+                <lightning-button label="Cancel" class="slds-m-right_small" onclick={closeAction}></lightning-button>
+                    <lightning-button label="Submit" variant="brand" onclick={handleSubmit}>
+                    </lightning-button>
+            </div>
+        </lightning-quick-action-panel>
+    </template>
+</template>

@@ -1,0 +1,4 @@
+<aura:component implements="lightning:actionOverride" access="global">
+    <!-- Embed the LWC -->
+    <c:fileUploadAction />
+</aura:component>

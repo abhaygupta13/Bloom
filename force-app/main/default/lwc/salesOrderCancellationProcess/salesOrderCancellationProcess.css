@@ -1,0 +1,14 @@
+.sectionCss{
+    font-weight: 700;
+    font-size: 13px;
+    background: #f3f3f3;
+    padding: 9px;
+    border-radius: 5px;
+}
+.outer-div {
+    position: relative;
+}
+
+.customSpinner {
+   position: absolute;
+}

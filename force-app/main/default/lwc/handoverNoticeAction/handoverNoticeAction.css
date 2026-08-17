@@ -1,0 +1,65 @@
+.custom_style{
+	background-color: rgb(248, 249, 249); /* rgb(248, 241, 239);*/
+}
+.table_style{
+	height: 22rem;
+	width: 100%; 
+}
+/* Reserve space for the error message so the layout doesn't shift */
+.slds-p-horizontal_small {
+    min-height: 90px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Ensure the button stays aligned with the top of the inputs */
+.slds-stretch {
+    margin-top: 24px; /* Adjust based on your label height */
+}
+/* This reduces the gap between the datatable and the Send button area */
+.slds-m-top_medium.slds-border_right {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.slds-p-around_medium.slds-text-align_right {
+    padding-top: 0.5rem; /* Tightens the space above the Send button */
+}
+/* Keeps the picklist section fixed at the top of the card */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white; /* Prevents datatable records from showing behind it */
+    border-bottom: 1px solid #dddbda;
+}
+
+/* Optional: Ensures a clean background for picklists */
+.bg-white {
+    background-color: #ffffff;
+}
+
+/* Limits the table height so it becomes scrollable */
+.table-container {
+    height: 400px; /* Adjust this height based on your requirement */
+}
+
+/* Makes the datatable internally scrollable */
+lightning-datatable {
+    height: 100%;
+}
+/* Removes the top border from the header row cells */
+.table-wrapper lightning-datatable {
+    --slds-c-datatable-header-color-border-top: transparent;
+}
+
+/* If the above token doesn't work in your version, use this: */
+.table-wrapper :host {
+    --slds-c-datatable-header-border-thickness: 0;
+}
+
+/* To specifically hide the top border line of the header container */
+.table-wrapper .slds-table_header-fixed_container {
+    border-top: none !important;
+}

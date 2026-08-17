@@ -1,0 +1,1108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>800-Aldar</fullName>
+        <default>false</default>
+        <label>800-Aldar</label>
+    </customValue>
+    <customValue>
+        <fullName>Abudhabi</fullName>
+        <default>false</default>
+        <label>Abudhabi</label>
+    </customValue>
+    <customValue>
+        <fullName>Cityscape - Abu Dhabi</fullName>
+        <default>false</default>
+        <label>Cityscape - Abu Dhabi</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Sales Centre</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Sales Centre</label>
+    </customValue>
+    <customValue>
+        <fullName>AbuDhabi Sports Council</fullName>
+        <default>false</default>
+        <label>AbuDhabi Sports Council</label>
+    </customValue>
+    <customValue>
+        <fullName>ADNOC Tower Kiosk</fullName>
+        <default>false</default>
+        <label>ADNOC Tower Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Ain Roadshow</fullName>
+        <default>false</default>
+        <label>Al Ain Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar</fullName>
+        <default>false</default>
+        <label>Aldar</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar.com</fullName>
+        <default>false</default>
+        <label>Aldar.com</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar.com ChatBot</fullName>
+        <default>false</default>
+        <label>Aldar.com ChatBot</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Academies</fullName>
+        <default>false</default>
+        <label>Aldar Academies</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar APP</fullName>
+        <default>false</default>
+        <label>Aldar APP</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar App ChatBot</fullName>
+        <default>false</default>
+        <label>Aldar App ChatBot</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Apps</fullName>
+        <default>false</default>
+        <label>Aldar Apps</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Email Campaign</fullName>
+        <default>false</default>
+        <label>Aldar Email Campaign</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Employee</fullName>
+        <default>false</default>
+        <label>Aldar Employee</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Hospitality</fullName>
+        <default>false</default>
+        <label>Aldar Hospitality</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Marinas</fullName>
+        <default>false</default>
+        <label>Aldar Marinas</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar SMS Campaign</fullName>
+        <default>false</default>
+        <label>Aldar SMS Campaign</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Square Sales Centre</fullName>
+        <default>false</default>
+        <label>Aldar Square Sales Centre</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar WhatsApp Campaign</fullName>
+        <default>false</default>
+        <label>Aldar WhatsApp Campaign</label>
+    </customValue>
+    <customValue>
+        <fullName>Aljimi Mall Kiosk</fullName>
+        <default>false</default>
+        <label>Aljimi Mall Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>AlMamoura Kiosk</fullName>
+        <default>false</default>
+        <label>AlMamoura Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>Amman Roadshow</fullName>
+        <default>false</default>
+        <label>Amman Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>BaniyasTower Kiosk</fullName>
+        <default>false</default>
+        <label>BaniyasTower Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>Bawabat Alsharq Mall Kiosk</fullName>
+        <default>false</default>
+        <label>Bawabat Alsharq Mall Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>Bayut.com</fullName>
+        <default>false</default>
+        <label>Bayut.com</label>
+    </customValue>
+    <customValue>
+        <fullName>Booking App</fullName>
+        <default>false</default>
+        <label>Booking App</label>
+    </customValue>
+    <customValue>
+        <fullName>Broker Agency Name</fullName>
+        <default>false</default>
+        <label>Broker Agency Name</label>
+    </customValue>
+    <customValue>
+        <fullName>ChatBot</fullName>
+        <default>false</default>
+        <label>ChatBot</label>
+    </customValue>
+    <customValue>
+        <fullName>Cinema</fullName>
+        <default>false</default>
+        <label>Cinema</label>
+    </customValue>
+    <customValue>
+        <fullName>CityWalkKiosk</fullName>
+        <default>false</default>
+        <label>CityWalkKiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>ComicCon Kiosk</fullName>
+        <default>false</default>
+        <label>ComicCon Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>Corporate Companies</fullName>
+        <default>false</default>
+        <label>Corporate Companies</label>
+    </customValue>
+    <customValue>
+        <fullName>Corporate Email Campaign</fullName>
+        <default>false</default>
+        <label>Corporate Email Campaign</label>
+    </customValue>
+    <customValue>
+        <fullName>Corporate SMS</fullName>
+        <default>false</default>
+        <label>Corporate SMS</label>
+    </customValue>
+    <customValue>
+        <fullName>Corporate Webpage</fullName>
+        <default>false</default>
+        <label>Corporate Webpage</label>
+    </customValue>
+    <customValue>
+        <fullName>Data Migration</fullName>
+        <default>false</default>
+        <label>Data Migration</label>
+    </customValue>
+    <customValue>
+        <fullName>DMSMarketing</fullName>
+        <default>false</default>
+        <label>DMSMarketing</label>
+    </customValue>
+    <customValue>
+        <fullName>Cityscape-Dubai</fullName>
+        <default>false</default>
+        <label>Cityscape-Dubai</label>
+    </customValue>
+    <customValue>
+        <fullName>Dubai Sales Centre</fullName>
+        <default>false</default>
+        <label>Dubai Sales Centre</label>
+    </customValue>
+    <customValue>
+        <fullName>Dubizzle</fullName>
+        <default>false</default>
+        <label>Dubizzle</label>
+    </customValue>
+    <customValue>
+        <fullName>End User</fullName>
+        <default>false</default>
+        <label>End User</label>
+    </customValue>
+    <customValue>
+        <fullName>F1 Paddock Kiosk</fullName>
+        <default>false</default>
+        <label>F1 Paddock Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>Facebook</fullName>
+        <default>false</default>
+        <label>Facebook</label>
+    </customValue>
+    <customValue>
+        <fullName>Fay Al Reeman Kiosk</fullName>
+        <default>false</default>
+        <label>Fay Al Reeman Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>Four Seasons Resort Dubai</fullName>
+        <default>false</default>
+        <label>Four Seasons Resort Dubai</label>
+    </customValue>
+    <customValue>
+        <fullName>Friends/Family</fullName>
+        <default>false</default>
+        <label>Friends/Family</label>
+    </customValue>
+    <customValue>
+        <fullName>Google Listings</fullName>
+        <default>false</default>
+        <label>Google Listings</label>
+    </customValue>
+    <customValue>
+        <fullName>GroveExperience SalesCentre</fullName>
+        <default>false</default>
+        <label>GroveExperience SalesCentre</label>
+    </customValue>
+    <customValue>
+        <fullName>Gulfnews.com</fullName>
+        <default>false</default>
+        <label>Gulfnews.com</label>
+    </customValue>
+    <customValue>
+        <fullName>HQ Tower Kiosk</fullName>
+        <default>false</default>
+        <label>HQ Tower Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>Influencers</fullName>
+        <default>false</default>
+        <label>Influencers</label>
+    </customValue>
+    <customValue>
+        <fullName>Instagram</fullName>
+        <default>false</default>
+        <label>Instagram</label>
+    </customValue>
+    <customValue>
+        <fullName>International Events &amp; Exhibitions</fullName>
+        <default>false</default>
+        <label>International Events &amp; Exhibitions</label>
+    </customValue>
+    <customValue>
+        <fullName>Investor</fullName>
+        <default>false</default>
+        <label>Investor</label>
+    </customValue>
+    <customValue>
+        <fullName>Jawahaer Show Home</fullName>
+        <default>false</default>
+        <label>Jawahaer Show Home</label>
+    </customValue>
+    <customValue>
+        <fullName>Jeddah Cityscape</fullName>
+        <default>false</default>
+        <label>Jeddah Cityscape</label>
+    </customValue>
+    <customValue>
+        <fullName>Khidmah</fullName>
+        <default>false</default>
+        <label>Khidmah</label>
+    </customValue>
+    <customValue>
+        <fullName>KSA - Bussma</fullName>
+        <default>false</default>
+        <label>KSA - Bussma</label>
+    </customValue>
+    <customValue>
+        <fullName>LinkedIn</fullName>
+        <default>false</default>
+        <label>LinkedIn</label>
+    </customValue>
+    <customValue>
+        <fullName>Louvre Abu Dhabi</fullName>
+        <default>false</default>
+        <label>Louvre Abu Dhabi</label>
+    </customValue>
+    <customValue>
+        <fullName>LPSShanghaiDec2019</fullName>
+        <default>false</default>
+        <label>LPSShanghaiDec2019</label>
+    </customValue>
+    <customValue>
+        <fullName>Mamsha Sales Centre</fullName>
+        <default>false</default>
+        <label>Mamsha Sales Centre</label>
+    </customValue>
+    <customValue>
+        <fullName>Mamsha Show Home</fullName>
+        <default>false</default>
+        <label>Mamsha Show Home</label>
+    </customValue>
+    <customValue>
+        <fullName>Management Referral</fullName>
+        <default>false</default>
+        <label>Management Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>Manchester City</fullName>
+        <default>false</default>
+        <label>Manchester City</label>
+    </customValue>
+    <customValue>
+        <fullName>MandarinOrientalHotelJumeirah</fullName>
+        <default>false</default>
+        <label>MandarinOrientalHotelJumeirah</label>
+    </customValue>
+    <customValue>
+        <fullName>Media Blogger</fullName>
+        <default>false</default>
+        <label>Media Blogger</label>
+    </customValue>
+    <customValue>
+        <fullName>NABD</fullName>
+        <default>false</default>
+        <label>NABD</label>
+    </customValue>
+    <customValue>
+        <fullName>Outbound Calls</fullName>
+        <default>false</default>
+        <label>Outbound Calls</label>
+    </customValue>
+    <customValue>
+        <fullName>Poster/Billboard</fullName>
+        <default>false</default>
+        <label>Poster/Billboard</label>
+    </customValue>
+    <customValue>
+        <fullName>PR/News</fullName>
+        <default>false</default>
+        <label>PR/News</label>
+    </customValue>
+    <customValue>
+        <fullName>Promofix</fullName>
+        <default>false</default>
+        <label>Promofix</label>
+    </customValue>
+    <customValue>
+        <fullName>Propertyfinder</fullName>
+        <default>false</default>
+        <label>Propertyfinder</label>
+    </customValue>
+    <customValue>
+        <fullName>Property Geeks</fullName>
+        <default>false</default>
+        <label>Property Geeks</label>
+    </customValue>
+    <customValue>
+        <fullName>Property-geeks</fullName>
+        <default>false</default>
+        <label>Property-geeks</label>
+    </customValue>
+    <customValue>
+        <fullName>Provis</fullName>
+        <default>false</default>
+        <label>Provis</label>
+    </customValue>
+    <customValue>
+        <fullName>Provis Email Campaign</fullName>
+        <default>false</default>
+        <label>Provis Email Campaign</label>
+    </customValue>
+    <customValue>
+        <fullName>Provis SMS</fullName>
+        <default>false</default>
+        <label>Provis SMS</label>
+    </customValue>
+    <customValue>
+        <fullName>Provis Webpage</fullName>
+        <default>false</default>
+        <label>Provis Webpage</label>
+    </customValue>
+    <customValue>
+        <fullName>Q4AlMiraRoadshow</fullName>
+        <default>false</default>
+        <label>Q4AlMiraRoadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>Radio</fullName>
+        <default>false</default>
+        <label>Radio</label>
+    </customValue>
+    <customValue>
+        <fullName>RakRoadshow</fullName>
+        <default>false</default>
+        <label>RakRoadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>Sales Booking App</fullName>
+        <default>false</default>
+        <label>Sales Booking App</label>
+    </customValue>
+    <customValue>
+        <fullName>Sales Events</fullName>
+        <default>false</default>
+        <label>Sales Events</label>
+    </customValue>
+    <customValue>
+        <fullName>SalesKioskApp</fullName>
+        <default>false</default>
+        <label>SalesKioskApp</label>
+    </customValue>
+    <customValue>
+        <fullName>Shamsmeera.com</fullName>
+        <default>false</default>
+        <label>Shamsmeera.com</label>
+    </customValue>
+    <customValue>
+        <fullName>Snapads</fullName>
+        <default>false</default>
+        <label>Snapads</label>
+    </customValue>
+    <customValue>
+        <fullName>SnapChat</fullName>
+        <default>false</default>
+        <label>SnapChat</label>
+    </customValue>
+    <customValue>
+        <fullName>Snap Chat</fullName>
+        <default>false</default>
+        <label>Snap Chat</label>
+    </customValue>
+    <customValue>
+        <fullName>TAMM</fullName>
+        <default>false</default>
+        <label>TAMM</label>
+    </customValue>
+    <customValue>
+        <fullName>Tenants</fullName>
+        <default>false</default>
+        <label>Tenants</label>
+    </customValue>
+    <customValue>
+        <fullName>The Bridges Show Home</fullName>
+        <default>false</default>
+        <label>The Bridges Show Home</label>
+    </customValue>
+    <customValue>
+        <fullName>TheMediaVantage</fullName>
+        <default>false</default>
+        <label>TheMediaVantage</label>
+    </customValue>
+    <customValue>
+        <fullName>The National News</fullName>
+        <default>false</default>
+        <label>The National News</label>
+    </customValue>
+    <customValue>
+        <fullName>TikTok</fullName>
+        <default>false</default>
+        <label>TikTok</label>
+    </customValue>
+    <customValue>
+        <fullName>TV</fullName>
+        <default>false</default>
+        <label>TV</label>
+    </customValue>
+    <customValue>
+        <fullName>Twitter</fullName>
+        <default>false</default>
+        <label>Twitter</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Select Email Campaign</fullName>
+        <default>false</default>
+        <label>Aldar Select Email Campaign</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Select SMS</fullName>
+        <default>false</default>
+        <label>Aldar Select SMS</label>
+    </customValue>
+    <customValue>
+        <fullName>VIP Webpage</fullName>
+        <default>false</default>
+        <label>VIP Webpage</label>
+    </customValue>
+    <customValue>
+        <fullName>Wealth Email Campaign</fullName>
+        <default>false</default>
+        <label>Wealth Email Campaign</label>
+    </customValue>
+    <customValue>
+        <fullName>Wealth SMS</fullName>
+        <default>false</default>
+        <label>Wealth SMS</label>
+    </customValue>
+    <customValue>
+        <fullName>Wealth Webpage</fullName>
+        <default>false</default>
+        <label>Wealth Webpage</label>
+    </customValue>
+    <customValue>
+        <fullName>Wechat</fullName>
+        <default>false</default>
+        <label>Wechat</label>
+    </customValue>
+    <customValue>
+        <fullName>WhatsApp</fullName>
+        <default>false</default>
+        <label>WhatsApp</label>
+    </customValue>
+    <customValue>
+        <fullName>WhatsAPP Business</fullName>
+        <default>false</default>
+        <label>WhatsAPP Business</label>
+    </customValue>
+    <customValue>
+        <fullName>W Hotel F1 Kiosk</fullName>
+        <default>false</default>
+        <label>W Hotel F1 Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>World Future Energy</fullName>
+        <default>false</default>
+        <label>World Future Energy</label>
+    </customValue>
+    <customValue>
+        <fullName>Yallacompare.com</fullName>
+        <default>false</default>
+        <label>Yallacompare.com</label>
+    </customValue>
+    <customValue>
+        <fullName>Yas Mall Kiosk</fullName>
+        <default>false</default>
+        <label>Yas Mall Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>YasMallKioskdeVere</fullName>
+        <default>false</default>
+        <label>YasMallKioskdeVere</label>
+    </customValue>
+    <customValue>
+        <fullName>Yas Marina Circuit Abudhabi</fullName>
+        <default>false</default>
+        <label>Yas Marina Circuit Abudhabi</label>
+    </customValue>
+    <customValue>
+        <fullName>YouTube</fullName>
+        <default>false</default>
+        <label>YouTube</label>
+    </customValue>
+    <customValue>
+        <fullName>ZoomProperties</fullName>
+        <default>false</default>
+        <label>ZoomProperties</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Ruwais Roadshow</fullName>
+        <default>false</default>
+        <label>Al Ruwais Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>Relationship Manager</fullName>
+        <default>false</default>
+        <label>Relationship Manager</label>
+    </customValue>
+    <customValue>
+        <fullName>Survey</fullName>
+        <default>false</default>
+        <label>Survey</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Existing Customers</fullName>
+        <default>false</default>
+        <label>Aldar Existing Customers</label>
+    </customValue>
+    <customValue>
+        <fullName>InternationalTower Kisok</fullName>
+        <default>false</default>
+        <label>InternationalTower Kisok</label>
+    </customValue>
+    <customValue>
+        <fullName>HSBC Golf Stand Kisok</fullName>
+        <default>false</default>
+        <label>HSBC Golf Stand Kisok</label>
+    </customValue>
+    <customValue>
+        <fullName>Saadiyat Grove</fullName>
+        <default>false</default>
+        <label>Saadiyat Grove</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Select EMAIL</fullName>
+        <default>false</default>
+        <label>Aldar Select EMAIL</label>
+    </customValue>
+    <customValue>
+        <fullName>ALdar Select SALES CENTER</fullName>
+        <default>false</default>
+        <label>Aldar Select SALES CENTER</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Jazira Club</fullName>
+        <default>false</default>
+        <label>Al Jazira Club</label>
+    </customValue>
+    <customValue>
+        <fullName>Kazakhstan Kiosk</fullName>
+        <default>false</default>
+        <label>Kazakhstan Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>RAK Al Hamra Kiosk</fullName>
+        <default>false</default>
+        <label>RAK Al Hamra Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>DIFC Kiosk</fullName>
+        <default>false</default>
+        <label>DIFC Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>Bayut.com </fullName>
+        <default>false</default>
+        <label>Bayut.com </label>
+    </customValue>
+    <customValue>
+        <fullName>DMSMarketing </fullName>
+        <default>false</default>
+        <label>DMSMarketing </label>
+    </customValue>
+    <customValue>
+        <fullName>Gulfnews.com </fullName>
+        <default>false</default>
+        <label>Gulfnews.com </label>
+    </customValue>
+    <customValue>
+        <fullName>Promofix </fullName>
+        <default>false</default>
+        <label>Promofix </label>
+    </customValue>
+    <customValue>
+        <fullName>Propertyfinder </fullName>
+        <default>false</default>
+        <label>Propertyfinder </label>
+    </customValue>
+    <customValue>
+        <fullName>Property Geeks </fullName>
+        <default>false</default>
+        <label>Property Geeks </label>
+    </customValue>
+    <customValue>
+        <fullName>Dubizzle </fullName>
+        <default>false</default>
+        <label>Dubizzle </label>
+    </customValue>
+    <customValue>
+        <fullName>TheMediaVantage </fullName>
+        <default>false</default>
+        <label>TheMediaVantage </label>
+    </customValue>
+    <customValue>
+        <fullName>The National News </fullName>
+        <default>false</default>
+        <label>The National News </label>
+    </customValue>
+    <customValue>
+        <fullName>Yallacompare.com </fullName>
+        <default>false</default>
+        <label>Yallacompare.com </label>
+    </customValue>
+    <customValue>
+        <fullName>ArabyAds</fullName>
+        <default>false</default>
+        <label>ArabyAds</label>
+    </customValue>
+    <customValue>
+        <fullName>Brandshift</fullName>
+        <default>false</default>
+        <label>Brandshift</label>
+    </customValue>
+    <customValue>
+        <fullName>DigitallyMe2</fullName>
+        <default>false</default>
+        <label>DigitallyMe2</label>
+    </customValue>
+    <customValue>
+        <fullName>EDSFZE</fullName>
+        <default>false</default>
+        <label>EDSFZE</label>
+    </customValue>
+    <customValue>
+        <fullName>Globmobi</fullName>
+        <default>false</default>
+        <label>Globmobi</label>
+    </customValue>
+    <customValue>
+        <fullName>Performena</fullName>
+        <default>false</default>
+        <label>Performena</label>
+    </customValue>
+    <customValue>
+        <fullName>Projectagora</fullName>
+        <default>false</default>
+        <label>Projectagora</label>
+    </customValue>
+    <customValue>
+        <fullName>XAPads</fullName>
+        <default>false</default>
+        <label>XAPads</label>
+    </customValue>
+    <customValue>
+        <fullName>RightMove</fullName>
+        <default>false</default>
+        <label>RightMove</label>
+    </customValue>
+    <customValue>
+        <fullName>Zoopla</fullName>
+        <default>false</default>
+        <label>Zoopla</label>
+    </customValue>
+    <customValue>
+        <fullName>Mayan Open House</fullName>
+        <default>false</default>
+        <label>Mayan Open House</label>
+    </customValue>
+    <customValue>
+        <fullName>AlGhadeer Open House</fullName>
+        <default>false</default>
+        <label>AlGhadeer Open House</label>
+    </customValue>
+    <customValue>
+        <fullName>WatersEdge Open House</fullName>
+        <default>false</default>
+        <label>WatersEdge Open House</label>
+    </customValue>
+    <customValue>
+        <fullName>Reflections Open House</fullName>
+        <default>false</default>
+        <label>Reflections Open House</label>
+    </customValue>
+    <customValue>
+        <fullName>SODIC Sales Centre</fullName>
+        <default>false</default>
+        <label>SODIC Sales Centre</label>
+    </customValue>
+    <customValue>
+        <fullName>Mayan Show Home</fullName>
+        <default>false</default>
+        <label>Mayan Show Home</label>
+    </customValue>
+    <customValue>
+        <fullName>AlGhadeer Show Home</fullName>
+        <default>false</default>
+        <label>AlGhadeer Show Home</label>
+    </customValue>
+    <customValue>
+        <fullName>WatersEdge Show Home</fullName>
+        <default>false</default>
+        <label>WatersEdge Show Home</label>
+    </customValue>
+    <customValue>
+        <fullName>Reflections Show Home</fullName>
+        <default>false</default>
+        <label>Reflections Show Home</label>
+    </customValue>
+    <customValue>
+        <fullName>UK Roadshow</fullName>
+        <default>false</default>
+        <label>UK Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>Egypt Roadshow</fullName>
+        <default>false</default>
+        <label>Egypt Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>India Roadshow</fullName>
+        <default>false</default>
+        <label>India Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>Moscow Roadshow</fullName>
+        <default>false</default>
+        <label>Moscow Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>Kazakhstan Roadshow</fullName>
+        <default>false</default>
+        <label>Kazakhstan Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>Local Events &amp; Exhibitions</fullName>
+        <default>false</default>
+        <label>Local Events &amp; Exhibitions</label>
+    </customValue>
+    <customValue>
+        <fullName>Cityscape - Egypt</fullName>
+        <default>false</default>
+        <label>Cityscape - Egypt</label>
+    </customValue>
+    <customValue>
+        <fullName>GoogleSDC</fullName>
+        <default>false</default>
+        <label>GoogleSDC</label>
+    </customValue>
+    <customValue>
+        <fullName>GoogleSearch</fullName>
+        <default>false</default>
+        <label>GoogleSearch</label>
+    </customValue>
+    <customValue>
+        <fullName>Grove Sales Centre</fullName>
+        <default>false</default>
+        <label>Grove Sales Centre</label>
+    </customValue>
+    <customValue>
+        <fullName>Social-FBIG</fullName>
+        <default>false</default>
+        <label>Social-FBIG</label>
+    </customValue>
+    <customValue>
+        <fullName>Intra Department Referral</fullName>
+        <default>false</default>
+        <label>Intra Department Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>Staff Referral</fullName>
+        <default>false</default>
+        <label>Staff Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>99acres</fullName>
+        <default>false</default>
+        <label>99acres</label>
+    </customValue>
+    <customValue>
+        <fullName>3meed</fullName>
+        <default>false</default>
+        <label>3meed</label>
+    </customValue>
+    <customValue>
+        <fullName>Adlive</fullName>
+        <default>false</default>
+        <label>Adlive</label>
+    </customValue>
+    <customValue>
+        <fullName>Adzouk</fullName>
+        <default>false</default>
+        <label>Adzouk</label>
+    </customValue>
+    <customValue>
+        <fullName>Affiperf Programmatic</fullName>
+        <default>false</default>
+        <label>Affiperf Programmatic</label>
+    </customValue>
+    <customValue>
+        <fullName>AlBayan</fullName>
+        <default>false</default>
+        <label>AlBayan</label>
+    </customValue>
+    <customValue>
+        <fullName>Al-Ittihad</fullName>
+        <default>false</default>
+        <label>Al-Ittihad</label>
+    </customValue>
+    <customValue>
+        <fullName>AlKhaleej</fullName>
+        <default>false</default>
+        <label>AlKhaleej</label>
+    </customValue>
+    <customValue>
+        <fullName>Arabclicks</fullName>
+        <default>false</default>
+        <label>Arabclicks</label>
+    </customValue>
+    <customValue>
+        <fullName>Bayut</fullName>
+        <default>false</default>
+        <label>Bayut</label>
+    </customValue>
+    <customValue>
+        <fullName>Connectads</fullName>
+        <default>false</default>
+        <label>Connectads</label>
+    </customValue>
+    <customValue>
+        <fullName>DigitallyME</fullName>
+        <default>false</default>
+        <label>DigitallyME</label>
+    </customValue>
+    <customValue>
+        <fullName>DigitalTree</fullName>
+        <default>false</default>
+        <label>DigitalTree</label>
+    </customValue>
+    <customValue>
+        <fullName>DigitalVentures</fullName>
+        <default>false</default>
+        <label>DigitalVentures</label>
+    </customValue>
+    <customValue>
+        <fullName>DisplayMobile</fullName>
+        <default>false</default>
+        <label>DisplayMobile</label>
+    </customValue>
+    <customValue>
+        <fullName>Emailciti</fullName>
+        <default>false</default>
+        <label>Emailciti</label>
+    </customValue>
+    <customValue>
+        <fullName>EmaratAlYoum</fullName>
+        <default>false</default>
+        <label>EmaratAlYoum</label>
+    </customValue>
+    <customValue>
+        <fullName>ForkMedia</fullName>
+        <default>false</default>
+        <label>ForkMedia</label>
+    </customValue>
+    <customValue>
+        <fullName>GulfNews</fullName>
+        <default>false</default>
+        <label>GulfNews</label>
+    </customValue>
+    <customValue>
+        <fullName>HavasProgrammaticHub</fullName>
+        <default>false</default>
+        <label>HavasProgrammaticHub</label>
+    </customValue>
+    <customValue>
+        <fullName>InMobi</fullName>
+        <default>false</default>
+        <label>InMobi</label>
+    </customValue>
+    <customValue>
+        <fullName>IntelligentStep</fullName>
+        <default>false</default>
+        <label>IntelligentStep</label>
+    </customValue>
+    <customValue>
+        <fullName>Itcan</fullName>
+        <default>false</default>
+        <label>Itcan</label>
+    </customValue>
+    <customValue>
+        <fullName>MagDigital</fullName>
+        <default>false</default>
+        <label>MagDigital</label>
+    </customValue>
+    <customValue>
+        <fullName>MediaBlends</fullName>
+        <default>false</default>
+        <label>MediaBlends</label>
+    </customValue>
+    <customValue>
+        <fullName>MIQintro</fullName>
+        <default>false</default>
+        <label>MIQintro</label>
+    </customValue>
+    <customValue>
+        <fullName>Mobext Programmatic</fullName>
+        <default>false</default>
+        <label>Mobext Programmatic</label>
+    </customValue>
+    <customValue>
+        <fullName>PropertyGuru</fullName>
+        <default>false</default>
+        <label>PropertyGuru</label>
+    </customValue>
+    <customValue>
+        <fullName>Rotana</fullName>
+        <default>false</default>
+        <label>Rotana</label>
+    </customValue>
+    <customValue>
+        <fullName>SkynewsArabia</fullName>
+        <default>false</default>
+        <label>SkynewsArabia</label>
+    </customValue>
+    <customValue>
+        <fullName>Skyscale</fullName>
+        <default>false</default>
+        <label>Skyscale</label>
+    </customValue>
+    <customValue>
+        <fullName>Teads</fullName>
+        <default>false</default>
+        <label>Teads</label>
+    </customValue>
+    <customValue>
+        <fullName>Theguardian</fullName>
+        <default>false</default>
+        <label>Theguardian</label>
+    </customValue>
+    <customValue>
+        <fullName>Thetimes</fullName>
+        <default>false</default>
+        <label>Thetimes</label>
+    </customValue>
+    <customValue>
+        <fullName>UAEBarq</fullName>
+        <default>false</default>
+        <label>UAEBarq</label>
+    </customValue>
+    <customValue>
+        <fullName>Thetimesuk</fullName>
+        <default>false</default>
+        <label>Thetimesuk</label>
+    </customValue>
+    <customValue>
+        <fullName>Timesofindia</fullName>
+        <default>false</default>
+        <label>Timesofindia</label>
+    </customValue>
+    <customValue>
+        <fullName>Digimotive</fullName>
+        <default>false</default>
+        <label>Digimotive</label>
+    </customValue>
+    <customValue>
+        <fullName>Magicbricks</fullName>
+        <default>false</default>
+        <label>Magicbricks</label>
+    </customValue>
+    <customValue>
+        <fullName>Bayutolx</fullName>
+        <default>false</default>
+        <label>Bayutolx</label>
+    </customValue>
+    <customValue>
+        <fullName>SODIC Referral</fullName>
+        <default>false</default>
+        <label>SODIC Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>ADNOC HQ Roadshow</fullName>
+        <default>false</default>
+        <label>ADNOC HQ Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>ADNOC SKEC I Roadshow</fullName>
+        <default>false</default>
+        <label>ADNOC SKEC I Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>ADNOC SKEC II Roadshow</fullName>
+        <default>false</default>
+        <label>ADNOC SKEC II Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>ADIB Roadshow</fullName>
+        <default>false</default>
+        <label>ADIB Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>All</fullName>
+        <default>false</default>
+        <label>All</label>
+    </customValue>
+    <customValue>
+        <fullName>ADHA Referral</fullName>
+        <default>false</default>
+        <label>ADHA Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>New Lovs</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>New Lovs</label>
+    </customValue>
+    <customValue>
+        <fullName>Outbound Call</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Outbound Call</label>
+    </customValue>
+    <description>Enquiry Trigger Picklist</description>
+    <masterLabel>Enquiry Trigger</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

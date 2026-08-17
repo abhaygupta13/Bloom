@@ -1,0 +1,513 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div outer-div>
+    <template if:true={openModal}>
+       
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Receipt Acknowledgement</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium " id="modal-content-id-1">
+                    <template if:true={showLoading}>
+                        <lightning-spinner alternative-text="Loading" size="medium" variant="brand"
+                            class="customSpinner"></lightning-spinner>
+                    </template>
+                    <template if:true={parentRecord}>
+                       <div class="slds-box slds-theme_default centered-box">
+
+    <template if:true={parentRecord.salesOrderRecord}>
+        <div class="slds-grid slds-wrap fixed-grid">
+
+            <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small">
+                <div class="label">Unit Number</div>
+                <div class="value">{parentRecord.salesOrderRecord.UnitNumber__c}</div>
+            </div>
+
+            <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small">
+                <div class="label">Account Name</div>
+                <div class="value">{parentRecord.salesOrderRecord.AccountName__c}</div>
+            </div>
+
+            <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small">
+                <div class="label">Sales Order Number</div>
+                <div class="value">{parentRecord.salesOrderRecord.Name}</div>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={parentRecord.installmentRec}>
+        <div class="slds-grid slds-wrap fixed-grid slds-m-top_small">
+
+            <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small">
+                <div class="label">Installment Number</div>
+                <div class="value">{parentRecord.installmentRec.InstallmentNumber__c}</div>
+            </div>
+
+            <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small">
+                <div class="label">Installment Amount</div>
+                <div class="value">{parentRecord.installmentRec.InstallmentAmount__c}</div>
+            </div>
+
+            <div class="slds-col slds-size_1-of-3 slds-p-horizontal_small">
+                <div class="label">Pending Amount</div>
+                <div class="value">{parentRecord.installmentRec.PendingAmount__c}</div>
+            </div>
+        </div>
+    </template>
+
+</div>
+                    </template>
+                        <div class="slds-box slds-theme_default slds-m-top_medium">
+                        <lightning-layout multiple-rows class="compact-layout">
+
+                        <!-- Payment Mode -->
+                        <lightning-layout-item size="4" class="compact-item">
+                            <lightning-combobox
+                                label="Payment Mode"
+                                name="PaymentMode"
+                                required
+                                value={paymentMode}
+                                onchange={handleChangePaymentMode}
+                                options={paymentModes}>
+                            </lightning-combobox>
+                        </lightning-layout-item>
+
+                        <!-- Reference Number -->
+                        <lightning-layout-item size="4" class="compact-item">
+                            <lightning-input
+                                label="Cheque / CC / Wire Transfer #"
+                                data-name="referenceNumber"
+                                value={referenceNumber}
+                                required
+                                min-length="6"
+                                onchange={handleChange}>
+                            </lightning-input>
+                            <template if:false={inputIsValid}>
+                                <p class="slds-text-color_error compact-error">{errorMessage}</p>
+                            </template>
+                        </lightning-layout-item>
+
+                        <!-- Currency -->
+                        <lightning-layout-item size="4" class="compact-item">
+                            <lightning-combobox
+                                label="Currency"
+                                required
+                                value={currencyISO}
+                                onchange={handleChangeCurrency}
+                                options={currency}>
+                            </lightning-combobox>
+                        </lightning-layout-item>
+
+                        <!-- Maturity Date -->
+                        <lightning-layout-item size="4" class="compact-item">
+                            <lightning-input
+                                class="hide-date-format"
+                                label="Maturity / Value / Cheque  Date"
+                                data-name="maturityDate"
+                                type="date"
+                                value={maturityDate}
+                                required={maturityDateRequired}
+                                onchange={handleChange}>
+                            </lightning-input>
+                        </lightning-layout-item>
+
+                        <!-- Posting Date -->
+                        <lightning-layout-item size="4" class="compact-item">
+                            <lightning-input
+                                class="hide-date-format"
+                                label="Posting Date"
+                                data-name="postingDate"
+                                type="date"
+                                value={postingDate}
+                                required
+                                onchange={handleChange}>
+                            </lightning-input>
+                        </lightning-layout-item>
+
+                        <!-- Amount -->
+                        <lightning-layout-item size="4" class="compact-item">
+                            <lightning-input
+                                label="Amount"
+                                type="number"
+                                value={amount}
+                                data-name="amount"
+                                required
+                                onchange={handleChange}>
+                            </lightning-input>
+                        </lightning-layout-item>
+
+                        <!-- Bank Name -->
+                        <template if:true={bankNames}>
+                            <lightning-layout-item size="4" class="compact-item">
+                                <lightning-combobox
+                                    label="Customer Bank Name"
+                                    value={customerBankName}
+                                    required={bankNameRequired}
+                                    onchange={handleChangeCustomerBankName}
+                                    options={bankNames}>
+                                </lightning-combobox>
+                            </lightning-layout-item>
+                        </template>
+
+                        <!-- Paid By -->
+                        <!--<lightning-layout-item size="4" class="compact-item">
+                            <lightning-combobox
+                                label="Paid By"
+                                value={payFromAccountId}
+                                onchange={handlePaidByChange}
+                                options={accountList}>
+                            </lightning-combobox>
+                        </lightning-layout-item>-->
+
+                        <!-- Bank Account -->
+                        <lightning-layout-item size="4" class="compact-item">
+                            <lightning-combobox
+                                label="Bloom Bank Account"
+                                value={bankAccount}
+                                required
+                                onchange={handleBankAccountChange}
+                                options={bankAccounts}>
+                            </lightning-combobox>
+                        </lightning-layout-item>
+
+                        <!-- Allocate To -->
+                        <!--<lightning-layout-item size="4" class="compact-item">
+                            <lightning-combobox
+                                label="Allocate To"
+                                value={allocatedValues}
+                                onchange={handleChangeallocateValues}
+                                options={allocateValues}>
+                            </lightning-combobox>
+                        </lightning-layout-item>-->
+
+                        <!-- Allocation Method -->
+                        <!--<lightning-layout-item size="4" class="compact-item">
+                            <lightning-combobox
+                                label="Allocation Method"
+                                value={allocationValue}
+                                onchange={handleChangeallocationValues}
+                                options={allocationValues}>
+                            </lightning-combobox>
+                        </lightning-layout-item>-->
+
+                        <!-- Invoice Type -->
+                        <!--<lightning-layout-item size="4" class="compact-item">
+                            <lightning-combobox
+                                label="Type Of Invoices"
+                                value={invoiceTypes}
+                                options={invoiceTypeOptions}
+                                onchange={handleInvoiceTypeChange}>
+                            </lightning-combobox>
+                        </lightning-layout-item>-->
+                        
+                        <!-- Overdue In Days -->
+                        <!--
+                        <lightning-layout-item size="3" class="compact-item">
+                            <lightning-input
+                                label="Overdue In Days"
+                                type="number"
+                                value={overdueInDays}
+                                onchange={handleOverdueChange}>
+                            </lightning-input>
+                        </lightning-layout-item>
+                        -->
+                        <!-- Across Units -->
+                        <!--
+                        <lightning-layout-item size="3" class="compact-item checkbox-align">
+                            <lightning-input
+                                type="checkbox"
+                                label="Across Units"
+                                checked={acrossUnitsChecked}
+                                onchange={handleAcrossUnitCheckbox}>
+                            </lightning-input>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="3" class="compact-item checkbox-align">
+                            <div class="slds-grid slds-wrap ">
+                            <template if:true={showUploadfile}>
+                                <lightning-input data-id="paymentFiles" accept=".png , .pdf" type="file"
+                                    onchange={handleFileUploaded} multiple class="customFile"></lightning-input>
+                            </template>
+                            <template if:true={showCamperaUpload}>
+                                <template if:true={showOrPart}>
+                                    <span
+                                        style="margin-top: 7px;padding-right: 10px;text-transform: uppercase;padding-left: 10px;">or</span>
+                                </template>
+                                <div class="slds-col slds-size_1-of-4">
+                                    <lightning-icon icon-name="action:add_photo_video" size="xx-small"
+                                        onclick={capureViewHandler}></lightning-icon>
+ 
+                                </div>
+                            </template>
+                    
+
+                            <template if:true={fileName}>
+                                <lightning-pill class="customPill slds-p-top_xx-small" label={fileName} name={fileName}
+                                    onremove={onFileRemove}>
+
+                                </lightning-pill>
+                            </template>
+                            <template if:true={cameraImg}>
+                                <lightning-pill class="customPill" label={cameraImg} name={cameraImg}
+                                    onremove={onCameraImageRemove}>
+
+                                </lightning-pill>
+                            </template>
+                                        </div>
+                        </lightning-layout-item>
+                        -->
+                        <!-- Remitter Name -->
+                        <lightning-layout-item size="4" class="compact-item">
+                            <lightning-combobox
+                                label="Remitter Name"
+                                name="remitterName"
+                                value={selectedRemitter}
+                                required
+                                options={remitterOptions}
+                                onchange={handleRemitterChange}>
+                            </lightning-combobox>
+                        </lightning-layout-item>
+
+                        <!-- Remarks -->
+                        <lightning-layout-item size="8" class="compact-item">
+                            <lightning-textarea
+                                label="Remarks"
+                                value={remarks}
+                                max-length="255"
+                                onchange={handleChange}>
+                            </lightning-textarea>
+                        </lightning-layout-item>
+
+                        <!-- Other Remitter Name -->
+                        <template if:true={showOtherRemitter}>
+                            <lightning-layout-item size="4" class="compact-item">
+                                <lightning-input
+                                    label="Other Remitter Name"
+                                    value={otherRemitterName}
+                                    required
+                                    onchange={handleOtherRemitterChange}>
+                                </lightning-input>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                    </div>
+
+                    <div class="slds-grid slds-wrap ">
+
+                        <!--  New upload button -->
+                        <div class="slds-col slds-size_1-of-2 slds-p-right_xx-small ">
+                            <!-- <lightning-input data-id="paymentFiles" accept=".png , .pdf" type="file"
+                                label="Attach Payment Detail" onchange={handleFileUploaded} multiple>
+                            </lightning-input>-->
+
+                            <template if:true={isModalOpen}>
+                                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01"
+                                    aria-modal="true" aria-describedby="modal-content-id-1"
+                                    class="slds-modal slds-fade-in-open">
+                                    <div class="slds-modal__container">
+                                        <!-- Modal/Popup Box LWC body starts here -->
+                                        <div class="slds-modal__content slds-p-around_large ">
+
+
+                                            <div class="slds-grid slds-gutters">
+
+                                                <div class="slds-col slds-size_6-of-12">
+                                                    <video class="videoElement" style="width:100%" autoplay></video>
+                                                    <canvas class="slds-hide canvas"></canvas>
+                                                </div>
+                                                <div class="slds-col slds-size_6-of-12">
+                                                    <img src="" class="slds-hide imageElement"
+                                                        style="width:100%;height:100%" alt="captured image" />
+                                                </div>
+                                            </div>
+                                            <!--  <div class="camera-wrapper"> -->
+                                            <div class="slds-align_absolute-center">
+
+                                                <lightning-icon icon-name="action:scan_enabled" size="small"
+                                                    class="slds-m-top_large" label="Capture Image"
+                                                    onclick={captureImage}></lightning-icon>
+                                                <lightning-icon size="small"
+                                                    class="slds-m-top_large slds-m-left_small slds-hide saveBtn"
+                                                    label="Save" onclick={handleSaveImage}>
+                                                </lightning-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn slds-modal__closepop close x-large">
+                                        <lightning-button-icon variant="border-filled" size="small"
+                                            icon-name="utility:close"
+                                            onclick={closePopupWindow}></lightning-button-icon>
+                                    </div>
+
+                        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    </div>
+
+
+
+
+
+    <!-- <div class="slds-col slds-size_1-of-2">
+                            <legend class="slds-form-element__legend slds-form-element__label">Paid By</legend>
+                            <lightning-combobox data-name="payFromAccountId" value={payFromAccountId}
+                                onchange={handleChange} options={accountList}></lightning-combobox>
+                        </div> -->
+    </div>
+   <template if:true={showAllinstallments}>
+
+ 
+    <div class="slds-grid" style="margin-top: 20px; margin-bottom: 20px; justify-content: flex-end;">
+        <div class="slds-col slds-size_1-of-4">
+            <p><b>Total Due</b> : {totalDue}</p>
+        </div>
+        <div class="slds-col slds-size_1-of-4">
+            <p><b>Total Allocated</b> : {totalAllocated}</p>
+        </div>
+    </div>
+    
+ 
+
+<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+    <thead>
+        <tr class="slds-line-height_reset">
+            <th class="" scope="col"><lightning-input type="checkbox"  onchange={handleAllSelect}></lightning-input>
+            </th>
+            <th class="" scope="col">Unit Number </th>
+            <th class="" scope="col"> Due Date</th>
+            <th class="" scope="col"> Type Of Invoices</th>
+            <th class="" scope="col">Installment #</th>
+            <th class="" scope="col">Invoice Amount</th>
+            <th class="" scope="col">Invoice Collected</th>
+            <th class="" scope="col">Amount Due</th>
+            <th class="" scope="col">Allocated Amount</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <template for:each={installmentdetailItem} for:item="it"  for:index="index">
+            <tr class="slds-hint-parent" key={it.Id}>
+                <td>
+                    <lightning-input type="checkbox" name={it.Id} value={it.Id}
+                        checked={it.isSelected} onchange={handleCheckboxinstallment} data-index={index}>
+                    </lightning-input>
+                </td>
+                 <td data-label=" Name">
+                    <div class="slds-cell-wrap">{it.SalesOrder__r.UnitNumber__c}</div>
+                </td>
+                <td data-label="Installment Date">
+                    <div class="slds-cell-wrap">{it.InstallmentDate__c}</div>
+                </td> 
+                <td data-label="Installment Type">
+                    <div class="slds-cell-wrap">{it.Installment_Type__c}</div>
+                </td>
+                <td data-label="Installment Number">
+                    <div class="slds-cell-wrap">{it.InstallmentNumber__c}</div>
+                </td>
+                <td data-label="Installment Amount">
+                    <div class="slds-cell-wrap">{it.InstallmentAmount__c}
+                    </div>
+                </td>
+                <td data-label="Amount Received">
+                    <div class="slds-cell-wrap">{it.AmountReceived__c}
+                    </div>
+                </td>
+                <td data-label="Pending Amount">
+                    <div class="slds-cell-wrap">{it.PendingAmount__c}
+                    </div>
+                </td>
+                <td data-label="Allocate Amount">
+                    <div class="slds-cell-wrap"><lightning-input type="number" class="slds-size_xx-small" value={it.allocatedAmount} onchange={allocateAmountChange} data-index={index}></lightning-input>
+                        
+                    </div>
+                    
+                </td>
+                
+
+            </tr>
+        </template>
+        <template if:true={showSalesorderOthercharge}>
+        <template for:each={salesorderOtherchargeRecord} for:item="it"  for:index="index">
+            <tr class="slds-hint-parent" key={it.Id}>
+                <td>
+                    <lightning-input type="checkbox" name={it.Id} value={it.Id}
+                        checked={it.isSelected} onchange={handleCheckboxSalesorderOther} data-index={index}>
+                    </lightning-input>
+                </td>
+                 <td data-label=" Name">
+                    <div class="slds-cell-wrap">{it.SalesOrder__r.UnitNumber__c}</div>
+                </td>
+                <td data-label="Installment Date">
+                    <div class="slds-cell-wrap">{it.Due_Date__c}</div>
+                </td> 
+                <td data-label="Installment Type">
+                    <div class="slds-cell-wrap">{it.TypeOfCharge__c}</div>
+                </td>
+                <td data-label="Installment Number">
+                    <div class="slds-cell-wrap">{it.InstallmentNumber__c}</div>
+                </td>
+                <td data-label="Installment Amount">
+                    <div class="slds-cell-wrap">{it.Amount__c}
+                    </div>
+                </td>
+                <td data-label="Amount Received">
+                    <div class="slds-cell-wrap">{it.AmountReceived__c}
+                    </div>
+                </td>
+                <td data-label="Pending Amount">
+                    <div class="slds-cell-wrap">{it.PendingAmount__c}
+                    </div>
+                </td>
+                <td data-label="Allocate Amount">
+                    <div class="slds-cell-wrap"><lightning-input type="number" class="slds-size_xx-small" value={it.allocatedAmountSalesother} onchange={allocateSalesOOtherAmountChange} data-index={index}></lightning-input>
+                        
+                    </div>
+                    
+                </td>
+                
+
+            </tr>
+        </template>
+    </template>
+    </tbody>
+</table>
+</template>
+
+
+    </div>
+
+    
+
+    <div class="slds-modal__footer">
+       
+    <!--<lightning-button variant="Brand" label="Allocate to Outstanding" disabled={disableAllocateOutStanding}
+            onclick={handleAllocateOUtStanding} class="slds-var-m-right_small" required></lightning-button>
+        
+        <lightning-button variant="Brand" label="Save Receipt & Manual Allocate" disabled={disableAllocationButton}
+            onclick={handleSaveAllocation} alternative-text="Save Receipt & Allocation"
+            title="Save Receipt & Allocation" class="slds-var-m-right_small"  required></lightning-button>-->
+        <lightning-button variant="neutral" class="slds-var-m-left_x-small" label="Cancel"
+            onclick={closeModal} alternative-text="Cancel" title="Cancel" required></lightning-button>
+        <lightning-button variant="Brand" class="slds-var-m-left_x-small" label="Save" disabled={disableSave}
+            onclick={handleSave} alternative-text="Save" title="Save" required></lightning-button>
+    </div>
+
+   
+
+    </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+</template>
+</div>
+</template>

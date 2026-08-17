@@ -1,0 +1,28 @@
+<template>
+		<div class="slds-page-header" style="border: rgb(174, 174, 174) 1px solid;">
+			<div class="slds-page-header__row">
+				<div class="slds-page-header__col-title">
+					<div class="slds-media">
+						<div class="slds-media__figure">
+							<span class="slds-icon_container" title="Unit">
+							<lightning-icon icon-name='action:record' alternative-text='record' size='x-small' title='record'></lightning-icon>
+						</span>
+						</div>
+						<div class="slds-media__body">
+							<div class="slds-page-header__name">
+								<div class="slds-page-header__name-title">
+									<h1>
+										<span class="slds-page-header__title slds-truncate" title="Related Units">Units</span>
+									</h1>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="border: rgb(174, 174, 174) 1px solid;max-height: 400px;overflow-y: auto;">
+			<lightning-datatable key-field="id" data={units} columns={columns} hide-checkbox-column show-row-number-column
+			onrowaction={handleRowAction}></lightning-datatable>
+		</div>
+</template>

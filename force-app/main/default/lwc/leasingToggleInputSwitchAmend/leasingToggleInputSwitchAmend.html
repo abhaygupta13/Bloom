@@ -1,0 +1,40 @@
+<template>
+  <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+    <lightning-layout-item size="6" padding="horizontal-small">
+      <lightning-combobox
+        name={name}
+        label={label}
+        value={type}
+        placeholder="Select Type"
+        options={discountOptions}
+        onchange={handleTypeChange}>
+      </lightning-combobox>
+    </lightning-layout-item>
+ 
+    <lightning-layout-item size="6" padding="horizontal-small">
+      <template if:true={isPercent}>
+        <lightning-input
+          type="number"
+          name={name}
+          label="Discount Percentage"
+          placeholder={percentPlaceholder}
+          value={effectiveValue}
+          onchange={handleInputChange}
+          max="100"
+          message-when-range-overflow="Value cannot exceed 100">
+        </lightning-input>
+      </template>
+ 
+      <template if:false={isPercent}>
+        <lightning-input
+          type="number"
+          name={name}
+          label="Discount Amount"
+          placeholder={amountPlaceholder}
+          value={effectiveValue}
+          onchange={handleInputChange}>
+        </lightning-input>
+      </template>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

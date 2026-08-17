@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>ApplicationNumber__c</field>
+        <field>ApprovalStatus__c</field>
+        <field>ApprovalComments__c</field>
+        <field>RejectionComments__c</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <approvalActions>
+            <action>
+                <name>BBMApprovalNotificationtoBrokerAgency</name>
+                <type>Alert</type>
+            </action>
+            <action>
+                <name>FinalApprovalStatusUpdateBBM</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Update_In_Approval_for_Approve</name>
+                <type>FieldUpdate</type>
+            </action>
+        </approvalActions>
+        <assignedApprover>
+            <approver>
+                <type>adhoc</type>
+            </approver>
+        </assignedApprover>
+        <description>This Last stage is to evaluate the Application Applicant record by BBM</description>
+        <label>Final Approval By BBM</label>
+        <name>FinalApprovalByBBM</name>
+        <rejectionActions>
+            <action>
+                <name>FinalRejectionStatusUpdateBBM</name>
+                <type>FieldUpdate</type>
+            </action>
+            <action>
+                <name>Update_In_Approval_For_Rejection</name>
+                <type>FieldUpdate</type>
+            </action>
+        </rejectionActions>
+    </approvalStep>
+    <description>This Approval process is for Broker Application final Stage for BBM</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>BrokerApplication__c.ApprovalStatus__c</field>
+            <operation>equals</operation>
+            <value>Agreement Completed</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Update_Approval_Check</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Application Approval Final Stage</label>
+    <processOrder>3</processOrder>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

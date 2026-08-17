@@ -1,0 +1,187 @@
+<template>
+	<div class="outer-div">
+		
+		<template if:true={showLoading}>
+			<lightning-spinner alternative-text="Loading" size="medium" variant="brand" class="customSpinner">
+			</lightning-spinner>
+		</template>
+		<iframe allow="camera *;" id="LWCWithVFPage" src="/apex/documentReader" onload={iframeLoadHandler} width="100%"
+			height="500" frameborder="0"> </iframe> <!-- style="padding-top:40px" -->
+
+
+		<template if:true={showData}>
+			<div class="slds-grid slds-wrap">
+				<div class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_4-of-12">
+					<table
+						class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal slds-table_fixed-layout">
+						<thead>
+							<tr class="slds-line-height_reset">
+								<th class="" scope="col">Data Type</th>
+								<!-- <th class="" scope="col">OCR Value</th> -->
+
+							</tr>
+						</thead>
+						<tbody>
+
+							<template for:each={ocrData} for:item="item" for:index="index">
+								<tr class="slds-hint-parent" key={item.fieldType} height="32px;">
+									<td>
+										<div class="slds-truncate">{item.fiedType}
+										</div>
+									</td>
+									<!-- <td>
+										<div class="slds-truncate">{item.OCRValue}</div>
+									</td> -->
+
+								</tr>
+							</template>
+
+						</tbody>
+					</table>
+				</div>
+				<div class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_4-of-12">
+					<lightning-record-view-form record-id={recordId} object-api-name="Account">
+
+						<table
+							class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal slds-table_fixed-layout">
+
+							<thead>
+								<tr class="slds-line-height_reset">
+									<th class="" scope="col">Current Info</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<template for:each={ocrData} for:item="item" for:index="index">
+									<tr class="slds-hint-parent" key={item.fieldType} height="32px;">
+										<td>
+											<div key={item.sfField}>
+												<lightning-output-field field-name={item.sfField} key={item.sfField}
+													variant="label-hidden">
+												</lightning-output-field>
+											</div>
+										</td>
+									</tr>
+								</template>
+							</tbody>
+						</table>
+
+					</lightning-record-view-form>
+
+				</div>
+				<div class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_4-of-12">
+					<lightning-record-edit-form record-id={recordId} object-api-name="Account"
+						record-type-name="PersonAccount" onsuccess={handleSuccess} onsubmit={handleSubmit}>
+						<lightning-messages></lightning-messages>
+						<table
+							class="slds-table slds-table_bordered slds-max-medium-table_stacked-horizontal slds-table_fixed-layout">
+
+							<thead>
+								<tr class="slds-line-height_reset">
+									<th class="" scope="col">OCR Info</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<template for:each={ocrData} for:item="item" for:index="index">
+
+									<div key={item.sfField}>
+										<lightning-input-field field-name={item.sfField} key={item.sfField}
+											value={item.sfValue} variant="label-hidden">
+										</lightning-input-field>
+									</div>
+								</template>
+
+
+							</tbody>
+
+						</table>
+						<div class="slds-grid slds-wrap slds-align_absolute-center" style="padding: 10px;">
+							<template if:true={showUpdateButton}>
+							<lightning-button variant="brand" type="submit" label="Update"></lightning-button>
+							</template>
+							<template if:true={showupdateDuplicateAccount}>
+								<lightning-button variant="brand" class="slds-m-left_medium"
+									onclick={updateDuplicateAccount} label="Update Duplicate Account">
+								</lightning-button>
+							</template>
+						</div>
+
+
+
+					</lightning-record-edit-form>
+					
+				</div>
+			</div>
+		</template>
+
+		<template if:true={showAccountResult}>
+			<template if:true={AccountResult}>
+				<h2 class="slds-text-heading_small slds-m-left_medium">
+					Duplicate Account Info.
+				</h2>
+			</template>
+
+			<template for:each={AccountResult} for:item="acc">
+				<div key={acc.Id} class="slds-m-top_small slds-m-bottom_small">
+					<!-- With an icon -->
+					<div class="slds-p-around_medium lgc-bg">
+						<lightning-tile data-id={acc.Id} label={acc.Name} href="javascript:void(0);" type="media"
+							onclick={navigateToAccountRecord}>
+							<!-- 							<lightning-avatar slot="media" src="https://www.lightningdesignsystem.com/assets/images/avatar1.jpg" fallback-icon-name="standard:person_account" alternative-text="Bruce Wayne"></lightning-avatar> -->
+							<ul class="slds-list_horizontal slds-has-dividers_right">
+								{acc.PersonEmail}
+								{acc.PersonMobilePhone}
+								{acc.PersonBirthdate}
+								{acc.Gender__pc}
+								{acc.Nationality__pc}
+								{acc.PassportNumber__pc}
+								{acc.Emirates_Id__pc}
+							</ul>
+						</lightning-tile>
+					</div>
+				</div>
+			</template>
+		</template>
+
+
+
+
+		<template for:each={imgDataList} for:item="item" for:index="index">
+			<div key={item.docName} style="margin:10px 10px;">
+				<div if:true={item.isPortrait}>
+					<p><b>Portrait</b></p>
+					<img src={item.base64Data} key={item.docName} width="20%" style="border-radius:9px;"></img>
+
+				</div>
+				<div if:false={item.isPortrait}>
+					<p><b>Document Image</b></p>
+					<div class="slds-grid slds-wrap">
+						<div class="slds-col slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_6-of-12">
+							<img src={item.base64Data} key={item.docName} width=""  style="border-radius:21px;"></img>
+
+						</div>
+						<template if:true={item.showBtn}>
+							<div class="slds-col slds-large-size_3-of-12 slds-medium-size_3-of-12 slds-size_3-of-12">
+								<lightning-combobox placeholder="Select Document" value={item.docValue}
+									options={item.docList} data-index={index} class="slds-m-around_x-small" onchange={imgSaveBtnHandler}>
+								</lightning-combobox>
+							</div>
+
+							<div class="slds-col slds-large-size_3-of-12 slds-medium-size_3-of-12 slds-size_3-of-12"
+								style="padding-top: 22px;">
+								<lightning-button variant="brand" data-index={index} label="Save"
+									class="slds-m-around_x-small" onclick={imgSaveHandler}>
+								</lightning-button>
+							</div>
+						</template>
+					</div>
+
+				</div>
+			</div>
+		</template>
+
+
+	</div>
+
+</template>

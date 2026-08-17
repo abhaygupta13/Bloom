@@ -1,0 +1,7 @@
+:host {
+    display: block;
+}
+
+lightning-input {
+    --slds-c-input-sizing-height: 2.625rem; /* EXACT SLDS height */
+}

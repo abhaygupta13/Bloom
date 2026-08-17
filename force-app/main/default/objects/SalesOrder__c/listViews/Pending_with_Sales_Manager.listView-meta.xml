@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pending_with_Sales_Manager</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Unit__c</columns>
+    <columns>Status__c</columns>
+    <columns>ProjectName__c</columns>
+    <columns>SubStatus__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>SubStatus__c</field>
+        <operation>equals</operation>
+        <value>Pending with Sales Manager,Rejected by Sales Operations,Rejected SPA Validation,Document Issued,SPA Signed-Cheques Received,Booking Forms Signed,SPA Under Customer Signature,Rejected by AD Sales,Documents Collected,Customer Signed SPA</value>
+    </filters>
+    <label>1.Pending with Me</label>
+    <sharedTo>
+        <group>Sales_Manager</group>
+        <group>System_Administrator</group>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Leasing_Payment_Plan_Schedule_Documents</fullName>
+    <columns>NAME</columns>
+    <columns>Type__c</columns>
+    <columns>ObjectType__c</columns>
+    <columns>Customer_Type__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ObjectType__c</field>
+        <operation>contains</operation>
+        <value>PaymentPlanSchedule__c</value>
+    </filters>
+    <label>Leasing Payment Plan Schedule Documents</label>
+</ListView>

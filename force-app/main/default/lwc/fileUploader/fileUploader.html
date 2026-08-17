@@ -1,0 +1,17 @@
+<template>
+    <div class="slds-form-element">
+        <lightning-input type="file" label={label} accept={acceptedFormats} onchange={handleFileChange}
+            variant="label-stacked" class="file-input"></lightning-input>
+
+        <template if:true={fileName}>
+            <div class="slds-m-top_small slds-box slds-box_x-small slds-grid slds-grid_align-spread">
+                <span>{fileName}</span>
+                <lightning-icon icon-name="utility:close" size="x-small" alternative-text="Remove File"
+                    onclick={handleRemoveFile} class="slds-m-left_xx-small slds-icon-text-error"></lightning-icon>
+            </div>
+        </template>
+    </div>
+    <!-- <lightning-file-upload label={label} name="fileUploader" accept={acceptedFormats} record-id={documentId}
+        onuploadfinished={handleUploadFinished} multiple>
+    </lightning-file-upload> -->
+</template>

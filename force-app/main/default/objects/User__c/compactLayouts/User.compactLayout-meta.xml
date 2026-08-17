@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User</fullName>
+    <fields>Name</fields>
+    <fields>Username__c</fields>
+    <fields>User_Account__c</fields>
+    <fields>Last_Login__c</fields>
+    <fields>isActive__c</fields>
+    <fields>Is_Azure_Active__c</fields>
+    <label>User</label>
+</CompactLayout>

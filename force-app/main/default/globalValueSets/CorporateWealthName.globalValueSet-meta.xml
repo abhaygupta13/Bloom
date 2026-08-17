@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Abu Dhabi Chamber</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Chamber</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Global Market</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Global Market</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Investment Council</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Investment Council</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Investment Office</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Investment Office</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Islamic Bank (ADIB)</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Islamic Bank (ADIB)</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Media Company</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Media Company</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi National Hotels</fullName>
+        <default>false</default>
+        <label>Abu Dhabi National Hotels</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Police</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Police</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Ports</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Ports</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi University</fullName>
+        <default>false</default>
+        <label>Abu Dhabi University</label>
+    </customValue>
+    <customValue>
+        <fullName>AbuDhabi Executive Office</fullName>
+        <default>false</default>
+        <label>AbuDhabi Executive Office</label>
+    </customValue>
+    <customValue>
+        <fullName>AbuDhabi Investment Authority</fullName>
+        <default>false</default>
+        <label>AbuDhabi Investment Authority</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Retirement Pension &amp; Benefits Fund</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Retirement Pension &amp; Benefits Fund</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Commercial Bank</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Commercial Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>ADCB Wealth</fullName>
+        <default>false</default>
+        <label>ADCB Wealth</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Distribution Company</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Distribution Company</label>
+    </customValue>
+    <customValue>
+        <fullName>The Department of Economic Development (ADDED)</fullName>
+        <default>false</default>
+        <label>The Department of Economic Development (ADDED)</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Department of Education and Knowledge (ADEK)</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Department of Education and Knowledge (ADEK)</label>
+    </customValue>
+    <customValue>
+        <fullName>ADIB Wealth</fullName>
+        <default>false</default>
+        <label>ADIB Wealth</label>
+    </customValue>
+    <customValue>
+        <fullName>ADNOC</fullName>
+        <default>false</default>
+        <label>ADNOC</label>
+    </customValue>
+    <customValue>
+        <fullName>Al Ain University of Science and Technology</fullName>
+        <default>false</default>
+        <label>Al Ain University of Science and Technology</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Academies</fullName>
+        <default>false</default>
+        <label>Aldar Academies</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Education</fullName>
+        <default>false</default>
+        <label>Aldar Education</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Hospitality</fullName>
+        <default>false</default>
+        <label>Aldar Hospitality</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Properties</fullName>
+        <default>false</default>
+        <label>Aldar Properties</label>
+    </customValue>
+    <customValue>
+        <fullName>Allen &amp; Overy</fullName>
+        <default>false</default>
+        <label>Allen &amp; Overy</label>
+    </customValue>
+    <customValue>
+        <fullName>Alshaya Group</fullName>
+        <default>false</default>
+        <label>Alshaya Group</label>
+    </customValue>
+    <customValue>
+        <fullName>American Community School of Abu Dhabi</fullName>
+        <default>false</default>
+        <label>American Community School of Abu Dhabi</label>
+    </customValue>
+    <customValue>
+        <fullName>General Authority of Islamic Affairs &amp; Endowments</fullName>
+        <default>false</default>
+        <label>General Authority of Islamic Affairs &amp; Endowments</label>
+    </customValue>
+    <customValue>
+        <fullName>Central Bank Of The U.A.E(CBUAE)</fullName>
+        <default>false</default>
+        <label>Central Bank Of The U.A.E(CBUAE)</label>
+    </customValue>
+    <customValue>
+        <fullName>Chalhoub Group</fullName>
+        <default>false</default>
+        <label>Chalhoub Group</label>
+    </customValue>
+    <customValue>
+        <fullName>Citi Bank</fullName>
+        <default>false</default>
+        <label>Citi Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Cleveland Clinic Abu Dhabi</fullName>
+        <default>false</default>
+        <label>Cleveland Clinic Abu Dhabi</label>
+    </customValue>
+    <customValue>
+        <fullName>Daman</fullName>
+        <default>false</default>
+        <label>Daman</label>
+    </customValue>
+    <customValue>
+        <fullName>Department of Community Development</fullName>
+        <default>false</default>
+        <label>Department of Community Development</label>
+    </customValue>
+    <customValue>
+        <fullName>Department of Health</fullName>
+        <default>false</default>
+        <label>Department of Health</label>
+    </customValue>
+    <customValue>
+        <fullName>Department of Culture and Tourism (TCA - Abu Dhabi)</fullName>
+        <default>false</default>
+        <label>Department of Culture and Tourism (TCA - Abu Dhabi)</label>
+    </customValue>
+    <customValue>
+        <fullName>Devere Wealth</fullName>
+        <default>false</default>
+        <label>Devere Wealth</label>
+    </customValue>
+    <customValue>
+        <fullName>Department of Municipalities and Transport (DMT)</fullName>
+        <default>false</default>
+        <label>Department of Municipalities and Transport (DMT)</label>
+    </customValue>
+    <customValue>
+        <fullName>DU</fullName>
+        <default>false</default>
+        <label>DU</label>
+    </customValue>
+    <customValue>
+        <fullName>Dubai Islamic Bank</fullName>
+        <default>false</default>
+        <label>Dubai Islamic Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Emirates Integrated Telecommunications Company, PJSC</fullName>
+        <default>false</default>
+        <label>Emirates Integrated Telecommunications Company, PJSC</label>
+    </customValue>
+    <customValue>
+        <fullName>Emirates Foundation</fullName>
+        <default>false</default>
+        <label>Emirates Foundation</label>
+    </customValue>
+    <customValue>
+        <fullName>Emirates NBD</fullName>
+        <default>false</default>
+        <label>Emirates NBD</label>
+    </customValue>
+    <customValue>
+        <fullName>Emirates Palace</fullName>
+        <default>false</default>
+        <label>Emirates Palace</label>
+    </customValue>
+    <customValue>
+        <fullName>Emirates Schools Establishment</fullName>
+        <default>false</default>
+        <label>Emirates Schools Establishment</label>
+    </customValue>
+    <customValue>
+        <fullName>Emirates University</fullName>
+        <default>false</default>
+        <label>Emirates University</label>
+    </customValue>
+    <customValue>
+        <fullName>ENEC</fullName>
+        <default>false</default>
+        <label>ENEC</label>
+    </customValue>
+    <customValue>
+        <fullName>Environment Agency Abu Dhabi</fullName>
+        <default>false</default>
+        <label>Environment Agency Abu Dhabi</label>
+    </customValue>
+    <customValue>
+        <fullName>Esaad</fullName>
+        <default>false</default>
+        <label>Esaad</label>
+    </customValue>
+    <customValue>
+        <fullName>Etihad Airways</fullName>
+        <default>false</default>
+        <label>Etihad Airways</label>
+    </customValue>
+    <customValue>
+        <fullName>Etisalat</fullName>
+        <default>false</default>
+        <label>Etisalat</label>
+    </customValue>
+    <customValue>
+        <fullName>Executive Affairs Authority</fullName>
+        <default>false</default>
+        <label>Executive Affairs Authority</label>
+    </customValue>
+    <customValue>
+        <fullName>FAB Wealth</fullName>
+        <default>false</default>
+        <label>FAB Wealth</label>
+    </customValue>
+    <customValue>
+        <fullName>Federal Transport Authority â€“ Land &amp; Maritime (FTA)</fullName>
+        <default>false</default>
+        <label>Federal Transport Authority â€“ Land &amp; Maritime (FTA)</label>
+    </customValue>
+    <customValue>
+        <fullName>First Abu Dhabi Bank (FAB)</fullName>
+        <default>false</default>
+        <label>First Abu Dhabi Bank (FAB)</label>
+    </customValue>
+    <customValue>
+        <fullName>FrontLines Heroes Office</fullName>
+        <default>false</default>
+        <label>FrontLines Heroes Office</label>
+    </customValue>
+    <customValue>
+        <fullName>Health Point</fullName>
+        <default>false</default>
+        <label>Health Point</label>
+    </customValue>
+    <customValue>
+        <fullName>Higher College of Technology</fullName>
+        <default>false</default>
+        <label>Higher College of Technology</label>
+    </customValue>
+    <customValue>
+        <fullName>HSBC</fullName>
+        <default>false</default>
+        <label>HSBC</label>
+    </customValue>
+    <customValue>
+        <fullName>HSCB Wealth</fullName>
+        <default>false</default>
+        <label>HSCB Wealth</label>
+    </customValue>
+    <customValue>
+        <fullName>Insurance Authority</fullName>
+        <default>false</default>
+        <label>Insurance Authority</label>
+    </customValue>
+    <customValue>
+        <fullName>Khalifa University</fullName>
+        <default>false</default>
+        <label>Khalifa University</label>
+    </customValue>
+    <customValue>
+        <fullName>Khidmah</fullName>
+        <default>false</default>
+        <label>Khidmah</label>
+    </customValue>
+    <customValue>
+        <fullName>Louvre Abu Dhabi</fullName>
+        <default>false</default>
+        <label>Louvre Abu Dhabi</label>
+    </customValue>
+    <customValue>
+        <fullName>Mamoura</fullName>
+        <default>false</default>
+        <label>Mamoura</label>
+    </customValue>
+    <customValue>
+        <fullName>Masdar Freezone</fullName>
+        <default>false</default>
+        <label>Masdar Freezone</label>
+    </customValue>
+    <customValue>
+        <fullName>Mashreq Bank</fullName>
+        <default>false</default>
+        <label>Mashreq Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Mashreq Wealth</fullName>
+        <default>false</default>
+        <label>Mashreq Wealth</label>
+    </customValue>
+    <customValue>
+        <fullName>Ministry Defence Armed Forces</fullName>
+        <default>false</default>
+        <label>Ministry Defence Armed Forces</label>
+    </customValue>
+    <customValue>
+        <fullName>Ministry of Economy</fullName>
+        <default>false</default>
+        <label>Ministry of Economy</label>
+    </customValue>
+    <customValue>
+        <fullName>Ministry of Education</fullName>
+        <default>false</default>
+        <label>Ministry of Education</label>
+    </customValue>
+    <customValue>
+        <fullName>Ministry of Interior</fullName>
+        <default>false</default>
+        <label>Ministry of Interior</label>
+    </customValue>
+    <customValue>
+        <fullName>Ministry Of Justice</fullName>
+        <default>false</default>
+        <label>Ministry Of Justice</label>
+    </customValue>
+    <customValue>
+        <fullName>Ministry of Presidential Affairs</fullName>
+        <default>false</default>
+        <label>Ministry of Presidential Affairs</label>
+    </customValue>
+    <customValue>
+        <fullName>Miral</fullName>
+        <default>false</default>
+        <label>Miral</label>
+    </customValue>
+    <customValue>
+        <fullName>Ministry of Foreign Affairs and International Cooperation(MoFAIC)</fullName>
+        <default>false</default>
+        <label>Ministry of Foreign Affairs and International Cooperation(MoFAIC)</label>
+    </customValue>
+    <customValue>
+        <fullName>Mubadala</fullName>
+        <default>false</default>
+        <label>Mubadala</label>
+    </customValue>
+    <customValue>
+        <fullName>Musanada</fullName>
+        <default>false</default>
+        <label>Musanada</label>
+    </customValue>
+    <customValue>
+        <fullName>NCB Wealth</fullName>
+        <default>false</default>
+        <label>NCB Wealth</label>
+    </customValue>
+    <customValue>
+        <fullName>NMC Healthcare</fullName>
+        <default>false</default>
+        <label>NMC Healthcare</label>
+    </customValue>
+    <customValue>
+        <fullName>Office of Government Protocol</fullName>
+        <default>false</default>
+        <label>Office of Government Protocol</label>
+    </customValue>
+    <customValue>
+        <fullName>Provis</fullName>
+        <default>false</default>
+        <label>Provis</label>
+    </customValue>
+    <customValue>
+        <fullName>RAK Wealth</fullName>
+        <default>false</default>
+        <label>RAK Wealth</label>
+    </customValue>
+    <customValue>
+        <fullName>Salama Bint Hamdan Al Nahyan Foundation</fullName>
+        <default>false</default>
+        <label>Salama Bint Hamdan Al Nahyan Foundation</label>
+    </customValue>
+    <customValue>
+        <fullName>SCB Wealth</fullName>
+        <default>false</default>
+        <label>SCB Wealth</label>
+    </customValue>
+    <customValue>
+        <fullName>Seha</fullName>
+        <default>false</default>
+        <label>Seha</label>
+    </customValue>
+    <customValue>
+        <fullName>Sorbonne University Abu Dhabi</fullName>
+        <default>false</default>
+        <label>Sorbonne University Abu Dhabi</label>
+    </customValue>
+    <customValue>
+        <fullName>Standard Chartered Bank</fullName>
+        <default>false</default>
+        <label>Standard Chartered Bank</label>
+    </customValue>
+    <customValue>
+        <fullName>Tawazun Economic Council</fullName>
+        <default>false</default>
+        <label>Tawazun Economic Council</label>
+    </customValue>
+    <customValue>
+        <fullName>The Crown Prince Court</fullName>
+        <default>false</default>
+        <label>The Crown Prince Court</label>
+    </customValue>
+    <customValue>
+        <fullName>Twofour 54</fullName>
+        <default>false</default>
+        <label>Twofour 54</label>
+    </customValue>
+    <customValue>
+        <fullName>VPS Healthcare</fullName>
+        <default>false</default>
+        <label>VPS Healthcare</label>
+    </customValue>
+    <customValue>
+        <fullName>Yas Holding</fullName>
+        <default>false</default>
+        <label>Yas Holding</label>
+    </customValue>
+    <customValue>
+        <fullName>Yas Marina Circuit</fullName>
+        <default>false</default>
+        <label>Yas Marina Circuit</label>
+    </customValue>
+    <customValue>
+        <fullName>Zayed Higher Organization</fullName>
+        <default>false</default>
+        <label>Zayed Higher Organization</label>
+    </customValue>
+    <customValue>
+        <fullName>Zayed University</fullName>
+        <default>false</default>
+        <label>Zayed University</label>
+    </customValue>
+    <customValue>
+        <fullName>Abu Dhabi Government Employees</fullName>
+        <default>false</default>
+        <label>Abu Dhabi Government Employees</label>
+    </customValue>
+    <customValue>
+        <fullName>ASN Investments</fullName>
+        <default>false</default>
+        <label>ASN Investments</label>
+    </customValue>
+    <customValue>
+        <fullName>CITI Wealth</fullName>
+        <default>false</default>
+        <label>CITI Wealth</label>
+    </customValue>
+    <customValue>
+        <fullName>HSBC Wealth</fullName>
+        <default>false</default>
+        <label>HSBC Wealth</label>
+    </customValue>
+    <customValue>
+        <fullName>NBF Wealth</fullName>
+        <default>false</default>
+        <label>NBF Wealth</label>
+    </customValue>
+    <masterLabel>Corporate/Wealth Name</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

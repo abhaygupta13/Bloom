@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Resident</fullName>
+        <default>false</default>
+        <label>Resident</label>
+    </customValue>
+    <customValue>
+        <fullName>GCC</fullName>
+        <default>false</default>
+        <label>GCC</label>
+    </customValue>
+    <customValue>
+        <fullName>International</fullName>
+        <default>false</default>
+        <label>International</label>
+    </customValue>
+    <customValue>
+        <fullName>UAE National</fullName>
+        <default>false</default>
+        <label>UAE National</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer- GCC</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Customer- GCC</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer- Expatriate</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Customer- Expatriate</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer- Non Resident</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Customer- Non Resident</label>
+    </customValue>
+    <customValue>
+        <fullName>New Customer</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>New Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>National</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>UAE.</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer- Local</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Customer- Local</label>
+    </customValue>
+    <customValue>
+        <fullName>Existing Customer</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Existing Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>VIP</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>VIP</label>
+    </customValue>
+    <customValue>
+        <fullName>CORPORATE</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>CORPORATE</label>
+    </customValue>
+    <description>Customer Type Picklist</description>
+    <masterLabel>Customer Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

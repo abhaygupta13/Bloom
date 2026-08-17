@@ -1,0 +1,213 @@
+<template>
+    <lightning-card title="Terminate Leasing Order" icon-name="standard:contract">
+        <div class="slds-m-around_medium">
+
+            <!-- Spinner -->
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Processing..." size="medium"></lightning-spinner>
+            </template>
+
+            <!-- Header fields -->
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input
+                        label="Security Deposit"
+                        value={leasingOrder.SecurityDeposit__c}
+                        disabled>
+                    </lightning-input>
+
+                    <lightning-input
+                        label="Reason for Termination"
+                        name="ReasonforTermination__c"
+                        value={reasonForTermination}
+                        onchange={handleInputChange}
+                        required>
+                    </lightning-input>
+
+                    <lightning-input
+                        type="date"
+                        label="Termination Date"
+                        name="TerminationDate__c"
+                        value={terminationDate}
+                        onchange={handleInputChange}
+                        required>
+                    </lightning-input>
+
+                  
+
+                      <lightning-combobox
+                        label="Termination Initiated By"
+                        name="TerminationInitiatedBy__c"
+                        value={terminationInitiatedBy}
+                        options={terminationIntimatedByOptions}
+                        onchange={handleInputChange}
+                        required>
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6" padding="around-small">
+                    <lightning-input
+                        type="date"
+                        label="Termination Notice Date"
+                        name="TerminationNoticeDate__c"
+                        value={terminationNoticeDate}
+                        onchange={handleInputChange}
+                        required>
+                    </lightning-input>
+
+                    <lightning-combobox
+                        label="Termination Type"
+                        name="TerminationType__c"
+                        value={terminationType}
+                        options={terminationTypeOptions}
+                        onchange={handleInputChange}
+                        required>
+                    </lightning-combobox>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <!-- Editable Charges Table -->
+            <h3 class="slds-text-heading_small slds-m-top_medium">Termination Charges</h3>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Subcategory</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <!-- <tbody>
+                    <template for:each={charges} for:item="charge">
+                        <tr key={charge.id}>
+                            
+                            <td>
+                                <lightning-combobox
+                                    data-id={charge.id}
+                                    value={charge.Name}
+                                    options={nameOptions}
+                                    onchange={handleNameChange}>
+                                </lightning-combobox>
+                            </td>
+                            <td>
+                                <lightning-combobox
+                                    options={subcategoryOptions}
+                                    value={charge.Subcategory}
+                                    data-id={charge.id}
+                                    onchange={handleSubcategoryChange}>
+                                </lightning-combobox>
+                            </td>
+                            <td>
+                                <lightning-input
+                                    type="number"
+                                    value={charge.Amount}
+                                    data-id={charge.id}
+                                    onchange={handleAmountChange}>
+                                </lightning-input>
+                            </td>
+                            <td style="text-align:center; vertical-align:middle;">
+                                <lightning-button-icon
+                                    icon-name="utility:add"
+                                    alternative-text="Add Row"
+                                    title="Add Row"
+                                    onclick={handleAddRow}
+                                    variant="border-filled"
+                                    data-id={charge.id}
+                                    size="small"
+                                    style="margin-right:4px; vertical-align:middle;">
+                                </lightning-button-icon>
+
+                                <lightning-button-icon
+                                    icon-name="utility:delete"
+                                    alternative-text="Delete Row"
+                                    title="Delete Row"
+                                    onclick={handleDeleteRow}
+                                    data-id={charge.id}
+                                    variant="border-filled"
+                                    size="small"
+                                    style="vertical-align:middle;">
+                                </lightning-button-icon>
+                            </td>
+                        </tr>
+                    </template>
+                    
+                </tbody> -->
+                <tbody>
+                    <template for:each={charges} for:item="charge">
+                        <tr key={charge.id}>
+                            <td>
+                                <lightning-combobox
+                                    data-id={charge.id}
+                                    value={charge.Name}
+                                    options={nameOptions}
+                                    onchange={handleNameChange}
+                                    placeholder="Select Charge Type">
+                                </lightning-combobox>
+                            </td>
+
+                            <td>
+                                <lightning-combobox
+                                    data-id={charge.id}
+                                    value={charge.Subcategory}
+                                    options={charge.subcategoryOptions}
+                                    onchange={handleSubcategoryChange}
+                                    placeholder="Select Subcategory">
+                                </lightning-combobox>
+                            </td>
+
+                            <td>
+                                <lightning-input
+                                    type="number"
+                                    value={charge.Amount}
+                                    data-id={charge.id}
+                                    onchange={handleAmountChange}
+                                    placeholder="Enter Amount">
+                                </lightning-input>
+                            </td>
+
+                            <td style="text-align:center; vertical-align:middle;">
+                                <lightning-button-icon
+                                    icon-name="utility:add"
+                                    title="Add Row"
+                                    onclick={handleAddRow}
+                                    variant="border-filled"
+                                    data-id={charge.id}
+                                    size="small"
+                                    style="margin-right:4px;">
+                                </lightning-button-icon>
+
+                                <lightning-button-icon
+                                    icon-name="utility:delete"
+                                    title="Delete Row"
+                                    onclick={handleDeleteRow}
+                                    data-id={charge.id}
+                                    variant="border-filled"
+                                    size="small">
+                                </lightning-button-icon>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+
+            </table>
+            
+            <template if:true={isError}>
+                        <p style="color:red; font-size:0.8rem; margin-top:4px; text-align:center;">*{errorMessage}</p>
+            </template>
+
+            <!-- Action Buttons -->
+            <div class="slds-m-top_medium slds-text-align_center">
+                <lightning-button
+                    class="slds-m-right_small"
+                    variant="brand"
+                    label="Terminate Lease"
+                    onclick={handleSave}>
+                </lightning-button>
+                <lightning-button
+                    variant="neutral"
+                    label="Cancel"
+                    onclick={handleClose}>
+                </lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

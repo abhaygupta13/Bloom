@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Arjan_Available_Units</fullName>
+    <columns>CommunityName__c</columns>
+    <columns>ProjectName__c</columns>
+    <columns>BuildingSectionName__c</columns>
+    <columns>UnitNumber__c</columns>
+    <columns>UnitView__c</columns>
+    <columns>Status__c</columns>
+    <columns>SellingPrice__c</columns>
+    <columns>NumberOfBedrooms__c</columns>
+    <columns>Internal_Saleable_Area__c</columns>
+    <columns>SaleableArea__c</columns>
+    <columns>TotalArea__c</columns>
+    <columns>UnitType__c</columns>
+    <columns>UnitCategory__c</columns>
+    <columns>Virtual_Account_IBAN__c</columns>
+    <columns>Virtual_Bank_Account_number__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Project__c</field>
+        <operation>equals</operation>
+        <value>Bloom Arjaan</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Available</value>
+    </filters>
+    <label>Arjaan Available Units</label>
+    <sharedTo>
+        <group>Sales_Manager</group>
+    </sharedTo>
+</ListView>

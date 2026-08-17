@@ -1,0 +1,32 @@
+<template>
+    <lightning-quick-action-panel header="Convert Lead">
+
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass"></lightning-spinner>
+        </template>
+        <div class="slds-p-around_large">
+            <div class="slds-align_absolute-center slds-text-heading_small slds-text-color_error">
+                {message}
+                <br />
+            </div>
+            <template if:true={missingFields}>
+                <div class="slds-text-heading_small slds-text-color_error">
+                    <template for:each={missingFields} for:item="missingField">
+                        <ul key={missingField}>
+                            <li style="list-style-type:square">
+                                {missingField}
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+            </template>
+        </div>
+        <div slot="footer">
+            <lightning-button onclick={handleCancel} variant="neutral" label="Cancel"></lightning-button>
+            &nbsp;&nbsp;
+            <template if:true={hasDuplicateAccount}>
+                <lightning-button onclick={handleConfirm} variant="brand" label="Confirm"></lightning-button>
+            </template>
+        </div>
+    </lightning-quick-action-panel>
+</template>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InventoryLaunchCategory__c</fullName>
+    <description>Define if a commission is applicable for &apos;Inventory/Launch&apos;.If the value is blank they the commission definition is considered for all the units.</description>
+    <inlineHelpText>Define if a commission is applicable for &apos;Inventory/Launch&apos;.If the value is blank they the commission definition is considered for all the units.</inlineHelpText>
+    <label>Inventory/Launch Category</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>InventoryLaunch</valueSetName>
+    </valueSet>
+</CustomField>

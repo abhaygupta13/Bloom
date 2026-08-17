@@ -1,0 +1,4 @@
+<aura:component implements="force:lightningQuickAction,flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride" access="global">
+    <!-- Pass recordId to LWC if needed -->
+    <c:salesOfferAction recordId="{!v.recordId}" autoOpen="true"/>
+</aura:component>

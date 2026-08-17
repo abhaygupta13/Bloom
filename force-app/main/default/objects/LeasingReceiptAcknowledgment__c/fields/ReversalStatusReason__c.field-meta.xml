@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ReversalStatusReason__c</fullName>
+    <label>Reversal Status Reason</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Account Closed</fullName>
+                <default>false</default>
+                <label>Account Closed</label>
+            </value>
+            <value>
+                <fullName>Cheque Error</fullName>
+                <default>false</default>
+                <label>Cheque Error</label>
+            </value>
+            <value>
+                <fullName>Insufficient Funds</fullName>
+                <default>false</default>
+                <label>Insufficient Funds</label>
+            </value>
+            <value>
+                <fullName>Irregular Signature</fullName>
+                <default>false</default>
+                <label>Irregular Signature</label>
+            </value>
+            <value>
+                <fullName>Customer Requested</fullName>
+                <default>false</default>
+                <label>Customer Requested</label>
+            </value>
+            <value>
+                <fullName>Cheque Expired</fullName>
+                <default>false</default>
+                <label>Cheque Expired</label>
+            </value>
+            <value>
+                <fullName>Wrong Data Entry</fullName>
+                <default>false</default>
+                <label>Wrong Data Entry</label>
+            </value>
+            <value>
+                <fullName>Wrong Data</fullName>
+                <default>false</default>
+                <label>Wrong Data</label>
+            </value>
+            <value>
+                <fullName>Cheque Replaced</fullName>
+                <default>false</default>
+                <label>Cheque Replaced</label>
+            </value>
+            <value>
+                <fullName>01</fullName>
+                <default>false</default>
+                <label>Reversal in current period</label>
+            </value>
+            <value>
+                <fullName>02</fullName>
+                <default>false</default>
+                <label>Reversal in Subsequent period</label>
+            </value>
+            <value>
+                <fullName>03</fullName>
+                <default>false</default>
+                <label>Actual reversal in current period</label>
+            </value>
+            <value>
+                <fullName>04</fullName>
+                <default>false</default>
+                <label>Actual reversal in closed period</label>
+            </value>
+            <value>
+                <fullName>05</fullName>
+                <default>false</default>
+                <label>Accrual/deferral posting</label>
+            </value>
+            <value>
+                <fullName>06</fullName>
+                <default>false</default>
+                <label>Return Cheque from Customer</label>
+            </value>
+            <value>
+                <fullName>07</fullName>
+                <default>false</default>
+                <label>PDC Withdrawal</label>
+            </value>
+            <value>
+                <fullName>08</fullName>
+                <default>false</default>
+                <label>Incorrect Entry</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

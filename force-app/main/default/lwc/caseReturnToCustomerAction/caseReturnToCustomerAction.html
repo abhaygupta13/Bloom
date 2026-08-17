@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Confirm Return to Customer " icon-name="action:approval">
+           <div class="slds-p-around_medium">
+
+                    <lightning-textarea 
+                        label="Comments" 
+                        value={comments} 
+                        onchange={handleCommentsChange}
+                        required="true"
+                        message-when-value-missing="Comments are required to update the status"
+                    ></lightning-textarea>
+
+        <div class="slds-m-top_medium slds-align_absolute-center">
+            <lightning-button label="Yes" variant="brand" onclick={handleYes}></lightning-button>
+            <lightning-button label="No" class="slds-m-left_small" variant="neutral" onclick={handleNo}></lightning-button>
+        </div>
+
+           </div>
+
+        <!-- Show spinner while processing -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Processing..."></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>

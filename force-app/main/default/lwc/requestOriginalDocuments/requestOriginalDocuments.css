@@ -1,0 +1,142 @@
+/* Outer container */
+.outer-div {
+    width: 100%;
+    max-width: 800px; /* Increased max-width for better layout */
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tile container (two columns) */
+.tile-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 1.5rem; /* Space between tiles */
+    margin-bottom: 1rem;
+}
+
+/* Individual Tile styling */
+.tile {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tile hover effect */
+.tile:hover {
+    transform: translateY(-5px); /* Subtle lift effect */
+}
+
+/* Tile header */
+.tile-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #830000; /* Match Submit button color */
+    border-bottom: 2px solid #830000; /* Underline with matching color */
+    padding-bottom: 0.5rem;
+}
+
+/* Checkbox grid layout within tiles */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 1rem;
+}
+
+/* Styling for each checkbox item */
+.checkbox-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Styling the remarks section */
+.remarks-section {
+    margin-top: 20px;
+}
+
+/* Styling the remarks textarea */
+.remarks-input {
+    width: 100%;
+    height: 120px;
+    font-size: 14px;
+}
+
+/* centerButtons.css */
+.center-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+/* Footer buttons container */
+.footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+
+/* Styling the Submit button */
+.submit-button {
+    width: 48%;
+    background-color: #0070d2; /* Matching color */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Submit button hover effect */
+.submit-button:hover {
+    background-color: #005cbf; /* Slightly darker for hover */
+    transform: translateY(-2px);
+}
+
+/* Submit button active effect (when clicked) */
+.submit-button:active {
+    background-color: #004c99; /* Even darker for active */
+    transform: translateY(0);
+}
+
+/* Styling the Cancel button */
+.cancel-button {
+    width: 48%;
+    background-color: #f3f4f6;
+    color: #333;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Cancel button hover effect */
+.cancel-button:hover {
+    background-color: #e1e2e6;
+    transform: translateY(-2px);
+}
+
+/* Cancel button active effect (when clicked) */
+.cancel-button:active {
+    background-color: #d1d3d8;
+    transform: translateY(0);
+}
+
+/* Accessibility: focus states for buttons */
+.submit-button:focus,
+.cancel-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 112, 210, 0.5);
+}

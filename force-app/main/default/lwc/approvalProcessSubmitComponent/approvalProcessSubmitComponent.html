@@ -1,0 +1,70 @@
+<template>
+	<div class="slds-is-relative" style="min-height: 120px;">
+		<template if:true={isLoading}>
+			<lightning-spinner alternative-text="Loading" size="medium" variant="brand">
+			</lightning-spinner>
+		</template>
+
+		<template if:false={isLoading}>
+			<!-- Broker Agent Registration And Update -->
+			<template if:true={showBrokerSubmitPanel}>
+				<lightning-quick-action-panel header="Submit For Approval">
+
+					<div class="slds-p-around_medium">
+
+						<p>
+							Are you sure you want to submit this record for approval?
+						</p>
+
+					</div>
+
+					<div slot="footer">
+
+						<lightning-button label="Cancel" onclick={closeModal} variant="neutral"></lightning-button>
+						<lightning-button label="Submit" onclick={submitforCancellation} variant="brand"
+							class="slds-m-left_small"></lightning-button>
+
+					</div>
+
+				</lightning-quick-action-panel>
+
+			</template>
+
+			<!-- All Other Record Types -->
+			<template if:false={isBrokerAgentRegistration}>
+
+				<template if:true={isModalOpen}>
+
+					<div class="slds-modal__container">
+						<header class="slds-modal__header">
+							<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Hold Unit</h2>
+						</header>
+
+						<footer class="slds-modal__footer">
+							<button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+							<button class="slds-button slds-button_brand" onclick={submitforCancellationApproval} title="Hold">Submit</button>
+						</footer>
+					</div>
+
+				</template>
+			</template>
+		</template>
+	</div>
+</template>
+<!-- <div if:false={isLoaded} class="slds-is-relative">
+		<lightning-spinner alternative-text="Loading..." variant="brand">
+		</lightning-spinner>
+	</div>
+
+	<template if:true={isModalOpen}>
+		<div class="slds-align_absolute-center" style="font-weight: bold; padding:10px;">
+			<b>Submit for Cancellation Approval</b>
+		</div>
+
+		<div class="slds-align_absolute-center" style="font-weight: bold; padding:10px;">
+			<lightning-button label="Submit" onclick={handleSaveClick} variant="brand"></lightning-button>
+			<lightning-button class="lightBtn slds-m-left_x-small" label="Cancel" variant="brand-outline"
+				onclick={cancel}></lightning-button>
+		</div>
+	</template>  
+</template>-->

@@ -1,0 +1,93 @@
+<template>
+
+<!--	<lightning-card  variant="Narrow"  title="Handover Process" icon-name="standard:document_preview"></lightning-card><br />
+-->
+    <div if:true={flags.isLoading} class="slds-is-relative">
+		<lightning-spinner
+			alternative-text="Loading..." variant="brand" style="position:fixed;">
+		</lightning-spinner>
+    </div>
+	<!-- NOTE: always visible -->
+<div class="slds-p-around_small slds-m-bottom_small">
+    <div class="slds-notify slds-notify_alert slds-theme_alert-texture" role="status">
+        
+        <!-- Warning Icon -->
+        <span class="slds-icon_container slds-m-right_x-small" title="Warning">
+            <lightning-icon icon-name="utility:warning" alternative-text="warning" size="small"></lightning-icon>
+        </span>
+
+        <!-- Content -->
+        <div class="slds-notify__content">
+           
+
+            <!-- Custom Red Warning Box -->
+            <div style="background-color: #ffe4e4; border: 1px solid #ff0000; padding: 8px; border-radius: 4px;">
+                <div style="color: #ff0000; font-weight: bold; font-size: 16px;">
+                    Warning: You cannot select more than <strong>25 records</strong> at a time.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <lightning-tabset variant="scoped" active-tab-value ="firstTab" class={tabsetClasses}>
+        <lightning-tab label={label.sendBCCLWCHeading1} value="firstTab" style="padding:0;" onactive={sendUnitToBCC}> 
+        </lightning-tab>
+		<lightning-tab label={label.sendCHOHeading} onactive={onUnitReadyTabClick} style="padding:0;">
+		</lightning-tab>
+		<lightning-tab label={label.sendNOCHeading} value="secondTab" style="padding:0;" onactive={sendUnitToNOC}> 
+        </lightning-tab>
+		 
+			<div class="slds-p-around_medium custom_style">
+				<div class="slds-grid slds-wrap">
+					<div class="slds-col slds-size_4-of-12 slds-p-around_medium" style="text-align:left;padding-left: 1%;">
+						<lightning-combobox class="validate" name="Choose_Project_Obj" label={flags.projLabel}
+							value={flags.selectedProjectId} options={flags.projectObjOptions} onchange={handleSObjectChange}>
+						</lightning-combobox>
+					</div>
+					<div class="slds-col slds-size_4-of-12 slds-p-around_medium">
+						<lightning-combobox class="validate" name="Choose_Building_Object" label={flags.buildLabel}
+							value={flags.selectedBuildingId} options={flags.buildingObjOptions} onchange={handleSObjectChange}>
+						</lightning-combobox>
+					</div>
+					<div if:true={sendBCCMailNotification}>
+						<button class="slds-button slds-button_brand" onclick={handleSearchClick} title="Search BCC Units" style="top:37px;">Search BCC Units</button>
+					</div>
+					<div if:true={sendNOCMailNotification}>
+						<button class="slds-button slds-button_brand" onclick={handleNOCSearchClick} title="Search NOC Units" style="top:37px;">Search NOC Units</button>
+					</div>
+					<div if:true={sendCHONotification}>
+						<button class="slds-button slds-button_brand" onclick={handleUnitReadySearch} title="Search CHO Units" style="top:37px;">Search CHO Units</button>
+					</div>
+					<div class="slds-col slds-size_2-of-12"></div>
+					<div if:true={flags.isVisiableTable} class="slds-col slds-size_12-of-12 slds-p-around_medium ">
+						<div class="slds-clearfix">
+							<div class="slds-float_right slds-m-bottom_small">
+								<p><b>Number of selected records: {selectedRecordCount}</b></p>
+							</div>
+						</div>
+						<div style="height:350Px">
+							<lightning-datatable key-field="Id" data={flags.tableData} columns={flags.tableColumns}
+								sorted-by={sortBy}
+								sorted-direction={sortDirection}
+								onsort={doSorting}
+								onrowselection={handleRowSelection}>
+							</lightning-datatable>
+						</div>
+					</div>
+				</div>
+				<footer class="slds-modal__footer">
+				<div if:true={sendBCCMailNotification}>
+					<button class="slds-button slds-button_brand" onclick={handleSubmit} title="Send BCC Mail to Customers">{label.bccButtonL}</button>
+				</div> 
+				<div if:true={sendNOCMailNotification}>
+					<button class="slds-button slds-button_brand" onclick={handleNOCSubmit} title="Send NOC Mail to Customers">{label.nocButtonL}</button>
+				</div>
+				<div if:true={sendCHONotification}>
+					<button class="slds-button slds-button_brand" onclick={handleUnitReadySubmit} title="Make unit ready">Submit</button>
+				</div>
+				</footer>
+			</div>
+   </lightning-tabset>
+</template>

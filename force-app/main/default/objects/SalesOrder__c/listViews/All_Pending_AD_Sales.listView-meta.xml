@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Pending_AD_Sales</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>ProjectName__c</columns>
+    <columns>Unit__c</columns>
+    <columns>NetAmount__c</columns>
+    <columns>Status__c</columns>
+    <columns>SubStatus__c</columns>
+    <columns>PaymentPlan__c</columns>
+    <columns>BookingDate__c</columns>
+    <columns>Broker_Agencyy__c</columns>
+    <columns>First_Installment_Received_Amount__c</columns>
+    <columns>ADM_Fee_Received_Amount__c</columns>
+    <columns>CustomerSignedSPADate__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PaymentPlan__c</field>
+        <operation>equals</operation>
+        <value>GR Corp 40-60 3% Disc</value>
+    </filters>
+    <label>All Pending AD Sales</label>
+    <sharedTo>
+        <group>Assistant_Director_Sales</group>
+    </sharedTo>
+</ListView>

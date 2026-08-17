@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BusinessHoursSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>20:55:00.000Z</fridayEndTime>
+        <fridayStartTime>09:30:00.000Z</fridayStartTime>
+        <mondayEndTime>20:55:00.000Z</mondayEndTime>
+        <mondayStartTime>09:30:00.000Z</mondayStartTime>
+        <name>Default SAT-SUN</name>
+        <thursdayEndTime>20:55:00.000Z</thursdayEndTime>
+        <thursdayStartTime>09:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>20:55:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>09:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>20:55:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>09:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>19:00:00.000Z</fridayEndTime>
+        <fridayStartTime>10:30:00.000Z</fridayStartTime>
+        <mondayEndTime>19:00:00.000Z</mondayEndTime>
+        <mondayStartTime>10:30:00.000Z</mondayStartTime>
+        <name>Demo Test business Hours prashant</name>
+        <thursdayEndTime>19:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>10:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>19:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>10:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>19:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>10:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>18:00:00.000Z</fridayEndTime>
+        <fridayStartTime>10:30:00.000Z</fridayStartTime>
+        <mondayEndTime>18:00:00.000Z</mondayEndTime>
+        <mondayStartTime>10:30:00.000Z</mondayStartTime>
+        <name>Ezzeldine fixed mailbox</name>
+        <thursdayEndTime>18:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>10:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>18:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>10:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>18:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>10:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <mondayEndTime>20:30:00.000Z</mondayEndTime>
+        <mondayStartTime>18:00:00.000Z</mondayStartTime>
+        <name>Sheriff 27Feb-5Mar</name>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>20:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>18:00:00.000Z</tuesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>19:00:00.000Z</fridayEndTime>
+        <fridayStartTime>10:30:00.000Z</fridayStartTime>
+        <mondayEndTime>19:00:00.000Z</mondayEndTime>
+        <mondayStartTime>10:30:00.000Z</mondayStartTime>
+        <name>Moussa - Deactivated</name>
+        <saturdayEndTime>19:00:00.000Z</saturdayEndTime>
+        <saturdayStartTime>10:30:00.000Z</saturdayStartTime>
+        <sundayEndTime>19:00:00.000Z</sundayEndTime>
+        <sundayStartTime>10:30:00.000Z</sundayStartTime>
+        <thursdayEndTime>19:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>10:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>14:30:00.000Z</fridayEndTime>
+        <fridayStartTime>09:00:00.000Z</fridayStartTime>
+        <name>Imran 27Feb-5Mar</name>
+        <saturdayEndTime>14:30:00.000Z</saturdayEndTime>
+        <saturdayStartTime>09:00:00.000Z</saturdayStartTime>
+        <thursdayEndTime>17:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>12:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>17:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>12:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>17:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>12:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>17:30:00.000Z</fridayEndTime>
+        <fridayStartTime>12:00:00.000Z</fridayStartTime>
+        <mondayEndTime>17:30:00.000Z</mondayEndTime>
+        <mondayStartTime>12:00:00.000Z</mondayStartTime>
+        <name>Ruwaida 27Feb-5Mar</name>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>23:00:00.000Z</fridayEndTime>
+        <fridayStartTime>09:00:00.000Z</fridayStartTime>
+        <mondayEndTime>21:00:00.000Z</mondayEndTime>
+        <mondayStartTime>09:00:00.000Z</mondayStartTime>
+        <name>Sales Manager Business Hours</name>
+        <saturdayEndTime>15:00:00.000Z</saturdayEndTime>
+        <saturdayStartTime>09:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>15:00:00.000Z</sundayEndTime>
+        <sundayStartTime>09:00:00.000Z</sundayStartTime>
+        <thursdayEndTime>23:59:00.000Z</thursdayEndTime>
+        <thursdayStartTime>09:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>15:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>09:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>23:59:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>09:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>00:00:00.000Z</fridayEndTime>
+        <fridayStartTime>00:00:00.000Z</fridayStartTime>
+        <mondayEndTime>00:00:00.000Z</mondayEndTime>
+        <mondayStartTime>00:00:00.000Z</mondayStartTime>
+        <name>CRM Business Hours</name>
+        <saturdayEndTime>00:00:00.000Z</saturdayEndTime>
+        <saturdayStartTime>00:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>00:00:00.000Z</sundayEndTime>
+        <sundayStartTime>00:00:00.000Z</sundayStartTime>
+        <thursdayEndTime>00:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>00:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>00:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>00:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>00:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>00:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>18:00:00.000Z</fridayEndTime>
+        <fridayStartTime>09:00:00.000Z</fridayStartTime>
+        <mondayEndTime>18:00:00.000Z</mondayEndTime>
+        <mondayStartTime>09:00:00.000Z</mondayStartTime>
+        <name>Test</name>
+        <sundayEndTime>18:00:00.000Z</sundayEndTime>
+        <sundayStartTime>09:00:00.000Z</sundayStartTime>
+        <thursdayEndTime>18:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>09:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>18:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>09:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>18:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>09:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>18:30:00.000Z</fridayEndTime>
+        <fridayStartTime>09:30:00.000Z</fridayStartTime>
+        <mondayEndTime>18:30:00.000Z</mondayEndTime>
+        <mondayStartTime>09:30:00.000Z</mondayStartTime>
+        <name>Back-Office Shift</name>
+        <sundayEndTime>00:00:00.000Z</sundayEndTime>
+        <sundayStartTime>00:00:00.000Z</sundayStartTime>
+        <thursdayEndTime>18:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>09:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>18:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>09:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>18:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>09:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>11:30:00.000Z</fridayEndTime>
+        <fridayStartTime>10:00:00.000Z</fridayStartTime>
+        <mondayEndTime>11:30:00.000Z</mondayEndTime>
+        <mondayStartTime>10:00:00.000Z</mondayStartTime>
+        <name>Haya 27Feb-5Mar ON</name>
+        <saturdayEndTime>11:30:00.000Z</saturdayEndTime>
+        <saturdayStartTime>10:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>11:30:00.000Z</sundayEndTime>
+        <sundayStartTime>10:00:00.000Z</sundayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <mondayEndTime>19:00:00.000Z</mondayEndTime>
+        <mondayStartTime>10:30:00.000Z</mondayStartTime>
+        <name>Abdelrahman 29Oct-4Nov</name>
+        <sundayEndTime>19:00:00.000Z</sundayEndTime>
+        <sundayStartTime>10:30:00.000Z</sundayStartTime>
+        <thursdayEndTime>20:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>15:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>19:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>10:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>20:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>15:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <name>Deactivated</name>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <wednesdayEndTime>20:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>14:15:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <mondayEndTime>17:00:00.000Z</mondayEndTime>
+        <mondayStartTime>10:30:00.000Z</mondayStartTime>
+        <name>Mahdi- Deactivated</name>
+        <sundayEndTime>17:00:00.000Z</sundayEndTime>
+        <sundayStartTime>10:30:00.000Z</sundayStartTime>
+        <thursdayEndTime>20:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>15:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>17:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>10:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>17:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>10:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>18:00:00.000Z</fridayEndTime>
+        <fridayStartTime>09:30:00.000Z</fridayStartTime>
+        <mondayEndTime>18:00:00.000Z</mondayEndTime>
+        <mondayStartTime>09:30:00.000Z</mondayStartTime>
+        <name>Eslam  Quality Loan</name>
+        <thursdayEndTime>18:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>09:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>18:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>09:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>18:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>09:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>true</default>
+        <fridayEndTime>17:30:00.000Z</fridayEndTime>
+        <fridayStartTime>08:30:00.000Z</fridayStartTime>
+        <mondayEndTime>18:30:00.000Z</mondayEndTime>
+        <mondayStartTime>08:30:00.000Z</mondayStartTime>
+        <name>Bloom Default Business Hours</name>
+        <thursdayEndTime>17:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>08:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>19:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>08:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>17:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>08:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>15:00:00.000Z</fridayEndTime>
+        <fridayStartTime>09:00:00.000Z</fridayStartTime>
+        <mondayEndTime>15:00:00.000Z</mondayEndTime>
+        <mondayStartTime>09:00:00.000Z</mondayStartTime>
+        <name>Leasing Team Business Hours</name>
+        <thursdayEndTime>15:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>09:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>15:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>09:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>15:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>09:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <mondayEndTime>20:30:00.000Z</mondayEndTime>
+        <mondayStartTime>15:00:00.000Z</mondayStartTime>
+        <name>Sherbeeny 27Feb-5Mar</name>
+        <saturdayEndTime>17:30:00.000Z</saturdayEndTime>
+        <saturdayStartTime>12:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>20:30:00.000Z</sundayEndTime>
+        <sundayStartTime>15:00:00.000Z</sundayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>20:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>15:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>20:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>15:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <name>Amir 27Feb-5Mar</name>
+        <thursdayEndTime>14:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>09:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>14:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>09:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>14:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>09:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>17:30:00.000Z</fridayEndTime>
+        <fridayStartTime>08:30:00.000Z</fridayStartTime>
+        <mondayEndTime>23:59:00.000Z</mondayEndTime>
+        <mondayStartTime>00:01:00.000Z</mondayStartTime>
+        <name>Bloom Connect Broker Management</name>
+        <sundayEndTime>23:59:00.000Z</sundayEndTime>
+        <sundayStartTime>08:30:00.000Z</sundayStartTime>
+        <thursdayEndTime>17:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>08:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>23:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>08:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>17:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>08:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>23:30:00.000Z</fridayEndTime>
+        <fridayStartTime>15:00:00.000Z</fridayStartTime>
+        <mondayEndTime>23:30:00.000Z</mondayEndTime>
+        <mondayStartTime>15:00:00.000Z</mondayStartTime>
+        <name>BFM - Haya 7-13Oct</name>
+        <saturdayEndTime>23:30:00.000Z</saturdayEndTime>
+        <saturdayStartTime>15:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>23:30:00.000Z</sundayEndTime>
+        <sundayStartTime>15:00:00.000Z</sundayStartTime>
+        <thursdayEndTime>23:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>15:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>08:30:00.000Z</fridayEndTime>
+        <fridayStartTime>00:00:00.000Z</fridayStartTime>
+        <mondayEndTime>08:30:00.000Z</mondayEndTime>
+        <mondayStartTime>00:00:00.000Z</mondayStartTime>
+        <name>BFM - Imran 7-13Oct</name>
+        <saturdayEndTime>08:30:00.000Z</saturdayEndTime>
+        <saturdayStartTime>00:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>08:30:00.000Z</sundayEndTime>
+        <sundayStartTime>00:00:00.000Z</sundayStartTime>
+        <thursdayEndTime>08:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>00:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <wednesdayEndTime>08:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>00:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>20:30:00.000Z</fridayEndTime>
+        <fridayStartTime>12:00:00.000Z</fridayStartTime>
+        <name>BFM - Yahia 7-13Oct</name>
+        <thursdayEndTime>20:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>12:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>20:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>12:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>20:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>12:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <mondayEndTime>20:30:00.000Z</mondayEndTime>
+        <mondayStartTime>12:00:00.000Z</mondayStartTime>
+        <name>BFM - Amir 7-13Oct</name>
+        <saturdayEndTime>20:30:00.000Z</saturdayEndTime>
+        <saturdayStartTime>12:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>20:30:00.000Z</sundayEndTime>
+        <sundayStartTime>12:00:00.000Z</sundayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>23:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>15:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>23:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>15:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>23:30:00.000Z</fridayEndTime>
+        <fridayStartTime>15:00:00.000Z</fridayStartTime>
+        <name>BFM - Sherbeeny OFF</name>
+        <saturdayEndTime>19:00:00.000Z</saturdayEndTime>
+        <saturdayStartTime>10:30:00.000Z</saturdayStartTime>
+        <sundayEndTime>19:00:00.000Z</sundayEndTime>
+        <sundayStartTime>10:30:00.000Z</sundayStartTime>
+        <thursdayEndTime>23:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>15:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <wednesdayEndTime>23:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>15:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>17:00:00.000Z</fridayEndTime>
+        <fridayStartTime>08:30:00.000Z</fridayStartTime>
+        <mondayEndTime>17:00:00.000Z</mondayEndTime>
+        <mondayStartTime>08:30:00.000Z</mondayStartTime>
+        <name>BFM - Noon 7-13Oct</name>
+        <thursdayEndTime>17:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>08:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>17:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>08:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>17:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>08:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <mondayEndTime>19:00:00.000Z</mondayEndTime>
+        <mondayStartTime>10:30:00.000Z</mondayStartTime>
+        <name>BFM - Abd.7-13Oct</name>
+        <sundayEndTime>19:00:00.000Z</sundayEndTime>
+        <sundayStartTime>10:30:00.000Z</sundayStartTime>
+        <thursdayEndTime>20:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>12:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>20:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>12:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>20:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>12:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <mondayEndTime>17:00:00.000Z</mondayEndTime>
+        <mondayStartTime>08:30:00.000Z</mondayStartTime>
+        <name>BFM - Sherif  7-13Oct</name>
+        <saturdayEndTime>17:00:00.000Z</saturdayEndTime>
+        <saturdayStartTime>08:30:00.000Z</saturdayStartTime>
+        <sundayEndTime>17:00:00.000Z</sundayEndTime>
+        <sundayStartTime>08:30:00.000Z</sundayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <name>Noon 27Feb-5Mar</name>
+        <saturdayEndTime>20:01:00.000Z</saturdayEndTime>
+        <saturdayStartTime>20:00:00.000Z</saturdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>20:30:00.000Z</fridayEndTime>
+        <fridayStartTime>18:00:00.000Z</fridayStartTime>
+        <mondayEndTime>17:30:00.000Z</mondayEndTime>
+        <mondayStartTime>12:00:00.000Z</mondayStartTime>
+        <name>Yahia 27Feb-5Mar</name>
+        <saturdayEndTime>20:30:00.000Z</saturdayEndTime>
+        <saturdayStartTime>18:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>17:30:00.000Z</sundayEndTime>
+        <sundayStartTime>12:00:00.000Z</sundayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>17:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>12:00:00.000Z</tuesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>18:30:00.000Z</fridayEndTime>
+        <fridayStartTime>09:30:00.000Z</fridayStartTime>
+        <mondayEndTime>18:30:00.000Z</mondayEndTime>
+        <mondayStartTime>09:30:00.000Z</mondayStartTime>
+        <name>BFM - Ezz fixed</name>
+        <thursdayEndTime>18:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>09:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>18:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>09:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>18:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>09:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>17:00:00.000Z</fridayEndTime>
+        <fridayStartTime>08:30:00.000Z</fridayStartTime>
+        <name>BFM - Ruwida 7-13Oct</name>
+        <saturdayEndTime>17:00:00.000Z</saturdayEndTime>
+        <saturdayStartTime>08:30:00.000Z</saturdayStartTime>
+        <sundayEndTime>17:00:00.000Z</sundayEndTime>
+        <sundayStartTime>08:30:00.000Z</sundayStartTime>
+        <thursdayEndTime>17:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>08:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>17:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>08:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>17:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>08:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>17:30:00.000Z</fridayEndTime>
+        <fridayStartTime>09:00:00.000Z</fridayStartTime>
+        <mondayEndTime>17:30:00.000Z</mondayEndTime>
+        <mondayStartTime>09:00:00.000Z</mondayStartTime>
+        <name>BFM Hussien 7-13Oct</name>
+        <thursdayEndTime>17:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>09:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>17:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>09:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>17:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>09:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>false</active>
+        <default>false</default>
+        <fridayEndTime>17:30:00.000Z</fridayEndTime>
+        <fridayStartTime>09:00:00.000Z</fridayStartTime>
+        <mondayEndTime>17:30:00.000Z</mondayEndTime>
+        <mondayStartTime>09:00:00.000Z</mondayStartTime>
+        <name>BFM Abdalla 7-13Oct</name>
+        <thursdayEndTime>17:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>09:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>17:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>09:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>17:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>09:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>11:30:00.000Z</fridayEndTime>
+        <fridayStartTime>10:00:00.000Z</fridayStartTime>
+        <mondayEndTime>11:30:00.000Z</mondayEndTime>
+        <mondayStartTime>10:00:00.000Z</mondayStartTime>
+        <name>Hussien 27Feb-5Mar</name>
+        <saturdayEndTime>11:30:00.000Z</saturdayEndTime>
+        <saturdayStartTime>10:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>11:30:00.000Z</sundayEndTime>
+        <sundayStartTime>10:00:00.000Z</sundayStartTime>
+        <thursdayEndTime>11:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>10:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <mondayEndTime>14:30:00.000Z</mondayEndTime>
+        <mondayStartTime>10:30:00.000Z</mondayStartTime>
+        <name>Abdullah 27Feb-5March</name>
+        <sundayEndTime>14:30:00.000Z</sundayEndTime>
+        <sundayStartTime>10:30:00.000Z</sundayStartTime>
+        <thursdayEndTime>11:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>10:30:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>11:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>10:30:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>11:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>10:30:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>20:30:00.000Z</fridayEndTime>
+        <fridayStartTime>18:00:00.000Z</fridayStartTime>
+        <name>Farah 27Feb-5March</name>
+        <saturdayEndTime>20:30:00.000Z</saturdayEndTime>
+        <saturdayStartTime>15:00:00.000Z</saturdayStartTime>
+        <thursdayEndTime>20:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>18:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>11:30:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>10:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>20:30:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>18:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <fridayEndTime>18:00:00.000Z</fridayEndTime>
+        <fridayStartTime>09:00:00.000Z</fridayStartTime>
+        <mondayEndTime>00:00:00.000Z</mondayEndTime>
+        <mondayStartTime>00:00:00.000Z</mondayStartTime>
+        <name>Community Management Business Hours</name>
+        <saturdayEndTime>00:00:00.000Z</saturdayEndTime>
+        <saturdayStartTime>00:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>00:00:00.000Z</sundayEndTime>
+        <sundayStartTime>00:00:00.000Z</sundayStartTime>
+        <thursdayEndTime>19:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>07:00:00.000Z</thursdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+        <tuesdayEndTime>00:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>00:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>18:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>07:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <holidays>
+        <activityDate>2025-06-06</activityDate>
+        <description>9 Dhul Hijjah (subject to moon)</description>
+        <isRecurring>false</isRecurring>
+        <name>Arafat Day</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-12-01</activityDate>
+        <businessHours>Bloom Connect Broker Management</businessHours>
+        <description>Formerly known as Martyrs’ Day</description>
+        <isRecurring>false</isRecurring>
+        <name>Commemoration Day</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-06-09</activityDate>
+        <description>10–12 Dhul Hijjah (subject to moon)</description>
+        <isRecurring>false</isRecurring>
+        <name>Eid Al Adha</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-06-07</activityDate>
+        <description>10–12 Dhul Hijjah (subject to moon)</description>
+        <isRecurring>false</isRecurring>
+        <name>Eid Al Adha</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-06-08</activityDate>
+        <description>10–12 Dhul Hijjah (subject to moon)</description>
+        <isRecurring>false</isRecurring>
+        <name>Eid Al Adha</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-04-01</activityDate>
+        <description>29 Ramadan to 3 Shawwal (subject to moon)</description>
+        <isRecurring>false</isRecurring>
+        <name>Eid Al Fitr</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-03-29</activityDate>
+        <description>29 Ramadan to 3 Shawwal (subject to moon)</description>
+        <isRecurring>false</isRecurring>
+        <name>Eid Al Fitr</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-03-30</activityDate>
+        <description>29 Ramadan to 3 Shawwal (subject to moon)</description>
+        <isRecurring>false</isRecurring>
+        <name>Eid Al Fitr</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-03-31</activityDate>
+        <description>29 Ramadan to 3 Shawwal (subject to moon)</description>
+        <isRecurring>false</isRecurring>
+        <name>Eid Al Fitr</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-06-27</activityDate>
+        <description>1 Muharram 1447 AH</description>
+        <isRecurring>false</isRecurring>
+        <name>Islamic New Year</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-01-01</activityDate>
+        <description>Fixed date</description>
+        <isRecurring>false</isRecurring>
+        <name>New Year&apos;s Day</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-09-04</activityDate>
+        <businessHours>Bloom Connect Broker Management</businessHours>
+        <description>12 Rabi Al Awwal</description>
+        <isRecurring>false</isRecurring>
+        <name>Prophet Muhammad’s Birthday</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-03-31</activityDate>
+        <isRecurring>false</isRecurring>
+        <name>Ramada Holiday</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-12-02</activityDate>
+        <businessHours>Bloom Connect Broker Management</businessHours>
+        <description>Celebrates unification of the Emirates</description>
+        <isRecurring>false</isRecurring>
+        <name>UAE National Day</name>
+    </holidays>
+    <holidays>
+        <activityDate>2025-12-03</activityDate>
+        <businessHours>Bloom Connect Broker Management</businessHours>
+        <description>Celebrates unification of the Emirates</description>
+        <isRecurring>false</isRecurring>
+        <name>UAE National Day</name>
+    </holidays>
+</BusinessHoursSettings>

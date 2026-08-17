@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>BFM_Case_Access</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Prepared for BFM team</description>
+        <label>BFM Case Access</label>
+        <sharedTo>
+            <group>BFM_Team</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>BFM Service Request</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Bloom_Gardens_Aldhay_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Bloom Gardens Aldhay Sharing</label>
+        <sharedTo>
+            <group>Bloom_Gardens_Al_Dhay_Community_Group</group>
+        </sharedTo>
+        <booleanFilter>(1 OR 2) AND(3 OR 4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Project_Name__c</field>
+            <operation>equals</operation>
+            <value>Bloom Gardens</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Project_Name__c</field>
+            <operation>equals</operation>
+            <value>Al Dhay</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RequestType__c</field>
+            <operation>equals</operation>
+            <value>Move In</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RequestType__c</field>
+            <operation>equals</operation>
+            <value>Move Out</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RequestType__c</field>
+            <operation>equals</operation>
+            <value>Renewal</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Park_View_Community_Sharing</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Park View Community Sharing</label>
+        <sharedTo>
+            <group>Park_View_Public_Group</group>
+        </sharedTo>
+        <booleanFilter>1 AND (2 OR 3 OR 4)</booleanFilter>
+        <criteriaItems>
+            <field>Project_Name__c</field>
+            <operation>equals</operation>
+            <value>Park View</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RequestType__c</field>
+            <operation>equals</operation>
+            <value>Move In</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RequestType__c</field>
+            <operation>equals</operation>
+            <value>Move Out</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RequestType__c</field>
+            <operation>equals</operation>
+            <value>Renewal</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ShareWthFinanceTeam</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share with Finance Team</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+        </sharedTo>
+        <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+        <criteriaItems>
+            <field>Step__c</field>
+            <operation>equals</operation>
+            <value>2</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>PendingWith__c</field>
+            <operation>equals</operation>
+            <value>Finance</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Cheque Replacement Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Cheque Withdrawal Request</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Service_Request_with_Finance_Team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share Service Request with Finance Team</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+        </sharedTo>
+        <booleanFilter>1 AND 2 AND (3 OR 4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Step__c</field>
+            <operation>equals</operation>
+            <value>Final</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>PendingWith__c</field>
+            <operation>equals</operation>
+            <value>Finance</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Post Sale Payment Deferral</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Cheque Replacement Request</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Cheque Withdrawal Request</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Service_Request_with_Government_Relation_Team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share Service Request with Government Relation Team</label>
+        <sharedTo>
+            <group>Government_Relations</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Step__c</field>
+            <operation>equals</operation>
+            <value>Final</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>PendingWith__c</field>
+            <operation>equals</operation>
+            <value>Government Relation</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Tawtheeq Enrollment</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_With_CRM_Team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share With CRM Team</label>
+        <sharedTo>
+            <group>Crm_Operations_Users</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>CaseNumber</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_With_Finance_Team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share with Finance Team</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+        </sharedTo>
+        <booleanFilter>(1 OR 2 OR 3) AND 4 AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Step__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Step__c</field>
+            <operation>equals</operation>
+            <value>5</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Step__c</field>
+            <operation>equals</operation>
+            <value>8</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>PendingWith__c</field>
+            <operation>equals</operation>
+            <value>Finance</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Default Unit</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Soho_Community_Sharing_rules</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Soho Community Sharing rules</label>
+        <sharedTo>
+            <group>Soho_Square_Group</group>
+        </sharedTo>
+        <booleanFilter>1 AND (2 OR 3 OR 4)</booleanFilter>
+        <criteriaItems>
+            <field>Project_Name__c</field>
+            <operation>equals</operation>
+            <value>Soho Square</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RequestType__c</field>
+            <operation>equals</operation>
+            <value>Move In</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RequestType__c</field>
+            <operation>equals</operation>
+            <value>Move Out</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RequestType__c</field>
+            <operation>equals</operation>
+            <value>Renewal</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

@@ -1,0 +1,116 @@
+<apex:page lightningStylesheets="true" sidebar="false" showHeader="false" showChat="false">
+  
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>My app</title>
+    <style>
+        #container {
+            display: flex;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            padding: 10px 30px;
+            color: white;
+            font-size: 16px;
+            border-radius: 2px;
+            background-color: #bd7dff;
+            border: 1px solid #bd7dff;
+            cursor: pointer;
+        }
+         #container .modal-container.slds-modal__container {
+        width: 100%!important;
+        min-width: 100%!important;
+        max-width: 100%!important;
+        min-height: 100%!important;
+        max-height: 100%!important;
+        height: 100%!important;
+        padding: 0!important;
+        margin: 0!important;
+    }
+    </style>
+</head>
+<body>
+<div id="container">
+    <!--button id="button">Open component</button-->
+</div>
+<script src="https://unpkg.com/@regulaforensics/vp-frontend-document-components@latest/dist/main.js"></script>
+<script>
+    window.$Label = window.$Label || {};
+    $Label.OCR_Key = '{!JSENCODE($Label.OCR_Key)}';
+    $Label.Salesforce_OCR_URL = '{!JSENCODE($Label.Salesforce_OCR_URL)}';
+   
+    const { defineComponents, DocumentReaderService } = window.Regula;
+    console.log('--'+defineComponents);
+    const container = document.querySelector('#container');
+    const button = document.querySelector('#button');
+    // var lexOrigin = 'https://bloomholding.lightning.force.com';
+    var lexOrigin =  $Label.Salesforce_OCR_URL; 
+   
+    window.RegulaDocumentSDK = new DocumentReaderService();
+
+    defineComponents().then(async () => {
+        await window.RegulaDocumentSDK.prepare();
+    });
+        
+        container.append(createDocumentReader());//start on load
+        
+    function createDocumentReader() {
+        const documentReaderElement = document.createElement('document-reader');
+
+        documentReaderElement.settings = {
+            startScreen: true,
+            changeCameraButton: true,
+            multipageProcessing :true,
+            devLicense:$Label.OCR_Key 
+    };
+
+        return documentReaderElement;
+    }
+
+    function documentReaderListener(data) {
+        console.log('log:Inside Doc Reader')
+        if (data.detail.action === 'PROCESS_FINISHED') {
+            const status = data.detail.data?.status;
+            const isFinishStatus = status === 1 || status === 2;
+
+            if (!isFinishStatus || !data.detail.data?.response) return;
+            window.parent.postMessage(data.detail.data.response, lexOrigin);//Fire Event to LWC
+            console.log(data.detail.data.response);
+           
+        }
+        if (data.detail?.action === 'CLOSE') {
+            const reader = document.querySelector('document-reader');
+
+            if (reader) {
+                reader.remove();
+                container.append(createDocumentReader());
+            }
+
+            // button.style.display = 'block';
+        }
+    }
+
+    function buttonListener(event) {
+        console.log('log:inside btn listner');
+        container.append(createDocumentReader());
+        event.target.style.display = 'none';
+    }
+  
+
+    container.addEventListener('document-reader', documentReaderListener);
+    button.addEventListener('click', buttonListener);
+</script>
+</body>
+</html>
+</apex:page>

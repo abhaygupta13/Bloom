@@ -1,0 +1,153 @@
+<apex:page controller="WorkOrderImageController" showHeader="false" renderAs="pdf">
+    <head>
+        <style>
+            .signature-img {
+            width: 200px !important;
+            height: 100px !important;
+            object-fit: cover;
+            }
+            
+        </style>
+    </head>
+    
+    <!-- Header Section -->
+    <div class="header">
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px; font-family: Arial, sans-serif; font-size: 12px;">
+            <tr>
+                <!-- Logo Section -->
+                <td style="width: 50%; padding: 10px; vertical-align: top;">
+                    <img src="/resource/BloomLogo" alt="Bloom Logo" style="width: 150px;" />
+                </td>
+                
+                <!-- Record Details Section -->
+                <td style="width: 50%; padding: 10px; text-align: right; vertical-align: top;">
+                    <div style="line-height: 1.5;">
+                        <div>
+                            <span style="color: #444; font-weight: bold;">Work Order Number:</span>
+                            <span>{!WorkOrder.WorkOrderNumber}</span>
+                        </div>
+                        <div>
+                            <span style="color: #444; font-weight: bold;">Project Name:</span>
+                            <span>{!WorkOrder.Project__r.Name}</span>
+                        </div>
+                        <div>
+                            <span style="color: #444; font-weight: bold;">Unit Number:</span>
+                            <span>{!WorkOrder.Unit__r.UnitNumber__c}</span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>    
+    
+    <!-- Work Details Section -->
+    <div style="font-size: 16px; font-weight: bold; color: #D444; margin-bottom: 10px;">
+        Work Details
+    </div>
+    <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 12px; table-layout: fixed; margin-bottom: 20px;">
+        <tr>
+            <td style="padding: 6px; font-weight: bold; color: #444; width: 20%;">Requester Name:</td>
+            <td style="padding: 6px; width: 30%;">{!WorkOrder.Requester_Name__c}</td>
+            <td style="padding: 6px; font-weight: bold; color: #444; width: 20%;">Type of Incident:</td>
+            <td style="padding: 6px; width: 30%;">{!WorkOrder.Type_of_Incident__c}</td>
+        </tr>
+        <tr>
+            <td style="padding: 6px; font-weight: bold; color: #444;">Requester Email:</td>
+            <td style="padding: 6px;">
+                <a href="mailto:{!WorkOrder.Requester_Email__c}" style="color: #0b6efd; text-decoration: none;">
+                    {!WorkOrder.Requester_Email__c}
+                </a>
+            </td>
+            <td style="padding: 6px; font-weight: bold; color: #444;">Incident Location:</td>
+            <td style="padding: 6px;">{!WorkOrder.Location__c}</td>
+        </tr>
+        <tr>
+            <td style="padding: 6px; font-weight: bold; color: #444;">Requester Phone:</td>
+            <td style="padding: 6px;">{!WorkOrder.Requester_Phone__c}</td>
+            <td style="padding: 6px; font-weight: bold; color: #444;">Incident Description:</td>
+            <td style="padding: 6px;">{!WorkOrder.Incident_description__c}</td>
+        </tr>
+         <tr>
+            <td style="padding: 6px; font-weight: bold; color: #444;">Category:</td>
+            <td style="padding: 6px;">{!WorkOrder.Category__c}</td>
+            <td style="padding: 6px; font-weight: bold; color: #444;">Sub Category:</td>
+            <td style="padding: 6px;">{!WorkOrder.Sub_category__c}</td>
+        </tr>
+         <tr>
+            <td style="padding: 6px; font-weight: bold; color: #444;">Problem Code:</td>
+            <td style="padding: 6px;">{!WorkOrder.Problem_Code_New__c}</td>
+            <td style="padding: 6px; font-weight: bold; color: #444;">Agent's Comment:</td>
+            <!--<td style="padding: 6px;">{!WorkOrder.Closure_Comment__c}</td>-->
+            <td style="padding: 6px;">{!WorkOrder.AgentsComments__c}</td>
+        </tr>
+         <tr>
+            <td style="padding: 6px; font-weight: bold; color: #444;">Rating:</td>
+            <td style="padding: 6px;">{!WorkOrder.Rating__c}</td>
+            <td style="padding: 6px; font-weight: bold; color: #444;">Customer Comment:</td>
+            <td style="padding: 6px;">{!WorkOrder.Customer_Comment__c}</td>
+        </tr>
+        <tr>
+            <td style="padding: 6px; font-weight: bold; color: #444;">Description:</td>
+            <td style="padding: 6px;">{!WorkOrder.Description}</td>
+            <td style="padding: 6px; font-weight: bold; color: #444;">HO Agent:</td>
+            <td style="padding: 6px;">{!WorkOrder.Owner.Name}</td>
+        </tr>
+
+    </table>
+    
+    <!-- DLP Images Section -->
+   <div style="font-size: 16px; font-weight: bold; color: #444; margin-bottom: 10px;">
+        DLP Before Images
+    </div>
+    <table style="width: 100%; border-collapse: collapse;">
+    <apex:repeat value="{!beforeImagePairs}" var="pair">
+        <tr>
+            <apex:repeat value="{!pair}" var="img">
+                <td style="padding: 5px; width: 50%;">
+                    <apex:outputPanel rendered="{!NOT(ISNULL(img))}">
+                        <img src="{!img}" class="dlp-img" alt="Work Order Image" width="300" height="400"/>
+                    </apex:outputPanel>
+                </td>
+            </apex:repeat>
+        </tr>
+    </apex:repeat>
+</table>
+    
+       <div style="font-size: 16px; font-weight: bold; color: #444; margin-bottom: 10px;">
+        DLP After Images
+    </div>
+    <table style="width: 100%; border-collapse: collapse;">
+    <apex:repeat value="{!AfterImagePairs}" var="pair">
+        <tr>
+            <apex:repeat value="{!pair}" var="img">
+                <td style="padding: 5px; width: 50%;">
+                    <apex:outputPanel rendered="{!NOT(ISNULL(img))}">
+                        <img src="{!img}" class="dlp-img" alt="Work Order Image" width="300" height="400"/>
+                    </apex:outputPanel>
+                </td>
+            </apex:repeat>
+        </tr>
+    </apex:repeat>
+</table>
+
+    
+    <!-- Signature Section -->
+        <div class="signature">
+            <table>
+                <tr>   
+                    <td style="padding: 6px; font-weight: bold; color: #444; width: 25%;">Signature:</td>
+                    <td style="padding: 6px; width: 15%;">
+                        <img src="{!signUrls}" class="signature-img" alt="Signature" />
+                    </td>
+                </tr>
+                 <tr>
+                    <td style="padding: 6px; font-weight: bold; color: #444; width: 25%;">Signed By:</td>
+                    <td style="padding: 6px; width: 25%;">{!WorkOrder.Signed_By__c}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 6px; font-weight: bold; color: #444; width: 25%;">Date:</td>
+                    <td style="padding: 6px; width: 25%;">{!todayDate}</td>
+                </tr>
+            </table>
+        </div>
+</apex:page>

@@ -1,0 +1,15 @@
+<template>
+    <lightning-quick-action-panel header="Confirm">
+    <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass"></lightning-spinner>
+    </template>
+        <div class="slds-align_absolute-center slds-text-heading_small slds-text-color_error">
+            Are you sure you want to assign this handover to yourself?
+        </div>
+        <div slot="footer">
+            <lightning-button onclick={handleCancel} variant="neutral" label="Cancel"></lightning-button>
+            &nbsp;&nbsp;
+            <lightning-button onclick={updateOwner} variant="brand" label="Confirm"></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

@@ -1,0 +1,252 @@
+<template>
+	<lightning-card variant="Narrow" title="Emirate ID Reader" icon-name="standard:account">
+
+
+
+		<div class="slds-grid slds-wrap slds-p-around_medium">
+			<div class="slds-col slds-size_1-of-3 slds-p-around_medium">
+
+				<lightning-combobox label="Salutation" value={saluation} options={salutationValues}
+					onchange={handleChange} onblur={handleBlur}></lightning-combobox>
+
+				<lightning-input type="text" value={middleName} label="Middle Name" onblur={handleBlur}>
+				</lightning-input>
+				<lightning-input type="text" value={fullNameEnglish} label="Full Name in English" onblur={handleBlur}>
+				</lightning-input>
+
+				<lightning-combobox label="Mobile Country Code" options={mobileCountrycodeValues}
+					onchange={handleChange} onblur={handleBlur}></lightning-combobox>
+
+				<lightning-input type="text" value={fullNameEnglish} label="Full Name in Arabic" onblur={handleBlur}>
+				</lightning-input>
+				<lightning-input type="text" label="Passport" onblur={handleBlur}></lightning-input>
+				<lightning-input type="phone" label="Phone" onblur={handleBlur}></lightning-input>
+				<lightning-input type="text" label="Occupation " onblur={handleBlur}></lightning-input>
+
+
+				<lightning-combobox label="Marital Status" value={martialStatus} options={martialStatusValues}
+					onchange={handleChange} onblur={handleBlur}></lightning-combobox>
+
+
+
+				<lightning-combobox label="Customer Type" value={customerType} options={customerTypevalues}
+					onchange={handleChange} onblur={handleBlur}></lightning-combobox>
+
+
+				<lightning-combobox label="Religion" value={religion} options={reigionValues} onchange={handleChange}
+					onblur={handleBlur}>
+				</lightning-combobox>
+
+				<lightning-combobox label="Resident Status" value={value} onblur={handleBlur}
+					options={residentStatusValues} onchange={handleChange}>
+				</lightning-combobox>
+				<lightning-input type="number" label="No of children" onblur={handleBlur}></lightning-input>
+
+
+
+
+
+			</div>
+			<div class="slds-col slds-size_1-of-3 slds-p-around_medium">
+				<lightning-input type="text" label="Last Name" onblur={handleBlur}></lightning-input>
+
+			<!-- 	<lightning-combobox label="Gender" options={genderValues} onblur={handleBlur} onchange={handleChange}>
+				</lightning-combobox> -->
+           <lightning-input type="text" label="Gender" onblur={handleBlur}></lightning-input>
+				<lightning-input type="email" value={homeEmail} label="Email" onblur={handleBlur}></lightning-input>
+				<lightning-input type="phone" label="Mobile" onblur={handleBlur}></lightning-input>
+				<lightning-input type="text" label="Title Arabic" onblur={handleBlur}></lightning-input>
+
+				<!-- <lightning-combobox label="Nationality" value={value} options={nationality} onblur={handleBlur}
+					onchange={handleChange}>
+				</lightning-combobox> -->
+                 <lightning-input type="text" label="Nationality" onblur={handleBlur}></lightning-input>
+				<lightning-input type="text" label="Company" onblur={handleBlur}></lightning-input>
+				<lightning-input type="text" label="No of Years Employed" onblur={handleBlur}></lightning-input>
+
+				<lightning-combobox label="Customer Sub Type" value={customerSubtype} options={customerSubTypeValues}
+					onchange={handleChange} onblur={handleBlur}></lightning-combobox>
+
+				<lightning-input type="number" step=".01" formatter="currency" label="Annual Income"
+					onblur={handleBlur}></lightning-input>
+				<lightning-input type="number" label="No of Properties Owned" onblur={handleBlur}></lightning-input>
+
+				<lightning-combobox label="Current Home Status" value={currentHomeStatus}
+					options={currentHomeStatusValues} onchange={handleChange} onblur={handleBlur}></lightning-combobox>
+
+				<lightning-combobox label="Purpose of Use" options={purposeofUseValues} onchange={handleChange}
+					onblur={handleBlur}></lightning-combobox>
+
+
+			</div>
+			<div class="slds-col slds-size_1-of-3 slds-p-around_medium">
+				<lightning-input type="text" label="First Name" onblur={handleBlur}></lightning-input>
+
+
+
+				<lightning-input type="text" label="Emirates ID #" onblur={handleBlur}></lightning-input>
+
+
+				<lightning-input type="text" label="Place of Issue" onblur={handleBlur}></lightning-input>
+
+				<lightning-input type="text" label="Place of Birth English" onblur={handleBlur}></lightning-input>
+
+
+				<lightning-input type="text" label="Qualification" onblur={handleBlur}></lightning-input>
+				<lightning-input type="text" label="Position" onblur={handleBlur}></lightning-input>
+
+				<lightning-input type="checkbox" label="Create Walk In Opportunity" onblur={handleBlur}>
+				</lightning-input>
+				<lightning-input type="checkbox" label="Create Broker Opportunity" onblur={handleBlur}>
+				</lightning-input>
+				<lightning-input type="checkbox" label="First Purchase" onblur={handleBlur}></lightning-input>
+
+				<c-custom-lookup icon-name="standard:contact" s-object-api-name="Account" label="Broker Agency"
+					onlookupupdate={handleLookupAccount} placeholder="Search Broker Agency">
+
+				</c-custom-lookup>
+				
+				<c-custom-lookup icon-name="standard:contact" s-object-api-name="Contact" label="Broker Agent"
+					onlookupupdate={handleLookupSelection} placeholder="Search Broker Agent">
+
+				</c-custom-lookup>
+				
+
+			<!-- 	<lightning-input type="date" label="Anniversary Date" onblur={handleBlur}></lightning-input> -->
+
+				<lightning-input type="text" value={dob} label="Birthdate"
+					 onblur={handleBlur}>
+				</lightning-input>
+
+				<lightning-input type="text" label="EID Expiry Date" onblur={handleBlur}></lightning-input>
+
+				<lightning-input type="text" label="Passport Expiry Date" onblur={handleBlur}
+					></lightning-input>
+
+			</div>
+		</div>
+
+		<div class="slds-text-align_center">
+
+			<lightning-button variant="Brand" label="Search" onclick={handleSearch} class="button-margin">
+			</lightning-button>
+			<template if:true={showCreatDuplicateAccount}>
+				<lightning-button variant="brand" onclick={createDuplicateAccount} label="Create Duplicate Account"
+					class="button-margin"></lightning-button>
+			</template>
+			<template if:true={showCreatAccount}>
+				<lightning-button variant="Brand" label="Create Account" onclick={CreateAccount} class="button-margin">
+				</lightning-button>
+			</template>
+			<template if:true={showNavigateButton}>
+				<lightning-button variant="brand" style="margin-right: 10px;" onclick={navigateToAccount}
+					label="Navigate to Account"></lightning-button>
+			</template>
+		</div>
+		<template if:true={showErrorMessage}>
+
+			<p style="color: red; text-align:center; font-size: larger;margin-top:30px"><b>No Record is available.</b>
+			</p>
+
+
+		</template>
+
+		<template if:true={showAccountResult}>
+			<template if:true={AccountResult}>
+				<h2 class="slds-text-heading_small slds-m-left_medium">
+					Duplicate Account Info.
+				</h2>
+			</template>
+
+
+			<div class="slds-box slds-theme–default">
+				<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+					<thead>
+						<tr class="slds-line-height_reset">
+							<th class="" scope="col">
+								Name
+							</th>
+							<th class="" scope="col">
+								Email
+							</th>
+							<th class="" scope="col">
+								Mobile Phone
+							</th>
+							<th class="" scope="col">
+								Birth Date
+							</th>
+							<th class="" scope="col">
+								Gender
+							</th>
+							<th class="" scope="col">
+								Nationality
+							</th>
+							<th class="" scope="col">
+								Passport
+							</th>
+							<th class="" scope="col">
+								Emirate Id
+							</th>
+							<th class="" scope="col">
+								Action
+							</th>
+							<th class="" scope="col">
+								Action
+							</th>
+
+
+						</tr>
+					</thead>
+					<tbody>
+						<template for:each={AccountResult} for:item="it">
+							<tr class="slds-hint-parent" key={it.id}>
+								<td data-label="Name">
+									<div class="slds-cell-wrap">
+										<a href="javascript:void(0);" data-id={it.Id}
+											onclick={navigateToAccountRecord}>{it.Name}</a>
+									</div>
+								</td>
+								<td data-label="Email">
+									<div class="slds-cell-wrap">{it.PersonEmail}</div>
+								</td>
+								<td data-label="Mobile Phone">
+									<div class="slds-cell-wrap">{it.PersonMobilePhone}</div>
+								</td>
+								<td data-label="Birthdate">
+									<div class="slds-cell-wrap">{it.PersonBirthdate}</div>
+								</td>
+								<td data-label="Gender Identity">
+									<div class="slds-cell-wrap">{it.Gender__pc}</div>
+								</td>
+								<td data-label="Nationality">
+									<div class="slds-cell-wrap">{it.Nationality__pc}</div>
+								</td>
+								<td data-label="Passport Number">
+									<div class="slds-cell-wrap">{it.PassportNumber__pc}</div>
+								</td>
+								<td data-label="Emirates ID">
+									<div class="slds-cell-wrap">{it.Emirates_Id__pc}</div>
+								</td>
+								<td data-label="Actions">
+									<div class="slds-cell-wrap">
+										<lightning-button variant="brand" data-id={it.Id} label="Update Account"
+											onclick={updateAccount}></lightning-button>
+									</div>
+								</td>
+								<td data-label="Actions">
+									<div class="slds-cell-wrap">
+										<lightning-button variant="brand" data-id={it.Id} label="Create Opportunity"
+											onclick={createOpportunity}></lightning-button>
+									</div>
+								</td>
+
+							</tr>
+						</template>
+					</tbody>
+				</table>
+
+			</div>
+		</template>
+
+	</lightning-card>
+</template>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OfferLine__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Related Offer line value</description>
+    <label>Offer Line</label>
+    <referenceTo>OfferLines__c</referenceTo>
+    <relationshipLabel>Opportunity Offer Lines</relationshipLabel>
+    <relationshipName>OpportunityOfferLines</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

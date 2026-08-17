@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalInstallment__c</fullName>
+    <description>Total sum of all the installment percentages.</description>
+    <inlineHelpText>Total sum of all the installment percentages.</inlineHelpText>
+    <label>Total Installment %</label>
+    <summarizedField>PaymentInstallments__c.InstallmentPercentage__c</summarizedField>
+    <summaryForeignKey>PaymentInstallments__c.PaymentPlan__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

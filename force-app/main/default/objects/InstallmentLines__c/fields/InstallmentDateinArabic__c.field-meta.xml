@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InstallmentDateinArabic__c</fullName>
+    <description>For capturing the arabic installment date</description>
+    <externalId>false</externalId>
+    <formula>IF( InstallmentNumber__c = 1,
+&quot;تاريخ السريان&quot;,
+CASE(
+MONTH(InstallmentDate__c ),
+1,TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;يناير&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)) ,
+2, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;فبراير&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+3, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;مارس&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+4, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;أبريل&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+5, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;مايو&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+6, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;يونيو&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+7, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;يوليو&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+8, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;أغسطس&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+9, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;سبتمبر&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)), 
+10, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;أكتوبر&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+11, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;نوفمبر&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+12, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;ديسمبر&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+&quot;None&quot;
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Installment Date in Arabic</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

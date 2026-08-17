@@ -1,0 +1,26 @@
+<apex:page sidebar="false" showHeader="false" standardController="Task">
+	<script type="text/javascript">
+
+	var softphoneSettings = {
+			WDE_IXN_MGR_URL: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__WDE_IXN_MGR_URL__c}",
+			PEF_GC_ENVIRONMENT: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_GC_ENVIRONMENT__c}"
+		}
+		
+		function loadPureCloudIxnMgr() {
+			var ixnIframe = document.getElementById("ixnIframe");
+		    var webappurl = "https://apps." + softphoneSettings.PEF_GC_ENVIRONMENT + "/crm/softphoneGenericCRM/interaction.html";
+			ixnIframe.setAttribute("src", webappurl);
+		}
+
+		var pageLoad = window.onload;
+		window.onload = function () {
+			if (pageLoad) {
+				pageLoad();
+			}
+			loadPureCloudIxnMgr();
+		}
+	</script>
+
+	<iframe allow="camera *; microphone *; autoplay *" width="100%" height="450px"   id="ixnIframe"></iframe>
+
+</apex:page>

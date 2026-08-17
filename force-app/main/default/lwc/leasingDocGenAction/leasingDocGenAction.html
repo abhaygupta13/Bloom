@@ -1,0 +1,32 @@
+<template>
+    <!-- <lightning-quick-action-panel header="Generate Document" class="outer-div"> -->
+    <lightning-spinner if:true={isLoading} class="customSpinner" alternative-text="Loading..."></lightning-spinner>
+
+    <template if:false={isLoading}>
+        <div class="grid-container  slds-p-around_medium">
+            <div class="checkbox-group">
+                <template for:each={options} for:item="option">
+                    <div key={option.value} class="checkbox-item">
+                        <lightning-input type="checkbox" label={option.label} value={option.value}
+                            onchange={handleCheckboxChange}>
+                        </lightning-input>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+
+    <!-- <div slot="footer">
+            <lightning-button label="Generate" variant="brand" onclick={handleGenerate} disabled={isLoading}></lightning-button>
+            &nbsp;&nbsp;
+            <lightning-button onclick={handleCancel} variant="neutral" label="Cancel"></lightning-button>
+        </div> -->
+    <!-- Footer buttons -->
+    <div slot="footer" class="footer-buttons">
+        <lightning-button label="Generate" variant="brand" onclick={handleGenerate} disabled={isLoading}>
+        </lightning-button>
+        <lightning-button class="slds-m-left_small" onclick={handleCancel} variant="neutral" label="Cancel">
+        </lightning-button>
+    </div>
+    <!-- </lightning-quick-action-panel> -->
+</template>

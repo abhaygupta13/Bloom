@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MasterLeasingOrder__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Master Leasing Order</label>
+    <referenceTo>LeasingOrder__c</referenceTo>
+    <relationshipLabel>Renewal Leasing Orders</relationshipLabel>
+    <relationshipName>RenewalLeasingOrders</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

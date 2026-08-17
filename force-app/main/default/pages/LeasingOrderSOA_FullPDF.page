@@ -1,0 +1,328 @@
+<apex:page renderAs="pdf"
+           showHeader="false"
+           sidebar="false"
+           standardStylesheets="false"
+           controller="LeasingSOAPDFHandler"
+           applyBodyTag="false">
+           
+
+    <head>
+        <style>
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 8.5px;
+                color: #000;
+            }
+
+            .header {
+                margin-bottom: 12px;
+            }
+
+            .divider {
+                height: 1px;
+                background: #000;
+                margin: 12px 0;
+            }
+
+            /* TABLE */
+            table.table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                border: 1px solid #000;
+                font-size: 9px;
+            }
+
+            .table th {
+                background: #5B9BD5;
+                color: white;
+                border: 1px solid #000;
+                padding: 6px 4px;
+                text-align: center;
+                font-weight: bold;
+                vertical-align: middle;
+            }
+
+            .table td {
+                background: #E7E6E6;
+                border: 1px solid #7F7F7F;
+                padding: 4px;
+                vertical-align: middle;
+                text-align: center;
+                word-wrap: break-word;
+            }
+
+            .amount {
+                text-align: right !important;
+                padding-right: 6px !important;
+            }
+
+            .textCol {
+                text-align: left !important;
+                padding-left: 5px !important;
+            }
+
+            .totalRow td {
+                background: #5B9BD5 !important;
+                color: white !important;
+                font-weight: bold;
+                border: 1px solid #000;
+            }
+
+            .footer-box {
+                margin-top: 20px;
+                padding: 12px;
+                border: 1px solid #000;
+                font-size: 10px;
+                line-height: 1.4;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <!-- <div class="header">
+            <apex:image value="{!$Resource.BloomLogo}" width="120" height="40"/>
+             <div class="header-title">Customer Statement of Account</div> -->
+
+            <!-- <table style="margin-top:10px; table-layout: auto;">
+                <tr><td colspan="3" style="text-align:center; font-size:24px; font-weight:bold; padding-bottom:15px;">Customer Statement of Account</td></tr>
+                <tr><td style="width:120px;">Customer Code</td><td>:</td><td>{!leasingOrder.SAPBPNumber__c}</td></tr>
+                <tr><td>Customer Name</td><td>:</td><td>{!leasingOrder.CustomerName__c}</td></tr>
+                <tr><td>Property Name</td><td>:</td><td>{!leasingOrder.PropertyName__c}</td></tr>
+                <tr><td>Unit No</td><td>:</td><td>{!leasingOrder.Unit__r.LeasingUnitNumber__c}</td></tr>
+                <tr><td>Date</td><td>:</td><td>{!statementDate}</td></tr> -->
+                <!-- <tr><td>Credit Balance</td><td>:</td>
+                    <td>
+                        <apex:outputText value="{0,number,##,##0.00}">
+                            <apex:param value="{!creditBalance}" />
+                        </apex:outputText>
+                     </td>
+                </tr> -->
+            <!-- </table>
+        </div> -->
+        <div class="header">
+
+            <table width="100%" style="border-collapse:collapse;">
+                <tr>
+
+                    <!-- Customer Details -->
+                    <td width="70%" valign="top">
+
+                        <table style="table-layout:auto;">
+                            <tr>
+                                <td colspan="3"
+                                    style="font-size:24px;
+                                        font-weight:bold;
+                                        padding-bottom:15px;">
+                                    Customer Statement of Account
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style="width:140px;"><b>Customer Code</b></td>
+                                <td>:</td>
+                                <td>{!leasingOrder.SAPBPNumber__c}</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Customer Name</b></td>
+                                <td>:</td>
+                                <td>{!leasingOrder.CustomerName__c}</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Property Name</b></td>
+                                <td>:</td>
+                                <td>{!leasingOrder.PropertyName__c}</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Unit No</b></td>
+                                <td>:</td>
+                                <td>{!leasingOrder.Unit__r.LeasingUnitNumber__c}</td>
+                            </tr>
+
+                            <tr>
+                                <td><b>Date</b></td>
+                                <td>:</td>
+                                <td>{!statementDate}</td>
+                            </tr>
+                        </table>
+
+                    </td>
+
+                    <!-- Logo -->
+                    <td width="30%" align="right" valign="middle">
+
+                        <apex:image value="{!$Resource.BloomEmiratesLogo}"
+                                    width="220"
+                                    height="80"/>
+
+                    </td>
+
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <table class="table">
+
+            <thead>
+                <tr>
+                    <th style="width:90px;">Posting Date</th>
+                    <th style="width:110px;">Document Number</th>
+
+                    <th style="width:100px;">
+                        Invoice Amount<br/>
+                        (Debit) AED
+                    </th>
+
+                    <th style="width:100px;">
+                        Receipt Amount<br/>
+                        (Credit) AED
+                    </th>
+
+                    <th style="width:100px;">
+                        Balance Amount<br/>
+                        AED
+                    </th>
+
+                    <th style="width:100px;">
+                        Contract Number
+                    </th>
+
+                    <th>
+                        Text
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <apex:repeat value="{!statementRows}" var="row">
+                    <tr>
+
+                        <td>{!row.postingDate}</td>
+
+                        <td>{!row.documentNumber}</td>
+
+                        <td class="amount">
+                            <apex:outputText value="{0,number,##,##0.00}">
+                                <apex:param value="{!row.invoiceAmount}"/>
+                            </apex:outputText>
+                        </td>
+
+                        <td class="amount">
+                            <apex:outputText value="{0,number,##,##0.00}">
+                                <apex:param value="{!row.receiptAmount}"/>
+                            </apex:outputText>
+                        </td>
+
+                        <td class="amount">
+                            <apex:outputText value="{0,number,##,##0.00}">
+                                <apex:param value="{!row.balanceAmount}"/>
+                            </apex:outputText>
+                        </td>
+
+                        <td>{!row.contractNumber}</td>
+
+                        <td class="textCol">{!row.text}</td>
+
+                    </tr>
+                </apex:repeat>
+
+                <!-- <apex:repeat value="{!sdRows}" var="row">
+                    <tr>
+
+                        <td>{!row.postingDate}</td>
+
+                        <td>{!row.documentNumber}</td>
+
+                        <td class="amount">
+                            <apex:outputText value="{0,number,##,##0.00}">
+                                <apex:param value="{!row.invoiceAmount}"/>
+                            </apex:outputText>
+                        </td>
+
+                        <td class="amount">
+                            <apex:outputText value="{0,number,##,##0.00}">
+                                <apex:param value="{!row.receiptAmount}"/>
+                            </apex:outputText>
+                        </td>
+
+                        <td class="amount">
+                            <apex:outputText value="{0,number,##,##0.00}">
+                                <apex:param value="{!row.balanceAmount}"/>
+                            </apex:outputText>
+                        </td>
+
+                        <td>{!row.contractNumber}</td>
+
+                        <td class="textCol">{!row.text}</td>
+
+                    </tr>
+                </apex:repeat> -->
+
+                <tr class="totalRow">
+
+                    <td colspan="2">
+                        Total
+                    </td>
+
+                    <td class="amount">
+                        <apex:outputText value="{0,number,##,##0.00}">
+                            <apex:param value="{!totalInvoice}"/>
+                        </apex:outputText>
+                    </td>
+
+                    <td class="amount">
+                        <apex:outputText value="{0,number,##,##0.00}">
+                            <apex:param value="{!totalReceipt}"/>
+                        </apex:outputText>
+                    </td>
+
+                    <td class="amount">
+                        <apex:outputText value="{0,number,##,##0.00}">
+                            <apex:param value="{!totalBalance}"/>
+                        </apex:outputText>
+                    </td>
+
+                    <td colspan="2"></td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="divider"></div>
+        <!-- <b>Total Amount in Words : {!creditBalanceWords}</b>         -->
+
+        <div class="footer-box">
+            <b>Please make all checks payable to:</b><br/>
+            {!leasingOrder.Project__r.Leasing_Company__r.Name}
+            <br/><br/>
+            <b>Or remit to:</b><br/>
+            <b>Bank Account Name:</b> {!leasingOrder.Project__r.LeasingBankAccount__r.BeneficiaryNameCorporate__c}<br/>
+            <b>Bank Name:</b> {!leasingOrder.Project__r.LeasingBankAccount__r.BankNameCorporate__c}<br/>
+            <b>Bank Account Number:</b> {!leasingOrder.Project__r.LeasingBankAccount__r.AccountNumberCorporate__c}<br/>
+            <b>IBAN:</b> {!leasingOrder.Project__r.LeasingBankAccount__r.IBANNoCorporate__c}<br/>
+            <b>SWIFT Code:</b> {!leasingOrder.Project__r.LeasingBankAccount__r.SwiftCodeCorporate__c}
+            <br/><br/>
+            If you have any clarification concerning this invoice, please contact : <b>Bloom Communities</b>, Tel: +9712 6969459 Email: <b>contactus@bloomcommunities.com</b>
+            <br/><br/>
+            <b>THANK YOU FOR YOUR BUSINESS</b>
+        </div>
+        <b><i>This is a computer generated document and does not require signature</i></b>
+    </body>
+</apex:page>

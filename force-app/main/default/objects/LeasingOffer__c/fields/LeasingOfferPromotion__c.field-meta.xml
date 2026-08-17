@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LeasingOfferPromotion__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Leasing Offer &amp; Promotion</label>
+    <referenceTo>LeasingOfferPromotion__c</referenceTo>
+    <relationshipLabel>Leasing Offers</relationshipLabel>
+    <relationshipName>Leasing_Offers</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

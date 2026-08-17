@@ -1,0 +1,30 @@
+.slds-card {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.slds-p-around_medium {
+    padding: 1rem;
+}
+
+.dummy{
+	color : black;
+}
+.outer-div {
+    position: relative;
+}
+
+.customSpinner {
+   position: absolute;
+}
+.checkbox-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 1rem; /* Space between checkboxes */
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+}

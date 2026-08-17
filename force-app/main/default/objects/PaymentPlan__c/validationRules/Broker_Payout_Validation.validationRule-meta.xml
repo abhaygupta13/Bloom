@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Broker_Payout_Validation</fullName>
+    <active>true</active>
+    <description>Sum of Broker Payout should be 100% to activate the payment plan.</description>
+    <errorConditionFormula>AND(
+ISPICKVAL(IsActive__c,&apos;Yes&apos;),
+OR( BrokerPayout__c &lt; 1.0 ,
+BrokerPayout__c &gt; 1.0
+) ,
+NOT(ISPICKVAL(Classification__c ,&apos;MEMO&apos;))
+)</errorConditionFormula>
+    <errorDisplayField>IsActive__c</errorDisplayField>
+    <errorMessage>Sum of Broker Payout should be 100% to activate the payment plan.</errorMessage>
+</ValidationRule>

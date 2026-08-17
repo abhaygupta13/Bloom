@@ -1,0 +1,36 @@
+.fullPageDark {
+     background-color: #F5F5F5; 
+    color: #fff;
+    width: 100%;
+    min-height: 100vh; /* Fill the entire viewport */
+    margin: 0;
+    padding: 1rem; /* Some padding so the card isn’t flush against the edge */
+}
+@media only screen and (max-width: 767px) {
+    .slds-table thead th {
+            font-size: 10px !important;
+    }
+}
+.custom-combobox .slds-combobox__form-element {
+    border-radius: 25px !important; /* Makes the dropdown oval */
+}
+
+.custom-combobox .slds-input {
+    border-radius: 25px !important; /* Makes the input field oval */
+    padding: 10px; 
+}
+.custom-table .slds-table thead th {
+    font-size: 4px; /* Adjust size as needed */
+    font-weight: normal;
+}
+/* Override SLDS truncation in the cells */
+.no-wrap-table .slds-truncate {
+    white-space: nowrap !important;   /* Keep text on one line */
+    overflow: visible !important;     /* Don’t clip text */
+    text-overflow: inherit !important;/* Remove ellipses */
+}
+.wrap-text-table .slds-truncate {
+    white-space: normal !important;   /* Wrap text onto new lines */
+    overflow: visible !important;     
+    text-overflow: inherit !important;
+}

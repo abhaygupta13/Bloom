@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>isLeasingOfferSigned__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>this is updating from Attach_Signed_Leasing_Offer_to_Leasing_Order flow trigger</description>
+    <label>Leasing Offer Signed</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

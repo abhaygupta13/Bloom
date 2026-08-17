@@ -1,0 +1,179 @@
+<template>
+	<div class="outer-div">
+
+		<template if:true={showLoading}>
+			<lightning-spinner alternative-text="Loading" size="medium" variant="brand" class="customSpinner">
+			</lightning-spinner>
+		</template>
+
+		<header class="slds-modal__header">
+			<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Submit for Cancellation
+			</h2>
+		</header>
+		<div class="slds-modal__content slds-p-around_medium slds-scrollable_y" id="modal-content-id-1">
+
+			<lightning-record-view-form record-id={recordId} object-api-name="SalesOrder__c">
+				<div>
+					<p class="sectionCss">Order Details</p>
+				</div>
+				<div class="slds-grid slds-wrap">
+
+					<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+						<lightning-output-field field-name="Unit__c">
+						</lightning-output-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+						<lightning-output-field field-name="Account__c">
+						</lightning-output-field>
+					</div>
+
+					<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+						<lightning-output-field field-name="Name"></lightning-output-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+						<!-- <lightning-output-field field-name="Name"></lightning-output-field> -->
+					</div>
+
+					<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+						<lightning-output-field field-name="Status__c"></lightning-output-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+						<lightning-output-field field-name="SubStatus__c">
+						</lightning-output-field>
+					</div>
+
+					<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+						<lightning-output-field field-name="BookingDate__c"></lightning-output-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+						<lightning-output-field field-name="SoldDate__c"></lightning-output-field>
+					</div>
+				</div>
+				<div>
+					<p class="sectionCss">Collection Details</p>
+				</div>
+				<div class="slds-grid slds-wrap">
+					<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+						<lightning-output-field field-name="First_Installment_Amount__c">
+						</lightning-output-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+						<lightning-output-field field-name="First_Installment_Cleared_Amount__c">
+						</lightning-output-field>
+					</div>
+
+					<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+						<lightning-output-field field-name="First_Installment_Received_Amount__c">
+						</lightning-output-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+						<!-- <lightning-output-field field-name="Name"></lightning-output-field> -->
+					</div>
+
+					<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+						<lightning-output-field field-name="ADMFeeAmount__c"></lightning-output-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+						<lightning-output-field field-name="ADM_Fee_Received_Amount__c">
+						</lightning-output-field>
+					</div>
+
+					<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+						<lightning-output-field field-name="ADMFeeWaivedAmount__c">
+						</lightning-output-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+						<lightning-output-field field-name="ADM_Fee_Cleared_Amount__c">
+						</lightning-output-field>
+					</div>
+
+					<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+						<lightning-output-field field-name="Sales_Order_Installment_Total__c">
+						</lightning-output-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+						<lightning-output-field field-name="Sales_Order_Due_Amount__c">
+						</lightning-output-field>
+					</div>
+
+					<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+						<lightning-output-field field-name="Sales_Order_Received_Amount__c">
+						</lightning-output-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+						<lightning-output-field field-name="Sales_Order_Pending_Amount__c">
+						</lightning-output-field>
+					</div>
+
+					<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+						<lightning-output-field field-name="Sales_Order_Cleared_Amount__c">
+						</lightning-output-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+						<lightning-output-field field-name="Sales_Order_Received_Not_Cleared_Amount__c">
+						</lightning-output-field>
+					</div>
+
+				</div>
+
+			</lightning-record-view-form>
+
+			<lightning-record-edit-form record-id={recordId} object-api-name="SalesOrder__c"
+				onsubmit={submitforCancellationApproval} >
+				<div>
+					<p class="sectionCss">Enter Cancellation Details</p>
+				</div>
+					<div class="slds-grid slds-wrap">
+						<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+							<lightning-input-field field-name="Reason_for_Cancellation__c" required>
+							</lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+							<lightning-input-field field-name="Refund_Applicable__c" value={value}
+								onchange={handleRefundApplicable}>
+							</lightning-input-field>
+						</div>
+
+						<div if:true={refundApplicable} class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+							<!-- <div if:true={refundApplicable}> -->
+							<lightning-input-field field-name="Refund_Reason__c">
+							</lightning-input-field><!-- </div> -->
+						</div>
+						<div if:true={refundApplicable} class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+							<!-- <div if:true={refundApplicable}> -->
+							<lightning-input-field field-name="Refund_Amount__c" value="0">
+							</lightning-input-field><!-- </div> -->
+						</div>
+
+						<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+							<lightning-input-field field-name="Forfeit_Amount__c" value={SOAmount}></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+							<lightning-input-field field-name="Reallocation_Amount__c" value="0">
+							</lightning-input-field>
+						</div>
+
+						<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+							<lightning-input-field field-name="Charges_Amount__c" value="0"></lightning-input-field>
+						</div>
+						<div class="slds-col slds-size_1-of-2 slds-p-left_xx-small">
+							<lightning-input-field field-name="Comments__c" ></lightning-input-field>
+						</div>
+
+
+					</div>
+				
+				<footer class="slds-modal__footer">
+					<lightning-button class="darkBtn" label="Submit" variant="brand" type="submit">
+					</lightning-button>
+					<lightning-button class="lightBtn slds-m-left_x-small" label="Cancel" variant="brand-outline"
+						onclick={closeModal}></lightning-button>
+				</footer>
+
+			</lightning-record-edit-form>
+
+
+		</div>
+
+	</div>
+</template>

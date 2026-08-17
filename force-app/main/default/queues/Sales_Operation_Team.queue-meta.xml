@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <doesSendEmailToMembers>true</doesSendEmailToMembers>
+    <name>Sales Operation Team</name>
+    <queueMembers>
+        <users>
+            <user>agurung@bloomholding.com</user>
+            <user>admin@bloomholding.com</user>
+            <user>aahmedali@bloomholding.com</user>
+            <user>abarhoum@bloomholding.com</user>
+            <user>amibrahim@bloomholding.com</user>
+            <user>amdiaz@bloomholding.com</user>
+            <user>gbaradie@bloomholding.com</user>
+            <user>jpereira@bloomholding.com</user>
+            <user>mkhan@bloomholding.com</user>
+            <user>msaaidi@bloomholding.com</user>
+            <user>nhirzalla@bloomholding.com</user>
+            <user>nalkaabi@bloomholding.com</user>
+            <user>noalkaabi@bloomholding.com</user>
+            <user>slanuza@bloomholding.com</user>
+            <user>salaboolan@bloomholding.com</user>
+            <user>tawadh@bloomholding.com</user>
+            <user>walamawi@bloomholding.com</user>
+            <user>zelkanzi@bloomholding.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>SalesOrder__c</sobjectType>
+    </queueSobject>
+</Queue>

@@ -1,0 +1,27 @@
+.slds-modal__container {
+  
+  width: 80%; 
+  max-width: 80%; 
+  
+}
+.slds-modal__content {
+    border-radius: 0.25rem;
+    min-height: 450px;
+}
+
+
+ .slds-modal__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 4rem 7.5rem 3rem 3rem ;
+    z-index: 100; 
+	
+}
+.outer-div {
+    position: relative;
+}
+
+.customSpinner {
+   position: absolute;
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SPA_Collection_Status__c</fullName>
+    <label>SPA Collection Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Ready for Collection</fullName>
+                <default>false</default>
+                <label>Ready for Collection</label>
+            </value>
+            <value>
+                <fullName>Collected</fullName>
+                <default>false</default>
+                <label>Collected</label>
+            </value>
+            <value>
+                <fullName>Couriered</fullName>
+                <default>false</default>
+                <label>Couriered</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

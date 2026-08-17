@@ -1,0 +1,233 @@
+<template>
+    <template if:true={showLoading}>
+        <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass"></lightning-spinner>
+    </template>
+
+    <lightning-card>
+        <div class="slds-p-around_medium">
+            <div class="slds-text-align_center slds-m-bottom_medium">
+                <h1 class="slds-text-heading_large slds-text-color_success">
+                    Welcome, {customerName}!
+                </h1>
+                <p class="slds-text-body_regular slds-m-top_x-small">
+                    Please select your unit to view or update your vehicle parking information.
+                </p>
+            </div>
+            <!-- Unit Selection -->
+            <div class="slds-m-bottom_large slds-align_absolute-center">
+                <lightning-combobox
+                    style="width: 20%;"
+                    name="unit"
+                    label="Select Your Unit"
+                    value={selectedUnitId}
+                    options={unitOptions}
+                    placeholder="Choose a unit"
+                    onchange={handleUnitChange}>
+                </lightning-combobox>
+            </div>
+            <!-- Vehicle Parking Details -->
+            <template if:true={unitFound}>
+                <div class="slds-align_absolute-center">
+                    <div class="slds-box slds-theme_default slds-m-top_medium" style="width: 95%">
+                        <div class="slds-text-heading_small slds-m-bottom_medium">
+                            Parking details for <strong>{projectName} - {buildingName}</strong>:
+                        </div>
+                      <!--<div class="slds-scrollable_x" style="height: 13rem;">-->
+                        <div class="vehicle-table-container">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_edit">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th><div class="slds-truncate slds-p-vertical_x-small">#</div></th>
+                                    <th class = "slds-text-align_center slds-p-vertical_x-small"><div class="slds-truncate"><span class="slds-required" title="required">*</span>Make & Model</div></th>
+                                    <th class = "slds-text-align_center slds-p-vertical_x-small"><div class="slds-truncate"><span class="slds-required" title="required">*</span>Plate Number</div></th>
+                                    <th class = "slds-text-align_center slds-p-vertical_x-small"><div class="slds-truncate"><span class="slds-required" title="required">*</span>Category</div></th>
+                                    <th class = "slds-text-align_center slds-p-vertical_x-small"><div class="slds-truncate"><span class="slds-required" title="required">*</span>Country/Region</div></th>
+                                    <th class = "slds-text-align_center slds-p-vertical_x-small"><div class="slds-truncate"><span class="slds-required" title="required">*</span>Effective Start Date</div></th>
+                                    <th class = "slds-text-align_center slds-p-vertical_x-small"><div class="slds-truncate"><span class="slds-required" title="required">*</span>Effective End Date</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={vehicleRows} for:item="row" for:index="index">
+                                    <tr key={row.id}>
+                                        <td><div class="slds-truncate">{row.id}</div></td>
+                                        <td>
+                                            <lightning-input
+                                                style="margin-bottom:0px"
+                                                name="VehicleMakeModel"
+                                                type="text"
+                                                variant="label-hidden"
+                                                placeholder="Enter make & model"
+                                                value=""
+                                                data-index={index}
+                                                onchange={handleInputChange}
+                                                required>
+                                            </lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input
+                                                style="margin-bottom:0px"
+                                                name="VehiclePlateNumber"
+                                                type="text"
+                                                variant="label-hidden"
+                                                placeholder="Enter plate number"
+                                                value=""
+                                                data-index={index}
+                                                onchange={handleInputChange}
+                                                required>
+                                            </lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-input
+                                                style="margin-bottom:0px"
+                                                name="Category"
+                                                type="text"
+                                                value={row.Category}
+                                                variant="label-hidden"
+                                                placeholder="Enter category"
+                                                data-index={index}
+                                                onchange={handleInputChange}
+                                                min="0"
+                                                max="9999"
+                                                step="1"
+                                                required>
+                                            </lightning-input>
+                                        </td>
+                                        <td>
+                                            <lightning-combobox
+                                                style="margin-bottom:0px"
+                                                name="CountryRegion"
+                                                value={row.CountryRegion}
+                                                options={countryOptions}
+                                                variant="label-hidden"
+                                                data-index={index}
+                                                onchange={handleInputChange}
+                                                 onclick={handleCountryClick}
+                                                dropdown-alignment="bottom-left"> 
+                                               
+                                            </lightning-combobox>
+                                        </td> 
+                                        <!-- <td>
+                                            <lightning-combobox
+                                                name="Group"
+                                                value={row.Group}
+                                                options={groupOptions}
+                                                variant="label-hidden"
+                                                data-index={index}
+                                                onchange={handleInputChange}
+                                                dropdown-alignment="auto">
+                                            </lightning-combobox>
+                                        </td>  -->
+                                         <!-- Category -->
+                                            
+                                        <td>
+                                        <lightning-input
+                                            style="margin-bottom:0px"
+                                            type="date"
+                                            name="EffectiveStartDate"
+                                            value={row.EffectiveStartDate}
+                                            variant="label-hidden"
+                                            data-index={index}
+                                            onchange={handleInputChange}>
+                                        </lightning-input>
+                                    </td> 
+                                    <td>
+                                    <lightning-input
+                                        style="margin-bottom:0px"
+                                        type="date"
+                                        name="EffectiveEndDate"
+                                        value={row.EffectiveEndDate}
+                                        variant="label-hidden"
+                                        data-index={index}
+                                        onchange={handleInputChange}>
+                                    </lightning-input>
+                                  </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                      </div>
+                        <!-- File uploader -->
+                        <div class="slds-m-top_medium slds-form-element">
+                            <lightning-input 
+                                type="file"
+                                label={label}
+                                accept={acceptedFormats}
+                                onchange={handleFileUpload}
+                                variant="label-stacked"
+                                class="file-input"
+                                required
+                            ></lightning-input>
+
+                            <template if:true={fileName}>
+                                <div class="slds-m-top_small slds-box slds-box_x-small slds-grid slds-grid_align-spread">
+                                    <span>{fileName}</span>
+                                    <lightning-icon 
+                                        icon-name="utility:close"
+                                        size="x-small"
+                                        alternative-text="Remove File"
+                                        onclick={handleRemoveFile}
+                                        class="slds-m-left_xx-small slds-icon-text-error"
+                                    ></lightning-icon>
+                                </div>
+                            </template>
+                        </div>
+                        <!-- Contract Date Fields -->
+                        <template if:true={isTenant}>
+                            <lightning-layout horizontal-align="spread" pull-to-boundary="small" class="slds-m-top_medium">
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <lightning-input
+                                        type="date"
+                                        name="tawtheeqStartDate"
+                                        label="Tawtheeq Contract Start Date"
+                                        value={tawtheeqStartDate}
+                                        onchange={handleTawtheeqDateChange}
+                                        required>
+                                    </lightning-input>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item padding="around-small" size="6">
+                                    <lightning-input
+                                        type="date"
+                                        name="tawtheeqEndDate"
+                                        label="Tawtheeq Contract End Date"
+                                        value={tawtheeqEndDate}
+                                        onchange={handleTawtheeqDateChange}
+                                        required>
+                                    </lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <template if:true={dateError}>
+                                <div class="slds-text-color_error slds-m-top_xx-small">
+                                    Start Date must be earlier than End Date.
+                                </div>
+                            </template>
+                        </template>
+                        <!-- Buttons -->
+                        <div class="slds-m-top_large slds-text-align_center">
+                            <lightning-button label="Cancel" variant="neutral" class="slds-m-right_small" onclick={handleCancel}></lightning-button>
+                            <lightning-button label="Save" variant="brand" onclick={handleSave} disabled={isSaveDisabled}></lightning-button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template if:true={showSuccess}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success slds-m-bottom_medium slds-align_absolute-center" role="alert" style="width: 35%;">
+                    <span class="slds-icon_container slds-icon-utility-success slds-m-right_x-small" title="Success">
+                        <lightning-icon icon-name="utility:success" size="small" variant="inverse"></lightning-icon>
+                    </span>
+                    <h2>Vehicle Registered Successfully!!!</h2>
+                </div>
+            </template>
+            <template if:true={showInProgressMessage}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-m-bottom_medium slds-align_absolute-center" role="alert" style="width: 40%;">
+                    <lightning-icon icon-name="utility:error" size="small" variant="inverse" class="slds-m-right_small"></lightning-icon>
+                    <h2>
+                        Your vehicle registration request is already in progress.
+                        Please wait for approval before submitting again.
+                    </h2>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="Change Owner" >
+        <div class="slds-m-around_medium">
+
+            <!-- User Lookup -->
+            <lightning-record-picker
+                label="Select New Owner"
+                placeholder="Search Users"
+                object-api-name="User"
+                value={selectedUserId}
+               onchange={handleUserChange}>
+            </lightning-record-picker>
+
+            <!-- Buttons -->
+            <div class="slds-m-top_medium slds-align_absolute-center">
+                <lightning-button 
+                    variant="brand" 
+                    label="Submit" 
+                    onclick={handleSubmit}
+                    disabled={isSubmitDisabled}>
+                </lightning-button>
+
+                <lightning-button 
+                    variant="neutral" 
+                    label="Cancel" 
+                    onclick={handleCancel}
+                    class="slds-m-left_small">
+                </lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="SLA Status">
+        <div class="container">
+            <div class="status">
+                {statusMessage}
+            </div>
+            <div class="progress-box">
+                <div class={progressBarClass} style={progressStyle}></div>
+                <div class="percentage">
+                    {percentage}%
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

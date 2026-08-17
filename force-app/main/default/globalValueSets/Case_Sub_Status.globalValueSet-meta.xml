@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>In Progress</fullName>
+        <default>false</default>
+        <label>In Progress</label>
+    </customValue>
+    <customValue>
+        <fullName>Pending Approval</fullName>
+        <default>false</default>
+        <label>Pending Approval</label>
+    </customValue>
+    <customValue>
+        <fullName>Appointment Requested</fullName>
+        <default>false</default>
+        <label>Appointment Requested</label>
+    </customValue>
+    <customValue>
+        <fullName>Received Customer Documents</fullName>
+        <default>false</default>
+        <label>Received Customer Documents</label>
+    </customValue>
+    <customValue>
+        <fullName>Contract Document Printed</fullName>
+        <default>false</default>
+        <label>Contract Document Printed</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer Signed SPA</fullName>
+        <default>false</default>
+        <label>Customer Signed SPA</label>
+    </customValue>
+    <customValue>
+        <fullName>SPA Signed-Cheques Received</fullName>
+        <default>false</default>
+        <label>SPA Signed-Cheques Received</label>
+    </customValue>
+    <customValue>
+        <fullName>Submitted to Sales Operations</fullName>
+        <default>false</default>
+        <label>Submitted to Sales Operations</label>
+    </customValue>
+    <customValue>
+        <fullName>Rejected by Sales Operations</fullName>
+        <default>false</default>
+        <label>Rejected by Sales Operations</label>
+    </customValue>
+    <customValue>
+        <fullName>Accepted by Sales Operations</fullName>
+        <default>false</default>
+        <label>Accepted by Sales Operations</label>
+    </customValue>
+    <customValue>
+        <fullName>Rejected SPA Validation</fullName>
+        <default>false</default>
+        <label>Rejected SPA Validation</label>
+    </customValue>
+    <customValue>
+        <fullName>Approved SPA Validation</fullName>
+        <default>false</default>
+        <label>Approved SPA Validation</label>
+    </customValue>
+    <customValue>
+        <fullName>SPA Counter Sign Pending</fullName>
+        <default>false</default>
+        <label>SPA Counter Sign Pending</label>
+    </customValue>
+    <customValue>
+        <fullName>SPA Counter Signed</fullName>
+        <default>false</default>
+        <label>SPA Counter Signed</label>
+    </customValue>
+    <customValue>
+        <fullName>Transfer Initiated</fullName>
+        <default>false</default>
+        <label>Transfer Initiated</label>
+    </customValue>
+    <customValue>
+        <fullName>Cancel Request</fullName>
+        <default>false</default>
+        <label>Cancel Request</label>
+    </customValue>
+    <customValue>
+        <fullName>Transfer Completed</fullName>
+        <default>false</default>
+        <label>Transfer Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Approved</fullName>
+        <default>false</default>
+        <label>Approved</label>
+    </customValue>
+    <customValue>
+        <fullName>Initiated</fullName>
+        <default>false</default>
+        <label>Initiated</label>
+    </customValue>
+    <customValue>
+        <fullName>Awaiting OPS Update</fullName>
+        <default>false</default>
+        <label>Awaiting OPS Update</label>
+    </customValue>
+    <customValue>
+        <fullName>Escalated to CRM/Management</fullName>
+        <default>false</default>
+        <label>Escalated to CRM/Management</label>
+    </customValue>
+    <customValue>
+        <fullName>Communication Sent</fullName>
+        <default>false</default>
+        <label>*Communication Sent</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer Informed</fullName>
+        <default>false</default>
+        <label>*Customer Informed</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer Guided Throught Process</fullName>
+        <default>false</default>
+        <label>*Customer Guided Throught Process</label>
+    </customValue>
+    <customValue>
+        <fullName>Construction Update Communicated</fullName>
+        <default>false</default>
+        <label>*Construction Update Communicated</label>
+    </customValue>
+    <customValue>
+        <fullName>Handover Dates Confirmed</fullName>
+        <default>false</default>
+        <label>*Handover Dates Confirmed</label>
+    </customValue>
+    <customValue>
+        <fullName>Request Attended</fullName>
+        <default>false</default>
+        <label>*Request Attended</label>
+    </customValue>
+    <customValue>
+        <fullName>Contact Details Updated</fullName>
+        <default>false</default>
+        <label>Contact Details Updated</label>
+    </customValue>
+    <customValue>
+        <fullName>Requirments Sent</fullName>
+        <default>false</default>
+        <label>Requirments Sent</label>
+    </customValue>
+    <customValue>
+        <fullName>Partial Requirments Received</fullName>
+        <default>false</default>
+        <label>Partial Requirments Received</label>
+    </customValue>
+    <customValue>
+        <fullName>Full Requirments Received</fullName>
+        <default>false</default>
+        <label>Full Requirments Received</label>
+    </customValue>
+    <customValue>
+        <fullName>Documents Requested from OPS</fullName>
+        <default>false</default>
+        <label>Documents Requested from OPS</label>
+    </customValue>
+    <customValue>
+        <fullName>Documents Received from OPS</fullName>
+        <default>false</default>
+        <label>Documents Received from OPS</label>
+    </customValue>
+    <customValue>
+        <fullName>Documents Signed by Customer</fullName>
+        <default>false</default>
+        <label>Documents Signed by Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Checklist Handed to OPS</fullName>
+        <default>false</default>
+        <label>Checklist Handed to OPS</label>
+    </customValue>
+    <customValue>
+        <fullName>New Owner Title Deed Received</fullName>
+        <default>false</default>
+        <label>*New Owner Title Deed Received</label>
+    </customValue>
+    <customValue>
+        <fullName>Escalated for Approval</fullName>
+        <default>false</default>
+        <label>Escalated for Approval</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in SPA Issuance</fullName>
+        <default>false</default>
+        <label>Delay in SPA Issuance</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in SPA Delivery</fullName>
+        <default>false</default>
+        <label>Delay in SPA Delivery</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in ROI Settlment</fullName>
+        <default>false</default>
+        <label>Delay in ROI Settlment</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Tawtheeq Issuance</fullName>
+        <default>false</default>
+        <label>Delay in Tawtheeq Issuance</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Security Deposit Refund</fullName>
+        <default>false</default>
+        <label>Delay in Security Deposit Refund</label>
+    </customValue>
+    <customValue>
+        <fullName>Despute on Rental Increase</fullName>
+        <default>false</default>
+        <label>Despute on Rental Increase</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in PM Contract</fullName>
+        <default>false</default>
+        <label>Delay in PM Contract</label>
+    </customValue>
+    <customValue>
+        <fullName>Compensation Due to Service Delay</fullName>
+        <default>false</default>
+        <label>Compensation Due to Service Delay</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Renewal</fullName>
+        <default>false</default>
+        <label>Delay in Renewal</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Issuing Lease Agreement</fullName>
+        <default>false</default>
+        <label>Delay in Issuing Lease Agreement</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Issuing SC Invoice/Receipt</fullName>
+        <default>false</default>
+        <label>Delay in Issuing SC Invoice/Receipt</label>
+    </customValue>
+    <customValue>
+        <fullName>Inoicing without ADM Approved Rates</fullName>
+        <default>false</default>
+        <label>Inoicing without ADM Approved Rates</label>
+    </customValue>
+    <customValue>
+        <fullName>SC Rate Increase</fullName>
+        <default>false</default>
+        <label>SC Rate Increase</label>
+    </customValue>
+    <customValue>
+        <fullName>Lack of Safety Messures</fullName>
+        <default>false</default>
+        <label>Lack of Safety Messures</label>
+    </customValue>
+    <customValue>
+        <fullName>Absence/Non-Functional CCTV Systems</fullName>
+        <default>false</default>
+        <label>Absence/Non-Functional CCTV Systems</label>
+    </customValue>
+    <customValue>
+        <fullName>Stranded Elevator</fullName>
+        <default>false</default>
+        <label>Stranded Elevator</label>
+    </customValue>
+    <customValue>
+        <fullName>Absence of Security Guards</fullName>
+        <default>false</default>
+        <label>Absence of Security Guards</label>
+    </customValue>
+    <customValue>
+        <fullName>Theft Incidants</fullName>
+        <default>false</default>
+        <label>Theft Incidants</label>
+    </customValue>
+    <customValue>
+        <fullName>Pets</fullName>
+        <default>false</default>
+        <label>Pets</label>
+    </customValue>
+    <customValue>
+        <fullName>Isolation Issues</fullName>
+        <default>false</default>
+        <label>Isolation Issues</label>
+    </customValue>
+    <customValue>
+        <fullName>Private Events Disturbance</fullName>
+        <default>false</default>
+        <label>Private Events Disturbance</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Move in Rectification</fullName>
+        <default>false</default>
+        <label>Delay in Move in Rectification</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Checkout Report Delivery</fullName>
+        <default>false</default>
+        <label>Delay in Checkout Report Delivery</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Quotation Issuance</fullName>
+        <default>false</default>
+        <label>Delay in Quotation Issuance</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Required Approvals</fullName>
+        <default>false</default>
+        <label>Delay in Required Approvals</label>
+    </customValue>
+    <customValue>
+        <fullName>Created</fullName>
+        <default>false</default>
+        <label>Created</label>
+    </customValue>
+    <customValue>
+        <fullName>Assign to me</fullName>
+        <default>false</default>
+        <label>Assign to me</label>
+    </customValue>
+    <customValue>
+        <fullName>Assigned</fullName>
+        <default>false</default>
+        <label>Assigned</label>
+    </customValue>
+    <customValue>
+        <fullName>Email Requirements Sent</fullName>
+        <default>false</default>
+        <label>Email Requirements Sent</label>
+    </customValue>
+    <customValue>
+        <fullName>Reminder Email Sent</fullName>
+        <default>false</default>
+        <label>Reminder Email Sent</label>
+    </customValue>
+    <customValue>
+        <fullName>*Requirements Not Received</fullName>
+        <default>false</default>
+        <label>*Requirements Not Received</label>
+    </customValue>
+    <customValue>
+        <fullName>Partial Requirements Received</fullName>
+        <default>false</default>
+        <label>Partial Requirements Received</label>
+    </customValue>
+    <customValue>
+        <fullName>Full Requirements Received</fullName>
+        <default>false</default>
+        <label>Full Requirements Received</label>
+    </customValue>
+    <customValue>
+        <fullName>Initiate Resale Request</fullName>
+        <default>false</default>
+        <label>Initiate Resale Request</label>
+    </customValue>
+    <customValue>
+        <fullName>Amendment Signed by Customer</fullName>
+        <default>false</default>
+        <label>Amendment Signed by Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer&apos;s Copy Shared with Customer</fullName>
+        <default>false</default>
+        <label>*Customer&apos;s Copy Shared with Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Request Completed</fullName>
+        <default>false</default>
+        <label>*Request Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>SPA Registration Delay</fullName>
+        <default>false</default>
+        <label>SPA Registration Delay</label>
+    </customValue>
+    <customValue>
+        <fullName>Pre/Title Deed Registration Delay</fullName>
+        <default>false</default>
+        <label>Pre/Title Deed Registration Delay</label>
+    </customValue>
+    <customValue>
+        <fullName>Mortgage Registration Delay</fullName>
+        <default>false</default>
+        <label>Mortgage Registration Delay</label>
+    </customValue>
+    <customValue>
+        <fullName>Resale/NOC Issuance Delay</fullName>
+        <default>false</default>
+        <label>Resale/NOC Issuance Delay</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Receipts</fullName>
+        <default>false</default>
+        <label>Delay in Receipts</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Cheque Withdrawal</fullName>
+        <default>false</default>
+        <label>Delay in Cheque Withdrawal</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Updating SOA/Issuance</fullName>
+        <default>false</default>
+        <label>Delay in Updating SOA/Issuance</label>
+    </customValue>
+    <customValue>
+        <fullName>Delay in Amendment Issuance</fullName>
+        <default>false</default>
+        <label>Delay in Amendment Issuance</label>
+    </customValue>
+    <customValue>
+        <fullName>Multiple Visits Requested for Additional Documents Signature</fullName>
+        <default>false</default>
+        <label>Multiple Visits Requested for Additional Documents Signature</label>
+    </customValue>
+    <customValue>
+        <fullName>Requirments Not Received</fullName>
+        <default>false</default>
+        <label>Requirments Not Received</label>
+    </customValue>
+    <customValue>
+        <fullName>Wrong Request Entered</fullName>
+        <default>false</default>
+        <label>*Wrong Request Entered</label>
+    </customValue>
+    <customValue>
+        <fullName>ADDC NOC Request Sent to OPS</fullName>
+        <default>false</default>
+        <label>ADDC NOC Request Sent to OPS</label>
+    </customValue>
+    <customValue>
+        <fullName>NOC Shared With Customer</fullName>
+        <default>false</default>
+        <label>NOC Shared With Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>ADDC Registration Submitted</fullName>
+        <default>false</default>
+        <label>ADDC Registration Submitted</label>
+    </customValue>
+    <customValue>
+        <fullName>Following up with concered department</fullName>
+        <default>false</default>
+        <label>Following up with concered department</label>
+    </customValue>
+    <customValue>
+        <fullName>Sent to OPS to Update</fullName>
+        <default>false</default>
+        <label>*Sent to OPS to Update</label>
+    </customValue>
+    <customValue>
+        <fullName>Address Shared with OPS to Courier</fullName>
+        <default>false</default>
+        <label>*Address Shared with OPS to Courier</label>
+    </customValue>
+    <customValue>
+        <fullName>ADDC Confirmation Received</fullName>
+        <default>false</default>
+        <label>*ADDC Confirmation Received</label>
+    </customValue>
+    <customValue>
+        <fullName>Request Sent to Concered Department</fullName>
+        <default>false</default>
+        <label>*Request Sent to Concered Department</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer Not Responding</fullName>
+        <default>false</default>
+        <label>Customer Not Responding</label>
+    </customValue>
+    <customValue>
+        <fullName>Inspection Booked</fullName>
+        <default>false</default>
+        <label>Inspection Booked</label>
+    </customValue>
+    <customValue>
+        <fullName>Inspection Rescheduled</fullName>
+        <default>false</default>
+        <label>Inspection Rescheduled</label>
+    </customValue>
+    <customValue>
+        <fullName>Inspection Done</fullName>
+        <default>false</default>
+        <label>Inspection Done</label>
+    </customValue>
+    <customValue>
+        <fullName>De-snag Completed</fullName>
+        <default>false</default>
+        <label>De-snag Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Handover Completed</fullName>
+        <default>false</default>
+        <label>Handover Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>Checklist sent for signature</fullName>
+        <default>false</default>
+        <label>Checklist sent for signature</label>
+    </customValue>
+    <customValue>
+        <fullName>NOC Shared</fullName>
+        <default>false</default>
+        <label>NOC Shared</label>
+    </customValue>
+    <customValue>
+        <fullName>NOC Expired. Transfer Not Completed</fullName>
+        <default>false</default>
+        <label>*NOC Expired Transfer Not Completed</label>
+    </customValue>
+    <customValue>
+        <fullName>SOA Shared</fullName>
+        <default>false</default>
+        <label>*SOA Shared</label>
+    </customValue>
+    <customValue>
+        <fullName>Receipts Shared</fullName>
+        <default>false</default>
+        <label>*Receipts Shared</label>
+    </customValue>
+    <customValue>
+        <fullName>Legal Case</fullName>
+        <default>false</default>
+        <label>*Legal Case</label>
+    </customValue>
+    <customValue>
+        <fullName>Checklist Assigned to OPS</fullName>
+        <default>false</default>
+        <label>*Checklist Assigned to OPS</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer Contacted</fullName>
+        <default>false</default>
+        <label>*Customer Contacted</label>
+    </customValue>
+    <customValue>
+        <fullName>*Finalized</fullName>
+        <default>false</default>
+        <label>*Finalized</label>
+    </customValue>
+    <customValue>
+        <fullName>*SPA &amp; Cancellation Signed</fullName>
+        <default>false</default>
+        <label>*SPA &amp; Cancellation Signed</label>
+    </customValue>
+    <customValue>
+        <fullName>Request In Progress With Concered Department</fullName>
+        <default>false</default>
+        <label>Request In Progress With Concered Department</label>
+    </customValue>
+    <customValue>
+        <fullName>Awaiting Management Feedback</fullName>
+        <default>false</default>
+        <label>Awaiting Management Feedback</label>
+    </customValue>
+    <customValue>
+        <fullName>*Complaint Resolved</fullName>
+        <default>false</default>
+        <label>*Complaint Resolved</label>
+    </customValue>
+    <customValue>
+        <fullName>Waiting Customer’ Email confirmation</fullName>
+        <default>false</default>
+        <label>Waiting Customer’ Email confirmation</label>
+    </customValue>
+    <customValue>
+        <fullName>Pending Customer’s Signature</fullName>
+        <default>false</default>
+        <label>Pending Customer’s Signature</label>
+    </customValue>
+    <customValue>
+        <fullName>Resale Documents under Preparation by OPS</fullName>
+        <default>false</default>
+        <label>Resale Documents under Preparation by OPS</label>
+    </customValue>
+    <customValue>
+        <fullName>Under Evaluation/Registration Payment</fullName>
+        <default>false</default>
+        <label>Under Evaluation/Registration Payment</label>
+    </customValue>
+    <customValue>
+        <fullName>Awaiting documents from Customer</fullName>
+        <default>false</default>
+        <label>Awaiting documents from Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Called – No Reply</fullName>
+        <default>false</default>
+        <label>Called – No Reply</label>
+    </customValue>
+    <customValue>
+        <fullName>Called – Switched Off</fullName>
+        <default>false</default>
+        <label>Called – Switched Off</label>
+    </customValue>
+    <customValue>
+        <fullName>Pending Mortgage Release</fullName>
+        <default>false</default>
+        <label>Pending Mortgage Release</label>
+    </customValue>
+    <customValue>
+        <fullName>Under SC payment</fullName>
+        <default>false</default>
+        <label>Under SC payment</label>
+    </customValue>
+    <customValue>
+        <fullName>Pending Title deed issuance</fullName>
+        <default>false</default>
+        <label>Pending Title deed issuance</label>
+    </customValue>
+    <customValue>
+        <fullName>Pending Check-In</fullName>
+        <default>false</default>
+        <label>Pending Check-In</label>
+    </customValue>
+    <customValue>
+        <fullName>Checked Out</fullName>
+        <default>false</default>
+        <label>Checked Out</label>
+    </customValue>
+    <customValue>
+        <fullName>Checked-in</fullName>
+        <default>false</default>
+        <label>Checked-in</label>
+    </customValue>
+    <customValue>
+        <fullName>Submitted to BFM</fullName>
+        <default>false</default>
+        <label>Submitted to BFM</label>
+    </customValue>
+    <customValue>
+        <fullName>1st Extension</fullName>
+        <default>false</default>
+        <label>1st Extension</label>
+    </customValue>
+    <customValue>
+        <fullName>2nd Extension</fullName>
+        <default>false</default>
+        <label>2nd Extension</label>
+    </customValue>
+    <description>Case Sub Status</description>
+    <masterLabel>Case Sub Status</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

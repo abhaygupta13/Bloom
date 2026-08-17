@@ -1,0 +1,252 @@
+<template>
+	<lightning-quick-action-panel header="Raise Complain Request/Case" icon-name="standard:case" class="outer-div">
+		<template if:true={isLoading}>
+			<lightning-spinner alternative-text="Loading" size="medium" variant="brand" class="customSpinner">
+			</lightning-spinner>
+		</template>
+	<template if:true={isduplicatefound}>
+			<div style="text-align: center;color: #F00;margin-bottom:13px ;font-size: 16px;font-weight: 400;">
+				We have found potential duplicate with same details.
+				<template if:true={showOneDuplicateCaseRecord}>
+					<template for:each={duplicatecaserecords} for:item="item">
+						<div key={item.id} style="display: inline-block; margin-right: 10px;margin-left:2px">
+
+							<a href="#" data-id={item.Id} target="_blank" onclick={navigateToRecordPage}>
+								View Duplicate
+							</a>
+						</div>
+					</template>
+				</template>
+			</div>
+			<template if:true={showAllDuplicateCases}>
+				<div style="margin-bottom: 20px;">
+					<div class="slds-grid slds-wrap slds-gutters">
+						<template for:each={duplicatecaserecords} for:item="item">
+							<div key={item.id}>
+								<div class="slds-col" style="margin-top:4px">
+									<span>	<lightning-button variant="brand-outline" label={item.CaseNumber} data-id={item.Id} onclick={navigateToRecordPage} icon-name="standard:case"></lightning-button></span>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</template>
+		</template>
+	
+
+		<div class="slds-p-horizontal_small">
+
+				<template if:false={recordId}>
+				<div class="slds-grid slds-gutters">
+					<!-- First Column -->
+					<div class="slds-col slds-size_1-of-2">
+						<c-custom-lookup icon-name="standard:contact" s-object-api-name="SalesOrder__c"
+							label="Sales Order/Unit" onlookupupdate={handleLookupSelection}
+							placeholder="Search Salesorder...">
+
+						</c-custom-lookup>
+					</div>
+					<div class="slds-col slds-size_1-of-2">
+                     <template if:true={showLookupAccountName}>
+					<lightning-record-view-form record-id={lookupSalesorderid} object-api-name="SalesOrder__c">
+				
+						<lightning-output-field field-name="Account__c"> </lightning-output-field>
+					
+				</lightning-record-view-form>
+                     </template>
+				
+			
+
+					</div>
+					</div>
+					<div class="slds-grid slds-gutters">
+					<div class="slds-col slds-size_1-of-2">
+						<lightning-input type="text" variant="standard" name="name" label="Mobile Number"
+							value={personMObilleNumber} disabled={accountdisabled}></lightning-input>
+					</div>
+					<div class="slds-col slds-size_1-of-2">
+						<lightning-input type="text" variant="standard" name="name" label="Email"
+							value={personEmail} disabled={accountdisabled}></lightning-input>
+					</div>
+					</div>
+				
+			</template>
+
+			<template if:true={recordId}>
+				
+					<lightning-record-view-form record-id={recordId} object-api-name="SalesOrder__c">
+				<div class="slds-grid slds-gutters">
+					<!-- First Column -->
+					<div class="slds-col slds-size_1-of-2">
+						<lightning-output-field field-name="Name"> </lightning-output-field>
+					</div>
+					<div class="slds-col slds-size_1-of-2">
+
+						<lightning-output-field field-name="Account__c"> </lightning-output-field>
+
+					</div>
+				
+				
+				</div>
+			</lightning-record-view-form>
+					<div class="slds-grid slds-gutters">
+					<!-- First Column -->
+					<div class="slds-col slds-size_1-of-2">
+						<lightning-input type="text" variant="standard" name="name" label="Mobile"
+							value={mobilePhonevalue} disabled={accountdisabled}></lightning-input>
+
+					</div>
+					<div class="slds-col slds-size_1-of-2">
+
+						<lightning-input type="text" variant="standard" name="name" label="Email"
+							value={emailValue} disabled={accountdisabled}></lightning-input>
+
+
+					</div>
+				
+				
+				</div>
+			</template>
+			
+			<div class="slds-grid slds-gutters">
+				<!-- First Column -->
+				<div class="slds-col slds-size_1-of-2">
+					<lightning-combobox label="Request Type" name="Request Type" value={selectedRecordTypeId}
+						options={recordTypeOptions} onchange={handleRecordTypeChange}>
+					</lightning-combobox>
+				</div>
+				<template if:true={showError}>
+					<p style="color: red;">Please select Case Type.</p>
+				</template>
+
+				
+				<div class="slds-col slds-size_1-of-2">
+					<lightning-combobox label="Request Sub Type"  class="requestSubtypeCmp" name="Request Sub Type" value={caseType}
+						options={caseSubtypes} disabled={isSubTypeDisabled} onchange={handleCaseTypeChange} required>
+					</lightning-combobox>
+					
+				</div>
+			</div>
+			<div class="slds-grid slds-gutters">
+			<div class="slds-col slds-size_1-of-2">
+
+
+				<lightning-combobox label="Reasons" name="Reasons" value={reasonValue} options={caseReasons}
+					disabled={isSubTypeDisabled} onchange={handleCaseTypeChange}>
+				</lightning-combobox>
+			</div>
+			<!--<template if:true={showDefaultOwner}>
+			<div class="slds-col slds-size_1-of-2">
+            <lightning-icon icon-name="action:user" class="custom-margin-top" alternative-text="user" size="x-small"></lightning-icon>
+			<span class="owner-value">{ownerValue}</span>
+			</div>
+			</template>-->
+      
+			</div>
+		
+
+            <lightning-textarea label="Description" name="Description"  class="descriptionCmp" value={descriptionValue} onchange={handleCaseTypeChange} required>
+			</lightning-textarea>
+
+			<lightning-textarea label="Internal Comments"  value={internalCommentValue} name="Internal Comments" onchange={handleCaseTypeChange}>
+			</lightning-textarea>
+
+			
+
+
+
+
+
+			<!--   <template if:true={casematuritydate}>
+                <lightning-record-edit-form object-api-name="ReceiptAcknowledgement__c">
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col">
+                            <lightning-input-field field-name="MaturityDate__c"> </lightning-input-field>
+                            <lightning-input-field field-name="ReferenceNumber__c"></lightning-input-field>
+                            <lightning-input-field field-name="Amount__c"></lightning-input-field>
+                        </div>
+                    </div>
+                </lightning-record-edit-form>
+            </template> -->
+			<template if:true={showNextBtn}>
+				<div style="padding: 10px">
+					<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+						border="1" width="100%">
+						<thead>
+							<tr class="slds-line-height_reset">
+								<td>
+									<lightning-input type="checkbox" onchange={handleSelctAllChecks}></lightning-input>
+								</td>
+								<td style="font-weight: bold">ReferenceNumber</td>
+								<td style="font-weight: bold">Amount</td>
+								<td style="font-weight: bold">MaturityDate</td>
+							</tr>
+						</thead>
+						<template for:each={receiptList} for:item="recp">
+							<tr key={recp.Id} class="slds-hint-parent">
+								<td>
+									<lightning-input type="checkbox" checked={recp.isSelected}
+										onchange={handleCheckChange} value={recp.index}></lightning-input>
+								</td>
+								<td>{recp.ReferenceNumber}</td>
+								<td>{recp.Amount}</td>
+								<td>{recp.MaturityDate}</td>
+							</tr>
+						</template>
+					</table>
+
+				</div>
+			</template>
+			<template if:true={errorMessageonReceipt}>
+				<p style="color: red; font-weight: bold; text-align: center; font-size: 18px;">No records are available
+				</p>
+			</template>
+
+
+			<br />
+
+        </div>
+
+			<template if:true={showRecpAckEntry}>
+				<div style="padding: 10px">
+					<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered"
+						border="1" width="100%">
+						<thead>
+							<tr class="slds-line-height_reset">
+
+								<td style="font-weight: bold">ReferenceNumber</td>
+								<td style="font-weight: bold">Amount</td>
+								<td style="font-weight: bold">MaturityDate</td>
+							</tr>
+						</thead>
+						<template for:each={getSelectedReceipts} for:item="recp">
+							<tr key={recp.Id} class="slds-hint-parent">
+
+								<td>{recp.ReferenceNumber}</td>
+								<td>{recp.Amount}</td>
+								<td>
+									<lightning-input type="date" value={recp.MaturityDate} data-index={recp.index}
+										onchange={updateMaturityDate} required="true"></lightning-input>
+								</td>
+							</tr>
+						</template>
+					</table>
+				</div>
+			</template>
+			<br />
+
+
+		 <template if:true={showSubmitBtn}>
+        <div class="slds-m-around_small slds-text-align_center">
+            <lightning-button label="Submit" variant="brand" onclick={handleSubmitActions} disabled={submitButtondisable} class="slds-m-right_small">
+            </lightning-button>
+
+            <lightning-button label="Clear" variant="brand" onclick={clearRaiseCase} disabled={submitButtondisable}>
+            </lightning-button>
+        </div>
+    </template>
+
+
+	</lightning-quick-action-panel>
+
+</template>

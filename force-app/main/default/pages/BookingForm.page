@@ -1,0 +1,478 @@
+<apex:page controller="bookingFormHandler" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    <head>
+        <style>
+            /*@page {
+            size: A4;
+            margin:25mm 10mm 10mm;
+            @bottom-left {
+            content: element(footer);
+            }
+            @top-left {
+            content: element(header);
+            }
+            @bottom-right {
+            content: "Page " counter(page) " of " counter(pages);
+            font-size: 12px;
+            }
+            }
+            
+            
+            div.divFooter {
+            display: block;
+            padding: 5px;
+            position: running(footer);
+            }
+            div.divHeader {
+            margin:10px 0px;
+            display: block;
+            padding: 5px;
+            position: running(header);
+            align:right;
+            }
+            body {
+            font-size:14px;
+            font-family: Calibri, sans-serif;
+            }
+            table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            }
+            ul li, ol li{
+            margin-bottom:10px;
+            text-align: justify;
+            }*/
+            
+            
+            
+            
+            @page {
+            size: A4;
+            margin:30mm 5mm;
+            @bottom-left {
+            content: element(footer);
+            }
+            @top-left {
+            content: element(header);
+            }
+            @bottom-right {
+            content: "Page " counter(page) " of " counter(pages);
+            font-size: 12px;
+            }
+            }
+            @page:first {
+            @bottom-left {
+            content: element(footer);
+            }
+            @top-left {
+            content: element(header);
+            }
+            } 
+            
+            div.divFooter {
+            display: block;
+            padding: 5px;
+            position: running(footer);
+            }
+            div.divHeader {
+            margin:0px 0px;
+            display: block;
+            padding: 0px;
+            position: running(header);
+            }
+            body {
+            font-size:14px;
+            font-family: Calibri, sans-serif;
+            }
+            table{
+            width: 100%;
+            }
+            div.divFooter {
+            display: block;
+            padding: 5px;
+            position: running(footer);
+            }
+            .termNCondition{
+            //page-break-before: always;
+            } 
+            .greyColor{
+            background: #ccc;
+            }
+            .contractTable{
+            border-collapse: collapse;
+            }
+            .contractTable tr th{
+            background:#f2f2f2;
+            padding:8px;
+            font-size:13px;
+            color:#000;
+            border: 1px solid #000;
+            font-weight: 300;
+            }
+            .contractTable tr td{
+            border: 1px solid #000;
+            padding:8px;
+            font-size:13px;
+            color:#000;    
+            vertical-align: middle;
+            }
+            .heading{
+            font-size: 16px;
+            text-align: center;
+            font-weight: 600;
+            }
+            .contractTable tr td.noBorder{
+            border: none;
+            padding: 0 0 .5rem;
+            }
+            .importantRed{
+            color: #ff0000;
+            }
+            .signatureLine{
+            border-top: 1px solid #000;
+            margin-top: 2rem;
+            }
+        </style>
+        
+        
+    </head>
+    
+    <div class="divHeader">
+    <div style="float:left; margin-top: 0px;"> <!-- Adjust the margin-top value to move the left logo up -->
+        <apex:image alt="Logo" value="{!$Resource.BloomgLiving}" width="120px" height="70px"/>
+    </div>
+    <div style="float:right; margin-top: 0px;"> <!-- Adjust the margin-top value to move the right logo up -->
+        <apex:image alt="Logo" value="{!$Resource.Granda}" width="120px" height="70px"/>
+    </div>
+</div>
+    
+<div class="divFooter">
+        <table class="paymentMethod">
+            <tr>
+                <td><a><apex:image alt="Logo" value="{!$Resource.BloomLogo}" width="100px" height="30px"/></a>
+                </td>
+                <td style="width: 100px;"></td>
+                <td><p style="font-size: 8px; color: #4d5156;">
+                    Bloom District Properties - Sole Proprietorship - L.L.C., P.O. Box 28928, Abu Dhabi, UAE<br/>
+                    T +971 2 6969500 call free 800 bloom (25666) F +971 2 6431144 <br/>
+                    Email: <span style="color: #8e8ee5;">info@bloom.co.ae - www.bloom.co.ae</span>
+                    </p></td> 
+            </tr>
+        </table>
+    </div> 
+    <h3 class="heading">BOOKING FORM</h3>
+    <table style="width: 60%" class="contractTable">
+        <tr>
+            
+            <td colspan="2" class="noBorder">
+                Date:  <apex:outputText value="{0,date,dd-MMM-yyyy}"> <apex:param value="{!NOW()}" /> </apex:outputText>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 100px;" class="greyColor">Order No:</td>
+            <td>{!OppList[0].OpportunityNumber__c}</td>
+            <td style="width: 100px;" class="greyColor">Project Name:</td>
+            <td>{!offerDetails.unitRecord.Project__r.Name}</td>
+        </tr>
+        
+    </table>
+    <br/>
+    <table id="table" width="100%" class="contractTable">
+        <tr>
+            <td colspan="7" class="greyColor">
+                Property Details: 
+            </td>
+        </tr>
+        <tr>
+            <td class="greyColor">Unit Number </td>
+            <td class="greyColor">Unit Type</td>
+            <td class="greyColor">No. of Bedrooms</td>
+            <td class="greyColor">Purchase Price</td>
+            <td class="greyColor">Payment Plan</td>
+            <td class="greyColor">Discount</td>
+            <td class="greyColor">Final Purchase Price</td>
+        </tr>
+        
+        
+        
+        
+        
+        <apex:repeat value="{!UnitList}" var="unit">
+            <tr>
+                <td>{!unit.UnitNumber__c}</td>
+                <td>{!unit.UnitType__c}</td>
+                <td>{!unit.NumberOfBedrooms__c}</td>
+                <td><!--{!unit.currencyISOCOde}--> <apex:outputText value="{0, number,  ###,##0}">
+                    <apex:param value="{!unit.SellingPrice__c}" />
+                    </apex:outputText>
+                    
+                </td>
+                <td>
+                    <!--{!paymentplanNameMap[unit.id]}-->{!paymentplanDescriptionMap[unit.id]}
+                </td>
+                <td> <!--{!offerDetails.unitRecord.currencyISOCOde}-->  <apex:repeat value="{!offerDetails.applicablePaymentPlansCalculated}" var="paymentPlans">
+                    <apex:outputPanel rendered="{!paymentPlans.isSelected}">
+                        <apex:outputText value="{0, number,  ###,##0}">
+                            <apex:param value="{!( offerDetails.unitRecord.SellingPrice__c - paymentPlans.discountedUnitSalesPrice )}" />
+                        </apex:outputText></apex:outputPanel></apex:repeat>
+                </td>
+                <td>
+                    
+                    <!--{!offerDetails.unitRecord.currencyISOCOde}-->  <apex:repeat value="{!offerDetails.applicablePaymentPlansCalculated}" var="paymentPlans">
+                    <apex:outputPanel rendered="{!paymentPlans.isSelected}">
+                        <apex:outputText value="{0, number,  ###,##0}">
+                            <apex:param value="{!(unit.SellingPrice__c - (offerDetails.unitRecord.SellingPrice__c - paymentPlans.discountedUnitSalesPrice) )}" />
+                        </apex:outputText></apex:outputPanel></apex:repeat>
+                    
+                </td>
+            </tr>
+        </apex:repeat>
+        
+        <tr>
+            <td colspan="3" align="right">Total</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                
+                {!offerDetails.unitRecord.currencyISOCOde}
+                <apex:outputText value="{0, number,  ###,##0}">
+                    <apex:param value="{!Total}" />
+                </apex:outputText>
+                
+            </td>
+        </tr>
+    </table>
+    <br/>
+    
+    <table width="100%" class="contractTable">
+        <tr>
+            <td colspan="6" class="greyColor">
+                Client Details: 
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">Customer Name: {!customerName} </td>
+            <td  colspan="3">Nationality: {!OppList[0].Account.Nationality__c}</td>
+        </tr>
+        <tr>
+            <td colspan="3">Passport No: {!OppList[0].Account.PassportNumber__pc} </td>
+            <td  colspan="3">Emirates ID Number: {!OppList[0].Account.Emirates_Id__pc}</td>
+        </tr>
+        <tr>
+            <td colspan="3">Mobile No: {!OppList[0].Account.MobileCountryCode__pc} {!OppList[0].Account.PersonMobilePhone}</td>
+            <td  colspan="3">E-mail Address: {!OppList[0].Account.PersonEmail}</td>
+        </tr>
+        <tr>
+            <td colspan="3">Source :{!OppList[0].LeadSource} </td>
+            <td  colspan="3" >Payment Mode :</td>
+            
+        </tr>
+        <tr>
+            <td colspan="3">Broker Name : {!OppList[0].BrokerAgencyAccount__r.Name} </td>
+            <td  colspan="3">Broker Agent(if applicable) : {!OppList[0].BrokerAgentContact__r.Name}</td>
+        </tr>
+        
+    </table>
+    <br/>
+    
+    <table width="100%" class="contractTable">
+        <tr>
+            <td  class="greyColor">
+                <apex:repeat value="{!UnitList}" var="unit"> <b> Payment Plan:</b>{!paymentplanDescriptionMap[unit.id]}</apex:repeat>
+            </td>
+            <td  class="greyColor">
+                <apex:outputPanel rendered="{!offerDetails.offerLinesApplied}" >
+                    <b> Offer:</b> {!offerDetails.offerRecord.Name} 
+                </apex:outputPanel>                
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"> 
+                <apex:outputPanel rendered="{!offerDetails.offerLinesApplied}" >                    
+                    <table width="100%">
+                        <tr>
+                            <!--td style="max-width:50%;">
+<apex:variable value="{!1}" var="rowNum"/>
+<apex:repeat value="{!offerDetails.applicableOfferLinesCalculated}" var="offerLine">
+
+<apex:outputPanel rendered="{! IF((mod(rowNum,2)) == 0,  false,true)}">
+{!offerLine.OfferType__c}: 
+<apex:outputText value="{0, number, ###,##0.00}">
+<apex:param value="{!offerLine.OfferValue__c}" />
+</apex:outputText>
+<apex:outputPanel rendered="{!offerLine.OfferType__c != null}">
+{!offerLine.OfferType__c}
+</apex:outputPanel> 
+<apex:outputPanel rendered="{!offerLine.DiscountType__c != null}">
+{!offerLine.DiscountType__c}
+</apex:outputPanel>  
+<apex:outputPanel rendered="{!offerLine.OfferType__c = 'Waiver'}">
+{!offerLine.BudgetTaskName__c}
+</apex:outputPanel>  
+
+<br/>
+</apex:outputPanel>
+<apex:variable var="rowNum" value="{!rowNum + 1}"/>   
+</apex:repeat>
+</td-->
+                            
+                            <td>
+                                <apex:variable value="{!1}" var="rowNum"/>
+                                <apex:repeat value="{!offerDetails.applicableOfferLinesCalculated}" var="offerLine">
+                                    
+                                    <apex:outputPanel rendered="{! IF((mod(rowNum,2)) == 0, true,false)}">
+                                        {!offerLine.OfferType__c}: 
+                                        <apex:outputText value="{0, number, ###,##0.00}">
+                                            <apex:param value="{!offerLine.OfferValue__c}" />
+                                        </apex:outputText>
+                                        <apex:outputPanel rendered="{!offerLine.OfferValueType__c != null}">
+                                            {!offerLine.OfferValueType__c}
+                                        </apex:outputPanel>      
+                                        <apex:outputPanel rendered="{!offerLine.DiscountType__c != null}">
+                                            {!offerLine.DiscountType__c}
+                                        </apex:outputPanel>    
+                                        <apex:outputPanel rendered="{!offerLine.OfferType__c = 'Waiver'}">
+                                            {!offerLine.BudgetTaskName__c}
+                                        </apex:outputPanel>  
+                                        
+                                        <br/>
+                                    </apex:outputPanel>
+                                    <apex:variable var="rowNum" value="{!rowNum + 1}"/>   
+                                </apex:repeat>
+                            </td> 
+                            
+                        </tr>
+                        
+                    </table>
+                </apex:outputPanel>
+            </td>
+        </tr>
+        
+        
+        
+    </table>
+    <br/>
+    
+    <table width="100%" class="contractTable">
+        <tr>
+            <td>
+                <b>Supporting Documents <span class="importantRed">**</span></b> 
+            </td>
+            <td>
+                <b>Broker</b> 
+            </td>
+            <td>
+                <b>Sales consultant</b> 
+            </td>
+            <td>
+                <b>Sales Admin</b> 
+            </td>
+            <td>
+                <b>Sales Validation</b> 
+            </td>
+        </tr>
+        
+        <tr>
+            <td>
+                Valid Passport Copy
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                Valid Emirates ID Copy
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                Trade License / POA copy (if Company)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                Lead registration confirmation if Broker
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                3rd Party Payment Undertaking Form (If Applicable)
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                Cheque book/DEPOSIT &amp; PDC’s
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        
+    </table>
+    <br/>
+    <div>
+        <p><i><span class="importantRed">**</span>Receipts of all supporting documents are mandatory for any booking</i></p>
+        <p><i><span class="importantRed">**</span>Deposits paid hereunder towards the booking of your Unit/Property are transferred to the escrow account as per applicable law and will be accounted towards the payment of the Unit/Property’s purchase price.<b><u>Deposits paid hereunder towards the booking and purchase of your Unit/Property are NON-REFUNDABLE.</u></b>
+            Thus, all payments made by you hereunder shall be entirely retained by Bloom.
+            <span class="importantRed">***</span>You hereby acknowledge that all information provided herein is true and correct. You hereby commit to promptly advise Bloom of any changes to the information provided herein (including, but not limited to trade license and authorized representatives (if the purchaser is a company), physical address, email address, passport or Emirates ID numbers, telephone numbers etc.). You further acknowledge that it is your sole responsibility to inform Bloom of any of the abovementioned changes and that any notice sent by Bloom to the addresses or authorized representatives specified herein shall be considered as validly sent. 
+            
+            </i></p>
+    </div>
+    <br/><br/><br/>
+    <table width="100%" class="contractTable">
+        <tr>
+            <td style="width: 25%;" class="noBorder">
+                <div class="signatureLine">
+                    Customer Name &amp; Signature
+                </div>
+            </td>
+            <td colapsn="3" class="noBorder"></td>
+        </tr>
+    </table>
+    <br/><br/><br/><br/>
+    <table width="100%" class="contractTable">
+        <tr>
+            <td style="width: 25%;" class="noBorder">
+                <div class="signatureLine">
+                    Broker Name &amp; Signature             
+                </div>
+            </td>
+            <td style="width: 25%;" class="noBorder">
+                <div class="signatureLine">
+                    Sales Name &amp; signature           
+                </div>
+            </td>
+            <td style="width: 25%;" class="noBorder">
+                <div class="signatureLine">
+                    Sales M. Name &amp; Signature        
+                </div>
+            </td>
+            <td style="width: 25%;" class="noBorder">
+                <div class="signatureLine">
+                    S.OPS Name &amp; Signature 
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+</apex:page>

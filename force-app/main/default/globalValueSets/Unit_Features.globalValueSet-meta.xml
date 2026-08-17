@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>P.Sea</fullName>
+        <default>false</default>
+        <label>P.Sea</label>
+    </customValue>
+    <customValue>
+        <fullName>Saadiyat</fullName>
+        <default>false</default>
+        <label>Saadiyat</label>
+    </customValue>
+    <customValue>
+        <fullName>Community</fullName>
+        <default>false</default>
+        <label>Community</label>
+    </customValue>
+    <customValue>
+        <fullName>F.Sea</fullName>
+        <default>false</default>
+        <label>F.Sea</label>
+    </customValue>
+    <customValue>
+        <fullName>Street</fullName>
+        <default>false</default>
+        <label>Street</label>
+    </customValue>
+    <customValue>
+        <fullName>Furnished</fullName>
+        <default>false</default>
+        <label>Furnished</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Furnished</fullName>
+        <default>false</default>
+        <label>Not Furnished</label>
+    </customValue>
+    <masterLabel>Unit Features</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

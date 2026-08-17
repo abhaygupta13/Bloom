@@ -1,0 +1,69 @@
+<apex:page sidebar="false" showHeader="false" standardController="Task">
+	<apex:includeScript value="/support/console/49.0/integration.js" />
+	<script>
+
+	</script>
+	<script type="text/javascript">
+
+	var softphoneSettings = {
+			GEN_INTEGRATION_TYPE: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GEN_INTEGRATION_TYPE__c}",
+			WDE_IXN_MGR_URL: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__WDE_IXN_MGR_URL__c }",
+			PEF_GC_ENVIRONMENT: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_GC_ENVIRONMENT__c }"
+		}
+		function SoftPhone_SetTabTitle() {
+			var interactionId = "{!Task.softphone_it__IWS_Interaction_ID__c}";
+			var mediatype = "{!Task.softphone_it__IWS_Media_Name__c}";
+			var subject = "{!Task.Subject}";
+			console.log("interactionId=" + interactionId + " mediatype="
+				+ mediatype + " subject=" + subject);
+			sforce.console.setTabTitle("IXN: " + subject);
+			var ixnIframe = document.getElementById("ixnIframe");
+			if (!interactionId) {
+				showError(ixnIframe);
+				return;
+			}
+			switch (softphoneSettings.GEN_INTEGRATION_TYPE) {
+				case "PURECLOUD":
+					loadPureCloudIxnMgr(ixnIframe, interactionId);
+					break;
+				case "WDE":
+				case "WWE":
+					loadPureEngageIxnMgr(ixnIframe, interactionId, mediatype);
+					break;
+			}
+		}
+
+		function loadPureEngageIxnMgr(ixnIframe, interactionId,mediatype) {
+			var urlParams = "id=" + interactionId + "&mediatype=" + mediatype;
+			var webappurl = softphoneSettings.WDE_IXN_MGR_URL + "?" + urlParams
+			console.log("webappurl: " + webappurl);
+			ixnIframe.setAttribute("src", webappurl);
+		}
+
+		function loadPureCloudIxnMgr(ixnIframe, interactionId) {
+			
+			var urlParams = "id=" + interactionId + "&embedAdmin=true&env=" + softphoneSettings.PEF_GC_ENVIRONMENT;
+			var webappurl = "{!$Resource.ixnmgr}" + "?" + urlParams
+			console.log("webappurl: " + webappurl);
+			ixnIframe.setAttribute("src", webappurl);
+		}
+
+		function showError(ixnIframe) {
+			ixnIframe.setAttribute("style", "display:none");
+			var message = document.getElementById("sMessage");
+			message.setAttribute("style", "display:block;margin:10px;color:red;font-size:14px");
+		}
+
+		var pageLoad = window.onload;
+		window.onload = function () {
+			if (pageLoad) {
+				pageLoad();
+			}
+			SoftPhone_SetTabTitle();
+		}
+	</script>
+	<div id="sMessage" style="display: none;">Interaction details not available for this activity.</div>
+
+	<apex:iframe height="600px" width="100%" scrolling="true" id="ixnIframe" />
+
+</apex:page>

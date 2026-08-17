@@ -1,0 +1,39 @@
+<template>
+    <template if:true={isReadonly}>
+        <template if:false={isCurrency}>
+            <lightning-formatted-text value={value}></lightning-formatted-text>
+        </template>
+        <template if:true={isCurrency}>
+            <lightning-formatted-number value={value}></lightning-formatted-number>
+        </template>
+    </template>
+    <template if:false={isReadonly}>
+        <template if:true={isText}>
+            <lightning-input type="text" name={column.fieldName} label={column.title} value={value} title={value}
+                variant="label-hidden" data-type="text" onchange={handleChange} readonly={isReadonly}></lightning-input>
+        </template>
+
+        <template if:true={isPicklist}>
+            <lightning-combobox name={column.fieldName} label={column.title} value={value} title={value}
+                placeholder="Select an Option" options={options} variant="label-hidden" data-type="picklist"
+                onchange={handleChange} readonly={isReadonly}></lightning-combobox>
+        </template>
+
+        <template if:true={isCurrency}>
+            <lightning-input type="number" step="0.01" name={column.fieldName} label={column.title} value={value}
+                title={value} variant="label-hidden" data-type="currency" onchange={handleChange} readonly={isReadonly}>
+            </lightning-input>
+        </template>
+    </template>
+
+    <template if:true={isButton}>
+        <template if:true={isDelete}>
+            <lightning-button-icon icon-name="utility:delete" alternative-text="Delete" class="slds-var-m-left_xx-small"
+                title="Delete Allocation" onclick={deleteAllocation}></lightning-button-icon>
+        </template>
+        <!-- <template if:false={isDelete}>
+            <lightning-button-icon icon-name="utility:add" alternative-text="Add" class="slds-var-m-left_xx-small"
+                title="Add Allocation"></lightning-button-icon>
+        </template> -->
+    </template>
+</template>

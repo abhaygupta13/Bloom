@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HandoverStatus__c</fullName>
+    <label>Handover Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Created</fullName>
+                <default>false</default>
+                <label>Created</label>
+            </value>
+            <value>
+                <fullName>QA Snagging Completed</fullName>
+                <default>false</default>
+                <label>QA Snagging Completed</label>
+            </value>
+            <value>
+                <fullName>QA De-Snagging Completed</fullName>
+                <default>false</default>
+                <label>QA De-Snagging Completed</label>
+            </value>
+            <value>
+                <fullName>Home Orientation Sent</fullName>
+                <default>false</default>
+                <label>Home Orientation Sent</label>
+            </value>
+            <value>
+                <fullName>Appointment Booked with Customer</fullName>
+                <default>false</default>
+                <label>Appointment Booked with Customer</label>
+            </value>
+            <value>
+                <fullName>Pre CHO Check Completed</fullName>
+                <default>false</default>
+                <label>Pre CHO Check Completed</label>
+            </value>
+            <value>
+                <fullName>CHO Snagging Completed</fullName>
+                <default>false</default>
+                <label>CHO Snagging Completed</label>
+            </value>
+            <value>
+                <fullName>CHO De-Snagging Completed</fullName>
+                <default>false</default>
+                <label>CHO De-Snagging Completed</label>
+            </value>
+            <value>
+                <fullName>Notice of Completion sent</fullName>
+                <default>false</default>
+                <label>Notice of Completion sent</label>
+            </value>
+            <value>
+                <fullName>Settlement Follow up</fullName>
+                <default>false</default>
+                <label>Settlement Follow up</label>
+            </value>
+            <value>
+                <fullName>Finance Verified</fullName>
+                <default>false</default>
+                <label>Finance Verified</label>
+            </value>
+            <value>
+                <fullName>Property Registration Completed</fullName>
+                <default>false</default>
+                <label>Property Registration Completed</label>
+            </value>
+            <value>
+                <fullName>Lease Agreement</fullName>
+                <default>false</default>
+                <label>Lease Agreement</label>
+            </value>
+            <value>
+                <fullName>PHPP - KHO Appointment Scheduled</fullName>
+                <default>false</default>
+                <label>PHPP - KHO Appointment Scheduled</label>
+            </value>
+            <value>
+                <fullName>Key Handed Over PHPP</fullName>
+                <default>false</default>
+                <label>Key Handed Over PHPP</label>
+            </value>
+            <value>
+                <fullName>PHPP Completion Pending</fullName>
+                <default>false</default>
+                <label>PHPP Completion Pending</label>
+            </value>
+            <value>
+                <fullName>Mortgage Release Initiated</fullName>
+                <default>false</default>
+                <label>Mortgage Release Initiated</label>
+            </value>
+            <value>
+                <fullName>Mortgage Release Document Uploaded</fullName>
+                <default>false</default>
+                <label>Mortgage Release Document Uploaded</label>
+            </value>
+            <value>
+                <fullName>Mortgage Release Completed</fullName>
+                <default>false</default>
+                <label>Mortgage Release Completed</label>
+            </value>
+            <value>
+                <fullName>Escrow Letter Generated</fullName>
+                <default>false</default>
+                <label>Escrow Letter Generated</label>
+            </value>
+            <value>
+                <fullName>Title Deed Registration Completed</fullName>
+                <default>false</default>
+                <label>Title Deed Registration Completed</label>
+            </value>
+            <value>
+                <fullName>Utilities Transfer Completed</fullName>
+                <default>false</default>
+                <label>Utilities Transfer Completed</label>
+            </value>
+            <value>
+                <fullName>Mortgage Cheque Clearance</fullName>
+                <default>false</default>
+                <label>Mortgage Cheque Clearance</label>
+            </value>
+            <value>
+                <fullName>KHO Appointment Scheduled</fullName>
+                <default>false</default>
+                <label>KHO Appointment Scheduled</label>
+            </value>
+            <value>
+                <fullName>Handover Completed</fullName>
+                <default>false</default>
+                <label>Handover Completed</label>
+            </value>
+            <value>
+                <fullName>Potential Defaulter</fullName>
+                <default>false</default>
+                <label>Potential Defaulter</label>
+            </value>
+            <value>
+                <fullName>Default -Under Discussion</fullName>
+                <default>false</default>
+                <label>Default -Under Discussion</label>
+            </value>
+            <value>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+                <label>Cancelled</label>
+            </value>
+            <value>
+                <fullName>Initiate Cancellation</fullName>
+                <default>false</default>
+                <label>Initiate Cancellation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

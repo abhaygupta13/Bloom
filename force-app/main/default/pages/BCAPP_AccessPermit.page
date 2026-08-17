@@ -1,0 +1,163 @@
+<apex:page renderAs="pdf"  standardController="Case" extensions="PdfControllerHelper">
+  
+  
+  <div style="text-align: center;">
+      <apex:image value="{!$Resource.BloomLogo}" width="150px"/> <br/><br/>
+      <font style="font-size: 32px;"> Access Permit </font>
+  </div>
+  
+  
+  <table width="100%" >
+      <tr >
+        <th colspan="4" align="center" bgcolor="#B62025" ><font style="font-size: 16px;color:white;font-family:Arial Unicode MS"> ACCESS PERMIT DETAILS </font></th>        
+      </tr>
+             
+       <tr>
+          
+           <td width="20%" height="30" >               
+               <font style="font-size: 16px;color:black;font-family:Arial Unicode MS"> Permit Number : </font> 
+           </td>
+           <td width="80%" height="30" style="border-bottom: 1px solid #000; " > 
+            <font style="font-size: 16px;color:black;font-family:Arial Unicode MS"> {!BLANKVALUE(Case.CaseNumber, caseRecord.CaseNumber)}</font>
+          
+           </td>
+       </tr>
+       <tr>
+           <td width="25%" height="30">               
+               <font style="font-size: 16px;color:black;font-family:Arial Unicode MS"> Community :  </font> 
+           </td>
+           <td width="75%" height="30" style="border-bottom: 1px solid #000;">               
+            <font style="font-size: 16px;color:black;font-family:Arial Unicode MS">{!BLANKVALUE(Case.Community_Name__c, caseRecord.Community_Name__c)}</font>
+           </td>
+       </tr>
+       <tr >
+           <td  width="25%" height="30" >               
+               <font style="font-size: 16px;color:black;font-family:Arial Unicode MS"> Tower :  </font> 
+           </td>
+            <td   height="30" width="50%" style="border-bottom: 1px solid #000;display:inline-block">               
+             <font style="font-size: 16px;color:black;font-family:Arial Unicode MS">{!BLANKVALUE(Case.Building_Phase__c, caseRecord.Building_Phase__c)} </font>
+           </td>
+           
+            <td width="10%" height="30" style="display:inline-block">               
+               <font style="font-size: 16px;color:black;font-family:Arial Unicode MS"> Unit :  </font> 
+           </td>
+            <td  height="30" width="37%" style="border-bottom: 1px solid #000;display:inline-block">               
+             <font style="font-size: 16px;color:black;font-family:Arial Unicode MS">{!BLANKVALUE(Case.Unit_Name_Formula__c, caseRecord.Unit_Name_Formula__c)}</font>
+           </td>
+           
+       </tr>
+       <tr>
+           <td width="25%" height="30">               
+               <font style="font-size: 16px;color:black;font-family:Arial Unicode MS"> Permit Issue Date : </font> 
+           </td>
+            <td  height="30" width="75%" style="border-bottom: 1px solid #000;" >               
+                 <font style="font-size: 16px;color:black;font-family:Arial Unicode MS">            
+                <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                    <apex:param value="{!BLANKVALUE(Case.Access_Permit_Preferred_Date__c, caseRecord.Access_Permit_Preferred_Date__c)}" /> 
+                </apex:outputText>              
+              </font>
+           </td>
+       </tr>
+      <!--
+       <tr>
+           <td width="25%" height="30">               
+               <font style="font-size: 16px;color:black;font-family:Arial Unicode MS"> Company Name :</font> 
+           </td>
+            <td  height="30" width="75%" style="border-bottom: 1px solid #000;" >              
+                 <font style="font-size: 16px;color:black;font-family:Arial Unicode MS">  {!BLANKVALUE(Case.Customer_Name__c, caseRecord.Customer_Name__c)} </font>
+           </td>
+       </tr>
+       -->
+        <tr>
+           <td width="25%" height="30">               
+               <font style="font-size: 16px;color:black;font-family:Arial Unicode MS"> Service Category :</font> 
+           </td>
+            <td  height="30" width="75%" style="border-bottom: 1px solid #000;" >           
+             <font style="font-size: 16px;color:black;font-family:Arial Unicode MS">   {!BLANKVALUE(Case.Access_Permit_Category__c, caseRecord.Access_Permit_Category__c)}  </font>             
+           </td>
+       </tr>
+       
+       <tr>
+           <td width="25%" height="30">               
+               <font style="font-size: 16px;color:black;font-family:Arial Unicode MS"> Brief Description :</font> 
+           </td>
+            <td  height="30" width="75%" style="border-bottom: 1px solid #000;" >             
+                <font style="font-size: 16px;color:black;font-family:Arial Unicode MS"> {!BLANKVALUE(Case.Access_Permit_Description__c, caseRecord.Access_Permit_Description__c)}     </font> 
+           </td>
+       </tr>
+       
+       <tr>
+           <td width="30%" height="30">               
+               <font style="font-size: 16px;color:black;font-family:Arial Unicode MS"> This permit is valid from :</font> 
+           </td>
+            <td  height="30" width="70%" style="border-bottom: 1px solid #000;" >               
+                 <font style="font-size: 16px;color:black;font-family:Arial Unicode MS">            
+               <apex:outputText value="{0, date, MMMM d',' yyyy}">
+    <apex:param value="{!BLANKVALUE(Case.Access_Permit_Preferred_Date__c, caseRecord.Access_Permit_Preferred_Date__c)}" /> 
+</apex:outputText>
+     
+              </font>
+           </td>
+       </tr>
+       <tr>
+           <td width="30%" height="30">               
+               <font style="font-size: 16px;color:black;font-family:Arial Unicode MS"> This permit is valid to :</font> 
+           </td>
+            <td  height="30" width="70%" style="border-bottom: 1px solid #000;" >               
+                 <font style="font-size: 16px;color:black;font-family:Arial Unicode MS">            
+               <apex:outputText value="{0, date, MMMM d',' yyyy}">
+    <apex:param value="{!BLANKVALUE(Case.Permit_Expiry_Date__c, caseRecord.Permit_Expiry_Date__c)}" /> 
+</apex:outputText>
+     
+              </font>
+           </td>
+       </tr>
+       
+       
+  </table>
+  <br/>
+ 
+  <table width="100%" >
+      <tr >
+        <th  align="center" bgcolor="#B62025 " colspan="2"><font style="font-size: 16px;color:white;font-family:Arial Unicode MS"> TERMS AND CONDITIONS </font></th>        
+      </tr>
+      
+       <tr width="100%">
+           <td bgcolor= "#E5E4E2 ;">
+                <font style="font-size:8px;color:black;font-family:Arial Unicode MS">
+                   <ol>
+                        <li style="font-size:13px;">Drilling and noisy work to carry out only between 9am – 5pm during weekdays.</li>
+                        <li style="font-size:13px;">The contractor and all workers must follow all instructions from the Community Management,including the Security team and HS&#38;E requirements.</li>
+                        <li style="font-size:13px;">The resident is responsible for the behavior of the contractor and any disturbances caused.</li>
+                        <li style="font-size:13px;">All workers must wear Personal Protective Equipment (PPE) suitable for the work and must maintain proper personal hygiene while working within the compound.</li>
+                        <li style="font-size:13px;">Common areas to remain clear and clean from all work, it is not allowed to store any material in common area or visible to common area.</li>
+                        <li style="font-size:13px;">Every resident must provide adequate containers, i.e., a skip or trash drum, sufficient to hold all work refuse (if any), in a designated area within the unit plot limit to be disposed off on a daily basis. Failure to provide this
+                        may result in work being stopped.</li>
+                        <li style="font-size:13px;">All high-risk activities like Hot Works &#38; Confined Space are valid for 1 Day only.</li>
+                        <li style="font-size:13px;">It is not allowed to do any work in common area, on the unit façade or any alteration work under this permit.</li>
+                        <li style="font-size:13px;">Routine maintenance activities can be given access &#38; general work permit which can be issued for a week &#38;
+                        may extend up to a month.</li>                        
+                         <li style="font-size:13px;">Permit can not be issued for multiple activities even if the contractor is same.</li>
+                        <li style="font-size:13px;">The Resident &#38; Contractor to fully comply with the community rules. and with the terms and conditions,
+                        failure provides the management the right to blacklist the contractor, application of the penalties and / or
+                        further escalation including report it to the local authority.</li>
+                        <li style="font-size:13px;">This permit is strictly for the approved work within the unit only, No other work can be carried out under the
+                        same permit.</li>
+                        
+                         <li style="font-size:13px;">The community management reserve the right to inspect the worksite and from time to time to ensure
+                        compliance.</li>
+                        <li style="font-size:13px;">The contractor must sign in and out at the security gate and present identification when and as requested by
+                        the security team.</li>
+                        <li style="font-size:13px;">Contractor must park his vehicle/s in the designated areas only.</li>
+                        <li style="font-size:13px;">The resident is responsible for any damage on common areas assets or adjacent properties due to this work,
+                        any damage must be reported immediately to the security.</li>
+                        <li style="font-size:13px;">Bloom Community Management takes no responsibility with respect to the work, vis-à-vis the Owner / Resident or any third party. To this effect, the Owner hereby commit to indemnify and hold harmless Bloom
+                        Emirates Properties LLC, its shareholders, affiliates, directors, and employees (the "Indemnitees") from any third-party claims brought against the Indemnitees in connection with this work</li>
+                       
+                       
+                   </ol>      
+                </font>
+           </td>
+       </tr>
+    </table>
+</apex:page>

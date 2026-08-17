@@ -1,0 +1,342 @@
+<template>
+	<lightning-quick-action-panel header="Raise Service Request/Case" icon-name="standard:case" class="outer-div">
+		<template if:true={isLoading}>
+			<lightning-spinner alternative-text="Loading" size="medium" variant="brand" class="customSpinner">
+			</lightning-spinner>
+		</template>
+
+		<template if:true={isduplicatefound}>
+			<div style="text-align: center;color: #F00;margin-bottom:13px ;font-size: 16px;font-weight: 400;">
+				We have found potential duplicate with same details.
+				<template if:true={showOneDuplicateCaseRecord}>
+					<template for:each={duplicatecaserecords} for:item="item">
+						<div key={item.id} style="display: inline-block; margin-right: 10px;margin-left:2px">
+
+							<a href="#" data-id={item.Id} target="_blank" onclick={navigateToRecordPage}>
+								View Duplicate
+							</a>
+						</div>
+					</template>
+				</template>
+			</div>
+			<template if:true={showAllDuplicateCases}>
+				<div style="margin-bottom: 20px;">
+					<div class="slds-grid slds-wrap slds-gutters">
+						<template for:each={duplicatecaserecords} for:item="item">
+							<div key={item.id}>
+								<div class="slds-col" style="margin-top:4px">
+									<span>	<lightning-button variant="brand-outline" label={item.CaseNumber} data-id={item.Id} onclick={navigateToRecordPage} icon-name="standard:case"></lightning-button></span>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</template>
+		</template>
+		<div class="slds-p-horizontal_small">
+
+			<template if:false={recordId}>
+				<div class="slds-grid slds-gutters">
+					<!-- First Column -->
+					<div class="slds-col slds-size_1-of-2">
+						<c-custom-lookup icon-name="standard:contact" s-object-api-name="SalesOrder__c"
+							label="Sales Order/Unit" onlookupupdate={handleLookupSelection}
+							placeholder="Search Salesorder...">
+
+						</c-custom-lookup>
+					</div>
+					<div class="slds-col slds-size_1-of-2">
+						<template if:true={showLookupAccountName}>
+							<lightning-record-view-form record-id={lookupSalesorderid} object-api-name="SalesOrder__c">
+
+								<lightning-output-field field-name="Account__c"> </lightning-output-field>
+
+							</lightning-record-view-form>
+						</template>
+
+
+
+					</div>
+				</div>
+				<div class="slds-grid slds-gutters">
+					<div class="slds-col slds-size_1-of-2">
+						<lightning-input type="text" variant="standard" name="name" label="Mobile Number"
+							value={personMObilleNumber} disabled={accountdisabled}></lightning-input>
+					</div>
+					<div class="slds-col slds-size_1-of-2">
+						<lightning-input type="text" variant="standard" name="name" label="Email" value={personEmail}
+							disabled={accountdisabled}></lightning-input>
+					</div>
+				</div>
+
+			</template>
+
+			<template if:true={recordId}>
+				<lightning-record-view-form record-id={recordId} object-api-name="SalesOrder__c">
+					<div class="slds-grid slds-gutters">
+						<!-- First Column -->
+						<div class="slds-col slds-size_1-of-2">
+							<lightning-output-field field-name="Name"> </lightning-output-field>
+						</div>
+						<div class="slds-col slds-size_1-of-2">
+
+							<lightning-output-field field-name="Account__c"> </lightning-output-field>
+
+						</div>
+
+
+					</div>
+				</lightning-record-view-form>
+
+
+				<div class="slds-grid slds-gutters">
+					<!-- First Column -->
+					<div class="slds-col slds-size_1-of-2">
+						<lightning-input type="text" variant="standard" name="name" label="Mobile"
+							value={mobilePhonevalue} disabled={accountdisabled}></lightning-input>
+
+					</div>
+					<div class="slds-col slds-size_1-of-2">
+
+						<lightning-input type="text" variant="standard" name="name" label="Email" value={emailValue}
+							disabled={accountdisabled}></lightning-input>
+
+
+					</div>
+
+
+				</div>
+			</template>
+
+
+			<div class="slds-grid slds-gutters">
+				<!-- First Column -->
+				<div class="slds-col slds-size_1-of-2">
+					<lightning-combobox label="Request Type" name="Request Type" value={selectedRecordTypeId}
+						options={recordTypeOptions} onchange={handleRecordTypeChange}>
+					</lightning-combobox>
+				</div>
+				<template if:true={showError}>
+					<p style="color: red;">Please select Case Type.</p>
+				</template>
+
+
+				<div class="slds-col slds-size_1-of-2">
+					<lightning-combobox label="Request Sub Type" class="requestSubtypeCmp" name="Request Sub Type"
+						value={caseType} options={caseSubtypes} disabled={isSubTypeDisabled}
+						onchange={handleCaseTypeChange} required>
+					</lightning-combobox>
+
+				</div>
+			</div>
+
+			<lightning-textarea label="Description" name="Description" class="descriptionCmp" value={descriptionValue}
+				onchange={handleCaseTypeChange} required>
+			</lightning-textarea>
+
+			<lightning-textarea label="Internal Comments" name="Internal Comments" value={internalCommentValue}
+				onchange={handleCaseTypeChange}>
+			</lightning-textarea>
+
+
+
+
+
+
+
+			<!--   <template if:true={casematuritydate}>
+                <lightning-record-edit-form object-api-name="ReceiptAcknowledgement__c">
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col">
+                            <lightning-input-field field-name="MaturityDate__c"> </lightning-input-field>
+                            <lightning-input-field field-name="ReferenceNumber__c"></lightning-input-field>
+                            <lightning-input-field field-name="Amount__c"></lightning-input-field>
+                        </div>
+                    </div>
+                </lightning-record-edit-form>
+            </template> -->
+			 <template if:true={showReceiptList}>
+				<div style="padding: 10px">
+					<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+						<thead>
+							<tr class="slds-line-height_reset">
+								<!-- <th class="" scope="col">
+									<lightning-input type="checkbox" onchange={handleSelctAllChecks}></lightning-input>
+								</th> -->
+								<th class="" scope="col"></th>
+								<th class="" scope="col">Reference Number</th>
+								<th class="" scope="col">Status</th>
+								<th class="" scope="col">Type</th>
+								<th class="" scope="col">Amount</th>
+								<th class="" scope="col">Maturity Date</th>
+								<th class="" scope="col">New Maturity Date</th>
+							</tr>
+						</thead>
+						<template for:each={receiptList} for:item="recp">
+							<tr key={recp.Id} class="slds-hint-parent">
+								<td>
+									<lightning-input type="checkbox" checked={recp.isSelected}
+										onchange={handleIndividualCheckChange} value={recp.index} ></lightning-input>
+								</td>
+								<td>{recp.ReferenceNumber}</td>
+								<td>{recp.Status}</td>
+								<td>{recp.type}</td>
+								<td>{recp.Amount}</td>
+								<td>
+									<lightning-formatted-date-time  value={recp.MaturityDate} data-index={recp.index}
+											 required="true"></lightning-formatted-date-time>
+								</td>
+								<td>
+									<lightning-input type="date" value={recp.NewMaturityDate} data-index={recp.index}
+											onchange={updateMaturityDate} style="width:130px;"></lightning-input>
+								</td>
+							</tr>
+						</template>
+					</table>
+
+				</div>
+			</template>
+			<template if:true={errorMessageonReceipt}>
+				<p style="color: #000; font-weight: bold; text-align: center; font-size: 18px;margin-top: 18px">No
+					Cheques are available.
+				</p>
+			</template>
+
+
+
+			<br />
+
+        </div>
+			<template if:true={errorMessageonDeleteJointOwner}>
+				<p style="color: #000; font-weight: bold; text-align: center; font-size: 18px;margin-top: 18px">No
+					records are available to proceed further.
+				</p>
+			</template>
+
+		<!-- 	<template if:true={showReceiptList}>
+				<div style="padding: 10px">
+					<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+
+						<thead>
+							<tr class="slds-line-height_reset">
+								<th class="" scope="col">ReferenceNumber </th>
+								<th class="" scope="col"> Amount</th>
+								<th class="" scope="col">MaturityDate</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<template for:each={receiptList} for:item="recp">
+								<tr key={recp.Id} class="slds-hint-parent">
+
+									<td>{recp.ReferenceNumber}</td>
+									<td>{recp.Amount}</td>
+									<td>
+										<lightning-input type="date" value={recp.MaturityDate} data-index={recp.index}
+											onchange={updateMaturityDate} required="true"></lightning-input>
+									</td>
+								</tr>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</template>
+		 -->	<br />
+
+			<template if:true={showJointOwnerDeletion}>
+				<div style="padding: 10px">
+
+
+					<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+						<thead>
+							<tr class="slds-line-height_reset">
+								<th class="" scope="col"></th>
+								<th class="" scope="col">Name </th>
+								<th class="" scope="col"> Account Name</th>
+								<th class="" scope="col"> Share Percentage</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<template iterator:it={jointOwnerDetail}>
+								<tr class="slds-hint-parent" key={it.value.Id}>
+									<td>
+										<lightning-input type="checkbox" name={it.value.Id} value={it.value.Id}
+											checked={it.value.isSelected} onchange={handleCheckboxChange}>
+										</lightning-input>
+									</td>
+									<td data-label=" Name">
+										<div class="slds-cell-wrap">{it.value.Name}</div>
+									</td>
+									<td data-label="Account Name">
+										<div class="slds-cell-wrap">{it.value.Account__r.Name}</div>
+									</td>
+									<td data-label="Share Percentage">
+										<div class="slds-cell-wrap">{it.value.SharePercentage__c}</div>
+									</td>
+
+								</tr>
+							</template>
+						</tbody>
+					</table>
+
+
+
+
+
+
+
+
+					<!-- <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" border="1" width="100%">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <td style="font-weight: bold"></td>
+                    <td style="font-weight: bold">Name</td>
+                    <td style="font-weight: bold">Account</td>
+                    <td style="font-weight: bold">Share Percentage</td>
+                </tr>
+            </thead>
+            <template for:each={jointOwnerDetail} for:item="item">
+                <tr key={item.Id} class="slds-hint-parent">
+                    <td>
+                        <lightning-input type="checkbox" name={item.Id} value={item.Id} checked={item.isSelected} onchange={handleCheckboxChange}></lightning-input>
+                    </td>
+                    <td>{item.Name}</td>
+                    <td>{item.Account__r.Name}</td>
+                    <td>{item.SharePercentage__c}</td>
+                </tr>
+            </template>
+        </table> -->
+				</div>
+			</template>
+
+
+
+			<div class="slds-m-top_medium slds-text-align_center">
+				<template if:true={showNextBtn}>
+					<template if:true={showforwardbtn}>
+						<lightning-button variant="brand" label="Next" disabled={isSelect}
+							onclick={handleSelectedReceipts}>
+						</lightning-button>
+					</template>
+				</template>
+			</div>
+
+			<template if:true={showSubmitBtn}>
+				<div class="slds-m-around_small slds-text-align_center">
+					<lightning-button label="Submit" variant="brand" onclick={handleSubmitActions}
+						disabled={submitButtondisable} class="slds-m-right_small">
+					</lightning-button>
+
+					<lightning-button label="Clear" variant="brand" onclick={clearRaiseCase}
+						disabled={submitButtondisable}>
+					</lightning-button>
+				</div>
+			</template>
+
+
+
+
+	</lightning-quick-action-panel>
+
+</template>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CustomerSPASigned__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This field will be set by the Sales manager once the SPA is signed by customer.</description>
+    <label>Customer Signed the SPA</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

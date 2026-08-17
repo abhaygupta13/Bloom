@@ -1,0 +1,311 @@
+<template>
+    <lightning-quick-action-panel header={projectName}>
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Loading" lable="Please wait..." variant="brand" size="large">
+                Please wait...
+            </lightning-spinner>
+        </template>
+        <div class="counters">
+            <template if:true={isConfirm}>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container" style="width:50% !important">
+                        <!-- modal header start -->
+                        <header class="slds-modal__header slds-theme_warning slds-theme_alert-texture">
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirm</h2>
+                        </header>
+
+                        <!-- modal body start -->
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1"
+                            style="text-align:center">
+                            <p><b>{confirmBoxMessage}</b></p>
+                        </div>
+
+                        <!-- modal footer start-->
+                        <footer class="slds-modal__footer">
+                            <button class="slds-button slds-button_neutral" onclick={closeConfirmBox}>Cancel</button>
+                            <button class="slds-button slds-button_brand" onclick={confirmBoxYes}>Confirm</button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+        </div>
+        <div style="height:280px;" lwc:if={dataTableRender}>
+            <div lwc:if={data.length}>
+                <div class="table-container">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="center slds-truncate" title="Sales Order">Sales Order</div>
+                                </th>
+                                <th>
+                                    <div class="center slds-truncate" title="Status">Status</div>
+                                </th>
+                                <th>
+                                    <div class="center slds-truncate" title="Name">Unit Number</div>
+                                </th>
+                                <th>
+                                    <div class="center slds-truncate" title="Plot Number">Plot Number</div>
+                                </th>
+                                <th>
+                                    <div class="center slds-truncate" title="Sold Date">Sold Date</div>
+                                </th>
+                                <th>
+                                    <div class="center slds-truncate" title="Fund Moved">Fund Moved</div>
+                                </th>
+                                <th>
+                                    <div class="center slds-truncate" title="Unit Registration Date">Unit Registration
+                                        Date
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="slds-p-left_small slds-truncate" title="Action"
+                                        style="text-align:center">Action
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template lwc:if={data}>
+                                <template for:each={data} for:item="row">
+                                    <tr key={row.Id}>
+                                        <td>
+                                            <div class="center slds-truncate" title={row.activeSalesOrderName}>
+                                                <a href={row.salesOrderLink}
+                                                    target="_blank">{row.activeSalesOrderName}</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="center slds-truncate" title={row.Status__c}>{row.Status__c}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="center slds-truncate" title={row.Name}>
+                                                <a href={row.unitLink} target="_blank">{row.Name}</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="center slds-truncate" title={row.plotNumber}>
+                                                {row.plotNumber}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="center slds-truncate" title={row.soldDate}>{row.soldDate}</div>
+                                        </td>
+                                        <td>
+                                            <div class="center slds-truncate">
+                                                <!-- <lightning-input message-toggle-inactive="" message-toggle-active=""
+                                                    type="toggle" checked={row.isFundMoved} disabled>
+                                                </lightning-input> -->
+                                                <template lwc:if={row.isFundMoved}>
+                                                    Yes
+                                                    <!-- <lightning-icon icon-name='utility:check' size='small'
+                                                        title='Completed' variant="success">
+                                                    </lightning-icon> -->
+                                                </template>
+                                                <template lwc:else>
+                                                    No
+                                                    <!-- <lightning-icon icon-name='utility:close' size='small'
+                                                        title='Not Completed' variant="error">
+                                                    </lightning-icon> -->
+                                                </template>
+                                            </div>
+                                        </td>
+                                        <!-- Custom Date Input column -->
+                                        <td class="reg-date-field">
+                                            <div class="reg-date-field">
+                                                <template lwc:if={row.unitRegistrered}>
+                                                    <lightning-input date-style="medium" variant="label-hidden"
+                                                        type="date" value={row.unitRegDate} disabled>
+                                                    </lightning-input>
+                                                </template>
+                                                <template lwc:else>
+                                                    <template lwc:if={row.isFundMoved}>
+                                                        <lightning-input date-style="medium" variant="label-hidden"
+                                                            type="date" value={row.unitRegDate} data-id={row.Id}
+                                                            onchange={handleDateChange}>
+                                                        </lightning-input>
+                                                    </template>
+                                                    <template lwc:else>
+                                                        <lightning-input variant="label-hidden" type="date" disabled>
+                                                        </lightning-input>
+                                                    </template>
+                                                </template>
+                                            </div>
+                                        </td>
+                                        <!-- Action column -->
+                                        <td>
+                                            <div class="slds-truncate" style="text-align:center">
+                                                <template lwc:if={row.unitRegistrered}>
+                                                    <!-- <lightning-icon data-sales-order-id={row.Active_Sales_Order__c}
+                                                    class="icon-disabled" icon-name="utility:download"
+                                                    alternative-text="Download" size="small" title="Download"
+                                                    variant="error">
+                                                </lightning-icon>&nbsp;&nbsp;&nbsp;&nbsp; -->
+
+                                                    <lightning-icon data-sales-order-id={row.Active_Sales_Order__c}
+                                                        class="icon" icon-name="utility:download"
+                                                        alternative-text="Download customer documents" size="small"
+                                                        title="Download customer documents" onclick={downloadDocuments}
+                                                        variant="success">
+                                                    </lightning-icon>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                    <!-- <lightning-icon class="icon-disabled" icon-name="utility:detach"
+                                                    alternative-text="Document Uploaded" size="small"
+                                                    title="Document Uploaded" variant="error">
+                                                </lightning-icon> -->
+                                                    <template lwc:if={row.filePreview}>
+                                                        <lightning-icon class="icon"
+                                                            icon-name="utility:document_preview" variant="success"
+                                                            size="small" title="Preview unit ADM registration document"
+                                                            data-id={row.filePreview} onclick={handleFilePreview}>
+                                                        </lightning-icon>
+                                                    </template>
+                                                </template>
+
+                                                <template lwc:else>
+                                                    <div>
+                                                        <template data-sales-order-id={row.Active_Sales_Order__c}
+                                                            if:true={row.fileName}>
+                                                            <p>{row.fileName}</p>
+                                                        </template>
+                                                        <template lwc:if={row.isNoDocument}>
+                                                            <lightning-icon class="icon-disabled"
+                                                                icon-name="utility:download"
+                                                                alternative-text="Customer documents not available to download"
+                                                                size="small"
+                                                                title="Customer documents not available to download">
+                                                            </lightning-icon>&nbsp;&nbsp;
+                                                            <lightning-icon class="icon-disabled"
+                                                                icon-name="utility:attach"
+                                                                alternative-text="Upload unit ADM registration document"
+                                                                size="small"
+                                                                title="Upload unit ADM registration document">
+                                                            </lightning-icon>&nbsp;&nbsp;
+                                                            <lightning-icon class="icon-disabled"
+                                                                icon-name="utility:document_preview" variant="error"
+                                                                size="small"
+                                                                title="Preview unit ADM registration document">
+                                                            </lightning-icon>
+                                                        </template>
+                                                        <template lwc:else>
+                                                            <lightning-icon
+                                                                data-sales-order-id={row.Active_Sales_Order__c}
+                                                                class="icon" icon-name="utility:download"
+                                                                alternative-text="Download customer documents"
+                                                                size="small" title="Download customer documents"
+                                                                onclick={downloadDocuments} variant="success">
+                                                            </lightning-icon>&nbsp;&nbsp;
+                                                            <template lwc:if={row.isFundMoved}>
+                                                                <lightning-icon
+                                                                    data-sales-order-id={row.Active_Sales_Order__c}
+                                                                    data-sales-order-name={row.activeSalesOrderName}
+                                                                    class="icon" icon-name="utility:attach"
+                                                                    alternative-text="Upload unit ADM registration document"
+                                                                    size="small"
+                                                                    title="Upload unit ADM registration document"
+                                                                    onclick={handleOpenfileUpload} variant="success">
+                                                                </lightning-icon>&nbsp;&nbsp;
+                                                                <input type="file" accept={acceptedFormats}
+                                                                    onchange={openfileUpload} class="file-input" />
+                                                            </template>
+                                                            <template lwc:else>
+                                                                <lightning-icon class="icon-disabled"
+                                                                    icon-name="utility:attach" size="small"
+                                                                    title="Upload unit ADM registration document">
+                                                                </lightning-icon>&nbsp;&nbsp;
+                                                            </template>
+                                                            <template lwc:if={row.filePreview}>
+                                                                <lightning-icon class="icon"
+                                                                    icon-name="utility:document_preview"
+                                                                    variant="success" size="small"
+                                                                    title="Preview unit ADM registration document"
+                                                                    data-id={row.filePreview}
+                                                                    onclick={handleFilePreview}>
+                                                                </lightning-icon>
+                                                            </template>
+                                                            <template lwc:else>
+                                                                <lightning-icon class="icon-disabled"
+                                                                    title="Preview unit ADM registration document"
+                                                                    icon-name="utility:document_preview" variant="error"
+                                                                    size="small">
+                                                                </lightning-icon>
+                                                            </template>
+                                                        </template>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <template if:true={isShowModal}>
+
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+                aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={handleCloseModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="brand"
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Document</h2>
+                    </header>
+
+                    <div class="slds-modal__content slds-p-around_medium">
+
+                        <div class="slds-grid slds-wrap slds-p-around_medium">
+                            <div class="slds-p-horizontal_large">
+                                <lightning-layout multiple-rows="false">
+
+                                    <lightning-layout-item size="12" padding="horizontal-large">
+                                        <div class="slds-align_absolute-center">
+                                            <lightning-input type="file" accept=".pdf" label="Document"
+                                                onchange={openfileUpload}></lightning-input>
+                                        </div>
+                                        <div>
+                                            <template if:true={fileData}>
+                                                <p>{fileData.filename}</p>
+                                            </template>
+                                            <!--template if:true={filesData}>
+                                                <template for:each={filesData} for:item="file" for:index="index">
+                                                    {file.filename}<span key={file.filename} data-id={index}
+                                                        onclick={removeReceiptImage} class="removeImage">X <br /></span>
+                                                </template>
+                                            </template-->
+                                        </div>
+                                        <br />
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button onclick={handleCloseModal} variant="neutral" label="Cancel">
+                        </lightning-button>
+                        &nbsp;&nbsp;
+                        <lightning-button onclick={handleFileUpload} variant="brand" label="Submit"></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <div slot="footer">
+            <lightning-button variant="neutral" label="Cancel" onclick={closAction}></lightning-button>
+            <lightning-button variant="brand" label="Save" class="slds-m-left_x-small" onclick={onSave}
+                disabled={isSaveButtonDisabled}>
+            </lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

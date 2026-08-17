@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Broker_Commission_Payment_Type__c</fullName>
+    <label>Broker Commission Payment Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Broker Commission 1st Payment</fullName>
+                <default>false</default>
+                <label>Broker Commission 1st Payment</label>
+            </value>
+            <value>
+                <fullName>Broker Commission Final Payment</fullName>
+                <default>false</default>
+                <label>Broker Commission Final Payment</label>
+            </value>
+            <value>
+                <fullName>Broker Commission Full Payment</fullName>
+                <default>false</default>
+                <label>Broker Commission Full Payment</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

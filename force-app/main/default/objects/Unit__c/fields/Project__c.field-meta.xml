@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>For capturing the Price Update Unit of the Unit</description>
+    <label>Project</label>
+    <referenceTo>Project__c</referenceTo>
+    <relationshipLabel>Units</relationshipLabel>
+    <relationshipName>UnitsProject</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

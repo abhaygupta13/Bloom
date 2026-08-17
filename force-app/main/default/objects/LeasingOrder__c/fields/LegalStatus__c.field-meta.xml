@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LegalStatus__c</fullName>
+    <label>Legal Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Legal Verification in process</fullName>
+                <default>false</default>
+                <label>Legal Verification in process</label>
+            </value>
+            <value>
+                <fullName>Case filed</fullName>
+                <default>false</default>
+                <label>Case filed</label>
+            </value>
+            <value>
+                <fullName>With Lawyer</fullName>
+                <default>false</default>
+                <label>With Lawyer</label>
+            </value>
+            <value>
+                <fullName>Waiting for next hearing</fullName>
+                <default>false</default>
+                <label>Waiting for next hearing</label>
+            </value>
+            <value>
+                <fullName>Waiting for Judgement</fullName>
+                <default>false</default>
+                <label>Waiting for Judgement</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

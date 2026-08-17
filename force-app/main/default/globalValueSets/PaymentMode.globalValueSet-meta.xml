@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Online</fullName>
+        <default>false</default>
+        <label>Online</label>
+    </customValue>
+    <customValue>
+        <fullName>Credit Card</fullName>
+        <default>false</default>
+        <label>Credit Card</label>
+    </customValue>
+    <customValue>
+        <fullName>Wire Transfer</fullName>
+        <default>false</default>
+        <label>Wire Transfer</label>
+    </customValue>
+    <customValue>
+        <fullName>Cheque</fullName>
+        <default>false</default>
+        <label>Cheque</label>
+    </customValue>
+    <customValue>
+        <fullName>Credit Note</fullName>
+        <default>false</default>
+        <label>Credit Note</label>
+    </customValue>
+    <customValue>
+        <fullName>POS</fullName>
+        <default>false</default>
+        <label>POS</label>
+    </customValue>
+    <customValue>
+        <fullName>Mortgage Cheque</fullName>
+        <default>false</default>
+        <label>Mortgage Cheque</label>
+    </customValue>
+    <customValue>
+        <fullName>Security Cheque</fullName>
+        <default>false</default>
+        <label>Security Cheque</label>
+    </customValue>
+    <customValue>
+        <fullName>Cash</fullName>
+        <default>false</default>
+        <label>Cash</label>
+    </customValue>
+    <customValue>
+        <fullName>Transfer of rights - Resale</fullName>
+        <default>false</default>
+        <label>Transfer of rights - Resale</label>
+    </customValue>
+    <customValue>
+        <fullName>Super App</fullName>
+        <default>false</default>
+        <label>Super App</label>
+    </customValue>
+    <masterLabel>Payment Mode</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

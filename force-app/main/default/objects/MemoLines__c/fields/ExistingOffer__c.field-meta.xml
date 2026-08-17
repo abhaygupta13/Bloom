@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ExistingOffer__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>For capturing the Existing Offer of the Memo Lines</description>
+    <label>Existing Offer</label>
+    <referenceTo>OffersPromotions__c</referenceTo>
+    <relationshipLabel>Memo Lines</relationshipLabel>
+    <relationshipName>Memo_Lines</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

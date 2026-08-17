@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prevent_Skip_stage_If_PHPP</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(
+ISPICKVAL(Payment_Type__c, &quot;PHPP&quot;),
+ISCHANGED(Sub_Status__c),
+NOT(
+OR(
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;QA De-Snagging Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;Home Orientation Sent&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Home Orientation Sent&quot;), ISPICKVAL(Sub_Status__c, &quot;Appointment Booked with Customer&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Home Orientation Sent&quot;), ISPICKVAL(Sub_Status__c, &quot;Pre-Checklist Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Appointment Booked with Customer&quot;), ISPICKVAL(Sub_Status__c, &quot;Pre-Checklist Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Pre-Checklist Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;CHO Snagging Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;CHO Snagging Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;CHO De-Snagging Completed&quot;)),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;CHO De-Snagging Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Notice of Completion sent&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Notice of Completion sent&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Payment Settled&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Payment Settled&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Finance Verified&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Finance Verified&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Property Registration Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Property Registration Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Lease Agreement&quot;)
+),
+
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Lease Agreement&quot;),
+ISPICKVAL(Sub_Status__c, &quot;PHPP - KHO Appointment Scheduled&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;PHPP - KHO Appointment Scheduled&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Key Handed Over PHPP&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Key Handed Over PHPP&quot;),
+ISPICKVAL(Sub_Status__c, &quot;PHPP Completion Pending&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;PHPP Completion Pending&quot;),
+ISPICKVAL(Sub_Status__c, &quot;PHPP Finance Clearance&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;PHPP Finance Clearance&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Mortgage Release Initiated&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Mortgage Release Initiated&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Mortgage Release Document Uploaded&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Mortgage Release Document Uploaded&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Mortgage Release Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Mortgage Release Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Title Deed Registration Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Title Deed Registration Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Utilities Transfer Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Utilities Transfer Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Handover Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;KHO Appointment Scheduled&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Handover Completed&quot;)
+)
+)
+),
+NOT(
+OR(
+$Profile.Name = &quot;System Administrator&quot;,
+$Profile.Name = &quot;HO Manager&quot;,
+$Profile.Name = &quot;Finance Team&quot;,
+$Permission.BypassValidationRule,
+AND(
+OR(
+ISPICKVAL(Sub_Status__c, &quot;Notice of Completion sent&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Potential Defaulter&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Default -Under Discussion&quot;)
+),
+$Permission.Handover_Collection_Team_Access
+),
+AND(
+ISPICKVAL(Sub_Status__c, &quot;Potential Defaulter&quot;),
+$Profile.Name = &quot;CRM Operations&quot;
+)
+
+
+)
+)
+)</errorConditionFormula>
+    <errorDisplayField>Sub_Status__c</errorDisplayField>
+    <errorMessage>You can only move to next stage</errorMessage>
+</ValidationRule>

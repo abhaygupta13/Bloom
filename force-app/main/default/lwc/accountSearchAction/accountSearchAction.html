@@ -1,0 +1,167 @@
+<template>
+    <lightning-card variant="brand" title="Account Search" icon-name="standard:account">
+        <div class="slds-align_absolute-center">
+            <lightning-button variant="brand" label="Account Search" title="Account Search" onclick={handleOpenModal}>
+
+            </lightning-button>
+
+        </div>
+        <div class="slds-align_absolute-center">
+            <br />
+            <div>Create a New Lead from Existing Account</div>
+        </div>
+    </lightning-card>
+    <template if:true={isShowModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={handleCloseModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="brand"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Account Search</h2>
+                </header>
+
+                <div class="slds-modal__content slds-p-around_medium">
+                    <template if:true={showLoading}>
+                        <lightning-spinner alternative-text="Loading..." size="medium"
+                            class="spinnerClass"></lightning-spinner>
+                    </template>
+                    <lightning-tabset>
+
+                        <lightning-tab label="Individual" name="IndividualTab" onactive={handleChangeTab}>
+
+                            <template if:true={showIndividualTab}>
+
+                                <lightning-layout multiple-rows="false">
+                                    <lightning-layout-item size="12" padding="around-small">
+                                        <lightning-combobox label="Search By" name="IndividualSearchBy"
+                                            value={individualSearchBy} options={IndividualSearchByOptions}
+                                            onchange={handleIndividualChange} placeholder="Select Option">
+                                        </lightning-combobox>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+
+                                <template if:true={showByEmail}>
+                                    <lightning-layout multiple-rows="false">
+                                        <lightning-layout-item size="12" padding="around-small">
+                                            <lightning-input required="true" type="email" label="Email Address"
+                                                onchange={handleEmailChange}></lightning-input>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+
+                                <template if:true={showByContact}>
+                                    <lightning-layout multiple-rows="false">
+                                        <lightning-layout-item size="12" padding="horizontal-small">
+                                            <lightning-combobox required="true" label="Mobile country Code"
+                                                name="countryCode" options={mobileCountryCodeList}
+                                                onchange={handleMobileCountryChange}>
+                                            </lightning-combobox>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" padding="horizontal-small">
+                                            <lightning-input required="true" type="phone" name="ContactNo"
+                                                label="Mobile Number" onchange={handleMobileChange}></lightning-input>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+
+                                <template if:true={showByEmiratesId}>
+                                    <lightning-layout multiple-rows="false">
+                                        <lightning-layout-item size="12" padding="horizontal-small">
+                                            <lightning-input required="true" type="text" name="EmiratesId"
+                                                label="Emirates Id" onchange={handleEIDChange}></lightning-input>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+
+                                <template if:true={showByPassport}>
+                                    <lightning-layout multiple-rows="false">
+                                        <lightning-layout-item size="12" padding="horizontal-small">
+                                            <lightning-combobox required="true" label="Nationality" name="nationality"
+                                                options={nationalityList} onchange={handleNationalityChange}>
+                                            </lightning-combobox>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" padding="horizontal-small">
+                                            <lightning-input required="true" type="text" label="Passport Number"
+                                                name="passportNumber" onchange={handlePassportChange}>
+                                            </lightning-input>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                            </template>
+                        </lightning-tab>
+
+
+                        <lightning-tab label="Organization" name="OrganizationTab" onactive={handleChangeTab}>
+                            <lightning-layout multiple-rows="false">
+                                <lightning-layout-item size="12" padding="horizontal-small">
+                                    <lightning-combobox required="true" label="Registration Authority" name="authority"
+                                        options={registrationAuthorityList}
+                                        onchange={handleRegistrationAuthorityChange}>
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" padding="horizontal-small">
+                                    <lightning-input required="true" type="text" name="licenseNo"
+                                        onchange={handleTradeLicenseChange} label="Trade License No"></lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-tab>
+                    </lightning-tabset>
+
+                    <template if:true={accountResult}>
+
+
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+                            aria-labelledby="element-with-table-label other-element-with-table-label">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="" scope="col" style="width:40%">
+                                        <div class="slds-truncate" title="Account Name">Name</div>
+                                    </th>
+                                    <th class="" scope="col" style="width:40%">
+                                        <div class="slds-truncate" title="Arabic Name">Arabic Name</div>
+                                    </th>
+                                    <th class="" scope="col" style="width:20%">
+                                        <div class="slds-truncate" title="Action">Action</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={accountResult} for:item="acc">
+                                    <tr class="slds-hint-parent" key={acc.id}>
+                                        <th data-label="Name" scope="row">
+                                            <div class="slds-truncate" title={acc.Name}>
+                                                {acc.Name}
+                                            </div>
+                                        </th>
+                                        <td data-label="Arabic Name">
+                                            <div class="slds-truncate" title={acc.NameinArabic__c}>{acc.NameinArabic__c}
+                                            </div>
+                                        </td>
+                                        <td data-label="Action">
+                                            <lightning-button-icon icon-name="utility:adduser" onclick={handleCreateLeadFromAccount} data-id={acc.Id} alternative-text="New Lead" title="New Lead"></lightning-button-icon>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </template>
+
+                    <template if:false={accountResult}>
+                        No data to display
+                    </template>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button onclick={handleCloseModal} variant="neutral" label="Cancel"></lightning-button>
+                    &nbsp;&nbsp;
+                    <lightning-button onclick={handleAccountSearch} variant="brand" label="Search"></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

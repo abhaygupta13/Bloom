@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bloom_Arjaan_All_Availble_Units</fullName>
+    <columns>NAME</columns>
+    <columns>Building_Phase_Name__c</columns>
+    <columns>ADM_Fee_Included__c</columns>
+    <columns>UnitNumber__c</columns>
+    <columns>SellingPrice__c</columns>
+    <columns>NumberOfBedrooms__c</columns>
+    <columns>Direct_Indirect__c</columns>
+    <columns>Status__c</columns>
+    <columns>Virtual_Bank_Account_number__c</columns>
+    <columns>StartDate__c</columns>
+    <columns>ADMPlotNumber__c</columns>
+    <columns>IsPublic__c</columns>
+    <columns>IsExclusive__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Project__c</field>
+        <operation>equals</operation>
+        <value>Bloom Arjaan</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Available</value>
+    </filters>
+    <label>Bloom Arjaan All Availble Units</label>
+    <sharedTo>
+        <group>Inventory_Management</group>
+        <group>Inventory_Management_Group</group>
+        <group>System_Administrator</group>
+    </sharedTo>
+</ListView>

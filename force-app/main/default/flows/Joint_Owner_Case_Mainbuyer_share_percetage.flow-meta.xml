@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Total_Joint_Owner_Shares</name>
+        <label>Total Joint Owner Shares</label>
+        <locationX>264</locationX>
+        <locationY>539</locationY>
+        <assignmentItems>
+            <assignToReference>TotalJointOwnerSharePercentage</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Joint_Owner_loop.SharePercentage__c</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Joint_Owner_loop</targetReference>
+        </connector>
+    </assignments>
+    <environments>Default</environments>
+    <formulas>
+        <name>Deduction</name>
+        <dataType>Number</dataType>
+        <expression>100-{!TotalJointOwnerSharePercentage}</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>Joint Owner_ Case Mainbuyer share percetage {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Joint Owner_ Case Mainbuyer share percetage</label>
+    <loops>
+        <name>Joint_Owner_loop</name>
+        <label>Joint Owner loop</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <collectionReference>get_all_joint_owner_record</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Total_Joint_Owner_Shares</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Update_Sales_Order</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>get_all_joint_owner_record</name>
+        <label>get all joint owner record</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Joint_Owner_loop</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>SalesOrder__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.SalesOrder__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>JointOwner__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Update_Sales_Order</name>
+        <label>Update Sales Order</label>
+        <locationX>176</locationX>
+        <locationY>731</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.SalesOrder__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>OwnerSharePercentage__c</field>
+            <value>
+                <elementReference>Deduction</elementReference>
+            </value>
+        </inputAssignments>
+        <object>SalesOrder__c</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>get_all_joint_owner_record</targetReference>
+        </connector>
+        <filterFormula>OR(
+AND(
+NOT(ISNEW()),
+ISCHANGED({!$Record.SharePercentage__c})),
+AND(
+ISNEW(),NOT(ISBLANK({!$Record.SharePercentage__c}))
+))</filterFormula>
+        <object>JointOwner__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>TotalJointOwnerSharePercentage</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <scale>2</scale>
+    </variables>
+    <variables>
+        <name>TotalOwnerPercentage</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <scale>2</scale>
+    </variables>
+    <variables>
+        <name>TotalOwnerSharePercentage</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <scale>2</scale>
+    </variables>
+</Flow>

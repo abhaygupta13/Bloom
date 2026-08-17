@@ -1,0 +1,27 @@
+.calendar-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.calendar-table th,
+.calendar-table td {
+    border: 1px solid #ddd;
+    padding: 6px;
+    text-align: center;
+    width: 80px;
+}
+
+.slot-booked {
+    background-color: #008000; 
+    color: #fff;
+}
+
+.slot-rejected {
+    background-color: #FF0000; 
+    color: #fff;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}

@@ -1,0 +1,20 @@
+<template>
+    <lightning-quick-action-panel header="Unhold Lead Confirmation">
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass"></lightning-spinner>
+        </template>
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass"></lightning-spinner>
+        </template>
+        <div class="slds-p-around_large">
+            <div class="slds-align_absolute-center slds-text-heading_small slds-text-color_error">
+                {message}
+            </div>
+        </div>
+        <div slot="footer">
+            <lightning-button onclick={handleCancel} variant="neutral" label="Cancel"></lightning-button>
+            &nbsp;&nbsp;
+            <lightning-button onclick={handleConfirm} variant="brand" label="Confirm"></lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

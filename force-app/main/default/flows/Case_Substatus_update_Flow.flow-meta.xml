@@ -1,0 +1,2012 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>case_sub_sattus_update_decesion</name>
+        <label>case sub sattus update decesion</label>
+        <locationX>446</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Sales_validation_records</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Transfer Initiated</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Sales_Validation_records_With_Case</targetReference>
+            </connector>
+            <label>Sales validation records</label>
+        </rules>
+        <rules>
+            <name>Update_to_Transfer_Complete_automatic</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>SPA Counter Signed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>IsChanged</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Transfer_History</targetReference>
+            </connector>
+            <label>Update to Transfer Complete automatic</label>
+        </rules>
+        <rules>
+            <name>Update_Status_Draft_to_Inprogress</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Transfer Initiated</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Draft_to_inprogress</targetReference>
+            </connector>
+            <label>Update Status Draft to Inprogress</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Customer_Service_record_type</name>
+        <label>Check Customer Service record type</label>
+        <locationX>9026</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Update_status_Customer</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Assigned</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Status_assigned_main</targetReference>
+            </connector>
+            <label>Update status Customer</label>
+        </rules>
+        <rules>
+            <name>Update_to_Inprogress_Customer_Service</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>In Progress</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_main_status_customer_service</targetReference>
+            </connector>
+            <label>Update to Inprogress Customer Service</label>
+        </rules>
+        <rules>
+            <name>Update_Status_esclated_customer_service</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>SPA Registration Delay</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Pre/Title Deed Registration Delay</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Mortgage Registration Delay</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Resale/NOC Issuance Delay</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in Receipts</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in Cheque Withdrawal</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in Updating SOA/Issuance</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in SPA Issuance</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in Amendment Issuance</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Multiple Visits Requested for Additional Documents Signature</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_status_to_Esclated_coustomer</targetReference>
+            </connector>
+            <label>Update Status esclated customer service</label>
+        </rules>
+        <rules>
+            <name>Update_to_closed_coustomer</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Request Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_status_to_closed_coustomerservices</targetReference>
+            </connector>
+            <label>Update to closed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Defect_liability_Record_Type</name>
+        <label>Check Defect liability Record Type</label>
+        <locationX>11666</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Update_status_to_assignned_Defect</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Assigned</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_status_to_assigned_Defect</targetReference>
+            </connector>
+            <label>Update status to assignned Defect</label>
+        </rules>
+        <rules>
+            <name>Update_status_in_progreses_Defect</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>In Progress</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>update_Status_Defect</targetReference>
+            </connector>
+            <label>Update status in progreses Defect</label>
+        </rules>
+        <rules>
+            <name>Update_status_to_Escalated_Defect</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in SPA Issuance</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in SPA Delivery</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Escalated_Defect</targetReference>
+            </connector>
+            <label>Update status to Escalated Defect</label>
+        </rules>
+        <rules>
+            <name>Updtes_statu_closed_Defect</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Request Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Closed_Defect</targetReference>
+            </connector>
+            <label>Updtes statu closed Defect</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Financial_Services_record_type</name>
+        <label>Check Financial Services record type</label>
+        <locationX>4142</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Update_assigned_status_and_sub_status_owner</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Assigned</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_owner_status</targetReference>
+            </connector>
+            <label>Update assigned status and sub status owner</label>
+        </rules>
+        <rules>
+            <name>Update_main_statuss_to_In_progress</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Email Requirements Sent</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Reminder Email Sent</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Requirements Not Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Partial Requirements Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Full Requirements Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Escalated for Approval</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Amendment Signed by Customer</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_status_to_in_progressss</targetReference>
+            </connector>
+            <label>Update main statuss to In progress</label>
+        </rules>
+        <rules>
+            <name>Update_status_to_closedd</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Checklist Handed to OPS</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Customer&apos;s Copy Shared with Customer</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_closedd_status</targetReference>
+            </connector>
+            <label>Update status to closedd</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Leasing_Complaint_record_type</name>
+        <label>Check Leasing Complaint record type</label>
+        <locationX>7706</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Update_status_owner_main</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Assigned</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_staus_main</targetReference>
+            </connector>
+            <label>Update status owner main</label>
+        </rules>
+        <rules>
+            <name>Update_statusin_progress</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>In Progress</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_status_Inprogresss</targetReference>
+            </connector>
+            <label>Update statusin progress</label>
+        </rules>
+        <rules>
+            <name>Update_to_escalted</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in ROI Settlment</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in Tawtheeq Issuance</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in Security Deposit Refund</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Despute on Rental Increase</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in PM Contract</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Compensation Due to Service Delay</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in Renewal</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in Issuing Lease Agreement</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_to_Esclated</targetReference>
+            </connector>
+            <label>Update to escalted</label>
+        </rules>
+        <rules>
+            <name>Update_to_closedd</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Request Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_to_closed</targetReference>
+            </connector>
+            <label>Update to closedd</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Property_Handover_Compalint_Record_Type</name>
+        <label>Check Property Handover Compalint Record Type</label>
+        <locationX>10346</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Update_status_to_assigned_handover</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Assigned</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_status_to_assignened_and_statuss</targetReference>
+            </connector>
+            <label>Update status to assigned handover</label>
+        </rules>
+        <rules>
+            <name>Update_status_in_progress_hand</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>In Progress</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>update_Status_Handover</targetReference>
+            </connector>
+            <label>Update status in progress hand</label>
+        </rules>
+        <rules>
+            <name>Update_status_to_Escalated_handoer</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in SPA Issuance</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in SPA Delivery</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Escalated_Handover</targetReference>
+            </connector>
+            <label>Update status to Escalated handoer</label>
+        </rules>
+        <rules>
+            <name>Updtes_statu_closed_propertyhandover</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Request Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Closed_Handover</targetReference>
+            </connector>
+            <label>Updtes statu closed propertyhandover</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Record_Type</name>
+        <label>Check Record Type</label>
+        <locationX>6452</locationX>
+        <locationY>323</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Property_Transfer_Resale</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Property_Transfer_Resale</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>case_sub_sattus_update_decesion</targetReference>
+            </connector>
+            <label>Property Transfer/Resale</label>
+        </rules>
+        <rules>
+            <name>General_Service_Request</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>General_Service_Request</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>General_service_case_sub_status_update_action</targetReference>
+            </connector>
+            <label>General Service Request</label>
+        </rules>
+        <rules>
+            <name>Resale_Service_Request</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Resale</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_record_type_resale</targetReference>
+            </connector>
+            <label>Resale Service Request</label>
+        </rules>
+        <rules>
+            <name>Financial_Services</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Financial_Services</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Financial_Services_record_type</targetReference>
+            </connector>
+            <label>Financial Services</label>
+        </rules>
+        <rules>
+            <name>Special_Services</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Special_Services</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Special_Services_record_type</targetReference>
+            </connector>
+            <label>Special Services</label>
+        </rules>
+        <rules>
+            <name>Sales_Complaint</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Sales_Complaint</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Sales_Complaint_record_type</targetReference>
+            </connector>
+            <label>Sales Complaint</label>
+        </rules>
+        <rules>
+            <name>Leasing_Complaint</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Leasing_Complaint</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Leasing_Complaint_record_type</targetReference>
+            </connector>
+            <label>Leasing Complaint</label>
+        </rules>
+        <rules>
+            <name>Customer_Service</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Customer_Service</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Customer_Service_record_type</targetReference>
+            </connector>
+            <label>Customer Service Complaint</label>
+        </rules>
+        <rules>
+            <name>Property_Handover_Complaint</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Property_Handover</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Property_Handover_Compalint_Record_Type</targetReference>
+            </connector>
+            <label>Property Handover Complaint</label>
+        </rules>
+        <rules>
+            <name>Defect_liability</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Defect_liability</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Defect_liability_Record_Type</targetReference>
+            </connector>
+            <label>Defect liability</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_record_type_resale</name>
+        <label>Check record type resale</label>
+        <locationX>2954</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Update_owner_and_assigned_sub_status_to_assigned</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Assigned</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Updatestatus_to_assigned</targetReference>
+            </connector>
+            <label>Update owner and assigned sub status to assigned</label>
+        </rules>
+        <rules>
+            <name>Update_main_status_to_In_progres</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Email Requirements Sent</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Reminder Email Sent</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Requirements Not Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Partial Requirements Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Full Requirements Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Initiate Resale Request</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Status_Inprogress</targetReference>
+            </connector>
+            <label>Update main status to In progress</label>
+        </rules>
+        <rules>
+            <name>Update_closed_status</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Requirements Not Received Closed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>New Owner Title Deed Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Transfer Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Wrong Request Entered</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_closed_main_status</targetReference>
+            </connector>
+            <label>Update closed status</label>
+        </rules>
+        <rules>
+            <name>Actions_on_transfer_completed</name>
+            <conditionLogic>1 AND (2 OR 3 OR 4)</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Transfer Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Transfer of Right</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Gifting</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>NOC/Transfer of Right</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_1_of_Update_closed_main_status</targetReference>
+            </connector>
+            <label>Actions on transfer completed with transfer property</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Sales_Complaint_record_type</name>
+        <label>Check Sales Complaint record type</label>
+        <locationX>6386</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Update_status_to_assignned</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Assigned</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_status_to_assignned_and_statuss</targetReference>
+            </connector>
+            <label>Update status to assignned</label>
+        </rules>
+        <rules>
+            <name>Update_status_in_progreses</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>In Progress</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>update_Status</targetReference>
+            </connector>
+            <label>Update status in progreses</label>
+        </rules>
+        <rules>
+            <name>Updatee_status_to_Escalated</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in SPA Issuance</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Delay in SPA Delivery</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_Escalated</targetReference>
+            </connector>
+            <label>Update status to Escalated</label>
+        </rules>
+        <rules>
+            <name>Updtes_statu_closed</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Request Completed</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Closed</targetReference>
+            </connector>
+            <label>Updtes statu closed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Check_Special_Services_record_type</name>
+        <label>Check Special Services record type</label>
+        <locationX>5198</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Update_assigned_status_and_sub_statuss_owner</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Assigned</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_statuss</targetReference>
+            </connector>
+            <label>Update assigned status and sub statuss owner</label>
+        </rules>
+        <rules>
+            <name>Update_main_statu_to_In_progress</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Email Requirements Sent</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Reminder Email Sent</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Requirements Not Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Partial Requirements Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Full Requirements Received</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Escalated for Approval</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Documents Signed by Customer</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_In_progress_statuss</targetReference>
+            </connector>
+            <label>Update main statu to In progress</label>
+        </rules>
+        <rules>
+            <name>Update_status_to_closeed</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Checklist Handed to OPS</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Customer&apos;s Copy Shared with Customer</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_closed_status_main</targetReference>
+            </connector>
+            <label>Update status to closeed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>General_service_case_sub_status_update_action</name>
+        <label>General service case sub status update action</label>
+        <locationX>1634</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Update_owner_and_assigned_sub_status</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Assigned</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_owner_and_status</targetReference>
+            </connector>
+            <label>Update owner and assigned sub status</label>
+        </rules>
+        <rules>
+            <name>Update_status_to_in_progress</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Awaiting OPS Update</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_main_status_to_In_progress</targetReference>
+            </connector>
+            <label>Update status to in progress</label>
+        </rules>
+        <rules>
+            <name>Update_status_to_Escalated</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Escalated to CRM</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_main_status_to_Escalated</targetReference>
+            </connector>
+            <label>Update status to Escalated</label>
+        </rules>
+        <rules>
+            <name>Update_status_to_closed</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Communication Sent</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Customer Informed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Customer Guided Throught Process</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Construction Update Communicated</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Handover Dates Confirmed</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Request Attended</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Case_Sub_Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Contact Details Updated</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Update_main_status_to_closed</targetReference>
+            </connector>
+            <label>Update status to closed</label>
+        </rules>
+    </decisions>
+    <environments>Default</environments>
+    <interviewLabel>Case__Substatus update Flow {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Case__Substatus update Action</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Copy_1_of_Create_Transfer_History</name>
+        <label>Copy 1 of Create Transfer History</label>
+        <locationX>3218</locationX>
+        <locationY>863</locationY>
+        <connector>
+            <targetReference>Copy_1_of_update_saleorder_account_name</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>BilledAmount__c</field>
+            <value>
+                <elementReference>$Record.Sales_Order__r.Sales_Order_Pending_Amount__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Case_Number__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FromAccount__c</field>
+            <value>
+                <elementReference>$Record.AccountId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OutstandingAmount__c</field>
+            <value>
+                <elementReference>$Record.Sales_Order__r.Sales_Order_Due_Amount__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SalesOrder__c</field>
+            <value>
+                <elementReference>$Record.Sales_Order__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ToAccount__c</field>
+            <value>
+                <elementReference>$Record.Account__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>TransferHistory__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Transfer_History</name>
+        <label>Create Transfer History</label>
+        <locationX>314</locationX>
+        <locationY>539</locationY>
+        <connector>
+            <targetReference>Update_Joint_owner_and_Salesorder_related_records</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>BilledAmount__c</field>
+            <value>
+                <elementReference>$Record.Sales_Order__r.Sales_Order_Pending_Amount__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Case_Number__c</field>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>FromAccount__c</field>
+            <value>
+                <elementReference>$Record.AccountId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OutstandingAmount__c</field>
+            <value>
+                <elementReference>$Record.Sales_Order__r.Sales_Order_Due_Amount__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SalesOrder__c</field>
+            <value>
+                <elementReference>$Record.Sales_Order__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ToAccount__c</field>
+            <value>
+                <elementReference>$Record.Account__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>TransferHistory__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Sales_Validation_records_With_Case</name>
+        <label>Sales Validation records With Case</label>
+        <locationX>50</locationX>
+        <locationY>539</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Sales_Validation__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Closed</name>
+        <label>Closed</label>
+        <locationX>6650</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Copy_1_of_Update_closed_main_status</name>
+        <label>Copy 1 of Update closed main status</label>
+        <locationX>3218</locationX>
+        <locationY>539</locationY>
+        <connector>
+            <targetReference>Update_previous_salesorder_joint_owners</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Copy_1_of_update_saleorder_account_name</name>
+        <label>Copy 1 of update saleorder account name</label>
+        <locationX>3218</locationX>
+        <locationY>971</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Account__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Sales_Order__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Account__c</field>
+            <value>
+                <elementReference>$Record.Account__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerSharePercentage__c</field>
+            <value>
+                <elementReference>$Record.Main_Buyer_Share_Percentage__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>SalesOrder__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>update_case_substatus_and_status</name>
+        <label>update case substatus and status</label>
+        <locationX>314</locationX>
+        <locationY>863</locationY>
+        <inputAssignments>
+            <field>Case_Sub_Status__c</field>
+            <value>
+                <stringValue>Transfer Completed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Closed_Defect</name>
+        <label>Update Closed Defect</label>
+        <locationX>11930</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Closed_Handover</name>
+        <label>Update Closed Handover</label>
+        <locationX>10610</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_closed_main_status</name>
+        <label>Update closed main status</label>
+        <locationX>2954</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_closed_status_main</name>
+        <label>Update closed status main</label>
+        <locationX>5330</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_closedd_status</name>
+        <label>Update closedd status</label>
+        <locationX>4274</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Draft_to_inprogress</name>
+        <label>Update Status Draft to inprogress</label>
+        <locationX>578</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Escalated</name>
+        <label>Update Escalated</label>
+        <locationX>6386</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Escalated</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Escalated_Defect</name>
+        <label>Update Escalated Defect</label>
+        <locationX>11666</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Escalated</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Escalated_Handover</name>
+        <label>Update Escalated Handover</label>
+        <locationX>10346</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Escalated</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_In_progress_statuss</name>
+        <label>Update In progress statuss</label>
+        <locationX>5066</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Joint_owner_and_Salesorder_related_records</name>
+        <label>Update Joint owner and Salesorder related records</label>
+        <locationX>314</locationX>
+        <locationY>647</locationY>
+        <connector>
+            <targetReference>update_saleorder_account_name</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsActive__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>SalesOrder__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>IsActive__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>SalesOrder__c</field>
+            <value>
+                <elementReference>$Record.Sales_Order__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>JointOwner__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_main_status_customer_service</name>
+        <label>Update main status customer service</label>
+        <locationX>8762</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_main_status_to_closed</name>
+        <label>Update main status to closed</label>
+        <locationX>1898</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_main_status_to_Escalated</name>
+        <label>Update main status to Escalated</label>
+        <locationX>1634</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Escalated</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <description>If case sub status is selected to Awaiting OPS Update then update status to In progress</description>
+        <name>Update_main_status_to_In_progress</name>
+        <label>Update main status to In progress</label>
+        <locationX>1370</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_new_joint_owner_with_salesorder_id</name>
+        <label>Update new joint owner with salesorder id</label>
+        <locationX>3218</locationX>
+        <locationY>755</locationY>
+        <connector>
+            <targetReference>Copy_1_of_Create_Transfer_History</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsActive__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>SalesOrder__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Case__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>SalesOrder__c</field>
+            <value>
+                <elementReference>$Record.Sales_Order__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>JointOwner__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_owner_and_status</name>
+        <label>Update owner and status</label>
+        <locationX>1106</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Case_Sub_Status__c</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_owner_status</name>
+        <label>Update owner status</label>
+        <locationX>3746</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Case_Sub_Status__c</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_previous_salesorder_joint_owners</name>
+        <label>Update previous salesorder joint owners</label>
+        <locationX>3218</locationX>
+        <locationY>647</locationY>
+        <connector>
+            <targetReference>Update_new_joint_owner_with_salesorder_id</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>IsActive__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>SalesOrder__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Case__c</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>IsActive__c</field>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
+        <object>JointOwner__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>update_saleorder_account_name</name>
+        <label>update saleorder account name</label>
+        <locationX>314</locationX>
+        <locationY>755</locationY>
+        <connector>
+            <targetReference>update_case_substatus_and_status</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Account__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Sales_Order__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Account__c</field>
+            <value>
+                <elementReference>$Record.Account__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerSharePercentage__c</field>
+            <value>
+                <elementReference>$Record.Main_Buyer_Share_Percentage__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>SalesOrder__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <name>update_Status</name>
+        <label>update Status</label>
+        <locationX>6122</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Status_assigned_main</name>
+        <label>Update Status assigned main</label>
+        <locationX>8498</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Case_Sub_Status__c</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>update_Status_Defect</name>
+        <label>update Status Defect</label>
+        <locationX>11402</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>update_Status_Handover</name>
+        <label>update Status Handover</label>
+        <locationX>10082</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Status_Inprogress</name>
+        <label>Update Status Inprogress</label>
+        <locationX>2690</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_status_Inprogresss</name>
+        <label>Update status Inprogress</label>
+        <locationX>7442</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_status_to_assigned_Defect</name>
+        <label>Update status to assigned Defect</label>
+        <locationX>11138</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Case_Sub_Status__c</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_status_to_assignened_and_statuss</name>
+        <label>Update status to assignened and statuss</label>
+        <locationX>9818</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Case_Sub_Status__c</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_status_to_assignned_and_statuss</name>
+        <label>Update status to assignned and statuss</label>
+        <locationX>5858</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Case_Sub_Status__c</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_status_to_closed_coustomerservices</name>
+        <label>Update status to closed</label>
+        <locationX>9290</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_status_to_Esclated_coustomer</name>
+        <label>Update status to Escalated</label>
+        <locationX>9026</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Escalated</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_status_to_in_progressss</name>
+        <label>Update status to in progressss</label>
+        <locationX>4010</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_statuss</name>
+        <label>Update statuss</label>
+        <locationX>4802</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Case_Sub_Status__c</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_staus_main</name>
+        <label>Update staus main</label>
+        <locationX>7178</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Case_Sub_Status__c</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_to_closed</name>
+        <label>Update to closed</label>
+        <locationX>7970</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_to_Esclated</name>
+        <label>Update to Esclated</label>
+        <locationX>7706</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Escalated</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Updatestatus_to_assigned</name>
+        <label>Updatestatus to assigned</label>
+        <locationX>2426</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>Case_Sub_Status__c</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Assigned</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>6326</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Check_Record_Type</targetReference>
+        </connector>
+        <object>Case</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

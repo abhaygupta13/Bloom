@@ -1,0 +1,38 @@
+<template>
+ <lightning-quick-action-panel header="Generate Draft Invoices" class="outer-div">
+   <template if:true={isLoading}>
+			<lightning-spinner alternative-text="Loading" size="medium" variant="brand" class="customSpinner">
+			</lightning-spinner>
+		</template>
+   <template if:true={hasPartialErrors}>
+       <p class='errMsg'>Please find the below records encounter some issues while processing.</p>
+				<div style="padding: 10px">
+					<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+					
+						<thead>
+							<tr class="slds-line-height_reset">                               
+								<th class="" scope="col">Id </th>
+								<th class="" scope="col"> Error</th>
+								<th class="" scope="col">Status Code</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+						<template for:each={errorDetails} for:item="err">
+							<tr key={err.Id} class="slds-hint-parent">
+
+								<td>{err.Id}</td>
+								<td>{err.error}</td>
+								<td>{err.statusCode}</td>							
+								
+							</tr>
+						</template>
+						</tbody>
+					</table>
+				</div>
+			</template>
+
+
+ </lightning-quick-action-panel>
+    
+</template>

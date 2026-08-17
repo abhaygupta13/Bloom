@@ -1,0 +1,7 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" access="global" controller="markDisqualifedLeadstatus">
+    
+    <aura:attribute name="recordId" type="String" access="public" />  
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <br/><br/><br/><br/><br/><br/><b><h1 align="center">Please Wait ...</h1></b>
+    
+</aura:component>

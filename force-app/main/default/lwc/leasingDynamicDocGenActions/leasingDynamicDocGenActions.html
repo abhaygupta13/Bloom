@@ -1,0 +1,45 @@
+<template>
+    <lightning-quick-action-panel header="Select Document to Generate">
+        <template if:false={isComponentShown}>
+
+            <div class="slds-p-around_medium">
+                <lightning-combobox name="actionSelect" value={selectedAction} placeholder="Choose one"
+                    options={options} onchange={handleChange}>
+                </lightning-combobox>
+                <template if:true={showSOAPDate}>
+                    <div class="slds-m-top_medium">
+                        <lightning-input type="date" label="Statement Date" value={statementDate}
+                            onchange={handleDateChange}>
+                        </lightning-input>
+                    </div>
+                </template>
+                <div class="slds-m-top_medium">
+                    <lightning-button label="Proceed" variant="brand" onclick={handleProceed} disabled={isDisabled}>
+                    </lightning-button>
+                    <lightning-button label="Cancel" variant="neutral" class="slds-m-left_small" onclick={handleCancel}>
+                    </lightning-button>
+                </div>
+            </div>
+        </template>
+
+
+        <!-- Render selected LWC dynamically -->
+        <template if:true={showFirst}>
+            <c-generate-leasing-offer-action record-id={recordId} onclosequickaction={handleCloseQuickAction}>
+            </c-generate-leasing-offer-action>
+        </template>
+        <template if:true={showSecond}>
+            <c-leasing-doc-gen-action record-id={recordId} onclosequickaction={handleCloseQuickAction}>
+            </c-leasing-doc-gen-action>
+        </template>
+        <!-- for statement of acount -->
+        <template if:true={showThird}>
+            <c-generate-leasing-order-soa record-id={recordId} onclosequickaction={handleCloseQuickAction}>
+            </c-generate-leasing-order-soa>
+        </template>
+        <template if:true={showFourth}>
+            <c-generate-leasing-order-full-soa record-id={recordId} onclosequickaction={handleCloseQuickAction}>
+            </c-generate-leasing-order-full-soa>
+        </template>
+    </lightning-quick-action-panel>
+</template>

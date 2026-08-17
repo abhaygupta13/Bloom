@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Order__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <label>Sales Order</label>
+    <referenceTo>SalesOrder__c</referenceTo>
+    <relationshipLabel>SMS Transactions</relationshipLabel>
+    <relationshipName>SMS_Transactions</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

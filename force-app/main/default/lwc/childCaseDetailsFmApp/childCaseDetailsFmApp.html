@@ -1,0 +1,33 @@
+<template>
+     <template if:false={showDocumentModal}> 
+    <lightning-card title="Permit Details" icon-name="standard:contact">
+        <div class="slds-m-around_medium">
+            <template if:true={caseRecords}>
+                <lightning-datatable 
+                    key-field="Id"
+                    data={caseRecords}
+                    columns={columns}
+                    hide-checkbox-column="true"
+                    show-row-number-column="true"
+                    onrowaction={handleRowAction}>
+                </lightning-datatable>
+            </template>
+
+            <template if:false={caseRecords}>
+                <p class="slds-text-color_error slds-text-heading_small slds-align_absolute-center">
+                    No permit details found.
+                </p>
+            </template>
+   
+        </div>
+    </lightning-card>
+     </template>
+             <template if:true={showDocumentModal}> 
+    <c-access-permit-doc 
+        document-url={selectedDocumentUrl} 
+        onclose={handleCloseModal}
+        record-id={childcaseId}>
+    </c-access-permit-doc>
+</template>
+
+</template>

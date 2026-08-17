@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CustomerType__c</fullName>
+    <label>Customer Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CORPORATE</fullName>
+                <default>false</default>
+                <label>CORPORATE</label>
+            </value>
+            <value>
+                <fullName>STAFF</fullName>
+                <default>false</default>
+                <label>STAFF</label>
+            </value>
+            <value>
+                <fullName>BULK</fullName>
+                <default>false</default>
+                <label>BULK</label>
+            </value>
+            <value>
+                <fullName>NORMAL</fullName>
+                <default>false</default>
+                <label>NORMAL</label>
+            </value>
+            <value>
+                <fullName>BULK SPECIAL</fullName>
+                <default>false</default>
+                <label>BULK SPECIAL</label>
+            </value>
+            <value>
+                <fullName>CORPORATE ADIB</fullName>
+                <default>false</default>
+                <label>CORPORATE ADIB</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

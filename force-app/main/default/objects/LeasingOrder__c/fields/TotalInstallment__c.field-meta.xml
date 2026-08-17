@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalInstallment__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    OR(ISBLANK(LeasingEndDate__c), ISBLANK(LeasingStartDate__c), ISBLANK(TEXT(PaymentTerm__c))),
+    &quot;0 installments&quot;,
+    TEXT(
+        ROUND(
+            ((LeasingEndDate__c - LeasingStartDate__c) / 365) * VALUE(LEFT(TEXT(PaymentTerm__c), FIND(&quot; &quot;, TEXT(PaymentTerm__c)) - 1)), 
+            0
+        )
+    ) &amp; &quot; installments&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total Installment</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

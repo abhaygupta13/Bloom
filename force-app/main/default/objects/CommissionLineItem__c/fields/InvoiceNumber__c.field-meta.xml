@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InvoiceNumber__c</fullName>
+    <description>Invoice number that was approved for a broker agent. (generated every time invoice is rejected)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Invoice number that was approved for a broker agent.</inlineHelpText>
+    <label>Invoice#</label>
+    <length>10</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

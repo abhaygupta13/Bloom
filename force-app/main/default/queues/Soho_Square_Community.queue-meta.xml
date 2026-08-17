@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <email>sohosquare@bloomcm.ae</email>
+    <name>Soho Square Community</name>
+    <queueMembers>
+        <users>
+            <user>aabduljaleel@bloomholding.com</user>
+            <user>bbhure@bloomholding.com</user>
+            <user>iali@bloomholding.com</user>
+            <user>ralkilani@bloomholding.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Action_Items__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

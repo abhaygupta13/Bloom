@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ToAccount__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>For capturing the Customer to whom the unit was transferred</description>
+    <label>To Account</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Transfer History (To Account)</relationshipLabel>
+    <relationshipName>Transfer_History1</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,87 @@
+<template>
+     <div class="slds-is-relative" style="min-height: 30vh;">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <template if:false={ShowTypeForm}>
+            <lightning-quick-action-panel header="Clarification Details">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" class="slds-p-horizontal_small">
+                        <lightning-textarea
+                            name="Description"
+                            label="Clarification Details (English): "
+                            value={descriptionEn}
+                            placeholder="Enter a description"
+                            onchange={onChangeDescriptionEn}>
+                        </lightning-textarea>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" class="slds-p-horizontal_small">
+                        <lightning-textarea
+                            name="Description"
+                            label="Clarification Details (Arabic): "
+                            value={descriptionAr}
+                            placeholder="Enter a description"
+                            onchange={onChangeDescriptionAr}>
+                        </lightning-textarea>
+                    </lightning-layout-item>
+
+                </lightning-layout>
+
+                <!-- Footer Buttons (Right Aligned) -->
+                <div slot="footer" class="slds-grid slds-grid_align-end">
+                    <lightning-button 
+                        variant="neutral" 
+                        label="Cancel" 
+                        onclick={closeModal}>
+                    </lightning-button>
+                    
+                        <lightning-button
+                            variant="brand"
+                            label="Submit"
+                            class="slds-m-left_x-small"
+                            onclick={handleSubmit}
+                            disabled={disableNextButton}>
+                        </lightning-button>
+                    
+                </div>
+            </lightning-quick-action-panel>
+        </template>
+        <template if:true={ShowTypeForm}>
+            <lightning-quick-action-panel header="Send Third Party Form">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" class="slds-p-horizontal_small">
+                        <lightning-combobox
+                            name="Third Party Form Type"
+                            label="Third Party Form Type"
+                            value={selectedType}
+                            placeholder="Select Type"
+                            options={industryOptions}
+                            onchange={handleChange}
+                            required >
+                        </lightning-combobox>
+                    </lightning-layout-item>
+
+                </lightning-layout>
+
+                <!-- Footer Buttons (Right Aligned) -->
+                <div slot="footer" class="slds-grid slds-grid_align-end">
+                    <lightning-button 
+                        variant="neutral" 
+                        label="Cancel" 
+                        onclick={closeModal}>
+                    </lightning-button>
+                    
+                        <lightning-button
+                            variant="brand"
+                            label="Submit"
+                            class="slds-m-left_x-small"
+                            onclick={handleSubmitTpForm}
+                            disabled={disableNextButton}>
+                        </lightning-button>
+                    
+                </div>
+            </lightning-quick-action-panel>
+        </template>
+        
+    </div>
+</template>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AmountApplied__c</fullName>
+    <description>Total amount applied for this receipt.</description>
+    <inlineHelpText>Total amount applied for this receipt.</inlineHelpText>
+    <label>Amount Applied</label>
+    <summarizedField>ReceiptAllocation__c.AmountApplied__c</summarizedField>
+    <summaryFilterItems>
+        <field>ReceiptAllocation__c.DateOfUnapplication__c</field>
+        <operation>equals</operation>
+        <value></value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>ReceiptAllocation__c.Unapply__c</field>
+        <operation>equals</operation>
+        <value>False</value>
+    </summaryFilterItems>
+    <summaryForeignKey>ReceiptAllocation__c.ReceiptAcknowledgement__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

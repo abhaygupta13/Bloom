@@ -1,0 +1,164 @@
+td,th{
+    /* border: 1px solid lightgray; */
+   
+}
+.nowrap .slds-button {
+ white-space: nowrap !important;
+   }
+   .slds-button, .slds-truncate .slds-m-left_x-small, lightning-button.slds-m-left_x-small.nowrap .slds-button {
+
+    white-space: nowrap !important;
+
+   }
+
+
+.slds-text-heading_xx-small.slds-p-bottom_xx-small{
+padding-left: unset;
+}
+
+.table-title{
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.ddl-title{
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+
+}
+
+.ddl-title-container{
+    padding-top: 1.3%;
+}
+
+.check-box-container{
+    display: flex;
+    height: 49px;
+    padding-top: 1.5%;
+    align-items: center;
+}
+
+.check-box-container-vertical{
+  display: flex;
+  flex-direction: column;
+  align-items: unset !important;
+}
+
+.check-box-container label{
+padding-right: 1rem;
+white-space: nowrap;
+}
+
+.customer-name-container{
+    width: 30%;
+    display: flex;
+}
+
+.customer-name-input{
+    width: 20rem;
+}
+
+.customer-name-container{
+    align-items: center;
+}
+
+.customer-name-container label{
+    padding-bottom: 0.3rem;
+    padding-right: 1rem;
+    font-weight: bold;
+}
+
+
+.custom-row{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.custom-cell{
+    flex-basis: 48%;
+}
+
+.custom-cell label{
+    margin-bottom: 0.5rem;
+}
+
+.custom-margin{
+    margin-bottom: 2.5rem
+}
+
+.proposed-installments-table td{
+    padding-left: 0.2rem !important;
+}
+.proposed-installments-table {
+    margin-bottom: 2rem;
+}
+
+.custom-btn{
+    height: 2rem;
+min-width: 8rem;
+margin-right: 1rem;
+}
+
+.btns-container{
+    margin-bottom: 2rem;
+}
+
+
+.box-container{
+  border: 1px solid lightgray;
+  border-radius: 12px;
+}
+
+.box-title{
+    font-size: 1rem;
+    font-weight: bold;
+}
+.payment-details-container{
+    margin-top: 0.4rem;
+}
+
+.box-title{
+    padding-bottom: 0.5rem;
+}
+
+.book-units-container{
+    justify-content: flex-end;
+    padding-right: 2.5rem;
+}
+
+.gray-background-icon{
+    --sds-c-icon-color-background: #BEBEBE;
+}
+.back-utility-icon {
+    --sds-c-icon-color-foreground-default: #fff;
+    background: #06a59a;
+    font-size: 1px;
+  
+}
+.backbtn-css {
+   --lwc-squareIconMediumContentAlt: 23px;
+    --slds-c-icon-color-foreground: #fff;
+    background: #06a59a;
+    border-radius: 3px;
+}
+.custom-icon {
+    font-size: 24px; /* Modify the icon size as desired */
+    margin-right: 10px; /* Add margin between the icon and other elements */
+  }
+
+.slds-modal__header {
+
+    background-color: #f3f3f3 !important;
+
+  }
+
+.slds-modal__content {
+
+    background-color: #f3f3f3 !important;
+
+}

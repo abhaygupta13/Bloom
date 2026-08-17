@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cancelled_Sales_order</fullName>
+    <columns>NAME</columns>
+    <columns>AccountName__c</columns>
+    <columns>BookingDate__c</columns>
+    <columns>Bloom_Signed_SPA__c</columns>
+    <columns>CustomerSignedSPADate__c</columns>
+    <columns>CustomerType__c</columns>
+    <columns>CustomerSubType__c</columns>
+    <columns>NetAmount__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Book Cancelled,Cancelled</value>
+    </filters>
+    <label>Cancelled Sales order</label>
+    <sharedTo>
+        <group>Operations_Team</group>
+        <group>System_Administrator</group>
+    </sharedTo>
+</ListView>

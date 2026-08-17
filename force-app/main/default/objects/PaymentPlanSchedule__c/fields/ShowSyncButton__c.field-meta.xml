@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ShowSyncButton__c</fullName>
+    <formula>LeaseEndDate__c &gt; TODAY() &amp;&amp; NOT(ISPICKVAL(LeasingOrder__r.Status__c, &quot;Cancelled&quot;)) &amp;&amp; NOT(ISPICKVAL(LeasingOrder__r.Status__c, &quot;Terminated&quot;))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>ShowSyncButton</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

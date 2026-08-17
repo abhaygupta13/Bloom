@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Ahmad Bin Salayem</fullName>
+        <default>false</default>
+        <label>Ahmad Bin Salayem</label>
+    </customValue>
+    <customValue>
+        <fullName>Hussain Almerl</fullName>
+        <default>false</default>
+        <label>Hussain Almerl</label>
+    </customValue>
+    <customValue>
+        <fullName>Lujayn Omran</fullName>
+        <default>false</default>
+        <label>Lujayn Omran</label>
+    </customValue>
+    <customValue>
+        <fullName>Mohanad Alwadiya</fullName>
+        <default>false</default>
+        <label>Mohanad Alwadiya</label>
+    </customValue>
+    <customValue>
+        <fullName>Searina Abd Alqader</fullName>
+        <default>false</default>
+        <label>Searina Abd Alqader</label>
+    </customValue>
+    <description>For capturing the name of the influencer</description>
+    <masterLabel>Influencers Name</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

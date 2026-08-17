@@ -1,0 +1,78 @@
+<template>
+    <div class="slds-is-relative" style="min-height: 30vh;">
+
+        <!-- Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Processing..." size="medium" variant="brand"></lightning-spinner>
+        </template>
+
+        <lightning-quick-action-panel header="Reassign">
+
+            <lightning-layout multiple-rows>
+
+                <!-- Row 1: Team & User -->
+                <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                    <lightning-combobox
+                        label="Team"
+                        value={selectedTeam}
+                        options={teamOptions}
+                        onchange={handleTeamChange}
+                        placeholder="Team">
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                    <lightning-combobox
+                        label="User"
+                        value={selectedUserId}
+                        options={userOptions}
+                        onchange={handleUserChange}
+                        placeholder="User">
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <!-- Row 2: Reason -->
+                <lightning-layout-item size="12" class="slds-p-horizontal_small">
+                    <lightning-combobox 
+                        name="reason"
+                        label="Reason"
+                        value={selectedReason}
+                        placeholder="Select a reason"
+                        options={reasonOptions}
+                        onchange={handlePicklistChange}
+                        required>
+                    </lightning-combobox>
+                </lightning-layout-item>
+
+                <!-- Row 3: Description -->
+                <lightning-layout-item size="12" class="slds-p-horizontal_small">
+                    <lightning-textarea 
+                        name="description"
+                        label="Description"
+                        placeholder="Enter comments"
+                        value={description}
+                        onchange={handleDescriptionChange}>
+                    </lightning-textarea>
+                </lightning-layout-item>
+
+            </lightning-layout>
+
+            <!-- Footer (Right aligned like your reference) -->
+            <div slot="footer" class="slds-grid slds-grid_align-end">
+                <lightning-button 
+                    variant="neutral" 
+                    label="Cancel" 
+                    onclick={closeModal}>
+                </lightning-button>
+
+                <lightning-button
+                    variant="brand" 
+                    label="Submit" 
+                    class="slds-m-left_x-small"
+                    onclick={handleSubmit}>
+                </lightning-button>
+            </div>
+
+        </lightning-quick-action-panel>
+    </div>
+</template>

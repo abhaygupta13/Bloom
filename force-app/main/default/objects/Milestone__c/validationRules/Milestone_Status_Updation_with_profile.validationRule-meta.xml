@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Milestone_Status_Updation_with_profile</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  ISCHANGED( Milestone_Status__c ),
+  ISPICKVAL( Milestone_Status__c , &apos;Delayed&apos;),
+   $User.Id  &lt;&gt;  $Label.MilestoneDelayedApprover 
+)</errorConditionFormula>
+    <errorMessage>Only Finance Director can make status as delayed</errorMessage>
+</ValidationRule>

@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <label>Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Abu Dh Tawteeq renwl</fullName>
+                <default>false</default>
+                <label>Abu Dh Tawteeq renwl</label>
+            </value>
+            <value>
+                <fullName>Additional Security Deposit Amount</fullName>
+                <default>false</default>
+                <label>Additional Security Deposit Amount</label>
+            </value>
+            <value>
+                <fullName>Admin Fee</fullName>
+                <default>false</default>
+                <label>Admin Fee</label>
+            </value>
+            <value>
+                <fullName>AD Tawteeq renewal</fullName>
+                <default>false</default>
+                <label>AD Tawteeq renewal</label>
+            </value>
+            <value>
+                <fullName>Base Advertising Fee</fullName>
+                <default>false</default>
+                <label>Base Advertising Fee</label>
+            </value>
+            <value>
+                <fullName>Base Rent</fullName>
+                <default>false</default>
+                <label>Base Rent</label>
+            </value>
+            <value>
+                <fullName>Base Rent Commercial</fullName>
+                <default>false</default>
+                <label>Base Rent Commercial</label>
+            </value>
+            <value>
+                <fullName>Base Rent Residentia</fullName>
+                <default>false</default>
+                <label>Base Rent Residentia</label>
+            </value>
+            <value>
+                <fullName>Base Rent Residential</fullName>
+                <default>false</default>
+                <label>Base Rent Residential</label>
+            </value>
+            <value>
+                <fullName>Break Lease fees</fullName>
+                <default>false</default>
+                <label>Break Lease fees</label>
+            </value>
+            <value>
+                <fullName>Brk Lease pnlt (2M C</fullName>
+                <default>false</default>
+                <label>Brk Lease pnlt (2M C</label>
+            </value>
+            <value>
+                <fullName>Brk Leas ptly (2M Rs</fullName>
+                <default>false</default>
+                <label>Brk Leas ptly (2M Rs</label>
+            </value>
+            <value>
+                <fullName>Broker Commission</fullName>
+                <default>false</default>
+                <label>Broker Commission</label>
+            </value>
+            <value>
+                <fullName>Changing occupant</fullName>
+                <default>false</default>
+                <label>Changing occupant</label>
+            </value>
+            <value>
+                <fullName>CheckoutDamage Recovery Charge</fullName>
+                <default>false</default>
+                <label>CheckoutDamage Recovery Charge</label>
+            </value>
+            <value>
+                <fullName>Cheque Bounce Fees</fullName>
+                <default>false</default>
+                <label>Cheque Bounce Fees</label>
+            </value>
+            <value>
+                <fullName>cheque replace fee</fullName>
+                <default>false</default>
+                <label>cheque replace fee</label>
+            </value>
+            <value>
+                <fullName>Chilled Water Charge</fullName>
+                <default>false</default>
+                <label>Chilled Water Charge</label>
+            </value>
+            <value>
+                <fullName>Chilled water Depst</fullName>
+                <default>false</default>
+                <label>Chilled water Depst</label>
+            </value>
+            <value>
+                <fullName>Collector</fullName>
+                <default>false</default>
+                <label>Collector</label>
+            </value>
+            <value>
+                <fullName>Cooling fee</fullName>
+                <default>false</default>
+                <label>Cooling fee</label>
+            </value>
+            <value>
+                <fullName>Delay Payement Fee</fullName>
+                <default>false</default>
+                <label>Delay Payement Fee</label>
+            </value>
+            <value>
+                <fullName>Delay Payment Fee</fullName>
+                <default>false</default>
+                <label>Delay Payment Fee</label>
+            </value>
+            <value>
+                <fullName>Design &amp; Review Fee</fullName>
+                <default>false</default>
+                <label>Design &amp; Review Fee</label>
+            </value>
+            <value>
+                <fullName>Discount - Comm.</fullName>
+                <default>false</default>
+                <label>Discount - Comm.</label>
+            </value>
+            <value>
+                <fullName>Discount - Resi.</fullName>
+                <default>false</default>
+                <label>Discount - Resi.</label>
+            </value>
+            <value>
+                <fullName>EIPS-Admin Fee</fullName>
+                <default>false</default>
+                <label>EIPS-Admin Fee</label>
+            </value>
+            <value>
+                <fullName>EIPS-NewRentCommisio</fullName>
+                <default>false</default>
+                <label>EIPS-NewRentCommisio</label>
+            </value>
+            <value>
+                <fullName>EIPS-Rec Rent Commis</fullName>
+                <default>false</default>
+                <label>EIPS-Rec Rent Commis</label>
+            </value>
+            <value>
+                <fullName>Ejari/Tawtheeq Fee</fullName>
+                <default>false</default>
+                <label>Ejari/Tawtheeq Fee</label>
+            </value>
+            <value>
+                <fullName>Extra Cheque Fee</fullName>
+                <default>false</default>
+                <label>Extra Cheque Fee</label>
+            </value>
+            <value>
+                <fullName>Fit Out Security Deposit</fullName>
+                <default>false</default>
+                <label>Fit Out Security Deposit</label>
+            </value>
+            <value>
+                <fullName>Installment Increase</fullName>
+                <default>false</default>
+                <label>Installment Increase</label>
+            </value>
+            <value>
+                <fullName>Leasing Director Com</fullName>
+                <default>false</default>
+                <label>Leasing Director Com</label>
+            </value>
+            <value>
+                <fullName>Leasing Manager Comm</fullName>
+                <default>false</default>
+                <label>Leasing Manager Comm</label>
+            </value>
+            <value>
+                <fullName>Leasng Prop. Sup Com</fullName>
+                <default>false</default>
+                <label>Leasng Prop. Sup Com</label>
+            </value>
+            <value>
+                <fullName>Legal Fee</fullName>
+                <default>false</default>
+                <label>Legal Fee</label>
+            </value>
+            <value>
+                <fullName>Maintenance Charge</fullName>
+                <default>false</default>
+                <label>Maintenance Charge</label>
+            </value>
+            <value>
+                <fullName>Notice penalty - Com</fullName>
+                <default>false</default>
+                <label>Notice penalty - Com</label>
+            </value>
+            <value>
+                <fullName>Notice penalty - Re</fullName>
+                <default>false</default>
+                <label>Notice penalty - Re</label>
+            </value>
+            <value>
+                <fullName>Notice penalty - Res</fullName>
+                <default>false</default>
+                <label>Notice penalty - Res</label>
+            </value>
+            <value>
+                <fullName>Operatn Manager Comm</fullName>
+                <default>false</default>
+                <label>Operatn Manager Comm</label>
+            </value>
+            <value>
+                <fullName>Other Charge</fullName>
+                <default>false</default>
+                <label>Other Charge</label>
+            </value>
+            <value>
+                <fullName>Overstay - Commercia</fullName>
+                <default>false</default>
+                <label>Overstay - Commercia</label>
+            </value>
+            <value>
+                <fullName>Overstay - Residenti</fullName>
+                <default>false</default>
+                <label>Overstay - Residenti</label>
+            </value>
+            <value>
+                <fullName>Parking Card Access</fullName>
+                <default>false</default>
+                <label>Parking Card Access</label>
+            </value>
+            <value>
+                <fullName>Parking Comm/ Retail</fullName>
+                <default>false</default>
+                <label>Parking Comm/ Retail</label>
+            </value>
+            <value>
+                <fullName>Parking Fee</fullName>
+                <default>false</default>
+                <label>Parking Fee</label>
+            </value>
+            <value>
+                <fullName>Penalties</fullName>
+                <default>false</default>
+                <label>Penalties</label>
+            </value>
+            <value>
+                <fullName>Penalty Charge</fullName>
+                <default>false</default>
+                <label>Penalty Charge</label>
+            </value>
+            <value>
+                <fullName>Recovery of Utility</fullName>
+                <default>false</default>
+                <label>Recovery of Utility</label>
+            </value>
+            <value>
+                <fullName>Renewal Fees</fullName>
+                <default>false</default>
+                <label>Renewal Fees</label>
+            </value>
+            <value>
+                <fullName>Security Deposit</fullName>
+                <default>false</default>
+                <label>Security Deposit</label>
+            </value>
+            <value>
+                <fullName>Security Deposit Amount</fullName>
+                <default>false</default>
+                <label>Security Deposit Amount</label>
+            </value>
+            <value>
+                <fullName>Securty Deposit</fullName>
+                <default>false</default>
+                <label>Securty Deposit</label>
+            </value>
+            <value>
+                <fullName>Service Charge</fullName>
+                <default>false</default>
+                <label>Service Charge</label>
+            </value>
+            <value>
+                <fullName>Service Charge Fee</fullName>
+                <default>false</default>
+                <label>Service Charge Fee</label>
+            </value>
+            <value>
+                <fullName>Short Term Renewal F</fullName>
+                <default>false</default>
+                <label>Short Term Renewal F</label>
+            </value>
+            <value>
+                <fullName>Sr. Leasing Admin</fullName>
+                <default>false</default>
+                <label>Sr. Leasing Admin</label>
+            </value>
+            <value>
+                <fullName>Staff Commission</fullName>
+                <default>false</default>
+                <label>Staff Commission</label>
+            </value>
+            <value>
+                <fullName>Staff Comm -Renewals</fullName>
+                <default>false</default>
+                <label>Staff Comm -Renewals</label>
+            </value>
+            <value>
+                <fullName>Tawteeq Renewal fees</fullName>
+                <default>false</default>
+                <label>Tawteeq Renewal fees</label>
+            </value>
+            <value>
+                <fullName>Tenancy Registration</fullName>
+                <default>false</default>
+                <label>Tenancy Registration</label>
+            </value>
+            <value>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+                <label>Utilities</label>
+            </value>
+            <value>
+                <fullName>Marketing Fund</fullName>
+                <default>false</default>
+                <label>Marketing Fund</label>
+            </value>
+            <value>
+                <fullName>Chilled Water</fullName>
+                <default>false</default>
+                <label>Chilled Water</label>
+            </value>
+            <value>
+                <fullName>CheckoutDamage Recov</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CheckoutDamage Recov</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

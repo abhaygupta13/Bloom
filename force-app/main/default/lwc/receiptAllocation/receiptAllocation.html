@@ -1,0 +1,150 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    
+    <div style="display: None;">{refresh}</div>
+    <lightning-card>
+        <div class="slds-var-p-horizontal_large">
+            <lightning-layout multiple-rows class="slds-var-p-bottom_medium">
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <strong>Account:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    {receiptData.accountName}
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <strong>Unit Number:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    {receiptData.unitNumber}
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <strong>SO #:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    {receiptData.soNumber}
+                </lightning-layout-item>
+
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <strong>Payment Mode:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    {receiptData.paymentMode}
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <strong>Cheque #:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    {receiptData.chequeNo}
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <strong>Currency:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    {receiptData.currencyISOCode}
+                </lightning-layout-item>
+
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <strong>Mortage Cheque:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    {receiptData.mortageCheque}
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <strong>Maturity Date:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    {receiptData.maturityDate}
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <strong>Amount:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <lightning-formatted-number value={receiptData.amount}></lightning-formatted-number>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <strong>Bank Name:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    {receiptData.bankName}
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <strong>Bank Account Number:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    {receiptData.bankAccountNo}
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    <strong>Paid By:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2" class="slds-var-p-bottom_x-small">
+                    {receiptData.paidBy}
+                </lightning-layout-item>
+
+                <lightning-layout-item size="2">
+                    <strong>Remarks:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    {receiptData.remarks}
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <strong>Total Amount Applied:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <lightning-formatted-number value={totalAmountApplied}></lightning-formatted-number>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <strong>Remaining Amount:</strong>
+                </lightning-layout-item>
+                <lightning-layout-item size="2">
+                    <lightning-formatted-number value={remainingAmount}></lightning-formatted-number>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <div style="overflow: auto;">
+                <table class="slds-table slds-table_bordered slds-table_striped" style="padding-bottom: 17.5rem;">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <template for:each={columns} for:item="column" for:index="cIndex">
+                                <th key={column.fieldName} scope="col" class="slds-line-height_reset"
+                                    title={column.title}>
+                                    <div class="slds-truncate" title={column.title}>
+                                        {column.title}
+                                    </div>
+                                </th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={receiptAllocationList} for:item="record" for:index="rIndex">
+                            <tr key={record.Id}>
+                                <template for:each={columns} for:item="column" for:index="cIndex">
+                                    <td key={column.fieldName} class="slds-truncate" style={column.style}>
+                                        <c-data-table-cell parent-record={receiptData} record={record} column={column}
+                                            record-index={rIndex} column-index={cIndex} account-list={accountOptions}
+                                            sales-order-list={salesOrderOptions} line-list={lineOptions}
+                                            onchangevalue={handleChange} ondeleteallocation={deleteAllocation}>
+                                        </c-data-table-cell>
+                                    </td>
+                                </template>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div slot="footer">
+            <lightning-button icon-name="utility:add" variant="neutral" label="Add" onclick={addAllocation}>
+            </lightning-button>
+            <lightning-button class="slds-var-m-left_x-small" variant="brand" label="Save" onclick={handleSave}
+                disabled={disableSave}></lightning-button>
+            <lightning-button class="slds-var-m-left_x-small" variant="neutral" label="Cancel"
+                onclick={backToReceiptAcknowledgement}></lightning-button>
+        </div>
+    </lightning-card>
+
+    <template if:true={isLoading}>
+        <lightning-spinner class="slds-is-fixed" style="z-index: 9999;" alternative-text="Loading..." size="small">
+        </lightning-spinner>
+    </template>
+</template>

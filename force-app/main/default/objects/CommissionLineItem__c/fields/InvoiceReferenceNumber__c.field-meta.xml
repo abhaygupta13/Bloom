@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>InvoiceReferenceNumber__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( ISPICKVAL(CommissionType__c,&apos;External&apos;) , IF( OldCommissionReference__c !=null ,OldCommissionReference__c ,SalesOrder__r.Name +&apos;_&apos;+ InstalmentNumber__c +&apos;_&apos; + InvoiceNumber__c ), null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Invoice Reference Number</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

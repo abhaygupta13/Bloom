@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Affiliates</fullName>
+        <default>false</default>
+        <label>Affiliates</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Apps</fullName>
+        <default>false</default>
+        <label>Aldar Apps</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Database</fullName>
+        <default>false</default>
+        <label>Aldar Database</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Employees</fullName>
+        <default>false</default>
+        <label>Aldar Employees</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Open House</fullName>
+        <default>false</default>
+        <label>Aldar Open House</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Sales Launch</fullName>
+        <default>false</default>
+        <label>Aldar Sales Launch</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Show Home</fullName>
+        <default>false</default>
+        <label>Aldar Show Home</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Websites</fullName>
+        <default>false</default>
+        <label>Aldar Websites</label>
+    </customValue>
+    <customValue>
+        <fullName>Broker/Agent</fullName>
+        <default>false</default>
+        <label>Broker/Agent</label>
+    </customValue>
+    <customValue>
+        <fullName>Corporate</fullName>
+        <default>false</default>
+        <label>Corporate</label>
+    </customValue>
+    <customValue>
+        <fullName>Exhibition</fullName>
+        <default>false</default>
+        <label>Exhibition</label>
+    </customValue>
+    <customValue>
+        <fullName>Experience Centre</fullName>
+        <default>false</default>
+        <label>Experience Centre</label>
+    </customValue>
+    <customValue>
+        <fullName>Google</fullName>
+        <default>false</default>
+        <label>Google</label>
+    </customValue>
+    <customValue>
+        <fullName>Internal Referral</fullName>
+        <default>false</default>
+        <label>Internal Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>Kiosk</fullName>
+        <default>false</default>
+        <label>Kiosk</label>
+    </customValue>
+    <customValue>
+        <fullName>Messenger App</fullName>
+        <default>false</default>
+        <label>Messenger App</label>
+    </customValue>
+    <customValue>
+        <fullName>Offline Campaigns</fullName>
+        <default>false</default>
+        <label>Offline Campaigns</label>
+    </customValue>
+    <customValue>
+        <fullName>Provis System</fullName>
+        <default>false</default>
+        <label>Provis System</label>
+    </customValue>
+    <customValue>
+        <fullName>Reactivation Campaign Customer</fullName>
+        <default>false</default>
+        <label>Reactivation Campaign Customer</label>
+    </customValue>
+    <customValue>
+        <fullName>Roadshow</fullName>
+        <default>false</default>
+        <label>Roadshow</label>
+    </customValue>
+    <customValue>
+        <fullName>Sales Center</fullName>
+        <default>false</default>
+        <label>Sales Center</label>
+    </customValue>
+    <customValue>
+        <fullName>Social</fullName>
+        <default>false</default>
+        <label>Social</label>
+    </customValue>
+    <customValue>
+        <fullName>Sponsorship</fullName>
+        <default>false</default>
+        <label>Sponsorship</label>
+    </customValue>
+    <customValue>
+        <fullName>Aldar Select</fullName>
+        <default>false</default>
+        <label>Aldar Select</label>
+    </customValue>
+    <customValue>
+        <fullName>Owners Program</fullName>
+        <default>false</default>
+        <label>Owners Program</label>
+    </customValue>
+    <customValue>
+        <fullName>Wealth</fullName>
+        <default>false</default>
+        <label>Wealth</label>
+    </customValue>
+    <customValue>
+        <fullName>Land</fullName>
+        <default>false</default>
+        <label>Land</label>
+    </customValue>
+    <customValue>
+        <fullName>Personal Referral</fullName>
+        <default>false</default>
+        <label>Personal Referral</label>
+    </customValue>
+    <customValue>
+        <fullName>SODIC</fullName>
+        <default>false</default>
+        <label>SODIC</label>
+    </customValue>
+    <customValue>
+        <fullName>ADHA</fullName>
+        <default>false</default>
+        <label>ADHA</label>
+    </customValue>
+    <customValue>
+        <fullName>Reactivation Campaign (*Retired only with specific reasons) Call or EDM</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Reactivation Campaign (*Retired only with specific reasons) Call or EDM</label>
+    </customValue>
+    <customValue>
+        <fullName>Corporate Campaigns</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Corporate Campaigns</label>
+    </customValue>
+    <description>Enquiry Category Picklist</description>
+    <masterLabel>Enquiry Category</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

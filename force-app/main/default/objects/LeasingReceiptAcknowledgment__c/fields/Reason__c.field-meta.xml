@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason__c</fullName>
+    <label>Reason</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cheque Presented by Mistake</fullName>
+                <default>false</default>
+                <label>Cheque Presented by Mistake</label>
+            </value>
+            <value>
+                <fullName>Poor Quality</fullName>
+                <default>false</default>
+                <label>Poor Quality</label>
+            </value>
+            <value>
+                <fullName>Irregular Signature</fullName>
+                <default>false</default>
+                <label>Irregular Signature</label>
+            </value>
+            <value>
+                <fullName>Overwriting</fullName>
+                <default>false</default>
+                <label>Overwriting</label>
+            </value>
+            <value>
+                <fullName>Altered</fullName>
+                <default>false</default>
+                <label>Altered</label>
+            </value>
+            <value>
+                <fullName>Amount in words not matching with number</fullName>
+                <default>false</default>
+                <label>Amount in words not matching with number</label>
+            </value>
+            <value>
+                <fullName>Swift Confirmation Awaited</fullName>
+                <default>false</default>
+                <label>Swift Confirmation Awaited</label>
+            </value>
+            <value>
+                <fullName>Insufficient Fund</fullName>
+                <default>false</default>
+                <label>Insufficient Fund</label>
+            </value>
+            <value>
+                <fullName>Closed Account</fullName>
+                <default>false</default>
+                <label>Closed Account</label>
+            </value>
+            <value>
+                <fullName>Frozen Account</fullName>
+                <default>false</default>
+                <label>Frozen Account</label>
+            </value>
+            <value>
+                <fullName>Signature Missing</fullName>
+                <default>false</default>
+                <label>Signature Missing</label>
+            </value>
+            <value>
+                <fullName>Cheque replacement</fullName>
+                <default>false</default>
+                <label>Cheque replacement</label>
+            </value>
+            <value>
+                <fullName>Unit under resale</fullName>
+                <default>false</default>
+                <label>Unit under resale</label>
+            </value>
+            <value>
+                <fullName>Advance paid</fullName>
+                <default>false</default>
+                <label>Advance paid</label>
+            </value>
+            <value>
+                <fullName>Postponement</fullName>
+                <default>false</default>
+                <label>Postponement</label>
+            </value>
+            <value>
+                <fullName>Milestone withdrawal/ PP change with approval</fullName>
+                <default>false</default>
+                <label>Milestone withdrawal/ PP change with approval</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

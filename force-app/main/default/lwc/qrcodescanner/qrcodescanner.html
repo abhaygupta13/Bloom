@@ -1,0 +1,15 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-box">
+            <lightning-button variant="brand" label="Scan QR Code" title="Scan QR Code" 
+                onclick={handleBarcodeClick} class="slds-m-left_x-small"> 
+            </lightning-button>
+           <!--  <lightning-button variant="brand" label="View Lead Record" title="View Lead Record" 
+                onclick={handleGotoRecordClick} class="slds-m-left_x-small"> 
+            </lightning-button> -->
+            <p class="slds-m-left_x-small"> 
+                {scannedBarcode}
+            </p>
+        </div> 
+    </div>
+</template>

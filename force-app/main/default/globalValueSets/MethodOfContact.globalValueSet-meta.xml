@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Online</fullName>
+        <default>false</default>
+        <label>Online</label>
+    </customValue>
+    <customValue>
+        <fullName>Direct Email</fullName>
+        <default>false</default>
+        <label>Direct Email</label>
+    </customValue>
+    <customValue>
+        <fullName>Direct  Call</fullName>
+        <default>false</default>
+        <label>Direct  Call</label>
+    </customValue>
+    <customValue>
+        <fullName>800-Aldar</fullName>
+        <default>false</default>
+        <label>800-Aldar</label>
+    </customValue>
+    <customValue>
+        <fullName>International Toll Free/Land Line</fullName>
+        <default>false</default>
+        <label>International Toll Free/Land Line</label>
+    </customValue>
+    <customValue>
+        <fullName>Broker Portal</fullName>
+        <default>false</default>
+        <label>Broker Portal</label>
+    </customValue>
+    <customValue>
+        <fullName>Provis</fullName>
+        <default>false</default>
+        <label>Provis</label>
+    </customValue>
+    <customValue>
+        <fullName>VIP</fullName>
+        <default>false</default>
+        <label>VIP</label>
+    </customValue>
+    <customValue>
+        <fullName>Walk-In</fullName>
+        <default>false</default>
+        <label>Walk-In</label>
+    </customValue>
+    <customValue>
+        <fullName>800-YASNOYA</fullName>
+        <default>false</default>
+        <label>800-YASNOYA</label>
+    </customValue>
+    <customValue>
+        <fullName>Commercial Land Brokerage</fullName>
+        <default>false</default>
+        <label>Commercial Land Brokerage</label>
+    </customValue>
+    <description>Method of Contact Picklist</description>
+    <masterLabel>Method of Contact</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

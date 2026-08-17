@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Handover_Collection_Team_Queue_Handover</fullName>
+    <columns>NAME</columns>
+    <columns>Unit__c</columns>
+    <columns>Sub_Status__c</columns>
+    <columns>Sales_Order__c</columns>
+    <columns>Unit_is_Ready__c</columns>
+    <filterScope>Queue</filterScope>
+    <label>Handover Collection Team Queue</label>
+    <queue>Handover_Collection_Team_Queue</queue>
+    <sharedTo>
+        <group>Collection_Team</group>
+    </sharedTo>
+</ListView>

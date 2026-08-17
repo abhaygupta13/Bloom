@@ -1,0 +1,49 @@
+<template>
+    <div if:true={isVisible}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open slds-modal_full">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+<svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+</svg>
+<span class="slds-assistive-text">Cancel and close</span>
+</button>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-combobox name="scope" label="Under Scope" value={value} placeholder="Select Progress"
+                        options={scopeOptions} onchange={handleChange}></lightning-combobox>
+
+
+                    <div if:true={isimagecapture}>
+                        <div if:true={isVisibleRsolutionTypology}>
+                            <lightning-combobox name="ResolutionTypology" label="Resolution Typology"
+                                value={resolutionTypologyValue} placeholder="Select Resolution Typology"
+                                options={resolutionTypologyOptions} onchange={handleChangeResolutionTypology}>
+                            </lightning-combobox>
+                        </div>
+                        <div if:false={isVisibleRsolutionTypology}>
+                            </br>
+                            <label class="custom-label">Agent's Comments:</label>
+                            <lightning-textarea name="comment" placeholder="type here..." value=""
+                                onchange={handleCommentChange}></lightning-textarea>
+                        </div>
+
+                        </br>
+                        Upload Image and Start Rectification
+                        <c-image-capture record-id={recordId} object-api-name={objectApiName} image-type={imageType} onsenddata={handleData}>
+                        </c-image-capture>
+                    </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_brand" onclick={handleSave}>Save</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </div>
+    <div if:false={isVisible}>
+        <p>
+            <lightning-formatted-text value="Already Filled Scope or Not Checked In Yet"></lightning-formatted-text>
+        </p>
+    </div>
+</template>

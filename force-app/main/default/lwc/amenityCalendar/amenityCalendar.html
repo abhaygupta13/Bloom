@@ -1,0 +1,68 @@
+<template >
+<div class="slds-p-around_medium" style="background:#fff;color: rgba(131, 0, 0, 1)">
+    <lightning-combobox
+        name="project"
+        label="Select Project"
+        value={selectedProject}
+        options={projects}
+        onchange={handleProjectChange}
+    ></lightning-combobox>
+
+    <lightning-combobox
+        name="amenity"
+        label="Select Amenity"
+        value={selectedAmenity}
+        options={amenities}
+        onchange={handleAmenityChange}
+    ></lightning-combobox>
+
+    <lightning-combobox
+        name="viewMode"
+        label="View Mode"
+        value={viewMode}
+        options={options}
+        onchange={handleViewChange}
+    ></lightning-combobox>
+    
+    <div class="slds-m-vertical_medium slds-text-align_right">
+         <lightning-button label="Book Amenity" onclick={handleOpenModal}></lightning-button>
+    </div>
+    
+    <template if:true={isModalOpen}>
+        <c-amenity-booking-modal onclosemodal={handleModalClose}></c-amenity-booking-modal>
+    </template>
+
+    <template if:true={loading}>
+        <p>Loading...</p>
+    </template>
+
+    <template if:true={error}>
+        <p class="error">{error}</p>
+    </template>
+
+    <template if:true={days.length}>
+        <table class="calendar-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <template for:each={timeSlots} for:item="slot">
+                        <th key={slot.start}>{slot.label}</th>
+                    </template>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={days} for:item="day">
+                    <tr key={day.date}>
+                        <td>{day.displayLabel}</td>
+                        <template for:each={day.slots} for:item="slot">
+                            <td key={slot.start} >
+                                    <span class={slot.className}>{slot.caseNumber} </span>
+                            </td>
+                        </template>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </template>
+</div>
+</template>

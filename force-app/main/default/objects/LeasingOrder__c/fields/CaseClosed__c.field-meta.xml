@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CaseClosed__c</fullName>
+    <label>Case Closed</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cancellation with no refund</fullName>
+                <default>false</default>
+                <label>Cancellation with no refund</label>
+            </value>
+            <value>
+                <fullName>Cancellation with refund</fullName>
+                <default>false</default>
+                <label>Cancellation with refund</label>
+            </value>
+            <value>
+                <fullName>Cancellation with compensation and refund</fullName>
+                <default>false</default>
+                <label>Cancellation with compensation and refund</label>
+            </value>
+            <value>
+                <fullName>Case closed by Court</fullName>
+                <default>false</default>
+                <label>Case closed by Court</label>
+            </value>
+            <value>
+                <fullName>Claim Rejected by Court</fullName>
+                <default>false</default>
+                <label>Claim Rejected by Court</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <description>Status of the commission line item.</description>
+    <inlineHelpText>Status of the commission line item.</inlineHelpText>
+    <label>Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sale Pending Completion</fullName>
+                <default>true</default>
+                <label>Sale Pending Completion</label>
+            </value>
+            <value>
+                <fullName>Invoice Ready</fullName>
+                <default>false</default>
+                <label>Invoice Ready</label>
+            </value>
+            <value>
+                <fullName>Invoice Submitted</fullName>
+                <default>false</default>
+                <label>Invoice Submitted</label>
+            </value>
+            <value>
+                <fullName>Invoice Approved</fullName>
+                <default>false</default>
+                <label>Invoice Approved</label>
+            </value>
+            <value>
+                <fullName>Invoice Rejected</fullName>
+                <default>false</default>
+                <label>Invoice Rejected</label>
+            </value>
+            <value>
+                <fullName>Under Payment Processing</fullName>
+                <default>false</default>
+                <label>Under Payment Processing</label>
+            </value>
+            <value>
+                <fullName>Paid</fullName>
+                <default>false</default>
+                <label>Paid</label>
+            </value>
+            <value>
+                <fullName>Approved</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Approved</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

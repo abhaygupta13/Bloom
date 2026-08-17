@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All_Offers__c</fullName>
+    <externalId>false</externalId>
+    <formula>if(Discount_Percent__c &gt; 0, &apos;Discount&apos; &amp; text(Discount_Percent__c) &amp; &apos;%&apos;, &apos;&apos;) &amp; if( ADM_Fee_Waived_Percentage__c &gt; 0, &apos; Adm Fee Waived&apos; &amp; text(ROUND(ADM_Fee_Waived_Percentage__c * 100,2)) &amp; &apos;%&apos;, &apos;&apos;) &amp; if( HomeMaintenanceWaivedYears__c &gt; 0, &apos; HomeMaintenanceWaiverYears&apos; &amp; text(HomeMaintenanceWaivedYears__c), &apos;&apos;) &amp; if(Rebate_Percentage__c &gt; 0, &apos; Rebate&apos; &amp; text(Rebate_Percentage__c * 100) &amp; &apos;%&apos;, &apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>All Offers</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

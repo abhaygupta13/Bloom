@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AllocateTo__c</fullName>
+    <label>Allocate To</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Rent Installment</fullName>
+                <default>false</default>
+                <label>Rent Installment</label>
+            </value>
+            <value>
+                <fullName>Service charges</fullName>
+                <default>false</default>
+                <label>Service charges</label>
+            </value>
+            <value>
+                <fullName>Admin</fullName>
+                <default>false</default>
+                <label>Admin</label>
+            </value>
+            <value>
+                <fullName>Transfer fee</fullName>
+                <default>false</default>
+                <label>Transfer fee</label>
+            </value>
+            <value>
+                <fullName>Leasing Advance</fullName>
+                <default>false</default>
+                <label>Leasing Advance</label>
+            </value>
+            <value>
+                <fullName>Tenants Security Deposits</fullName>
+                <default>false</default>
+                <label>Tenants Security Deposits</label>
+            </value>
+            <value>
+                <fullName>Chilled water</fullName>
+                <default>false</default>
+                <label>Chilled water</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

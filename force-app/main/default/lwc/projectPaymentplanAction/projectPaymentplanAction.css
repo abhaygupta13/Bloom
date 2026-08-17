@@ -1,0 +1,145 @@
+/* ============================= */
+/* MODAL WIDTH (match first UI)  */
+/* ============================= */
+.slds-modal__container {
+    width: 90%;  /* mobile width */
+    max-width: 90%;
+    min-height: 60vh; /* force a taller modal on mobile */
+    margin: auto;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .slds-modal__container {
+        max-width: 55rem;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .slds-modal__container {
+        max-width: 50rem; /* slightly tighter like Sales Offer */
+    }
+}
+
+/* ============================= */
+/* MODAL CONTENT SCROLL          */
+/* ============================= */
+.slds-modal__content {
+    overflow-y: auto;
+    max-height: calc(100% - 100px);
+    padding: 1rem; /* tighter spacing */
+}
+
+/* ============================= */
+/* BACKDROP (lighten background) */
+/* ============================= */
+.slds-backdrop {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ============================= */
+/* HEADER & FOOTER POLISH        */
+/* ============================= */
+.slds-modal__header {
+    border-bottom: 1px solid #d8dde6;
+}
+
+.slds-modal__footer {
+    border-top: 1px solid #d8dde6;
+}
+
+/* Title size match */
+.slds-modal__header h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+/* ============================= */
+/* TABLE STYLING                 */
+/* ============================= */
+.slds-table th,
+.slds-table td {
+    white-space: nowrap; /* prevent stretch */
+}
+
+/* Optional: better spacing */
+.slds-table td {
+    vertical-align: middle;
+}
+
+/* ============================= */
+/* HIDE FILE INPUT (IMPORTANT)   */
+/* ============================= */
+.hidden-file-input {
+    display: none !important;
+}
+
+/* ============================= */
+/* ICON ALIGNMENT & UX           */
+/* ============================= */
+td lightning-icon {
+    cursor: pointer;
+    margin-right: 6px;
+}
+
+/* ============================= */
+/* PILLS WRAP (if reused)        */
+/* ============================= */
+.slds-pill_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+/* ============================= */
+/* MOBILE RESPONSIVENESS         */
+/* ============================= */
+@media (max-width: 767px) {
+    lightning-layout {
+        flex-direction: column !important;
+    }
+
+    lightning-layout-item {
+        width: 100% !important;
+    }
+}
+.table-container {
+    overflow-x: auto;
+}
+
+.custom-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.custom-table th {
+    background: #f3f3f3;
+    font-weight: 600;
+    color: #444;
+}
+
+.custom-table th,
+.custom-table td {
+    text-align: center;
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.custom-table lightning-input {
+    width: 100%;
+    display: inline-block;
+}
+
+.percent-cell {
+    text-align: center;
+}
+
+.created-date-value {
+    padding-top: 2rem;
+}

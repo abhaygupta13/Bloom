@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Bloom Living</fullName>
+        <default>false</default>
+        <label>Bloom Living</label>
+    </customValue>
+    <customValue>
+        <fullName>Park View</fullName>
+        <default>false</default>
+        <label>Park View</label>
+    </customValue>
+    <customValue>
+        <fullName>Jumeirah Village Circle</fullName>
+        <default>false</default>
+        <label>Jumeirah Village Circle</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Gardens</fullName>
+        <default>false</default>
+        <label>Bloom Gardens</label>
+    </customValue>
+    <customValue>
+        <fullName>Saadiyat Island</fullName>
+        <default>false</default>
+        <label>Saadiyat Island</label>
+    </customValue>
+    <customValue>
+        <fullName>Soho Square</fullName>
+        <default>false</default>
+        <label>Soho Square</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloom Living - Cordoba</fullName>
+        <default>false</default>
+        <label>Bloom Living - Cordoba</label>
+    </customValue>
+    <customValue>
+        <fullName>Jumeirah Village Triangle</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Jumeirah Village Triangle</label>
+    </customValue>
+    <customValue>
+        <fullName>Mohamed Bin Zayed City</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Mohamed Bin Zayed City</label>
+    </customValue>
+    <customValue>
+        <fullName>Abudhabi City</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Abudhabi City</label>
+    </customValue>
+    <customValue>
+        <fullName>Zayed City</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Zayed City</label>
+    </customValue>
+    <masterLabel>Community</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

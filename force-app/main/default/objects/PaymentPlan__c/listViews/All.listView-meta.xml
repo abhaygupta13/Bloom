@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>Project__c</columns>
+    <columns>Description__c</columns>
+    <columns>NAME</columns>
+    <columns>BrokerPayout__c</columns>
+    <columns>Classification__c</columns>
+    <columns>CustomerSubType__c</columns>
+    <columns>IsActive__c</columns>
+    <columns>PaymentPlanDiscount__c</columns>
+    <columns>PaymentPlanType__c</columns>
+    <columns>PHPPFlag__c</columns>
+    <columns>RebatePercentage__c</columns>
+    <columns>TotalInstallment__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

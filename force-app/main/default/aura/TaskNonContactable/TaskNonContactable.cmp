@@ -1,0 +1,9 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" access="global" controller="ActivityController">
+    
+    <aura:attribute name="recordId" type="String" access="public" /> 
+    <aura:attribute name="rejectReason" type="String" default=""/>
+    <aura:attribute name="request" type="Task"  default="{'sobjectType':'Task'}"/> 
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <br/><br/><br/><br/><br/><br/><b><h1 align="center">Please Wait ...</h1></b>
+    
+</aura:component>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Received_cheque_cannot_be_updated</fullName>
+    <active>true</active>
+    <errorConditionFormula>ChequeReceived__c &amp;&amp; 
+NOT(ISNEW()) &amp;&amp;
+(ISCHANGED(Amount__c) ||
+ISCHANGED(BankName__c) ||
+ISCHANGED(BeneficiaryName__c) ||
+ISCHANGED(ChequeReceived__c) ||
+ISCHANGED(ChequeReceivedBy__c) ||
+ISCHANGED(ChequeReceivedDate__c) ||
+ISCHANGED(Customer_Transfer_Reference__c) ||
+ISCHANGED(MaturityDate__c) ||
+ISCHANGED(PaidBy__c) ||
+ISCHANGED(PaymentType__c) ||
+ISCHANGED(ReceiptNumber__c) ||
+ISCHANGED(ReceiptDate__c) ||
+ISCHANGED(ReferenceNumber__c) ||
+ISCHANGED(Remarks__c) ||
+ISCHANGED(VerifyBy__c) ||
+ISCHANGED(VerifyDate__c) ||
+ISCHANGED(RecievedFromAccount__c)
+
+)
+&amp;&amp;
+( $Profile.Name = &apos;Sales Manager&apos; ||
+$Profile.Name = &apos;Sales Admin&apos; ||
+$Profile.Name = &apos;Customer Management&apos; ||
+$Profile.Name = &apos;CM Agent&apos; )</errorConditionFormula>
+    <errorMessage>Receipt cannot be update once received by finance team.</errorMessage>
+</ValidationRule>

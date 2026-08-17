@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This permission set is created to give additional access to system admins which is not editable in the standard profile</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Additional Access to System Administrator</label>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ApiEnabled</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ManageSessionPermissionSets</name>
+    </userPermissions>
+</PermissionSet>

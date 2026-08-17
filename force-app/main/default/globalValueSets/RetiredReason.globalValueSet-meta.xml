@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Already Leased Elsewhere</fullName>
+        <default>false</default>
+        <label>Already Leased Elsewhere</label>
+    </customValue>
+    <customValue>
+        <fullName>Already Purchased Elsewhere</fullName>
+        <default>false</default>
+        <label>Already Purchased Elsewhere</label>
+    </customValue>
+    <customValue>
+        <fullName>Availability</fullName>
+        <default>false</default>
+        <label>Availability</label>
+    </customValue>
+    <customValue>
+        <fullName>Broker Enquiry</fullName>
+        <default>false</default>
+        <label>Broker Enquiry</label>
+    </customValue>
+    <customValue>
+        <fullName>Broker-Related Inquiry</fullName>
+        <default>false</default>
+        <label>Broker-Related Inquiry</label>
+    </customValue>
+    <customValue>
+        <fullName>Business Type rejected</fullName>
+        <default>false</default>
+        <label>Business Type rejected</label>
+    </customValue>
+    <customValue>
+        <fullName>Client Profile not Approved</fullName>
+        <default>false</default>
+        <label>Client Profile not Approved</label>
+    </customValue>
+    <customValue>
+        <fullName>Closed through Another Sales Manager</fullName>
+        <default>false</default>
+        <label>Closed through Another Sales Manager</label>
+    </customValue>
+    <customValue>
+        <fullName>Closed through Broker</fullName>
+        <default>false</default>
+        <label>Closed through Broker</label>
+    </customValue>
+    <customValue>
+        <fullName>CRM Inquiry</fullName>
+        <default>false</default>
+        <label>CRM Inquiry</label>
+    </customValue>
+    <customValue>
+        <fullName>Duplicate</fullName>
+        <default>false</default>
+        <label>Duplicate</label>
+    </customValue>
+    <customValue>
+        <fullName>Future Interest</fullName>
+        <default>false</default>
+        <label>Future Interest</label>
+    </customValue>
+    <customValue>
+        <fullName>Higher Than the Market</fullName>
+        <default>false</default>
+        <label>Higher Than the Market</label>
+    </customValue>
+    <customValue>
+        <fullName>Lease Inquiry</fullName>
+        <default>false</default>
+        <label>Lease Inquiry</label>
+    </customValue>
+    <customValue>
+        <fullName>Location</fullName>
+        <default>false</default>
+        <label>Location</label>
+    </customValue>
+    <customValue>
+        <fullName>Looking for information only</fullName>
+        <default>false</default>
+        <label>Looking for information only</label>
+    </customValue>
+    <customValue>
+        <fullName>Lost Interest</fullName>
+        <default>false</default>
+        <label>Lost Interest</label>
+    </customValue>
+    <customValue>
+        <fullName>No Answer</fullName>
+        <default>false</default>
+        <label>No Answer</label>
+    </customValue>
+    <customValue>
+        <fullName>No Availability</fullName>
+        <default>false</default>
+        <label>No Availability</label>
+    </customValue>
+    <customValue>
+        <fullName>Non-Leasing Inquiry</fullName>
+        <default>false</default>
+        <label>Non-Leasing Inquiry</label>
+    </customValue>
+    <customValue>
+        <fullName>Non-Sale Enquiry</fullName>
+        <default>false</default>
+        <label>Non-Sale Enquiry</label>
+    </customValue>
+    <customValue>
+        <fullName>No Number</fullName>
+        <default>false</default>
+        <label>No Number</label>
+    </customValue>
+    <customValue>
+        <fullName>Not interested at the present time</fullName>
+        <default>false</default>
+        <label>Not interested at the present time</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Ready to Move Forward</fullName>
+        <default>false</default>
+        <label>Not Ready to Move Forward</label>
+    </customValue>
+    <customValue>
+        <fullName>Not the Right Time</fullName>
+        <default>false</default>
+        <label>Not the Right Time</label>
+    </customValue>
+    <customValue>
+        <fullName>Not willing to provide required Documents</fullName>
+        <default>false</default>
+        <label>Not willing to provide required Documents</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Within Budget</fullName>
+        <default>false</default>
+        <label>Not Within Budget</label>
+    </customValue>
+    <customValue>
+        <fullName>Number of parking not suitable</fullName>
+        <default>false</default>
+        <label>Number of parking not suitable</label>
+    </customValue>
+    <customValue>
+        <fullName>Number of Payments not suitable</fullName>
+        <default>false</default>
+        <label>Number of Payments not suitable</label>
+    </customValue>
+    <customValue>
+        <fullName>Payment Plan</fullName>
+        <default>false</default>
+        <label>Payment Plan</label>
+    </customValue>
+    <customValue>
+        <fullName>Payment Plan Issues</fullName>
+        <default>false</default>
+        <label>Payment Plan Issues</label>
+    </customValue>
+    <customValue>
+        <fullName>Price</fullName>
+        <default>false</default>
+        <label>Price</label>
+    </customValue>
+    <customValue>
+        <fullName>Price Too High</fullName>
+        <default>false</default>
+        <label>Price Too High</label>
+    </customValue>
+    <customValue>
+        <fullName>Price Too Low</fullName>
+        <default>false</default>
+        <label>Price Too Low</label>
+    </customValue>
+    <customValue>
+        <fullName>Property Location Not Suitable</fullName>
+        <default>false</default>
+        <label>Property Location Not Suitable</label>
+    </customValue>
+    <customValue>
+        <fullName>Property Not Suitable</fullName>
+        <default>false</default>
+        <label>Property Not Suitable</label>
+    </customValue>
+    <customValue>
+        <fullName>Property Size Not Ideal</fullName>
+        <default>false</default>
+        <label>Property Size Not Ideal</label>
+    </customValue>
+    <customValue>
+        <fullName>Requesting Cash Back</fullName>
+        <default>false</default>
+        <label>Requesting Cash Back</label>
+    </customValue>
+    <customValue>
+        <fullName>Sales Inquiry</fullName>
+        <default>false</default>
+        <label>Sales Inquiry</label>
+    </customValue>
+    <customValue>
+        <fullName>Spam</fullName>
+        <default>false</default>
+        <label>Spam</label>
+    </customValue>
+    <customValue>
+        <fullName>System/Technical Issue</fullName>
+        <default>false</default>
+        <label>System/Technical Issue</label>
+    </customValue>
+    <customValue>
+        <fullName>System Issue</fullName>
+        <default>false</default>
+        <label>System Issue</label>
+    </customValue>
+    <customValue>
+        <fullName>Test Lead</fullName>
+        <default>false</default>
+        <label>Test Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>Transfer to Lease Lead</fullName>
+        <default>false</default>
+        <label>Transfer to Lease Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>Transfer to SR</fullName>
+        <default>false</default>
+        <label>Transfer to SR</label>
+    </customValue>
+    <customValue>
+        <fullName>Unit Design</fullName>
+        <default>false</default>
+        <label>Unit Design</label>
+    </customValue>
+    <customValue>
+        <fullName>Unit Too Large</fullName>
+        <default>false</default>
+        <label>Unit Too Large</label>
+    </customValue>
+    <customValue>
+        <fullName>Unit Too Small</fullName>
+        <default>false</default>
+        <label>Unit Too Small</label>
+    </customValue>
+    <customValue>
+        <fullName>Waiting List</fullName>
+        <default>false</default>
+        <label>Waiting List</label>
+    </customValue>
+    <customValue>
+        <fullName>Wrong Phone number</fullName>
+        <default>false</default>
+        <label>Wrong Phone number</label>
+    </customValue>
+    <customValue>
+        <fullName>Wrong phone number Provided</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Wrong phone number Provided</label>
+    </customValue>
+    <customValue>
+        <fullName>General Enquiry - Broker</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>General Enquiry - Broker</label>
+    </customValue>
+    <description>Retired Reason</description>
+    <masterLabel>Retired Reason</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

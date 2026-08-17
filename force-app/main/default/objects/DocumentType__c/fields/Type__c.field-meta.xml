@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <label>Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ADDC NOC</fullName>
+                <default>false</default>
+                <label>ADDC NOC</label>
+            </value>
+            <value>
+                <fullName>Additional Document 1</fullName>
+                <default>false</default>
+                <label>Additional Document 1</label>
+            </value>
+            <value>
+                <fullName>Additional Document 10</fullName>
+                <default>false</default>
+                <label>Additional Document 10</label>
+            </value>
+            <value>
+                <fullName>Additional Document 2</fullName>
+                <default>false</default>
+                <label>Additional Document 2</label>
+            </value>
+            <value>
+                <fullName>Additional Document 3</fullName>
+                <default>false</default>
+                <label>Additional Document 3</label>
+            </value>
+            <value>
+                <fullName>Additional Document 4</fullName>
+                <default>false</default>
+                <label>Additional Document 4</label>
+            </value>
+            <value>
+                <fullName>Additional Document 5</fullName>
+                <default>false</default>
+                <label>Additional Document 5</label>
+            </value>
+            <value>
+                <fullName>Additional Document 6</fullName>
+                <default>false</default>
+                <label>Additional Document 6</label>
+            </value>
+            <value>
+                <fullName>Additional Document 7</fullName>
+                <default>false</default>
+                <label>Additional Document 7</label>
+            </value>
+            <value>
+                <fullName>Additional Document 8</fullName>
+                <default>false</default>
+                <label>Additional Document 8</label>
+            </value>
+            <value>
+                <fullName>Additional Document 9</fullName>
+                <default>false</default>
+                <label>Additional Document 9</label>
+            </value>
+            <value>
+                <fullName>ADM Registration Document</fullName>
+                <default>false</default>
+                <label>ADM Registration Document</label>
+            </value>
+            <value>
+                <fullName>AMC</fullName>
+                <default>false</default>
+                <label>AMC</label>
+            </value>
+            <value>
+                <fullName>Application for Modification and Fitout Works - Arabic</fullName>
+                <default>false</default>
+                <label>Application for Modification and Fitout Works - Arabic</label>
+            </value>
+            <value>
+                <fullName>Application for Modification and Fitout Works - English</fullName>
+                <default>false</default>
+                <label>Application for Modification and Fitout Works - English</label>
+            </value>
+            <value>
+                <fullName>Authorization Letter</fullName>
+                <default>false</default>
+                <label>Authorization Letter</label>
+            </value>
+            <value>
+                <fullName>Bank confirmation letter</fullName>
+                <default>false</default>
+                <label>Bank confirmation letter</label>
+            </value>
+            <value>
+                <fullName>Bank NOC</fullName>
+                <default>false</default>
+                <label>Bank NOC</label>
+            </value>
+            <value>
+                <fullName>BCC Announcement</fullName>
+                <default>false</default>
+                <label>BCC Announcement</label>
+            </value>
+            <value>
+                <fullName>Bloom Title Deed</fullName>
+                <default>false</default>
+                <label>Bloom Title Deed</label>
+            </value>
+            <value>
+                <fullName>Book, CIS, Disclosure, MCD and SPA Arabic</fullName>
+                <default>false</default>
+                <label>Book, CIS, Disclosure, MCD and SPA Arabic</label>
+            </value>
+            <value>
+                <fullName>Book, CIS, Disclosure, MCD and SPA English</fullName>
+                <default>false</default>
+                <label>Book, CIS, Disclosure, MCD and SPA English</label>
+            </value>
+            <value>
+                <fullName>Book, CIS, Disclosure and MCD Arabic</fullName>
+                <default>false</default>
+                <label>Book, CIS, Disclosure and MCD Arabic</label>
+            </value>
+            <value>
+                <fullName>Book, CIS, Disclosure and MCD English</fullName>
+                <default>false</default>
+                <label>Book, CIS, Disclosure and MCD English</label>
+            </value>
+            <value>
+                <fullName>Booking, CIS, Broker Acknowledgement</fullName>
+                <default>false</default>
+                <label>Booking, CIS, Broker Acknowledgement</label>
+            </value>
+            <value>
+                <fullName>Booking Form</fullName>
+                <default>false</default>
+                <label>Booking Form</label>
+            </value>
+            <value>
+                <fullName>Booking Form - Signed</fullName>
+                <default>false</default>
+                <label>Booking Form - Signed</label>
+            </value>
+            <value>
+                <fullName>BRN/RERA card</fullName>
+                <default>false</default>
+                <label>BRN/RERA card</label>
+            </value>
+            <value>
+                <fullName>Broker Acknowledgement</fullName>
+                <default>false</default>
+                <label>Broker Acknowledgement</label>
+            </value>
+            <value>
+                <fullName>Broker Acknowledgement Form</fullName>
+                <default>false</default>
+                <label>Broker Acknowledgement Form</label>
+            </value>
+            <value>
+                <fullName>Broker Agreement</fullName>
+                <default>false</default>
+                <label>Broker Agreement</label>
+            </value>
+            <value>
+                <fullName>Broker Agreement International</fullName>
+                <default>false</default>
+                <label>Broker Agreement International</label>
+            </value>
+            <value>
+                <fullName>Broker Document</fullName>
+                <default>false</default>
+                <label>Broker Document</label>
+            </value>
+            <value>
+                <fullName>Broker Form</fullName>
+                <default>false</default>
+                <label>Broker Form</label>
+            </value>
+            <value>
+                <fullName>Broker Invoice Combined Document</fullName>
+                <default>false</default>
+                <label>Broker Invoice Combined Document</label>
+            </value>
+            <value>
+                <fullName>Broker Shared Invoice</fullName>
+                <default>false</default>
+                <label>Broker Shared Invoice</label>
+            </value>
+            <value>
+                <fullName>Buyer Emirates ID</fullName>
+                <default>false</default>
+                <label>Buyer Emirates ID</label>
+            </value>
+            <value>
+                <fullName>Buyer Passport</fullName>
+                <default>false</default>
+                <label>Buyer Passport</label>
+            </value>
+            <value>
+                <fullName>Buyers Undertaking</fullName>
+                <default>false</default>
+                <label>Buyers Undertaking</label>
+            </value>
+            <value>
+                <fullName>Buyer Visa</fullName>
+                <default>false</default>
+                <label>Buyer Visa</label>
+            </value>
+            <value>
+                <fullName>Cancellation &amp; Termination Agreement</fullName>
+                <default>false</default>
+                <label>Cancellation &amp; Termination Agreement</label>
+            </value>
+            <value>
+                <fullName>Checkout Form</fullName>
+                <default>false</default>
+                <label>Checkout Form</label>
+            </value>
+            <value>
+                <fullName>CHO Desnagging Report</fullName>
+                <default>false</default>
+                <label>CHO Desnagging Report</label>
+            </value>
+            <value>
+                <fullName>CHO Snagging Report</fullName>
+                <default>false</default>
+                <label>CHO Snagging Report</label>
+            </value>
+            <value>
+                <fullName>CIF</fullName>
+                <default>false</default>
+                <label>CIF</label>
+            </value>
+            <value>
+                <fullName>CIS</fullName>
+                <default>false</default>
+                <label>CIS</label>
+            </value>
+            <value>
+                <fullName>Client Information Sheet (KYC)</fullName>
+                <default>false</default>
+                <label>Client Information Sheet (KYC)</label>
+            </value>
+            <value>
+                <fullName>Commercial License</fullName>
+                <default>false</default>
+                <label>Commercial License</label>
+            </value>
+            <value>
+                <fullName>Community Entry Permit - Arabic</fullName>
+                <default>false</default>
+                <label>Community Entry Permit - Arabic</label>
+            </value>
+            <value>
+                <fullName>Community Entry Permit - English</fullName>
+                <default>false</default>
+                <label>Community Entry Permit - English</label>
+            </value>
+            <value>
+                <fullName>Community Management Statement</fullName>
+                <default>false</default>
+                <label>Community Management Statement</label>
+            </value>
+            <value>
+                <fullName>Company logo</fullName>
+                <default>false</default>
+                <label>Company logo</label>
+            </value>
+            <value>
+                <fullName>Completed Project Undertaking letter</fullName>
+                <default>false</default>
+                <label>Completed Project Undertaking letter</label>
+            </value>
+            <value>
+                <fullName>Copy of Judgement Document</fullName>
+                <default>false</default>
+                <label>Copy of Judgement Document</label>
+            </value>
+            <value>
+                <fullName>Credit invoice</fullName>
+                <default>false</default>
+                <label>Credit invoice</label>
+            </value>
+            <value>
+                <fullName>Credit Report</fullName>
+                <default>false</default>
+                <label>Credit Report</label>
+            </value>
+            <value>
+                <fullName>Debit Advice</fullName>
+                <default>false</default>
+                <label>Debit Advice</label>
+            </value>
+            <value>
+                <fullName>Default Notice</fullName>
+                <default>false</default>
+                <label>Default Notice</label>
+            </value>
+            <value>
+                <fullName>Developer NOC</fullName>
+                <default>false</default>
+                <label>Developer NOC</label>
+            </value>
+            <value>
+                <fullName>Digital Signature Attachment</fullName>
+                <default>false</default>
+                <label>Digital Signature Attachment</label>
+            </value>
+            <value>
+                <fullName>Disclosure Statement</fullName>
+                <default>false</default>
+                <label>Disclosure Statement</label>
+            </value>
+            <value>
+                <fullName>Dubai rera index</fullName>
+                <default>false</default>
+                <label>Dubai rera index</label>
+            </value>
+            <value>
+                <fullName>Email</fullName>
+                <default>false</default>
+                <label>Email</label>
+            </value>
+            <value>
+                <fullName>Emirates Id</fullName>
+                <default>false</default>
+                <label>Emirates Id</label>
+            </value>
+            <value>
+                <fullName>Emirates ID Back</fullName>
+                <default>false</default>
+                <label>Emirates ID Back</label>
+            </value>
+            <value>
+                <fullName>Emirates ID Front</fullName>
+                <default>false</default>
+                <label>Emirates ID Front</label>
+            </value>
+            <value>
+                <fullName>Escrow Letter</fullName>
+                <default>false</default>
+                <label>Escrow Letter</label>
+            </value>
+            <value>
+                <fullName>Floor Plan</fullName>
+                <default>false</default>
+                <label>Floor Plan</label>
+            </value>
+            <value>
+                <fullName>Generated Invoice</fullName>
+                <default>false</default>
+                <label>Generated Invoice</label>
+            </value>
+            <value>
+                <fullName>Gifting - Buyers Undertaking</fullName>
+                <default>false</default>
+                <label>Gifting - Buyers Undertaking</label>
+            </value>
+            <value>
+                <fullName>Gifting NOC</fullName>
+                <default>false</default>
+                <label>Gifting NOC</label>
+            </value>
+            <value>
+                <fullName>Guideline 1</fullName>
+                <default>false</default>
+                <label>Guideline 1</label>
+            </value>
+            <value>
+                <fullName>Guideline 1 Arabic</fullName>
+                <default>false</default>
+                <label>Guideline 1 Arabic</label>
+            </value>
+            <value>
+                <fullName>Guideline 2</fullName>
+                <default>false</default>
+                <label>Guideline 2</label>
+            </value>
+            <value>
+                <fullName>Guideline 2 Arabic</fullName>
+                <default>false</default>
+                <label>Guideline 2 Arabic</label>
+            </value>
+            <value>
+                <fullName>Guideline 3</fullName>
+                <default>false</default>
+                <label>Guideline 3</label>
+            </value>
+            <value>
+                <fullName>Guideline 3 Arabic</fullName>
+                <default>false</default>
+                <label>Guideline 3 Arabic</label>
+            </value>
+            <value>
+                <fullName>Handover Payment Attachment</fullName>
+                <default>false</default>
+                <label>Handover Payment Attachment</label>
+            </value>
+            <value>
+                <fullName>IBAN Letter</fullName>
+                <default>false</default>
+                <label>IBAN Letter</label>
+            </value>
+            <value>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+                <label>Insurance</label>
+            </value>
+            <value>
+                <fullName>JOPD</fullName>
+                <default>false</default>
+                <label>JOPD</label>
+            </value>
+            <value>
+                <fullName>KHO</fullName>
+                <default>false</default>
+                <label>KHO</label>
+            </value>
+            <value>
+                <fullName>LAF</fullName>
+                <default>false</default>
+                <label>LAF</label>
+            </value>
+            <value>
+                <fullName>Layout</fullName>
+                <default>false</default>
+                <label>Layout</label>
+            </value>
+            <value>
+                <fullName>Lease Agreement 1</fullName>
+                <default>false</default>
+                <label>Lease Agreement 1</label>
+            </value>
+            <value>
+                <fullName>Leasing ADDC NOC</fullName>
+                <default>false</default>
+                <label>Leasing ADDC NOC</label>
+            </value>
+            <value>
+                <fullName>Leasing Contract</fullName>
+                <default>false</default>
+                <label>Leasing Contract</label>
+            </value>
+            <value>
+                <fullName>Leasing Contract - Signed</fullName>
+                <default>false</default>
+                <label>Leasing Contract - Signed</label>
+            </value>
+            <value>
+                <fullName>Leasing Offer</fullName>
+                <default>false</default>
+                <label>Leasing Offer</label>
+            </value>
+            <value>
+                <fullName>Leasing Offer - Signed</fullName>
+                <default>false</default>
+                <label>Leasing Offer - Signed</label>
+            </value>
+            <value>
+                <fullName>Leasing Receipt document</fullName>
+                <default>false</default>
+                <label>Leasing Receipt document</label>
+            </value>
+            <value>
+                <fullName>Leasing Renewal Notice</fullName>
+                <default>false</default>
+                <label>Leasing Renewal Notice</label>
+            </value>
+            <value>
+                <fullName>Letter</fullName>
+                <default>false</default>
+                <label>Letter</label>
+            </value>
+            <value>
+                <fullName>Lost SPA Undertaking</fullName>
+                <default>false</default>
+                <label>Lost SPA Undertaking</label>
+            </value>
+            <value>
+                <fullName>Master Plan</fullName>
+                <default>false</default>
+                <label>Master Plan</label>
+            </value>
+            <value>
+                <fullName>Memo</fullName>
+                <default>false</default>
+                <label>Memo</label>
+            </value>
+            <value>
+                <fullName>Memorandum and articles of confirmation</fullName>
+                <default>false</default>
+                <label>Memorandum and articles of confirmation</label>
+            </value>
+            <value>
+                <fullName>Memorandum of Association Power of Attorney</fullName>
+                <default>false</default>
+                <label>Memorandum of Association Power of Attorney</label>
+            </value>
+            <value>
+                <fullName>Milestone Update</fullName>
+                <default>false</default>
+                <label>Milestone Update</label>
+            </value>
+            <value>
+                <fullName>MOA/POA</fullName>
+                <default>false</default>
+                <label>MOA/POA</label>
+            </value>
+            <value>
+                <fullName>Mortgage Cheque Copy</fullName>
+                <default>false</default>
+                <label>Mortgage Cheque Copy</label>
+            </value>
+            <value>
+                <fullName>Mortgage Contract</fullName>
+                <default>false</default>
+                <label>Mortgage Contract</label>
+            </value>
+            <value>
+                <fullName>MOU</fullName>
+                <default>false</default>
+                <label>MOU</label>
+            </value>
+            <value>
+                <fullName>Move In Request Form</fullName>
+                <default>false</default>
+                <label>Move In Request Form</label>
+            </value>
+            <value>
+                <fullName>Move Out Request Form</fullName>
+                <default>false</default>
+                <label>Move Out Request Form</label>
+            </value>
+            <value>
+                <fullName>National ID Back</fullName>
+                <default>false</default>
+                <label>National ID Back</label>
+            </value>
+            <value>
+                <fullName>National ID Front</fullName>
+                <default>false</default>
+                <label>National ID Front</label>
+            </value>
+            <value>
+                <fullName>NOC</fullName>
+                <default>false</default>
+                <label>NOC</label>
+            </value>
+            <value>
+                <fullName>Non-VAT declaration document if not registered for VAT</fullName>
+                <default>false</default>
+                <label>Non-VAT declaration document if not registered for VAT</label>
+            </value>
+            <value>
+                <fullName>Novation Agreement or DOA</fullName>
+                <default>false</default>
+                <label>Novation Agreement or DOA</label>
+            </value>
+            <value>
+                <fullName>Offer/Promo Letter</fullName>
+                <default>false</default>
+                <label>Offer/Promo Letter</label>
+            </value>
+            <value>
+                <fullName>Offer Letter</fullName>
+                <default>false</default>
+                <label>Offer Letter</label>
+            </value>
+            <value>
+                <fullName>Offer Letter Unit Layout</fullName>
+                <default>false</default>
+                <label>Offer Letter Unit Layout</label>
+            </value>
+            <value>
+                <fullName>Order Receipt Acknowledgement</fullName>
+                <default>false</default>
+                <label>Order Receipt Acknowledgement</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Passport</fullName>
+                <default>false</default>
+                <label>Passport</label>
+            </value>
+            <value>
+                <fullName>Passport Back</fullName>
+                <default>false</default>
+                <label>Passport Back</label>
+            </value>
+            <value>
+                <fullName>Passport Front</fullName>
+                <default>false</default>
+                <label>Passport Front</label>
+            </value>
+            <value>
+                <fullName>Payment Advice Document</fullName>
+                <default>false</default>
+                <label>Payment Advice Document</label>
+            </value>
+            <value>
+                <fullName>Payment Receipt</fullName>
+                <default>false</default>
+                <label>Payment Receipt</label>
+            </value>
+            <value>
+                <fullName>Payment Third Party Form</fullName>
+                <default>false</default>
+                <label>Payment Third Party Form</label>
+            </value>
+            <value>
+                <fullName>PDCs</fullName>
+                <default>false</default>
+                <label>PDCs</label>
+            </value>
+            <value>
+                <fullName>Permit to Move</fullName>
+                <default>false</default>
+                <label>Permit to Move</label>
+            </value>
+            <value>
+                <fullName>POA Document</fullName>
+                <default>false</default>
+                <label>POA Document</label>
+            </value>
+            <value>
+                <fullName>POA EID</fullName>
+                <default>false</default>
+                <label>POA EID</label>
+            </value>
+            <value>
+                <fullName>POA Passport</fullName>
+                <default>false</default>
+                <label>POA Passport</label>
+            </value>
+            <value>
+                <fullName>POA Visa</fullName>
+                <default>false</default>
+                <label>POA Visa</label>
+            </value>
+            <value>
+                <fullName>Power of Attorney</fullName>
+                <default>false</default>
+                <label>Power of Attorney</label>
+            </value>
+            <value>
+                <fullName>Project Logo</fullName>
+                <default>false</default>
+                <label>Project Logo</label>
+            </value>
+            <value>
+                <fullName>Project-Unit Registration Document</fullName>
+                <default>false</default>
+                <label>Project-Unit Registration Document</label>
+            </value>
+            <value>
+                <fullName>Proof of first-degree kinship</fullName>
+                <default>false</default>
+                <label>Proof of first-degree kinship</label>
+            </value>
+            <value>
+                <fullName>Proof of Payment</fullName>
+                <default>false</default>
+                <label>Proof of Payment</label>
+            </value>
+            <value>
+                <fullName>Proof of Signatory</fullName>
+                <default>false</default>
+                <label>Proof of Signatory</label>
+            </value>
+            <value>
+                <fullName>QA Desnagging Report</fullName>
+                <default>false</default>
+                <label>QA Desnagging Report</label>
+            </value>
+            <value>
+                <fullName>QA Snagging Report</fullName>
+                <default>false</default>
+                <label>QA Snagging Report</label>
+            </value>
+            <value>
+                <fullName>Quote Extension Document</fullName>
+                <default>false</default>
+                <label>Quote Extension Document</label>
+            </value>
+            <value>
+                <fullName>Referral Letter</fullName>
+                <default>false</default>
+                <label>Referral Letter</label>
+            </value>
+            <value>
+                <fullName>Refund form</fullName>
+                <default>false</default>
+                <label>Refund form</label>
+            </value>
+            <value>
+                <fullName>Registration Agreement</fullName>
+                <default>false</default>
+                <label>Registration Agreement</label>
+            </value>
+            <value>
+                <fullName>Registration NOC</fullName>
+                <default>false</default>
+                <label>Registration NOC</label>
+            </value>
+            <value>
+                <fullName>Registration SPA</fullName>
+                <default>false</default>
+                <label>Registration SPA</label>
+            </value>
+            <value>
+                <fullName>Removal of Name - Acknowledgement Letter</fullName>
+                <default>false</default>
+                <label>Removal of Name - Acknowledgement Letter</label>
+            </value>
+            <value>
+                <fullName>Rera Certificate</fullName>
+                <default>false</default>
+                <label>Rera Certificate</label>
+            </value>
+            <value>
+                <fullName>Resale Cancellation</fullName>
+                <default>false</default>
+                <label>Resale Cancellation</label>
+            </value>
+            <value>
+                <fullName>Returned Memo</fullName>
+                <default>false</default>
+                <label>Returned Memo</label>
+            </value>
+            <value>
+                <fullName>Salary Certificate</fullName>
+                <default>false</default>
+                <label>Salary Certificate</label>
+            </value>
+            <value>
+                <fullName>Sales Purchase Agreement</fullName>
+                <default>false</default>
+                <label>Sales &amp; Purchase Agreement</label>
+            </value>
+            <value>
+                <fullName>Sales Offer</fullName>
+                <default>false</default>
+                <label>Sales Offer</label>
+            </value>
+            <value>
+                <fullName>Seller Emirates ID</fullName>
+                <default>false</default>
+                <label>Seller Emirates ID</label>
+            </value>
+            <value>
+                <fullName>Seller Passport</fullName>
+                <default>false</default>
+                <label>Seller Passport</label>
+            </value>
+            <value>
+                <fullName>Seller Visa</fullName>
+                <default>false</default>
+                <label>Seller Visa</label>
+            </value>
+            <value>
+                <fullName>Send Email to Customer (cc to you)</fullName>
+                <default>false</default>
+                <label>Send Email to Customer (cc to you)</label>
+            </value>
+            <value>
+                <fullName>Send Email to Me</fullName>
+                <default>false</default>
+                <label>Send Email to Me</label>
+            </value>
+            <value>
+                <fullName>Send for Customer Signature (last generated)</fullName>
+                <default>false</default>
+                <label>Send for Customer Signature (last generated)</label>
+            </value>
+            <value>
+                <fullName>Service Charge Clearance Letter</fullName>
+                <default>false</default>
+                <label>Service Charge Clearance Letter</label>
+            </value>
+            <value>
+                <fullName>Signature Broker Acknowledgement Form</fullName>
+                <default>false</default>
+                <label>Signature Broker Acknowledgement Form</label>
+            </value>
+            <value>
+                <fullName>Signed KYC</fullName>
+                <default>false</default>
+                <label>Signed KYC</label>
+            </value>
+            <value>
+                <fullName>SOA</fullName>
+                <default>false</default>
+                <label>SOA</label>
+            </value>
+            <value>
+                <fullName>SPA</fullName>
+                <default>false</default>
+                <label>SPA</label>
+            </value>
+            <value>
+                <fullName>SPA, Disclosure and CMS Arabic</fullName>
+                <default>false</default>
+                <label>SPA, Disclosure and CMS Arabic</label>
+            </value>
+            <value>
+                <fullName>SPA, Disclosure and CMS English</fullName>
+                <default>false</default>
+                <label>SPA, Disclosure and CMS English</label>
+            </value>
+            <value>
+                <fullName>SPA Pre Registration</fullName>
+                <default>false</default>
+                <label>SPA Pre Registration</label>
+            </value>
+            <value>
+                <fullName>SPA - Signed</fullName>
+                <default>false</default>
+                <label>SPA - Signed</label>
+            </value>
+            <value>
+                <fullName>Statement of Account</fullName>
+                <default>false</default>
+                <label>Statement of Account</label>
+            </value>
+            <value>
+                <fullName>Statement of Account - Full</fullName>
+                <default>false</default>
+                <label>Statement of Account - Full</label>
+            </value>
+            <value>
+                <fullName>Statement of Account - Invoice</fullName>
+                <default>false</default>
+                <label>Statement of Account - Invoice</label>
+            </value>
+            <value>
+                <fullName>Supporting Document 1</fullName>
+                <default>false</default>
+                <label>Supporting Document 1</label>
+            </value>
+            <value>
+                <fullName>Supporting Document 2</fullName>
+                <default>false</default>
+                <label>Supporting Document 2</label>
+            </value>
+            <value>
+                <fullName>Suqur Al Watan Employee Document</fullName>
+                <default>false</default>
+                <label>Suqur Al Watan Employee Document</label>
+            </value>
+            <value>
+                <fullName>Surrender Agreement or DOS</fullName>
+                <default>false</default>
+                <label>Surrender Agreement or DOS</label>
+            </value>
+            <value>
+                <fullName>TAQA Joint Owner NOC</fullName>
+                <default>false</default>
+                <label>TAQA Joint Owner NOC</label>
+            </value>
+            <value>
+                <fullName>TAQA NOC</fullName>
+                <default>false</default>
+                <label>TAQA NOC</label>
+            </value>
+            <value>
+                <fullName>TAQA Non-Resident Owner NOC</fullName>
+                <default>false</default>
+                <label>TAQA Non-Resident Owner NOC</label>
+            </value>
+            <value>
+                <fullName>TAQA Owner NOC</fullName>
+                <default>false</default>
+                <label>TAQA Owner NOC</label>
+            </value>
+            <value>
+                <fullName>TAQA SOA Request</fullName>
+                <default>false</default>
+                <label>TAQA SOA Request</label>
+            </value>
+            <value>
+                <fullName>TAQA Transfer Confirmation Email</fullName>
+                <default>false</default>
+                <label>TAQA Transfer Confirmation Email</label>
+            </value>
+            <value>
+                <fullName>Tawtheeq /Ejari Document</fullName>
+                <default>false</default>
+                <label>Tawtheeq /Ejari Document</label>
+            </value>
+            <value>
+                <fullName>Tawtheeq Registration Confirmation</fullName>
+                <default>false</default>
+                <label>Tawtheeq Registration Confirmation</label>
+            </value>
+            <value>
+                <fullName>Tax invoice</fullName>
+                <default>false</default>
+                <label>Tax invoice</label>
+            </value>
+            <value>
+                <fullName>Tax Registration Number</fullName>
+                <default>false</default>
+                <label>Tax Registration Number</label>
+            </value>
+            <value>
+                <fullName>Third Party EID</fullName>
+                <default>false</default>
+                <label>Third Party EID</label>
+            </value>
+            <value>
+                <fullName>Third Party Form</fullName>
+                <default>false</default>
+                <label>Third Party Form</label>
+            </value>
+            <value>
+                <fullName>Title Deed</fullName>
+                <default>false</default>
+                <label>Title Deed</label>
+            </value>
+            <value>
+                <fullName>Title Deed Document</fullName>
+                <default>false</default>
+                <label>Title Deed Document</label>
+            </value>
+            <value>
+                <fullName>TPF Document</fullName>
+                <default>false</default>
+                <label>TPF Document</label>
+            </value>
+            <value>
+                <fullName>Trade License</fullName>
+                <default>false</default>
+                <label>Trade License</label>
+            </value>
+            <value>
+                <fullName>Undertaking Letter</fullName>
+                <default>false</default>
+                <label>Undertaking Letter</label>
+            </value>
+            <value>
+                <fullName>Unit Finishes</fullName>
+                <default>false</default>
+                <label>Unit Finishes</label>
+            </value>
+            <value>
+                <fullName>Unit Registration</fullName>
+                <default>false</default>
+                <label>Unit Registration</label>
+            </value>
+            <value>
+                <fullName>Variation Agreement or DOV</fullName>
+                <default>false</default>
+                <label>Variation Agreement or DOV</label>
+            </value>
+            <value>
+                <fullName>Visa</fullName>
+                <default>false</default>
+                <label>Visa</label>
+            </value>
+            <value>
+                <fullName>Waive of 2 months penalty</fullName>
+                <default>false</default>
+                <label>Waive of 2 months penalty</label>
+            </value>
+            <value>
+                <fullName>Welcome letter from bank</fullName>
+                <default>false</default>
+                <label>Welcome letter from bank</label>
+            </value>
+            <value>
+                <fullName>HO Undertaking Letter</fullName>
+                <default>false</default>
+                <label>HO Undertaking Letter</label>
+            </value>
+            <value>
+                <fullName>KYC Declaration Form</fullName>
+                <default>false</default>
+                <label>KYC Declaration Form</label>
+            </value>
+            <value>
+                <fullName>Deletion Undertaking Letter</fullName>
+                <default>false</default>
+                <label>Deletion Undertaking Letter</label>
+            </value>
+            <value>
+                <fullName>Last tenancy contract</fullName>
+                <default>false</default>
+                <label>Last tenancy contract</label>
+            </value>
+            <value>
+                <fullName>Water &amp; Electricity Clearance Certificate</fullName>
+                <default>false</default>
+                <label>Water &amp; Electricity Clearance Certificate</label>
+            </value>
+            <value>
+                <fullName>Maintenance Checkout Report</fullName>
+                <default>false</default>
+                <label>Maintenance Checkout Report</label>
+            </value>
+            <value>
+                <fullName>Tenant Letter for Break Lease</fullName>
+                <default>false</default>
+                <label>Tenant Letter for Break Lease</label>
+            </value>
+            <value>
+                <fullName>Break Lease Forms Signed by Tenant</fullName>
+                <default>false</default>
+                <label>Break Lease Forms Signed by Tenant</label>
+            </value>
+            <value>
+                <fullName>Welcome Letter</fullName>
+                <default>false</default>
+                <label>Welcome Letter</label>
+            </value>
+            <value>
+                <fullName>Offer Template for Renewal</fullName>
+                <default>false</default>
+                <label>Offer Template for Renewal</label>
+            </value>
+            <value>
+                <fullName>Statement of Account - Full SAP</fullName>
+                <default>false</default>
+                <label>Statement of Account - Full SAP</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

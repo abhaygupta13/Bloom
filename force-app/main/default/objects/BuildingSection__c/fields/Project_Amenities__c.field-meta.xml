@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project_Amenities__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF ( INCLUDES (  Project__r.Amenities__c , &quot;Gym&quot; ), &quot;Gym; &quot;,null ) &amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Swimming Pool&quot; ), &quot;Swimming Pool; &quot;,null ) &amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Built-in Wardrobes&quot; ), &quot;Built-in Wardrobes; &quot;,null ) &amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Balcony&quot; ), &quot;Balcony; &quot;,null ) &amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Pets Allowed&quot; ), &quot;Pets Allowed; &quot;,null )&amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Covered Parking&quot; ), &quot;Covered Parking; &quot;,null )&amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Jogging Track&quot; ), &quot;Jogging Track; &quot;,null )&amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Restaurant&quot; ), &quot;Restaurant; &quot;,null )&amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Children Play Area&quot; ), &quot;Children Play Area; &quot;,null )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Project Amenities</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

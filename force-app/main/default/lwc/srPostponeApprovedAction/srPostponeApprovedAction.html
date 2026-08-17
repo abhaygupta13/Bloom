@@ -1,0 +1,42 @@
+<template>
+    <div class="slds-is-relative" style="min-height: 30vh;">
+    <lightning-spinner if:true={isLoading} alternative-text="Processing..." size="small"></lightning-spinner>
+    <lightning-card>
+        <div class="slds-p-around_medium">
+            <!-- Centered & Bold Header -->
+            <div class="slds-text-heading_medium slds-text-align_center slds-m-bottom_medium">
+                Postpone Approval
+            </div>
+
+            <!-- PostponeApproved Picklist -->
+            <div class="slds-m-bottom_medium">
+                <lightning-combobox 
+                    name="postponeApproval"
+                    label="Postpone Approved"
+                    value={selectedValue}
+                    placeholder="Select an option"
+                    options={options}
+                    onchange={handleChange}
+                    required>
+                </lightning-combobox>
+            </div>
+
+            <!-- Footer Buttons -->
+            <div class="slds-m-top_medium slds-text-align_right">
+                <lightning-button 
+                    variant="neutral" 
+                    label="Cancel" 
+                    onclick={handleCancel}>
+                </lightning-button>
+
+                <lightning-button
+                    variant="brand" 
+                    label="Submit" 
+                    class="slds-m-left_small"
+                    onclick={handleSubmit}>
+                </lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</div>
+</template>

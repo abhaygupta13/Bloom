@@ -1,0 +1,969 @@
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="False" applyBodyTag="false" renderAs="pdf" controller="CommOfferExtension">
+    <html>
+        <head>
+            <style>
+                body {
+                font-family: "Times New Roman", serif;
+                margin: 40px;
+                color: #000;
+                }
+                .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                }
+                .logo {
+                font-size: 48px;
+                color: #c00000;
+                font-weight: bold;
+                }
+                .title {
+                font-size: 22px;
+                font-weight: bold;
+                text-align: center;
+                margin-top: 20px;
+                }
+                .section {
+                margin-top: 20px;
+                font-size: 16px;
+                }
+                table {
+                width: 100%;
+                border-collapse: collapse;
+                }
+                th, td {
+                border: 1px solid #000;
+                padding: 8px;
+                text-align: left;
+                }
+                th {
+                font-weight: bold;
+                }
+                .center {
+                text-align: center;
+                }
+                @page {
+                size: A10;
+                margin: 40px;
+                }
+                
+                .page-break {
+                page-break-before: always;
+                }
+                .rentTable {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                margin-bottom: 0;
+                }
+                
+                
+                .rentTable th,
+                .rentTable td {
+                border: 1px solid #222222;
+                padding: 5px 5px;
+                vertical-align: middle;
+                text-align: center;
+                font-size: 9px;
+                }
+                
+                .sectionTitleTable{
+                width:100%;
+                border-collapse:collapse;
+                table-layout:fixed;
+                margin-top:5px;
+                margin-bottom:0;
+                }
+                
+                .sectionTitleTable td{
+                border:1px solid #222222;
+                border-bottom:none;
+                text-align:center;
+                font-weight:bold;
+                font-size:12px;
+                padding:5px 0;
+                }
+                
+                
+                .rentTable th {
+                font-weight: bold;
+                font-size: 9px;
+                }
+                
+                
+                .rentPeriod {
+                width: 21%;
+                }
+                
+                
+                .rentStart {
+                width: 19%;
+                }
+                
+                
+                .rentEnd {
+                width: 19%;
+                }
+                
+                
+                .rentPerSqm {
+                width: 21%;
+                }
+                
+                
+                .rentTotal {
+                width: 20%;
+                }
+                
+                
+                .amountTable {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                margin-top: 18px;
+                }
+                
+                
+                .amountTable td {
+                border: 1px solid #222222;
+                padding: 6px 7px;
+                vertical-align: top;
+                font-size: 10px;
+                }
+                
+                
+                .amountLabel {
+                width: 37%;
+                font-weight: bold;
+                }
+                
+                
+                .amountValue {
+                width: 63%;
+                }
+                
+                
+                .serviceChargeTable {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                }
+                
+                
+                .serviceChargeTable td {
+                border: 1px solid #222222;
+                padding: 6px 7px;
+                vertical-align: top;
+                font-size: 10px;
+                }
+                
+                
+                .serviceChargeLabel {
+                width: 37%;
+                font-weight: bold;
+                }
+                
+                
+                .serviceChargeDetails {
+                width: 63%;
+                }
+                
+                
+                .serviceChargeSubTable {
+                width: 100%;
+                border-collapse: collapse;
+                }
+                
+                
+                .serviceChargeSubTable td {
+                border: 1px solid #222222;
+                padding: 5px;
+                vertical-align: top;
+                }
+                
+                
+                .serviceChargeSubLabel {
+                width: 35%;
+                }
+                
+                
+                .serviceChargeSubValue {
+                width: 65%;
+                }
+                
+                
+                .turnoverTable {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                }
+                
+                
+                .turnoverTable td {
+                border: 1px solid #222222;
+                padding: 6px 7px;
+                vertical-align: top;
+                font-size: 10px;
+                }
+                
+                
+                .turnoverLabel {
+                width: 37%;
+                font-weight: bold;
+                }
+                
+                
+                .turnoverValue {
+                width: 63%;
+                }
+                
+                
+                .turnoverSubTable {
+                width: 100%;
+                border-collapse: collapse;
+                }
+                
+                
+                .turnoverSubTable td {
+                border: 1px solid #222222;
+                padding: 5px;
+                }
+                
+                
+                .turnoverSubLabel {
+                width: 35%;
+                }
+                
+                
+                .turnoverSubValue {
+                width: 65%;
+                }
+                
+                
+                .description {
+                text-align: justify;
+                line-height: 1.3;
+                }
+                
+                
+                .amount {
+                white-space: nowrap;
+                }
+                
+                
+                .textRight {
+                text-align: right;
+                }
+                
+                
+                .textCenter {
+                text-align: center;
+                }
+                
+                
+                .bold {
+                font-weight: bold;
+                }
+                
+                
+                .noBorder {
+                border: none !important;
+                }
+                
+                
+                .keepTogether {
+                page-break-inside: avoid;
+                }
+                
+                
+                .rentTable tr {
+                page-break-inside: avoid;
+                }
+                
+                
+                .smallText {
+                font-size: 9px;
+                }
+                
+                .acceptanceSection {
+                width: 100%;
+                margin-top: 25px;
+                font-size: 11px;
+                line-height: 1.4;
+                }
+                
+                .contactText {
+                margin-top: 15px;
+                text-align: justify;
+                line-height: 1.5;
+                }
+                
+            </style>
+        </head>
+        
+        <body>
+            
+            <!-- Header -->
+            <div class="header">
+                <div class="logo">Bloom</div>
+            </div>
+            
+            <div class="title">Offer</div>
+            
+            <!-- Basic Info -->
+            <div class="section">
+                <p><b>Date:</b> <apex:outputText value="{0,date,d MMMM yyyy}">
+                            <apex:param value="{!wrapper.todayDate}"/>
+                        </apex:outputText></p>
+                <p><b>Tenant Name:</b>{!wrapper.tenantName}</p>
+                <p>Dear</p>
+                
+                <p>
+                    Further to your expressed interest in leasing a unit through Bloom Emirates Properties,
+                    we are pleased to hereby present the details below, including the annual rental rate
+                    and applicable charges:
+                    <b>(Please note this is legally non-binding and is subject to Leasing Committee approval and obtaining all Municipality requirements)</b>
+                </p>
+            </div>
+            
+            <!-- Property Details -->
+            <table>
+                <tr>
+                    <td><b>Development Name:</b></td>
+                    <td>{!wrapper.developmentName}</td>
+                </tr>
+                <tr>
+                    <td><b>Unit Type:</b></td>
+                    <td>{!wrapper.unitType}</td>
+                </tr>
+                <tr>
+                    <td><b>Unit Number:</b></td>
+                    <td>{!wrapper.unitNumber}</td>
+                </tr>
+                <tr>
+                    <td><b>Unit Condition:</b></td>
+                    <td>As-is</td>
+                </tr>
+                <tr>
+                    <td><b>Location:</b></td>
+                    <td>{!wrapper.location}</td>
+                </tr>
+                <tr>
+                    <td><b>Internal Area:</b></td>
+                    <td><apex:outputText value="{0,number,#,##0.##}">
+                            <apex:param value="{!wrapper.internalArea}"/>
+                        </apex:outputText> m2 (approximately)</td>
+                </tr>
+                <tr>
+                    <td><b>External Area:</b></td>
+                    <td><apex:outputText value="{0,number,#,##0.##}"
+                                         rendered="{!NOT(ISNULL(wrapper.externalArea))}">
+                            
+                            <apex:param value="{!wrapper.externalArea}"/>
+                            
+                        </apex:outputText></td>
+                </tr>
+            </table>
+            
+            <!-- Rent Schedule 
+            <table style="width:100%; border-collapse: collapse;">
+                
+                <!-- ===== Base Rent Schedule Header ===== 
+                <tr>
+                    <th colspan="5" style="text-align:center;">Base Rent Schedule</th>
+                </tr>
+                
+                <tr>
+                    <th>Lease Period</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Base Rent per sqm (excl. VAT) AED</th>
+                    <th>Total Base Rent (excl. VAT) AED</th>
+                </tr>
+                
+                <!-- Rent Rows 
+                <tr>
+                    <td>Gross Rent-Free Period</td>
+                    <td>01 June 2026</td>
+                    <td>28 September 2026</td>
+                    <td>0.00</td>
+                    <td>0.00</td>
+                </tr>
+                
+                <tr>
+                    <td>Lease Period 1</td>
+                    <td>29 September 2026</td>
+                    <td>28 September 2027</td>
+                    <td>2,500.00</td>
+                    <td>910,000.00</td>
+                </tr>
+                
+                <tr>
+                    <td>Lease Period 2</td>
+                    <td>29 September 2027</td>
+                    <td>28 September 2028</td>
+                    <td>2,625.00</td>
+                    <td>955,500.00</td>
+                </tr>
+                
+                <tr>
+                    <td>Lease Period 3</td>
+                    <td>29 September 2028</td>
+                    <td>28 September 2029</td>
+                    <td>2,756.25</td>
+                    <td>1,003,275.00</td>
+                </tr>
+                
+                <tr>
+                    <td>Lease Period 4</td>
+                    <td>29 September 2029</td>
+                    <td>28 September 2030</td>
+                    <td>2,894.06</td>
+                    <td>1,053,439.00</td>
+                </tr>
+                
+                <tr>
+                    <td>Lease Period 5</td>
+                    <td>29 September 2030</td>
+                    <td>28 September 2031</td>
+                    <td>3,038.77</td>
+                    <td>1,106,110.00</td>
+                </tr>
+                
+                <!-- ===== Service Charge Section ===== 
+                <tr>
+                    <td rowspan="2"><b>Service Charge</b></td>
+                    <td><b>Amount for Lease Period 1</b></td>
+                    <td colspan="3">
+                        AED 91,000 (excl. VAT), being AED 250 per square meter
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><b>Specific conditions</b></td>
+                    <td colspan="3">
+                        The Service Charge payable by the Tenant shall increase on the commencement date 
+                        of each new Lease Period by five percent (5%) greater than the amount payable in 
+                        the preceding Lease Period.
+                    </td>
+                </tr>
+                
+                <!-- ===== Marketing Fund =====
+                <tr>
+                    <td><b>Marketing Fund</b></td>
+                    <td colspan="4">
+                        AED 45,500 (excl. VAT) being 2.5% of Annual Base Rent
+                    </td>
+                </tr>
+                
+                <!-- ===== Gross Rent ===== 
+                <tr>
+                    <td><b>Gross Rent Amount Year 1</b></td>
+                    <td colspan="4">AED 1,046,500.00</td>
+                </tr>
+                
+                <!-- ===== Chilled Water ===== 
+                <tr>
+                    <td><b>Chilled Water:</b></td>
+                    <td colspan="4">Metered</td>
+                </tr>
+                
+                <!-- ===== Fit-out Deposit ===== 
+                <tr>
+                    <td><b>Fit-out Deposit (Undated Cheque – 25%):</b></td>
+                    <td colspan="4">AED 227,500.00</td>
+                </tr>
+                
+                <!-- ===== Security Deposit ===== 
+                <tr>
+                    <td><b>Security Deposit (25% of Base/annum):</b></td>
+                    <td colspan="4">AED 227,500.00</td>
+                </tr>
+                
+                <!-- ===== Turnover Rent ===== 
+                <tr>
+                    <td rowspan="3"><b>Turnover Rent</b></td>
+                    <td colspan="4">
+                        means for each Lease Period an amount equal to the amount (if any) by which the 
+                        Turnover Percentage of Gross Revenue exceeds the Base Rent due and payable in 
+                        the same Lease Period.
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><b>Turnover</b></td>
+                    <td colspan="3">29 September 2026 to 28 September 2031</td>
+                </tr>
+                
+                <tr>
+                    <td><b>Percentage</b></td>
+                    <td colspan="3">12%</td>
+                </tr>
+                
+            </table>-->
+            
+            <!-- ============================= -->
+            <!-- BASE RENT SCHEDULE -->
+            <!-- ============================= -->
+            <br/>
+            <table class="sectionTitleTable">
+                <tr>
+                    <td>Base Rent Schedule</td>
+                </tr>
+            </table>
+            <table class="rentTable">
+                <thead>
+                    <tr>
+                        
+                        <th class="rentPeriod">
+                            Lease Period
+                        </th>
+                        
+                        <th class="rentStart">
+                            Start
+                        </th>
+                        
+                        <th class="rentEnd">
+                            End
+                        </th>
+                        
+                        <th class="rentPerSqm">
+                            Base Rent per<br/>
+                            sqm (excl.<br/>
+                            VAT)<br/>
+                            AED 
+                        </th>
+                        
+                        <th class="rentTotal">
+                            Total Base Rent<br/>
+                            (excl. VAT)<br/>
+                            AED 
+                        </th>
+                        
+                    </tr>
+                    
+                </thead>
+                
+                
+                <tbody>
+                    
+                    <apex:repeat value="{!wrapper.baseRentRows}"
+                                 var="row">
+                        
+                        <tr>
+                            
+                            <td class="rentPeriod">
+                                {!row.leasePeriod}
+                            </td>
+                            
+                            
+                            <td class="rentStart">
+                                
+                                <apex:outputText value="{0,date,d MMMM yyyy}">
+                                    <apex:param value="{!row.startDate}"/>
+                                </apex:outputText>
+                                
+                            </td>
+                            
+                            
+                            <td class="rentEnd">
+                                
+                                <apex:outputText value="{0,date,d MMMM yyyy}">
+                                    <apex:param value="{!row.endDate}"/>
+                                </apex:outputText>
+                                
+                            </td>
+                            
+                            
+                            <td class="rentPerSqm">
+                                
+                                <apex:outputText value="{0,number,#,##0.00}">
+                                    <apex:param value="{!row.baseRentPerSqm}"/>
+                                </apex:outputText>
+                                
+                            </td>
+                            
+                            
+                            <td class="rentTotal">
+                                
+                                <apex:outputText value="{0,number,#,##0.00}">
+                                    <apex:param value="{!row.totalBaseRent}"/>
+                                </apex:outputText>
+                                
+                            </td>
+                            
+                        </tr>
+                        
+                    </apex:repeat>
+                    
+                </tbody>
+                
+            </table>
+            
+            
+            <!-- ============================= -->
+            <!-- SERVICE CHARGE -->
+            <!-- ============================= -->
+            
+            <table class="serviceChargeTable">
+                
+                <tr>
+                    
+                    <td class="serviceChargeLabel">
+                        Service Charge
+                    </td>
+                    
+                    
+                    <td class="serviceChargeDetails">
+                        
+                        <table class="serviceChargeSubTable">
+                            
+                            <tr>
+                                
+                                <td class="serviceChargeSubLabel">
+                                    
+                                    Amount for<br/>
+                                    Lease Period 1
+                                    
+                                </td>
+                                
+                                
+                                <td class="serviceChargeSubValue">
+                                    
+                                    AED &nbsp;
+                                    
+                                    <apex:outputText value="{0,number,#,##0.00}">
+                                        <apex:param value="{!wrapper.serviceChargeAmount}"/>
+                                    </apex:outputText>
+                                    
+                                    (excl. VAT), being AED &nbsp;
+                                    
+                                    <apex:outputText value="{0,number,#,##0.00}">
+                                        <apex:param value="{!wrapper.serviceChargePerSqm}"/>
+                                    </apex:outputText>
+                                    
+                                    per square meter
+                                    
+                                </td>
+                                
+                            </tr>
+                            
+                            
+                            <tr>
+                                
+                                <td class="serviceChargeSubLabel">
+                                    
+                                    Specific conditions
+                                    
+                                </td>
+                                
+                                
+                                <td class="serviceChargeSubValue description">
+                                    
+                                    The Service Charge payable by the Tenant shall
+                                    increase on the commencement date of each
+                                    new Lease Period by five percent (5%) greater
+                                    than the amount payable in the preceding Lease
+                                    Period.
+                                    
+                                </td>
+                                
+                            </tr>
+                            
+                        </table>
+                        
+                    </td>
+                    
+                </tr>
+                
+                
+                <!-- ============================= -->
+                <!-- MARKETING FUND -->
+                <!-- ============================= -->
+                
+                
+                
+                <tr>
+                    
+                    <td class="amountLabel">
+                        Marketing Fund
+                    </td>
+                    
+                    
+                    <td class="amountValue">
+                        
+                        AED &nbsp;
+                        
+                        <apex:outputText value="{0,number,#,##0.00}">
+                            <apex:param value="{!wrapper.marketingFundAmount}"/>
+                        </apex:outputText>
+                        
+                        (excl. VAT) being 2.5% of Annual Base Rent
+                        
+                    </td>
+                    
+                </tr>
+                
+                
+                <!-- ============================= -->
+                <!-- GROSS RENT -->
+                <!-- ============================= -->
+                
+                <tr>
+                    
+                    <td class="amountLabel">
+                        Gross Rent Amount Year 1
+                    </td>
+                    
+                    
+                    <td class="amountValue">
+                        
+                        AED &nbsp;
+                        
+                        <apex:outputText value="{0,number,#,##0.00}">
+                            <apex:param value="{!wrapper.grossRentAmountYear1}"/>
+                        </apex:outputText>
+                        
+                    </td>
+                    
+                </tr>
+                
+                
+                <!-- ============================= -->
+                <!-- CHILLED WATER -->
+                <!-- ============================= -->
+                
+                <tr>
+                    
+                    <td class="amountLabel">
+                        Chilled Water:
+                    </td>
+                    
+                    
+                    <td class="amountValue">
+                        {!wrapper.chilledWater}
+                    </td>
+                    
+                </tr>
+                
+                
+                <!-- ============================= -->
+                <!-- SECURITY DEPOSIT -->
+                <!-- ============================= -->
+                
+                <tr>
+                    
+                    <td class="amountLabel">
+                        Security Deposit (25% of Base/annum):
+                    </td>
+                    
+                    
+                    <td class="amountValue">
+                        
+                        AED &nbsp;
+                        
+                        <apex:outputText value="{0,number,#,##0.00}">
+                            <apex:param value="{!wrapper.securityDeposit}"/>
+                        </apex:outputText>
+                        
+                    </td>
+                    
+                </tr>
+                
+                
+                <!-- ============================= -->
+                <!-- TURNOVER RENT -->
+                <!-- ============================= -->
+                
+                
+                
+                <tr>
+                    
+                    <td class="turnoverLabel">
+                        Turnover Rent
+                    </td>
+                    
+                    
+                    <td class="turnoverValue">
+                        
+                        <div class="description">
+                            
+                            means for each Lease Period an amount equal
+                            to the amount (if any) by which the Turnover
+                            Percentage of Gross Revenue exceeds the Base
+                            Rent due and payable in the same Lease Period.
+                            
+                        </div>
+                        
+                        
+                        <table class="turnoverSubTable">
+                            
+                            <tr>
+                                <td class="turnoverSubLabel">
+                                    Turnover
+                                </td>
+                                
+                                <td class="turnoverSubValue">
+                                    
+                                    <apex:outputText value="{0,date,d MMMM yyyy}">
+                                        <apex:param value="{!wrapper.torStartDate}"/>
+                                    </apex:outputText>
+                                    
+                                    &nbsp;to&nbsp;
+                                    
+                                    <apex:outputText value="{0,date,d MMMM yyyy}">
+                                        <apex:param value="{!wrapper.torEndDate}"/>
+                                    </apex:outputText>
+                                    
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="turnoverSubLabel">
+                                    Percentage
+                                </td>
+                                
+                                <td class="turnoverSubValue">
+                                    
+                                    <apex:outputPanel rendered="{!wrapper.torPercentage > 0}">
+                                        
+                                        <apex:outputText value="{0,number,#,##0.##}%">
+                                            <apex:param value="{!wrapper.torPercentage}"/>
+                                        </apex:outputText>
+                                        
+                                    </apex:outputPanel>
+                                    
+                                    <apex:outputPanel rendered="{!wrapper.torPercentage <= 0}">
+                                        Not Applicable
+                                    </apex:outputPanel>
+                                    
+                                </td>
+                            </tr>
+                            
+                        </table>
+                        
+                    </td>
+                    
+                </tr>
+            </table>
+            
+            <table class="headerTable">
+                <tr>
+                    <td class="left" style="border: 0px">
+                        <div class="company">Bloom Properties LLC</div>
+                        <div>Abu Dhabi, United Arab Emirates</div>
+                        <div>P.O. Box 28928 | T. +971 2 6969500 | F. +971 2 6431144</div>
+                        <div class="sub">A National Holding Company</div>
+                    </td>
+                    <td class="right" style="border: 0px">
+                        bloomproperties.com
+                    </td>
+                </tr>
+            </table>
+            <!-- Header -->
+            <div class="header" style="padding-top:15rem">
+                <div class="logo">Bloom</div>
+            </div>
+            <!-- ===== Fees & Details Table ===== -->
+            <table style="width:100%; border-collapse:collapse; margin-top:20px; font-family:'Times New Roman', serif; font-size:13px;">
+                
+                <tr>
+                    <td style="width:35%; border:1px solid black; padding:6px;"><b>Admin Fees including VAT:</b></td>
+                    <td style="border:1px solid black; padding:6px;">AED 22,750.00</td>
+                </tr>
+                
+                <tr>
+                    <td style="border:1px solid black; padding:6px;"><b>Design Review Fee including VAT:</b></td>
+                    <td style="border:1px solid black; padding:6px;">AED 15,000 + VAT</td>
+                </tr>
+                
+                <tr>
+                    <td style="border:1px solid black; padding:6px;"><b>Fit-out Period:</b></td>
+                    <td style="border:1px solid black; padding:6px;">120 days</td>
+                </tr>
+                
+                <tr>
+                    <td style="border:1px solid black; padding:6px;"><b>Contract Period:</b></td>
+                    <td style="border:1px solid black; padding:6px;">5 Years</td>
+                </tr>
+                
+                <tr>
+                    <td style="border:1px solid black; padding:6px;"><b>Handover Date:</b></td>
+                    <td style="border:1px solid black; padding:6px;">June 1, 2026</td>
+                </tr>
+                
+                <tr>
+                    <td style="border:1px solid black; padding:6px;"><b>Rent Commencement Date</b></td>
+                    <td style="border:1px solid black; padding:6px;">29 September 2026</td>
+                </tr>
+                
+                <tr>
+                    <td style="border:1px solid black; padding:6px;"><b>Lease Expiry</b></td>
+                    <td style="border:1px solid black; padding:6px;">28 September 2031</td>
+                </tr>
+                
+                <tr>
+                    <td style="border:1px solid black; padding:6px;"><b>Permitted use</b></td>
+                    <td style="border:1px solid black; padding:6px;"></td>
+                </tr>
+                
+                <tr>
+                    <td style="border:1px solid black; padding:6px;"><b>Term of Payment:</b></td>
+                    <td style="border:1px solid black; padding:6px;">
+                        4 quarterly payments yearly paid in advance each year
+                    </td>
+                </tr>
+                
+            </table>
+            
+            <!-- ===== Notes Section ===== -->
+            <div style="margin-top:20px; font-family:'Times New Roman', serif; font-size:14px;">
+                
+                <p style="margin:10px 0;">
+                    Kindly confirm your acceptance of this offer within 7 working days.
+                </p>
+                
+                <p style="margin:10px 0;">
+                    Should you require any further information in this regard, please feel free to contact me at 
+                    <span style="text-decoration:underline; color:#0000EE;">
+                        meljammal@bloomholding.com
+                    </span> / +971 (50) 256 2660.
+                </p>
+                
+            </div>
+            
+            <!-- ===== Signature Section ===== -->
+            <table style="width:100%; margin-top:40px; font-family:'Times New Roman', serif; font-size:13px; border-collapse:collapse;border: 0px">
+                
+                <tr>
+                    
+                    <!-- Left -->
+                    <td style="width:50%; vertical-align:top; padding-right:20px;border: 0px;">
+                        <p style="margin:0;">Sincerely,</p>
+                        
+                        <div style="height:60px;"></div>
+                        
+                        <div style="border-top:1px solid black; width:80%;"></div>
+                        
+                        <p style="margin-top:5px;">
+                            Bloom Emirates Properties LLC (Managed by EIPS)
+                        </p>
+                    </td>
+                    
+                    <!-- Right -->
+                    <td style="width:50%; text-align:center; vertical-align:top;border: 0px">
+                        <p style="margin:0;">Accepted above offer:</p>
+                        
+                        <div style="height:60px;"></div>
+                        
+                        <div style="border-top:1px solid black; width:80%; margin:0 auto;"></div>
+                        
+                        <p style="margin-top:5px;">Tenant Name &amp; Signature</p>
+                    </td>
+                    
+                </tr>
+                
+            </table> 
+        </body>
+    </html>
+</apex:page>

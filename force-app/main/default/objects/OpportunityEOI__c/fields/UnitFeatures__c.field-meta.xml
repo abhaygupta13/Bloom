@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UnitFeatures__c</fullName>
+    <description>For capturing the Unit Features of the Opportunity EOI</description>
+    <label>Unit Features</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Unit_Features</valueSetName>
+    </valueSet>
+</CustomField>

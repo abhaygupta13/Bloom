@@ -1,0 +1,205 @@
+<template>
+	<lightning-card variant="narrow">
+		<!-- Table of Sales Validations if flags configured -->
+		<div if:false={isLoaded} class="slds-is-relative">
+			<lightning-spinner alternative-text="Loading..." variant="brand">
+			</lightning-spinner>
+		</div>
+
+		<template if:true={hasSVrecords}>
+			 <div if:false={readOnly}>
+			<div if:false={iseditable} class="slds-align_absolute-center"
+				style="font-weight: bold; padding:10px;">
+				<lightning-button label="Edit" onclick={handleEditClick} variant="brand"></lightning-button>
+			</div>
+			</div>
+			<div if:true={iseditable}>
+			<div  class="slds-align_absolute-center"
+				style="font-weight: bold; padding:10px;">
+				<lightning-button label="Save" onclick={handleSaveHandler} variant="brand"></lightning-button>
+				<lightning-button class="lightBtn slds-m-left_x-small" label="Cancel" variant="brand-outline"
+					onclick={cancel}></lightning-button>
+			</div>
+			</div>
+			<!-- <div if:false={isSaved} class="slds-is-relative">
+				<lightning-spinner alternative-text="Loading..." variant="brand">
+				</lightning-spinner>
+			</div> -->
+		</template>
+
+		<template if:true={hasSVrecords}>
+			<table if:true={hasTableData} id="data-table"
+				class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small">
+				<thead>
+					<tr class="slds-line-height_reset">
+						<th class="" scope="col"></th>
+						<th class="" scope="col"></th>
+						<th class="" scope="col"></th>
+						<th class="" scope="col"></th>
+						
+						<th  class="" scope="col">
+							<div class="slds-truncate" title="Initiator">Initiator</div>
+						</th>
+						<th class="" scope="col"></th>
+						<th class="" scope="col"></th>
+						<th class="" scope="col">
+							<div  class="slds-truncate" title="Approver">Approver</div>
+						</th>
+						<th class="" scope="col"></th>
+						
+						<!-- <th class="" scope="col"></th> -->
+					</tr>
+
+					<tr class="slds-line-height_reset">
+
+						<th class="" scope="col">
+							<div class="slds-truncate" title="SNo">S.No</div>
+						</th>
+
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Validation Type">Validation Type</div>
+						</th>
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Validation Sub Type">Validation Sub Type</div>
+						</th>
+						
+						
+						<th class="" scope="col" style="width:50px;">
+							<div class="slds-truncate" title="Validated Flag">Yes</div>
+						</th>
+						<!-- <th class="" scope="col" style="width:50px;">
+							<div class="slds-truncate" title="Validated Flag">No</div>
+						</th> -->
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Validated Flag">N.A.</div>
+						</th>
+						
+
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Comments">Comments</div>
+						</th>
+
+						
+						<th class="" scope="col" style="width:50px;">
+							<div class="slds-truncate" title="Validated Flag">Yes</div>
+						</th>
+						
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Validated Flag">N.A.</div>
+						</th>
+						
+
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Comments">Comments</div>
+						</th>
+
+						<!-- <th class="" scope="col">
+							<div class="slds-truncate" title="Last Modified By">Last Modified By</div>
+						</th>
+
+						<th class="" scope="col">
+							<div class="slds-truncate" title="Last Modified Date">Last Modified Date</div>
+						</th> -->
+
+					</tr>
+				</thead>
+
+				<tbody>
+					<template for:each={salesValidationList} for:item="svrec" for:index="index">
+
+						<tr class="slds-hint-parent" key={svrec.Id}>
+							<td></td>
+							<td>
+								<div class="slds-truncate">{svrec.Validation_Type__c}</div>
+							</td>
+							<td>
+								<div class="slds-truncate"><a href={svrec.recordLink}
+										target="_blank">{svrec.Validation_Sub_Type__c}</a></div>
+							</td>
+
+							
+							<td>
+								<lightning-button-icon-stateful data-id={svrec.Id} data-index={index} name={svrec.Id} data-sid="Initiator_Validated_Flag__c"
+									selected={svrec.initYesValue} icon-name="action:check" value="Yes"
+									onclick={onStep1ButtonCheck} disabled={initiatorEditDisabled}>
+								</lightning-button-icon-stateful>
+							</td>
+
+							<td>
+								<lightning-button-icon-stateful data-id={svrec.Id} data-index={index} name={svrec.Id} data-sid="Initiator_Validated_Flag__c"
+									selected={svrec.initNAValue} icon-name="action:close" value="Not Applicable"
+									onclick={onStep1ButtonCheck} disabled={initiatorEditDisabled}>
+								</lightning-button-icon-stateful>
+							</td>
+							
+							<!-- <td>
+								<lightning-button-icon-stateful data-id={svrec.Id} name={svrec.Id}
+									selected={svrec.naValue} icon-name="action:lead_convert" value="Not Applicable"
+									onclick={onRadioButtonChange} disabled={editDisabled}>
+								</lightning-button-icon-stateful>
+							</td> -->
+
+							<td>
+								<lightning-textarea class="textAreaBody"  data-id={svrec.Id} data-sid="Initiator_Comments__c" data-index={index} value={svrec.Initiator_Comments__c} onchange={onCommentHandler} disabled={initiatorEditDisabled} ></lightning-textarea>
+							</td>
+
+							
+							<td>
+								<lightning-button-icon-stateful data-id={svrec.Id} data-index={index} name={svrec.Id} data-sid="Approver_Validated_Flag__c"
+									selected={svrec.apprYesValue} icon-name="action:check" value="Yes"
+									onclick={onStep2ButtonCheck} disabled={approverEditDisabled}>
+								</lightning-button-icon-stateful>
+							</td>
+
+							<td>
+								<lightning-button-icon-stateful data-id={svrec.Id} data-index={index} name={svrec.Id} data-sid="Approver_Validated_Flag__c"
+									selected={svrec.apprNAValue} icon-name="action:close" value="Not Applicable"
+									onclick={onStep2ButtonCheck} disabled={approverEditDisabled}>
+								</lightning-button-icon-stateful>
+							</td>
+						
+
+							<td>
+								
+								<lightning-textarea class="textAreaBody" data-id={svrec.Id} data-index={index} data-sid="Approver_Comments__c" value={svrec.Approver_Comments__c} onchange={onCommentHandler} disabled={approverEditDisabled} ></lightning-textarea>
+							</td>
+
+							<!-- <td>
+								<div class="slds-truncate">{svrec.lastModified}</div>
+							</td>
+							<td>
+								<div class="slds-truncate">{svrec.formattedDate}</div>
+							</td> -->
+
+						</tr>
+					</template>
+				</tbody>
+			</table>
+		</template>
+
+		<div if:true={isLoaded} class="slds-is-relative">
+			<template if:false={hasSVrecords}>
+				<div class="slds-align_absolute-center" style="margin-top: 29px;font-weight: bold; padding:15px;">No
+					records found.</div>
+			</template>
+		</div>
+
+		<template if:true={hasSVrecords}>
+			<div if:false={readOnly}> 
+			<div if:false={iseditable} class="slds-align_absolute-center"
+				style="font-weight: bold; padding:10px;">
+				<lightning-button label="Edit" onclick={handleEditClick} variant="brand"></lightning-button>
+			</div>
+		 </div>
+			<div if:true={iseditable}>
+			<div class="slds-align_absolute-center"
+				style="font-weight: bold; padding:10px;">
+				<lightning-button label="Save" onclick={handleSaveHandler} variant="brand"></lightning-button>
+				<lightning-button class="lightBtn slds-m-left_x-small" label="Cancel" variant="brand-outline"
+					onclick={cancel}></lightning-button>
+			</div>
+			</div>
+		</template>
+
+	</lightning-card>
+</template>

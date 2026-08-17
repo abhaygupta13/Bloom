@@ -1,0 +1,134 @@
+<apex:page controller="softphone_it.ConnectorController" extensions="ConnectorControllerExtension,SyncUtil,softphone_it.ConnectorControllerWithoutSharing"
+ showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+	<apex:includeLightning />
+	<apex:slds />
+	<apex:stylesheet value="{!$Resource.iwsstyle}" />
+	<apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" />
+	<apex:includeScript value="/support/console/61.0/integration.js" />
+	<apex:includeScript value="{!$Resource.softphone_it__jquery}" />
+	<apex:includeScript value="{!$Resource.softphone_it__softphone_connector_core}" />
+	<apex:includeScript value="{!$Resource.softphone_it__coreutils}" />
+	<apex:includeScript value="{!$Resource.iwsutil_timelog}" />
+	<apex:includeScript value="{!$Resource.iwsutil}" />
+	
+	<script type="text/javascript">
+		console.log('**** Loading settings....');
+		const agentId = "{!$User.Id}";
+		const smartUiPath = "{!$Resource.softphone_it__softphone_connector_smart_ui}";
+		const smartuiDisambiguation = "{!$Resource.contactDisambiguation}";
+
+		const softphoneSettings = {
+			GEN_SF_EXPERIENCE: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GEN_SF_EXPERIENCE__c}",
+			GEN_SMART_UI: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GEN_SMART_UI__c}" == 'true',
+			GEN_CONTACT_DISAMBIGUATION: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GEN_CONTACT_DISAMBIGUATION__c}" == 'true',
+			GEN_SHOW_CONNECTION_LED: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GEN_SHOW_CONNECTION_LED__c}" == 'true',
+			GEN_INTEGRATION_TYPE: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GEN_INTEGRATION_TYPE__c}",
+			GEN_EXTERNAL_ROUTING: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GEN_EXTERNAL_ROUTING__c}"  == 'true',
+			GEN_TIMELOG_ENABLED: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GEN_TIMELOG_ENABLED__c}"  == 'true',
+			WDE_IXN_MGR_URL: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__WDE_IXN_MGR_URL__c}",
+			GEN_LOG_LEVEL: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GEN_LOG_LEVEL__c}",
+			WDE_HOST: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__WDE_HOSTNAME__c}",
+			WDE_PORT: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__WDE_PORTNUMBER__c}",
+			WDE_PROTOCOL: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__WDE_PROTOCOLTYPE__c}",
+			PEF_GC_ENVIRONMENT: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_GC_ENVIRONMENT__c}",
+			PEF_NOT_READY_ID: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_NOT_READY_ID__c}",
+			PEF_ON_QUEUE_ID: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_ON_QUEUE_ID__c}",
+			WWE_URL: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__WWE_URL__c}",
+			ER_OMNI_READY_ID: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_OMNI_READY_ID__c}" ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_OMNI_READY_ID__c}".substr(0, 15) : undefined,
+			ER_OMNI_NOT_READY_ID: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_OMNI_NOT_READY_ID__c}" ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_OMNI_NOT_READY_ID__c}".substr(0, 15) : undefined,
+			ER_WDE_CHANNELS_TO_SYNC: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_WDE_CHANNELS_TO_SYNC__c}",
+			PEF_DEDICATED_LOGIN_WINDOW: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_DEDICATED_LOGIN_WINDOW__c}" == 'true',
+			PEF_ENABLE_CALL_LOGS: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_ENABLE_CALL_LOGS__c}" == 'true',
+			PEF_HIDE_CALL_LOG_CONTACT: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_HIDE_CALL_LOG_CONTACT__c}" == 'true',
+			PEF_HIDE_CALL_LOG_RELATION: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_HIDE_CALL_LOG_RELATION__c}" == 'true',
+			PEF_HIDE_CALL_LOG_SUBJECT: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_HIDE_CALL_LOG_SUBJECT__c}" == 'true',
+			PEF_HIDE_WEB_RTC_POP_UP_OPTION: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_HIDE_WEB_RTC_POP_UP_OPTION__c}" == 'true',
+			PEF_EMBED_WEB_RTC_BY_DEFAULT: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_EMBED_WEB_RTC_BY_DEFAULT__c}" == 'true',
+			ER_OMNI_NO_SYNC_ID: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_OMNI_NO_SYNC_ID__c}" ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_OMNI_NO_SYNC_ID__c}".substr(0, 15) : undefined,
+			ER_SYNC_WDE_TO_OMNI: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_SYNC_WDE_TO_OMNI__c}" == 'true',
+			ER_SYNC_OMNI_TO_WDE: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_SYNC_OMNI_TO_WDE__c}" == 'true',
+			PEF_ENABLE_TRANSFER_CONTEXT: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_ENABLE_TRANSFER_CONTEXT__c}" == 'true',
+			PEF_EMBEDDED_INTERACTION_WINDOW: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_EMBEDDED_INTERACTION_WINDOW__c}" == 'true',
+			PEF_ENABLE_CONFIGURABLE_CALLER_ID: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_ENABLE_CONFIGURABLE_CALLER_ID__c}" == 'true',
+			PEF_ENABLE_SERVER_SIDE_LOGGING: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_ENABLE_SERVER_SIDE_LOGGING__c}" == 'true',
+			PEF_ENABLE_CALL_HISTORY: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_ENABLE_CALL_HISTORY__c}" == 'true',
+			ER_ENABLE_SYNC_ON_OMNI_CAPACITY: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_ENABLE_SYNC_ON_OMNI_CAPACITY__c}" == 'true',
+			ER_OMNI_BUSY_ON_VOICE_ESTABLISHED: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_OMNI_BUSY_ON_VOICE_ESTABLISHED__c}" == 'true',
+			ER_OMNI_BUSY_ID: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_OMNI_BUSY_ID__c}" ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_OMNI_BUSY_ID__c}".substr(0, 15) : undefined,
+			ER_CAPACITY_THRESHOLD: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_CAPACITY_THRESHOLD__c}",
+			ER_WDE_BUSY_ID: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__ER_WDE_BUSY_ID__c}",
+			GC_SSO: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GC_SSO__c}" == 'true',
+			GC_SSO_ORG_NAME: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GC_SSO__c}" == 'true' ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GC_SSO_ORG_NAME__c}" : undefined,
+			GC_SSO_PROVIDER: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GC_SSO__c}" == 'true' ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GC_SSO_PROVIDER__c}" : undefined,
+			PEF_THEME_PRIMARY: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_THEME_PRIMARY__c}",
+			PEF_THEME_TEXT: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_THEME_TEXT__c}",
+			CON_EVENT_TYPE: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__CON_EVENT_TYPE__c}",
+			GEN_LIVE_INTERACTION: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__GEN_LIVE_INTERACTION__c}" == 'true',
+			PEF_CUSTOM_ATTRIBUTES: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_CUSTOM_ATTRIBUTES__c}" ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_CUSTOM_ATTRIBUTES__c}" : undefined,
+			PEF_SEARCH_TARGETS: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_SEARCH_TARGETS__c}" ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_SEARCH_TARGETS__c}" : undefined,
+			PEF_DISPLAY_DETAILS_CALL: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_DISPLAY_DETAILS_CALL__c}" ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_DISPLAY_DETAILS_CALL__c}" : undefined,
+			PEF_DISPLAY_DETAILS_CALLBACK: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_DISPLAY_DETAILS_CALLBACK__c}" ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_DISPLAY_DETAILS_CALLBACK__c}" : undefined,
+			PEF_DISPLAY_DETAILS_CHAT: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_DISPLAY_DETAILS_CHAT__c}" ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_DISPLAY_DETAILS_CHAT__c}" : undefined,
+			PEF_DISPLAY_DETAILS_EMAIL: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_DISPLAY_DETAILS_EMAIL__c}" ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_DISPLAY_DETAILS_EMAIL__c}" : undefined,
+			PEF_DISPLAY_DETAILS_MESSAGE: "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_DISPLAY_DETAILS_MESSAGE__c}" ? "{!$Setup.softphone_it__Connector_Settings__c.softphone_it__PEF_DISPLAY_DETAILS_MESSAGE__c}" : undefined
+		}
+		log.info("softphone settings : " + JSON.stringify(softphoneSettings));
+		if (!softphoneSettings.GEN_INTEGRATION_TYPE) {
+			alert("You need to configure the cti-connector-core package.");
+		}
+
+		var experience = softphoneSettings.GEN_SF_EXPERIENCE == 'Lightning' ? '/support/api/61.0/lightning/opencti_min.js' : '/support/api/61.0/interaction.js'
+		loadScript(experience);
+
+		log.info('softphoneSettings : ' + JSON.stringify(softphoneSettings));
+
+		if (softphoneSettings.GEN_EXTERNAL_ROUTING) {
+			loadScript("{!$Resource.softphone_it__omniUtils}");
+		}
+
+		loadScript("{!$Resource.iwsscript}");
+
+		if (!softphoneSettings.GEN_SMART_UI && softphoneSettings.GEN_INTEGRATION_TYPE != 'PURECLOUD') {
+			$("body").append('<div id="content" class="softphone_content"></div>');
+		}
+
+		switch (softphoneSettings.GEN_INTEGRATION_TYPE) {
+			case 'PURECLOUD':
+
+				if (!softphoneSettings.GEN_SMART_UI) {
+					$("body").append('<div id="content" class="softphone_content"></div>');
+					appendHTML('<apex:iframe height="100%" width="100%" scrolling="true" id="pureFrame" />');
+				}
+				break;
+			case 'WDE':
+				loadScript("{!$Resource.iwsprescript}");
+				loadScript("{!$Resource.wdeintegration}");
+				appendHTML('<div id="IWSConnectorToolbar" name="IWSConnectorToolbar" style="display: none"></div><div class="container-wde"><div class="header"><img src="{!$Resource.logo_softphone}" /><p class="title"></p><p class="version"></p></div><div class="led-msg"><div id="led"></div><p></p><div class="btn-logs"><label>Logs</label><input type="button" onclick="toggleExpand()" id="expand" value="+"></input></div></div><div class="buttons" style="display: none"><input id="saveLogs" type="checkbox" onchange="updateSaveLog()" /><label>Save logs</label><button onclick="download()">Download</button><button onclick="clearLog()">Clear</button></div><div class="logs"><ul></ul></div></div>');
+				break;
+			case 'WWE':
+				appendHTML('<apex:iframe height="100%" width="100%" scrolling="true" id="wweFrame" />');
+				break;
+		}
+
+		loadScript("{!$Resource.iwsconfig}");
+		
+		function loadScript(src) {
+			const script = document.createElement('script');
+			script.src = src;
+			script.async = false;
+			document.head.appendChild(script);
+		}
+
+		function loadScriptSync(src, callback) {
+			const script = document.createElement('script');
+			script.src = src;
+			script.async = false;
+			document.head.appendChild(script);
+			script.onload = callback;
+		}
+
+		function appendHTML(content) {
+			$("#content").append(content);
+		}
+	</script>
+</apex:page>

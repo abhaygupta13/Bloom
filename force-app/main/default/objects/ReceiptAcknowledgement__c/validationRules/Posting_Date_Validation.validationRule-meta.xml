@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Posting_Date_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    NOT($Profile.Name = &quot;System Administrator&quot;),
+    ISCHANGED(ReceiptPostingDate__c),
+    ReceiptPostingDate__c &lt; TODAY(),
+    OR(
+        MONTH(ReceiptPostingDate__c) &lt;&gt; MONTH(TODAY()),
+        YEAR(ReceiptPostingDate__c) &lt;&gt; YEAR(TODAY())
+    )
+)</errorConditionFormula>
+    <errorMessage>Posting Date must be within the current month or future date</errorMessage>
+</ValidationRule>

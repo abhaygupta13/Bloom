@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TypeOfResale__c</fullName>
+    <label>Type of Resale</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>SPA Registered</fullName>
+                <default>false</default>
+                <label>SPA Registered</label>
+            </value>
+            <value>
+                <fullName>SPA not Registered</fullName>
+                <default>false</default>
+                <label>SPA not Registered</label>
+            </value>
+            <value>
+                <fullName>Gifting</fullName>
+                <default>false</default>
+                <label>Gifting</label>
+            </value>
+            <value>
+                <fullName>Addition/Deletion</fullName>
+                <default>false</default>
+                <label>Addition/Deletion</label>
+            </value>
+            <value>
+                <fullName>Resale</fullName>
+                <default>false</default>
+                <label>Resale</label>
+            </value>
+            <value>
+                <fullName>Add/Del of Kin</fullName>
+                <default>false</default>
+                <label>Add/Del of Kin</label>
+            </value>
+            <value>
+                <fullName>Add/Del</fullName>
+                <default>false</default>
+                <label>Add/Del</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,318 @@
+<template>
+<div style="background:#F5F5F5" >
+<template if:false={showSearchComponent}>
+<div class="button-container2">    
+<lightning-button-icon 
+icon-name="utility:back"
+variant="border-filled"
+alternative-text="Back"
+class="slds-m-top_medium"
+onclick={handleBack}>
+</lightning-button-icon>
+</div>
+
+<!-- Display Current Date and Time -->
+ <!-- Section 1-->
+
+<template if:true={showSection1}>
+<div class="slds-p-around_medium">
+<p>
+    <lightning-icon 
+        icon-name="utility:clock" 
+        alternative-text="Clock" 
+        size="small" 
+        class="slds-m-right_small">
+    </lightning-icon>
+    <strong>Current Date and Time:</strong> {currentDateTime}
+</p>
+</div>
+
+<lightning-card title="Permit Details" icon-name="standard:contact" style="background:#F5F5F5">
+    <div style="background:#F5F5F5">
+        <!-- Section 1: Details -->
+        <div class="slds-p-bottom_medium">
+            <template if:true={caseRecord}>
+                <div class="slds-grid slds-wrap slds-gutters">
+    <!-- Column 1 -->
+    <div class="slds-col slds-size_1-of-1 slds-p-horizontal_small" >
+        <p><strong>Request No:</strong> {caseRecord.Request_Number__c}</p>
+        <p><strong>Building name :</strong> {caseRecord.Unit__r.BuildingSectionName__r.Name}</p>
+        <p><strong>Location code :</strong> {caseRecord.Unit_Name_Formula__c}</p>
+        <p><strong>User type:</strong> {caseRecord.User_Type__c}</p>
+        <p><strong>Customer name :</strong> {caseRecord.Account.Name}</p>
+        <p><strong>Source name :</strong> {caseRecord.Origin}</p>
+        <p><strong>Status:</strong> {caseRecord.Status}</p>
+        <p><strong>Sub Status :</strong> {caseRecord.Case_Sub_Status__c}</p>
+        <p><strong>Frequency :</strong> {caseRecord.Frequency__c}</p>
+        
+    </div>
+
+    <!-- Column 2 -->
+    <div class="slds-col slds-size_1-of-1 slds-p-horizontal_small slds-p-top_medium">
+        <p><strong>Community name :</strong> {caseRecord.Community_Name__c}</p>
+        <p><strong>Preferred Date :</strong> {caseRecord.Access_Permit_Preferred_Date__c}</p>
+        <p><strong>Permit Validity:</strong>{caseRecord.Permit_Validaity__c}</p>
+        <p><strong>Request expiry date:</strong> {caseRecord.Permit_Expiry_Date__c}</p>
+        <p><strong>Permit category :</strong> {caseRecord.Access_Permit_Category__c}</p>
+        <p><strong>Permit type :</strong> {caseRecord.Service_Types__c}</p>
+        <p><strong>Description :</strong> {caseRecord.Access_Permit_Description__c}</p>
+        <p><strong>Company name :</strong> {caseRecord.Access_Permit_Company__c}</p>
+        <p><strong>Assigned Gate house name :</strong> {caseRecord.Unit__r.Project__r.Gate_Name__c}</p>
+        <!-- <p><strong>Permit validity period :</strong> {caseRecord.Permit_Validaity__c}</p>-->
+        
+    </div>
+</div>
+    </template>
+    </div>
+</div>
+</lightning-card>
+<template if:true={checkoutDetils}>
+    <lightning-card title="Check-in Details" icon-name="standard:contact">
+    <div style="background:#F5F5F5">
+        <!-- Section 1: Details -->
+        <div class="slds-p-bottom_medium">
+            <template if:true={caseRecord}>
+                <div class="slds-grid slds-wrap slds-gutters">
+    <!-- Column 1 -->
+    <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small">
+        <p><strong>Emirates ID:</strong> {caseRecord.Visitor_Emirates_ID__c}</p>
+        <p><strong>Trade License Expiry Date :</strong> {caseRecord.Visitor_Trade_license_expiry_date__c}</p>
+        <p><strong>Plate Number :</strong> {caseRecord.Visitor_Plate_Number__c}</p>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="slds-col slds-size_1-of-2 slds-p-horizontal_small">
+        <p><strong>Mobile Number :</strong> {caseRecord.Visitor_Mobile_Number__c}</p>
+        <p><strong>Plate Source:</strong> {caseRecord.Visitor_Plate_Source__c}</p>
+        <p><strong>Plate Code:</strong> {caseRecord.Visitor_Plate_Code__c}</p>
+    </div>
+</div>
+    </template>
+    </div>
+</div>
+</lightning-card>
+</template>
+<template if:false={checkoutDetils}>
+ <div class="button-container">
+        <lightning-button
+            label="Next"
+            onclick={displaySection2}
+            disabled={isNextDisabled}>
+        </lightning-button>
+    </div>
+</template>
+</template>
+ <!-- End of Section 1-->
+
+  <!-- Section 2-->
+<template if:true={showSection2}>   
+
+
+<template if:true={isNotCheckin} style="background:#F5F5F5">
+    <div style="background:#F5F5F5">
+<lightning-card title="Security check-in details" icon-name="standard:contact" style="background:#F5F5F5">
+<div class="slds-m-around_medium" style="background:#F5F5F5">
+    <!-- Section 1: Details -->
+    <div class="slds-p-bottom_medium" style="background:#F5F5F5">
+        <div class="slds-grid slds-wrap slds-gutters" style="background:#F5F5F5">
+            <!-- Column 1 -->
+            
+<div >
+<div class="slds-col slds-size_1-of-1">
+    <lightning-input 
+            type="text" 
+            label="Emirates ID" 
+            disabled={isApprove} 
+            value={emiratesId} 
+            maxlength="18"
+            onchange={handleEmiratesInput}  
+            placeholder="Format: 784-XXXX-XXXXXXX-X"
+            pattern="784-\d{4}-\d{7}-\d{1}"
+            required
+            message-when-pattern-mismatch="Please enter Emirates ID in the format 784-XXXX-XXXXXXX-X">
+        </lightning-input>
+</div>
+
+<div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+    <lightning-input 
+            type="date" 
+            label="Trade License Expiry Date" 
+            value={tradeCoomercialNumber} 
+            min={minDate}
+            onchange={handleInputChange}
+            disabled={isApprove}>
+</lightning-input>
+
+</div>
+<div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+<!-- Plate Source -->
+    <lightning-input 
+        type="text" 
+        label="Plate Source" 
+        value={plateSource} 
+        onchange={handleInputChange}
+            disabled={isApprove}
+            max-length="50"
+            required>
+    </lightning-input>
+
+    <lightning-input 
+        type="text" 
+        label="Plate Code" 
+        value={plateCode} 
+        onchange={handleInputChange}
+            disabled={isApprove}
+            max-length="50"
+            required>
+    </lightning-input>
+    <lightning-input 
+        type="text" 
+        label="Plate Number" 
+        value={plateNumber} 
+        onchange={handleInputChange}
+            disabled={isApprove}
+            max-length="50"
+            required>
+    </lightning-input>
+</div>
+<label class="slds-form-element__label" for="mobileNumber" style="margin-left: 13px;">
+   <abbr class="slds-required" title="required">*</abbr>  Mobile Number
+</label>
+<div class="custom-container">
+    <div class="custom-inputs">
+        <!-- Mobile Number Label -->
+        <!-- Mobile Number Label (Ensure it takes full width) -->
+       
+        <div class="custom-mobile-wrapper" style="display: flex; gap:10px; align-items: center; width: 92%; margin-left: 13px;">
+            <!-- Country Code Dropdown -->
+            <div class="custom-country-code" style="flex: 1;">
+                <lightning-combobox 
+                    value={selectedCountryCode} 
+                    options={countryCodeOptions} 
+                    onchange={handleInputChange}
+                    disabled={isApprove}
+                    variant="label-hidden">
+                </lightning-combobox>
+            </div>
+
+            <!-- Mobile Number Input -->
+            <div class="custom-mobile-number" style="flex: 2;width: 100%; margin-left: 10px;">
+                <lightning-input 
+                    id="mobileNumber"
+                    data-name="mobileNumber"
+                    type="text"  
+                    value={mobileNumber} 
+                    onchange={handleInputChange}
+                    max-length="9"
+                    disabled={isApprove}
+                    variant="label-hidden">
+                </lightning-input>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+    </div>
+</div>
+
+</lightning-card>
+    </div>
+</template>
+
+
+<lightning-card title="Upload Attachment" icon-name="standard:attach" style="background:#F5F5F5">
+
+<!-- File Input for Each Category -->
+<template for:each={fileCategories} for:item="category" style="background:#F5F5F5">
+<div key={category.value} class="slds-m-bottom_medium" style="background:#F5F5F5">
+    <lightning-input
+        type="file"
+        label={category.label}
+        disabled={isApprove}
+        onchange={handleFileChange}
+        data-category={category.value}
+        multiple
+        required={category.required}
+        accept=".pdf, .jpeg, .jpg"
+         style="background:#F5F5F5">
+    </lightning-input>
+</div>
+</template>
+
+
+<!-- Display Uploaded Files -->
+<template if:true={uploadedFiles.length} style="background:#F5F5F5">
+    <div class="slds-col slds-size_1-of-1" style="background:#F5F5F5">
+        <h3 class="slds-m-top_medium">Uploaded Files:</h3>
+        <ul>
+            <template for:each={uploadedFiles} for:item="file">
+                <li key={file.name}>
+                    {file.category}: {file.name} - {file.status}
+                </li>
+            </template>
+        </ul>
+    </div>
+</template>
+
+</lightning-card>
+</template>
+<template if:true={showSuccessMessage} style="background:#F5F5F5">
+        <p class="slds-text-color_success slds-m-top_medium">✔️  Details saved successfully. Click on back button.</p>
+</template>
+
+<div style="background:#F5F5F5">
+    <template if:true={isNotCheckin} style="background:#F5F5F5">
+<lightning-button 
+    label="Check in" 
+    variant="brand" 
+    data-action="Approved"
+    onclick={handleSave}
+    disabled={isDisabled}
+    class="sameWidth">
+</lightning-button>
+<lightning-button 
+    label="Reject" 
+    variant="destructive" 
+    class="slds-m-left_small sameWidth" 
+    data-action="Rejected"
+    onclick={handleSave}
+    disabled={isRejected}>
+</lightning-button>
+    </template>
+</div>
+
+
+
+    <!-- Case Details Section -->
+    <template if:false={isNotCheckin}>
+    <c-access-detail-checkout 
+        case-id={caseId}  >
+    </c-access-detail-checkout >
+    </template>
+</template>
+    <!-- Back Button -->
+    <template if:true={showSearchComponent}>
+    <c-access-search-f-m-app></c-access-search-f-m-app>
+</template>
+<template if:true={errorMessage}>
+<div class="slds-text-color_error slds-m-top_small slds-text-heading_medium">
+    <strong>Error:</strong> {errorMessage}
+</div>
+</template>
+<template if:true={isLoading}>
+<div class="slds-spinner_container">
+    <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+        <span class="slds-assistive-text">Loading...</span>
+    </div>
+</div>
+</template>
+
+<template if:true={isNotCheckin}>
+    <!--
+<div class="button-container alignCenter">
+<lightning-button label="Next" onclick={handleNext} disabled={isNextDisabled}></lightning-button>
+</div>-->
+</template>
+</div>
+</template>

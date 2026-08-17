@@ -1,0 +1,1658 @@
+<apex:page controller="RefundFormPDFController"
+           renderAs="pdf"
+           showHeader="false"
+           sidebar="false"
+           applyBodyTag="false"
+           standardStylesheets="false">
+    
+    <html>
+        
+        <head>
+            
+            <style>
+                
+                .headingCell{
+                
+                width:60%;
+                
+                background:#d9d9d9;
+                
+                border:1px solid #666;
+                
+                text-align:center;
+                
+                padding:7px;
+                
+                font-size:14px;
+                
+                }
+                
+                .valueCell{
+                
+                width:40%;
+                
+                border:1px solid #666;
+                
+                padding-left:8px;
+                
+                font-size:14px;
+                
+                }
+                
+                @page{
+                size:A4;
+                margin:18mm;
+                }
+                
+                body{
+                font-family:Arial, Helvetica, sans-serif;
+                font-size:11px;
+                color:#000;
+                }
+                
+                table{
+                width:100%;
+                border-collapse:collapse;
+                }
+                
+                td{
+                vertical-align:top;
+                }
+                
+                .section{
+                margin-top:12px;
+                }
+                
+                .border{
+                
+                border:1px solid #666;
+                
+                padding:5px;
+                
+                }
+                
+                .label{
+                font-weight:bold;
+                width:30%;
+                }
+                
+                .value{
+                width:70%;
+                }
+                
+                .title{
+                font-size:18px;
+                font-weight:bold;
+                text-align:center;
+                margin-top:15px;
+                margin-bottom:15px;
+                }
+                
+                .logoTable{
+                width:100%;
+                }
+                
+                .logoLeft{
+                width:70%;
+                }
+                
+                .logoRight{
+                width:30%;
+                text-align:right;
+                }
+                
+                .logoRight img{
+                width:170px;
+                }
+                
+                .heading{
+                background:#eeeeee;
+                font-weight:bold;
+                }
+                
+                .center{
+                text-align:center;
+                }
+                
+                .right{
+                text-align:right;
+                }
+                
+                .checkbox{
+                font-size:14px;
+                font-weight:bold;
+                }
+                
+                .small{
+                font-size:10px;
+                }
+                
+                .signatureBox{
+                height:65px;
+                }
+                
+                .sectionTitle{
+                
+                font-size:18px;
+                
+                font-weight:bold;
+                
+                color:#3d4ea2;
+                
+                text-decoration:underline;
+                
+                margin-bottom:8px;
+                
+                }
+                
+            </style>
+            
+        </head>
+        
+        <body>
+            
+            <div style="width:100%;">
+                
+                <!-- ================= HEADER ================= -->
+                
+                <table style="width:100%;border-collapse:collapse;">
+                    
+                    <tr>
+                        
+                        <td style="width:100%;font-size:20px;font-weight:normal;">
+                            {!wrapper.leasingCompanyName}
+                        </td>
+                        
+                        <td style="width:100%;text-align:right;">
+                            <apex:image value="{!URLFOR($Resource.BloomEmiratesLogo)}"
+                                        width="300"/>
+                        </td>
+                        
+                    </tr>
+                    
+                </table>
+                
+                <table style="width:100%;margin-top:10px;">
+                    
+                    <tr>
+                        
+                        <td></td>
+                        
+                        <td style="text-align:right;font-size:16px;">
+                            
+                            <b><i>Date :</i></b>
+                            
+                            <apex:outputText value="{0,date,dd MMM yyyy}">
+                                <apex:param value="{!wrapper.todayDate}"/>
+                            </apex:outputText>
+                            
+                        </td>
+                        
+                    </tr>
+                    
+                </table>
+                
+                <div style="text-align:center;
+                            margin-top:18px;
+                            margin-bottom:20px;
+                            color:#5b5b9f;
+                            font-size:26px;
+                            font-style:italic;
+                            text-decoration:underline;">
+                    
+                    Clearance of Tenancy Contract
+                    
+                </div>
+                
+                <!-- ================= PROPERTY ROW ================= -->
+                
+                <table style="width:100%;
+                              border-collapse:collapse;
+                              margin-bottom:20px;">
+                    
+                    <tr>
+                        
+                        <td style="background:#d9d9d9;
+                                   border:1px solid #555;
+                                   width:15%;
+                                   text-align:center;
+                                   font-size:14px;">
+                            
+                            Property
+                            
+                        </td>
+                        
+                        <td style="border:1px solid #555;
+                                   width:23%;
+                                   padding-left:8px;
+                                   font-size:15px;">
+                            
+                            {!wrapper.propertyName}
+                            
+                        </td>
+                        
+                        <td style="width:2%;"></td>
+                        
+                        <td style="background:#d9d9d9;
+                                   border:1px solid #555;
+                                   width:10%;
+                                   text-align:center;
+                                   font-size:14px;">
+                            
+                            Type
+                            
+                        </td>
+                        
+                        <td style="border:1px solid #555;
+                                   width:18%;
+                                   text-align:center;
+                                   font-size:15px;">
+                            
+                            {!wrapper.unitType}
+                            
+                        </td>
+                        
+                        <td style="width:2%;"></td>
+                        
+                        <td style="background:#d9d9d9;
+                                   border:1px solid #555;
+                                   width:10%;
+                                   text-align:center;
+                                   font-size:14px;">
+                            
+                            Unit
+                            
+                        </td>
+                        
+                        <td style="border:1px solid #555;
+                                   width:16%;
+                                   padding-left:8px;
+                                   font-size:15px;">
+                            
+                            {!wrapper.unitName}
+                            
+                        </td>
+                        
+                    </tr>
+                    
+                </table>
+                <!-- ================= MAIN CONTENT ========================== -->
+                
+                <table style="
+                              width:100%;
+                              border-collapse:collapse;
+                              table-layout:fixed;
+                              margin:0;
+                              padding:0;">
+                    <!-- CONTRACT DETAILS TITLE                                -->
+                    
+                    <tr>
+                        <td colspan="2"
+                            style="
+                                   font-size:18px;
+                                   color:#5b5b9f;
+                                   text-decoration:underline;
+                                   padding:0 0 3px 0;
+                                   text-align:left;">
+                            
+                            Contract Details:
+                            
+                        </td>
+                    </tr>
+                    <!-- TENANT NAME                                           -->
+                    <!-- RIGHT SIDE EMPTY                                      -->
+                    
+                    <tr>
+                        <td style="
+                                   width:50%;
+                                   vertical-align:top;
+                                   padding:0 15px 0 0;">
+                            
+                            <table style="
+                                          width:100%;
+                                          border-collapse:collapse;
+                                          table-layout:fixed;">
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               width:65%;
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:5px;
+                                               font-size:13px;">
+                                        
+                                        Tenant Name
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               width:35%;
+                                               border:1px solid #666;
+                                               padding:5px 8px;
+                                               font-size:13px;
+                                               vertical-align:middle;">
+                                        
+                                        {!wrapper.tenantName}
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                            </table>
+                            
+                        </td>
+                        <td style="
+                                   width:50%;
+                                   padding:0;
+                                   margin:0;">
+                        </td>
+                        
+                    </tr>
+                    <!-- OCCUPANT NAME                                         -->
+                    <!-- RIGHT SIDE EMPTY                                      -->
+                    <tr>
+                        <td style="
+                                   width:50%;
+                                   vertical-align:top;
+                                   padding:0 15px 0 0;">
+                            
+                            <table style="
+                                          width:100%;
+                                          border-collapse:collapse;
+                                          table-layout:fixed;">
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               width:65%;
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:5px;
+                                               font-size:13px;">
+                                        
+                                        Occupant Name
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               width:35%;
+                                               border:1px solid #666;
+                                               padding:5px 8px;
+                                               font-size:13px;
+                                               vertical-align:middle;">
+                                        
+                                        {!wrapper.occupantName}
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                            </table>
+                            
+                        </td>
+                        <td style="
+                                   width:50%;
+                                   padding:0;
+                                   margin:0;">
+                        </td>
+                        
+                    </tr>
+                    
+                    
+                    <!-- MAIN CONTRACT / REFUND DETAILS                       -->
+                    
+                    <tr>
+                        <!-- LEFT COLUMN                                       -->
+                        <td style="
+                                   width:50%;
+                                   vertical-align:top;
+                                   padding:0 15px 0 0;">
+                            <!-- CONTRACT INFORMATION                          -->
+                            
+                            <table style="
+                                          width:100%;
+                                          border-collapse:collapse;
+                                          table-layout:fixed;
+                                          margin:0;
+                                          padding:0;">
+                                
+                                <!-- TENANCY CONTRACT NO -->
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               width:65%;
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:5px;
+                                               font-size:13px;">
+                                        
+                                        Tenancy Contract No.
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               width:35%;
+                                               background:#ffffff;
+                                               border:1px solid #666;
+                                               padding:5px 8px;
+                                               font-size:13px;
+                                               vertical-align:middle;">
+                                        
+                                        {!wrapper.sapCompanyCode} / {!wrapper.tenancyContractNo}
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                                <!-- RENT -->
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               width:65%;
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:5px;
+                                               font-size:13px;">
+                                        
+                                        Rent
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               width:35%;
+                                               background:#ffffff;
+                                               border:1px solid #666;
+                                               padding:5px 8px;
+                                               font-size:13px;
+                                               vertical-align:middle;">
+                                        
+                                        <apex:outputText value="{0,number,#,##0.00}">
+                                            <apex:param value="{!wrapper.annualRent}"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                                <!-- PERIOD FROM -->
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               width:65%;
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:5px;
+                                               font-size:13px;">
+                                        
+                                        Period From
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               width:35%;
+                                               background:#ffffff;
+                                               border:1px solid #666;
+                                               padding:5px 8px;
+                                               font-size:13px;
+                                               vertical-align:middle;">
+                                        
+                                        <apex:outputText value="{0,date,dd MMMM yyyy}">
+                                            <apex:param value="{!wrapper.leasingStartDate}"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                                <!-- TO -->
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               width:65%;
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:5px;
+                                               font-size:13px;">
+                                        
+                                        To
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               width:35%;
+                                               background:#ffffff;
+                                               border:1px solid #666;
+                                               padding:5px 8px;
+                                               font-size:13px;
+                                               vertical-align:middle;">
+                                        
+                                        <apex:outputText value="{0,date,dd MMMM yyyy}">
+                                            <apex:param value="{!wrapper.leasingEndDate}"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                                <!-- EVACUATE / BREAK LEASE DATE -->
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               width:65%;
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:5px;
+                                               font-size:13px;">
+                                        
+                                        Evacuate / Break Lease Date
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               width:35%;
+                                               background:#ffffff;
+                                               border:1px solid #666;
+                                               padding:5px 8px;
+                                               font-size:13px;
+                                               vertical-align:middle;">
+                                        
+                                        <apex:outputText value="{0,date,dd MMMM yyyy}">
+                                            <apex:param value="{!wrapper.terminationDate}"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                            </table>
+                            <!-- CALCULATION DETAILS                            -->
+                            
+                            <div style="
+                                        font-size:16px;
+                                        color:#5b5b9f;
+                                        text-decoration:underline;
+                                        margin-top:8px;
+                                        margin-bottom:3px;
+                                        text-align:left;">
+                                
+                                Calculation Details:
+                                
+                            </div>
+                            
+                            
+                            <!-- CALCULATION DETAILS TABLE -->
+                            
+                            <table style="
+                                          width:100%;
+                                          border-collapse:collapse;
+                                          table-layout:fixed;
+                                          margin:0;
+                                          padding:0;">
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               width:65%;
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:7px;
+                                               font-size:13px;">
+                                        
+                                        Additional days (not utilization days)
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               width:35%;
+                                               border:1px solid #666;
+                                               padding:7px 8px;
+                                               font-size:13px;
+                                               text-align:right;
+                                               vertical-align:middle;">
+                                        
+                                        {!wrapper.additionalDays}
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:7px;
+                                               font-size:13px;">
+                                        
+                                        Value of days (Dhs.)
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               border:1px solid #666;
+                                               padding:7px 8px;
+                                               font-size:13px;
+                                               text-align:right;
+                                               vertical-align:middle;">
+                                        
+                                        -<apex:outputText value="{0,number,#,##0.00}">
+                                        <apex:param value="{!wrapper.valueOfDays}"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:7px;
+                                               font-size:13px;">
+                                        
+                                        2 months rent penalty + Fees
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               border:1px solid #666;
+                                               padding:7px 8px;
+                                               font-size:13px;
+                                               text-align:right;
+                                               vertical-align:middle;">
+                                        
+                                        <apex:outputText value="{0,number,#,##0.00}">
+                                            <apex:param value="{!wrapper.breakLeasePenalty}"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:7px;
+                                               font-size:13px;">
+                                        
+                                        Balance Payment
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               border:1px solid #666;
+                                               padding:7px 8px;
+                                               font-size:13px;
+                                               text-align:right;
+                                               vertical-align:middle;">
+                                        
+                                        <apex:outputText value="{0,number,#,##0.00}">
+                                            <apex:param value="{!wrapper.balancePayment}"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:7px;
+                                               font-size:13px;">
+                                        
+                                        Admin Fees
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               border:1px solid #666;
+                                               padding:7px 8px;
+                                               font-size:13px;
+                                               text-align:right;
+                                               vertical-align:middle;">
+                                        
+                                        <apex:outputText value="{0,number,#,##0.00}">
+                                            <apex:param value="{!wrapper.adminFees}"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:7px;
+                                               font-size:13px;">
+                                        
+                                        Maintenance Charges (VAT)
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               border:1px solid #666;
+                                               padding:7px 8px;
+                                               font-size:13px;
+                                               text-align:right;
+                                               vertical-align:middle;">
+                                        
+                                        <apex:outputText value="{0,number,#,##0.00}">
+                                            <apex:param value="{!wrapper.maintenanceCharges}"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:7px;
+                                               font-size:13px;">
+                                        
+                                        Security Deposit
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               border:1px solid #666;
+                                               padding:7px 8px;
+                                               font-size:13px;
+                                               text-align:right;
+                                               vertical-align:middle;">
+                                        
+                                        -<apex:outputText value="{0,number,#,##0.00}">
+                                        <apex:param value="{!wrapper.securityDeposit}"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               font-weight:bold;
+                                               border:1px solid #666;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:7px;
+                                               font-size:13px;">
+                                        
+                                        Due From (To) before POC Adj
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               border:1px solid #666;
+                                               padding:7px 8px;
+                                               font-size:13px;
+                                               text-align:right;
+                                               font-weight:bold;
+                                               vertical-align:middle;">
+                                        
+                                        <apex:outputText value="{0,number,#,##0.00}">
+                                            <apex:param value="{!wrapper.dueAmount}"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                            </table>
+                            
+                        </td>
+                        
+                        <td style="
+                                   width:50%;
+                                   vertical-align:top;
+                                   padding:0 0 0 15px;">
+                            
+                            <table style="
+                                          width:100%;
+                                          border-collapse:collapse;
+                                          table-layout:fixed;
+                                          margin:0;
+                                          padding:0;">
+                                
+                                <tr>
+                                    
+                                    <!-- PAID IN FULL -->
+                                    <td style="
+                                               width:50%;
+                                               padding:0;
+                                               margin:0;
+                                               vertical-align:middle;">
+                                        
+                                        <table style="
+                                                      width:100%;
+                                                      border-collapse:collapse;
+                                                      margin:0;
+                                                      padding:0;">
+                                            
+                                            <tr>
+                                                
+                                                <td style="
+                                                           width:15px;
+                                                           background:#d9d9d9;
+                                                           padding:0;
+                                                           border:none;
+                                                           font-size:12px;
+                                                           text-align:center;
+                                                           vertical-align:middle;">
+                                                    
+                                                    <span style="
+                                                                 display:inline-block;
+                                                                 width:10px;
+                                                                 height:10px;
+                                                                 border:1px solid #777;
+                                                                 background:#ffffff;
+                                                                 vertical-align:middle;">
+                                                    </span>
+                                                    
+                                                </td>
+                                                
+                                                <td style="
+                                                           width:calc(100% - 15px);
+                                                           background:#d9d9d9;
+                                                           padding:5px 8px;
+                                                           border:none;
+                                                           font-size:12px;
+                                                           vertical-align:middle;">
+                                                    
+                                                    Paid in full
+                                                    
+                                                </td>
+                                                
+                                            </tr>
+                                            
+                                        </table>
+                                        
+                                    </td>
+                                    
+                                    
+                                    <!-- R.V NO -->
+                                    <td style="
+                                               width:50%;
+                                               padding:0;
+                                               margin:0;
+                                               vertical-align:middle;">
+                                        
+                                        <table style="
+                                                      width:100%;
+                                                      border-collapse:collapse;
+                                                      margin:0;
+                                                      padding:0;">
+                                            
+                                            <tr>
+                                                
+                                                <td style="
+                                                           width:50%;
+                                                           background:#d9d9d9;
+                                                           padding:5px 8px;
+                                                           border:none;
+                                                           font-size:12px;
+                                                           font-weight:bold;
+                                                           text-align:center;
+                                                           vertical-align:middle;
+                                                           white-space:nowrap;">
+                                                    
+                                                    R.V No.
+                                                    
+                                                </td>
+                                                
+                                                <td style="
+                                                           width:50%;
+                                                           background:#ffffff;
+                                                           padding:5px 8px;
+                                                           border:1px solid #999;
+                                                           font-size:12px;
+                                                           vertical-align:middle;">
+                                                    
+                                                </td>
+                                                
+                                            </tr>
+                                            
+                                        </table>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td colspan="2"
+                                        style="
+                                               padding:0;
+                                               margin:0;
+                                               vertical-align:middle;">
+                                        
+                                        <table style="
+                                                      width:100%;
+                                                      border-collapse:collapse;
+                                                      margin:0;
+                                                      padding:0;">
+                                            
+                                            <tr>
+                                                
+                                                <!-- GREY LABEL -->
+                                                <td style="
+                                                           width:75%;
+                                                           background:#d9d9d9;
+                                                           padding:5px 8px;
+                                                           border:none;
+                                                           font-size:12px;
+                                                           text-align:center;
+                                                           vertical-align:middle;">
+                                                    
+                                                    Rent Diff. from Occupant
+                                                    
+                                                </td>
+                                                
+                                                <!-- WHITE VALUE -->
+                                                <td style="
+                                                           width:25%;
+                                                           background:#ffffff;
+                                                           padding:5px 8px;
+                                                           border:1px solid #999;
+                                                           font-size:12px;
+                                                           vertical-align:middle;">
+                                                    
+                                                </td>
+                                                
+                                            </tr>
+                                            
+                                        </table>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td colspan="2"
+                                        style="
+                                               height:30px;
+                                               padding:5px;">
+                                    </td>
+                                    
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td colspan="3"
+                                        style="
+                                               padding:0;
+                                               margin:0;
+                                               vertical-align:top;">
+                                        
+                                        <table style="
+                                                      width:100%;
+                                                      border-collapse:collapse;
+                                                      table-layout:fixed;
+                                                      margin:0;
+                                                      padding:0;
+                                                      font-size:11px;">
+                                            
+                                            <!-- ATTACHMENT HEADER -->
+                                            
+                                            <tr>
+                                                
+                                                <td style="
+                                                           width:8%;
+                                                           background:#d9d9d9;
+                                                           padding:5px;
+                                                           text-align:center;
+                                                           vertical-align:middle;
+                                                           font-weight:bold;">
+                                                </td>
+                                                
+                                                <td style="
+                                                           width:62%;
+                                                           background:#d9d9d9;
+                                                           padding:5px;
+                                                           text-align:left;
+                                                           vertical-align:middle;
+                                                           font-weight:bold;">
+                                                    
+                                                    Attachment:
+                                                    
+                                                </td>
+                                                
+                                                <td style="
+                                                           width:30%;
+                                                           background:#d9d9d9;
+                                                           padding:5px;
+                                                           text-align:center;
+                                                           vertical-align:middle;
+                                                           font-weight:bold;">
+                                                    
+                                                    Date
+                                                    
+                                                </td>
+                                                
+                                            </tr>
+                                            
+                                            
+                                            <!-- ATTACHMENT ROWS -->
+                                            
+                                            <apex:repeat value="{!wrapper.attachments}" var="att">
+                                                
+                                                <tr>
+                                                    
+                                                    <!-- CHECKBOX -->
+                                                    
+                                                    <td style="
+                                                               width:8%;
+                                                               background:#ffffff;
+                                                               padding:8px;
+                                                               text-align:center;
+                                                               vertical-align:middle;">
+                                                        
+                                                        <apex:outputPanel rendered="{!att.available}"
+                                                                          layout="inline">
+                                                            
+                                                            <span style="
+                                                                         display:inline-block;
+                                                                         width:10px;
+                                                                         height:10px;
+                                                                         border:1px solid #000;
+                                                                         text-align:center;
+                                                                         vertical-align:middle;
+                                                                         line-height:9px;
+                                                                         font-size:9px;">
+                                                                
+                                                                V
+                                                                
+                                                            </span>
+                                                            
+                                                        </apex:outputPanel>
+                                                        
+                                                        
+                                                        <apex:outputPanel rendered="{!!att.available}"
+                                                                          layout="inline">
+                                                            
+                                                            <span style="
+                                                                         display:inline-block;
+                                                                         width:10px;
+                                                                         height:10px;
+                                                                         border:1px solid #000;
+                                                                         background:#ffffff;
+                                                                         vertical-align:middle;">
+                                                            </span>
+                                                            
+                                                        </apex:outputPanel>
+                                                        
+                                                    </td>
+                                                    
+                                                    
+                                                    <!-- ATTACHMENT NAME -->
+                                                    
+                                                    <td style="
+                                                               width:62%;
+                                                               background:#ffffff;
+                                                               padding:6px;
+                                                               vertical-align:middle;">
+                                                        
+                                                        {!att.documentName}
+                                                        
+                                                    </td>
+                                                    
+                                                    
+                                                    <!-- DATE -->
+                                                    
+                                                    <td style="
+                                                               width:30%;
+                                                               background:#ffffff;
+                                                               padding:6px;
+                                                               text-align:center;
+                                                               vertical-align:middle;">
+                                                        
+                                                        <apex:outputPanel rendered="{!att.hasDocumentDate}">
+                                                            
+                                                            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                                                
+                                                                <apex:param value="{!att.documentDate}"/>
+                                                                
+                                                            </apex:outputText>
+                                                            
+                                                        </apex:outputPanel>
+                                                        
+                                                    </td>
+                                                    
+                                                </tr>
+                                                
+                                            </apex:repeat>
+                                            
+                                        </table>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                <!-- COR NO. AND DATE -->
+                                
+                                <table style="
+                                              width:100%;
+                                              border-collapse:collapse;
+                                              table-layout:fixed;
+                                              margin-top:60px;
+                                              padding:0;">
+                                    
+                                    <tr>
+                                        
+                                        <!-- COR No. LABEL -->
+                                        <td style="
+                                                   width:25%;
+                                                   background:#d9d9d9;
+                                                   border:1px solid #666;
+                                                   padding:5px;
+                                                   text-align:center;
+                                                   vertical-align:middle;
+                                                   font-size:12px;">
+                                            
+                                            COR No.
+                                            
+                                        </td>
+                                        
+                                        <!-- COR No. VALUE -->
+                                        <td style="
+                                                   width:25%;
+                                                   background:#ffffff;
+                                                   border:1px solid #666;
+                                                   padding:5px;
+                                                   vertical-align:middle;
+                                                   font-size:12px;">
+                                            
+                                        </td>
+                                        
+                                        <!-- DATE LABEL -->
+                                        <td style="
+                                                   width:20%;
+                                                   background:#d9d9d9;
+                                                   border:1px solid #666;
+                                                   padding:5px;
+                                                   text-align:center;
+                                                   vertical-align:middle;
+                                                   font-size:12px;">
+                                            
+                                            Date
+                                            
+                                        </td>
+                                        
+                                        <!-- DATE VALUE -->
+                                        <td style="
+                                                   width:30%;
+                                                   background:#ffffff;
+                                                   border:1px solid #666;
+                                                   padding:5px;
+                                                   vertical-align:middle;
+                                                   font-size:12px;">
+                                            
+                                        </td>
+                                        
+                                    </tr>
+                                    
+                                </table>
+                                
+                                
+                                
+                                
+                            </table>
+                            
+                        </td>
+                        
+                    </tr>
+                    
+                </table>
+                
+                
+                
+                <table style="
+                              width:100%;
+                              border-collapse:collapse;
+                              table-layout:fixed;
+                              margin-top:20px;
+                              padding:0;">
+                    
+                    <colgroup>
+                        <col style="width:50%;"/>
+                        <col style="width:50%;"/>
+                    </colgroup>
+                    
+                    <tr>
+                        
+                        <td style="
+                                   width:50%;
+                                   padding:0 3px 0 0;
+                                   vertical-align:top;">
+                            
+                            <!-- SECTION TITLE -->
+                            
+                            <div style="
+                                        font-size:16px;
+                                        color:#5b5b9f;
+                                        text-decoration:underline;
+                                        margin-bottom:3px;
+                                        text-align:left;">
+                                
+                                PDC to be return
+                                
+                            </div>
+                            
+                            
+                            <!-- PDC TABLE -->
+                            
+                            <table style="
+                                          width:100%;
+                                          border-collapse:collapse;
+                                          table-layout:fixed;
+                                          font-size:11px;">
+                                
+                                <tr style="background:#d9d9d9;">
+                                    
+                                    <th style="
+                                               width:12%;
+                                               border:1px solid #666;
+                                               padding:5px;
+                                               text-align:center;">
+                                        
+                                        S.No
+                                        
+                                    </th>
+                                    
+                                    <th style="
+                                               width:28%;
+                                               border:1px solid #666;
+                                               padding:5px;
+                                               text-align:center;">
+                                        
+                                        Cheque No.
+                                        
+                                    </th>
+                                    
+                                    <th style="
+                                               width:30%;
+                                               border:1px solid #666;
+                                               padding:5px;
+                                               text-align:center;">
+                                        
+                                        Due Date
+                                        
+                                    </th>
+                                    
+                                    <th style="
+                                               width:30%;
+                                               border:1px solid #666;
+                                               padding:5px;
+                                               text-align:center;">
+                                        
+                                        Amount
+                                        
+                                    </th>
+                                    
+                                </tr>
+                                
+                                <apex:repeat value="{!wrapper.pdcRows}" var="row">
+                                    
+                                    <tr>
+                                        
+                                        <!-- S.NO -->
+                                        
+                                        <td style="
+                                                   border:1px solid #666;
+                                                   padding:5px;
+                                                   text-align:center;
+                                                   vertical-align:middle;">
+                                            
+                                            {!row.serialNo}
+                                            
+                                        </td>
+                                        
+                                        
+                                        <!-- CHEQUE NO -->
+                                        
+                                        <td style="
+                                                   border:1px solid #666;
+                                                   padding:5px;
+                                                   vertical-align:middle;">
+                                            
+                                            {!row.chequeNo}
+                                            
+                                        </td>
+                                        
+                                        
+                                        <!-- DUE DATE -->
+                                        
+                                        <td style="
+                                                   border:1px solid #666;
+                                                   padding:5px;
+                                                   text-align:center;
+                                                   vertical-align:middle;">
+                                            
+                                            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                                
+                                                <apex:param value="{!row.dueDate}"/>
+                                                
+                                            </apex:outputText>
+                                            
+                                        </td>
+                                        
+                                        
+                                        <!-- AMOUNT -->
+                                        
+                                        <td style="
+                                                   border:1px solid #666;
+                                                   padding:5px;
+                                                   text-align:right;
+                                                   vertical-align:middle;">
+                                            
+                                            <apex:outputText value="{0,number,#,##0.00}">
+                                                
+                                                <apex:param value="{!row.amount}"/>
+                                                
+                                            </apex:outputText>
+                                            
+                                        </td>
+                                        
+                                    </tr>
+                                    
+                                </apex:repeat>
+                                
+                                
+                                <!-- TOTAL -->
+                                
+                                <tr style="font-weight:bold;">
+                                    
+                                    <td colspan="3"
+                                        style="
+                                               border:1px solid #666;
+                                               padding:5px;
+                                               text-align:right;
+                                               vertical-align:middle;">
+                                        
+                                        Total PDC to be return
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               border:1px solid #666;
+                                               padding:5px;
+                                               text-align:right;
+                                               vertical-align:middle;">
+                                        
+                                        <apex:outputText value="{0,number,#,##0.00}">
+                                            
+                                            <apex:param value="{!wrapper.totalPDCReturn}"/>
+                                            
+                                        </apex:outputText>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                            </table>
+                            
+                        </td>
+                        <!-- RIGHT SIDE - NOTE                                 -->
+                        
+                        <td style="
+                                   width:50%;
+                                   padding:0 0 0 10px;
+                                   vertical-align:top;">
+                            
+                            <!-- NOTE BOX -->
+                            
+                            <table style="
+                                          width:100%;
+                                          border-collapse:collapse;
+                                          table-layout:fixed;
+                                          margin:0;
+                                          padding:0;">
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               width:100%;
+                                               height:130px;
+                                               border:1px solid #666;
+                                               padding:5px 8px;
+                                               vertical-align:top;
+                                               font-size:11px;">
+                                        
+                                        <!-- NOTE TITLE -->
+                                        
+                                        <div style="
+                                                    font-size:16px;
+                                                    color:#5b5b9f;
+                                                    text-decoration:underline;
+                                                    margin-bottom:8px;">
+                                            
+                                            Note:
+                                            
+                                        </div>
+                                        
+                                        
+                                        <!-- NOTE CONTENT -->
+                                        
+                                        <div style="
+                                                    font-size:11px;
+                                                    line-height:14px;">
+                                            
+                                            {!wrapper.notes}
+                                            
+                                        </div>
+                                        
+                                    </td>
+                                    
+                                </tr>
+                                
+                            </table>
+                            
+                        </td>
+                        
+                    </tr>
+                    
+                </table>
+                
+                <!-- ================= SIGNATURE SECTION ================= -->
+                
+                <table style="
+                              width:100%;
+                              margin-top:35px;
+                              border-collapse:collapse;
+                              table-layout:fixed;">
+                    
+                    <tr>
+                        
+                        <!-- ================= PREPARED BY ================= -->
+                        
+                        <td style="
+                                   width:25%;
+                                   text-align:center;
+                                   vertical-align:top;
+                                   padding:0 10px;">
+                            
+                            <!-- Signature Line with Owner Name -->
+                            <div style="
+                                        width:80%;
+                                        height:18px;
+                                        margin:0 auto;
+                                        border-bottom:1px solid #000;
+                                        text-align:center;
+                                        font-size:12px;
+                                        line-height:18px;">
+                                
+                                {!wrapper.preparedBy}
+                                
+                            </div>
+                            
+                            <!-- Prepared By -->
+                            <div style="
+                                        width:80%;
+                                        margin:2px auto 0 auto;
+                                        font-size:12px;
+                                        text-align:center;">
+                                
+                                Prepared by
+                                
+                            </div>
+                            
+                        </td>
+                        
+                        
+                        <!-- ================= MANAGEMENT APPROVAL ================= -->
+                        
+                        <td style="
+                                   width:25%;
+                                   text-align:center;
+                                   vertical-align:top;
+                                   padding:0 10px;">
+                            
+                            <!-- Signature Line -->
+                            <div style="
+                                        width:80%;
+                                        height:18px;
+                                        margin:0 auto;
+                                        border-bottom:1px solid #000;">
+                            </div>
+                            
+                            <!-- Label -->
+                            <div style="
+                                        width:80%;
+                                        margin:2px auto 0 auto;
+                                        font-size:12px;
+                                        text-align:center;">
+                                
+                                Management Approval
+                                
+                            </div>
+                            
+                        </td>
+                        
+                        
+                        <!-- ================= FINANCE ================= -->
+                        
+                        <td style="
+                                   width:25%;
+                                   text-align:center;
+                                   vertical-align:top;
+                                   padding:0 10px;">
+                            
+                            <!-- Signature Line -->
+                            <div style="
+                                        width:80%;
+                                        height:18px;
+                                        margin:0 auto;
+                                        border-bottom:1px solid #000;">
+                            </div>
+                            
+                            <!-- Label -->
+                            <div style="
+                                        width:80%;
+                                        margin:2px auto 0 auto;
+                                        font-size:12px;
+                                        text-align:center;">
+                                
+                                Finance Dep.
+                                
+                            </div>
+                            
+                        </td>
+                        
+                        
+                        <!-- ================= SENIOR SUPERVISOR ================= -->
+                        
+                        <td style="
+                                   width:25%;
+                                   text-align:center;
+                                   vertical-align:top;
+                                   padding:0 10px;">
+                            
+                            <!-- Signature Line -->
+                            <div style="
+                                        width:80%;
+                                        height:18px;
+                                        margin:0 auto;
+                                        border-bottom:1px solid #000;">
+                            </div>
+                            
+                            <!-- Label -->
+                            <div style="
+                                        width:80%;
+                                        margin:2px auto 0 auto;
+                                        font-size:12px;
+                                        text-align:center;">
+                                
+                                Senior Supervisor
+                                
+                            </div>
+                            
+                        </td>
+                        
+                    </tr>
+                    
+                </table>
+                
+            </div>
+            
+        </body>
+        
+    </html>
+    
+</apex:page>

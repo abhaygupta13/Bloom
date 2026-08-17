@@ -1,0 +1,38 @@
+<template>
+
+	<lightning-card variant="Narrow" title="Design and View" icon-name="utility:image">
+		<lightning-icon icon-name="utility:expand" slot="actions" size="small" onclick={imageExpandHandler}>
+		</lightning-icon>
+
+		<template if:true={showerror}>
+			<div class="slds-align_absolute-center" style="margin-top: 29px;font-weight: bold; padding:15px;">No records
+				found.</div>
+
+		</template>
+		<template if:true={sliderData}>
+			<c-image-slider slides-data={sliderData} custom-height="450px" custom-width="100%" auto-scroll={autoScroll}
+				hide-slide-text hide-slide-number></c-image-slider>
+
+		</template>
+
+
+		<template if:true={fullScreen}>
+			<div role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open">
+
+				<div class="slds-modal__container">
+					<c-image-slider slides-data={sliderData} custom-height="100%" custom-width="100%"
+						auto-scroll={autoScroll} hide-slide-text hide-slide-number></c-image-slider>
+				</div>
+				<div class="btn slds-modal__close close x-large">
+					<lightning-button-icon variant="border-filled" size="large" icon-name="utility:close"
+						onclick={closeImageHandler}></lightning-button-icon>
+				</div>
+
+			</div>
+			<div class="slds-backdrop slds-backdrop_open"></div>
+
+		</template>
+	</lightning-card>
+
+
+</template>

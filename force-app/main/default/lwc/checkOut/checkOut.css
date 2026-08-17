@@ -1,0 +1,73 @@
+/* .rating {
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    cursor: pointer;
+    padding: 5px;
+} */
+
+.signature-canvas {
+    width: 100%;
+    height: 250px;
+}
+.canvas-container {
+    text-align: center;
+}
+.button-group {
+    text-align: center;
+}
+
+/* *******smiley css*******
+.notSelected-smiley {
+    cursor: pointer;
+}
+.selected-smiley {
+    cursor: pointer;
+    --sds-c-icon-color-foreground-default: green;
+}
+.notSelected-smiley:hover{
+    --sds-c-icon-color-foreground-default: green;
+} */
+
+.emoji {
+    font-size: 2rem;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 5px;
+    transition: transform 0.2s, opacity 0.2s, color 0.2s;
+}
+
+/* Blank (unselected) state */
+.blank-smiley {
+    color: #ccc; /* Dimmed color for unselected emojis */
+    opacity: 0.5;
+}
+
+/* Filled (selected) state */
+.filled-smiley {
+    opacity: 1;
+    transform: scale(1.2); /* Slightly enlarge selected emojis */
+}
+
+/* Specific emoji colors */
+.sad-smiley {
+    color: red;
+}
+
+.confused-smiley {
+    color: orange;
+}
+
+.neutral-smiley {
+    color: yellow;
+}
+
+.happy-smiley {
+    color: lightgreen;
+}
+
+.very-happy-smiley {
+    color: green;
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PDCCollected__c</fullName>
+    <label>PDC Collected</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Not Fully Collected</fullName>
+                <default>false</default>
+                <label>Not Fully Collected</label>
+            </value>
+            <value>
+                <fullName>Fully Collected</fullName>
+                <default>false</default>
+                <label>Fully Collected</label>
+            </value>
+            <value>
+                <fullName>Needs to be Replaced</fullName>
+                <default>false</default>
+                <label>Needs to be Replaced</label>
+            </value>
+            <value>
+                <fullName>PDC&apos;s not Requires</fullName>
+                <default>false</default>
+                <label>PDC&apos;s not Requires</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

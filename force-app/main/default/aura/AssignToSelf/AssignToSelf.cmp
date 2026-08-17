@@ -1,0 +1,7 @@
+<aura:component implements="force:lightningQuickAction,force:hasRecordId" controller="AssignToSelfTaskAssignmentController">
+    <aura:attribute name="recordId" type="Id" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+     <div class="slds-is-relative" style="min-height: 25vh;">
+    <lightning:spinner variant="brand" size="medium" />
+    </div>
+</aura:component>

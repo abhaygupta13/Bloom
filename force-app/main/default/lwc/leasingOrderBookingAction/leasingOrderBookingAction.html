@@ -1,0 +1,637 @@
+<template>
+    <template if:false={activeContract}>
+        <lightning-card>
+            <template if:true={isSubmissionLoading}>
+                <div class="spinner-overlay">
+                    <lightning-spinner variant="base" size="medium"></lightning-spinner>
+                </div>
+            </template>
+
+            <lightning-progress-indicator current-step={currentStep} type="base" variant="shade" has-error={hasError}>
+
+                <lightning-progress-step label="Select Unit" value="step1" onclick={handleStepClick}>
+                </lightning-progress-step>
+
+                <lightning-progress-step label="Payment Plan" value="step2" onclick={handleStepClick}>
+                </lightning-progress-step>
+
+                <lightning-progress-step label="Fee Details" value="step3" onclick={handleStepClick}>
+                </lightning-progress-step>
+
+                <lightning-progress-step label="Escalation Schedule" value="step4" onclick={handleStepClick}>
+                </lightning-progress-step>
+
+            </lightning-progress-indicator>
+            <!--- Stage 1 Start ---->
+            <template if:true={isStage1Selected}>
+                <lightning-card variant="Narrow">
+                    <lightning-accordion>
+                        <lightning-accordion-section name="unitDetails" label="Project and Unit Details">
+                            <template if:true={isLoading}>
+                                <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+                                </lightning-spinner>
+                            </template>
+                            <div class="slds-m-bottom_medium">
+                                <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                    <lightning-layout-item size="3" padding="horizontal-small">
+                                        <lightning-combobox name="Projects" label="Projects" value={selectedProject}
+                                            options={projectList} onchange={handleProjectChange} required>
+                                        </lightning-combobox>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="3" padding="horizontal-small">
+                                        <lightning-combobox name="Building" label="Building" value={selectedBuilding}
+                                            options={buildingList} onchange={handleBuildingChange} required>
+                                        </lightning-combobox>
+                                    </lightning-layout-item>
+
+                                    <lightning-layout-item size="3" padding="horizontal-small">
+                                        <lightning-combobox name="propertyType" label="Property Type"
+                                            options={propertyValue} value={propertyType} onchange={handleFilterChange}
+                                            required>
+                                        </lightning-combobox>
+                                    </lightning-layout-item>
+                                    <template if:true={isPersonAccount}>
+                                        <lightning-layout-item size="3" padding="horizontal-small">
+                                            <lightning-combobox name="bedrooms" label="Bed Rooms"
+                                                options={unitBedRoomsSetList} value={bedrooms}
+                                                onchange={handleFilterChange} required>
+                                            </lightning-combobox>
+                                        </lightning-layout-item>
+                                    </template>
+                                </lightning-layout>
+                                <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                    <lightning-layout-item size="3" padding="horizontal-small">
+                                        <lightning-input name="unitNumber" type="text" label="Unit Number"
+                                            onchange={handleFilterChange} value={unitNumber}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="3" padding="horizontal-small">
+                                        <div class="slds-grid slds-grid_align-end">
+                                            <div class="slds-grid slds-grid_align-end">
+                                                <lightning-button label="Search Units" variant="neutral"
+                                                    onclick={handleLoadUnits}>
+                                                </lightning-button>
+                                            </div>
+                                            <div class="slds-grid slds-m-left_x-small">
+                                                <lightning-button name="GenerateOffer" label="Next" variant="brand"
+                                                    onclick={handleNext} disabled={isNextDisabled}></lightning-button>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+
+                                <lightning-layout
+                                    class="slds-grid slds-gutters slds-grid_vertical-align-end slds-m-top_medium">
+                                    <lightning-layout-item size="12" padding="horizontal-small">
+                                        <table class="slds-table" style="border:1px solid #ccc;">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col">Unit Name</th>
+                                                    <th scope="col">Unit Type</th>
+                                                    <th scope="col">Unit Category</th>
+                                                    <th scope="col">Bedrooms</th>
+                                                    <th scope="col">Internal Area</th>
+                                                    <th scope="col">External Area</th>
+                                                    <th scope="col">Property Usage</th>
+                                                    <th scope="col">Leasing Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template if:true={unitDataTable}>
+                                                    <template for:each={unitDataTable} for:item="item">
+                                                        <tr key={item.unitDetails.Id}>
+                                                            <td>
+                                                                <input type="radio" name="unitSelection" data-id={item.unitDetails.Id} onchange={handleRowSelect}>
+                                                            </td>
+                                                            <td><a data-id={item.unitDetails.Id}
+                                                                    onclick={navigateToRecordPage}>{item.unitDetails.LeasingUnitNumber__c}</a>
+                                                            </td>
+                                                            <td>{item.unitDetails.UnitType__c}</td>
+                                                            <td>{item.unitDetails.UnitCategory__c}</td>
+                                                            <td>{item.unitDetails.NumberOfBedrooms__c}</td>
+                                                            <td>{item.unitDetails.Internal_Saleable_Area__c}</td>
+                                                            <td>{item.unitDetails.External_Saleable_Area__c}</td>
+                                                            <td>{item.unitDetails.PropertyUsage__c}</td>
+                                                            <td>
+                                                                <lightning-formatted-number format-style="currency"
+                                                                    value={item.unitDetails.LeasingAnnualRent__c}
+                                                                    currency-code={sObjectRecord.CurrencyIsoCode}>
+                                                                </lightning-formatted-number>
+                                                            </td>
+                                                        </tr>
+                                                    </template>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                        <template if:true={noDataavailable}>
+                                            <div style="text-align: center;"><b>No record found.</b></div>
+                                        </template>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+                </lightning-card>
+            </template>
+            <!--- Stage 1 End ---->
+
+            <!--- Stage 2 Start ---->
+            <template if:true={isStage2Selected}>
+                <lightning-card variant="Narrow">
+                    <!-- <div class="slds-p-around_medium"> -->
+                    <lightning-accordion>
+                        <lightning-accordion-section name="GeneralDetails" label="Payment Plan Details">
+                            <div class="slds-m-bottom_medium">
+                                <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <label class="slds-form-element__label">Payment Term</label>
+                                        <lightning-combobox id="paymentPlan" name="paymentPlan" label-hidden
+                                            variant="label-hidden" placeholder="Select a Payment Plan"
+                                            options={paymentPlanOptions} value={selectedPaymentPlanId}
+                                            onchange={handlePaymentPlanChange} required class="validate">
+                                        </lightning-combobox>
+                                    </lightning-layout-item>
+
+                                    <!-- <lightning-layout-item size="6" padding="horizontal-small">
+                                        <label class="slds-form-element__label">Offer</label>
+                                        <lightning-combobox id="leasingOffer" name="leasingOffer" label-hidden
+                                            variant="label-hidden" placeholder="Select a Offer"
+                                            options={leasingOfferOptions} value={selectedLeasingOfferId}
+                                            onchange={handleLeasingOfferChange}>
+                                        </lightning-combobox>
+                                    </lightning-layout-item> -->
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <lightning-input name="PropertyId"
+                                            type="text"
+                                            label="Property Id"
+                                            value={propertyId}
+                                            onchange={handleFieldChange}
+                                            maxlength="20">
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                            <div class="slds-m-bottom_medium">
+                                <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <lightning-input name="AnnualRent" type="number" disabled
+                                            label="Annual Rent (AED)" value={selectedUnit.LeasingAnnualRent__c}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <lightning-input type="number" name="appliedAnnualRent"
+                                            label="Applied Annual Rent (AED)" value={appliedAnnualRent}
+                                            onchange={handleFieldChange}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                            <div class="slds-m-bottom_medium">
+                                <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <lightning-input type="date" name="leasingStartDate" label="Leasing Start Date"
+                                            value={leasingStartDate} onchange={handleFieldChange} required
+                                            class="validate">
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <lightning-input name="leasingContractMonths" label="Leasing Contract Months"
+                                            type="number" value={leasingContractMonths} onchange={handleFieldChange}
+                                            required class="validate">
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                            <div class="slds-m-bottom_medium">
+                                <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <lightning-input type="date" name="leasingEndDate" label="Leasing End Date"
+                                            value={leasingEndDate} disabled>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <!-- Pranav
+                                        <lightning-input type="number" name="gracePeriod" value={gracePeriod}
+                                            label="Grace Period" placeholder="Enter number of days"
+                                            onchange={handleFieldChange} class="validate">
+                                        </lightning-input> -->
+                                        <lightning-combobox
+                                            name="gracePeriod"
+                                            label="Grace Period"
+                                            value={gracePeriod}
+                                            placeholder="Enter number of Months"
+                                            options={options}
+                                            onchange={handleFieldChange}
+                                            class="validate">
+                                        </lightning-combobox>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                            <div class="slds-m-bottom_medium">
+                                <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                    <lightning-layout-item size="12" padding="horizontal-small">
+                                        <c-leasing-toggle-input-switch label="Discount Type" name="DiscountType"
+                                            amount-placeholder="Enter Amount (AED)" percent-placeholder="Enter %"
+                                            type={discountType} value={discountValue}
+                                            onvaluechange={handleToggleValueChange}>
+                                        </c-leasing-toggle-input-switch>
+
+                                    </lightning-layout-item>
+
+                                </lightning-layout>
+                            </div>
+                            <div class="slds-m-bottom_medium">
+                                <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <template if:true={showFamilyStatus}>
+                                            <label class="slds-form-element__label" >Family Status</label>
+                                            <lightning-combobox name="familyStatus" variant="label-hidden"
+                                                id="FamilyStatus" value={familyStatus} options={familyStatusOptions}
+                                                onchange={handleFamilyStatusChange} required>
+                                            </lightning-combobox>
+                                        </template>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <template if:true={showRentalAfterDiscount}>
+                                            <!-- <label class="slds-form-element__label">Rental After Discount</label> -->
+                                            <template if:true={rentalAfterDiscount}>
+                                                <!-- <lightning-formatted-number value={rentalAfterDiscount}
+                                                format-style="currency" currency-code={sObjectRecord.CurrencyIsoCode}>
+                                            </lightning-formatted-number> -->
+                                                <lightning-input name="rentalAfterDiscount" type="number" disabled
+                                                    label="Rental After Discount (AED)" value={rentalAfterDiscount}>
+                                                </lightning-input>
+                                            </template>
+                                        </template>
+                                    </lightning-layout-item>
+                                    
+                                   
+                                </lightning-layout>
+                            </div>
+                            <div class="slds-m-bottom_medium">
+                                <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                    
+                                        <lightning-layout-item size="6" padding="horizontal-small">
+                                            <template if:false={isBloomSisterEmployeeChecked}>
+                                                <lightning-input type="checkbox"
+                                                    label="Is Bloom Employee"
+                                                    name="Is Bloom Employee"
+                                                    checked={isBloomEmployeeChecked}
+                                                    onchange={handleBECheck}>
+                                                </lightning-input>
+                                            </template>
+                                        </lightning-layout-item>
+                                    
+                                    
+                                        <lightning-layout-item size="6" padding="horizontal-small">
+                                            <template if:false={isBloomEmployeeChecked}>
+                                                <lightning-input type="checkbox"
+                                                    label="Is Bloom Sister Company Employee"
+                                                    name="Is Bloom Sister Company Employee"
+                                                    checked={isBloomSisterEmployeeChecked}
+                                                    onchange={handleBSECheck}>
+                                                </lightning-input>
+                                            </template>
+                                        </lightning-layout-item>
+                                    
+                                </lightning-layout>
+                            </div>
+                            <div class="slds-m-bottom_medium">
+    <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+
+        <lightning-layout-item size="6" padding="horizontal-small">
+            <lightning-input
+                type="checkbox"
+                label="Related Party Bloom Holding"
+                name="relatedPartyBloomHolding"
+                checked={relatedPartyBloomHolding}
+                onchange={handleFieldChange}>
+            </lightning-input>
+        </lightning-layout-item>
+
+    </lightning-layout>
+</div>
+                            <div class="slds-m-bottom_medium">
+                                <template if:true={showCountDetails}>
+                                    <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                        <lightning-layout-item size="6" padding="horizontal-small">
+                                            
+                                            <label class="slds-form-element__label" >No. of Adults</label>
+                                            <lightning-input 
+                                                name="adultCount" 
+                                                type="number" 
+                                                value={adultCount} 
+                                                onchange={handleFieldChange}>
+                                            </lightning-input>
+
+                                            
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="6" padding="horizontal-small">
+                                            
+                                            <label class="slds-form-element__label" >No. of Children</label>
+                                            <lightning-input 
+                                                name="childCount" 
+                                                type="number"
+                                                value={childCount} 
+                                                onchange={handleFieldChange}>
+                                            </lightning-input>
+
+                                            
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                            </div>
+                            <template if:false={showFamilyStatus}>
+                                <div class="slds-m-bottom_medium">
+                                    <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                        <lightning-layout-item size="6" padding="horizontal-small">
+                                            <label class="slds-form-element__label" >Current Condition</label>
+                                            <lightning-combobox name="currentCondition" variant="label-hidden"
+                                                id="currentCondition" value={currentCondition}
+                                                options={unitConditionStateValues}
+                                                onchange={handleCurrentConditionChange} read-only={isReadOnly}>
+                                            </lightning-combobox>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="6" padding="horizontal-small">
+                                            <label class="slds-form-element__label" >Handover Condition</label>
+                                            <lightning-combobox name="handOverCondition" variant="label-hidden"
+                                                id="handOverCondition" value={handOverCondition}
+                                                options={unitConditionStateValues}
+                                                onchange={handleHandOverConditionChange} read-only={isReadOnly}>
+                                            </lightning-combobox>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </div>
+                                <div class="slds-m-bottom_medium">
+                                    <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                        <lightning-layout-item size="6" padding="horizontal-small">
+                                            <lightning-input name="offerValidityDays" type="number"
+                                                label="Offer Validity Days" value={offerValidityDays}
+                                                onchange={handleFieldChange} class="validate">
+                                            </lightning-input>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </div>
+                            </template>
+                            <template if:true={showCommercialFields}>
+    <div class="slds-m-bottom_medium">
+        <lightning-layout class="slds-grid slds-gutters">
+
+    <lightning-layout-item size="6" padding="horizontal-small">
+        <lightning-combobox
+            name="category"
+            label="Category"
+            value={category}
+            options={categoryOptions}
+            onchange={handleFieldChange}>
+        </lightning-combobox>
+    </lightning-layout-item>
+
+    <lightning-layout-item size="6" padding="horizontal-small">
+        <lightning-combobox
+            name="subCategory"
+            label="Sub Category"
+            value={subCategory}
+            options={subCategoryOptions}
+            onchange={handleFieldChange}>
+        </lightning-combobox>
+    </lightning-layout-item>
+        </lightning-layout>
+    </div>
+<div class="slds-m-bottom_medium">
+                                    <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+            <lightning-layout-item size="6" padding="horizontal-small">
+                <lightning-input
+                    type="number"
+                    label="Fit Out Days"
+                    name="fitOutDays"
+                    value={fitOutDays}
+                    onchange={handleFieldChange}>
+                </lightning-input>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="6" padding="horizontal-small">
+                <lightning-input
+                    type="date"
+                    label="Unit Hand Over Date"
+                    name="unitHandOverDate"
+                    value={unitHandOverDate}
+                    onchange={handleFieldChange}>
+                </lightning-input>
+            </lightning-layout-item>
+
+        </lightning-layout>
+    </div>
+</template>
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+
+                    <div class="slds-grid slds-grid_align-end slds-p-around_medium">
+                        <div class="slds-col slds-m-right_small">
+                            <lightning-button label="Back" onclick={handleBackStage1}>
+                            </lightning-button>
+                        </div>
+                        <div class="slds-col">
+                            <lightning-button label="Next" variant="brand" onclick={handleNextStage3}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                </lightning-card>
+            </template>
+            <!--- Stage 2 End ---->
+
+            <!--- Stage 3 Start ---->
+            <template if:true={isStage3Selected}>
+                <lightning-accordion>
+                    <lightning-accordion-section name="FeeDetails" label="Fee Details">
+                        <div class="slds-m-bottom_medium">
+                            <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                <!-- Normal editable flow -->
+                                <lightning-layout-item size="6" padding="horizontal-small">
+                                    <lightning-combobox name="securityDepositType" label="Security Deposit Type"
+                                        value={securityDepositType} options={securityDepositTypeOptions}
+                                        onchange={handleFieldChange} required disabled={disableSecurityDeposit}>
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item size="6" padding="horizontal-small">
+                                    <template if:true={isSecurityDepositPercent}>
+                                        <lightning-input type="number" name="securityDepositPercent"
+                                            label="Security Deposit (%)" value={securityDepositPercent}
+                                            onchange={handleFieldChange} min="0" max="100" required>
+                                        </lightning-input>
+                                    </template>
+                                    <template if:false={isSecurityDepositPercent}>
+                                        <lightning-input type="currency" name="securityDeposit" formatter="currency" step="0.01"
+                                            label="Security Deposit (AED)" value={securityDeposit}
+                                            onchange={handleFieldChange} required disabled={disableSecurityDeposit}>
+                                        </lightning-input>
+                                    </template>
+                                </lightning-layout-item>
+
+                            </lightning-layout>
+
+                            <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                <template if:false={showFamilyStatus}>
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <lightning-input label="Fit Out Security Deposit (AED)" type="currency" required formatter="currency" step="0.01"
+                                            name="fitOutSecurityDeposit" value={fitOutSecurityDeposit}
+                                            onchange={handleFieldChange} class="validate">
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </template>
+                                  <lightning-layout-item size="6" padding="horizontal-small">
+                                        <lightning-input label="Booking Amount" type="currency"  formatter="currency" step="0.01"
+                                            name="bookingAmount" value={bookingAmount}
+                                            onchange={handleFieldChange}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                        <div class="slds-m-bottom_medium">
+                            <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                <template if:true={isEJari_TawtheeqEligible}>
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <lightning-input label={ejari_Tawtheeq} type="currency" name="ejariFee" required formatter="currency" step="0.01"
+                                            value={ejariFee} onchange={handleFieldChange}
+                                            field-level-help={ejariFeeHelpText} read-only={isReadOnly}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </template>
+                                <lightning-layout-item size="6" padding="horizontal-small">
+                                    <lightning-input label="Admin Fee (AED)" type="currency" name="adminFee" required step="0.01"
+                                        value={adminFee} onchange={handleFieldChange} formatter="currency"
+                                        field-level-help={adminFeeHelpText} read-only={isReadOnly}>
+                                    </lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+
+                            <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                <lightning-layout-item size="6" padding="horizontal-small">
+                                    <lightning-input label="Extra Cheque Fee (AED)" type="currency" formatter="currency" step="0.01"
+                                        name="extraChequeFee" required value={extraChequeFee}
+                                        onchange={handleFieldChange} class="validate">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <template if:false={showFamilyStatus}>
+                                    <lightning-layout-item size="6" padding="horizontal-small">
+                                        <lightning-input label="Service Charge (AED)" type="currency" formatter="currency" step="0.01"
+                                            name="serviceCharge" required value={serviceCharge}
+                                            onchange={handleFieldChange} field-level-help={serviceChargeHelpText}
+                                            read-only={isReadOnly}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </div>
+
+                        <div class="slds-m-bottom_medium">
+                            <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                <lightning-layout-item size="12" padding="horizontal-small">
+                                    <!-- <label class="slds-form-element__label">Remarks</label> -->
+                                    <lightning-textarea label="Remarks" name="remarks" value={remarks}
+                                        onchange={handleFieldChange}>
+                                    </lightning-textarea>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+
+                        <template if:true={showCommercialFields}>
+
+                         <div class="slds-m-bottom_medium">
+                            <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+                                <lightning-layout-item size="12" padding="horizontal-small">
+                                    <!-- <label class="slds-form-element__label">Remarks</label> -->
+                                    <lightning-textarea label="Permitted Use" name="PermittedUse" value={permittedUse}
+                                        onchange={handleFieldChange}>
+                                    </lightning-textarea>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                        </template>
+                    </lightning-accordion-section>
+                </lightning-accordion>
+                <div class="slds-grid slds-grid_align-end slds-p-around_medium">
+                    <div class="slds-col slds-m-right_small">
+                        <lightning-button label="Back" onclick={handleBacktStage2}>
+                        </lightning-button>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-button label="Next" variant="brand" onclick={handleNextStage4}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </template>
+            <!--- Stage 3 End ---->
+            <!--- Stage 4 Start ---->
+            <template if:true={isStage4Selected}>
+                <lightning-card>
+                    <lightning-accordion>
+                        <lightning-accordion-section name="EscalationScheduleDetails" label="Escalation Details">
+                            <template if:true={showRentSchedule}>
+                                <!-- Pranav
+                                <c-leasing-offer-discount-calculation months={leasingContractMonths}
+                                    rental-amount={rentalAfterDiscount} discount-pct={combinedDiscountPct}
+                                    discount-amount={discountAmount} discount-type={discountType}>
+                                </c-leasing-offer-discount-calculation> -->
+                                <c-leasing-offer-discount-calculation months={leasingContractMonths_}
+                                    rental-amount={appliedAnnualRent} discount-pct={combinedDiscountPct}
+                                    discount-amount={discountAmount} discount-type={discountType}>
+                                </c-leasing-offer-discount-calculation>
+                            </template>
+                            <template if:false={showRentSchedule}>
+                                <lightning-card variant="Narrow"
+                                    title="Escalations can be applied only more than 1 year Contracts"
+                                    icon-name="standard:account">
+                                </lightning-card>
+                            </template>
+                        </lightning-accordion-section>
+                    </lightning-accordion>
+                    <!-- Buttons: Cancel / Back / Save -->
+                    <div class="slds-grid slds-grid_align-end slds-m-top_medium">
+                        <div class="slds-col">
+                            <lightning-button label="Cancel" variant="neutral" onclick={handleCancel}>
+                            </lightning-button>
+                        </div>
+                        <div class="slds-col slds-m-left_small">
+                            <lightning-button label="Back" variant="neutral" onclick={handleBack}>
+                            </lightning-button>
+                        </div>
+                        <div class="slds-col slds-m-left_small">
+                            <lightning-button label="Save" variant="brand" onclick={handleSave}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                </lightning-card>
+            </template>
+            <!--- Stage 4 End ---->
+        </lightning-card>
+    </template>
+    <template if:true={activeContract}>
+
+        <lightning-card>
+            <div
+                class="slds-box slds-theme_alert-texture slds-theme_inverse slds-p-around_medium slds-m-around_medium slds-border_top">
+                <div class="slds-media slds-media_center">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="utility:customer_workspace" alternative-text="Warning"
+                            variant="warning" size="medium">
+                        </lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_small slds-m-bottom_x-small">
+                            This customer already has an <strong>active Leasing Order</strong>.
+                        </h2>
+                        <lightning-button class="slds-m-top_small" variant="brand" label="View Leasing Contract"
+                            onclick={navigateToContract}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+        </lightning-card>
+    </template>
+</template>

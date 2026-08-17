@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldOverrides>
+        <field>ReversalApprovalDate__c</field>
+        <formula>TODAY()</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>ReversalApprovalStatus__c</field>
+        <literalValue>Approved</literalValue>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>ReversalApprovedBy__c</field>
+        <formula>$User.Id</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>SendtoSAP__c</field>
+        <formula>IF(ISBLANK(ReceiptAcknowledgement__c.SAP_Document_No__c) , false, true)</formula>
+    </fieldOverrides>
+    <label>Approve Reversal Requests</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <quickActionLayout>
+        <layoutSectionStyle>TwoColumnsLeftToRight</layoutSectionStyle>
+        <quickActionLayoutColumns>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>ReversalApprovalRemarks__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+        </quickActionLayoutColumns>
+        <quickActionLayoutColumns/>
+    </quickActionLayout>
+    <successMessage>Receipts Approved Successfully!!!</successMessage>
+    <type>Update</type>
+</QuickAction>

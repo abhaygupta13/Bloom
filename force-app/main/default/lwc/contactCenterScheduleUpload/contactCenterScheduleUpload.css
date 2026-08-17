@@ -1,0 +1,36 @@
+.mainContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.iconWrapper {
+    background: #4f5dff;
+    padding: 16px;
+    border-radius: 50%;
+}
+
+.contentSection {
+    flex: 1;
+    margin-left: 20px;
+}
+
+/* .downloadButtonContainer {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.downloadBtn {
+    min-width: 50px;
+} */
+
+.downloadButtonContainer {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.downloadBtn {
+    min-width: 320px;
+    white-space: nowrap;
+}

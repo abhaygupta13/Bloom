@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Receive_Allocations</fullName>
+    <columns>Account__c</columns>
+    <columns>AmountApplied__c</columns>
+    <columns>InstallmentAmountOtherChargeAmount__c</columns>
+    <columns>InstallmentNumberOrChargeType__c</columns>
+    <columns>InstallmentLine__c</columns>
+    <columns>ReceiptAcknowledgement__c</columns>
+    <columns>ReceiptAcknowledgementAmount__c</columns>
+    <columns>ReceiptClearedDate__c</columns>
+    <columns>Receipt_Number__c</columns>
+    <columns>ReceiptMaturityDate__c</columns>
+    <columns>Receipt_Reference__c</columns>
+    <columns>ReceiptStatus__c</columns>
+    <columns>Receipt_Type__c</columns>
+    <columns>Unit_Number__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Receive Allocations</label>
+    <sharedTo>
+        <group>Finance_Group</group>
+    </sharedTo>
+</ListView>

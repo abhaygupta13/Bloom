@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+	<masterLabel>Unit-Reg Pre-Requisites Finance Action</masterLabel>
+	<apiVersion>62.0</apiVersion>
+	<description>Unit-Reg Pre-Requisites Finance Action</description>
+	<isExposed>true</isExposed>
+	<targets>
+		<target>lightning__RecordAction</target>
+	</targets>
+</LightningComponentBundle>

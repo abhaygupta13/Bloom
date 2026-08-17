@@ -1,0 +1,430 @@
+<apex:page controller="SalesSOAPDFController" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false">
+    <head>
+        <style>
+            @page {
+            size: 300mm 500mm;
+            margin: 10mm;
+            }
+            body {
+            font-family: Times-Roman;
+            font-size: 12pt; 
+            color: #000;
+            position: relative; 
+            padding-bottom: 60px; 
+            }
+            h1 {
+            
+            font-size: 12pt;
+            text-decoration: underline;
+            }
+            table {
+            width: 70%; 
+            border-collapse: collapse;
+            border: 1px solid #000; 
+            margin-bottom: 20px;
+            font-family: Times-Roman;
+            }
+            th, td {
+            padding: 8px 12px;
+            border: 1px solid #000; 
+            font-size: 12pt; 
+            word-wrap: break-word; 
+            font-family: Times-Roman;
+            }
+            .table-first td:first-child {
+            background-color: #ccd1d1;
+            }
+            .table-second td:first-child {
+            background-color: #ccd1d1;
+            }
+            
+            
+            .headerTable th, .headerTable td {
+            background-color: #f1f1f1;
+            }
+            .alnleft {
+            text-align: left;
+            }
+            .alnright {
+            text-align: right;
+            }
+            .footer {
+            position: fixed; 
+            left: 0;
+            bottom: 10mm; 
+            width: 100%;
+            text-align: center;
+            font-size: 8pt;
+            }
+            .header-section {
+            width: 100%;
+            margin-bottom: 20px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            }
+            .company-info {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 10pt;
+            }
+            .total-row td {
+            font-weight: bold; 
+            text-align: right; 
+            }
+            .currency-row td {
+            text-align: right !important; 
+            }
+            
+            /* New Style for Second Table */
+            .receiptTable {
+            width: 100%; /* Full width */
+            border-collapse: collapse;
+            border: 1px solid #000;
+            margin-bottom: 20px;
+            
+            }
+            .receiptTable th, .receiptTable td {
+            padding: 8px 10px;
+            border: 1px solid #000; 
+            font-size: 9pt; 
+            word-wrap: break-word;
+            }
+            
+            .receiptTable thead tr {
+            background-color: #ccd1d1; /* Background color for the header row */
+            }
+            /* New Style for Second Table */
+            .bankDetailTable {
+            width: 100%; /* Full width */
+            border-collapse: collapse;
+            border: 1px solid #000;
+            margin-bottom: 20px;
+            
+            }
+            .bankDetailTable th, .receiptTable td {
+            padding: 8px 10px;
+            border: 1px solid #000; 
+            font-size: 12pt; 
+            word-wrap: break-word;
+            }   
+        </style>
+    </head>
+    <body>
+        <div class="header-section">
+            <div class="alnleft">
+                <apex:image alt="Logo" value="{!$Resource.BloomgLiving}" width="150px" height="100px"/>
+            </div>
+        </div>
+        
+        <!-- Header and summary -->
+        <table style="width:100%; border-collapse: collapse;">
+            <tr>
+                <td colspan="2" style="text-align: center; background-color: #ccd1d1;">
+                    <strong>Statement of Account as of {!salesOrderWrapperList[0].todayDate} for {!salesOrderWrapperList[0].salesOrder.Unit__r.UnitNumber__c} in {!salesOrderWrapperList[0].salesOrder.Unit__r.ProjectName__c} {!salesOrderWrapperList[0].salesOrder.Unit__r.BuildingSectionName__r.Name}</strong>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Customer Name:</strong> {!salesOrderWrapperList[0].salesOrder.AccountName__c}</td>
+                <td><strong>Customer Number:</strong> {!salesOrderWrapperList[0].salesOrder.Account__r.MobileCountryCode__c}{!salesOrderWrapperList[0].salesOrder.Account__r.PersonMobilePhone}</td>
+            </tr>
+            <tr>
+                <td><strong>Account Number:</strong> {!salesOrderWrapperList[0].salesOrder.Account__r.AccountNumber__c}</td>
+                <td><strong>Email:</strong> {!salesOrderWrapperList[0].salesOrder.Account__r.PersonEmail}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:left;">
+                    <strong>Address:</strong> {!salesOrderWrapperList[0].salesOrder.Account__r.PersonMailingStreet}
+                    {!salesOrderWrapperList[0].salesOrder.Account__r.PersonMailingCity}
+                    {!salesOrderWrapperList[0].salesOrder.Account__r.PersonMailingState}
+                    {!salesOrderWrapperList[0].salesOrder.Account__r.PersonMailingCountry}
+                    {!salesOrderWrapperList[0].salesOrder.Account__r.PersonMailingPostalCode}
+                </td>
+            </tr>
+        </table>
+        
+        <!-- Sales order meta -->
+        <table style="width:100%; border-collapse: collapse;">
+            <tr>
+                <td><strong>Sales Order Number:</strong> {!salesOrderWrapperList[0].salesOrder.Sales_Order_Number__c}</td>
+                <td><strong>SPA Date:</strong> {!salesOrderWrapperList[0].bookingDateFormatted}</td>
+            </tr>
+            <tr>
+                <td><strong>Property Type:</strong> {!salesOrderWrapperList[0].salesOrder.Unit__r.UnitType__c}</td>
+                <td><strong>Type:</strong> {!salesOrderWrapperList[0].salesOrder.Unit__r.UnitModel__c}</td>
+            </tr>
+            <tr>
+                <td>
+                    <!-- WAIVER -->
+                    <apex:outputPanel rendered="{!salesOrderWrapperList[0].isWaiver}" layout="none">
+                        <strong>Net Sales Price:</strong>
+                        AED 
+                        <apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!salesOrderWrapperList[0].salesOrder.NetAmount__c}" />
+                        </apex:outputText>
+                    </apex:outputPanel>
+                    
+                    <!-- REGULAR -->
+                    <apex:outputPanel rendered="{!salesOrderWrapperList[0].isRegular}" layout="none">
+                        <strong>Net Sales Price:</strong>
+                        AED 
+                        <apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!salesOrderWrapperList[0].salesOrder.NetAmount__c}" />
+                        </apex:outputText>
+                    </apex:outputPanel>
+                    
+                    <!-- ADM -->
+                    <apex:outputPanel rendered="{!salesOrderWrapperList[0].isADM}" layout="none">
+                        <strong>Price (Including ADM Charges):</strong>
+                        AED 
+                        <apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!salesOrderWrapperList[0].salesOrder.NetAmount__c}" />
+                        </apex:outputText>
+                    </apex:outputPanel>
+                    
+                    <!-- VAT -->
+                    <apex:outputPanel rendered="{!salesOrderWrapperList[0].isVAT}" layout="none">
+                        <strong>Amount Without VAT:</strong>
+                        AED 
+                        <apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!salesOrderWrapperList[0].salesOrder.NetAmount__c}" />
+                        </apex:outputText>
+                    </apex:outputPanel>
+                </td>
+                
+                <td>
+                    <strong>Total Collection:</strong> 
+                    AED 
+                    <apex:outputText value="{0, number, ###,##0.00}">
+                        <apex:param value="{!salesOrderWrapperList[0].totalCollectedAmt}" />
+                    </apex:outputText>
+                </td>
+            </tr>
+            
+            <tr>                
+                <td>
+                    <!-- REGULAR -->
+                    <apex:outputPanel rendered="{!salesOrderWrapperList[0].isRegular}" layout="none">
+                        <strong>ADM Charge:</strong>
+                        AED 
+                        <apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!salesOrderWrapperList[0].admAmount}" />
+                        </apex:outputText>
+                    </apex:outputPanel>
+                    
+                    <!-- ADM -->
+                    <apex:outputPanel rendered="{!salesOrderWrapperList[0].isADM}" layout="none">
+                        <strong>Price (Excluding ADM Charges):</strong>
+                        AED 
+                        <apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!salesOrderWrapperList[0].salesOrder.Sales_Price_Excluding_ADM__c}" />
+                        </apex:outputText>
+                    </apex:outputPanel>
+                    
+                    <!-- VAT -->
+                    <apex:outputPanel rendered="{!salesOrderWrapperList[0].isVAT}" layout="none">
+                        <strong>Total Amount With VAT:</strong>
+                        AED 
+                        <apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!salesOrderWrapperList[0].totalAmountWithVAT}" />
+                        </apex:outputText>
+                    </apex:outputPanel>
+                </td>
+                
+                <td>
+                    <strong>Total Outstanding:</strong>
+                    AED 
+                    <apex:outputText value="{0, number, ###,##0.00}">
+                        <apex:param value="{!salesOrderWrapperList[0].totalBalanceInstallment}" />
+                    </apex:outputText>
+                </td>
+            </tr>
+        </table>
+        
+        <!-- Installment and Payment Details Section -->
+        <h1>Installment and Payment Details</h1>
+        <table class="receiptTable">
+            <thead>
+                <tr>
+                    <th>Due Date</th><th>Inst#</th><th>Amount (AED)</th><th>%</th>
+                    <th>RV No</th><th>RV Date</th><th>Mode</th><th>Status</th>
+                    <th>Collected (AED)</th><th>Outstanding (AED)</th><th>LPF (AED)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!salesOrderWrapperList[0].consolidatedInstallments}" var="inst">
+                    <!-- Case 1: Has RVs -->
+                    <apex:outputPanel layout="none" rendered="{!NOT(ISNULL(inst.rvDetails)) && inst.rvDetails.size > 0}">
+                        <apex:variable var="rowCount" value="{!inst.rvDetails.size}" />
+                        <apex:variable var="first" value="true" />
+                        <apex:repeat value="{!inst.rvDetails}" var="rv">
+                            <tr>
+                                <apex:outputPanel layout="none" rendered="{!first}">
+                                    <td rowspan="{!rowCount}">{!inst.dueDateFormatted}</td>
+                                    <td rowspan="{!rowCount}">{!inst.installmentNumber}</td>
+                                    <td rowspan="{!rowCount}" style="text-align:right;">
+                                        <apex:outputText value="{0, number, ###,##0.00}">
+                                            <apex:param value="{!inst.amount}" />
+                                        </apex:outputText>
+                                    </td>
+                                    <td rowspan="{!rowCount}" style="text-align:center;">{!inst.percentage}</td>
+                                </apex:outputPanel>
+
+                                <td>{!rv.rvNo}</td>
+                                <td>{!rv.rvDateFormatted}</td>
+                                <td>{!rv.mode}</td>
+                                <td>{!rv.status}</td>
+                                <td style="text-align:right;">
+                                    <apex:outputText value="{0, number, ###,##0.00}">
+                                        <apex:param value="{!rv.collected}" />
+                                    </apex:outputText>
+                                </td>
+                                <td style="text-align:right;">
+                                    <apex:outputText value="{0, number, ###,##0.00}">
+                                        <apex:param value="{!rv.outstanding}" />
+                                    </apex:outputText>
+                                </td>
+                                <td style="text-align:right;">
+                                    <apex:outputText value="{0, number, ###,##0.00}">
+                                        <apex:param value="{!rv.lpf}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                            <apex:variable var="first" value="false" />
+                        </apex:repeat>
+                    </apex:outputPanel>
+
+                    <!-- Case 2: No RVs -->
+                    <apex:outputPanel layout="none" rendered="{!ISNULL(inst.rvDetails) || inst.rvDetails.size == 0}">
+                        <tr>
+                            <td>{!inst.dueDateFormatted}</td>
+                            <td>{!inst.installmentNumber}</td>
+                            <td style="text-align:right;">
+                                <apex:outputText value="{0, number, ###,##0.00}">
+                                    <apex:param value="{!inst.amount}" />
+                                </apex:outputText>
+                            </td>
+                            <td style="text-align:center;">{!inst.percentage}</td>
+                            <td colspan="7"></td>
+                        </tr>
+                    </apex:outputPanel>
+                </apex:repeat>
+
+                <!-- Total Row -->
+                <tr class="total-row">
+                    <td colspan="8" style="text-align:right;"><b>Total (AED):</b></td>
+                    <td style="text-align:right;">
+                        <apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!salesOrderWrapperList[0].installmentCollectedAmount}" />
+                        </apex:outputText>
+                    </td>
+                    <td style="text-align:right;">
+                        <apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!salesOrderWrapperList[0].totalBalanceInstallment}" />
+                        </apex:outputText>
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Sales Order Receipts Section -->
+        <h1>OTHER PAYMENT DETAILS : </h1>
+        <table class="receiptTable">
+            <thead>
+                <tr>
+                    <th>Charge No</th>
+                    <th>Due Date</th>
+                    <th>Purpose</th>
+                    <th>Amount(AED)</th>
+                    <th>RV No</th>
+                    <th>RV Date</th>
+                    <th>Mode</th>
+                    <th>Status</th>
+                    <th>Collected(AED)</th>
+                    <th>Outstanding Balance(AED)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!salesOrderWrapperList[0].salesOrderReceiptWrappers}" var="receipt">
+                    <tr>
+                        <td>
+                            {!IF(NOT(ISBLANK(receipt.receipt.SalesOrderOtherCharges__r.Name)),
+                            receipt.receipt.SalesOrderOtherCharges__r.Name,
+                            'On Account'
+                            )}
+                        </td>
+                        <td>{!receipt.otherChargedueDateFormatted}</td>
+                        <td>{!receipt.receipt.SalesOrderOtherCharges__r.TypeOfCharge__c}</td>
+                        <td style="text-align: right;"><apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!receipt.receipt.SalesOrderOtherCharges__r.Amount__c}" />
+                            </apex:outputText></td>
+                        <td>{!receipt.receipt.Receipt_Reference__c}</td>
+                        <td>{!receipt.RvDateFormatted}</td>
+                        <td>{!receipt.receipt.Receipt_Type__c}</td>
+                        <td>{!receipt.receipt.ReceiptStatus__c}</td>
+                        <td style="text-align: right;"><apex:outputText value="{0, number, ###,##0.00}">
+                            <apex:param value="{!receipt.receipt.AmountApplied__c}" />
+                            </apex:outputText></td>
+                        <td>{!receipt.receipt.SalesOrderOtherCharges__r.PendingAmount__c}</td>
+                    </tr>
+                </apex:repeat>
+                <tr class="total-row">
+                    <td colspan="3"><b>Total(AED) : </b></td>
+                    <td>{!salesOrderWrapperList[0].totalAmtOtherCharge}</td>
+                    <td colspan="4"><b>Total(AED) : </b></td>
+                    <td><apex:outputText value="{0, number, ###,##0.00}">
+                        <apex:param value="{!salesOrderWrapperList[0].totalAppliedAmtOtherCharge}" />
+                        </apex:outputText></td>
+                    <td><apex:outputText value="{0, number, ###,##0.00}">
+                        <apex:param value="{!salesOrderWrapperList[0].totalPendingAmtOtherCharge}" />
+                        </apex:outputText></td>
+                </tr>
+            </tbody> 
+        </table>
+        <h2>
+            <p><strong>
+                Kindly Make Payment to
+                </strong>
+            </p>
+        </h2>
+        <table class="bankDetailTable">
+            <tr>
+                <td><strong>Bank Name : </strong>{!salesOrderWrapperList[0].salesOrder.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.BankNameCorporate__c}</td>
+                <td><strong>Branch : </strong>{!salesOrderWrapperList[0].salesOrder.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.BranchCorporate__c}</td>
+            </tr>
+            <tr>
+                <td><strong>Account Name : </strong>{!salesOrderWrapperList[0].salesOrder.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.BeneficiaryNameCorporate__c}</td>
+                <td><strong>Account Number : </strong>{!salesOrderWrapperList[0].salesOrder.Virtual_Bank_Account_Number__c}</td>
+            </tr>
+            <tr>
+                <td><strong>IBAN Number : </strong>{!salesOrderWrapperList[0].salesOrder.Virtual_Account_IBAN__c}</td>
+                <td><strong>Swift Code : </strong>{!salesOrderWrapperList[0].salesOrder.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.SwiftCodeCorporate__c}</td>
+            </tr>
+        </table>
+        <p>
+            <b>Message to be included in Payment : </b> Payment against<b> {!salesOrderWrapperList[0].salesOrder.UnitNumber__c} in {!salesOrderWrapperList[0].salesOrder.ProjectName__c}, {!salesOrderWrapperList[0].salesOrder.Unit__r.BuildingSectionName__r.Name}</b>
+        </p>
+        <apex:outputPanel rendered="{!salesOrderWrapperList[0].admFeeIncludedValue}">
+            Note : Abu Dhabi registration fees is included in the purchase price.
+        </apex:outputPanel>
+        
+        <p>
+            <strong>Terms and Conditions</strong><br />
+            Service Charge, Offers and Rebates are not transferable. LPC, Rebates is inline to Sales and Purchase Agreement
+        </p>
+        <div class="footer">
+            <table style="width: 100%; border-collapse: collapse; border: none;">
+                <tr>
+                    <td style="width: 30%; text-align: left; border: none;">
+                        <apex:image alt="Logo" value="{!$Resource.BloomLogo}" width="150px" height="50px"/>
+                    </td>
+                    <td style="width: 70%; text-align: right; border: none; font-size: 12pt;">
+                        <p>Bloom District Properties – Sole Proprietorship – L.L.C., P.O. Box 28928, Abu Dhabi, UAE</p>
+                        <p>T +971 2 6969500 call free 800-bloom (25666)</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</apex:page>

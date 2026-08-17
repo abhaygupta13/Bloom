@@ -1,0 +1,10 @@
+<template>
+        <!--lightning-button label="Create Azure B2C User" onclick={handleButtonClick}></lightning-button-->
+    
+    <template if:true={showPopup}>
+        <lightning-card title="Azure B2C User Creation">
+            <p class="slds-p-horizontal_medium">{popupMessage}</p>
+            <!--lightning-button label="Close" onclick={closePopup}></lightning-button-->
+        </lightning-card>
+    </template>
+</template>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Handover_Government_Relations_Queue_Handover</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Unit__c</columns>
+    <columns>Unit_Plot_Number__c</columns>
+    <columns>Sub_Status__c</columns>
+    <columns>CREATEDBY_USER</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>UPDATEDBY_USER</columns>
+    <filterScope>Queue</filterScope>
+    <label>Handover Government Relations Queue</label>
+    <queue>Handover_Government_Relations_Queue</queue>
+    <sharedTo>
+        <group>Government_Relations</group>
+    </sharedTo>
+</ListView>

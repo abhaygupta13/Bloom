@@ -1,0 +1,63 @@
+<template>
+    <div if:true={isVisible}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open slds-modal_full">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Cancel and close</span>
+                </button>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    Customer Satisfaction Rating</br>
+                    <!-- <template for:each={stars} for:item="star">
+                        <lightning-icon key={star.index} icon-name={star.icon} class={star.emojiStyle}
+                            data-index={star.index} onclick={handleRatingClick}>
+                        </lightning-icon>
+                    </template> -->
+                    <template for:each={stars} for:item="star">
+                        <div key={star.index} class={star.emojiStyle} data-index={star.index}
+                            onclick={handleRatingClick}>
+                            {star.icon}
+                        </div>
+                    </template>
+                    </br>
+                    <lightning-textarea name="comment" label="Customer feedback" placeholder="type here..." value=""
+                        onchange={handleChange}></lightning-textarea>
+                        <lightning-input type="text" label="Signed By" placeholder="Enter Name..." value=""
+                        onchange={handleSignedBy}></lightning-input>
+                    <div class="c-container">
+                        <lightning-card title="Signature Pad" icon-name="utility:signature">
+                            <div class="canvas-container">
+                                <canvas lwc:dom="manual" class="signature-canvas"
+                                    style="border:2px solid #888; background: #fff;"></canvas>
+                            </div>
+                            <div class="button-group slds-m-top_small">
+                                <!-- <lightning-button variant="brand" label="Save" title="Save" onclick={handleSaveClick}></lightning-button> -->
+                                <lightning-button variant="neutral" label="Clear" title="Clear"
+                                    onclick={handleClearClick}></lightning-button>
+                            </div>
+                        </lightning-card>
+                    </div>
+                </div>
+
+
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_brand" onclick={handleSave}>Save</button>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </div>
+    <div if:false={isVisible}>
+        <p>
+          <lightning-formatted-text value="Issue Under Rectification or Fixed Already"></lightning-formatted-text>
+        </p>
+    </div>
+    <!-- <div if:true={isVisibleWhenNotCheckIN}>
+        <p>
+            <lightning-formatted-text value="Please check in first."></lightning-formatted-text>
+        </p>
+    </div> -->
+</template>

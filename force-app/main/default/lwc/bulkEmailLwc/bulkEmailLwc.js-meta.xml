@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+	<masterLabel>BulkEmailLwc</masterLabel>
+	<apiVersion>62.0</apiVersion>
+	<description>This Lwc is used to send the bulk email based on uploaded file, or based on existing reports which have contacts.</description>
+	<isExposed>true</isExposed>
+	<targets>
+		<target>lightning__AppPage</target>
+		<target>lightning__HomePage</target>
+	</targets>
+</LightningComponentBundle>

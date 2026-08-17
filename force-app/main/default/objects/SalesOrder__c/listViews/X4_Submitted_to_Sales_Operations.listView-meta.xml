@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X4_Submitted_to_Sales_Operations</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>ProjectName__c</columns>
+    <columns>Unit__c</columns>
+    <columns>NetAmount__c</columns>
+    <columns>Status__c</columns>
+    <columns>SubStatus__c</columns>
+    <columns>BookingDate__c</columns>
+    <columns>Broker_Agencyy__c</columns>
+    <columns>First_Installment_Received_Amount__c</columns>
+    <columns>ADM_Fee_Received_Amount__c</columns>
+    <columns>CustomerSignedSPADate__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>SubStatus__c</field>
+        <operation>equals</operation>
+        <value>Submitted to Sales Operations</value>
+    </filters>
+    <label>4.Submitted to Sales Operations</label>
+    <sharedTo>
+        <group>Operations_Team</group>
+        <group>Sales_Manager</group>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,56 @@
+/* Gray out disabled tabs */
+.disabled-tab .slds-tabs_default__item,
+.disabled-tab .slds-tabs_scoped__item {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Modal width & height responsive */
+.slds-modal__container {
+    width: 90%;  /* mobile width */
+    max-width: 90%;
+    min-height: 60vh; /* force a taller modal on mobile */
+    margin: auto;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .slds-modal__container {
+        width: 70%;    /* slightly reduced width */
+        max-width: 70%;
+        min-height: 70vh; /* taller modal for tablet */
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .slds-modal__container {
+        width: 60%;    /* slightly reduced width on desktop */
+        max-width: 60%;
+        min-height: 80vh; /* taller modal for desktop */
+    }
+}
+
+/* Make modal content scrollable if too tall */
+.slds-modal__content {
+    overflow-y: auto;
+    max-height: calc(100% - 100px); /* leave space for header/footer */
+}
+
+/* Pills wrapping */
+.slds-pill_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+/* Force stacked layout for mobile */
+@media (max-width: 767px) {
+    lightning-layout {
+        flex-direction: column !important;
+    }
+    lightning-layout-item {
+        width: 100% !important;
+    }
+}

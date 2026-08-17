@@ -1,0 +1,84 @@
+<template>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <h2 class="slds-text-heading_medium">New Amenity Booking</h2>
+                <button class="slds-button slds-modal__close" title="Close" onclick={closeModal}>×</button>
+            </header>
+
+            <div class="slds-modal__content slds-p-around_medium">
+                <!-- Standard Account field -->
+                <c-custom-lookup
+                label="Account"
+                placeholder="Search Account"
+                icon-name="standard:account"
+                s-object-api-name="Account"
+                onlookupupdate={handleAccountSelect}
+                key={accountKey}
+                data-id="accountLookup"
+            ></c-custom-lookup>
+
+                <!-- Custom Lookup: Unit__c filtered by Account -->
+                <c-custom-lookup
+                    label="Unit"
+                    placeholder="Search Unit"
+                    icon-name="standard:location"
+                    s-object-api-name="Unit__c"
+                    filter-field="Account__c"
+                    filter-value={selectedAccountId}
+                    onlookupupdate={handleUnitSelect}
+                    class="slds-m-bottom_small"
+                    key={unitKey}
+                    data-id="unitLookup"
+                ></c-custom-lookup>
+
+                <!-- Custom Lookup: Amenities__c filtered by Unit -->
+                <c-custom-lookup
+                    label="Amenity"
+                    placeholder="Search Amenity"
+                    icon-name="standard:product"
+                    s-object-api-name="Amenities__c"
+                    filter-field="Unit__c"
+                    filter-value={selectedUnitId}
+                    onlookupupdate={handleAmenitySelect}
+                    key={amenityKey}
+                    data-id="amenityLookup"
+                ></c-custom-lookup>
+
+                <!-- Booking Date -->
+                <lightning-input
+                    type="date"
+                    label="Booking Date"
+                    value={formFields.bookingDate}
+                    onchange={handleInputChange}
+                    data-field="bookingDate"
+                     data-id="bookingDateInput"
+                    min={today}
+                    required
+                ></lightning-input>
+
+                <!-- Booking Time -->
+               
+                <lightning-combobox
+                    name="bookingTime"
+                    label="Booking Time"
+                    value={formFields.bookingTime}
+                    placeholder="Select a time slot"
+                    options={availableSlots}
+                    onchange={handleInputChange}
+                    data-field="bookingTime"
+                    required
+                    disabled={disableBookingTime}
+                ></lightning-combobox>
+
+                <!-- Actions -->
+                <div class="slds-m-top_medium">
+                    <lightning-button variant="brand" label="Submit" onclick={handleSubmit}></lightning-button>
+                    <lightning-button variant="neutral" label="Cancel" onclick={closeModal} class="slds-m-left_small"></lightning-button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

@@ -1,0 +1,158 @@
+<apex:page name="Receipt_PDF" controller="BCAPP_ReceiptPDFController" showHeader="false" applyHtmlTag="false" applyBodyTag="false" renderAs="pdf">
+    <html>
+        <head>
+            <meta charset="utf-8"/>
+            <style>
+                @page { size: 297mm 420mm; margin: 0; }
+                body { margin: 1%; font-family: Arial, Helvetica, 'Arial Unicode MS', sans-serif; color: #000; padding: 20px; border: 2px solid; }
+            </style>
+        </head>
+        <body>
+            
+            <!-- ===== Header Row ===== -->
+            <div style="width:100%;display:flex;align-items:center;justify-content:space-between;margin-top:15px;">
+                <!-- Left: Logo + sub-brand -->
+                <div style="display:flex;flex-direction:column; margin-top:10px;">
+                    <apex:image value="{!$Resource.BloomLogo}" width="80" style="margin-bottom:10px;"/>
+                    <div style="font-size:8px;letter-spacing:.2px;color:#6b6b6b;">
+                        COMMUNITY MANAGEMENT
+                    </div>
+                </div>
+                
+                <!-- Right: Empty space for now -->
+                <div></div>
+            </div>
+            
+            <!-- ===== RV No, Title, and Date Row ===== -->
+            <div style="width:100%;display:flex;align-items:center;justify-content:space-between;margin-bottom:15px;">
+                <!-- Left: RV No -->
+                <div style="font-size:13px;">
+                    <span style="font-weight:700;">RV. No. :</span>
+                    <span style="margin-left:10px;font-weight:700;">{!receiptNo}</span>
+                </div>
+                
+                <!-- Center: Bilingual Title -->
+                <div style="text-align:center;margin-top:5%">
+                    <div style="font-size:14px;font-weight:700;direction:rtl;margin-bottom:2px;">سند قبض</div>
+                    <div style="font-size:14px;font-weight:700;">Receipt Voucher</div>
+                </div>
+                
+                <!-- Right: Date -->
+                <div style="font-size:13px;text-align:right;">
+                    <span style="font-weight:700;">Date:</span>
+                    <span style="margin:0 10px;font-weight:700;">{!TEXT(receipt.PaymentDate__c)}</span>
+                    <span style="direction:rtl;font-weight:700;">التاريخ</span>
+                </div>
+            </div>
+            
+            <!-- ===== Amount Section ===== -->
+            <div style="margin:15px 0;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px; width:22%">
+                    <div style="font-weight:700;font-size:12px;">AED</div>
+                    <div style="font-weight:700;font-size:12px;direction:rtl;float: right; margin-top:-7%">درهم</div>
+                </div>
+                <div style=" width:22%; border:1px solid #000;border-bottom:1px solid #000;padding:1px 2px;text-align:right;font-size:14px;background-color:#fff;">
+                    {!totalReceived2dp}
+                </div>
+            </div>
+            
+            <!-- ===== Details Table ===== -->
+            <table style="width:100%;border-collapse:collapse;margin-top:15px;font-size:13px;">
+                <!-- Project -->
+                <tr>
+                    <td style="width:15%;padding:8px;font-weight:700;">Project:</td>
+                    <td style="width:60%;padding:8px;text-align:left;">{!projectName}</td>
+                    <td style="width:25%;padding:8px;text-align:right;direction:rtl;font-weight:700;">المشروع</td>
+                </tr>
+                <!-- Property Details -->
+                <tr>
+                    <td style="padding:8px;font-weight:700;">Property Details:</td>
+                    <td style="padding:8px;text-align:left;">{!receipt.Unit__r.Name}</td>
+                    <td style="padding:8px;text-align:right;direction:rtl;font-weight:700;">تفاصيل العقار</td>
+                </tr>
+                <!-- Customer ID -->
+                <tr>
+                    <td style="padding:8px;font-weight:700;">Customer ID:</td>
+                    <td style="padding:8px;text-align:left;">{!receipt.Account__r.SAP_BP_No__c}</td>
+                    <td style="padding:8px;text-align:right;direction:rtl;font-weight:700;">رقم هوية العميل</td>
+                </tr>
+                <!-- Contract No -->
+                <tr>
+                    <td style="padding:8px;font-weight:700;">Contract No:</td>
+                    <td style="padding:8px;text-align:left;">{!receipt.Unit__r.SAP_Contract_No__c}</td>
+                    <td style="padding:8px;text-align:right;direction:rtl;font-weight:700;">رقم العقد</td>
+                </tr>
+            </table>
+            <table style="width:100%;border-collapse:collapse;margin-top:15px;font-size:13px;">
+                <!-- Received From -->
+                <tr>
+                    <td style="width:25%;padding:8px;font-weight:700;">Received from Mr. / Ms. / M/s:</td>
+                    <td style="width:50%;padding:8px;text-align:center;">{!receipt.Account__r.Name}</td>
+                    <td style="width:25%;padding:8px;text-align:right;direction:rtl;font-weight:700;">استلمنا من السيد / السيدة</td>
+                </tr>
+                <!-- Amount in Words -->
+                <tr>
+                    <td style="padding:8px;font-weight:700;">Amount in Words:</td>
+                    <td style="padding:8px;text-align:center;">{!amountInWords}</td>
+                    <td style="padding:8px;text-align:right;direction:rtl;font-weight:700;">المبلغ بالكلمات</td>
+                </tr>
+                <!-- Being Towards -->
+                <tr>
+                    <td style="padding:8px;font-weight:700;">Being towards:</td>
+                    <td style="padding:8px;text-align:center;">Service Charge Payments</td>
+                    <td style="padding:8px;text-align:right;direction:rtl;font-weight:700;">وذلك عن</td>
+                </tr>
+            </table>
+            
+            <!-- ===== Payment Details Block ===== -->
+            <div style="margin-top:20px;">
+                <div style="text-align:center;font-size:13px;font-weight:700;text-decoration:underline;margin-bottom:10px;">
+                    Payment Details
+                </div>
+                
+                <table style="width:100%;border-collapse:collapse;font-size:11px;">
+                    <tr>
+                        <td style="width:25%;border:1px solid #000;padding:8px;font-weight:700;">Type:</td>
+                        <td style="width:50%;border:1px solid #000;padding:8px;text-align:center;">{!receipt.PaymentMode__c}</td>
+                        <td style="width:25%;border:1px solid #000;padding:8px;text-align:right;direction:rtl;font-weight:700;">طريقة الدفع</td>
+                    </tr>
+                    <tr>
+                        <td style="border:1px solid #000;padding:8px;font-weight:700;">Cheque / TT:</td>
+                        <td style="border:1px solid #000;padding:8px;text-align:center;">{!receipt.GatewayReference__c}</td>
+                        <td style="border:1px solid #000;padding:8px;text-align:right;direction:rtl;font-weight:700;">رقم الشيك \ رقم التحويل المصرفي</td>
+                    </tr>
+                    <tr>
+                        <td style="border:1px solid #000;padding:8px;font-weight:700;">Value Date:</td>
+                        <td style="border:1px solid #000;padding:8px;text-align:center;">{!TEXT(receipt.PaymentDate__c)}</td>
+                        <td style="border:1px solid #000;padding:8px;text-align:right;direction:rtl;font-weight:700;">تاريخ الاستلام</td>
+                    </tr>
+                    <tr>
+                        <td style="border:1px solid #000;padding:8px;font-weight:700;">Amount:</td>
+                        <td style="border:1px solid #000;padding:8px;text-align:center;">{!amountReceived2dp} AED</td>
+                        <td style="border:1px solid #000;padding:8px;text-align:right;direction:rtl;font-weight:700;">المبلغ</td>
+                    </tr>
+                     <tr rendered="{!NOT(ISBLANK(technologyFee2dp))}">
+                        <td style="border:1px solid #000;padding:8px;font-weight:700;">Technology Fee:</td>
+                        <td style="border:1px solid #000;padding:8px;text-align:center;">{!technologyFee2dp} AED</td>
+                        <td style="border:1px solid #000;padding:8px;text-align:right;direction:rtl;font-weight:700;">رسوم التكنولوجيا</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- ===== Notes ===== -->
+            <div style="font-size:12px;margin-top:20px;line-height:1.5;">
+                <div style="font-weight:700;margin-bottom:5px;">NOTE:</div>
+                <div style="margin-bottom:3px;">
+                    1. For service charge enquiries email us on
+                    <a href="mailto:SCQuery@bloomCM.ae" style="color:#0066cc;">SCQuery@bloomCM.ae</a>
+                </div>
+                <div style="margin-bottom:8px;">
+                    2. Cheque bounced charges AED 500 and replace only with Direct Deposit, Transfer or Card payment.
+                </div>
+                <div style="font-style:italic;text-align:left;">
+                    Digital receipt does not need signature or stamp
+                </div>
+            </div>
+        </body>
+    </html>
+</apex:page>

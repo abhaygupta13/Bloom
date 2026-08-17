@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AllSurveys</fullName>
+    <columns>NAME</columns>
+    <columns>SurveyType__c</columns>
+    <columns>Account__c</columns>
+    <columns>FirstName__c</columns>
+    <columns>LastName__c</columns>
+    <columns>AccountManager__c</columns>
+    <columns>AccountManagerName__c</columns>
+    <columns>BookingDate__c</columns>
+    <columns>Email__c</columns>
+    <columns>ProjectName__c</columns>
+    <columns>SalesManagerName__c</columns>
+    <columns>SalesOrder__c</columns>
+    <columns>Unit__c</columns>
+    <columns>UnitNumber__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>All Surveys</label>
+</ListView>

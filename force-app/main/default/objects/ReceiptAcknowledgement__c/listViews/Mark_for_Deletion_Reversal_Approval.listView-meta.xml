@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mark_for_Deletion_Reversal_Approval</fullName>
+    <columns>NAME</columns>
+    <columns>Unit_Number__c</columns>
+    <columns>ReferenceNumber__c</columns>
+    <columns>PaymentType__c</columns>
+    <columns>BankName__c</columns>
+    <columns>Markfordeletion__c</columns>
+    <columns>Reversal_Status_Reason__c</columns>
+    <columns>ReversalComments__c</columns>
+    <columns>Amount__c</columns>
+    <columns>MaturityDate__c</columns>
+    <columns>ChequeReceived__c</columns>
+    <columns>RejectCheque__c</columns>
+    <columns>Finance_Verified__c</columns>
+    <columns>SalesOrder__c</columns>
+    <columns>MortgageCheque__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>notEqual</operation>
+        <value>Cleared,Bounced,Reversed</value>
+    </filters>
+    <filters>
+        <field>Unit_Number__c</field>
+        <operation>notEqual</operation>
+    </filters>
+    <filters>
+        <field>Markfordeletion__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>7.Submit for Deletion/Reversal</label>
+    <sharedTo>
+        <group>Finance_Group</group>
+        <group>Operations_Team</group>
+        <group>Sales_Manager</group>
+    </sharedTo>
+</ListView>

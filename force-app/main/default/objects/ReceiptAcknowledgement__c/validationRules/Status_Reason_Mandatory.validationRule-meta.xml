@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status_Reason_Mandatory</fullName>
+    <active>true</active>
+    <description>Status reason to be provided when status is &apos;On Hold&apos; or &apos;Reversal&apos;</description>
+    <errorConditionFormula>AND(
+ISBLANK( TEXT(StatusReason__c )),
+ ISPICKVAL( Status__c , &apos;On Hold&apos;)
+ 
+)</errorConditionFormula>
+    <errorDisplayField>StatusReason__c</errorDisplayField>
+    <errorMessage>Please provide reason for the receipt to be &apos;On Hold&apos;</errorMessage>
+</ValidationRule>

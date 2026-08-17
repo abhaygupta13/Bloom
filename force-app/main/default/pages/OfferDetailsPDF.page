@@ -1,0 +1,483 @@
+<apex:page controller="OfferDetailsPDFHandler" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+        <head>
+            <style>
+                @page {
+                size: A4 portrait;
+                margin: 8mm 10mm 10mm 10mm; /* tighter margins */
+                @bottom-right { content: element(footer); }
+                }
+                
+                body {
+                font-family: sans-serif;
+                font-size: 10pt; /* slightly smaller font */
+                margin: 0;
+                padding: 0;
+                }
+                
+                table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 0;
+                }
+                
+                th, td {
+                padding: 2px 3px; /* compact cell padding */
+                margin: 0;
+                vertical-align: middle;
+                word-wrap: break-word;
+                }
+                .floorplan-container {
+                page-break-before: always;
+                page-break-inside: avoid;
+                margin: 0;
+                padding: 0;
+                }
+                
+                /* Adaptive height container for image + disclaimer */
+                .floorplan-wrapper {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                height: 270mm; /* total printable area minus header/footer */
+                overflow: hidden;
+                }
+                
+                /* ✅ Slightly reduce spacing to make room for disclaimer */
+                table, tr, td {
+                padding: 1.5px 2px;
+                }
+                
+                .headerTable th {
+                background-color: #D1D3D4;
+                }
+                
+                .headerTable td {
+                background-color: #E2E5F3;
+                }
+                
+                .alnright {
+                text-align: right;
+                }
+                
+                hr {
+                border: 0;
+                border-top: 1px solid #D1D3D4;
+                opacity: 0.1;
+                margin: 3px 0;
+                }
+                
+                .footer {
+                display: block;
+                padding: 6px;
+                font-size: 8pt;
+                position: running(footer);
+                }
+                
+                .pagenumber:before { content: counter(page); }
+                .pagecount:before { content: counter(pages); }
+                
+                .fullPageContainer {
+                display: block;
+                page-break-before: always;
+                page-break-inside: avoid;
+                margin: 0;
+                padding: 0;
+                text-align: left; 
+                }
+                
+                .fullPageImage {
+                width: 100%;
+                height: calc(100% - 18mm); /* auto adjusts with disclaimer size */
+                object-fit: contain;
+                margin: 0;
+                border: none;
+                }
+                
+                .disclaimer {
+                font-size: 9.5pt;
+                line-height: 1.05;
+                margin: 0;
+                padding-top: 2mm;
+                padding-bottom: 0;
+                background-color: #fff;
+                page-break-before: avoid;
+                page-break-inside: avoid;
+                text-align: left;
+                }
+                
+                .imageouter img {
+                width: 100% !important;
+                height: auto !important;
+                display: block;
+                margin: 0 auto;
+                }
+                
+                .sectionHeading {
+                margin: 0;
+                padding: 0;
+                font-weight: bold;
+                font-size: 11pt;
+                line-height: 1;
+                }
+                
+                /* ✅ Compress payment plan table more tightly */
+                .headerTable th:nth-child(1),
+                .headerTable td:nth-child(1) { width: 5%; }   /* Inst. */
+                .headerTable th:nth-child(2),
+                .headerTable td:nth-child(2) { width: 35%; }  /* Milestone */
+                .headerTable th:nth-child(3),
+                .headerTable td:nth-child(3) { width: 10%; }  /* % */
+                .headerTable th:nth-child(4),
+                .headerTable td:nth-child(4) { width: 15%; }  /* Date */
+                .headerTable th:nth-child(5),
+                .headerTable td:nth-child(5) { width: 20%; }  /* Amount */
+                
+                .headerTable tr { page-break-inside: avoid; }
+                
+                /* ✅ Reduce vertical spacing everywhere */
+                tr, td, th, p, div, span {
+                line-height: 1.1;
+                }
+                
+                /* ✅ Reduce spacing in headers and footers */
+                .headerTable th, .headerTable td {
+                font-size: 10.5pt;
+                }
+                
+                .promo, .footer, .sectionHeading {
+                page-break-inside: avoid;
+                }
+            </style>
+            
+        </head>
+        <body>
+            <table width="100%">
+                <!-- Header -->
+                <tr>
+                    <td>
+                        <div style="font-size: 15pt; padding-bottom: 2pt;"><b>Bloom Sales Offer</b></div>
+                        Date: {!todayDate}<br/><br/><br/>
+                    </td>
+                    <td class="alnright">
+                        <div style="float:right;">
+                            <apex:image alt="Logo" value="{!$Resource.BloomLogo}" width="150px" height="50px"/>
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Greeting -->
+                <tr>
+                    <td colspan="2">
+                        <div style="padding-bottom: 5pt;"><b>Dear {!customerName},</b></div>
+                        Thanks for your interest in Bloom Properties.<br/>
+                        As discussed, please find below a detailed offer for your interest in {!offerDetails.unitRecord.Project__r.Name}.
+                    </td>
+                </tr>
+                
+                <!-- Unit Details Table -->
+                <tr>
+                    <td colspan="2">
+                        <br/>
+                        <table class="headerTable" width="100%">
+                            <tr>
+                                <th>Project</th>
+                                <th>Unit Number</th>
+                                <th>Estimated Completion Date</th>
+                                <th>Selling Price ({!offerDetails.unitRecord.currencyISOCOde})</th>
+                            </tr>
+                            <tr>
+                                <td>{!offerDetails.unitRecord.Project__r.Name}</td>
+                                <td>{!offerDetails.unitRecord.Name}</td>
+                                <td>
+                                    <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                        <apex:param value="{!offerDetails.unitRecord.CompletionDate__c}"/>
+                                    </apex:outputText>
+                                </td>
+                                <td>
+                                    <apex:outputText value="{0, number, ###,##0.00}">
+                                        <apex:param value="{!offerDetails.unitRecord.SellingPrice__c}"/>
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                
+                <!-- Additional Unit Details -->
+                <tr>
+                    <td colspan="2">
+                        <br/>
+                        <hr/>
+                        <table width="100%">
+                            <tr>
+                                <td>Unit Type</td>
+                                <td>: {!offerDetails.unitRecord.UnitType__c}</td>
+                                <td>Unit Model</td>
+                                <td>: {!offerDetails.unitRecord.UnitModel__c}</td>
+                            </tr>
+                            <tr>
+                                <td>Internal Area (SQMT)</td>
+                                <td>: {!offerDetails.unitRecord.Internal_Saleable_Area__c}</td>
+                                <td>Internal Area (SQFT)</td>
+                                <td>: {!sqftInternal}</td>
+                            </tr>
+                            <tr>
+                                <td>External Area (SQMT)</td>
+                                <td>: {!offerDetails.unitRecord.External_Saleable_Area__c}</td>
+                                <td>External Area (SQFT)</td>
+                                <td>: {!sqftExternal}</td>
+                            </tr>
+                            <tr>
+                                <td>Gross Area (SQMT)</td>
+                                <td>: {!offerDetails.unitRecord.SaleableArea__c}</td>
+                                <td>Gross Area (SQFT)</td>
+                                <td>: {!sqftGross}</td>
+                            </tr>
+                            <apex:outputPanel layout="none" rendered="{!offerDetails.unitRecord.UnitType__c == 'Apartment'}">
+                                <tr>
+                                    <td>Number of Parking</td>
+                                    <td>: {!offerDetails.unitRecord.NumberOfCarParks__c }</td>
+                                </tr>
+                            </apex:outputPanel>
+                            <apex:outputPanel layout="none" rendered="{!offerDetails.unitRecord.UnitType__c == 'Apartment' || offerDetails.unitRecord.UnitType__c == 'Villa'}">
+                                <tr>
+                                    <td>Number of Bedrooms</td>
+                                    <td>: {!offerDetails.unitRecord.NumberOfBedrooms__c}</td>
+                                    <td>Unit Category</td>
+                                    <td>: {!offerDetails.unitRecord.UnitCategory__c}</td>
+                                </tr>
+                                <tr>
+                                    <td>Plot Area (SQMT)</td>
+                                    <td>: {!offerDetails.unitRecord.PlotArea__c}</td>
+                                </tr>
+                            </apex:outputPanel>
+                        </table>
+                        <hr/>
+                    </td>
+                </tr>
+                
+                <!-- Payment Plan -->
+                <tr>
+                    <td colspan="2">
+                        <apex:repeat value="{!offerDetails.applicablePaymentPlansCalculated}" var="paymentPlans">
+                            <apex:outputPanel rendered="{!paymentPlans.isSelected}">
+                                <br/>
+                                <div style="padding-bottom:5pt;"><b>Payment Plan:</b> {!paymentPlans.paymentPlanDetails.Name}</div>
+                                <table width="100%" class="headerTable">
+                                    <tr>
+                                        <th style="text-align:center">Inst.</th>
+                                        <th>Milestone</th>
+                                        <th style="text-align:center">Percentage</th>
+                                        <th style="text-align:center">Date</th>
+                                        <th style="text-align:center">Amount ({!offerDetails.unitRecord.currencyISOCOde})</th>
+                                    </tr>
+                                    <apex:repeat value="{!paymentPlans.installmentDetails}" var="paymentPlanLines">
+                                        <tr>
+                                            <td style="text-align:center">{!paymentPlanLines.installmentRecord.InstallmentNumber__c}</td>
+                                            <td>{!paymentPlanLines.installmentRecord.Description__c}</td>
+                                            <td style="text-align:center">{!ROUND(paymentPlanLines.installmentRecord.InstallmentPercentage__c,2)}%</td>
+                                            <td style="text-align:center">
+                                                <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                                    <apex:param value="{!paymentPlanLines.installmentRecord.InstallmentDate__c}"/>
+                                                </apex:outputText>
+                                            </td>
+                                            <td style="text-align:center">
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!paymentPlanLines.totalValue}" />
+                                                </apex:outputText>
+                                            </td>
+                                        </tr>
+                                    </apex:repeat>
+                                </table>
+                                
+                                <!-- Totals Section -->
+                                <table width="100%" style="margin-top:5px;">
+                                    <tr>
+                                        <td style="background-color: #E2E5F3; width:33%; text-align:center;">
+                                            <b>{!offerDetails.unitRecord.currencyISOCOde} 
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{!offerDetails.unitRecord.SellingPrice__c}" />
+                                                </apex:outputText>
+                                            </b><br/> Selling Price
+                                        </td>
+                                        <td style="background-color: #D1D3D4; width:33%; text-align:center;">
+                                            <apex:outputPanel rendered="{! (offerDetails.unitRecord.SellingPrice__c - paymentPlans.discountedUnitSalesPrice) != 0 }">
+                                                <b>{!offerDetails.unitRecord.currencyISOCOde} 
+                                                    <apex:outputText value="{0, number, ###,##0.00}">
+                                                        <apex:param value="{! (offerDetails.unitRecord.SellingPrice__c - paymentPlans.discountedUnitSalesPrice) }" />
+                                                    </apex:outputText>
+                                                </b><br/> Total Discount
+                                            </apex:outputPanel>
+                                        </td>
+                                        <td style="background-color: #E2E5F3; width:33%; text-align:center;">
+                                            <b>{!offerDetails.unitRecord.currencyISOCOde} 
+                                                <apex:outputText value="{0, number, ###,##0.00}">
+                                                    <apex:param value="{! paymentPlans.netSalesPrice }" />
+                                                </apex:outputText>
+                                            </b><br/> Payable Price
+                                        </td>
+                                        <td style="{!IF(AND(paymentPlans.rebateAmount!=null,paymentPlans.rebateAmount!=0),'background-color: #D1D3D4; width:34%','')}">
+                                            <apex:outputPanel rendered="{!AND(paymentPlans.rebateAmount!=null,paymentPlans.rebateAmount!=0)}">
+                                                <b>{!offerDetails.unitRecord.currencyISOCOde} 
+                                                    <apex:outputText value="{0, number, ###,##0.00}">
+                                                        <apex:param value="{! paymentPlans.rebateAmount }"/>
+                                                    </apex:outputText>
+                                                </b><br/> Rebate
+                                            </apex:outputPanel>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Partner Discount Row -->
+                                    <tr style="{!IF( (offerDetails.unitRecord.SellingPrice__c - paymentPlans.discountedUnitSalesPrice ) == 0,'display:none;','')}">
+                                        <td style="{!IF(AND(paymentPlans.partnerDiscountAmount!=null, paymentPlans.partnerDiscountAmount!=0),'background-color: #D1D3D4; width:33%','')}">
+                                            <apex:outputPanel rendered="{!AND(paymentPlans.partnerDiscountAmount!=null, paymentPlans.partnerDiscountAmount!=0)}">
+                                                <center>
+                                                    <b>{!offerDetails.unitRecord.currencyISOCOde} 
+                                                        <apex:outputText value="{0, number, ###,##0.00}">
+                                                            <apex:param value="{! paymentPlans.partnerDiscountAmount }"/>
+                                                        </apex:outputText>
+                                                    </b><br/> Partner Discount
+                                                </center>
+                                            </apex:outputPanel>
+                                        </td>
+                                        <td colspan="3"></td>
+                                    </tr>
+                                </table>
+                                
+                            </apex:outputPanel>
+                        </apex:repeat>
+                    </td>
+                </tr>
+                
+                <!-- ADM Charges Section -->
+                <tr>
+                    <td colspan="2">
+                        <br/>
+                        <table width="100%" class="headerTable">
+                            <tr>
+                                <td style="background-color: #E2E5F3; text-align:center;">
+                                    <b>{!offerDetails.admFeeTobeChargedPercentage*100}%</b><br/>ADM Charges
+                                </td>
+                                <td style="background-color: #D1D3D4; text-align:center;">
+                                    <b>{!offerDetails.unitRecord.currencyISOCOde} {!offerDetails.admFeeTobeChargedAmount}</b><br/>ADM Admin Fee
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="{!IF(offerDetails.offerLinesApplied,'','display:none;')}">
+                    <td class="promo" colspan="2">
+                        <apex:outputPanel rendered="{!offerDetails.offerLinesApplied}" >
+                            <div>
+                                <br/>
+                                <div style="padding-bottom: 5pt;"><b> Promotion: {!offerDetails.offerRecord.Name} </b> </div>
+                                <hr style="border: 0; border-top: 1px solid #FFFFFF; opacity: .1"/>
+                                <table width="100%">
+                                    <tr>
+                                        <td style="max-width:50%;">
+                                            <apex:variable value="{!1}" var="rowNum"/>
+                                            <apex:repeat value="{!offerDetails.applicableOfferLinesCalculated}" var="offerLine">
+                                                <apex:outputPanel rendered="{! IF((mod(rowNum,2)) == 0, false,true)}">
+                                                    <apex:outputPanel rendered="{!offerLine.OfferType__c == 'ADM Waiver'}">
+                                                        <!-- Intentionally blank so ADM Waiver does not display value/% -->
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!offerLine.OfferType__c != 'ADM Waiver'}">
+                                                        {!offerLine.OfferType__c}: 
+                                                        <apex:outputText value="{0, number, ###,##0.00}">
+                                                            <apex:param value="{!offerLine.OfferValue__c}" />
+                                                        </apex:outputText>
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!AND(offerLine.OfferValueType__c != null, offerLine.OfferType__c != 'ADM Waiver')}">
+                                                        {!offerLine.OfferValueType__c}
+                                                    </apex:outputPanel> 
+                                                    <apex:outputPanel rendered="{!offerLine.DiscountType__c != null}">
+                                                        {!offerLine.DiscountType__c}
+                                                    </apex:outputPanel>  
+                                                    <apex:outputPanel rendered="{!offerLine.OfferType__c == 'Waiver'}">
+                                                        {!offerLine.BudgetTaskName__c}
+                                                    </apex:outputPanel>  
+                                                    <br/>
+                                                </apex:outputPanel>
+                                                <apex:variable var="rowNum" value="{!rowNum + 1}"/>   
+                                            </apex:repeat>
+                                        </td>
+                                        
+                                        <td style="max-width:50%;">
+                                            <apex:variable value="{!1}" var="rowNum"/>
+                                            <apex:repeat value="{!offerDetails.applicableOfferLinesCalculated}" var="offerLine">
+                                                <apex:outputPanel rendered="{! IF((mod(rowNum,2)) == 0, true,false)}">
+                                                    <!-- ADM Waiver (nothing displayed for value or %) -->
+                                                    <apex:outputPanel rendered="{!offerLine.OfferType__c == 'ADM Waiver'}">
+                                                        <!-- Intentionally blank so ADM Waiver does not display value/% -->
+                                                    </apex:outputPanel>
+                                                    <!-- For all other OfferTypes -->
+                                                    <apex:outputPanel rendered="{!offerLine.OfferType__c != 'ADM Waiver'}">
+                                                        {!offerLine.OfferType__c}: 
+                                                        <apex:outputText value="{0, number, ###,##0.00}">
+                                                            <apex:param value="{!offerLine.OfferValue__c}" />
+                                                        </apex:outputText>
+                                                    </apex:outputPanel>
+                                                    <!-- Show OfferValueType only if NOT ADM Waiver -->
+                                                    <apex:outputPanel rendered="{!AND(offerLine.OfferValueType__c != null, offerLine.OfferType__c != 'ADM Waiver')}">
+                                                        {!offerLine.OfferValueType__c}
+                                                    </apex:outputPanel>      
+                                                    <apex:outputPanel rendered="{!offerLine.DiscountType__c != null}">
+                                                        {!offerLine.DiscountType__c}
+                                                    </apex:outputPanel>    
+                                                    <apex:outputPanel rendered="{!offerLine.OfferType__c == 'Waiver'}">
+                                                        {!offerLine.BudgetTaskName__c}
+                                                    </apex:outputPanel>  
+                                                    <br/>
+                                                </apex:outputPanel>
+                                                <apex:variable var="rowNum" value="{!rowNum + 1}"/>   
+                                            </apex:repeat>
+                                        </td> 
+                                    </tr>
+                                    <tr style="{!IF(offerDetails.offerRecord.ADM_Fee_Included__c, '', 'display:none;')}">
+                                        <td style="padding-top:5px;">
+                                            <b>Note: ADM fee inclusive.</b>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </apex:outputPanel>         
+                    </td>
+                </tr> 
+            </table>
+            
+            <!-- VAT Section -->
+            <tr style="{!IF(showVatNote, '', 'display:none;')}">
+                <td style="padding-top:5px;">
+                    <b>Note: VAT ({!IF(ISBLANK(offerDetails.unitRecord.BuildingSectionName__r.TaxPercentage__c), 0, ROUND(offerDetails.unitRecord.BuildingSectionName__r.TaxPercentage__c, 0))}%) is applicable on the purchase price.</b>
+                </td>
+            </tr>
+            
+            <!-- Brochure Section -->
+            <apex:outputPanel rendered="{!brochureURL != null}" styleClass="fullPageContainer">
+                <div class="sectionHeading">Brochure URL</div>
+                <div style="margin:0; padding:0; text-align:left;">
+                    <a href="{!brochureURL}">{!brochureURL}</a>
+                </div>
+            </apex:outputPanel>
+            
+            <!-- Floor Plan Section -->
+            <apex:outputPanel rendered="{!WebfloorPlanLink != null}" styleClass="fullPageContainer">
+                <div class="sectionHeading">Floor Plan</div>
+                <apex:image alt="Floor Plan" value="{!WebfloorPlanLink}" 
+                            style="width:100%; height:260mm; display:block; margin:0; object-fit:contain;"/>
+            </apex:outputPanel>
+            
+            <!-- Disclaimer Section -->
+            <div class="disclaimer-section" style="font-size:10pt; padding-top:4px;">
+                <b>Disclaimer</b> - <span style="color:red">*</span> This document is considered a quotation, not an official reservation or sale. A sale is only considered when the first payment is cleared and SPA signed.
+            </div>
+
+            <!-- Footer -->
+            <div class="footer" name="footer">
+                <div style="float:right;">{!todayDate} | Page: <span class="pagenumber"/> of <span class="pagecount"/></div>
+            </div>
+        </body>
+    </html>
+</apex:page>

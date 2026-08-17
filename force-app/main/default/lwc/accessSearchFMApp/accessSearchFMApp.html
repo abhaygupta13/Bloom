@@ -1,0 +1,99 @@
+<template>
+    <div style="background:#F5F5F5;display:block">
+
+    <!-- Search Section -->
+    <template if:false={selectedContactId}>
+        <div class="slds-text-align_left slds-m-bottom_medium">
+         <img src={bloomLogoUrl} alt="Bloom Logo" style="max-width:200px;background:#F5F5F5"/>
+       </div>
+
+        
+            <div class="oval-container" style="background:#F5F5F5">
+         <lightning-layout-item flexibility="auto"  >
+            <lightning-combobox
+                label="Process Type"
+                class="custom-combobox"
+                value={selectedValue}
+                placeholder="Select an option"
+                options={options}
+                onchange={handleInputChange}>
+            </lightning-combobox>
+         </lightning-layout-item>
+<lightning-layout-item flexibility="auto">
+                <lightning-input
+                    label="Permit Search"
+                    class="custom-combobox"
+                    placeholder="Enter Unit number/Permit number"
+                    value={searchTerm}
+                    onchange={handleInputChange}>
+                </lightning-input>
+    
+           
+                <!-- Search Button -->
+                <lightning-button
+                    label="Search"
+                    variant="brand"
+                    onclick={handleSearch}>
+                </lightning-button>
+                </lightning-layout-item>
+           </div>
+  
+          <!-- Search Results -->
+        <template if:false={ischeckout}>
+            <template if:true={results}>
+ 
+    <!-- Container to enable horizontal scrolling -->
+    <div style="overflow-x: auto; width: 100%;">
+        <lightning-datatable
+            class="no-wrap-table"
+            key-field="Id"
+            data={results}
+            columns={columns}
+            onrowaction={handleRowAction}
+        >
+        </lightning-datatable>
+    </div>
+
+
+            </template> 
+        </template>
+
+            <template if:true={ischeckout}>
+             <template if:true={results}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={results}
+                    columns={checkoutcolumns}
+                    onrowaction={handleRowAction}
+                    class="slds-m-top_medium">
+                </lightning-datatable>
+            </template> 
+            </template>
+            <template if:false={results}>
+               <p class="slds-text-heading_medium slds-text-align_center slds-m-top_medium">No records found</p>
+            </template>
+
+       <!-- Loading Spinner -->
+            <template if:true={isLoading}>
+                <div class="slds-align_absolute-center slds-m-top_large">
+                    <lightning-spinner alternative-text="Loading"></lightning-spinner>
+                </div>
+            </template>
+       
+    </template>
+
+    <!-- Case Details Section -->
+     <template if:true={selectedContactId}>
+     <lightning-card>
+        <c-access-details-fm-app 
+            case-id={selectedContactId} 
+            permit-type={selectedValue} 
+            onclose={handleClose}>
+        </c-access-details-fm-app>
+    </lightning-card>
+    </template>
+     <template if:true={noResults}>
+            <p>No records found</p>
+      </template>
+</div>
+</template>

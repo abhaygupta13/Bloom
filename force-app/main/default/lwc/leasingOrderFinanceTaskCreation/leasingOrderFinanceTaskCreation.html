@@ -1,0 +1,126 @@
+<template>
+    <div class="slds-is-relative" style="min-height: 30vh;">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <lightning-quick-action-panel header="Update Details">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="6" class="slds-p-horizontal_small" lwc:if={isSyncTaskRequired}>
+                    <lightning-input 
+                        type="checkbox"
+                        label="Ejari / Tawtheeq received?"
+                        value={ejariPresent}
+                        onchange={handleFieldChange}
+                        name="EjariCheck">
+                    </lightning-input>
+                </lightning-layout-item>
+                <template if:true={showEjariFileUpload}>
+                    <lightning-layout-item size="6" class="slds-p-horizontal_small"  lwc:if={isSyncTaskRequired}>
+                        <lightning-input 
+                            type="text" 
+                            label="Ejari/Tawtheeq number:" 
+                            onchange={handleFieldChange}
+                            name="EjariNumber"
+                            required>
+                        </lightning-input>
+                             
+                    </lightning-layout-item>
+                
+                    <lightning-layout-item size="6" class="slds-p-horizontal_small"  lwc:if={isSyncTaskRequired}>
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item class="slds-p-horizontal_small">
+                                <lightning-input
+                                    type="file"
+                                    label="Ejari/Tawtheeq document:"
+                                    onchange={handleFieldChange}
+                                    name="EjariFile"
+                                    required>
+                                </lightning-input>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-horizontal_small">
+                                <template if:true={ejariFileName}>
+                                    <p style="margin-top:0.5rem; display:inline-block; padding:0.2rem 0.5rem; border-radius:0.25rem;">
+                                        <strong>Selected File:</strong> {EjarifileData.filename}
+                                    </p>
+                                </template>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </template>
+                <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                    <lightning-input 
+                        type="date" 
+                        label="PDC/CDC received on:" 
+                        value={selectedDate} 
+                        onchange={handleFieldChange}
+                        name="pdcDate"
+                        required>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                    <lightning-input type="number"
+                        name="pdcNumber"
+                        label="Number of PDC/CDC received: " 
+                        onchange={handleFieldChange}
+                        required>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                    <lightning-record-picker
+                        label="PDC/CDC handed over to : "
+                        object-api-name="User"
+                        filter={filter}
+                        onchange={handleFieldChange}
+                        name="pdcUser"
+                        required>
+                    </lightning-record-picker>
+                    <!--   -->
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="slds-p-horizontal_small" lwc:if={isSyncTaskRequired}>
+                    <lightning-record-picker
+                        label="Leasing contract review finance : "
+                        object-api-name="User"
+                        value={loSyncUser}
+                        name="loSyncUser"
+                        required
+                        disabled
+                        >
+                        <!-- filter={filter}
+                        onchange={handleFieldChange} -->
+                    </lightning-record-picker>
+                    <!--   -->
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="slds-p-horizontal_small">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item class="slds-p-horizontal_small">
+                            <lightning-input
+                                type="file"
+                                label="PDC/CDC file"
+                                onchange={handleFieldChange}
+                                name="pdcFile"
+                                required>
+                            </lightning-input>
+                            </lightning-layout-item>
+                        <lightning-layout-item class="slds-p-horizontal_small">
+                            <template if:true={pdcFileName}>
+                                <p style="margin-top:0.5rem; display:inline-block; padding:0.2rem 0.5rem; border-radius:0.25rem;">
+                                    <strong>Selected File:</strong> {pdcFileData.filename}
+                                </p>
+                            </template>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout horizontal-align="end" class="slds-p-horizontal_small slds-p-top_medium">
+                <lightning-layout-item>
+                    <lightning-button
+                        variant="brand"
+                        label="Submit"
+                        onclick={handleSubmit}
+                        disabled={disableSubmitButton}>
+                    </lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-quick-action-panel>
+    </div>
+</template>

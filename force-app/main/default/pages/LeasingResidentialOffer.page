@@ -1,0 +1,306 @@
+<apex:page renderAs="pdf" applyBodyTag="false" showHeader="false"
+               standardController="LeasingOrder__c" extensions="LeasingOfferLetterGenerateController" applyHtmlTag="False">
+    <html lang="en">
+        <head>
+            <title><apex:outputText value="{!offerLetterTitle}"/></title>
+            <style type="text/css">
+                @page {
+                margin: 10mm;
+                size: A4;
+                border: 1px solid black;
+                
+                @bottom-left {
+                content:  "{!pageBottomNumberMessage}";
+                font-size: 10px;
+                font-family: Arial, sans-serif;
+                }
+                @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+                font-size: 10px;
+                font-family: Arial, sans-serif;
+                }
+                }
+                
+                body {
+                font-size: 12px;
+                font-family: Arial, sans-serif;
+                line-height: 1.5;
+                }
+                
+                .page-wrapper {
+                
+                padding: 10px;
+                box-sizing: border-box;
+                }
+                
+                table, th, td {
+                border-collapse: collapse;
+                }
+                
+                th, td {
+                padding: 5px;
+                border: 1px solid black;
+                text-align: left;
+                }
+            </style>
+        </head>
+        
+        <body>
+            <div class="page-wrapper">
+                
+                <div id="pg1"><img src="{!URLFOR($Resource.BloomLogo)}" width="120" height="40"/></div>
+                <h2 style="text-align: center; border: 1px solid; margin-left: 30%; margin-right: 30%;">{!offerLetterTitle}</h2>
+                <p><strong>Date:</strong> {!OfferDate}</p>
+                
+                <p><strong>Tenant:</strong> {!opp.Account.Name} </p>
+                
+                
+                <p>Dear Sir / Madam,</p>
+                <p>Thank you for your interest in leasing a {!unitType} unit through {!leasingCompanyName}, we are pleased to offer you the following details, including the annual rate and associated charges as follows:</p>
+                
+                <table style='width: 100%; border-collapse: collapse;'>
+                    <tr><th style='padding: 5px; border: 1px solid black; text-align: left;' >Property Name</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!leaseContract.PropertyName__c}</td></tr>
+                    <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Unit Number</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!unitNumber}</td></tr>
+                    <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Unit Type</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!opp.NumberOfBedrooms__c}-{!opp.UnitType__c}</td></tr>
+                    <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Location</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!leaseContract.Unit__r.Project__r.City__c}</td></tr>
+                    <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Annual Rent</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!annualRentWithOutVAT} - ( {!totalAnnualRentPayments} cheque/s payable to {!leasingCompanyName})  </td></tr>
+                    <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Security Deposit</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!SecurityDeposit} - ( 1 cheque payable to {!leasingCompanyName})</td></tr>
+                    <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Admin Fee + VAT ({!vatPercentageStr})</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!AdminFee} - ( 1 cheque payable to {!leasingCompanyName})</td></tr>
+                    <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Term of Payment</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!termofPayment} (Payments per year)</td></tr>
+                    <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Lease Term</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!contractTerm} Months</td></tr>
+                    <apex:outputPanel rendered="{!isMultiyearContract}" layout="none">
+                        <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Escalation</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>Please refer in the next page</td></tr>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!gracePeriod!='No Grace Period'}" layout="none">
+                        <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Fit out Period</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!gracePeriod} Days</td></tr>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!noOfCarParking!='Not Available'}" layout="none">
+                        <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Number of Parking</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!noOfCarParking}</td></tr>
+                    </apex:outputPanel>
+                    <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Contract Start Date</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!leasingStartDate}</td></tr>
+                    <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Contract End Date</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!leasingEndDate}</td></tr>
+                    <tr><th style='padding: 5px; border: 1px solid black; text-align: left;'>Offer Validity</th><td style='padding: 5px; border: 1px solid black; text-align: left;'>{!offerValidity}</td></tr>
+                </table>
+                <p>Upon acceptance of the offer, all payments must be made via cheque or bank transfer (cash will not be accepted), and all required documents must be completed and submitted prior to contract issuance.</p>
+                <p>The tenant must pay all the utility bills and service charges to the service provider directly.
+                </p>
+                <p>
+                    Please note that the keys will not be handed over unless electricity and AC account are connected, all payments are made,
+                    and the lease agreement is duly signed by the tenant.The tenancy contract will be issued through the {!rentSystem} system by the landlord’s office in accordance with {!projectMuncipality} Municipality procedures
+                </p>
+                <p>Kindly confirm your acceptance of this offer letter within {!offerValidity} by settling the administration fee and security deposit as booking payments. Please note that these payments are necessary to reserve the property and non-refundable in case of cancellation.</p>
+                <p>
+                    Upon signing of this offer and receipt of booking payments, the contract start date shall be as mutually agreed in writing or as per the date mentioned herein, unless otherwise modified by both parties.               
+                </p>
+                <p>
+                    If the lease agreement is signed and the rent amount is paid, the security deposit will be refundable in accordance with the terms and conditions stated in the lease agreement at time of vacating the unit.
+                </p>
+                
+                <div style="page-break-inside: avoid; width: 100%;">
+                    <h3 style="margin-top: 10px;">
+                        Non compliance / Delayed payments / Cancellation:
+                    </h3>
+                    <p>
+                        <!--The refund of the security deposit shall be subject to the tenant fulfilling all contractual obligations, including but not limited to, settlement of utility bills, removal of fit‑outs (if required),and reinstatement of the premises to its original condition.-->
+                        1.Failure to make the required payments or to sign the lease agreement within the stipulated timeline will result in forfeiture of the booking amount and cancellation of the offer without further notice.
+                    </p>
+                    <p>
+                        2.The refund of the security deposit shall be subject to the tenant fulfilling all contractual obligations, including but not limited to, settlement of utility bills, removal of fit outs (if required), and reinstatement of the premises to its original condition.  
+                    </p>
+                    <p>
+                        3.Upon signing of this offer and receipt of booking payments, the contract start date shall be as mutually agreed in writing or as per the date mentioned herein, unless otherwise modified by both parties.
+                    </p>
+                    <p>
+                        4.The Landlord reserves the right to cancel this offer at any time prior to the signing of the lease agreement due to bona fide errors, mistakes, unforeseen circumstances, or any other valid reason. In such an event, the Tenant will be refunded the Security Deposit and Administration Fee in full without any deductions. 
+                    </p>
+                    <p>
+                        5.The Landlord shall not be held liable for any direct or indirect damages, losses, expenses, or consequences arising from such cancellation, including but not limited to relocation costs, loss of income, or any inconvenience caused to the Tenant. Acceptance of this offer constitutes the Tenant’s acknowledgment and agreement to this clause.                        
+                    </p>
+                </div>
+                
+                
+                <apex:outputPanel rendered="{!remarks!='No Remarks'}" layout="none">
+                    <p><strong>Remarks :</strong> </p>
+                    <p>
+                        {!remarks}               
+                    </p>
+                </apex:outputPanel>
+                <div style="page-break-inside: avoid;  width: 100%;">
+                    <h3 style="margin-top:30px; font-family: Arial, sans-serif;">Payment Schedule</h3>
+                    <apex:repeat value="{!paymentsByYear}" var="yearKey">
+                        <h3 style="margin-top:30px; font-family: Arial, sans-serif;">Year {!yearKey}</h3>
+                        <table style="
+                                      width:100%;
+                                      border-collapse: collapse;
+                                      font-family: Arial, sans-serif;
+                                      font-size: 12px;
+                                      margin-bottom:20px;
+                                      ">
+                            <caption style="
+                                            caption-side: top;
+                                            padding: 10px;
+                                            font-weight: bold;
+                                            background-color: #e8e8e8;
+                                            border: 1px solid #000;
+                                            ">
+                                <apex:outputText rendered="{!yearKey == '1'}">
+                                    Rent Payment Schedule 
+                                </apex:outputText>
+                                <apex:outputText rendered="{!yearKey != '1'}">
+                                    Rent Payment Schedule + Rent Escalation ({!paymentsByYear[yearKey][0].escPercent}%) 
+                                </apex:outputText>
+                            </caption>
+                            <thead>
+                                <tr style="background-color: #f2f2f2;">
+                                    <th style="padding:8px; border:1px solid #000; text-align:left;">Installment</th>
+                                    <th style="padding:8px; border:1px solid #000;">Date</th>
+                                    <th style="padding:8px; border:1px solid #000;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!paymentsByYear[yearKey]}" var="payment">
+                                    <tr>
+                                        <td style="padding:8px; border:1px solid #000; text-align:left;">{!payment.name}</td>
+                                        <td style="padding:8px; border:1px solid #000; text-align:left;">{!payment.paymentStartDate}</td>
+                                        <td style="padding:8px; border:1px solid #000; text-align:left;">{!payment.amount}</td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                        
+                        <!-- One-time Service Charges (for Residential only) -->
+                        <apex:outputPanel rendered="{!AND(customerType = 'Residential', yearKey = '1')}">
+                            <h3 style="margin-top:30px; font-family: Arial, sans-serif;">Fee Details</h3>
+                            <table style="width:100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 12px; margin-bottom:20px;">
+                                <thead>
+                                    <tr style="background-color: #f2f2f2;">
+                                        <th style="padding:8px; border:1px solid #000; text-align:left;">Other Charges</th>
+                                        <th style="padding:8px; border:1px solid #000; text-align:left;">Date</th>
+                                        <th style="padding:8px; border:1px solid #000; text-align:left;">Amount</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!ServiceCharges}" var="s">
+                                        <tr>
+                                            <td style="padding:6px; border:1px solid #000; text-align:left;">{!s.chargeType}</td>
+                                            <td style="padding:6px; border:1px solid #000; text-align:left;">{!paymentsByYear[yearKey][0].paymentStartDate} </td>
+                                            <td style="padding:6px; border:1px solid #000; text-align:left;">{!s.totalAmount}</td>
+                                        </tr>
+                                    </apex:repeat>
+                                </tbody>
+                            </table>
+                        </apex:outputPanel>
+                    </apex:repeat>
+                </div>
+                <div style="page-break-before: always;  width: 100%;">
+                    <p>Should you require any further information in this regard, please feel free to contact me at <a href="mailto:{!ownerEmailAddress}">{!ownerEmailAddress}</a> /{!ownerPhoneNumber} , Bloom support at 800BLOOM</p>
+                  
+                    <div style='float:left'>
+                        <p><strong>Authorized Signatory for Company</strong></p>
+                        <p>{!leasingCompanyName}</p>
+                        <div style="color:white; padding:10px;">
+                            leasingManagerSignHere
+                        </div>
+                    </div>
+                    <div style='margin-left: 50%; padding-top: 10px;'>
+                        <strong>Accepted above offer</strong>
+                        <div>
+                            <div style="color:white; padding:10px;">
+                                MainBuyer:
+                            </div>
+                            <p><strong>Tenant Name and Signature</strong></p>
+                            <div style="color:white; padding:10px;">
+                                MBIni:
+                            </div>
+                            <div style="color:white; padding:10px;">
+                                MainBuyerSignedDate:
+                            </div>
+                        </div>
+                    </div> 
+                </div>   
+            </div>
+            <!-- Know Your Customer Section -->
+            <div style="page-break-before: always; font-family: Arial, sans-serif; font-size: 12px; padding: 10px;">
+                <div id="pg1"><img src="{!URLFOR($Resource.BloomLogo)}" width="120" height="40"/></div>
+                <h2 style="text-align:center; text-decoration: underline;">KNOW YOUR CUSTOMER</h2>
+                <h3 style="text-align:center;">({!leaseContract.Project__r.Name}-{!leaseContract.Unit__r.Name})</h3>
+                
+                <h4>Tenant Information <span style="color:red;">*</span></h4>
+                <table style="width:100%; border-collapse: collapse; margin-bottom: 15px;">
+                    <tr><th style="width:30%;">Name <span style="color:red;">*</span></th><td>{!leaseContract.Account__r.Name}</td></tr>
+                    <tr><th>Nationality</th><td>{!leaseContract.Account__r.Nationality__pc}</td></tr>
+                    <tr><th>Passport No <span style="color:red;">*</span></th><td>{!leaseContract.Account__r.PassportNumber__pc}</td></tr>
+                    <tr><th>Emirates ID Number <span style="color:red;">*</span></th><td>{!leaseContract.Account__r.Emirates_Id__pc}</td></tr>
+                    <tr><th>Marital Status <span style="color:red;">*</span></th><td>{!leaseContract.Account__r.MaritalStatus__pc}</td></tr>
+                    <tr><th>Residential Status <span style="color:red;">*</span></th><td>{!leaseContract.Account__r.ResidentStatus__pc}</td></tr>
+                    <tr><th>Mobile No <span style="color:red;">*</span></th><td>{!leaseContract.Account__r.PersonMobilePhone}</td></tr>
+                    <tr><th>Email Address <span style="color:red;">*</span></th><td>{!leaseContract.Account__r.PersonEmail}</td></tr>
+                </table>
+                
+                <h4>Details of Employment <span style="color:red;">*</span></h4>
+                <table style="width:100%; border-collapse: collapse; margin-bottom: 15px;">
+                    <tr><th style="width:30%;">Employment Status <span style="color:red;">*</span></th><td>{!leaseContract.Account__r.EmploymentStatus__pc}</td></tr>
+                    <tr><th>Name of Employer <span style="color:red;">*</span></th><td>{!leaseContract.Account__r.CompanyName__c}</td></tr>
+                    <tr><th>Position <span style="color:red;">*</span></th><td>{!leaseContract.Account__r.Position__pc}</td></tr>
+                    <tr><th>Office Address / Phone <span style="color:red;">*</span></th><td>{!leaseContract.Account__r.CompanyAddress__pc}</td></tr>
+                </table>
+                
+                <h4>Occupants Information</h4>
+                <table style="width:100%; border-collapse: collapse; margin-bottom: 15px;">
+                    <thead>
+                        <tr style="background-color:#f2f2f2;">
+                            <th style="width:30%;">Occupant</th>
+                            <th style="width:40%;">Name</th>
+                            <th style="width:20%;">Relationship</th>
+                            <th style="width:10%;">Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Occupant #1</td><td><span style="color:white;">Occupant1Name</span></td><td><span style="color:white;">Occupant1Relationship</span></td><td><span style="color:white;">Occupant1Age</span></td></tr>
+                        <tr><td>Occupant #2</td><td><span style="color:white;">Occupant2Name</span></td><td><span style="color:white;">Occupant2Relationship</span></td><td><span style="color:white;">Occupant2Age</span></td></tr>
+                        <tr><td>Occupant #3</td><td><span style="color:white;">Occupant3Name</span></td><td><span style="color:white;">Occupant3Relationship</span></td><td><span style="color:white;">Occupant3Age</span></td></tr>
+                        <tr><td>Occupant #4</td><td><span style="color:white;">Occupant4Name</span></td><td><span style="color:white;">Occupant4Relationship</span></td><td><span style="color:white;">Occupant4Age</span></td></tr>
+                        <tr><td>Occupant #5</td><td><span style="color:white;">Occupant5Name</span></td><td><span style="color:white;">Occupant5Relationship</span></td><td><span style="color:white;">Occupant5Age</span></td></tr>
+                        <tr><td>Occupant #6</td><td><span style="color:white;">Occupant6Name</span></td><td><span style="color:white;">Occupant6Relationship</span></td><td><span style="color:white;">Occupant6Age</span></td></tr>
+                    </tbody>
+                </table>
+                
+                <h4>Emergency Contact Information</h4>
+                <table style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+                    <tr><th style="width:30%;">Contact Person <span style="color:red;">*</span></th><td><span style="color:white;">EmergencyContactPerson</span></td></tr>
+                    <tr><th>Mobile Number <span style="color:red;">*</span></th><td><span style="color:white;">EmergencyMobileNumber</span></td></tr>
+                    <tr><th>Relationship <span style="color:red;">*</span></th><td><span style="color:white;">EmergencyRelationship</span></td></tr>
+                </table>
+                
+                <p style="font-size:11px; text-align:justify;">
+                    <span style="color:red;">*</span> Mandatory Fields
+                </p>
+                <p style="font-size:11px; text-align:justify;">
+                    By signing this form, I acknowledge and confirm to Bloom Properties LLC (Managed by EIPS) that the information provided is accurate and will be used for all future interaction and official communication. I undertake to inform Bloom District company if any changes occur to my contact details mentioned above.
+                </p>
+                
+                <div style="margin-top:40px;">
+                    <div style="color:white; padding:10px;">
+                        MainBuyer:
+                    </div>
+                    <p>_________________________</p>
+                    <p><strong>Client Signature (Purchaser)</strong></p>
+                    <p>(Date)</p>
+                </div>
+                <div style="margin-top:40px;">
+                    <div style="color:white; padding:10px;">
+                        bloomHoldingCEOSignHere
+                    </div>
+                </div>
+            </div>
+            
+            <apex:outputPanel rendered="{!IF(AND(projectMuncipality = 'Dubai',offerLetterTitle = 'Offer Letter'), true, false)}">
+                <apex:image url="{!$Resource.LeasingDubaiEIPS}" width="300" height="300"/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!IF(AND(projectMuncipality != 'Dubai',offerLetterTitle = 'Offer Letter'), true, false)}">
+                <apex:image url="{!$Resource.LeasingAbuDhabiEIPS}" width="300" height="300"/>
+            </apex:outputPanel>
+        </body>
+    </html>
+</apex:page>

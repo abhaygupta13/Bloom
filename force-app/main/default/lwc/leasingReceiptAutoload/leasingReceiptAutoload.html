@@ -1,0 +1,356 @@
+<template>
+
+<lightning-card>
+
+    <!-- 🔹 Title -->
+    <div class="slds-text-align_center slds-text-heading_medium slds-p-bottom_medium">
+        <b>Receipt Acknowledgement</b>
+    </div>
+
+    <!-- 🔹 HEADER (NON-EDITABLE - 4 COLUMN GRID) -->
+<!-- 🔹 HEADER (NON-EDITABLE - 4 COLUMN GRID) -->
+<div class="slds-box slds-theme_default">
+
+    <div class="slds-grid slds-wrap">
+
+        <!-- Row 1 -->
+        <div class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+            <div class="slds-text-title">Property</div>
+            <div>{projectName}</div>
+        </div>
+
+        <div class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+            <div class="slds-text-title">Unit</div>
+            <div>{unitName}</div>
+        </div>
+
+        <div class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+            <div class="slds-text-title">Account Name</div>
+            <div>{accountName}</div>
+        </div>
+
+        <div class="slds-col slds-size_1-of-4 slds-p-around_x-small">
+            <div class="slds-text-title">SAP Contract ID</div>
+            <div>{sapContract}</div>
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- 🔹 FORM SECTION -->
+    <div class="slds-box slds-theme_default slds-m-top_medium">
+
+            <h3 class="slds-text-heading_small slds-text-align_center slds-p-bottom_small">
+        <b>Transaction Details</b>
+    </h3>
+
+       <lightning-layout multiple-rows vertical-align="start">
+
+            <!-- Amount -->
+            <lightning-layout-item size="3" padding="around-small">
+                <lightning-input 
+                class="req-field"
+                    label="Amount"
+                    type="number"
+                    step="0.01"
+                    required
+                    value={amount}
+                    disabled>
+                    <!-- onchange={handleAmount}> -->
+                    
+                </lightning-input>
+            </lightning-layout-item>
+
+            <!-- Payment Type -->
+            <lightning-layout-item size="3" padding="around-small">
+                <lightning-combobox
+                class="req-field"
+                    label="Payment Type"
+                    value={paymentType}
+                    options={paymentTypeOptions}
+                    required
+                    disabled>
+                    <!-- onchange={handlePaymentType}> -->
+                </lightning-combobox>
+            </lightning-layout-item>
+
+            <!-- Cheque Date -->
+            <lightning-layout-item size="3" padding="around-small">
+                <lightning-input 
+                class="req-field"
+                    label="Cheque/Transaction Date"
+                    type="date"
+                    required
+                    value={chequeDate}
+                    disabled>
+                    <!-- onchange={handleChequeDate}> -->
+                </lightning-input>
+            </lightning-layout-item>
+
+            <!-- Verify Date -->
+            <lightning-layout-item size="3" padding="around-small">
+                <lightning-input 
+                    label="Verify Date"
+                    type="date"
+                    value={verifyDate}
+                    disabled>
+                    <!-- onchange={handleVerifyDate}> -->
+                </lightning-input>
+            </lightning-layout-item>
+
+            <!-- Receipt Date -->
+            <lightning-layout-item size="3" padding="around-small">
+                <lightning-input 
+                class="req-field"
+                    label="Receipt Date"
+                    type="date"
+                    required
+                    value={receiptDate}
+                    disabled>
+                    <!-- onchange={handleReceiptDate}> -->
+                </lightning-input>
+            </lightning-layout-item>
+
+            <!-- Reference Number -->
+            <lightning-layout-item size="3" padding="around-small">
+                <lightning-input 
+                class="conditional-field"
+                    label="Reference Number"
+                    value={referenceNumber}
+                    disabled
+                    >
+                    <!-- onchange={handleReferenceNumber} -->
+
+                </lightning-input>
+            </lightning-layout-item>
+
+            <!-- Cheque Number -->
+            <lightning-layout-item size="3" padding="around-small">
+                <lightning-input 
+                class="conditional-field"
+                    label="Cheque Number"
+                    value={chequeNumber}
+                    disabled>
+                    <!-- onchange={handleChequeNumber}> -->
+                </lightning-input>
+            </lightning-layout-item>
+
+            <!-- Bank Account -->
+            <lightning-layout-item size="3" padding="around-small">
+                <div class="lookup-wrapper disabled-lookup">
+                    <c-bank-account-lookup
+                        label="Bank Account"
+                        default-record-id={bankAccount}
+                        default-label={bankAccountName}
+                        value={bankAccount}
+                        aria-disabled="true"
+                        >
+                        <!-- onlookupselect={handleBankAccount} -->
+                    </c-bank-account-lookup>
+                </div>
+
+            </lightning-layout-item>
+         <!--</lightning-layout>
+            </div>
+
+            <div class="slds-box slds-theme_default slds-m-top_medium">
+
+    <h3 class="slds- ̰-heading_small slds-text-align_center slds-p-bottom_small">
+        <b>Transaction Type</b>
+    </h3>
+
+    <lightning-layout multiple-rows vertical-align="start">
+
+<lightning-layout-item size="12" padding="around-small">
+    <div class="slds-grid slds-gutters">
+
+        <div class="slds-col slds-size_1-of-4">
+            <lightning-input
+                type="checkbox"
+                label="Intercompany Transaction"
+                checked={isIntercompany}
+                onchange={handleIntercompany}>
+            </lightning-input>
+        </div>
+
+        <div class="slds-col slds-size_1-of-4">
+            <lightning-input
+                type="checkbox"
+                label="Bank Charges Applicable"
+                checked={isBankChargesApplicable}
+                onchange={handleBankChargesApplicable}>
+            </lightning-input>
+        </div>
+
+        <div class="slds-col slds-size_1-of-4">
+            <lightning-input
+                type="checkbox"
+                label="Is Leasing Advance"
+                checked={isAdvance}
+                onchange={handleAdvance}>
+            </lightning-input>
+        </div>
+
+        <div class="slds-col slds-size_1-of-4"></div>
+
+    </div>
+</lightning-layout-item> -->
+
+<!-- <lightning-layout-item size="12" padding="around-small">
+    <div class="slds-grid slds-gutters">
+
+        <template if:true={isIntercompany}>
+            <div class="slds-col slds-size_1-of-4">
+                <lightning-input
+                    label="Receiving Entity"
+                    value={receivingEntity}
+                    onchange={handleReceivingEntity}>
+                </lightning-input>
+            </div>
+        </template>
+
+        <template if:true={isBankChargesApplicable}>
+            <div class="slds-col slds-size_1-of-4">
+                <lightning-input
+                    label="Bank Charges"
+                    type="number"
+                    step="0.01"
+                    value={bankCharges}
+                    onchange={handleBankCharges}>
+                </lightning-input>
+            </div>
+        </template>
+
+    </div>
+</lightning-layout-item> -->
+      <!-- ✅ BEING TOWARDS + DYNAMIC FIELDS -->
+      <!-- <lightning-layout-item size="6" padding="around-small">
+        <div class="lookup-wrapper disabled-lookup">
+
+            <lightning-dual-listbox
+            class="req-field"
+            label="Being Towards"
+            required
+            source-label="Available"
+            selected-label="Selected"
+            options={beingTowardsOptions}
+            value={beingTowardsValues}
+            onchange={handleBeingTowards}
+            size="2">
+                
+
+            </lightning-dual-listbox>
+        </div>
+      </lightning-layout-item> -->
+      <!-- Intercompany Field -->
+      <!-- <template if:true={isIntercompany}>
+        <lightning-layout-item size="3" padding="around-small">
+          <lightning-input
+            label="Receiving Entity"
+            value={receivingEntity}
+            onchange={handleReceivingEntity}>
+          </lightning-input>
+        </lightning-layout-item>
+      </template> -->
+      <!-- Bank Charges Field -->
+      <!-- <template if:true={isBankChargesApplicable}>
+        <lightning-layout-item size="3" padding="around-small">
+          <lightning-input
+            label="Bank Charges"
+            type="number"
+            step="0.01"
+            value={bankCharges}
+            onchange={handleBankCharges}>
+          </lightning-input>
+        </lightning-layout-item>
+      </template> -->
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    </lightning-layout>
+  </div>
+
+    <!-- 🔹 ALLOCATION TABLE -->
+    <template if:false={isAdvance}>
+        <div class="slds-m-top_medium">
+
+            <h3 class="slds-text-align_center slds-text-heading_small slds-p-bottom_small">
+                Receipt Allocation
+            </h3>
+
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered" id="allocations">
+
+                <thead>
+                    <tr>
+                        <th>Schedules</th>
+                        <th>Due Date</th>
+                        <th>Total Amount</th>
+                        <th>Paid Amount</th>
+                        <th>Applied Amount</th>
+                        <th>Apply</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <template for:each={rows} for:item="row" for:index="index">
+                        <tr key={row.recordId}>
+                            <td>{row.name}</td>
+                            <td>{row.dueDate}</td>
+                            <td>{row.totalAmount}</td>
+                            <td>{row.paidAmount}</td>
+
+                            <td>
+                                <lightning-input
+                                    type="number"
+                                    step="0.01"
+                                    data-index={index}
+                                    value={row.appliedAmount}
+                                    onchange={handleAppliedAmount}>
+                                </lightning-input>
+                            </td>
+
+                            <td>
+                                <lightning-input
+                                    type="checkbox"
+                                    data-index={index}
+                                    checked={row.apply}
+                                    onchange={handleApply}>
+                                </lightning-input>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+
+            </table>
+        </div>
+    </template>
+
+    <!-- 🔹 BUTTONS -->
+    <div class="slds-align_absolute-center slds-p-top_medium">
+
+       <lightning-button
+    variant="brand"
+    label={saveButtonLabel}
+    onclick={handleSave}
+    disabled={isSaveDisabled}>
+</lightning-button>
+
+        <lightning-button
+            label="Cancel"
+            variant="neutral"
+            onclick={handleCancel}>
+        </lightning-button>
+
+    </div>
+
+</lightning-card>
+
+</template>

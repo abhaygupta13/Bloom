@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MIlestone_date_greaterthan_21_days</fullName>
+    <active>false</active>
+    <errorConditionFormula>AND(Milestone_Date__c &lt;  TODAY()  + 20,  ISCHANGED( Milestone_Status__c) ,  ISPICKVAL(Milestone_Status__c, &apos;Reached&apos;) )</errorConditionFormula>
+    <errorMessage>Milestone date should not be less than 21 days when status is reached</errorMessage>
+</ValidationRule>

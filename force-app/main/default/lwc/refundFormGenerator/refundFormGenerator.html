@@ -1,0 +1,55 @@
+<template>
+
+    <lightning-quick-action-panel header="Generate Refund Form">
+
+        <div class="slds-p-around_medium">
+
+            <lightning-textarea
+                label="Notes"
+                value={notes}
+                onchange={handleNotes}>
+            </lightning-textarea>
+
+            <br/>
+
+            <lightning-input
+                type="date"
+                label="Water & Electricity Clearance Date"
+                value={waterElectricityDate}
+                onchange={handleWaterDate}
+                required>
+            </lightning-input>
+
+            <br/>
+
+            <lightning-input
+                type="date"
+                label="Maintenance Checkout Date"
+                value={maintenanceCheckoutDate}
+                onchange={handleMaintenanceDate}
+                required>
+            </lightning-input>
+
+        </div>
+
+        <div slot="footer">
+
+            <lightning-button
+                label="Cancel"
+                onclick={handleCancel}>
+            </lightning-button>
+
+            &nbsp;
+
+            <lightning-button
+                variant="brand"
+                label="Generate PDF"
+                onclick={generatePDF}
+                disabled={isLoading}>
+            </lightning-button>
+
+        </div>
+
+    </lightning-quick-action-panel>
+
+</template>

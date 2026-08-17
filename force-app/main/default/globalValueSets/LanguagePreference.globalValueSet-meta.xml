@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>English</fullName>
+        <default>false</default>
+        <label>English</label>
+    </customValue>
+    <customValue>
+        <fullName>Arabic</fullName>
+        <default>false</default>
+        <label>Arabic</label>
+    </customValue>
+    <customValue>
+        <fullName>Mandarin</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Mandarin</label>
+    </customValue>
+    <customValue>
+        <fullName>Hindi</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Hindi</label>
+    </customValue>
+    <customValue>
+        <fullName>Russian</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Russian</label>
+    </customValue>
+    <description>Language Preference Picklist</description>
+    <masterLabel>Language Preference</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

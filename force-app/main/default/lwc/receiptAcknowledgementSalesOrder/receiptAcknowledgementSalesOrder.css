@@ -1,0 +1,79 @@
+/* ===== MODAL SIZING ===== */
+.slds-modal__container {
+    max-width: 90rem !important;
+    width: 95% !important;
+}
+
+/* ===== COMPACT FORM LAYOUT ===== */
+.compact-layout {
+    width: 100%;
+    row-gap: 0.25rem;
+}
+
+.compact-item {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    box-sizing: border-box;
+}
+
+.compact-item .slds-form-element {
+    margin-bottom: 0.4rem;
+}
+
+.compact-item .slds-form-element__label {
+    margin-bottom: 0.25rem;
+}
+
+/* ===== BOLD LABELS ===== */
+:host .compact-layout lightning-input::part(label),
+:host .compact-layout lightning-combobox::part(label),
+:host .compact-layout lightning-textarea::part(label) {
+    font-weight: 700;
+}
+
+/* ===== REMARKS TEXTAREA ===== */
+.compact-item lightning-textarea::part(textarea) {
+    min-height: 80px;
+}
+
+/* ===== HIDE DATE FORMAT HELPER TEXT ===== */
+:host ::deep .hide-date-format .slds-form-element__help {
+    display: none !important;
+}
+
+/* ===== MODAL CONTENT ===== */
+.slds-modal__content {
+    border-radius: 0.25rem;
+    overflow-y: auto;
+}
+
+/* ===== FOOTER ===== */
+.slds-modal__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+:host {
+    --slds-c-modal-sizing-width: 95%;
+    --slds-c-modal-sizing-max-width: 90rem;
+}
+
+:host .slds-modal__container {
+    max-width: 90rem !important;
+    width: 95% !important;
+    min-width: 0 !important;
+}
+
+:host .slds-modal {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+:host .slds-modal__content {
+    overflow-y: auto;
+    max-height: 70vh;
+}

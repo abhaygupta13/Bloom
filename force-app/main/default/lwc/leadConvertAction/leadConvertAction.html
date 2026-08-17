@@ -1,0 +1,86 @@
+<template>
+    <lightning-quick-action-panel header="Convert Lead">
+
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading..." size="medium" class="spinnerClass"></lightning-spinner>
+        </template>
+        <div class="slds-p-around_large">
+            <div class="slds-align_absolute-center slds-text-heading_small slds-text-color_error">
+                {message}
+                <br />
+            </div>
+            <template if:true={missingFields}>
+                <div class="slds-text-heading_small slds-text-color_error">
+                    <template for:each={missingFields} for:item="missingField">
+                        <ul key={missingField}>
+                            <li style="list-style-type:square">
+                                {missingField}
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+            </template>
+            <template if:true={hasDuplicateAccount}>
+                <template if:true={isIndividualLead}>
+                    <lightning-card title="Existing Account Details">
+                        <p class="slds-p-horizontal_small">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input type="text" value={accountRecord.Name} disabled="true"
+                                        label="Account Name"></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input type="text" value={accountRecord.Emirates_Id__pc} disabled="true"
+                                        label="Emirates ID"></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input type="text" value={accountRecord.Nationality__pc} disabled="true"
+                                        label="Nationality"></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input value={accountRecord.PassportNumber__pc} disabled="true"
+                                        type="text" label="Passport Number"></lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </p>
+                    </lightning-card>
+                </template>
+                <template if:false={isIndividualLead}>
+                    <lightning-card title="Exieting Account Details">
+                        <p class="slds-p-horizontal_small">
+                            <lightning-layout multiple-rows>
+
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input type="text" value={accountRecord.Name} disabled="true"
+                                        label="Account Name"></lightning-input>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item size="6" padding="around-small">
+                                    <lightning-input type="text" disabled="true"
+                                        value={accountRecord.Trade_License_No__c}
+                                        label="Trade License Number"></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+
+                                    <lightning-input type="text" disabled="true"
+                                        value={accountRecord.Registration_Authority__c}
+                                        label="Registration Authority"></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6" padding="around-small">
+
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </p>
+                    </lightning-card>
+                </template>
+            </template>
+        </div>
+        <div slot="footer">
+            <lightning-button onclick={handleCancel} variant="neutral" label="Cancel"></lightning-button>
+            &nbsp;&nbsp;
+            <template if:true={hasDuplicateAccount}>
+                <lightning-button onclick={handleConfirm} variant="brand" label="Confirm"></lightning-button>
+            </template>
+        </div>
+    </lightning-quick-action-panel>
+</template>

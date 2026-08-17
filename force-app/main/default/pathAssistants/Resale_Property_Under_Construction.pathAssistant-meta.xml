@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Case</entityName>
+    <fieldName>Status</fieldName>
+    <masterLabel>Resale Property Under Construction</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>PendingWith__c</fieldNames>
+        <fieldNames>SubStatus__c</fieldNames>
+        <picklistValueName>Closed</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>PendingWith__c</fieldNames>
+        <fieldNames>SubStatus__c</fieldNames>
+        <picklistValueName>In Progress</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>PendingWith__c</fieldNames>
+        <fieldNames>SubStatus__c</fieldNames>
+        <picklistValueName>New</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>Resale_Property_Under_Construction</recordTypeName>
+</PathAssistant>

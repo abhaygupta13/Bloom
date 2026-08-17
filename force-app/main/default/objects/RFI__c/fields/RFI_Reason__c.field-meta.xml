@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RFI_Reason__c</fullName>
+    <label>RFI Reason</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Document Pending</fullName>
+                <default>false</default>
+                <label>Document Pending</label>
+            </value>
+            <value>
+                <fullName>User Information Pending</fullName>
+                <default>false</default>
+                <label>User Information Pending</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>Missing document</fullName>
+                <default>false</default>
+                <label>Missing document</label>
+            </value>
+            <value>
+                <fullName>Mismatch with uploaded documents</fullName>
+                <default>false</default>
+                <label>Mismatch with uploaded documents</label>
+            </value>
+            <value>
+                <fullName>Signature or stamp missing</fullName>
+                <default>false</default>
+                <label>Signature or stamp missing</label>
+            </value>
+            <value>
+                <fullName>Supporting documents required</fullName>
+                <default>false</default>
+                <label>Supporting documents required</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

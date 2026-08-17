@@ -1,0 +1,279 @@
+<apex:page controller="SalesReceiptController" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false">
+    <head>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Lora:wght@400;500;600&amp;display=swap');
+            
+            @page {
+            size: 300mm 500mm;
+            margin: 10mm;
+            }
+            
+            body {
+            font-family: 'Lora', serif;
+            font-size: 11pt;
+            color: #000;
+            position: relative;
+            padding-bottom: 60px;
+            line-height: 1.5;
+            letter-spacing: 0.2px;
+            }
+            
+            h1 {
+            font-family: 'Cormorant Garamond', serif;
+            text-align: center;
+            font-size: 20pt;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            margin-bottom: 15px;
+            }
+            
+            h2 {
+            font-size: 12pt;
+            text-decoration: underline;
+            }
+            
+            /* Shared Table Styling */
+            table {
+            border-collapse: collapse;
+            border: 1px solid #000;
+            margin-bottom: 20px;
+            width: 100%;
+            }
+            
+            th, td {
+            padding: 6px 8px;
+            border: 1px solid #000;
+            font-size: 10.5pt;
+            word-wrap: break-word;
+            font-family: 'Lora', serif;
+            }
+            
+            /* Info Table Styling */
+            .infoTable {
+            width: 70%;
+            margin-bottom: 20px;
+            }
+            
+            .infoTable td:first-child {
+            background-color: #e6e6e6;
+            font-weight: 600;
+            width: 35%;
+            }
+            
+            .infoTable td:last-child {
+            font-weight: normal;
+            width: 65%;
+            }
+            
+            /* Receipt Table Styling */
+            .receiptTable {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #000;
+            }
+            
+            .receiptTable th {
+            background-color: #d9d9d9;
+            font-weight: 600;
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 0.5px;
+            }
+            
+            .receiptTable td {
+            text-align: center;
+            font-weight: normal;
+            }
+            
+            .total-row td {
+            font-weight: 600;
+            text-align: center;
+            background-color: #f2f2f2;
+            font-family: 'Cormorant Garamond', serif;
+            }
+            
+            .header-section {
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            }
+            
+            .email-text {
+            font-size: 9.5pt;
+            text-align: right;
+            line-height: 1.3;
+            }
+            
+            .footer {
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 11pt;
+            font-family: 'Lora', serif;
+            }
+            
+            .footer td, .footer p {
+            font-weight: normal;
+            }
+            
+            .page-break {
+            page-break-before: always;
+            }
+            
+        </style>
+        
+    </head>
+    
+    <body>
+        <div class="header-section">
+            <div class="alnleft">
+                <apex:image alt="Logo" value="{!$Resource.BloomLogo}" width="150px" height="50px"/>
+            </div>
+            <div class="email-text">
+                <p>Email: <a href="mailto:customercare@bloom.co.ae">customercare@bloom.co.ae</a></p>
+                <p>This is a system-generated document. No signature is required.</p>
+            </div>
+        </div>
+        
+        <h1>RECEIPT ADVICE</h1>
+        
+        <apex:repeat value="{!salesOrderWrapperList}" var="wrapper">
+            <p><b>Date:</b> {!wrapper.todayDate}</p>
+            
+            <!-- Info Table -->
+            <table class="infoTable">
+                <tr><td>Customer Name</td><td>{!wrapper.salesOrder.AccountName__c}</td></tr>
+                <tr><td>Customer Number</td><td>{!wrapper.salesOrder.Name}</td></tr>
+                <tr><td>Opportunity Number</td><td>{!wrapper.salesOrder.Sales_Order_Number__c}</td></tr>
+                <tr><td>Project</td><td>{!wrapper.salesOrder.ProjectName__c}</td></tr>
+                <tr><td>Unit Number</td><td>{!wrapper.salesOrder.UnitNumber__c}</td></tr>
+            </table>
+            
+            <h2 style="margin-top:25px;">INSTALLMENT PAYMENT DETAILS :</h2>
+            <!-- Receipt Table -->
+            <table class="receiptTable">
+                <thead>
+                    <tr>
+                        <th>Inst#</th>
+                        <th>Installment Date</th>
+                        <th>Amount (AED)</th>
+                        <th>%</th>
+                        <th>Payment Mode</th>
+                        <th>Reference No</th>
+                        <th>Amount Collected</th>
+                        <th>Cheque Date</th>
+                        <th>Bank Name</th>
+                        <th>Remitter Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:repeat value="{!wrapper.installmentReceiptWrappers}" var="receiptWrapper">
+                        <tr>
+                            <td>{!receiptWrapper.receipt.InstallmentNumberOrChargeType__c}</td>
+                            <td>{!receiptWrapper.RvDateFormatted}</td>
+                            <td><apex:outputText value="{0, number, ###,##0.00}"><apex:param value="{!receiptWrapper.receipt.InstallmentLine__r.InstallmentAmount__c}" /></apex:outputText></td>
+                            <td>{!receiptWrapper.receipt.InstallmentLine__r.InstallmentPercentage__c}</td>
+                            <td>{!receiptWrapper.receipt.Receipt_Type__c}</td>
+                            <td>{!receiptWrapper.receipt.Receipt_Reference__c}</td>
+                            <td><apex:outputText value="{0, number, ###,##0.00}"><apex:param value="{!receiptWrapper.collectedAmount}" /></apex:outputText></td>
+                            <td>{!receiptWrapper.RvDateFormatted}</td>
+                            <td>{!receiptWrapper.receipt.ReceiptAcknowledgement__r.BankName__c}</td>
+                            <td>{!receiptWrapper.remitterName}</td>
+                        </tr>
+                    </apex:repeat>
+                    <tr class="total-row">
+                        <td colspan="2"><b>Total Installments (AED):</b></td>
+                        <td>{!wrapper.installmentAmountTotal}</td>
+                        <td style="text-align:center;">
+                            {!wrapper.totalPercentage}
+                        </td>
+                        <td colspan="2">Total Collected (AED):</td>
+                        <td>
+                            <b>
+                                <apex:outputText value="{0, number, ###,##0.00}">
+                                    <apex:param value="{!wrapper.installmentCollectedTotal}" />
+                                </apex:outputText>
+                            </b>
+                        </td>
+                        <td colspan="3"></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <apex:outputPanel rendered="{!wrapper.salesOrderReceiptWrappers.size > 0}">
+                <h2 style="margin-top:10px;">OTHER PAYMENT DETAILS :</h2>
+                
+                <table class="receiptTable">
+                    <thead>
+                        <tr>
+                            <th>Charge Type</th>
+                            <th>Due Date</th>
+                            <th>Charge Amount (AED)</th>
+                            <th>Payment Mode</th>
+                            <th>Reference No</th>
+                            <th>Amount Collected (AED)</th>
+                            <th>Cheque Date</th>
+                            <th>Bank Name</th>
+                            <th>Remitter Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <apex:repeat value="{!wrapper.salesOrderReceiptWrappers}" var="rw">
+                            <tr>
+                                <td>{!rw.receipt.InstallmentNumberOrChargeType__c}</td>
+                                <td>{!rw.otherChargeDueDateFormatted}</td>
+                                <td>
+                                    <apex:outputText value="{0,number,###,##0.00}">
+                                        <apex:param value="{!rw.adjustedAmount}" />
+                                    </apex:outputText>
+                                </td>
+                                <td>{!rw.receipt.Receipt_Type__c}</td>
+                                <td>{!rw.receipt.Receipt_Reference__c}</td>
+                                <td>
+                                    <apex:outputText value="{0,number,###,##0.00}">
+                                        <apex:param value="{!rw.collectedAmount}" />
+                                    </apex:outputText>
+                                </td>
+                                <td>{!rw.rvDateFormatted}</td>
+                                <td>{!rw.receipt.ReceiptAcknowledgement__r.BankName__c}</td>
+                                <td>{!rw.remitterName}</td>
+                            </tr> 
+                        </apex:repeat>
+                        <tr class="total-row">
+                            <td colspan="2"><b>Total Other Charges (AED):</b></td>
+                            <td>{!wrapper.otherChargesAmountTotal}</td>
+                            <td colspan="2">Total Collected (AED):</td>
+                            <td >
+                                <b>
+                                    <apex:outputText value="{0, number, ###,##0.00}">
+                                        <apex:param value="{!wrapper.otherChargesCollectedTotal}" />
+                                    </apex:outputText>
+                                </b>
+                            </td>
+                            <td colspan="3"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </apex:outputPanel>
+            
+            <p><b>Total Amount in words:</b> {!wrapper.totalAmountInWords}</p>
+        </apex:repeat>
+        
+        <p>Bloom District Properties Sole Proprietorship LLC</p>
+        <p>Note: The receipt is system-generated and subject to clearance.</p>
+        
+        <div class="footer">
+            <table style="width: 100%; border-collapse: collapse; border: none;">
+                <tr>
+                    <td style="width: 30%; border: none;"></td>
+                    <td style="width: 70%; text-align: right; border: none; font-size: 10.5pt;">
+                        <p>Bloom District Properties – Sole Proprietorship – L.L.C., P.O. Box 28928, Abu Dhabi, UAE</p>
+                        <p>T +971 2 6969500 | Call free 800-BLOOM (25666)</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</apex:page>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>300K-650K</fullName>
+        <default>false</default>
+        <label>300K-650K</label>
+    </customValue>
+    <customValue>
+        <fullName>700K-1Million</fullName>
+        <default>false</default>
+        <label>700K-1Million</label>
+    </customValue>
+    <customValue>
+        <fullName>1M-3M</fullName>
+        <default>false</default>
+        <label>1M-3M</label>
+    </customValue>
+    <customValue>
+        <fullName>3M-5M</fullName>
+        <default>false</default>
+        <label>3M-5M</label>
+    </customValue>
+    <customValue>
+        <fullName>5M-7M</fullName>
+        <default>false</default>
+        <label>5M-7M</label>
+    </customValue>
+    <customValue>
+        <fullName>7M-9M</fullName>
+        <default>false</default>
+        <label>7M-9M</label>
+    </customValue>
+    <customValue>
+        <fullName>10M and above</fullName>
+        <default>false</default>
+        <label>10M and above</label>
+    </customValue>
+    <customValue>
+        <fullName>175K-AED 200K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>175K-AED 200K</label>
+    </customValue>
+    <customValue>
+        <fullName>200K-AED 225K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>200K-AED 225K</label>
+    </customValue>
+    <customValue>
+        <fullName>225K-AED 250K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>225K-AED 250K</label>
+    </customValue>
+    <customValue>
+        <fullName>250K-AED 275K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>250K-AED 275K</label>
+    </customValue>
+    <customValue>
+        <fullName>275K-AED 300K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>275K-AED 300K</label>
+    </customValue>
+    <customValue>
+        <fullName>300K-AED 325K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>300K-AED 325K</label>
+    </customValue>
+    <customValue>
+        <fullName>325K-AED 350K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>325K-AED 350K</label>
+    </customValue>
+    <customValue>
+        <fullName>350K-AED 375K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>350K-AED 375K</label>
+    </customValue>
+    <customValue>
+        <fullName>375K-AED 400K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>375K-AED 400K</label>
+    </customValue>
+    <customValue>
+        <fullName>400K-AED 425K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>400K-AED 425K</label>
+    </customValue>
+    <customValue>
+        <fullName>425K-AED 450K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>425K-AED 450K</label>
+    </customValue>
+    <customValue>
+        <fullName>0K-AED 25K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>0K-AED 25K</label>
+    </customValue>
+    <customValue>
+        <fullName>475K-AED 500K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>475K-AED 500K</label>
+    </customValue>
+    <customValue>
+        <fullName>500K-1Million</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>500K-1Million</label>
+    </customValue>
+    <customValue>
+        <fullName>1Million-1.9Million</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>1Million-1.9Million</label>
+    </customValue>
+    <customValue>
+        <fullName>2-2.9 Million</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>2-2.9 Million</label>
+    </customValue>
+    <customValue>
+        <fullName>3-3.9 Million</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>3-3.9 Million</label>
+    </customValue>
+    <customValue>
+        <fullName>4-4.9 Million</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>4-4.9 Million</label>
+    </customValue>
+    <customValue>
+        <fullName>5-5.9 Million</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>5-5.9 Million</label>
+    </customValue>
+    <customValue>
+        <fullName>6 Million and above</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>6 Million and above</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Disclosed</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Not Disclosed</label>
+    </customValue>
+    <customValue>
+        <fullName>Not Applicable</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Not Applicable</label>
+    </customValue>
+    <customValue>
+        <fullName>450K-AED 475K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>450K-AED 475K</label>
+    </customValue>
+    <customValue>
+        <fullName>25K-AED 50K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>25K-AED 50K</label>
+    </customValue>
+    <customValue>
+        <fullName>50K-AED 75K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>50K-AED 75K</label>
+    </customValue>
+    <customValue>
+        <fullName>75K-AED 100K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>75K-AED 100K</label>
+    </customValue>
+    <customValue>
+        <fullName>100K-AED 125K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>100K-AED 125K</label>
+    </customValue>
+    <customValue>
+        <fullName>125K-AED 150K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>125K-AED 150K</label>
+    </customValue>
+    <customValue>
+        <fullName>150K-AED 175K</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>150K-AED 175K</label>
+    </customValue>
+    <description>Customer Budget Picklist</description>
+    <masterLabel>Customer Budget</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

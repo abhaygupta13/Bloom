@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OtherChargeDateInBetwnLeaseStartEndDate</fullName>
+    <active>true</active>
+    <description>Other charge calculation start date should be in between leasing period.</description>
+    <errorConditionFormula>(CalculationFromDate__c &lt; LeasingOrder__r.LeasingStartDate__c) || (CalculationFromDate__c &gt; LeasingOrder__r.LeasingEndDate__c )</errorConditionFormula>
+    <errorMessage>Start date should be in between lease start date and lease end date.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason__c</fullName>
+    <label>Reason</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ReceiptReversalCategory__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cheque Presented by Mistake</fullName>
+                <default>false</default>
+                <label>Cheque Presented by Mistake</label>
+            </value>
+            <value>
+                <fullName>Poor Quality</fullName>
+                <default>false</default>
+                <label>Poor Quality</label>
+            </value>
+            <value>
+                <fullName>Irregular Signature</fullName>
+                <default>false</default>
+                <label>Irregular Signature</label>
+            </value>
+            <value>
+                <fullName>Overwriting</fullName>
+                <default>false</default>
+                <label>Overwriting</label>
+            </value>
+            <value>
+                <fullName>Altered</fullName>
+                <default>false</default>
+                <label>Altered</label>
+            </value>
+            <value>
+                <fullName>Amount in words not matching with number</fullName>
+                <default>false</default>
+                <label>Amount in words not matching with number</label>
+            </value>
+            <value>
+                <fullName>Swift Confirmation Awaited</fullName>
+                <default>false</default>
+                <label>Swift Confirmation Awaited</label>
+            </value>
+            <value>
+                <fullName>Insufficient Fund</fullName>
+                <default>false</default>
+                <label>Insufficient Fund</label>
+            </value>
+            <value>
+                <fullName>Closed Account</fullName>
+                <default>false</default>
+                <label>Closed Account</label>
+            </value>
+            <value>
+                <fullName>Frozen Account</fullName>
+                <default>false</default>
+                <label>Frozen Account</label>
+            </value>
+            <value>
+                <fullName>Signature Missing</fullName>
+                <default>false</default>
+                <label>Signature Missing</label>
+            </value>
+            <value>
+                <fullName>Cheque replacement</fullName>
+                <default>false</default>
+                <label>Cheque replacement</label>
+            </value>
+            <value>
+                <fullName>Unit under resale</fullName>
+                <default>false</default>
+                <label>Unit under resale</label>
+            </value>
+            <value>
+                <fullName>Advance paid</fullName>
+                <default>false</default>
+                <label>Advance paid</label>
+            </value>
+            <value>
+                <fullName>Postponement</fullName>
+                <default>false</default>
+                <label>Postponement</label>
+            </value>
+            <value>
+                <fullName>Milestone withdrawal/ PP change with approval</fullName>
+                <default>false</default>
+                <label>Milestone withdrawal/ PP change with approval</label>
+            </value>
+            <value>
+                <fullName>Others</fullName>
+                <default>false</default>
+                <label>Others</label>
+            </value>
+            <value>
+                <fullName>PRS BY OTH THAN BENE BANK</fullName>
+                <default>false</default>
+                <label>PRS BY OTH THAN BENE BANK</label>
+            </value>
+            <value>
+                <fullName>Payee name missing / Title Differs</fullName>
+                <default>false</default>
+                <label>Payee name missing / Title Differs</label>
+            </value>
+            <value>
+                <fullName>Alterations/ Overwriting not signed</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Alterations/ Overwriting not signed</label>
+            </value>
+            <value>
+                <fullName>Closed account/ Frozen account</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Closed account/ Frozen account</label>
+            </value>
+            <value>
+                <fullName>Insufficient funds</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Insufficient funds</label>
+            </value>
+            <value>
+                <fullName>Poor quality of cheque</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Poor quality of cheque</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Cheque Presented by Mistake</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Poor Quality</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Irregular Signature</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Overwriting</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Altered</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Amount in words not matching with number</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Swift Confirmation Awaited</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Insufficient Fund</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Closed Account</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Frozen Account</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Signature Missing</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <valueName>PRS BY OTH THAN BENE BANK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+            <valueName>Payee name missing / Title Differs</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Withdrawal</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Cheque replacement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Withdrawal</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Unit under resale</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Withdrawal</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Advance paid</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Withdrawal</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Postponement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Withdrawal</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Milestone withdrawal/ PP change with approval</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Withdrawal</controllingFieldValue>
+            <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+            <valueName>Others</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

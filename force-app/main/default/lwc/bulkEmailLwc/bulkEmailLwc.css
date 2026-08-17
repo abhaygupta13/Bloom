@@ -1,0 +1,3 @@
+.rich-text-wrapper .slds-rich-text-editor__textarea {
+    text-align: center !important; /* Force center alignment */
+}

@@ -1,0 +1,35 @@
+<template>
+ <template if:false={logInpage}>
+<lightning-button 
+    label="Back" 
+    variant="neutral" 
+    class="slds-m-left_small" 
+    onclick={handleBack}>
+</lightning-button>
+
+    <lightning-card title="Related Documents" icon-name="utility:document">
+        <template if:true={documents}>
+            <ul class="slds-list_dotted slds-m-around_medium">
+                <template for:each={documents} for:item="doc">
+                    <li key={doc.Id}>
+                        <lightning-icon icon-name="utility:attach" size="small" class="slds-m-right_small"></lightning-icon>
+                        
+                        <!-- Open document in a new tab -->
+                        <lightning-formatted-url 
+                            value={doc.fileUrl} 
+                            label={doc.Title} 
+                            target="_blank">
+                        </lightning-formatted-url>
+                    </li>
+                </template>
+            </ul>
+        </template>
+        <template if:false={documents}>
+            <p class="slds-m-around_medium">No documents found.</p>
+        </template>
+    </lightning-card>
+    </template>
+    <template if:true={logInpage}>
+       <c-child-case-details-fm-app></c-child-case-details-fm-app>
+    </template>
+</template>

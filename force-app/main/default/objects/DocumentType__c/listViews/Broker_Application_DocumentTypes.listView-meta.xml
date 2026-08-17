@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Broker_Application_DocumentTypes</fullName>
+    <columns>NAME</columns>
+    <columns>TypeofEstablishment__c</columns>
+    <columns>Type__c</columns>
+    <columns>ObjectType__c</columns>
+    <columns>RecordTypeDevName__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ObjectType__c</field>
+        <operation>equals</operation>
+        <value>Broker Application</value>
+    </filters>
+    <label>Broker Application DocumentTypes</label>
+</ListView>

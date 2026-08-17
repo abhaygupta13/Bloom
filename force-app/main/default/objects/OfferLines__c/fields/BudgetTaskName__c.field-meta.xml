@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BudgetTaskName__c</fullName>
+    <inlineHelpText>Budget Task Name that this offer line has to be mapped to.</inlineHelpText>
+    <label>Budget Task Name</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ADM Fee</fullName>
+                <default>false</default>
+                <label>ADM Fee</label>
+            </value>
+            <value>
+                <fullName>Home Maintenance</fullName>
+                <default>false</default>
+                <label>Home Maintenance</label>
+            </value>
+            <value>
+                <fullName>Service Charges</fullName>
+                <default>false</default>
+                <label>Service Charges</label>
+            </value>
+            <value>
+                <fullName>BrokerCommission</fullName>
+                <default>false</default>
+                <label>Broker Commission</label>
+            </value>
+            <value>
+                <fullName>InternalCommission</fullName>
+                <default>false</default>
+                <label>Internal Commission</label>
+            </value>
+            <value>
+                <fullName>Rebates</fullName>
+                <default>false</default>
+                <label>Rebates</label>
+            </value>
+            <value>
+                <fullName>Discounts</fullName>
+                <default>false</default>
+                <label>Discounts</label>
+            </value>
+            <value>
+                <fullName>PM Fee</fullName>
+                <default>false</default>
+                <label>PM Fee</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

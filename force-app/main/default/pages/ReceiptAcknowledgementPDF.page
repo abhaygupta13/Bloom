@@ -1,0 +1,255 @@
+<apex:page controller="ReceiptAcknowledgementController" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false">
+    <head>
+        <style>
+            @page {
+                size: 300mm 350mm;
+                margin: 10mm;
+            }
+            body {
+                font-family: Calibri;
+                font-size: 12pt; 
+                color: #000;
+                position: relative; 
+                padding-bottom: 60px; 
+            }
+            h1 {
+                text-align: center;
+                font-size: 16pt;
+            }
+
+            /* First Table Styling */
+            table {
+                width: 70%; 
+                border-collapse: collapse;
+                border: 1px solid #000; 
+                margin-bottom: 20px;
+            }
+
+            /* Apply background to first child in first table */
+            .table-primary td:first-child {
+                background-color: #ccd1d1;
+            }
+
+            th, td {
+                padding: 2px 6px;
+                border: solid #000; 
+                font-size: 11pt; 
+                word-wrap: break-word;
+                font-weight: bold;
+            }
+
+            .headerTable th, .headerTable td {
+                background-color: #f1f1f1;
+            }
+            .alnleft {
+                text-align: left;
+            }
+            .alnright {
+                text-align: right;
+            }
+            .footer {
+                position: fixed; 
+                left: 0;
+                bottom: 10mm; 
+                width: 100%;
+                text-align: center;
+                font-size: 12pt;
+            }
+             .footer td, .footer p {
+        font-weight: normal; /* Ensure normal font weight inside footer */
+    }
+            .header-section {
+                width: 100%;
+                margin-bottom: 20px;
+                display: flex; 
+                justify-content: space-between; 
+                align-items: center; 
+            }
+            .company-info {
+                text-align: center;
+                margin-top: 30px;
+                font-size: 10pt;
+            }
+            .total-row td {
+                font-weight: bold; 
+                text-align: center; 
+            }
+
+            /* Second Table (Receipt Table) Styling */
+            .receiptTable {
+                width: 100%; /* Full width */
+                border-collapse: collapse;
+                border: 1px solid #000;
+                margin-bottom: 20px;   
+            }
+
+            .receiptTable th, .receiptTable td {
+                padding: 8px 10px;
+                border: 1px solid #000; 
+                font-size: 10pt; 
+                word-wrap: break-word;
+                font-weight: normal; /* Set font weight to normal */
+            }
+
+            /* Background color for the header row of receiptTable */
+            .receiptTable thead tr {
+                background-color: #ccd1d1; /* Background color for the header row */
+            }
+
+            /* Ensure that the body rows have no additional background color */
+            .receiptTable tbody tr {
+                background-color: transparent; /* Ensure body rows have no background color */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header-section">
+            <div class="alnleft">
+                <apex:image alt="Logo" value="{!$Resource.BloomgLiving}" width="150px" height="50px"/>
+                <apex:repeat value="{!salesOrderWrapperList}" var="wrapper">
+                    <p><b>Date:</b> {!wrapper.todayDate}</p>
+                </apex:repeat>
+            </div>
+        </div>
+
+        <h1>RECEIPT ACKNOWLEDGEMENT</h1>
+
+        <apex:repeat value="{!salesOrderWrapperList}" var="wrapper">
+            <!-- First Table with class table-primary -->
+            <table class="table-primary">
+                <tr>
+                    <td><b>Customer Name:</b></td>
+                    <td>{!wrapper.salesOrder.AccountName__c}</td>
+                </tr>
+                <tr>
+                    <td><b>Customer Number:</b></td>
+                    <td>{!wrapper.salesOrder.Name}</td>
+                </tr>
+                <tr>
+                    <td><b>Sales Order Number:</b></td>
+                    <td>{!wrapper.salesOrder.Sales_Order_Number__c}</td>
+                </tr>
+                <tr>
+                    <td><b>Project:</b></td>
+                    <td>{!wrapper.salesOrder.ProjectName__c}</td>
+                </tr>
+                <tr>
+                    <td><b>Unit Number:</b></td>
+                    <td>{!wrapper.salesOrder.UnitNumber__c}</td>
+                </tr>
+                <tr>
+                    <td><b>Price (Including ADM Charges):</b></td>
+                    
+                    <td>
+                      <apex:outputText value="{0, number, ###,##0.00}">AED
+                                    <apex:param value="{!wrapper.salesOrder.NetAmount__c}" />
+                                </apex:outputText></td>
+                </tr>
+                <tr>
+                    <td><b>Price (Excluding ADM Charges):</b></td>
+                    
+                    <td>
+                      <apex:outputText value="{0, number, ###,##0.00}">AED
+                                    <apex:param value="{!wrapper.salesOrder.Sales_Price_Excluding_ADM__c}" />
+                                </apex:outputText></td>
+                </tr>
+            </table>
+
+            <!-- Second Table with class receiptTable -->
+            <table class="receiptTable">
+                <thead>
+                    <tr>
+                        <th>Payment Mode</th>
+                        <th>Receipt Voucher #</th>
+                        <th>Reference #</th>
+                        <th>Bank</th>
+                        <th>Receipt Amount</th>
+                        <th>Status</th>
+                        <th>Due Date</th>
+                        <th>Inst#/Charge</th>
+                        <th>Amount Applied</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through Installment Receipts -->
+                    <apex:repeat value="{!wrapper.installmentReceiptWrappers}" var="receiptWrapper">
+                        <tr>
+                            <td>{!receiptWrapper.receipt.Receipt_Type__c}</td>
+                            <td>{!receiptWrapper.receipt.Receipt_Number__c}</td>
+                            <td>{!receiptWrapper.receipt.Receipt_Reference__c}</td>
+                            <td>{!receiptWrapper.receipt.ReceiptAcknowledgement__r.BankName__c}</td>
+                            <td>
+                                <apex:outputText value="{0, number, ###,##0.00}">
+                                    <apex:param value="{!receiptWrapper.adjustedAmount}" />
+                                </apex:outputText>
+                            </td>
+                            <td>{!receiptWrapper.receipt.ReceiptAcknowledgement__r.Status__c}</td>
+                            <td>{!receiptWrapper.RvDateFormatted}</td>
+                            <td>{!receiptWrapper.receipt.InstallmentNumberOrChargeType__c}</td>
+                            <td>
+                                <apex:outputText value="{0, number, ###,##0.00}">
+                                    <apex:param value="{!receiptWrapper.receipt.AmountApplied__c}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+
+                    <!-- Loop through Sales Order Receipts -->
+                    <apex:repeat value="{!wrapper.salesOrderReceiptWrappers}" var="receiptWrapper">
+                        <tr>
+                            <td>{!receiptWrapper.receipt.Receipt_Type__c}</td>
+                            <td>{!receiptWrapper.receipt.Receipt_Number__c}</td>
+                            <td>{!receiptWrapper.receipt.Receipt_Reference__c}</td>
+                            <td>{!receiptWrapper.receipt.ReceiptAcknowledgement__r.BankName__c}</td>
+                            <td>
+                                <apex:outputText value="{0, number, ###,##0.00}">
+                                    <apex:param value="{!receiptWrapper.receipt.ReceiptAcknowledgementAmount__c}" />
+                                </apex:outputText>
+                            </td>
+                            <td>{!receiptWrapper.receipt.ReceiptAcknowledgement__r.Status__c}</td>
+                            <td>{!receiptWrapper.RvDateFormatted}</td>
+                            <td>{!receiptWrapper.receipt.InstallmentNumberOrChargeType__c}</td>
+                            <td>
+                                <apex:outputText value="{0, number, ###,##0.00}">
+                                    <apex:param value="{!receiptWrapper.receipt.AmountApplied__c}" />
+                                </apex:outputText>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+
+                    <!-- Total Row -->
+                    <tr class="total-row">
+                        <td colspan="8"><b>Total Amount Applied (AED):</b></td>
+                        <td>{!wrapper.totalAmountFormatted}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>
+   
+    <apex:outputPanel rendered="{!wrapper.admFeeIncludedValue}">
+        Note: Abu Dhabi registration fees is included in the purchase price.
+    </apex:outputPanel>
+</p>
+
+
+            <p><b>Total Amount in words: {!wrapper.totalAmountInWords}</b></p>
+        </apex:repeat>
+
+        <p>Bloom District Properties Sole Proprietorship LLC</p>
+        <p>Note: The receipt is system generated and subject to clearance.</p>
+
+        <div class="footer">
+            <table style="width: 100%; border-collapse: collapse; border: none;">
+                <tr>
+                    <td style="width: 30%; text-align: left; border: none;">
+                        <apex:image alt="Logo" value="{!$Resource.BloomLogo}" width="150px" height="50px"/>
+                    </td>
+                    <td style="width: 70%; text-align: right; border: none; font-size: 12pt;">
+                        <p>Bloom District Properties – Sole Proprietorship – L.L.C., P.O. Box 28928, Abu Dhabi, UAE</p>
+                        <p>T +971 2 6969500 call free 800-bloom (25666)</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</apex:page>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Granada_Documents</fullName>
+    <columns>NAME</columns>
+    <columns>Type__c</columns>
+    <columns>Project__c</columns>
+    <columns>Active__c</columns>
+    <columns>DocGenPackage__c</columns>
+    <columns>IsDocgen__c</columns>
+    <columns>ObjectType__c</columns>
+    <columns>DeliveryOption__c</columns>
+    <columns>Customer_Type__c</columns>
+    <columns>Docusign_Envelope_Template__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Project__c</field>
+        <operation>equals</operation>
+        <value>Granada</value>
+    </filters>
+    <label>Granada 1 Documents</label>
+</ListView>

@@ -1,0 +1,223 @@
+<template>
+    <lightning-quick-action-panel header={header}>
+        <template lwc:if={isLoading}>
+            <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+        <template if:true={isConfirm}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container" style="width:50% !important">
+                    <!-- modal header start -->
+                    <header class="slds-theme_alert-texture slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Confirm</h2>
+                    </header>
+
+                    <!-- modal body start -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1"
+                        style="text-align:center">
+                        <p>Please make sure you have entered correct information.</p>
+                    </div>
+
+                    <!-- modal footer start-->
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick={closeConfirmBox}>Cancel</button>
+                        <button class="slds-button slds-button_brand" onclick={confirmBoxYes}>Confirm</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4">
+
+            </lightning-layout-item>
+
+            <lightning-layout-item size="3" class="slds-p-left_small">
+                <lightning-input date-style="medium" type="date" name="RegDate" label="Project Registration Date"
+                    value={admRegDate} onchange={admRegDateChange} disabled={isAdmRegDateReadOnly} required="true">
+                </lightning-input>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="3" class="slds-p-left_small">
+                <lightning-input date-style="medium" type="number" name="RegNumber" label="Project Registration Number"
+                    value={projectRegNumber} onchange={projectRegNumberChange} disabled={isProjectRegNumberReadOnly} required="true">
+                </lightning-input>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="2">
+            </lightning-layout-item>
+        </lightning-layout>
+
+
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4">
+
+            </lightning-layout-item>
+            
+            <lightning-layout-item size="3" class="slds-p-left_small">
+                <template lwc:if={isAttachmentUpload}>
+                    <lightning-input type="file" accept={acceptedFormats} onchange={openfileUpload}
+                        label="Upload Attachment" required="true"></lightning-input>
+                    <template if:true={fileData}>
+                        <p>{fileData.filename}</p>
+                    </template>
+                </template>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="3" class="slds-p-left_small">
+                <lightning-textarea class="textAreaBody" name="RegRemark" label="Project Registration Remark"
+                    value={admRegRemark} onchange={admRemarkChange} disabled={isAdmRegRemarkReadOnly} required="true">
+                </lightning-textarea>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="2">
+
+            </lightning-layout-item>
+
+
+        </lightning-layout>
+
+        <br/>
+        <div class="counters">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="9">
+                    <p>Please select below units which are eligible for registration.</p>
+                </lightning-layout-item>
+                <lightning-layout-item size="3">
+                    <p style="text-align:right">Selected / Total Records : {selectedRecords} / {totalRecords}</p>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div lwc:if={dataTableRender}>
+            <div style="height:110px;" lwc:if={data.length}>
+                <!-- <lightning-datatable key-field="Id" data={data} columns={columns} selected-rows={selectedRowKeys}
+                    onrowselection={handleRowSelection}>
+                </lightning-datatable> -->
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div style="margin: -4px;" class="center slds-truncate" title="Select All">
+                                    <lightning-input type="checkbox" variant="label-hidden" message-toggle-inactive=""
+                                        message-toggle-active="" onchange={onSelecAllCheckbox}>
+                                    </lightning-input>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="center slds-truncate" title="Sales Order">Sales Order</div>
+                            </th>
+                            <th>
+                                <div class="center slds-truncate" title="Status">Status</div>
+                            </th>
+                            <th>
+                                <div class="center slds-truncate" title="Unit Number">Unit Number</div>
+                            </th>
+                            <th>
+                                <div class="center slds-truncate" title="Plot Number">Plot Number</div>
+                            </th>
+                            <th>
+                                <div class="center slds-truncate" title="Sold Date">Sold Date</div>
+                            </th>
+                            <th>
+                                <div class="center slds-truncate" title="Registration Date">Registration Date</div>
+                            </th>
+                            <th>
+                                <div class="center slds-truncate" title="Action">Action</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={data} for:item="row">
+                            <tr key={row.id}>
+                                <!-- Checkbox Column -->
+                                <td>
+                                    <div class="center slds-truncate" title={row.Name}>
+                                        <!-- <lightning-input type="toggle" 
+                                        variant="label-hidden" 
+                                        message-toggle-inactive=""
+                                        message-toggle-active="" 
+                                        data-id={row.Id} 
+                                        checked={row.isChecked}
+                                        disabled={row.isReadOnly}
+                                        onchange={onCheckboxClick}>
+                                    </lightning-input> -->
+                                        <lightning-input type="checkbox" data-id={row.Id} checked={row.isChecked}
+                                            disabled={row.isReadOnly} onchange={onCheckboxClick}>
+                                        </lightning-input>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="center slds-truncate" title={row.activeSalesOrderName}>
+                                        <a href={row.salesOrderLink} target="_blank">{row.activeSalesOrderName}</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="center slds-truncate" title={row.Status__c}>{row.Status__c}</div>
+                                </td>
+                                <td>
+                                    <div class="center slds-truncate" title={row.Name}>
+                                        <a href={row.unitLink} target="_blank">{row.Name}</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="center slds-truncate" title={row.plotNumber}>
+                                        {row.plotNumber}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="center slds-truncate" title={row.soldDate}>{row.soldDate}</div>
+                                </td>
+                                <td>
+                                    <div class="center slds-truncate" title={row.RegistrationDate__c}>
+                                        {row.RegistrationDate__c}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="center slds-truncate" title="Action">
+                                        <template lwc:if={row.isReadOnly}>
+                                            <template lwc:if={row.filePreview}>
+                                                <lightning-icon data-id={row.filePreview} class="icon" icon-name="utility:document_preview"
+                                                    variant="success" size="small" title="Preview project-unit registration document" onclick={handleFilePreview}>
+                                                </lightning-icon>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-icon class="icon" icon-name="utility:document_preview"
+                                                    variant="error" size="small" title="Document not available for preview">
+                                                </lightning-icon>
+                                            </template>
+                                        </template>
+                                        <template lwc:else>
+                                            <lightning-icon data-id={row.Id} data-name="unitIcon" icon-name="utility:upload"
+                                                title="Upload project-unit registration document" variant="success"
+                                                size="small" onclick={handleOpenfileUpload}>
+                                            </lightning-icon>&nbsp;&nbsp;
+                                            <input type="file" accept={acceptedFormats} name="unitFileUpload"
+                                                                onchange={openUnitFileUpload} class="file-input"/>
+                                            <template lwc:if={row.filePreview}>
+                                                <lightning-icon data-id={row.filePreview} class="icon" icon-name="utility:document_preview"
+                                                    variant="success" size="small" title="Preview project-unit registration document" onclick={handleFilePreview}>
+                                                </lightning-icon>
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-icon class="icon" icon-name="utility:document_preview"
+                                                    variant="error" size="small" title="Document not available for preview">
+                                                </lightning-icon>
+                                            </template>
+                                        </template><br/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div slot="footer">
+            <lightning-button variant="neutral" label="Cancel" onclick={closAction}></lightning-button>
+            <lightning-button variant="brand" label="Save" class="slds-m-left_x-small" onclick={handleSaveClick}>
+            </lightning-button>
+        </div>
+    </lightning-quick-action-panel>
+</template>

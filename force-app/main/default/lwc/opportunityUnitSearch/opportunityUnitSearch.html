@@ -1,0 +1,1918 @@
+<template>
+	<article class="slds-card slds-p-around_x-small">
+		<div class="spinner">
+			<template if:true={isLoading}>
+				<lightning-spinner alternative-text="Loading" variant="brand" size="large">
+				</lightning-spinner>
+			</template>
+		</div>
+		<!--Spinner when submitting for approval-->
+		<div class="spinner">
+			<template if:false={isloaded}>
+				<lightning-spinner alternative-text="Loading" variant="brand" size="large">
+				</lightning-spinner>
+			</template>
+		</div>
+		
+		<div class="slds-card__header slds-grid">
+			<header class="slds-media slds-media_center slds-has-flexi-truncate">
+				<!--<div class="slds-media__figure">
+					<lightning-icon icon-name="standard:groups" size="medium" alternative-text="Unit Search">
+					</lightning-icon>
+				</div>-->
+				<div class="slds-media__body">
+					<h2 class="slds-card__header-title">
+						<!--<a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Unit Search">
+							<span>Unit Search</span>
+						</a>-->
+						<template if:true={ReservationWizard}>
+							&nbsp;
+							<c-custom-timer start-from={OppBookingTimerStartFrom} redirect-to={redirecPageUrl}> </c-custom-timer>
+
+						</template>
+						<template if:true={BookingWizard}>
+							&nbsp;
+							<c-custom-timer start-from={OppBookingTimerStartFrom} onapproved={timeAddedResult} redirect-to={redirecPageUrl} opportunity-id={recordId} locked-unit={unitsToLock}> </c-custom-timer>
+
+						</template>
+						
+					</h2>
+
+				</div>
+				<div class="btn_div">
+
+					<div class="btn_inner_div" role="group">
+
+						<template if:true={BookingWizard}>
+							<template if:true={showReqExtendTimeBtn}>
+							<lightning-button variant="brand" label="Request for extension" title="titleName" onclick={handeExtendTime} style="margin-right:5px" ></lightning-button>
+						</template>					</template>
+							
+						<template if:false={disablPath}>
+							<!-- <lightning-button-icon  name="BACK"  class="backbtn-css"  icon-name="utility:back" slot="actions"
+								disabled={disableBack} onclick={handleMenuAction} ></lightning-button-icon> -->
+							<lightning-icon name="BACK" icon-name="action:recall" size="" class="backbtn" slot="actions"
+								disabled={disableBack} onclick={handleMenuAction}></lightning-icon>
+
+							<template if:false={reserveMemoFlowButton}>
+
+								<lightning-icon name="FORWARD" class="slds-m-left_large nextbtn"
+									icon-name="action:lead_convert" size="" slot="actions" disabled={disableProceed}
+									onclick={handleMenuAction}></lightning-icon>
+							</template>
+							
+
+							<!--Commented by Sreelakshmi Sk START-->
+							<!--template if:true={memoFlow}>
+								<lightning-button name="FORWARDMEMO" label="Proceed with Memo"
+									icon-name="utility:forward" slot="actions" icon-position="right"
+									disabled={disableProceed} onclick={handleMenuAction}></lightning-button>
+							</template>
+
+							<template if:true={reserveFlowButton}>
+								<lightning-button name="Reserve Unit" label="Submit for Approval"
+									icon-name="utility:forward" slot="actions" icon-position="right"
+									onclick={handleReservation}></lightning-button>
+							</template--><!--Commented by Sreelakshmi Sk END-->
+
+						</template>
+
+						<template if:true={disablPath}>
+							<!-- <template if:true={exportExcel}>
+								<lightning-button name="EXPORT" label="Export as Excel" icon-name="utility:download"
+								slot="actions" disabled={disableDownload} onclick={handleMenuAction}></lightning-button>
+							</template>
+							&nbsp;-->
+							<lightning-button name="REQUESTOASSIGN" label="Hold Unit for Me" icon-name="standard:avatar"
+								slot="actions" disabled={disableOffer} onclick={handleMenuAction}></lightning-button>
+							&nbsp;
+
+							<lightning-button name="BOOKINGAGREEMENT" label="Send Booking Agreement"
+								icon-name="standard:email" slot="actions" disabled={disableOffer}
+								onclick={handleMenuAction}></lightning-button>
+							&nbsp;
+
+							<!-- <div if:false={isloaded} class="slds-is-relative">
+								<lightning-spinner
+									alternative-text="Loading..." variant="brand">
+								</lightning-spinner>
+							</div> -->
+
+							<lightning-button name="OFFER" label="Send Offer" icon-name="standard:email" slot="actions"
+								disabled={disableOffer} onclick={handleMenuAction}></lightning-button>
+							&nbsp;
+							<!-- <lightning-button name="MEMO" label="Generate Memo" icon-name="utility:edit_form"
+								slot="actions" disabled={disableMemo} onclick={handleMenuAction}></lightning-button>
+							&nbsp; -->
+							<!-- 	<lightning-button name="RESERVE" label="Reserve Unit/s" icon-name="utility:edit_form"
+								slot="actions" disabled={disableReserve} onclick={handleMenuAction}></lightning-button>
+							<template if:true={disableReserve}>
+								<template if:true={registrationValidationMessage}>
+									<lightning-helptext content={registrationValidationMessage}></lightning-helptext>
+								</template>
+							</template>
+							&nbsp; -->
+
+							<lightning-button name="BOOKING" label="Book" icon-name="standard:order_item" slot="actions"
+								disabled={disableBooking} onclick={handleMenuAction}></lightning-button>
+
+
+							<template if:true={disableBooking}>
+								<!-- <template if:true={registrationValidationMessage}>
+									<lightning-helptext content={registrationValidationMessage}></lightning-helptext>
+								</template> -->
+							</template>
+
+							&nbsp; &nbsp;
+							<ul class="slds-global-actions" slot="actions">
+								<li class="slds-global-actions__item">
+									<div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+
+										<template if:true={disableOffer}>
+
+											<button
+												class="slds-button slds-button_icon slds-button_icon slds-button_icon-container slds-button_icon-small slds-global-actions__notifications slds-global-actions__item-action slds-incoming-notification"
+												title="1 new notifications" aria-live="assertive" aria-atomic="true">
+												<lightning-icon icon-name="standard:webcart" alternative-text="cart"
+													size="small" title="cart"
+													class="gray-background-icon"></lightning-icon>
+												<span class="slds-assistive-text">{totalSelectedUnits}</span>
+											</button>
+										</template>
+										<template if:false={disableOffer}>
+											<button
+												class="slds-button slds-button_icon slds-button_icon slds-button_icon-container slds-button_icon-small slds-global-actions__notifications slds-global-actions__item-action slds-incoming-notification"
+												title="1 new notifications" aria-live="assertive" aria-atomic="true">
+												<lightning-icon icon-name="standard:webcart" alternative-text="cart"
+													title="cart" size="small"
+													style="--sds-c-icon-color-foreground-default: rgb(1, 118, 211)">
+												</lightning-icon>
+												<span class="slds-assistive-text">{totalSelectedUnits}</span>
+											</button>
+											<span aria-hidden="true"
+												class="slds-notification-badge slds-incoming-notification slds-show-notification">{totalSelectedUnits}</span>
+										</template>
+									</div>
+								</li>
+							</ul>
+						</template>
+					</div>
+
+				</div>
+
+			</header>
+		</div>
+		<template if:false={disablPath}>
+			<br />
+			<lightning-progress-indicator current-step={pageNumber} type="path" variant="base">
+
+				<template for:each={steps} for:item="step">
+					<lightning-progress-step label={step.label} value={step.value} key={step.label}>
+					</lightning-progress-step>
+				</template>
+
+			</lightning-progress-indicator>
+			<br />
+		</template>
+		<div class="slds-grid slds-container--fluid slds-gutters slds-grid_vertical-align-end">
+
+			<!--
+			<div class="slds-path" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem); width: 100%;">
+				<div class="slds-grid slds-path__track">
+					<div class="slds-grid slds-path__scroller-container">
+						<div class="slds-path__scroller">
+							<div class="slds-path__scroller_inner">
+								<ul class="slds-path__nav" role="listbox" aria-orientation="horizontal">
+									<template if:false={unitWizard}>
+										<li class={page1NavCSS} role="presentation">
+											<a aria-selected="true" class="slds-path__link" id="path-1" role="option" data-path-id="1" onclick={handlePathChnage} tabindex="0">
+												<span class="slds-path__stage">
+													Unit Selection
+												</span>
+												<span class="slds-path__title">Unit Selection</span>
+											</a>
+										</li>
+									</template>
+									<li class={page2NavCSS} role="presentation">
+										<a aria-selected="false" class="slds-path__link" id="path-2" data-path-id="2" onclick={handlePathChnage} role="option" tabindex="-1">
+											<span class="slds-path__stage">
+												Payment/Offer Selction
+											</span>
+											<span class="slds-path__title">Payment/Offer Selction</span>
+										</a>
+									</li>
+									<li class={page3NavCSS} role="presentation">
+										<a aria-selected="false" class="slds-path__link" id="path-3" data-path-id="3" onclick={handlePathChnage} role="option" tabindex="-1">
+											<span class="slds-path__stage">
+												Confirm
+											</span>
+											<span class="slds-path__title">Confirm</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="slds-grid slds-path__action">
+						<lightning-button variant="brand" label="Previous" title="Previous" disabled={disablePrev} onclick={handlePathPrev} class="slds-m-left_x-small"></lightning-button>
+						<lightning-button variant="brand" label="Next" title="Next" disabled={disableNext} onclick={handlePathNext} class="slds-m-left_x-small"></lightning-button>
+					</div>
+				</div>
+			</div> 
+			-->
+		</div>
+		<template if:true={showPage1}>
+			<div class="slds-card__body">
+				<div class="slds-grid slds-container--fluid slds-gutters slds-grid_vertical-align-end">
+					<div class="filter-col slds-col slds-size_3-of-12">
+						<lightning-combobox dropdown-alignment="auto" name="Projects" label="Projects"
+							value={selectedProject} options={projectList} onchange={handleProjectChange}>
+						</lightning-combobox>
+					</div>
+					<div class="filter-col slds-col slds-size_3-of-12">
+						<lightning-combobox dropdown-alignment="auto" name="Building/Section" label="Building/Phase"
+							value={selectedBuilding} options={buildingList} onchange={handleBuildingChange}>
+						</lightning-combobox>
+					</div>
+
+					<div class="filter-col slds-col slds-size_3-of-12">
+						<lightning-combobox dropdown-alignment="auto" name="Unit Model" label="Unit Model"
+							options={unitModelSetList} onchange={handleFilterChange} class="unitFilter"
+							data-field-api="UnitModel__c">
+						</lightning-combobox>
+					</div>
+					<div class="filter-col slds-col slds-size_3-of-12">
+						<lightning-combobox dropdown-alignment="auto" name="Bed Rooms" label="Bed Rooms"
+							options={unitBedRoomsSetList} onchange={handleFilterChange} class="unitFilter"
+							data-field-data-type="number" data-field-api="NumberOfBedrooms__c">
+						</lightning-combobox>
+					</div>
+				</div>
+				<div class="slds-grid slds-container--fluid slds-gutters slds-grid_vertical-align-end">
+					<div class="slds-col slds-size_3-of-12">
+						<lightning-input type="text" label="Unit Number" onchange={handleUnitSearch}
+							class="unitNumber"></lightning-input>
+					</div>
+					<!-- <div class="slds-col slds-size_3-of-12"> 
+						<lightning-combobox dropdown-alignment="auto" value={opportunityDirectindirectvalue} name="Direct/Indirect" label="Direct/Indirect"
+							options={diectIndirectValue} onchange={handleDirectIndirectChange} 
+							data-field-api="AgentType__c">
+						</lightning-combobox>
+					</div> -->
+				</div>
+
+				<!-- <template if:true={showAdditianlFilters}>
+					<div class="slds-grid slds-container--fluid slds-gutters slds-grid_vertical-align-end">
+					    
+					    Additinal Filter section
+					</div>
+					</template> -->
+				<div class="slds-p-around_x-small slds-table_edit_container slds-scrollable" style="padding-left: 0">
+					<div class="slds-table_edit_container slds-is-relative">
+						<table class="slds-table slds-table_cell-buffer slds-table_bordered"
+							style="border:1px solid #ccc;">
+
+							<thead>
+								<tr class="slds-line-height_reset">
+									<template if:false={isExport}>
+										<th class="" scope="col"
+											style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+											<!-- <div class="slds-trunslds-p-around_x-small slds-table_edit_container slds-scrollablecate">
+												<lightning-input class="selectAllCheckBox" onchange={allSelected}
+													type="checkbox"></lightning-input>
+												</div> -->
+										</th>
+									</template>
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.40rem 0.5rem);">
+										Unit Name
+									</th>
+
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Unit Type
+									</th>
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Unit Category
+									</th>
+									<th scope="col">
+										Bedrooms
+									</th>
+
+									<!--<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Multi Purpose Room Area
+									</th>
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Property Usage
+									</th>
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Unit Model
+									</th>
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Floor Number
+									</th>
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Unit View
+									</th>-->
+									<!-- <th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Property Status
+									</th>
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Total Rooms
+									</th>-->
+
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Internal Area
+									</th>
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										External Area
+									</th>
+
+
+									<!--<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Terrace Area
+									</th>
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Total Area
+									</th>
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Unit Plot Area
+									</th>-->
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Selling Price
+									</th> 
+									<!-- <th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Standard Price
+									</th>
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Premium Price
+									</th> -->
+									<!--<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Online Reservation Fee
+									</th>-->
+									<!--<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Affection Plan
+									</th>
+									<th scope="col" style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+										Marketing Plan
+									</th>-->
+								</tr>
+							</thead>
+							<tbody>
+								<template if:true={unitDataTable}>
+									<template for:each={unitDataTable} for:item="item" for:index="indexVar">
+										<tr key={item.unitDetails.Id} aria-selected="false" class="slds-hint-parent">
+											<template if:false={isExport}>
+												<td class="slds-truncate " tabindex="0">
+
+													<lightning-input class="rowSelector" type="checkbox"
+														data-id={item.unitDetails.Id}
+														data-hasvalid={item.unitDetails.hasValidSalesorder__c}
+						                                data-admincludedfee={item.unitDetails.ADM_Fee_Included__c}
+														data-directindirect={item.unitDetails.Direct_Indirect__c}
+														data-unit-name={item.unitDetails.Name}
+														
+														data-unit-project={item.unitDetails.ProjectName__c}
+														data-unit-asc={item.unitDetails.AnticipatedServiceCharges__c}
+														data-unit-pmf={item.unitDetails.BuildingSectionName__r.PropertyManagementFee__c}
+														data-unit-unittype={item.unitDetails.UnitType__c}
+														data-unit-totalrooms={item.unitDetails.TotalRooms__c}
+														data-unit-saleablearea={item.unitDetails.SaleableArea__c}
+														data-unit-measuredarea={item.unitDetails.MeasuredArea__c}
+														data-unit-unitprice={item.unitDetails.SellingPrice__c}
+														onchange={handleRowSelect} checked={item.isSelected}
+														value={item.isSelected}></lightning-input>
+
+												</td>
+											</template>
+											<td class="slds-truncate" tabindex="0" style="white-space: nowrap;">
+
+												<template if:false={isExport}>
+													<a data-id={item.unitDetails.Id} target="_blank"
+														onclick={navigateToRecordPage}>{item.unitDetails.Name}</a>
+													<!-- <lightning-button variant="base" 
+															value={item.unitDetails.Id} 
+															onclick={navigateToRecordPage} class="slds-m-left_x-small btnCustom">
+														</lightning-button> -->
+												</template>
+												<template if:true={isExport}>
+
+													{item.unitDetails.Name}
+
+												</template>
+
+											</td>
+
+											<td class="slds-truncate" tabindex="0">
+												<span>
+													{item.unitDetails.UnitType__c}
+												</span>
+											</td>
+											<td class="slds-truncate" tabindex="0">
+												<span class="slds-grid slds-grid_align-spread">
+													{item.unitDetails.UnitCategory__c}
+												</span>
+											</td>
+
+
+
+											<td class="slds-truncate slds-truncate slds-wrap" tabindex="0">
+												<span class="slds-grid slds-grid_align-spread ">
+													{item.unitDetails.NumberOfBedrooms__c}
+												</span>
+											</td>
+
+
+
+
+											<td class="slds-truncate" tabindex="0">
+												<span class="slds-grid slds-grid_align-spread">
+
+													<p> <lightning-formatted-number class="table-input"
+															value={item.unitDetails.Internal_Saleable_Area__c}
+															minimum-fraction-digits="2" maximum-fraction-digits="2"
+															readonly></lightning-formatted-number></p>
+												</span>
+											</td>
+											<td class="slds-truncate" tabindex="0">
+												<span class="slds-grid slds-grid_align-spread">
+
+													<p> <lightning-formatted-number class="table-input"
+															value={item.unitDetails.External_Saleable_Area__c}
+															minimum-fraction-digits="2" maximum-fraction-digits="2"
+															readonly></lightning-formatted-number></p>
+												</span>
+											</td>
+
+											<!--<td class="slds-cell-edit" role="gridcell" tabindex="0">
+												<span class="slds-grid slds-grid_align-spread">
+													
+													<p> <lightning-formatted-number  class="table-input" value={item.unitDetails.TerraceArea__c} minimum-fraction-digits="2" maximum-fraction-digits="2" readonly ></lightning-formatted-number></p>															
+												</span>
+											</td>
+											<td class="slds-cell-edit" role="gridcell" tabindex="0">
+												<span class="slds-grid slds-grid_align-spread">-->
+											<!--{item.unitDetails.TotalArea__c}
+													<p> <lightning-formatted-number class="table-input" value={item.unitDetails.TotalArea__c} minimum-fraction-digits="2" maximum-fraction-digits="2" readonly></lightning-formatted-number></p>															
+												</span>
+											</td>
+											<td class="slds-cell-edit" role="gridcell" tabindex="0">
+												<span class="slds-grid slds-grid_align-spread">-->
+											<!--{item.unitDetails.UnitPlotArea__c}
+													<p> <lightning-formatted-number  class="table-input" value={item.unitDetails.UnitPlotArea__c} minimum-fraction-digits="2" maximum-fraction-digits="2" readonly ></lightning-formatted-number></p>															
+												</span>
+											</td>-->
+											 <td class="slds-cell-edit" role="gridcell" tabindex="0">
+												<span>
+													
+													<p> <lightning-formatted-number format-style="currency"
+															class="table-input" value={item.unitDetails.SellingPrice__c}
+															minimum-fraction-digits="2" maximum-fraction-digits="2"
+															readonly
+															currency-code={sObjectRecord.CurrencyIsoCode}></lightning-formatted-number>
+													</p>
+												</span>
+											</td>
+											<!-- <td class="slds-cell-edit" role="gridcell" tabindex="0">
+												<span>
+													
+													<p> <lightning-formatted-number format-style="currency"
+															class="table-input"
+															value={item.unitDetails.StandardPrice__c}
+															minimum-fraction-digits="2" maximum-fraction-digits="2"
+															readonly
+															currency-code={sObjectRecord.CurrencyIsoCode}></lightning-formatted-number>
+													</p>
+												</span>
+											</td>
+											<td class="slds-cell-edit" role="gridcell" tabindex="0">
+												<span>
+													
+													<p> <lightning-formatted-number format-style="currency"
+															class="table-input" value={item.unitDetails.PremiumPrice__c}
+															minimum-fraction-digits="2" maximum-fraction-digits="2"
+															readonly
+															currency-code={sObjectRecord.CurrencyIsoCode}></lightning-formatted-number>
+													</p>
+												</span>
+											</td>
+ -->
+											<td class="slds-truncate" tabindex="0">
+												<span>
+													{item.unitDetails.Direct_Indirect__c}
+												</span>
+											</td>
+
+
+										</tr>
+									</template>
+								</template>
+
+
+
+							</tbody>
+
+						</table>
+						<template if:true={noDataavailable}>
+							<div style="line-height: 50px;
+							height: 50px;">
+								<h1 style="text-align: center;"><b>No record found with searched keyword.</b></h1>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</template>
+		<!-- Page 2 Start -->
+		<template if:true={showPage2}>
+			<template if:true={memoFlow}>
+				<div class="slds-card__body">
+					<div class="slds-grid slds-container--fluid slds-gutters slds-grid_vertical-align-top">
+						<div class="filter-col slds-col slds-size_12-of-12">
+							<div class="slds-grid slds-wrap">
+
+
+								<div class="custom-row">
+									<div class="custom-cell">
+
+										<label>Memo Type</label><abbr style="color: red;"> *</abbr>
+										<lightning-record-edit-form object-api-name="BookingMemo__c"
+											style="margin-bottom: 1rem;">
+											<lightning-input-field name="memoTypeField" value={memoTypeField}
+												field-name="MemoType__c" variant="label-hidden" aria-required="true"
+												onchange={handleChange}>
+											</lightning-input-field>
+										</lightning-record-edit-form>
+									</div>
+
+									<div class="custom-cell">
+
+										<label>Memo Subject</label><abbr style="color: red;"> *</abbr>
+										<lightning-input type="text" variant="label-hidden" aria-required="true"
+											name="memoSubjectField" value={memoSubjectField} placeholder="Memo Subject"
+											onkeyup={handleKeyUp}>
+										</lightning-input>
+									</div>
+
+								</div>
+
+
+								<div class="custom-row">
+									<div class="custom-cell">
+										<label>Memo Header</label><abbr style="color: red;"> *</abbr>
+										<lightning-textarea type="text" variant="label-hidden" aria-required="true"
+											name="memoHeaderField" value={memoHeaderField} placeholder="Memo Header"
+											onkeyup={handleKeyUp}>
+										</lightning-textarea>
+									</div>
+
+									<div class="custom-cell">
+										<label>Special Note</label>
+										<lightning-textarea type="text" variant="label-hidden" aria-required="true"
+											name="specialNoteField" value={specialNoteField} placeholder="Special Note"
+											onkeyup={handleKeyUp}>
+										</lightning-textarea>
+									</div>
+								</div>
+
+
+
+
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</template>
+			<div class="slds-card__body">
+				<div class="slds-grid slds-container--fluid slds-gutters slds-grid_vertical-align-top">
+					<div class="filter-col slds-col slds-size_12-of-12">
+
+						
+						<template if:true={reserveBookingFlow}>
+							<div class="slds-m-around_medium">
+								<lightning-input type="checkbox" label="Same Payment Plan & Offer" checked={singlePaymentSelectcheck} onchange={handleSinglePaymentSelection}></lightning-input>
+							</div>
+						</template>
+						
+						<lightning-tabset variant="scoped">
+							<template for:each={selectedUnitList} for:item="item" for:index="indexVar">
+								<lightning-tab key={item.unitId} label={item.unitName} value={item.unitId}
+									onactive={handlePaymentUnitSelect}>
+
+									<div class="slds-grid slds-wrap slds-p-around_small" style="padding-left: unset;">
+										<div class="filter-col slds-col slds-size_12-of-12"
+											style="padding-left: unset;">
+
+
+										</div>
+										<div class="filter-col slds-col slds-size_12-of-12"
+											style="padding-left: unset;">
+											<div class="slds-grid slds-wrap custom-margin" style="padding-left: unset;">
+												<div class="filter-col slds-col slds-size_3-of-12 ddl-title-container"
+													style="padding-left: unset;">
+													<h1 class="ddl-title">Payment And Offer</h1>
+												</div>
+												<div class="filter-col slds-col slds-size_3-of-12"
+													style="padding-left: unset;">
+													<template if:true={item.salesOfferDetails}>
+														<template
+															if:true={item.salesOfferDetails.availablePaymentPlans}>
+															<template if:false={reserveBookingFlow}>
+																<!-- label="Select an existing payment plan" -->
+																<lightning-combobox dropdown-alignment="auto"
+																	name={item.unitId} placeholder="Select Payment Plan"
+																	value={selectedPaymentPlan}
+																	options={item.salesOfferDetails.availablePaymentPlans}
+																	onchange={selectPaymentPlan}
+																	data-record-id={item.unitId} variant="label-hidden"
+																	class="selectedPaymentPlan"></lightning-combobox>
+															</template>
+
+
+															<template if:true={reserveBookingFlow}>
+																<!-- label="Select an existing payment plan" -->
+
+																<lightning-combobox dropdown-alignment="auto"
+																	placeholder="Payment Plan"
+																	value={selectedPaymentPlan}
+																	options={item.salesOfferDetails.availablePaymentPlans}
+																	onchange={selectPaymentPlan}
+																	data-record-id={item.unitId} variant="label-hidden"
+																	class="selectedPaymentPlan"></lightning-combobox>
+															</template>
+
+
+															<!-- <lightning-button label="Budget Check" 
+																slot="actions" onclick={handleMenuAction}></lightning-button> -->
+
+															<!-- Show Pills-->
+															<template if:false={AgreementWizard}>
+																<template if:false={hidePill}>
+																	<div
+																		class="slds-grid slds-wrap slds-p-around_xx-top">
+																		<template
+																			if:true={item.salesOfferDetails.applicablePaymentPlansCalculated}>
+																			<template
+																				for:each={item.salesOfferDetails.applicablePaymentPlansCalculated}
+																				for:item="paymentItem"
+																				for:index="paymentItemIndexVar">
+																				<template
+																					if:true={paymentItem.isSelected}>
+																					<lightning-pill
+																						key={paymentItem.paymentPlanDetails.Id}
+																						class="slds-m-around_xx-small"
+																						name={paymentItem.paymentPlanDetails.Id}
+																						label={paymentItem.paymentPlanDetails.Name}
+																						onremove={unselectPaymentPlan}
+																						variant="label-hidden">
+																					</lightning-pill>
+																				</template>
+																			</template>
+																		</template>
+																	</div>
+																</template>
+															</template>
+														</template>
+													</template>
+												</div>
+												<div class="filter-col slds-col slds-size_3-of-12">
+													<template if:true={item.salesOfferDetails}>
+														<template if:true={item.salesOfferDetails.availableOffers}>
+															<template if:true={reserveBookingFlow}>
+																
+																<div class="filter-col slds-col"
+																	style="padding-left: unset;">
+																	<lightning-combobox dropdown-alignment="auto"
+																		name={item.unitId} placeholder="Select Offer"
+																		value={item.offerId} variant="label-hidden"
+																		options={item.salesOfferDetails.availableOffers}
+																		onchange={handleOfferChange}
+																		data-record-id={item.unitId}
+																		class="selectedOffer"></lightning-combobox>
+																</div>
+															</template>
+														</template>
+														<template if:false={reserveBookingFlow}>
+															<div class="filter-col slds-col">
+																
+																<lightning-combobox dropdown-alignment="auto"
+																	name={item.unitId} placeholder="Offer"
+																	value={item.offerId}
+																	options={item.salesOfferDetails.availableOffers}
+																	onchange={handleOfferChange}
+																	data-record-id={item.unitId} class="selectedOffer"
+																	variant="label-hidden"></lightning-combobox>
+															</div>
+														</template>
+
+													</template>
+												</div>
+
+
+
+												<template if:true={reserveBookingFlow}>
+													<div class="filter-col slds-col slds-size_3-of-12" style="margin-top:-20px;" >
+														<lightning-combobox name={item.unitId}
+															value={item.finishingtypeValue} 
+															placeholder="Finishing Type"
+															options={finishingtypeOptions}
+															onchange={handleFinishingTypeChange}></lightning-combobox>
+													</div>
+												</template>
+
+
+												<template if:false={reserveBookingFlow}>
+													<div class="filter-col slds-col slds-size_3-of-12" style="margin-top:-20px;">
+
+
+														<lightning-combobox name={item.unitId}
+															value={item.finishingtypeValue} 
+															placeholder="Finishing Type"
+															options={finishingtypeOptions}
+															onchange={handleFinishingTypeChange}></lightning-combobox>
+													</div>
+												</template>
+
+											</div>
+										</div>
+
+
+
+										<template if:true={memoFlow}>
+											<div class="filter-col slds-col slds-size_12-of-12"
+												style="padding-left: unset;">
+
+												<div class="custom-row">
+													<div class="custom-cell">
+														<label>Discount Percentage</label>
+														<lightning-input type="number" variant="label-hidden" min="0"
+															step=".01" max="100" aria-required="true"
+															value={item.discountPercentageField}
+															name="discountPercentageField"
+															placeholder="Discount Percentage" onkeyup={caltculateValue}>
+														</lightning-input>
+													</div>
+													<div class="custom-cell">
+														<label>Discount Amount</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true" value={item.discountAmountField}
+															name="discountAmountField" placeholder="Discount Amount"
+															readonly disabled class="read-only" step="0.01">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="custom-row">
+													<div class="custom-cell">
+														<label>Rebate Percentage</label>
+														<lightning-input type="number" variant="label-hidden" min="0"
+															step=".01" max="100" aria-required="true"
+															value={item.rebatePercentageField}
+															name="rebatePercentageField" placeholder="Rebate Percentage"
+															onkeyup={caltculateValue}>
+														</lightning-input>
+													</div>
+													<div class="custom-cell">
+														<label>Rebate Amount</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true" value={item.rebateAmountField}
+															name="rebateAmountField" placeholder="Rebate Amount"
+															readonly disabled class="read-only" step="0.01">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="custom-row">
+													<div class="custom-cell">
+														<label>SC Waiver Years</label>
+														<lightning-input type="number" variant="label-hidden" min="0"
+															step=".01" max="10" aria-required="true"
+															value={item.sCWaiverYearsField}
+															message-when-range-overflow='SC Waiver Years should be between 0 and 10 years'
+															message-when-range-underflow='SC Waiver Years should be between 0 and 10 years'
+															name="sCWaiverYearsField" placeholder="SC Waiver Years"
+															onkeyup={caltculateValue}>
+														</lightning-input>
+													</div>
+													<div class="custom-cell">
+														<label>SC Waiver Amount</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true" value={item.sCWaiverAmountField}
+															name="sCWaiverAmountField" placeholder="SC Waiver Amount"
+															readonly disabled class="read-only" step="0.01">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="custom-row">
+													<div class="custom-cell">
+														<label>PM Fee Years</label>
+														<lightning-input type="number" variant="label-hidden" min="0"
+															step=".01" max="10" aria-required="true"
+															value={item.pMFeeYearsField}
+															message-when-range-overflow='PM Fee Years should be between 0 and 10 years'
+															message-when-range-underflow='PM Fee Years should be between 0 and 10 years'
+															name="pMFeeYearsField" placeholder="PM Fee Years"
+															onkeyup={caltculateValue}>
+														</lightning-input>
+													</div>
+													<div class="custom-cell">
+														<label>PM Fee Amount</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true" value={item.pMFeeAmountField}
+															name="pMFeeAmountField" placeholder="PM Fee Amount" readonly
+															disabled class="read-only" step="0.01">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="custom-row">
+													<div class="custom-cell">
+														<label>Home Maintenance Years</label>
+														<lightning-input type="number" variant="label-hidden" min="0"
+															step=".01" max="10" aria-required="true"
+															value={item.homeMaintenanceYearsField}
+															message-when-range-overflow='Home Maintenance Years should be between 0 and 10 years'
+															message-when-range-underflow='Home Maintenance Years should be between 0 and 10 years'
+															name="homeMaintenanceYearsField"
+															placeholder="Home Maintenance Years"
+															onkeyup={caltculateValue}>
+														</lightning-input>
+													</div>
+													<div class="custom-cell">
+														<label>Home Maintenance Amount</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true" value={item.homeMaintenanceAmountField}
+															name="homeMaintenanceAmountField"
+															placeholder="Home Maintenance Amount" readonly disabled
+															class="read-only" step="0.01">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="custom-row">
+													<div class="custom-cell">
+														<label>ADM Fee Percentage</label>
+														<lightning-input type="number" variant="label-hidden" min="0"
+															step=".01" max="2" aria-required="true"
+															value={item.aDMFeePercentageField}
+															message-when-range-overflow='ADM Fee Percentage should be between 0% and 2%'
+															message-when-range-underflow='ADM Fee Percentage should be between 0% and 2%'
+															name="aDMFeePercentageField"
+															placeholder="ADM Fee Percentage" onkeyup={caltculateValue}>
+														</lightning-input>
+													</div>
+													<div class="custom-cell">
+														<label>ADM Fee Amount</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true" value={item.aDMFeeAmountField}
+															name="aDMFeeAmountField" placeholder="ADM Fee Amount"
+															readonly disabled class="read-only" step="0.01">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="custom-row">
+													<div class="custom-cell">
+														<label>Int Commission Percentage</label>
+														<lightning-input type="number" variant="label-hidden" min="0"
+															step=".01" max={label.MemoDirectCommission}
+															aria-required="true"
+															message-when-range-overflow={memoDirectCommissionAlert}
+															message-when-range-underflow={memoDirectCommissionAlert}
+															name="intCommissionPercentageField"
+															value={item.intCommissionPercentageField}
+															placeholder="Int Commission Percentage"
+															onkeyup={caltculateValue}>
+														</lightning-input>
+													</div>
+													<div class="custom-cell">
+														<label>Int Commission Amount</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true" value={item.intCommissionAmountField}
+															name="intCommissionAmountField"
+															placeholder="Int Commission Amount" readonly disabled
+															class="read-only" step="0.01">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="custom-row">
+													<div class="custom-cell">
+														<label>Broker Commission Percentage</label>
+														<lightning-input type="number" variant="label-hidden" min="0"
+															step=".01" max={label.MemoIndirectCommission}
+															aria-required="true"
+															value={item.brokerCommissionPercentageField}
+															message-when-range-overflow={memoIndirectCommissionAlert}
+															message-when-range-underflow={memoIndirectCommissionAlert}
+															name="brokerCommissionPercentageField"
+															placeholder="Broker Commission Percentage"
+															onkeyup={caltculateValue}>
+														</lightning-input>
+													</div>
+													<div class="custom-cell">
+														<label>Broker Commission Amount</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true" value={item.brokerCommissionField}
+															name="brokerCommissionField"
+															placeholder="Broker Commission Amount" readonly disabled
+															class="read-only" step="0.01">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="custom-row">
+													<div class="custom-cell">
+														<label>Subsidy Percentage</label>
+														<lightning-input type="number" variant="label-hidden" min="0"
+															step=".01" max="100" aria-required="true"
+															value={item.subsidyPercentageField}
+															name="subsidyPercentageField"
+															placeholder="Subsidy Percentage" onkeyup={caltculateValue}>
+														</lightning-input>
+													</div>
+													<div class="custom-cell">
+														<label>Subsidy Amount</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true" value={item.subsidyAmountField}
+															name="subsidyAmountField" placeholder="Subsidy Amount"
+															readonly disabled class="read-only" step="0.01">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="custom-row">
+													<div class="custom-cell">
+														<label>Voucher Name</label>
+														<lightning-combobox dropdown-alignment="auto"
+															variant="label-hidden" options={voucherValues}
+															value={item.voucherNameField} name="voucherNameField"
+															placeholder="Voucher Name" onchange={caltculateValue}>
+														</lightning-combobox>
+													</div>
+													<div class="custom-cell">
+														<label>Voucher Amount</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true" value={item.voucherAmountField}
+															name="voucherAmountField" class="read-only"
+															placeholder="Voucher Amount" readonly disabled
+															onkeyup={caltculateValue} step="0.01">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="custom-row">
+													<div class="custom-cell">
+														<label>Membership Type </label>
+														<lightning-combobox dropdown-alignment="auto"
+															variant="label-hidden" options={membershipValues}
+															value={item.membershipTypeField} name="membershipTypeField"
+															placeholder="Membership Type" onchange={caltculateValue}>
+														</lightning-combobox>
+													</div>
+													<div class="custom-cell">
+														<label>Membership Amount</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true" value={item.membershipAmountField}
+															name="membershipAmountField" class="read-only" readonly
+															disabled placeholder="Membership Amount"
+															onkeyup={caltculateValue} step="0.01">
+														</lightning-input>
+													</div>
+												</div>
+
+												<div class="custom-row">
+													<div class="custom-cell">
+														<label> <strong>Net Impact %</strong> </label>
+														<lightning-input type="text" variant="label-hidden"
+															aria-required="true" value={item.netImpactField}
+															name="netImpactField" placeholder="Net Impact %"
+															onkeyup={handleKeyUp} readonly disabled class="read-only">
+														</lightning-input>
+													</div>
+													<div class="custom-cell">
+														<label> <strong>Net Offer Value</strong> </label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true" value={item.netOfferValueField}
+															name="netOfferValueField" placeholder="Net Offer Value"
+															onkeyup={handleKeyUp} readonly disabled class="read-only"
+															step="0.01">
+														</lightning-input>
+													</div>
+												</div>
+
+												<div class="custom-row">
+													<div class="custom-cell">
+														<lightning-file-upload label="Attach Files" name="fileUploader"
+															accept={acceptedFormats} record-id={recordId}
+															onuploadfinished={handleUploadFinished} multiple>
+														</lightning-file-upload>
+													</div>
+													<div class="custom-cell">
+														<template for:each={uploadedFileNames} for:item="fileData">
+															<li key={fileData.documentId}>
+																<lightning-pill label={fileData.name}
+																	name={fileData.documentId}
+																	onremove={handleAttachmentRemove}></lightning-pill>
+															</li>
+														</template>
+													</div>
+												</div>
+
+
+
+											</div>
+										</template>
+
+
+									</div>
+
+									<div class="installment_div">
+										<h2>Installment Details</h2>
+										<template if:true={item.salesOfferDetails}>
+											<template if:true={item.salesOfferDetails.applicablePaymentPlansCalculated}>
+												<template
+													for:each={item.salesOfferDetails.applicablePaymentPlansCalculated}
+													for:item="paymentItem" for:index="paymentItemIndexVar">
+													<template if:true={paymentItem.isSelected}>
+														<div key={paymentItem.paymentPlanDetails.Name}
+															class="slds-p-bottom_small">
+															<div
+																class="slds-text-heading_xx-small slds-p-bottom_xx-small table-title">
+																<b>{paymentItem.paymentPlanDetails.Name} </b>
+															</div>
+															<!--
+												<div  class="slds-grid slds-container--fluid slds-grid_vertical-align-center slds-p-bottom_x-small">
+													<div class="filter-col slds-col slds-size_6-of-12" >
+														<lightning-input type="toggle" message-toggle-active="" checked={paymentItem.isSelected} message-toggle-inactive="" name={paymentItem.paymentPlanDetails.Id} label={paymentItem.paymentPlanDetails.Name} onchange={handlePaymentSelection}></lightning-input>
+													</div>
+												</div>
+												-->
+															<div class="slds-table_edit_container slds-scrollable"
+																style="margin-top: 1rem;">
+																<table aria-multiselectable="true"
+																	class="slds-table slds-no-row-hover slds-table_bordered slds-table_col-bordered slds-table_edit "
+																	style="border:1px solid #ccc;" role="grid">
+																	<thead>
+																		<tr class="slds-line-height_reset">
+																			<th scope="col"
+																				style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+																				Installment #
+																			</th>
+																			<th scope="col"
+																				style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+																				Milestone
+																			</th>
+																			<th scope="col"
+																				style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+																				Installment Percentage
+																			</th>
+																			<th scope="col"
+																				style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+																				Broker Payout Percentage
+																			</th>
+																			<th scope="col"
+																				style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+																				Installment Date
+																			</th>
+
+																			<template if:false={memoFlow}>
+																				<th scope="col"
+																					style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+																					Total
+																				</th>
+																			</template>
+
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<template
+																			if:true={paymentItem.installmentDetails}>
+																			<template
+																				for:each={paymentItem.installmentDetails}
+																				for:item="installmentItem"
+																				for:index="installmentItemIndexVar">
+																				<tr key={installmentItem.installmentRecord.Id}
+																					aria-selected="false"
+																					class="slds-hint-parent">
+																					<td class="slds-cell-edit"
+																						role="gridcell" tabindex="0">
+																						{installmentItem.installmentRecord.InstallmentNumber__c}
+																					</td>
+																					<td class="slds-cell-edit"
+																						role="gridcell" tabindex="0">
+																						{installmentItem.installmentRecord.Description__c}
+																					</td>
+																					<td class="slds-cell-edit"
+																						role="gridcell" tabindex="0">
+																						{installmentItem.installmentRecord.InstallmentPercentage__c}
+																						%
+																					</td>
+																					<td class="slds-cell-edit"
+																						role="gridcell" tabindex="0">
+																						{installmentItem.installmentRecord.BrokerPayoutPercentage__c}
+																						<template
+																							if:true={installmentItem.installmentRecord.BrokerPayoutPercentage__c}>&nbsp;
+																							%</template>
+
+																					</td>
+																					<td class="slds-cell-edit"
+																						role="gridcell" tabindex="0">
+																						<lightning-formatted-date-time
+																							value={installmentItem.installmentRecord.InstallmentDate__c}
+																							year="2-digit"
+																							month="2-digit"
+																							day="2-digit">
+																						</lightning-formatted-date-time>
+																					</td>
+
+																					<template if:false={memoFlow}>
+																						<td class="slds-cell-edit"
+																							role="gridcell"
+																							tabindex="0">
+																							<!-- <lightning-input class="table-input" value={installmentItem.totalValue} minimum-fraction-digits="2" maximum-fraction-digits="2" readonly></lightning-input> -->
+																							<p> <lightning-formatted-number
+																									format-style="currency"
+																									class="table-input"
+																									value={installmentItem.totalValue}
+																									minimum-fraction-digits="2"
+																									maximum-fraction-digits="2"
+																									readonly
+																									currency-code={sObjectRecord.CurrencyIsoCode}></lightning-formatted-number>
+																							</p>
+
+																						</td>
+																					</template>
+
+																				</tr>
+																			</template>
+
+
+																		</template>
+																	</tbody>
+																</table>
+															</div>
+															</br>
+															</br>
+															<template if:true={memoFlow}>
+																<template if:true={paymentItem.installmentDetails}>
+																	<lightning-card variant="Narrow"
+																		class="proposed-installments-section"
+																		title="Proposed Installments">
+																		<table
+																			class="slds-table slds-table_cell-buffer slds-table_bordered proposed-installments-table"
+																			style="border:1px solid #ccc;">
+																			<thead>
+																				<tr class="slds-line-height_reset">
+
+																					<td scope="col">
+																						<lightning-input type="number"
+																							variant="standard"
+																							name="proposedInstallmentNumberField"
+																							label="Proposed Installment Number"
+																							value={proposedInstallmentNumberField}
+																							placeholder="Proposed Installment Number"
+																							onchange={handleChange}>
+																						</lightning-input>
+																					</td>
+
+																					<td scope="col">
+																						<lightning-input type="date"
+																							variant="standard"
+																							name="proposedInstallmentDateField"
+																							label="Proposed Installment Date"
+																							value={proposedInstallmentDateField}
+																							placeholder="Proposed Installment Date"
+																							onchange={handleChange}>
+																						</lightning-input>
+																					</td>
+																					<td scope="col">
+																						<lightning-input type="number"
+																							variant="standard"
+																							name="proposedInstallmentRateField"
+																							value={proposedInstallmentRateField}
+																							label="Proposed Installment %"
+																							placeholder="Proposed Installment %"
+																							onkeyup={handleKeyUp}>
+																						</lightning-input>
+																					</td>
+																					<td scope="col">
+																						<lightning-input type="number"
+																							variant="standard"
+																							name="proposedBrokerPayoutField"
+																							value={proposedBrokerPayoutField}
+																							label="Proposed Broker %"
+																							placeholder="Proposed Broker %"
+																							onkeyup={handleKeyUp}>
+																						</lightning-input>
+																					</td>
+																					<td scope="col">
+																						<lightning-input type="text"
+																							variant="standard"
+																							name="proposedMilestoneField"
+																							value={proposedMilestoneField}
+																							label="Milestone"
+																							placeholder="Milestone"
+																							onkeyup={handleKeyUp}>
+																						</lightning-input>
+																					</td>
+
+																				</tr>
+																			</thead>
+																		</table>
+																		<div
+																			class="slds-align_absolute-center btns-container">
+																			<button
+																				class="slds-button slds-button_neutral custom-btn"
+																				slot="actions"
+																				onclick={addProposedInstallmentLineChanges}
+																				style="padding: 5pt;">Add
+																			</button>
+
+																			<button
+																				class="slds-button slds-button_neutral custom-btn"
+																				slot="actions"
+																				onclick={cloneInstallmentLines}
+																				style="padding: 5pt;">Clone Installments
+																			</button>
+																		</div>
+																		<div style="height: 200px;">
+																			<lightning-datatable
+																				class="memo-lines-table"
+																				key-field="InstallmentNumber"
+																				data={item.dataInstallmentLineChanges}
+																				columns={columns}
+																				hide-checkbox-column="true"
+																				sorted-by={sortBy}
+																				onrowaction={handleRowAction}
+																				show-row-number-column="true"
+																				sorted-direction={sortDirection}
+																				draft-values={draftValues}
+																				onsave={handleSave}>
+																			</lightning-datatable>
+																		</div>
+																	</lightning-card>
+																</template>
+															</template>
+
+															<!-- Extra Details -->
+
+
+														</div>
+
+
+													</template>
+												</template>
+											</template>
+										</template>
+										<p slot="footer"></p>
+									</div>
+									<template if:false={memoFlow}>
+										<div class="offer_details_div">
+											<h2>Offer Details</h2>
+											<template if:true={item.salesOfferDetails}>
+												<template if:true={item.salesOfferDetails.offersAvailable}>
+													<div class="slds-grid slds-wrap">
+														<!--
+												<div class="slds-col slds-size_12-of-12">
+                                                   <lightning-combobox dropdown-alignment="auto" variant="label-hidden" name={item.unitId} label="Offers"  placeholder="Select Offers" value={item.offerId} 
+                                                        options={item.salesOfferDetails.availableOffers} onchange={handleOfferChange} ></lightning-combobox>
+                                                </div>
+                                                <div class="slds-col slds-size_1-of-12">
+                                                    <lightning-button-icon class="slds-float_right" icon-name="utility:delete"  alternative-text="Remove Offer" title="Remove Offer" onclick={handleRemoveOffer}></lightning-button-icon>
+                                                </div>
+                                                <div class="slds-col slds-size_12-of-12">
+                                                    <br/>
+                                                </div>-->
+														<template if:true={item.salesOfferDetails.offerLinesApplied}>
+															<div
+																class="slds-text-heading_xx-small slds-p-bottom_xx-small table-title">
+																<b>{item.salesOfferDetails.offerRecord.Name} </b>
+															</div>
+															<table aria-multiselectable="true"
+																class="slds-table slds-no-row-hover slds-table_bordered slds-table_col-bordered slds-table_edit "
+																role="grid">
+																<thead>
+																	<tr class="slds-line-height_reset">
+																		<!-- <th scope="col"
+																			style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+																			Offer Name
+																		</th> -->
+																		<th scope="col"
+																			style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+																			Offer Type
+																		</th>
+																		<th scope="col"
+																			style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+																			Offer On
+																		</th>
+																		<th scope="col"
+																			style="padding: var(--lwc-tableCellSpacing,0.25rem 0.5rem);">
+																			Value
+																		</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<template
+																		for:each={item.salesOfferDetails.applicableOfferLinesCalculated}
+																		for:item="OfferItem" for:index="indexVar">
+																		<tr key={OfferItem.Id} aria-selected="false"
+																			class="slds-hint-parent">
+																			<!-- <td class="slds-cell-edit" role="gridcell"
+																				tabindex="0">
+																				<b>{OfferItem.Name}</b>
+																			</td> -->
+																			<td class="slds-cell-edit" role="gridcell"
+																				tabindex="0">
+																				{OfferItem.OfferType__c}
+																			</td>
+																			<td class="slds-cell-edit" role="gridcell"
+																				tabindex="0">
+																				{OfferItem.OfferOn__c} <span
+																					if:true={OfferItem.DiscountType__c}>({OfferItem.DiscountType__c})</span>
+																			</td>
+																			<td class="slds-cell-edit" role="gridcell"
+																				tabindex="0">
+																				<lightning-formatted-number
+																					class="table-input"
+																					value={OfferItem.OfferValue__c}
+																					minimum-fraction-digits="2"
+																					maximum-fraction-digits="2"
+																					readonly> &nbsp;
+																				</lightning-formatted-number><span
+																					if:true={OfferItem.OfferValueType__c}>{OfferItem.OfferValueType__c}
+																				</span>
+																			</td>
+																		</tr>
+																	</template>
+																</tbody>
+															</table>
+														</template>
+														<template if:false={item.salesOfferDetails.offerLinesApplied}>
+															No Offers Lines Applied
+														</template>
+													</div>
+												</template>
+												<template if:false={item.salesOfferDetails.offersAvailable}>
+													No Offers applicable
+												</template>
+											</template>
+											<p slot="footer"></p>
+										</div>
+									</template>
+									<!--
+                                    EXP
+
+                                -->
+								</lightning-tab>
+							</template>
+
+						</lightning-tabset>
+					</div>
+				</div>
+			</div>
+		</template>
+		<!-- Page 2 End -->
+		<!-- Page 3 Start -->
+		<template if:true={showPage3}>
+			<template if:true={reserveFlow}>
+				<div class="slds-card__body">
+
+					<template if:true={BookingWizard}>
+
+						<!-- <div class="slds-grid slds-wrap slds-p-bottom_small">
+							
+						</div>
+						<div class="slds-grid slds-wrap slds-p-bottom_small">
+							
+						</div> -->
+
+						<div class="slds-grid slds-wrap slds-p-bottom_small slds-border_bottom">
+							<template if:true={ICACheckRequired}>
+								<div class="filter-col slds-col slds-size_3-of-12">
+									<lightning-input type="file" variant="label-stacked" required label="ICA Verified"
+										class="icaVerificationConfirm"
+										onchange={handleBookingButtonDisplay}></lightning-input>
+									<!--<lightning-file-upload variant="label-stacked" record-id={recordId} required label="ICA Verification Proof" class="icaVerificationConfirm" onchange={handleBookingButtonDisplay}></lightning-file-upload>
+									-->
+									<div if:true={fileData}>{fileData.filename}</div>
+								</div>
+							</template>
+
+							<!-- <div class="filter-col slds-col slds-size_3-of-12"> -->
+							<div class="slds-col slds-size_1-of-3 slds-p-right_xx-small">
+								<lightning-combobox dropdown-alignment="auto" class="bookingConfirmationWinReason"
+									label="Win Reason" variant="label-stacked" placeholder="Win Reason" required
+									onchange={handleBookingButtonDisplay} value={OppWinReason}
+									options={winReasonOptions}>
+								</lightning-combobox>
+
+
+
+								<!--	<template if:true={showPage3}>
+									<template if:true={reserveFlow}>
+										<template if:true={BookingWizard}>
+				
+											<lightning-button class="slds-float_right" variant="brand" name="Book Unit(s)"
+												label="Book" icon-name="standard:qualifications" disabled={disableBookingButton}
+												onclick={handleBooking}></lightning-button>
+				
+										</template>
+									</template>
+								</template>-->
+
+
+								<!--	<div class="check-box-container check-box-container-vertical">
+<label >Customer Contact Details are Verified <span style="color: red;">*</span></label>
+<lightning-input type="checkbox" variant="label-stacked" required label="" class="bookingConfirmationConfirm hide-astrisk" onchange={handleBookingButtonDisplay}></lightning-input>
+
+								</div>-->
+
+
+							</div>
+
+							<div class="slds-col slds-size_1-of-3">
+								<br />
+
+								<lightning-input class="slds-p-left_xx-large" type="checkbox" data-id="checkbox"
+									label="Down Payment Received" onchange={handleCheckboxChange}></lightning-input>
+
+							</div>
+
+							<div class="slds-col slds-size_1-of-3 slds-p-left_xx-small" style="padding: 1.3rem;">
+								<!-- <div class="filter-col slds-col slds-size_3-of-12 book-units-container"  style="padding-top: 1.3rem;"> -->
+								<lightning-button class="slds-float_right" variant="brand" name="Book Unit(s)"
+									label="Book Unit(s)" disabled={disableBookingButton}
+									onclick={handleBooking}></lightning-button>
+								<!-- </div> -->
+							</div>
+
+
+							<div class="filter-col slds-col slds-size_3-of-12 slds-text-align_left">
+							</div>
+
+							<template if:true={availableEOIs}>
+								<div class="filter-col slds-col slds-size_3-of-12">
+									<lightning-combobox dropdown-alignment="auto" class="eoi" label="Select EOI"
+										variant="label-stacked" placeholder="EOI" options={availableEOIs}>
+									</lightning-combobox>
+								</div>
+							</template>
+
+
+						</div>
+
+					</template>
+
+				</div>
+			</template>
+			<div class="slds-card__body">
+				<div class="slds-grid slds-container--fluid slds-gutters slds-grid_vertical-align-top">
+					<div class="filter-col slds-col slds-size_12-of-12">
+
+						<template if:true={OfferWizard}>
+							<lightning-tabset variant="scoped">
+								<template for:each={selectedUnitList} for:item="item" for:index="indexVar">
+
+									<lightning-tab key={item.unitId} label={item.unitName} data-target-type="tab"
+										data-unit-id={item.unitId} value={item.unitId} onactive={handlePDFActive}>
+
+										<lightning-card variant="Narrow" title="Offer Details">
+											<template if:false={unitWizard}>
+												<lightning-button slot="actions" name="Email Current Offer"
+													label="Email Current" data-unit-id={item.unitId}
+													onclick={sendSalesOfferEmail}></lightning-button> &nbsp;
+												<lightning-button slot="actions" name="Whatsapp Offer"
+													label="WhatsApp Current">
+												</lightning-button>
+												<lightning-button slot="actions" name="Email All Offers"
+													label="Email All" onclick={sendSalesOfferEmail}>
+												</lightning-button>
+												<lightning-button slot="actions" name="Whatsapp Offer"
+													label="WhatsApp All">
+												</lightning-button>
+											</template>
+											<div class="customer-name-container">
+												<label for="">Customer Name</label>
+												<div>
+													<lightning-input type="text" class="customer-name-input"
+														data-target-type="input" data-unit-id={item.unitId}
+														variant="label-inline" value={customerName}
+														onchange={handlePDFActive}></lightning-input>
+												</div>
+
+											</div>
+											<iframe scrolling="auto" style="width:100%" height="1000"
+												src={fullUrl}></iframe>
+											<br />
+											<!-- {fullUrl} -->
+											<p slot="footer"></p>
+										</lightning-card>
+									</lightning-tab>
+								</template>
+
+							</lightning-tabset>
+						</template>
+
+						<!-- for send sales agreement -->
+						<template if:true={AgreementWizard}>
+							<lightning-tabset variant="scoped">
+
+								<lightning-tab label="Booking Agreement" data-target-type="tab"
+									onactive={handleAgreementPDF}>
+									<lightning-card variant="Narrow">
+
+										<template if:false={unitWizard}>
+											<lightning-button slot="actions" name="Email Current Booking Agreement"
+												label="Email Current"
+												onclick={sendBookingAgreementEmail}></lightning-button>&nbsp;
+
+											<lightning-button slot="actions" name="Whatsapp Offer"
+												label="WhatsApp Current">
+											</lightning-button>
+
+										</template>
+
+										<div class="customer-name-container">
+											<label for="">Customer Name</label>
+											<div>
+												<lightning-input type="text" class="customer-name-input"
+													data-target-type="input" variant="label-inline" value={customerName}
+													onchange={handlePDFActive}></lightning-input>
+											</div>
+
+										</div>
+
+										<iframe scrolling="auto" style="width:100%" height="1000"
+											src={fullUrl}></iframe>
+										<br />
+
+										<p slot="footer"></p>
+										<!-- </div> -->
+									</lightning-card>
+								</lightning-tab>
+
+							</lightning-tabset>
+						</template>
+
+
+						<template if:true={ReservationWizard}>
+							<lightning-tabset variant="scoped">
+								<template for:each={selectedUnitList} for:item="item" for:index="indexVar">
+									<lightning-tab key={item.unitId} label={item.unitName} data-target-type="tab"
+										data-unit-id={item.unitId} value={item.unitId} onactive={handleReserveChoice}>
+
+										<lightning-card variant="Narrow" title="Reservation Confirmation">
+											<div class="slds-grid slds-wrap slds-p-around_small box-container">
+												<div class="filter-col slds-col slds-size_6-of-12">
+
+													<label style="font-weight:bold">Selling Price</label>
+													<lightning-input type="number" variant="label-hidden"
+														aria-required="true"
+														value={item.salesOfferDetails.unitRecord.SellingPrice__c}
+														name="reservationSellingPrice" placeholder="Selling Price"
+														onkeyup={handleKeyUp} readonly>
+													</lightning-input>
+													<template if:true={selectedPaymentCalculatedJS}>
+														<label style="font-weight:bold">Payable Price</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true"
+															value={selectedPaymentCalculatedJS.netSalesPrice}
+															name="reservationPayablePrice" placeholder="Payable Price"
+															onkeyup={handleKeyUp} readonly>
+														</lightning-input>
+
+														<label style="font-weight:bold">Rebate (Upon Handover)</label>
+														<lightning-input type="number" variant="label-hidden"
+															aria-required="true"
+															value={selectedPaymentCalculatedJS.rebateAmount}
+															name="reservationRebate"
+															placeholder="Rebate (Upon Handover)" onkeyup={handleKeyUp}
+															readonly>
+														</lightning-input>
+													</template>
+												</div>
+												<template if:true={selectedPaymentCalculatedJS}>
+													<div class="filter-col slds-col slds-size_6-of-12">
+
+														<label style="font-weight:bold">Total Discount</label>
+														<lightning-input type="number" variant="label-hidden"
+															value={selectedPaymentCalculatedJS.discountAmount}
+															name="reservationTotalDiscount" placeholder="Total Discount"
+															onkeyup={handleKeyUp} readonly>
+														</lightning-input>
+
+														<label style="font-weight:bold">Partner Discount</label>
+														<lightning-input type="number" variant="label-hidden"
+															value={selectedPaymentCalculatedJS.partnerDiscountAmount}
+															name="reservationPartnerDiscount"
+															placeholder="Partner Discount" onkeyup={handleKeyUp}
+															readonly>
+														</lightning-input>
+
+													</div>
+												</template>
+											</div>
+										</lightning-card>
+										<lightning-card variant="Narrow" title="Unit Details">
+											<div class="slds-grid slds-wrap slds-p-around_small box-container">
+												<div class="filter-col slds-col slds-size_4-of-12">
+
+													<label style="font-weight:bold">Unit Type</label>
+													<lightning-input type="text" variant="label-hidden"
+														value={item.salesOfferDetails.unitRecord.UnitType__c}
+														name="unitType" onkeyup={handleKeyUp} readonly>
+													</lightning-input>
+
+													<label style="font-weight:bold">Unit Name</label>
+													<lightning-input type="text" variant="label-hidden"
+														value={item.salesOfferDetails.unitRecord.Name} name="unitName"
+														onkeyup={handleKeyUp} readonly>
+													</lightning-input>
+
+													<label style="font-weight:bold">Rooms</label>
+													<lightning-input type="text" variant="label-hidden"
+														value={item.salesOfferDetails.unitRecord.TotalRooms__c}
+														name="unitRooms" onkeyup={handleKeyUp} readonly>
+													</lightning-input>
+
+												</div>
+												<div class="filter-col slds-col slds-size_4-of-12">
+													<label style="font-weight:bold">Terrace Area</label>
+													<lightning-input type="text" variant="label-hidden"
+														value={item.salesOfferDetails.unitRecord.TerraceArea__c}
+														name="unitTerraceArea" onkeyup={handleKeyUp} readonly>
+													</lightning-input>
+
+													<label style="font-weight:bold">Reservation Amount</label>
+													<template
+														if:true={item.salesOfferDetails.unitRecord.BuildingSectionName__c}>
+														<!-- <template
+															if:true={item.salesOfferDetails.unitRecord.BuildingSectionName__r.ReservationAmount__c}>
+															<lightning-input type="text" variant="label-hidden"
+																value={item.salesOfferDetails.unitRecord.BuildingSectionName__r.ReservationAmount__c}
+																name="unitReservationAmount" onkeyup={handleKeyUp}
+																readonly>
+															</lightning-input>
+														</template>
+														<template
+															if:false={item.salesOfferDetails.unitRecord.BuildingSectionName__r.ReservationAmount__c}>
+															<lightning-input type="text" variant="label-hidden"
+																value={item.salesOfferDetails.unitRecord.Project__r.ReservationAmount__c}
+																name="unitReservationAmount" onkeyup={handleKeyUp}
+																readonly>
+															</lightning-input>
+														</template> -->
+													</template>
+													<template if:true={selectedPaymentCalculatedJS}>
+														<template
+															if:true={selectedPaymentCalculatedJS.multiPurposeAmountApplicable}>
+															<label style="font-weight:bold">Multi-purpose Room</label>
+															<lightning-input type="text" variant="label-hidden"
+																value={item.multipurposeamount}
+																name="unitMultiPurposeRoom" onkeyup={handleKeyUp}
+																readonly>
+															</lightning-input>
+														</template>
+													</template>
+												</div>
+
+												<div class="filter-col slds-col slds-size_4-of-12">
+
+
+													<!-- <template if:true={eligibleforUnitFinishes}> -->
+													<label style="font-weight:bold">Unit Finish</label>
+													<lightning-input type="text" variant="label-hidden"
+														value={item.unitFinishes} name="unitFinish"
+														onkeyup={handleKeyUp} readonly>
+													</lightning-input>
+													<!-- </template> -->
+													<label style="font-weight:bold">Saleable Area</label>
+													<lightning-input type="text" variant="label-hidden"
+														value={item.salesOfferDetails.unitRecord.SaleableArea__c}
+														name="unitSaleableArea" onkeyup={handleKeyUp} readonly>
+													</lightning-input>
+
+
+
+												</div>
+											</div>
+
+											<div class="payment-details-container">
+												<h1 class="box-title">Payment Details</h1>
+												<div class="slds-grid slds-wrap slds-p-around_small box-container">
+													<div class="filter-col slds-col slds-size_6-of-12">
+
+														<lightning-combobox dropdown-alignment="auto" name={item.unitId}
+															label="Select Reservation Amount"
+															placeholder="Select Reservation Amount" required
+															value={item.reservationAmountType}
+															options={paymentAmountOptionsForReservation}
+															onchange={handleReservationAmountTypeChange}>
+														</lightning-combobox>
+														<lightning-input class="slds-p-around_xx-top" type="number"
+															disabled={item.disableAmountInput}
+															value={item.reservationAmount} name={item.unitId}
+															label="Reservation Amount" required
+															onchange={handlePaymentAmountChange}></lightning-input>
+													</div>
+													<div class="filter-col slds-col slds-size_6-of-12">
+
+														<lightning-combobox dropdown-alignment="auto" name={item.unitId}
+															label="Select Payment Mode"
+															placeholder="Select Payment Mode" required
+															value={item.paymentMethod}
+															options={paymentOptionsForReservation}
+															onchange={handlePaymentMethodChange}></lightning-combobox>
+													</div>
+												</div>
+											</div>
+
+											<!-- <div slot="footer" class="slds-grid slds-wrap">
+												<div class="filter-col slds-col slds-size_12-of-12">
+													<lightning-button class="slds-float_right" variant="brand"
+														name="Reserve Unit" label="Reserve Unit"
+														onclick={handleReservation}></lightning-button>
+
+												</div>
+											</div> -->
+
+
+										</lightning-card>
+									</lightning-tab>
+								</template>
+
+							</lightning-tabset>
+						</template>
+						<template if:true={BookingWizard}>
+							<lightning-tabset variant="scoped">
+								<template for:each={selectedUnitList} for:item="item" for:index="indexVar">
+									<lightning-tab key={item.unitId} label={item.unitName} data-target-type="tab"
+										data-unit-id={item.unitId} value={item.unitId} onactive={handleReserveChoice}>
+										<lightning-card variant="Narrow" title="Booking Confirmation">
+											<div class="slds-grid slds-wrap slds-p-around_small box-container"
+												style="margin-bottom: 1rem;">
+												<div class="filter-col slds-col slds-size_4-of-12">
+													<label style="font-weight:bold">Property Name</label>
+													<lightning-input type="text" variant="label-hidden"
+														value={item.salesOfferDetails.unitRecord.Project__r.Name}
+														name="PropertyName" readonly>
+													</lightning-input>
+													<template if:true={selectedPaymentCalculatedJS}>
+														<label style="font-weight:bold">Selling Price</label>
+
+														<lightning-input type="number" variant="label-hidden"
+															value={item.salesOfferDetails.unitRecord.SellingPrice__c}
+															name="SellingPrice" readonly>
+														</lightning-input>
+													</template>
+
+													<template if:true={selectedPaymentCalculatedJS}>
+														<label style="font-weight:bold">Payment Plan</label>
+														<lightning-input type="text" variant="label-hidden"
+															data-record-id={item.unitId}
+															value={selectedPaymentCalculatedJS.paymentPlanDetails.Name}
+															name="selectedPaymentPlanName"
+															class="selectedPaymentPlanName" readonly>
+														</lightning-input>
+													</template>
+
+												</div>
+												<template if:true={selectedPaymentCalculatedJS}>
+													<div class="filter-col slds-col slds-size_4-of-12">
+
+														<label style="font-weight:bold">Unit Type</label>
+														<lightning-input type="text" variant="label-hidden"
+															value={item.salesOfferDetails.unitRecord.UnitType__c}
+															name="unitType" readonly>
+														</lightning-input>
+
+
+														<label style="font-weight:bold">Total Discount</label>
+														<lightning-input type="number" variant="label-hidden"
+															value={selectedPaymentCalculatedJS.discountAmount}
+															name="TotalDiscount" placeholder="Total Discount" readonly>
+														</lightning-input>
+														<template if:true={item.salesOfferDetails.offerRecord}>
+															<label style="font-weight:bold">Offer Name</label>
+															<lightning-input type="text" variant="label-hidden"
+																value={item.salesOfferDetails.offerRecord.Name}
+																name="OfferName" readonly>
+															</lightning-input>
+														</template>
+
+
+
+													</div>
+													<div class="filter-col slds-col slds-size_4-of-12">
+
+
+
+														<label style="font-weight:bold">Unit Name</label>
+														<lightning-input type="text" variant="label-hidden"
+															value={item.salesOfferDetails.unitRecord.Name}
+															name="unitName" readonly>
+														</lightning-input>
+														<template if:true={selectedPaymentCalculatedJS}>
+															<label style="font-weight:bold">Payable Price</label>
+															<lightning-input type="number" variant="label-hidden"
+																value={selectedPaymentCalculatedJS.netSalesPrice}
+																name="PayablePrice" readonly>
+															</lightning-input>
+														</template>
+														<!--
+													<label style="font-weight:bold">Price</label>
+													<lightning-input type="number" variant="label-hidden"
+														 value={item.salesOfferDetails.unitRecord.SellingPrice__c}
+														name="unitRooms"
+														readonly>
+													</lightning-input>-->
+
+													</div>
+												</template>
+											</div>
+
+											<div slot="footer" class="slds-grid slds-wrap">
+												<div class="filter-col slds-col slds-size_3-of-12">
+													<label style="font-weight:bold"
+														class="slds-text-title_bold slds-float_left">Total</label>
+													<lightning-input type="number" label="Total" variant="label-hidden"
+														value={item.salesOfferDetails.totalOfAllUnitNetSellingPrice}
+														name="PayablePrice" readonly>
+													</lightning-input>
+												</div>
+												<!--<div class="filter-col slds-col slds-size_3-of-12">
+													<label style="font-weight:bold" class="slds-text-title_bold slds-float_left">Mortgage Applicable</label>
+													<lightning-combobox dropdown-alignment="auto" name="mortgageApplicable" variant="label-hidden" required placeholder="Mortgage Applicable"
+															options={mortgageApplicableVals} onchange={handleMortgageChange} data-record-id={item.unitId} class="mortgageApplicableField"></lightning-combobox>
+												</div>-->
+												<!-- commented by sreelakshmi sk, condition already commented -->
+												<!-- <div class="filter-col slds-col slds-size_3-of-12">
+													<template if:true={item.mortgageApplicable}>
+													<label style="font-weight:bold" class="slds-text-title_bold slds-float_left">Mortgage Bank </label>
+													<lightning-combobox dropdown-alignment="auto" name="mortgageBank" variant="label-hidden" 
+															options={mortgageBankVals} onchange={handleMortgageBankChange} required data-record-id={item.unitId} class="mortgageBankField"></lightning-combobox>
+													</template>
+												</div> 
+												<div class="filter-col slds-col slds-size_3-of-12">
+													<lightning-button class="slds-float_right" variant="brand"
+														name="Book Unit(s)" label="Book Unit(s)" disabled={disableBookingButton}
+														onclick={handleBooking}></lightning-button>
+												</div>-->
+											</div>
+										</lightning-card>
+									</lightning-tab>
+								</template>
+
+							</lightning-tabset>
+						</template>
+					</div>
+				</div>
+			</div>
+
+		</template>
+		<!-- Page 3 End -->
+
+
+
+		<!-- Hold date modal -->
+
+		<template if:true={showSelectDateModal}>
+
+			<template if:true={showLoading}>
+				<lightning-spinner alternative-text="Loading" size="medium" variant="brand" class="customSpinner">
+				</lightning-spinner>
+			</template>
+
+			<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+				aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+				<div class="slds-modal__container">
+
+					<header class="slds-modal__header">
+						<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Request to Hold</h2>
+					</header>
+
+					<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+						<div class="slds-col slds-size_1-of-2 slds-p-right_xx-small">
+							<label for="FieldSelect" class="slds-form-element__label slds-no-flex">
+								<abbr title="required" class="slds-required">*</abbr>
+								Select the Number of Days to Hold
+							</label>
+							<select class="slds-select" name="optionSelect" onchange={changeHandler}>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+						</div>
+						<!-- <lightning-combobox class="inputCss" name="NumberofDays" label="Enter number of days to hold" value={days}
+									options={NumDays} onchange={handleDaysEntered} placeholder="Select a Number of days to hold"
+									required="true"></lightning-combobox> -->
+
+						<!-- <lightning-input name="NumberofDays" label="Enter number of days to hold" type="Number" onchange={handleDaysEntered} value={days}></lightning-input> -->
+					</div>
+
+					<footer class="slds-modal__footer">
+						<button class="slds-button slds-button_neutral" onclick={closeselectDateModal}
+							title="Cancel">Cancel</button>
+						<button class="slds-button slds-button_brand" onclick={submitforHoldApproval}
+							title="Hold">Submit</button>
+					</footer>
+
+				</div>
+			</section>
+		</template>
+
+	</article>
+</template>

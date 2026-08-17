@@ -1,0 +1,161 @@
+<apex:page controller="BrokerFormPDFController" applyHtmlTag="false" showHeader="false" renderAs="PDF">
+    <head>
+        <style>
+            body {
+                font-family: Arial;
+                margin: 0;
+                padding: 0;
+            }
+            .brand-header {
+                font-family: 'Perpetua', serif;
+                font-size: 60px;
+                color:#b41f20;
+            }
+            
+            .header {
+                text-align: center;
+                margin: 15px 0;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+                color: #333;
+            }
+            table,th, td{
+                border:1px solid black;
+                border-collapse: collapse;
+                width:100%;
+            }
+            .top-table td, .top-table th{
+                width:50%;
+            }
+            .bottom-table{
+                margin-top:5%;
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            .bottom-table td,th{
+                width:14%;
+            }
+            .bottom-table td{
+                min-height: 30px;
+            }
+            .bottom-table th{
+                font-size: 12px;
+            }
+            .no-border-right {
+                border-right: none;
+            }
+            .no-border-left {
+                border-left: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <p class="brand-header">Bloom</p>
+        </div>
+        <div class="header">
+            <h3>Broker Commission Details</h3>
+        </div>
+        <table class="top-table">
+            <tr>
+                <td class="no-border-right">Project</td>
+                <th class="no-border-left">{!brokerCommission.Project__r.Name}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">Unit Details</td>
+                <th class="no-border-left">{!brokerCommission.SalesOrder__r.Unit__r.Name}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">Usage Type</td>
+                <th class="no-border-left">{!brokerCommission.SalesOrder__r.Unit__r.UnitModel__c}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">SPA Date</td>
+                <th class="no-border-left">{!spaDate}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">Sold Date</td>
+                <th class="no-border-left">{!soldDate}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">1st Inst. Due/Bank Clearing Date</td>
+                <th class="no-border-left">{!dueDateInstallment1}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">2nd Inst. Due/Bank Clearing Date</td>
+                <th class="no-border-left">{!dueDateInstallment2}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">Customer Name</td>
+                <th class="no-border-left">{!brokerCommission.SalesOrder__r.Account__r.Name}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">Billing Plan</td>
+                <th class="no-border-left">{!brokerCommission.InstallmentLine__r.PaymentPlan__r.Name}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">ADM fees Waiver(P126)</td>
+                <th class="no-border-left">{!admFeeString}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">Pricelist price(P001)</td>
+                <th class="no-border-left">{!netAmountString}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">Unit Price(P007)</td>
+                <th class="no-border-left">{!unitPriceString}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">Broker Name</td>
+                <th class="no-border-left">{!brokerCommission.Agency__r.Name}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">Total Entitled Commission %</td>
+                <th class="no-border-left">{!totalCommissionPercentage}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">{!typeOfPayment}</td>
+                <th class="no-border-left">{!commissionAmountString}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">Tax Amount</td>
+                <th class="no-border-left">{!taxAmountString}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">Broker Commission %</td>
+                <th class="no-border-left">{!brokerCommission.CommissionPercentage__c}</th>
+            </tr>
+            <tr>
+                <td class="no-border-right">% of Collection</td>
+                <th class="no-border-left">{!collectionPercentage}</th>
+            </tr>
+        </table>
+    <div>
+            <p class="slds-m-vertical_xx-large">The above have been verified and approved by the following:</p>
+        </div>
+        <table class="bottom-table">
+            <tr>
+                <th>Broker Management Operation</th>
+                <th>Operational Excellence</th>
+                <th>Sales Finance</th>
+                <th>Sales Finance</th>
+                <th>Finance Director</th>
+            </tr>
+            
+            <tr>
+                <td style="border: 1px solid black;text-align: center;font-size:14px">{!brokerCommission.VerifiedBy__r.Name}{!brokerCommission.VerifiedBy__r.Title}</td>
+                <apex:repeat value="{!approverList}" var="approver" id="approver">
+                    <td style="border: 1px solid black; text-align: center;font-size:14px">{!approver.approverName}{!approver.approverTitle}</td>
+                </apex:repeat>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black; text-align: center;font-size:14px">{!verifiedDate}</td>
+                <apex:repeat value="{!approverList}" var="approver" id="approvers">
+                    <td style="border: 1px solid black; text-align: center;font-size:14px">{!approver.approvedDate}</td>
+                </apex:repeat>
+            </tr>
+        </table>
+    </body>   
+</apex:page>

@@ -1,0 +1,41 @@
+<template>
+  <lightning-card>
+
+    <div class="slds-p-around_medium">
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Annual Rent (AED)</th>
+            <th>Escalation (%)</th>
+            <th>Total Rent</th>
+            <th>After Discount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template for:each={schedule} for:item="row" for:index="index">
+            <tr key={row.year}>
+              <td>{row.year}</td>
+              <td>{row.annualRent}</td>
+              <td>
+                <input type="number"
+       value={row.escalation}
+       data-index={index}
+       onchange={handleDiscountChange}
+       class="slds-input"
+       min="0"
+       required
+       disabled={row.isFirstYear} />
+              </td>
+              <td>{row.totalRent}</td>
+              <td>{row.afterDiscount}</td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+    <!-- Temp Code END -->
+
+    <!-- </div> -->
+  </lightning-card>
+</template>

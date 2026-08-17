@@ -1,0 +1,13 @@
+<aura:component implements="force:appHostable"  controller="SM_Availability_for_Leads_Ctrl">
+     <aura:attribute name="users" type="User[]" />
+    <aura:attribute name="userColumns" type="List"/> 
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+	<aura:handler event="force:refreshView" action="{!c.init}" />
+    
+    <lightning:datatable aura:id="userTable" 
+                         data="{!v.users}"    
+                         columns="{!v.userColumns}"    
+                         keyField="Id"   
+                         hideCheckboxColumn="true" 
+                         onsave="{!c.onSave}"/>
+</aura:component>

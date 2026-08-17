@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SAP_Integration_BP_No__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE (CommissionType__c, &apos;External&apos;,  BrokerAgency__r.SAP_BP_No__c , &apos;Broker Commission&apos;, BrokerAgency__r.SAP_BP_No__c, &apos;Sales Manager&apos;,  SalesManager__r.SAP_BP_No__c , &apos;Internal&apos;, SalesManager__r.SAP_BP_No__c , &apos;AD Sales&apos;,  SalesManager__r.Manager.SAP_BP_No__c , SalesManager__r.SAP_BP_No__c )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>SAP Integration BP No</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

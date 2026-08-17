@@ -1,0 +1,506 @@
+<apex:page controller="LeasingSOAPDFHandler" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false">
+    <head>
+        <style>
+            @page {
+            size: 300mm 425mm;
+            //size: A4;
+            margin: 10mm;
+            }
+            body {
+            font-family: Times-Roman;
+            font-size: 12pt; 
+            color: #000;
+            position: relative; 
+            padding-bottom: 60px; 
+            }
+            h1 {
+            
+            font-size: 12pt;
+            text-decoration: underline;
+            }
+            table {
+            width: 70%; 
+            border-collapse: collapse;
+            border: 1px solid #000; 
+            margin-bottom: 20px;
+            font-family: Times-Roman;
+            }
+            th, td {
+            padding: 8px 12px;
+            border: 1px solid #000; 
+            font-size: 12pt; 
+            word-wrap: break-word; 
+            font-family: Times-Roman;
+            }
+            .table-first td:first-child {
+            background-color: #ccd1d1;
+            }
+            .table-second td:first-child {
+            background-color: #ccd1d1;
+            }
+            
+            
+            .headerTable th, .headerTable td {
+            background-color: #f1f1f1;
+            }
+            .alnleft {
+            text-align: left;
+            }
+            .alnright {
+            text-align: right;
+            }
+            .footer {
+            position: fixed; 
+            left: 0;
+            bottom: 10mm; 
+            width: 100%;
+            text-align: center;
+            font-size: 8pt;
+            }
+            .header-section {
+            width: 100%;
+            margin-bottom: 20px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            }
+            .company-info {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 10pt;
+            }
+            .total-row td {
+            font-weight: bold; 
+            text-align: right; 
+            }
+            .currency-row td {
+            text-align: right !important; 
+            }
+            
+            /* New Style for Second Table */
+            .receiptTable {
+            width: 100%; /* Full width */
+            border-collapse: collapse;
+            border: 1px solid #000;
+            margin-bottom: 20px;
+            
+            }
+            .receiptTable th, .receiptTable td {
+            /*padding: 8px 8px;*/
+            border: 1px solid #000; 
+            font-size: 11pt;
+            word-wrap: break-word;
+            }
+            
+            /*.receiptTable thead tr {
+            background-color: #000047;  Background color for the header row 
+            }*/
+            /* New Style for Second Table */
+            .bankDetailTable {
+            width: 100%; /* Full width */
+            border-collapse: collapse;
+            border: 1px solid #000;
+            margin-bottom: 20px;
+            
+            }
+            .bankDetailTable th, .receiptTable td {
+            padding: 8px 10px;
+            border: 1px solid #000; 
+            font-size: 12pt; 
+            word-wrap: break-word;
+            }   
+        </style>
+    </head>
+    <body>
+        
+        <!-- Main Section for Statement of Account --> 
+        <table style="width:100%; border-collapse: collapse; border: none; margin-bottom: 0;" >
+            <tr>
+                <td style="text-align: left; width:10%; border: none;">
+                    <div class="alnleft">
+                        <apex:image alt="Logo" value="{!$Resource.LeasingLogo}" width="120px" height="40px"/>
+                    </div>
+                </td>
+                <td style="text-align: center; width:90%; border: none;padding-right: 200px;">
+                    <strong style="font-family: 'Aptos Narrow Bold', Times-Roman, serif;font-size: 19pt;"> Statement of Account</strong>
+                </td>
+            </tr>
+            <tr>
+			</tr>
+            <tr>
+                <td colspan="2" style="text-align: left; border: none;">
+                    Statement Date : {!statementDate}
+                </td> 
+            </tr>
+            
+        </table>
+        
+        <!-- Installment and Payment Details Section -->
+        <table style="width:100%;">
+            <thead>
+                <tr style="background-color: #000047; text-align: center; height: 30px;">
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">Project Name</th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">Tenant Identification Number</th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">Unit Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                	<td style="text-align: center;">{!projectName}</td>
+                    <td></td>
+                    <td style="text-align: center;">{!unitNumber}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        
+        
+        <table style="width:100%;">
+            <thead>
+                <tr style="background-color: #000047; text-align: center; height: 30px;">
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">Unit Type</th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">Lease Start Date</th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">Lease End Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                	<td style="text-align: center;">{!unitType}</td>
+                    <td style="text-align: center;">{!leaseStartDate}</td>
+                    <td style="text-align: center;">{!leaseEndDate}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table class="receiptTable">
+            <tbody>
+                <tr>
+                    <td rowspan = "3" style="width: 30%; font-weight: bold; text-align: center; background-color: #f0f0f0;">
+                        Tenant Information
+                    </td>
+                    <td style="width: 70%; text-align: left; vertical-align: top; border-bottom: none;">
+                    	Tenant Name: {!tenantName}
+                    </td>
+				</tr>
+                <tr>
+                    <td style="width: 70%; text-align: left; vertical-align: top;border-bottom: none;border-top: none;">
+                    	Address: {!tenantAddress}
+                    </td>
+               	</tr>
+                <tr>
+                    <td style="width: 70%; text-align: left; vertical-align: top;border-top: none;">
+                    	Email: {!tenantEmail}
+                    </td>
+               	</tr>
+            </tbody>
+        </table>
+        <table class="receiptTable" style="margin-bottom: 0;">
+            <tbody>
+                <tr>
+                    <td style="background-color: #b8ecff;font-weight: bold;text-align: center; border : none">Transaction Summary</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width:100%;">
+            <thead>
+                <tr style="background-color: #000047; text-align: center; height: 30px;">
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">Total Charged</th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">Total Receipts</th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                	<td style="text-align: center;">{!totalCharges}</td>
+                    <td style="text-align: center;">{!totalCollection}</td>
+                    <td style="text-align: center;">{!totalOutStanding}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table class="receiptTable" style="margin-bottom: 0;">
+            <tbody>
+                <tr>
+                    <td style="background-color: #b8ecff;font-weight: bold;text-align: center; border : none">Installlment</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width:100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 20px; font-family: Times-Roman; font-size: 10pt;">
+            <thead>
+                
+                <tr style="background-color: #ba0f06; height: 30px;">
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Installment
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Doc. Sequence Number
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Due Date
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Charge Amount
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Paid
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Balance due
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!paymentPlans}" var="receipt">
+                    <tr>
+                        <td style="border: 1px dotted #000; border-left: 1px solid #000; padding: 8px;text-align: center;">{!receipt.installmentName}</td>
+                        <td style="border: 1px dotted #000; padding: 8px;text-align: center;">&nbsp;</td>
+                        <td style="border: 1px dotted #000; padding: 8px;text-align: center;">{!receipt.installmentDueDate}</td>
+                        <td style="border: 1px dotted #000; padding: 8px;text-align: right;">
+                            
+                            {!receipt.formattedAmount}
+                        </td>
+                        <td style="border: 1px dotted #000; padding: 8px;text-align: right;">
+                            
+                            {!receipt.formattedCollectedAmount}
+                        </td>
+                        <td style="border: 1px dotted #000; border-right: 1px solid #000; padding: 8px;text-align: right;">
+                            
+                            {!receipt.formattedOustandingAmount}
+                        </td>
+                    </tr>
+                </apex:repeat>
+                
+            </tbody>
+            <tfoot>
+                <tr style="background-color: #cccccc;">
+                    <td colspan="3" style="border: 1px solid #000; font-weight: bold; text-align: center; padding: 8px;">
+                        Total Installment
+                    </td>
+                    <td style="border: 1px solid #000; padding: 8px;text-align: right;">{!installmentTotal}</td>
+                    <td style="border: 1px solid #000; padding: 8px;text-align: right;">{!totalInstallmentCollection}</td>
+                    <td style="border: 1px solid #000; padding: 8px;text-align: right;">{!totalInstallmentOutStanding}</td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <table class="receiptTable" style="margin-bottom: 0;">
+            <tbody>
+                <tr>
+                    <td style="background-color: #b8ecff;font-weight: bold;text-align: center; border : none">Other Charges</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width:100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 20px; font-family: Times-Roman; font-size: 10pt;">
+            <thead>
+                
+                <tr style="background-color: #ba0f06; height: 30px;">
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Installment
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Doc. Sequence Number
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Due Date
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Charge Amount
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Paid
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Balance due
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!otherCharges}" var="receipt">
+                    <tr>
+                        <td style="border: 1px dotted #000; border-left: 1px solid #000; padding: 8px;text-align: center;">{!receipt.otherChargeName}</td>
+                        <td style="border: 1px dotted #000; padding: 8px;text-align: center;"></td>
+                        <td style="border: 1px dotted #000; padding: 8px;text-align: center;">{!receipt.otherChargeDueDate}</td>
+                        <td style="border: 1px dotted #000; padding: 8px;text-align: right;">{!receipt.formattedAmount}</td>
+                        <td style="border: 1px dotted #000; padding: 8px;text-align: right;">{!receipt.formattedCollectedAmount}</td>
+                        <td style="border: 1px dotted #000; border-right: 1px solid #000; padding: 8px;text-align: right;">{!receipt.formattedPendingAmount}</td>
+                    </tr>
+                </apex:repeat>
+            </tbody>
+            <tfoot>
+                <tr style="background-color: #cccccc;">
+                    <td colspan="3" style="border: 1px solid #000; font-weight: bold; text-align: center; padding: 8px;">
+                        Total Other Charges
+                    </td>
+                    <td style="border: 1px solid #000; padding: 8px;text-align: right;">{!ocTotal}</td>
+                    <td style="border: 1px solid #000; padding: 8px;text-align: right;">{!totalOCCollection}</td>
+                    <td style="border: 1px solid #000; padding: 8px;text-align: right;">{!totalOCOutStanding}</td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <table class="receiptTable" style="margin-bottom: 0;">
+            <tbody>
+                <tr>
+                    <td style="background-color: #b8ecff;font-weight: bold;text-align: center; border : none">Penalties</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width:100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 20px; font-family: Times-Roman; font-size: 10pt;">
+            <thead>
+                
+                <tr style="background-color: #ba0f06; height: 30px;">
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Installment
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Doc. Sequence Number
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Due Date
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Charge Amount
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Paid
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Balance due
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!ocPenalties}" var="receipt">
+                    <tr>
+                        <td style="border: 1px dotted #000; border-left: 1px solid #000; padding: 8px;text-align: center;">{!receipt.otherChargeName}</td>
+                        <td style="border: 1px dotted #000; padding: 8px;text-align: center;"></td>
+                        <td style="border: 1px dotted #000; padding: 8px;text-align: center;">{!receipt.otherChargeDueDate}</td>
+                        <td style="border: 1px dotted #000; padding: 8px;text-align: right;">{!receipt.formattedAmount}</td>
+                        <td style="border: 1px dotted #000; padding: 8px;text-align: right;">{!receipt.formattedCollectedAmount}</td>
+                        <td style="border: 1px dotted #000; border-right: 1px solid #000; padding: 8px;text-align: right;">{!receipt.formattedPendingAmount}</td>
+                    </tr>
+                </apex:repeat>
+            </tbody>
+            <tfoot>
+                <tr style="background-color: #cccccc;">
+                    <td colspan="3" style="border: 1px solid #000; font-weight: bold; text-align: center; padding: 8px;">
+                        Total Penalties
+                    </td>
+                    <td style="border: 1px solid #000; padding: 8px;text-align: right;">{!penaltyTotal}</td>
+                    <td style="border: 1px solid #000; padding: 8px;text-align: right;">{!penaltyCollected}</td>
+                    <td style="border: 1px solid #000; padding: 8px;text-align: right;">{!penaltyDue}</td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <table class="receiptTable" style="margin-bottom: 0;">
+            <tbody>
+                <tr>
+                    <td style="background-color: #b8ecff;font-weight: bold;text-align: center; border : none">Prepayments</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width:100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 20px; font-family: Times-Roman; font-size: 10pt;">
+            <thead>
+                
+                <tr style="background-color: #ba0f06; height: 30px;">
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Installment
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Doc. Sequence Number
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Due Date
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Charge Amount
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Paid
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Balance due
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!prePayments}" var="receipt">
+                    <tr>
+                        <td style="border: 1px dotted #000; border-left: 1px solid #000; padding: 8px; text-align: center;">{!receipt.acknowledgementName}</td>
+                        <td style="border: 1px dotted #000; padding: 8px; text-align: center;">{!receipt.doqSeqNumber}</td>
+                        <td style="border: 1px dotted #000; padding: 8px; text-align: center;">{!receipt.acknowledgementDueDate}</td>
+                        <td style="border: 1px dotted #000; padding: 8px; text-align: right;">{!receipt.formattedAmount}</td>
+                        <td style="border: 1px dotted #000; padding: 8px;">&nbsp;</td>
+                        <td style="border: 1px dotted #000; border-right: 1px solid #000; padding: 8px;">&nbsp;</td>
+                    </tr>
+                </apex:repeat>
+            </tbody>
+            <tfoot>
+                <tr style="background-color: #cccccc;">
+                    <td colspan="3" style="border: 1px solid #000; font-weight: bold; text-align: center; padding: 8px;">
+                        Total Prepayments
+                    </td>
+                    <td style="border: 1px solid #000; padding: 8px;">&nbsp;</td>
+                    <td style="border: 1px solid #000; padding: 8px;">&nbsp;</td>
+                    <td style="border: 1px solid #000; padding: 8px;">&nbsp;</td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <table class="receiptTable" style="margin-bottom: 0;">
+            <tbody>
+                <tr>
+                    <td style="background-color: #b8ecff;font-weight: bold;text-align: center; border : none">PDC to be Submitted</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width:100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 20px; font-family: Times-Roman; font-size: 10pt;">
+            <thead>
+                
+                <tr style="background-color: #ba0f06; height: 30px;">
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Installment
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Doc. Sequence Number
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Due Date
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Charge Amount
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Paid
+                    </th>
+                    <th style="border: 1px solid #000; border-style: solid; border-color: #000; border-width: 1px 1px 1px 1px; font-weight: bold; text-align: center; color: #FFFFFF; padding: 5px;">
+                        Balance due
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!pdcs}" var="receipt">
+                    <tr>
+                        <td style="border: 1px dotted #000; border-left: 1px solid #000; padding: 8px; text-align: center;">{!receipt.acknowledgementName}</td>
+                        <td style="border: 1px dotted #000; padding: 8px; text-align: center;">{!receipt.doqSeqNumber}</td>
+                        <td style="border: 1px dotted #000; padding: 8px; text-align: center;">{!receipt.acknowledgementDueDate}</td>
+                        <td style="border: 1px dotted #000; padding: 8px; text-align: right;">{!receipt.formattedAmount}</td>
+                        <td style="border: 1px dotted #000; padding: 8px;">&nbsp;</td>
+                        <td style="border: 1px dotted #000; border-right: 1px solid #000; padding: 8px;">&nbsp;</td>
+                    </tr>
+                </apex:repeat>               
+            </tbody>
+            <tfoot>
+                <tr style="background-color: #cccccc;">
+                    <td colspan="3" style="border: 1px solid #000; font-weight: bold; text-align: center; padding: 8px;">
+                        Total PDC Submitted
+                    </td>
+                    <td style="border: 1px solid #000; padding: 8px;">&nbsp;</td>
+                    <td style="border: 1px solid #000; padding: 8px;">&nbsp;</td>
+                    <td style="border: 1px solid #000; padding: 8px;">&nbsp;</td>
+                </tr>
+            </tfoot>
+        </table>
+    </body>
+</apex:page>

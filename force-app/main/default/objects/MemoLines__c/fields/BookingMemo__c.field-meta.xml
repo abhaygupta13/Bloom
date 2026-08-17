@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BookingMemo__c</fullName>
+    <description>For capturing the ADM Fee Percentage of the Memo Lines</description>
+    <label>Booking Memo</label>
+    <referenceTo>BookingMemo__c</referenceTo>
+    <relationshipLabel>Memo Lines</relationshipLabel>
+    <relationshipName>MemoLinesBookingMemo</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

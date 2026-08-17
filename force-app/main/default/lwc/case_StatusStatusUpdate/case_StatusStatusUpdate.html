@@ -1,0 +1,42 @@
+<template>
+
+	<lightning-card variant="Narrow" title="Update Sub Status" class="outer-div ">
+
+		<template if:true={isLoading}>
+			<lightning-spinner alternative-text="Loading" size="medium" variant="brand" class="customSpinner">
+			</lightning-spinner>
+		</template>
+
+		<template if:true={recordId}>
+
+			<template if:true={nextApplicableStatusOptions}>
+				<lightning-combobox required name="Sub Status" onchange={handleSubStatusChange}
+					value={selectedSubStatus} dropdown-alignment="auto" label="Sub Status"
+					options={nextApplicableStatusOptions} class="slds-m-around_x-small"  disabled={applicableDisabled}>
+				</lightning-combobox>
+				<template if:true={showStatus}>
+					<p>
+						<lightning-input label="Status" value={applicableStatus} disabled={statusdisable}
+							class="slds-m-around_x-small"></lightning-input>
+					</p>
+				</template>
+
+
+
+				<lightning-textarea name="Remarks" label="Remarks" placeholder="Enter Remarks here..."
+					class="inputRemarks slds-m-around_x-small" onchange={handleSubStatusChange}></lightning-textarea>
+
+				<div slot="footer">
+				
+					<lightning-button variant="brand" label="Save" class="slds-m-left_x-small"  onclick={handleSubmit}
+						disabled={disableSavebutton}></lightning-button>
+				</div>
+
+			</template>
+		</template>
+
+
+
+	</lightning-card>
+
+</template>

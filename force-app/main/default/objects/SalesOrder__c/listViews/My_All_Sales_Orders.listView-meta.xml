@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_All_Sales_Orders</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>UnitNumber__c</columns>
+    <columns>Status__c</columns>
+    <columns>BookingDate__c</columns>
+    <columns>CustomerSubType__c</columns>
+    <columns>PaymentPlan__c</columns>
+    <columns>Offer__c</columns>
+    <columns>SellingPrice__c</columns>
+    <columns>Discount__c</columns>
+    <columns>NetAmount__c</columns>
+    <columns>Direct_Indirect__c</columns>
+    <columns>Sale_Type__c</columns>
+    <columns>Broker_Agencyy__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>My All Sales Orders</label>
+    <sharedTo>
+        <group>Sales_Manager</group>
+    </sharedTo>
+</ListView>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TotalRentForPeriod__c</fullName>
+    <description>This field aggregates the sum of all rent installments from the associated Payment Plan Schedules. It was created to replace the static &apos;RentForPeriod&apos; formula field, ensuring that the exact prorated contract value is accurately reflected based on the generated payment plan.</description>
+    <inlineHelpText>This amount is automatically calculated by summing up the total rent installments from your generated payment plan. It represents the exact prorated rent for this specific contract duration.</inlineHelpText>
+    <label>Total Rent For Period</label>
+    <summarizedField>PaymentPlanSchedule__c.Amount__c</summarizedField>
+    <summaryForeignKey>PaymentPlanSchedule__c.LeasingOrder__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

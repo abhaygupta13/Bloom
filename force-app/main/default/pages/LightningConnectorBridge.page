@@ -1,0 +1,49 @@
+<apex:page showHeader="false" sidebar="false">
+    <script>
+        window.addEventListener("message", (event) => {
+            console.log("event received in bridge : ", event);
+            var frame = parent.frames["sfdcSoftphone"];
+            if (frame) {
+                frame.postMessage({ type: event.data.type, key: event.data.key }, frame.location.origin);
+            }
+        }, false);
+/*
+window.addEventListener("message", async (event) => {
+    console.log("event received in bridge : ", event.data);
+    switch (event.data.type) {
+        case 'onbeforeunload':
+            let channels = WDE_CHANNELS_TO_SYNCH.split(",");
+            if (channels) {
+                channels.forEach(c => {
+                    if (c == "voice") {
+                        iwscommand.NotReady(undefined);
+                    } else {
+                        iwscommand.MediaNotReady(c, undefined);
+                    }
+                })
+            }
+            break;
+        case 'keypress':
+            if (event.data.key == 'ctrlq') {
+                let tabid = await omniUtils.callApiSync(sforce.console.getFocusedPrimaryTabId);
+                console.log("tabid : ", tabid);
+                let page = await omniUtils.callApiSync(sforce.console.getPageInfo, tabid.id);
+                console.log("page : ", page);
+                if (page) {
+                    let pageInfo = JSON.parse(page.pageInfo);
+                    console.log("pageInfo : ", pageInfo);
+                    if (!pageInfo) {
+                        alert("no Object selected");
+                        return;
+                    }
+                    let interactionId = pageInfo.objectName;
+                    console.log("interactionID : ", interactionId);
+                    alert("interactionid of focused object : " + interactionId);
+                }
+            }
+            break;
+
+    }
+}, false);
+    </script>
+</apex:page>

@@ -1,0 +1,68 @@
+.fullPageDark {
+     background-color: #F5F5F5; 
+    color: #fff;
+    width: 100%;
+    min-height: 100vh; /* Fill the entire viewport */
+    margin: 0;
+    padding: 1rem; /* Some padding so the card isn’t flush against the edge */
+}
+@media only screen and (max-width: 767px) {
+    .slds-table thead th {
+            font-size: 10px !important;
+    }
+}
+.custom-combobox .slds-combobox__form-element {
+    border-radius: 25px !important; /* Makes the dropdown oval */
+}
+
+.custom-combobox .slds-input {
+    border-radius: 25px !important; /* Makes the input field oval */
+    padding: 10px; 
+}
+.custom-table .slds-table thead th {
+    font-size: 4px; /* Adjust size as needed */
+    font-weight: normal;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.button-container2 {
+    display: flex;
+    justify-content: flex-start; /* Aligns button to the extreme left */
+    width: 100%;
+}
+.custom-container {
+    display: flex;
+    flex-direction: column; /* Stack label on top */
+    width: 100%;
+}
+
+.custom-label {
+   margin-bottom: 5px; /* Adds spacing below label */
+    display: block;
+}
+
+.custom-inputs {
+    display: flex;
+    align-items: center; /* Align dropdown and input in one row */
+    gap: 10px; /* Space between dropdown and input */
+    width: 100%;
+}
+
+.custom-country-code {
+    flex: 1; /* Adjust width */
+    max-width: 120px; /* Keeps dropdown size in check */
+}
+
+.custom-mobile-number {
+    flex: 3; /* Allows input to take more space */
+    width: 100%;
+}
+.button-container {
+    display: flex;              /* Enable flexbox */
+    justify-content: flex-end;  /* Move children to the right end */
+    width: 100%;                /* Ensure container spans the full width */
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Definition__c</fullName>
+    <label>Definition</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bulk SR creation per villa based on</fullName>
+                <default>false</default>
+                <label>Bulk SR creation per villa based on</label>
+            </value>
+            <value>
+                <fullName>General Requests related to maintenance</fullName>
+                <default>false</default>
+                <label>General Requests related to maintenance</label>
+            </value>
+            <value>
+                <fullName>New SR created</fullName>
+                <default>false</default>
+                <label>New SR created</label>
+            </value>
+            <value>
+                <fullName>SR created based on repeated request</fullName>
+                <default>false</default>
+                <label>SR created based on repeated request</label>
+            </value>
+            <value>
+                <fullName>Warraty related cases post DLP expiry</fullName>
+                <default>false</default>
+                <label>Warraty related cases post DLP expiry</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

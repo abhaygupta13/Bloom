@@ -1,0 +1,15 @@
+.slds-modal__container {
+    margin-top: 100px;
+    height: 90%;
+    width: 90%;
+    max-width: initial;
+}
+
+ .slds-modal__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 3rem;
+    z-index: 100; 
+	
+}

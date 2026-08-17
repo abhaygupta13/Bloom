@@ -1,0 +1,45 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" access="global" controller="markRetiredLeadstatus"> 
+    
+    <aura:html tag="style">
+        .slds-p-around–medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+    </aura:html>
+    <aura:attribute name="selectedRetiredreason" type="String" access="public" />
+    <aura:attribute name="selectedReason" type="String" access="public" />
+    
+    <header class="slds-modal__header">
+        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Mark Lead Retired</h2>
+    </header>
+    
+    <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Lead" onsuccess="{!c.handleSuccess}" onerror="{!c.handleError}">
+        
+        <lightning:inputField aura:id="RetiredReason__c" fieldName="RetiredReason__c" required="true"  onchange="{!c.onPicklistChange}"/>
+        <aura:if isTrue="{!v.selectedRetiredreason}">
+            <lightning:inputField aura:id="field" fieldName="Future_Interest_Date__c" required="true" />
+            
+        </aura:if>
+        <lightning:inputField aura:id="field" fieldName="Status" value="Closed" class="slds-hide"/>
+        <lightning:inputField aura:id="field" fieldName="LeadManagerStatus__c" value="Retired" class="slds-hide"/>
+        <lightning:inputField aura:id="retirementcomment" fieldName="RetirementComments__c" required="true" />
+        
+        
+        <div class="slds-align_absolute-center">
+            <lightning:button class="slds-m-top_small" onclick="{!c.handleSave}" label="Save"/>
+            <!--<lightning:button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Save"/>-->
+            <lightning:button class="slds-m-top_small" onclick="{!c.handleReset}" label="Cancel" />
+        </div>
+        
+    </lightning:recordEditForm>
+    
+    
+    
+</aura:component>

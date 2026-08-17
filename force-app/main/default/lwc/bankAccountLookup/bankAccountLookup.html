@@ -1,0 +1,55 @@
+<template>
+    <div class="slds-form-element">
+
+        <!-- LABEL -->
+        <label class="slds-form-element__label">{label}</label>
+
+        <!-- CONTROL -->
+        <div class="slds-form-element__control">
+
+            <div class="slds-combobox_container">
+                <div class={dropdownClass}>
+
+                    <!-- INPUT -->
+                    <lightning-input
+                        variant="label-hidden"
+                        type="search"
+                        value={searchKey}
+                        onchange={handleSearch}
+                        onclick={openDropdown}
+                        placeholder="Search Bank Account">
+                    </lightning-input>
+
+                    <!-- DROPDOWN -->
+                    <template if:true={isOpen}>
+                        <div class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid">
+                            <ul class="slds-listbox slds-listbox_vertical">
+                                <template for:each={records} for:item="rec">
+                                    <li key={rec.Id}
+                                        data-id={rec.Id}
+                                        onclick={selectRecord}
+                                        class="slds-listbox__item">
+
+                                        <div class="slds-media slds-listbox__option slds-listbox__option_entity">
+                                            <div class="slds-media__body">
+                                                <div class="slds-listbox__option-text">
+                                                    {rec.displayLabel}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </template>
+
+                                <template if:false={records.length}>
+                                    <li class="slds-listbox__item">No Records Found</li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>
