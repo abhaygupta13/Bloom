@@ -5,5 +5,6 @@
     "**/.sf": true,
     "**/.sfdx": true
   },
-  "salesforcedx-vscode-core.push-or-deploy-on-save.enabled": false
+  "salesforcedx-vscode-core.push-or-deploy-on-save.enabled": false,
+  "xml.preferences.showSchemaDocumentationType": "none"
 }

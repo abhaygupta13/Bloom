@@ -23,3 +23,5 @@ README.md
 # OS Files
 .DS_Store
 Thumbs.db
+**/jsconfig.json
+**/.eslintrc.json
