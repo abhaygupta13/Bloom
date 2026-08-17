@@ -29,7 +29,7 @@ public class MicrosoftAzureB2CUtility {
 
         String TOKEN_URL = APIInstance.URL__c;//'https://login.microsoftonline.com/8e569186-d6b2-4250-8cef-dc0bede8edb9/oauth2/v2.0/token';
         String CLIENT_ID = APIInstance.Client_Id__c;//'d72b7142-30e6-4630-9b39-4c77af7062f9';
-        String CLIENT_SECRET =APIInstance.Client_Secret__c;// 'REPLACE_WITH_ACTUAL_SECRET';
+        String CLIENT_SECRET = APIInstance.Client_Secret__c;
         String SCOPE =APIInstance.Scope__c;// 'https://graph.microsoft.com/.default';
         Http http = new Http();
         HttpRequest request = new HttpRequest();
