@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>PaymentPlanSchedule__c</baseObject>
+    <category>other</category>
+    <deployed>true</deployed>
+    <description>All Invoice report - Leasing Payment Plan Schedules</description>
+    <label>All Invoice report - Leasing Payment Plan Schedules</label>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Invoice amount</displayNameOverride>
+            <field>TotalInstallmentAmount__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Name of User - Entry</displayNameOverride>
+            <field>CreatedBy</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>SAP sync status</displayNameOverride>
+            <field>IntegrationStatus__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>SAP Invoice number</displayNameOverride>
+            <field>RefDocno__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Salesforce transaction number</displayNameOverride>
+            <field>Name</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Invoice Date</displayNameOverride>
+            <field>DueDate__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Paid/unpaid status</displayNameOverride>
+            <field>PaymentStatus__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Overdue_days__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>PostedToSAP__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CreatedDate</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LeaseEndDate__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ShowSyncButton__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <masterLabel>Leasing Payment Plan Schedules</masterLabel>
+    </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Leasing Order No</displayNameOverride>
+            <field>LeasingOrder__c.LeasingOrderNumber__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>SAP Contract Number</displayNameOverride>
+            <field>LeasingOrder__c.LeasingSAPContractId__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Name of Unit</displayNameOverride>
+            <field>LeasingOrder__c.Unit__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Name of Customer</displayNameOverride>
+            <field>LeasingOrder__c.Name</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Property Name</displayNameOverride>
+            <field>LeasingOrder__c.PropertyName__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>SAP Profit center number</displayNameOverride>
+            <field>LeasingOrder__c.Unit__c.LeasingProfitCenter__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Migrated from SAP- Ref number</displayNameOverride>
+            <field>LeasingOrder__c.LeasingOrderDataMigrationUniqueKey__c</field>
+            <table>PaymentPlanSchedule__c</table>
+        </columns>
+        <masterLabel>Leasing Order</masterLabel>
+    </sections>
+</ReportType>
