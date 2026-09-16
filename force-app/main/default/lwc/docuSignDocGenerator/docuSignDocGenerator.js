@@ -73,7 +73,7 @@ export default class DocuSignDocGenerator extends NavigationMixin(LightningEleme
                             label: doc.Type__c, // Use Type__c as label
                             value: doc.Id, // Use Id as values
                         })),
-                    { label: 'Send for Signature (last generated)', value: 'Send for Customer Signature (last generated)' }/*,
+                    { label: 'Send for Customer Signature (last generated)', value: 'Send for Customer Signature (last generated)' }/*,
                     { label: 'Send Email to Customer (cc to you)', value: 'Send Email to Customer (cc to you)' },
                     { label: 'Send Email to Me', value: 'Send Email to Me'}*/
                 ];

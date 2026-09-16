@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Handover_Phase_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Handover_Phase_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>AfterHONoticeSubstatus__c</fullName>
+        <externalId>false</externalId>
+        <label>After HO Notice Substatus</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AppointmentConfirmSignEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>Appointment Confirm Sign Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ApppintmentReminderStop__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Apppintment Reminder Stop</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BCCEmailTemplateId__c</fullName>
+        <externalId>false</externalId>
+        <label>BCC EmailTemplate Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BCCRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>BCC Required</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CHOAppointmentConfirmEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>CHO Appointment Confirm Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CHOAttendedbyCustomerEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>CHO Attended by Customer Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CHOReschedulingappoingmentTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>CHO Rescheduling appoingment Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CHOinviteEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>CHO invite Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChoAppointmentCanceledEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>Cho Appointment Canceled Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChoCustomerNotattendedEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>Cho Customer Not attended Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChoDesnaggingEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>Cho Desnagging Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChoSnaggingEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>Cho Snagging Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DoorNumberClarificationEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>Door Number Clarification Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DoorNumberClarificationrequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Door Number Clarification required</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>EstimatedCompletionDate__c</fullName>
+        <label>Estimated Completion Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ExcludedHandoverStages__c</fullName>
+        <label>Excluded Handover Stages</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>false</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>QA Snagging</fullName>
+                    <default>false</default>
+                    <label>QA Snagging</label>
+                </value>
+                <value>
+                    <fullName>QA De-Snagging</fullName>
+                    <default>false</default>
+                    <label>QA De-Snagging</label>
+                </value>
+                <value>
+                    <fullName>Upload SOA</fullName>
+                    <default>false</default>
+                    <label>Upload SOA</label>
+                </value>
+                <value>
+                    <fullName>Upload SPA</fullName>
+                    <default>false</default>
+                    <label>Upload SPA</label>
+                </value>
+                <value>
+                    <fullName>Handover Keys to BAM</fullName>
+                    <default>false</default>
+                    <label>Handover Keys to BAM</label>
+                </value>
+                <value>
+                    <fullName>Send Handover Notice</fullName>
+                    <default>false</default>
+                    <label>Send Handover Notice</label>
+                </value>
+                <value>
+                    <fullName>Book Appointment with Customer</fullName>
+                    <default>false</default>
+                    <label>Book Appointment with Customer</label>
+                </value>
+                <value>
+                    <fullName>Settlement Follow up</fullName>
+                    <default>false</default>
+                    <label>Settlement Follow up</label>
+                </value>
+                <value>
+                    <fullName>Settlement Confirmation</fullName>
+                    <default>false</default>
+                    <label>Settlement Confirmation</label>
+                </value>
+                <value>
+                    <fullName>Generate Bank NOC</fullName>
+                    <default>false</default>
+                    <label>Generate Bank NOC</label>
+                </value>
+                <value>
+                    <fullName>Tawtheeq Enrollment</fullName>
+                    <default>false</default>
+                    <label>Tawtheeq Enrollment</label>
+                </value>
+                <value>
+                    <fullName>Lease Agreement</fullName>
+                    <default>false</default>
+                    <label>Lease Agreement</label>
+                </value>
+                <value>
+                    <fullName>Upload Mortgage Release Documents</fullName>
+                    <default>false</default>
+                    <label>Upload Mortgage Release Documents</label>
+                </value>
+                <value>
+                    <fullName>ADREC Approval and Mortgage Release</fullName>
+                    <default>false</default>
+                    <label>ADREC Approval and Mortgage Release</label>
+                </value>
+                <value>
+                    <fullName>Generate Developer NOC</fullName>
+                    <default>false</default>
+                    <label>Generate Developer NOC</label>
+                </value>
+                <value>
+                    <fullName>Developer NOC Internal Follow Up</fullName>
+                    <default>false</default>
+                    <label>Developer NOC Internal Follow Up</label>
+                </value>
+                <value>
+                    <fullName>Register Title Deed</fullName>
+                    <default>false</default>
+                    <label>Register Title Deed</label>
+                </value>
+                <value>
+                    <fullName>PHPP Handover Keys</fullName>
+                    <default>false</default>
+                    <label>PHPP Handover Keys</label>
+                </value>
+                <value>
+                    <fullName>Transfer Utilities</fullName>
+                    <default>false</default>
+                    <label>Transfer Utilities</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Cheque Clearance</fullName>
+                    <default>false</default>
+                    <label>Mortgage Cheque Clearance</label>
+                </value>
+                <value>
+                    <fullName>Handover Signing Document (KHO) Appointment</fullName>
+                    <default>false</default>
+                    <label>Handover Signing Document (KHO) Appointment</label>
+                </value>
+                <value>
+                    <fullName>Handover Completed</fullName>
+                    <default>false</default>
+                    <label>Handover Completed</label>
+                </value>
+                <value>
+                    <fullName>Potential Defaulter</fullName>
+                    <default>false</default>
+                    <label>Potential Defaulter</label>
+                </value>
+                <value>
+                    <fullName>Default -Under Discussion</fullName>
+                    <default>false</default>
+                    <label>Default -Under Discussion</label>
+                </value>
+                <value>
+                    <fullName>Cancelled</fullName>
+                    <default>false</default>
+                    <label>Cancelled</label>
+                </value>
+                <value>
+                    <fullName>Under Resale</fullName>
+                    <default>false</default>
+                    <label>Under Resale</label>
+                </value>
+                <value>
+                    <fullName>Initiate Cancellation</fullName>
+                    <default>false</default>
+                    <label>Initiate Cancellation</label>
+                </value>
+                <value>
+                    <fullName>Keys Handedover to BAM</fullName>
+                    <default>false</default>
+                    <label>Keys Handedover to BAM</label>
+                </value>
+                <value>
+                    <fullName>Await PHPP Completion</fullName>
+                    <default>false</default>
+                    <label>Await PHPP Completion</label>
+                </value>
+                <value>
+                    <fullName>Clear PHPP Finances</fullName>
+                    <default>false</default>
+                    <label>Clear PHPP Finances</label>
+                </value>
+                <value>
+                    <fullName>Initiate Mortgage Release</fullName>
+                    <default>false</default>
+                    <label>Initiate Mortgage Release</label>
+                </value>
+                <value>
+                    <fullName>Generate Escrow Letter</fullName>
+                    <default>false</default>
+                    <label>Generate Escrow Letter</label>
+                </value>
+                <value>
+                    <fullName>HO Undertaking Letter</fullName>
+                    <default>false</default>
+                    <label>HO Undertaking Letter</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>FirstHOPaymentReminderEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>First HO Payment Reminder Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HOCongratulationEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>HO Congratulation Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HOOutstandingConfirmationTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>HO Outstanding Confirmation Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HOTitleDeedEmailTempID__c</fullName>
+        <externalId>false</externalId>
+        <label>HO Title Deed Email Temp ID</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HandoverInstallmentRevisedDateBuffer__c</fullName>
+        <externalId>false</externalId>
+        <label>Handover Installment Revised Date Buffer</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HomeOrientationByBloomEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>Home Orientation By Bloom Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>KHOAppointmentConfirmEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>KHO Appointment Confirm Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>KeyHandoverInvitationEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>Key Handover Invitation Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NOCCHOEmailtemplateId__c</fullName>
+        <externalId>false</externalId>
+        <label>NOC-CHO Email template Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PaymentReminderStop__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Payment Reminder Stop</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PhaseNameInArabic__c</fullName>
+        <externalId>false</externalId>
+        <label>Phase Name In Arabic</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>Handover Phases</relationshipLabel>
+        <relationshipName>HandoverPhases</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RequiredSOAAttachment__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Required SOA Attachment</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SecondHOPaymentReminderEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>Second HO Payment Reminder Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SignHoDOCInvitationTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>Sign Ho DOC Invitation Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SkipHandoverCHOTasks__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Skip Handover CHO Tasks</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StopThirdHandoverAppointmentReminder__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Stop Third Handover Appointment Reminder</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ThirdHOPaymentReminderEmailTempId__c</fullName>
+        <externalId>false</externalId>
+        <label>Third HO Payment Reminder Email Temp Id</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UnitType__c</fullName>
+        <label>Unit Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>UnitType</valueSetName>
+        </valueSet>
+    </fields>
+    <label>Handover Phase</label>
+    <listViews>
+        <fullName>Handover_Leasing_Team_Queue_HandoverPhase</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Handover Leasing Team Queue</label>
+        <queue>Handover_Leasing_Team_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>Handover Phase Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Handover Phases</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

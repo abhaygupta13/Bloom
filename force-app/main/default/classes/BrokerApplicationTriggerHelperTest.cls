@@ -75,11 +75,11 @@ public class BrokerApplicationTriggerHelperTest {
             FirstName__c = 'Test',
             LastName__c = 'Contact',
             BrokerContactRole__c = 'CEO',
-            Email__c = 'test12@bloomholding.com',
+            Email__c = 'test@bloomholding.com',
             typeOfEstablishment__c = 'Domestic'
         );
         insert applicant;
-        
+
         // Call the method under test
         Test.startTest();
         BrokerApplicationTriggerHelper.createDocuments(brokerAppList);

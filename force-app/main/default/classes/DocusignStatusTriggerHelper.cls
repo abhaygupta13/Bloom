@@ -15,37 +15,25 @@ public without sharing class DocusignStatusTriggerHelper {
         
         Set<Id> brokerAppIdsToUpdate = new Set<Id>();
         Set<Id> brokerAppIdsForEmail = new Set<Id>();
-        Set<Id> caseIdsToUpdateAfterSign = new Set<Id>();
-        Set<Id> caseIdsToUpdateBeforeSign = new Set<Id>();
         
         for (dfsle__EnvelopeStatus__c rec : newList) {
-            system.debug('rec-->'+rec);
             
             dfsle__EnvelopeStatus__c oldRec = oldMap.get(rec.Id);
             Id sourceId = (Id) rec.dfsle__SourceId__c;
-            system.debug('sourceId-->'+sourceId);
-            system.debug('sourceId.getSObjectType()-->'+sourceId.getSObjectType());
-            system.debug('Case.SObjectType-->'+ Case.SObjectType);
-            if (sourceId.getSObjectType() == BrokerApplication__c.SObjectType) {
-                // Broker Signed check
-                if (rec.BrokerSigned__c == true && oldRec.BrokerSigned__c != rec.BrokerSigned__c) {
-                    brokerAppIdsForEmail.add(sourceId);
-                }
-                // Status Completed check
-                if (rec.dfsle__Status__c == 'Completed' && oldRec.dfsle__Status__c != rec.dfsle__Status__c) {
-                    brokerAppIdsToUpdate.add(sourceId);
-                }
+            
+            if (sourceId.getSObjectType() != BrokerApplication__c.SObjectType) {
+                System.debug('Not a BrokerApplication record, skipping');
+                continue;
             }
-            if(sourceId.getSObjectType() == Case.SObjectType){
-            system.debug('rec.dfsle__Status__c-->'+ rec.dfsle__Status__c);
-            system.debug('oldRec.dfsle__Status__c-->'+ oldRec.dfsle__Status__c);
-            system.debug('rec.dfsle__Status__c-->'+ rec.dfsle__Status__c);
-                if (rec.dfsle__Status__c == 'Completed' && oldRec.dfsle__Status__c != rec.dfsle__Status__c) {
-                    caseIdsToUpdateAfterSign.add(sourceId);
-                }
-                if (rec.dfsle__Status__c == 'Sent') {
-                    caseIdsToUpdateBeforeSign.add(sourceId);
-                }
+            
+            // Status Completed check
+            if (rec.dfsle__Status__c == 'Completed' && oldRec.dfsle__Status__c != rec.dfsle__Status__c) {
+                brokerAppIdsToUpdate.add(sourceId);
+            }
+            
+            // Broker Signed check
+            if (rec.BrokerSigned__c == true && oldRec.BrokerSigned__c != rec.BrokerSigned__c) {
+                brokerAppIdsForEmail.add(sourceId);
             }
         }
         
@@ -56,30 +44,6 @@ public without sharing class DocusignStatusTriggerHelper {
                 app.ApprovalStatus__c = 'Approved';
             }
             BrokerApplicationService.getInstance().updateBrokerApplications(brokerApps);
-        }
-        if (!caseIdsToUpdateAfterSign.isEmpty()) {
-            List<Case> cases = CaseService.getInstance().getCaseByIds(caseIdsToUpdateAfterSign);
-            for (Case cas : cases) {
-                cas.AgreementRenewalStatus__c = 'Agreement Signed';
-            }
-            CaseService.getInstance().updateCaseWithoutTrigger(cases);
-        }
-        if (!caseIdsToUpdateBeforeSign.isEmpty()) {
-            Set<Id> accountIdsToUpdate = new Set<Id>();
-            List<Case> cases = CaseService.getInstance().getCaseByIds(caseIdsToUpdateBeforeSign);
-            for (Case cas : cases) {
-                accountIdsToUpdate.add(cas.AccountId);
-                cas.AgreementRenewalStatus__c = 'In Progress';
-            }
-            CaseService.getInstance().updateCaseWithoutTrigger(cases);
-            
-            if(!accountIdsToUpdate.isEmpty()){
-                List<Account> accounts = AccountService.getInstance().getAccountsByIds(accountIdsToUpdate);
-                for (Account acc : accounts) {
-                    acc.AgreementRenewalStatus__c = 'In Progress';
-                }
-                AccountService.getInstance().updateAccountsWithoutTrigger(accounts);
-            }
         }
         
         // EMAIL LOGIC

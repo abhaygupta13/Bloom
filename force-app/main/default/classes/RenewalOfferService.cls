@@ -32,6 +32,7 @@ public with sharing class RenewalOfferService {
             Account__r.Name,
             
             Project__r.Name,
+            Project__r.Location_Name__c,
             
             Unit__r.UnitType__c,
             Unit__r.UnitNumber__c,
@@ -211,7 +212,9 @@ public with sharing class RenewalOfferService {
         
         
         wrapper.location =
-            'Al Bateen – Abu Dhabi';
+            order.Project__r.Location_Name__c  != null
+            ? order.Project__r.Location_Name__c
+            : order.Project__r.Name;
         
         
         wrapper.internalArea =
@@ -450,7 +453,7 @@ public with sharing class RenewalOfferService {
             
             else if (
                 charge.Type__c ==
-                'Chilled Water'
+                'Chilled Water Charge'
             ) {
                 
                 chilledWaterAmount += amount;

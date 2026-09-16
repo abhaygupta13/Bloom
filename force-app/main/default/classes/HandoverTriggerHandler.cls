@@ -22,6 +22,7 @@ public class HandoverTriggerHandler implements ITriggerHandler{
     public void beforeInsert(List<sObject> newList) {
         HandoverTriggerHelper.beforeInsert((List<Handover__c>) newList);  
         HandoverTriggerHelper.updateContactId((List<Handover__c>) newList, null);
+        HandoverTriggerHelper.updateHoAgentAssignedUser(null, (List<Handover__c>) newList);
     }
     
     public void afterInsert(List<sObject> newList , Map<Id, sObject> newMap) { 
@@ -29,9 +30,8 @@ public class HandoverTriggerHandler implements ITriggerHandler{
         //HandoverTriggerHelper.createHandoverSla((List<Handover__c>) newList);
         HandoverTriggerHelper.setInitialDocumentOnHandover((List<Handover__c>) newList);  
         HandoverTriggerHelper.notifyOwners((List<Handover__c>) newList, NULL);
-        HandoverTriggerHelper.updateHoAgentAssignedUser(new Map<Id, Handover__c>(), (List<Handover__c>) newList);
+        //HandoverTriggerHelper.updateHoAgentAssignedUser(new Map<Id, Handover__c>(), (List<Handover__c>) newList);
         HandoverTriggerHelper.updateRelatedSalesorder(new Map<Id, Handover__c>(), (List<Handover__c>) newList);
-        HandoverTriggerHelper.updateServiceChargeDatesOnSalesOrder(new Map<Id, Handover__c>(), (List<Handover__c>) newList);
     }
     
     public void beforeUpdate(List<sObject> newList, Map<Id, sObject> newMap, List<sObject> oldList, Map<Id, sObject> oldMap) {
@@ -53,10 +53,9 @@ public class HandoverTriggerHandler implements ITriggerHandler{
         //HandoverTriggerHelper.updateHoAgentAssignedUser((Map<Id, Handover__c>)oldMap, (List<Handover__c>) newList);
         //HandoverTriggerHelper.updateHOPreviousStatus((Map<Id, Handover__c>) newMap, (Map<Id, Handover__c>)oldMap);
         HandoverTriggerHelper.updateInstallmentLineItems((Map<Id, Handover__c>)oldMap, (List<Handover__c>) newList);
-        //HandoverTriggerHelper.notifyOwners((List<Handover__c>) newList, (Map<Id, Handover__c>)oldMap);
-      //  HandoverTriggerHelper.notifyCustomers((List<Handover__c>) newList, (Map<Id, Handover__c>)oldMap);
+        HandoverTriggerHelper.notifyOwners((List<Handover__c>) newList, (Map<Id, Handover__c>)oldMap);
+        HandoverTriggerHelper.notifyCustomers((List<Handover__c>) newList, (Map<Id, Handover__c>)oldMap);
         HandoverTriggerHelper.updateRelatedSalesorder((Map<Id, Handover__c>)oldMap, (List<Handover__c>) newList);
-        HandoverTriggerHelper.updateServiceChargeDatesOnSalesOrder((Map<Id, Handover__c>)oldMap, (List<Handover__c>) newList);
     }
     
     public void beforeDelete(List<sObject> oldList , Map<Id, sObject> oldMap) {

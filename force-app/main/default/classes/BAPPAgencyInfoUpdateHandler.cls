@@ -13,8 +13,6 @@ public with sharing class BAPPAgencyInfoUpdateHandler {
         public String caseDescription;
         public String category;
         public String subCategory;
-        public String subject;
-        public String origin;
         public AgencyInformation agencyInformation;
         public AddressDetails addressDetails;
         public BankDetails bankDetails;
@@ -25,8 +23,6 @@ public with sharing class BAPPAgencyInfoUpdateHandler {
         public Boolean isVatRegistered;
         public Date vatUndertakingIssueDate;
         public String taxRegistrationNumber;
-        public String agencyName;
-        public String agencyType;
     }
     public class AddressDetails {
         public String addressLine01;
@@ -169,25 +165,22 @@ public with sharing class BAPPAgencyInfoUpdateHandler {
                     LIMIT 1
                 ].Id;
             } catch (Exception e) {
+                System.debug('️ Queue "Bloom_Broker_Management" not found: ' + e.getMessage());
                 bloomQueueId = null;
             }
             
             Case caseRec;
             if (String.isBlank((String)input.caseId)) {
                 // -------- CREATE CASE --------
-                Id brokerRegistrationRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'BrokerAgencyDetailsUpdate');
+                Id brokerRegistrationRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'Broker_Agency_Details_Update');
+                System.debug('brokerRegistrationRecordTypeId '+brokerRegistrationRecordTypeId);
                 caseRec = new Case();
                 caseRec.ServiceCatalog__c = sc != null ? sc.Id : null;
                 caseRec.RecordTypeId = brokerRegistrationRecordTypeId;
                 caseRec.AccountId = input.accountId;
                 caseRec.ContactId = input.contactId;
-                caseRec.Status = 'New';
-                caseRec.Draft__c = true;
-                caseRec.ApprovalStatus__c = 'Not Approved';
+                caseRec.ApprovalStatus__c = 'Draft';
                 caseRec.TypeofEstablishment__c = agencyType.TypeofEstablishment__c;
-                caseRec.Subject = input.subCategory;
-            	caseRec.Origin = 'Portal';
-                caseRec.OwnerId = bloomQueueId;
             } else {
                 // -------- UPDATE CASE --------
                 caseRec = [
@@ -214,12 +207,7 @@ public with sharing class BAPPAgencyInfoUpdateHandler {
                     AccountNumber__c,
                     BankAddress__c,
                     IBANNumber__c,
-                    SwiftCode__c,
-                    Subject,
-                    Origin,
-                    Step__c,
-                    CaseType__c,
-                    Draft__c, AgencyName__c, AgencyType__c
+                    SwiftCode__c
                     FROM Case
                     WHERE Id = :input.caseId
                     LIMIT 1
@@ -232,12 +220,12 @@ public with sharing class BAPPAgencyInfoUpdateHandler {
                 }
                 
                 // --- Status check ---
-                if (caseRec.Draft__c == false) {
+                if (caseRec.ApprovalStatus__c != 'Draft') {
                     sendError('You cannot update the Service Request once Submitted.');
                     return;
                 }
                 
-                caseRec.Status = input.caseStatus;
+                caseRec.ApprovalStatus__c = input.caseStatus;
             }
             
             
@@ -250,17 +238,15 @@ public with sharing class BAPPAgencyInfoUpdateHandler {
             // Common fields for Create/Update
             caseRec.Description = input.caseDescription;
             // caseRec.Category__c = input.category;
-             caseRec.SubType__c  = input.serviceRequestType;
+            // caseRec.Sub_category__c  = input.subCategory;
             //caseRec.ApprovalStatus__c = input.caseStatus;
             //caseRec.Status = input.caseStatus;
-            caseRec.Type = input.category;
+            caseRec.Type = input.serviceRequestType;
             caseRec.ServiceCatalog__c = sc != null ? sc.Id : null;
             
             if (input.agencyInformation != null) {
                 caseRec.TradeLicenseExpiryDate__c = input.agencyInformation.tradeLicenseExpiryDate;
                 caseRec.CommercialLicenseExpiryDate__c = input.agencyInformation.commercialLicenseExpiryDate;
-                caseRec.AgencyName__c = input.agencyInformation.agencyName;
-                caseRec.AgencyType__c = input.agencyInformation.agencyType;
                 // caseRec.IsVATRegistered__c = input.agencyInformation.isVatRegistered;
                 // Assign only if not null to avoid INVALID_TYPE_ON_FIELD_IN_RECORD
                 if (input.agencyInformation.isVatRegistered != null) {
@@ -284,22 +270,10 @@ public with sharing class BAPPAgencyInfoUpdateHandler {
                 caseRec.SwiftCode__c = input.bankDetails.swiftCode;
             }
             
-            Boolean isSubmitted = false;
-
-            if (input.caseStatus == 'Submitted') {
-                //caseRec.Status = 'New';
-                caseRec.Draft__c = false;
-                caseRec.ApprovalStatus__c = 'Pending';
-                isSubmitted = true;
-            }
-            
             if (String.isBlank((String)input.caseId)) {
-            
                 insert caseRec;
-            
             } else {
-            
-                Case updatedCase = CaseService.getInstance().updateCase(caseRec);
+                update caseRec;
             }
             
             // Update Account phone directly
@@ -379,8 +353,6 @@ public with sharing class BAPPAgencyInfoUpdateHandler {
         agencyInfoMap.put('commercialLicenseExpiryDate', caseRec.CommercialLicenseExpiryDate__c);
         agencyInfoMap.put('vatUndertakingIssueDate', caseRec.VATUndertakingIssue_Date__c);
         agencyInfoMap.put('taxRegistrationNumber', caseRec.TaxRegistrationNumber__c);
-        agencyInfoMap.put('agencyName', caseRec.AgencyName__c);
-        agencyInfoMap.put('agencyType', caseRec.AgencyType__c);
         if (input.serviceRequestType != 'Legal Documents Update' && caseRec.IsVATRegistered__c != null) {
             agencyInfoMap.put('isVatRegistered', caseRec.IsVATRegistered__c);
         }

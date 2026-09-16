@@ -23,6 +23,7 @@ export default class ProjectPaymentplanAction extends NavigationMixin(LightningE
     selectedClassification;
     selectedPaymentPlan;
     selectedPaymentPlanCreatedDate = '';
+    paymentPlanStatus = '';
     recordTypeId;
     lstInstallmentLine = [];
     noOfActiveSalesOrder = 0;
@@ -92,6 +93,10 @@ export default class ProjectPaymentplanAction extends NavigationMixin(LightningE
         return !!this.selectedPaymentPlan;
     }
 
+    get showPaymentPlanStatus() {
+        return !!this.selectedPaymentPlan;
+    }
+
     getActiveSalesOrderCount() {
         getActiveSalesOrderCount({
             paymentPlanId: this.selectedPaymentPlan
@@ -107,7 +112,7 @@ export default class ProjectPaymentplanAction extends NavigationMixin(LightningE
 
     handleNext() {
 
-        
+
 
         this.showUpdateScreen = false;
 
@@ -126,20 +131,25 @@ export default class ProjectPaymentplanAction extends NavigationMixin(LightningE
         this.selectedPaymentPlan = null;
         this.noOfActiveSalesOrder = 0;
         this.selectedPaymentPlanCreatedDate = '';
+        this.paymentPlanStatus = '';
         this.paymentPlanOptions = [];
         this.lstInstallmentLine = [];
         this.isLoading = true;
+
         getPaymentPlans({
             projectId: this.recordId,
             classification: this.selectedClassification
         })
             .then(result => {
                 const data = Array.isArray(result) ? result : [];
+
                 this.paymentPlanOptions = data.map(plan => ({
                     label: plan.Name,
                     value: plan.Id,
-                    createdDate: plan.CreatedDate
+                    createdDate: plan.CreatedDate,
+                    status: plan.IsActive__c === 'Yes' ? 'Active' : 'Inactive'
                 }));
+
                 this.isLoading = false;
             })
             .catch(error => {
@@ -172,6 +182,7 @@ export default class ProjectPaymentplanAction extends NavigationMixin(LightningE
         );
 
         this.selectedPaymentPlanCreatedDate = selectedPlan?.createdDate || '';
+        this.paymentPlanStatus = selectedPlan?.status || '';
         this.getActiveSalesOrderCount();
         this.isLoading = true;
         getInstallmentsByPlan({
@@ -235,7 +246,7 @@ export default class ProjectPaymentplanAction extends NavigationMixin(LightningE
         });
 
         // If user unchecks Cheque Replacement, validate existing Revised Date
-        if ( !checked && row.Type__c !== 'Handover' && row.Type__c !== 'Post Handover Installment') {
+        if (!checked && row.Type__c !== 'Handover' && row.Type__c !== 'Post Handover Installment') {
             const row = this.lstInstallmentLine.find(item => item.Id === recordId);
             if (row && row.NewRevisedDate__c) {
                 const selectedDate = new Date(row.NewRevisedDate__c);
@@ -288,7 +299,7 @@ export default class ProjectPaymentplanAction extends NavigationMixin(LightningE
         }
 
         // 180 day validation
-        if ( !row.ChequeReplacement__c && row.Type__c !== 'Handover' && row.Type__c !== 'Post Handover Installment') {
+        if (!row.ChequeReplacement__c && row.Type__c !== 'Handover' && row.Type__c !== 'Post Handover Installment') {
             const maxAllowedDate = new Date(dueDate);
             maxAllowedDate.setDate(maxAllowedDate.getDate() + 180);
             console.log('selectedDate' + selectedDate);

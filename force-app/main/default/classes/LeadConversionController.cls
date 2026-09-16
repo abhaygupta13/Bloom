@@ -36,7 +36,7 @@ public without sharing class LeadConversionController {
     public static String vaidateLead(Id leadId){
         String jsonData;
         LeadConvertWrapper obj = new LeadConvertWrapper();
-       // try{
+        try{
             Id individualLeadRecordTypeId = Utility.getRecordTypeIdByDevName(Lead.SObjectType, LEAD_RT_DEV_NAME_INDIVIDUAL_LEAD);
             Id organizationLeadRecordTypeId = Utility.getRecordTypeIdByDevName(Lead.SObjectType, LEAD_RT_DEV_NAME_ORGANIZATION_LEAD);
             LeadService objLeadService = LeadService.getInstance();
@@ -58,9 +58,9 @@ public without sharing class LeadConversionController {
                 return JSON.serialize(obj);
             }
             obj.isEligibleToConvert = true;
-      /*  }catch(System.exception ex){
+        }catch(System.exception ex){
             throw new AuraHandledException('Error: '+ ex.getMessage());   
-        }*/
+        }
         jsonData = JSON.serialize(obj);
         return jsonData;
     }
@@ -83,11 +83,11 @@ public without sharing class LeadConversionController {
             if(String.isBlank(objLead.NameArabic__c)){
                 missingFields.add('Arabic Name');
             }
-            if(String.isBlank(objLead.nationality__c)){
-                missingFields.add('Nationality');
-            }
             if(String.isBlank(objLead.MaritalStatus__c)  && objLead.LeadTeam__c == 'Sales'){
                 missingFields.add('Marital Status');
+            }
+            if(String.isBlank(objLead.nationality__c)){
+                missingFields.add('Nationality');
             }
             if(String.isBlank(objLead.ResidentStatus__c)){
                 missingFields.add('Resident Status');
@@ -140,26 +140,26 @@ public without sharing class LeadConversionController {
             if(String.isBlank(objLead.PostalCode) && (objLead.LeadTeam__c == 'Sales' || objLead.LeadTeam__c == 'Leasing')){
                 missingFields.add('Address - Postal Code');
             }
-                        //-- added KYC fields
+            //-- added KYC fields
             if(String.isBlank(objLead.EmploymentStatus__c) && objLead.LeadTeam__c == 'Sales'){
                 missingFields.add('Employment Status');
             }
-            if(String.isBlank(objLead.CompanyIndustry__c) && objLead.LeadTeam__c == 'Sales'){
+            if(String.isBlank(objLead.CompanyIndustry__c) && objLead.LeadTeam__c == 'Sales' && objLead.EmploymentStatus__c != 'Retired'){
                 missingFields.add('Company Industry');
             }
-            if(String.isBlank(objLead.YearsOfEmployment__c) && objLead.LeadTeam__c == 'Sales'){
+            if(String.isBlank(objLead.YearsOfEmployment__c) && objLead.LeadTeam__c == 'Sales' && objLead.EmploymentStatus__c != 'Retired'){
                 missingFields.add('Years of Employment');
             }
-            if(String.isBlank(objLead.CompanyEmirates__c) && objLead.LeadTeam__c == 'Sales'){
+            if(String.isBlank(objLead.CompanyEmirates__c) && objLead.LeadTeam__c == 'Sales' && objLead.EmploymentStatus__c != 'Retired'){
                 missingFields.add('Company Emirates');
             }
-            if(String.isBlank(objLead.CompanyName__c) && objLead.LeadTeam__c == 'Sales'){
+            if(String.isBlank(objLead.CompanyName__c) && objLead.LeadTeam__c == 'Sales' && objLead.EmploymentStatus__c != 'Retired'){
                 missingFields.add('Company Name');
             }
-            if(String.isBlank(objLead.Position__c) && objLead.LeadTeam__c == 'Sales'){
+            if(String.isBlank(objLead.Position__c) && objLead.LeadTeam__c == 'Sales' && objLead.EmploymentStatus__c != 'Retired'){
                 missingFields.add('Position');
             }
-            if(objLead.AnnualIncome__c == null && objLead.LeadTeam__c == 'Sales'){
+            if(objLead.AnnualIncome__c == null && objLead.LeadTeam__c == 'Sales'  && objLead.EmploymentStatus__c != 'Retired'){
                 missingFields.add('Annual Income');
             }
             if(String.isBlank(objLead.SourceOfFunds__c) && objLead.LeadTeam__c == 'Sales'){
@@ -194,6 +194,18 @@ public without sharing class LeadConversionController {
             }
             if(String.isBlank(objLead.BPType__c) && objLead.LeadTeam__c == 'Leasing'){
                 missingFields.add('BP Type');
+            }
+            if(!String.isBlank(objLead.Emirates_Id__c) && objLead.EmiratesIDExpiryDate__c == NULL ){
+                missingFields.add('Emirates ID Expiry Date');
+            }
+            if(!String.isBlank(objLead.Emirates_Id__c) && objLead.EmiratesIDIssueDate__c == NULL ){
+                missingFields.add('Emirates ID Issue Date');
+            }
+            if(!String.isBlank(objLead.Passport_Number__c ) && objLead.PassportExpiryDate__c == NULL ){
+                missingFields.add('Passport Expiry Date');
+            }
+            if(!String.isBlank(objLead.Passport_Number__c ) && objLead.PassportIssueDate__c == NULL ){
+                missingFields.add('Passport Issue Date');
             }
         }else if(objLead.RecordTypeId == organizationLeadRecordTypeId){
             if(String.isBlank(objLead.FirstName)){
@@ -262,6 +274,12 @@ public without sharing class LeadConversionController {
             if(String.isBlank(objLead.TradeLicenseNumber__c)){
                 missingFields.add('TradeLicense Number');
             }
+            if(objLead.TradeLicenseExpiryDate__c == NULL){
+                missingFields.add('Trade License Expiry Date');
+            }
+            if(objLead.TradeLicenseIssueDate__c == NULL){
+                missingFields.add('Trade License Issue Date');
+            }
             if(String.isBlank(objLead.RegistrationAuthority__c)){
                 missingFields.add('Registration Authority');
             }
@@ -271,7 +289,7 @@ public without sharing class LeadConversionController {
             if(String.isBlank(objLead.BPType__c) && objLead.LeadTeam__c == 'Leasing'){
                 missingFields.add('BP Type');
             }
-                         //--- added KYC fields
+            //--- added KYC fields
             if(String.isBlank(objLead.EmploymentStatus__c) && objLead.LeadTeam__c == 'Sales'){
                 missingFields.add('Employment Status');
             }
@@ -297,7 +315,7 @@ public without sharing class LeadConversionController {
                 missingFields.add('Source of Funds');
             }
             //---------
-
+            
         }
         return missingFields;
     }
@@ -334,6 +352,9 @@ public without sharing class LeadConversionController {
             objAccount.BillingPostalCode = objLead.PostalCode;
             objAccount.BillingState = objLead.State;
             objAccount.BillingStateCode = objLead.StateCode;
+            objAccount.Trade_License_No__c = objLead.TradeLicenseNumber__c ;
+            objAccount.Trade_License_Expiry_Date__c = objLead.TradeLicenseExpiryDate__c ;
+            objAccount.Trade_License_Issue_Date__c = objLead.TradeLicenseIssueDate__c ;
             objAccount.BillingStreet = objLead.Street;
             objAccountService.updateAccountWithoutDuplicateRule(objAccount);
         }
@@ -356,6 +377,12 @@ public without sharing class LeadConversionController {
             objAccount.PersonBirthdate = objLead.Birthdate__c;
             objAccount.PrimaryMobileCountryCode__pc = objLead.MobileCountryCode__c;
             objAccount.PrimaryMobilePhone__pc = objLead.MobilePhoneNumber__c;
+            objAccount.PassportNumber__pc = objLead.Passport_Number__c ;
+            objAccount.PassportExpiryDate__pc = objLead.PassportExpiryDate__c ;
+            objAccount.PassportIssueDate__pc = objLead.PassportIssueDate__c ;
+            objAccount.Emirates_Id__pc = objLead.Emirates_Id__c ;
+            objAccount.EID_Issue_Date__pc = objLead.EmiratesIDIssueDate__c ;
+            objAccount.EID_Expiry_Date__pc = objLead.EmiratesIDExpiryDate__c ;
         }
         if(objLead.LeadTeam__c == 'Sales'){
             objAccount.IsSales__c = true;

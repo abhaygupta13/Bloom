@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Phase_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Phase_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Building_Compact_Layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Building_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>Project__c</fields>
+        <fields>EndDate__c</fields>
+        <fields>CompletionCertificateDate__c</fields>
+        <fields>LatitudeLongitude__c</fields>
+        <fields>PropertyManagementFee__c</fields>
+        <fields>PublicLaunchDate__c</fields>
+        <label>Building Compact Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to manage all the Building and Sections that the project as. All the units will be associated with a building or section.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>ADMDistrictNameArabic__c</fullName>
+        <description>To capture the District name in Arabic text</description>
+        <externalId>false</externalId>
+        <label>ADM District Name (Arabic)</label>
+        <length>200</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ADMDistrictNameEng__c</fullName>
+        <description>To capture the District name of the Building in English text</description>
+        <externalId>false</externalId>
+        <label>ADM District Name (English)</label>
+        <length>200</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BounceChequeAccount__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Other Charges Account</label>
+        <referenceTo>BankAccount__c</referenceTo>
+        <relationshipName>Buildings_Phases4</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Brochure_URL__c</fullName>
+        <label>Brochure URL</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>BuildingSectionCode__c</fullName>
+        <externalId>false</externalId>
+        <label>Building/Phase Code</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Building_Amenities__c</fullName>
+        <label>Building Amenities</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Balcony</fullName>
+                    <default>false</default>
+                    <label>Balcony</label>
+                </value>
+                <value>
+                    <fullName>Built-in Wardrobes</fullName>
+                    <default>false</default>
+                    <label>Built-in Wardrobes</label>
+                </value>
+                <value>
+                    <fullName>Children Play Area</fullName>
+                    <default>false</default>
+                    <label>Children Play Area</label>
+                </value>
+                <value>
+                    <fullName>Covered Parking</fullName>
+                    <default>false</default>
+                    <label>Covered Parking</label>
+                </value>
+                <value>
+                    <fullName>Gym</fullName>
+                    <default>false</default>
+                    <label>Gym</label>
+                </value>
+                <value>
+                    <fullName>Jogging Track</fullName>
+                    <default>false</default>
+                    <label>Jogging Track</label>
+                </value>
+                <value>
+                    <fullName>Pets Allowed</fullName>
+                    <default>false</default>
+                    <label>Pets Allowed</label>
+                </value>
+                <value>
+                    <fullName>Restaurant</fullName>
+                    <default>false</default>
+                    <label>Restaurant</label>
+                </value>
+                <value>
+                    <fullName>Swimming Pool</fullName>
+                    <default>false</default>
+                    <label>Swimming Pool</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Building_Plot_No__c</fullName>
+        <externalId>false</externalId>
+        <label>Building Plot No</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CompletionCertificateDate__c</fullName>
+        <label>Completion Certificate Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ConstructionStatus__c</fullName>
+        <label>Construction Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Under Construction</fullName>
+                    <default>false</default>
+                    <label>Under Construction</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <label>Description</label>
+        <length>1000</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <label>End Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>HandoverAccountInstallment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Handover Account Installment</label>
+        <referenceTo>BankAccount__c</referenceTo>
+        <relationshipName>Buildings_Phases3</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LatitudeLongitude__c</fullName>
+        <displayLocationInDecimal>false</displayLocationInDecimal>
+        <label>Latitude &amp; Longitude</label>
+        <required>false</required>
+        <scale>5</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>LeasingBuildingName__c</fullName>
+        <externalId>false</externalId>
+        <label>Leasing Building Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PHPPAccountInstallment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>PHPP Account Installment</label>
+        <referenceTo>BankAccount__c</referenceTo>
+        <relationshipName>Buildings_Phases2</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Primary_Account_ADM_Charges__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Primary Account ADM/Charges</label>
+        <referenceTo>BankAccount__c</referenceTo>
+        <relationshipName>Buildings_Phases1</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Primary_Account_Installment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Primary Account Installment</label>
+        <referenceTo>BankAccount__c</referenceTo>
+        <relationshipName>Buildings_Phases</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Project_Amenities__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF ( INCLUDES (  Project__r.Amenities__c , &quot;Gym&quot; ), &quot;Gym; &quot;,null ) &amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Swimming Pool&quot; ), &quot;Swimming Pool; &quot;,null ) &amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Built-in Wardrobes&quot; ), &quot;Built-in Wardrobes; &quot;,null ) &amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Balcony&quot; ), &quot;Balcony; &quot;,null ) &amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Pets Allowed&quot; ), &quot;Pets Allowed; &quot;,null )&amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Covered Parking&quot; ), &quot;Covered Parking; &quot;,null )&amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Jogging Track&quot; ), &quot;Jogging Track; &quot;,null )&amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Restaurant&quot; ), &quot;Restaurant; &quot;,null )&amp;
+IF ( INCLUDES ( Project__r.Amenities__c , &quot;Children Play Area&quot; ), &quot;Children Play Area; &quot;,null )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project Amenities</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipName>BuildingsSectionsProject</relationshipName>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PropertyManagementFee__c</fullName>
+        <label>Property Management Fee %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>PublicLaunchDate__c</fullName>
+        <description>Date when the building was released to Public.</description>
+        <inlineHelpText>Date when the building was released to Public.</inlineHelpText>
+        <label>Public Launch Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>SAP_Building_No__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Building No</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <label>StartDate</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Strata_Stmt_Arabic__c</fullName>
+        <label>Strata Stmt Arabic</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Strata_Stmt_English__c</fullName>
+        <label>Strata Stmt English</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>TaxPercentage__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Represents the TAx % that will be applied to the Salesorder</description>
+        <label>Tax %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>isEnabledMIP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>isEnabledMIP</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Phase</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>BuildingSectionCode__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Building/Phase Name</label>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Phases</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>NewFromDocument</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Import</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>PrintableListView</excludedStandardButtons>
+        <searchResultsAdditionalFields>BuildingSectionCode__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Project__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CompletionCertificateDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>EndDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PublicLaunchDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PropertyManagementFee__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Read</sharingModel>
+    <validationRules>
+        <fullName>Property_Management_Fee</fullName>
+        <active>true</active>
+        <errorConditionFormula>PropertyManagementFee__c  &lt; 0</errorConditionFormula>
+        <errorDisplayField>PropertyManagementFee__c</errorDisplayField>
+        <errorMessage>Property Management Fee cannot be negative.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

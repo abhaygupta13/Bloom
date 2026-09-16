@@ -200,7 +200,7 @@ public without sharing class BCAPP_SendNotificationAction {
     }
     
     public void handlePushNotificationActionItems() {
-        System.debug('--->>>>handlePushNotificationActionItems--->>>');
+        
         Set<Id> catalogIds = new Set<Id>();
         Set<Id> accountIds = new Set<Id>();
         Map<Id,String> accountDeviceToken = new Map<Id,String>();

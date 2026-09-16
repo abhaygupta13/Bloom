@@ -28,13 +28,6 @@ public inherited sharing class ActivityService {
                 Limit 1];
         
     }
-        public List<Task> fetchOpenTaskForCase(Case caseObj){
-        return [SELECT Id,FinalTask__c,WhatId,OwnerId FROM Task 
-                WHERE WhatId =:caseObj.id 
-                AND Status = 'Open' 
-                Limit 2];
-        
-    }
 
     public List<Task> getOpenTaskForHandoverTeam(Handover__c handoverObj){
         return [SELECT Id,FinalTask__c,WhatId,SubType__c,OwnerId,CompletedDateTime__c FROM Task 
@@ -103,10 +96,15 @@ public inherited sharing class ActivityService {
                  AND Status != 'Completed' Order By CreatedDate DESC LIMIT 1];
     }
 
+    public List<Task> fetchOpenTaskForCase(Case caseObj){
+        return [SELECT Id,FinalTask__c,WhatId,OwnerId FROM Task 
+                WHERE WhatId =:caseObj.id 
+                AND Status = 'Open' 
+                Limit 2];
+        
+    }
+
     public List<Task> fetchOpenTaskFromServiceAction(ServiceAction__c sa,String WhatId){
-        if (sa == null || String.isBlank(WhatId)) {
-            return new List<Task>();
-        }
         return  [SELECT Id,Type__c,SubType__c,FinalTask__c,WhatId,OwnerId,Owner.email,Department__c,SLAHours__c,CompletedDateTime__c
                  FROM Task 
                  WHERE WhatId =:WhatId 
@@ -164,8 +162,7 @@ public inherited sharing class ActivityService {
                             }
     
     public Task getActivityWithSLA(String subject, Date ActivityDate, Datetime dueDateTime, String description, 
-                                   String status, String type, String priority, Integer count, Id ownerId, Id whoId, 
-                                   Datetime slaDateTime, Id BusinessHourId, Decimal slaHours, Integer reminderBeforeHours){ 
+                            String status, String type, String priority, Integer count, Id ownerId, Id whoId, Datetime slaDateTime, Id BusinessHourId, Decimal slaHours){ 
                                 Task objTask = new Task();
                                 objTask.Subject = String.isNotBlank(subject) ? subject : null;
                                 objTask.ActivityDate = ActivityDate != null ? ActivityDate : null;
@@ -180,7 +177,6 @@ public inherited sharing class ActivityService {
                                 objTask.SLADateTime__c   = slaDateTime != null ? slaDateTime : null;
                                 objTask.SLAHours__c = slaHours != null ? slaHours : slaDateTime != null ? (slaDateTime.getTime() - Datetime.now().getTime()) / (1000.0 * 60 * 60) : null;
                                 objTask.BusinessHours__c = BusinessHourId != null ? BusinessHourId : null;
-                                       objTask.ReminderBeforeHours__c = reminderBeforeHours != null ? reminderBeforeHours : null;
                                 
                                 return objTask;
                             }
@@ -195,15 +191,17 @@ public inherited sharing class ActivityService {
         return taskList;
     }
 
-    public List<Task> getTasksByCaseIds(Set<Id> caseIds){
-        List<Task> taskList = [SELECT Id, WhatId, OwnerId FROM Task WHERE WhatId IN :caseIds];
-        return taskList;
-    }
-
     public void deleteEvents(List<Event> events){
         if(events != NULL && !events.isEmpty()){
             delete events;
         }
+    }
+    
+    public Event insertEvent(Event event){
+        if(event != NULL ){
+            event = insertEvents(new List<Event>{event})[0];
+        }
+        return event;
     }
     
     public List<Event> insertEvents(List<Event> eventList){
@@ -218,6 +216,20 @@ public inherited sharing class ActivityService {
             insert taskList;
         }
         return taskList;
+    }
+    public List<Task> getOpenTasksByOwner(Id whatId){
+         
+    List<Task> openTasks = [
+        SELECT Id
+        FROM Task
+        WHERE WhatId = :whatId
+        AND OwnerId = :UserInfo.getUserId()
+        AND Status != 'Completed'
+        LIMIT 1
+    ];
+        return openTasks;
+        
+        
     }
     
     public  Map<Id,List<Task>> fetchOpenTaskByCaseList(List<Case> listOfCases){
@@ -292,5 +304,40 @@ public inherited sharing class ActivityService {
     
     public Task updateTask(Task tsk){
         return updateTasks(new List<Task>{tsk})[0];
+    }
+
+    public Event createEventObj(Id whoId, Id appointmentSlotId, String status, DateTime startDateTime, DateTime endDateTime, String subject, String type){
+        Event objEvent = new Event();
+        objEvent.WhoId = whoId;
+        objEvent.AppointmentSlot__c = appointmentSlotId;
+        objEvent.AppointmentStatus__c = status;
+        objEvent.StartDateTime = startDateTime;
+        objEvent.EndDateTime = endDateTime;
+        objEvent.Subject = subject;
+        objEvent.Type = type;
+        return objEvent;
+    }
+
+    public List<Event> updateEvents(List<Event> eventList){ 
+        if(eventList != NULL && !eventList.isEmpty()){
+            update eventList;
+        }
+        return eventList; 
+    }
+          
+    public Messaging.SingleEmailMessage createAppointmentNotificationEmail(EmailTemplate emailTemplate, Event eventRec, Map<String, String> templateFieldValues){
+        EmailService objEmailService = EmailService.getInstance();
+            String emailBody = emailTemplate.HtmlValue;
+            String emailSubject = emailTemplate.Subject;
+            String appointmentDate = eventRec.StartDateTime != null ? eventRec.StartDateTime.format('yyyy-MM-dd') : '';
+            String appointmentTime = (eventRec.StartDateTime != null && eventRec.EndDateTime != null) ? eventRec.StartDateTime.format('HH:mm a') + ' - ' + eventRec.EndDateTime.format('HH:mm a') : '';
+            String body = emailBody.replace('[Customer_Name]', templateFieldValues.get('customerName'))
+                .replace('[Customer_Name_Arabic]', templateFieldValues.get('customerNameArabic'))
+                .replace('[Date]', appointmentDate)
+                .replace('[Slot_Time]', appointmentTime)
+                .replace('[Location]', String.isBlank(eventRec.Location) ? '' : eventRec.Location)
+                .replace('[Manager_Name]', String.isBlank(templateFieldValues.get('accountManagerName')) ? '' : templateFieldValues.get('accountManagerName'))
+                .replace('[Manager_Number]', String.isBlank(templateFieldValues.get('accountManagerPhone')) ? '' : templateFieldValues.get('accountManagerPhone'));
+            return objEmailService.getSingleEmailMessage(null, null, eventRec.WhoId, emailSubject, body, templateFieldValues.get('NoReplyBloomEmail'));
     }
 }

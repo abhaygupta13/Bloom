@@ -10,7 +10,7 @@
 public class ContactTriggerHandler  implements ITriggerHandler{
     
     private static final string CONTACT_RT_DEV_NAME_BROKER { get { return 'Broker'; } }
-    private static final String CASE_RT_DEV_NAME_BROKER_REGISTRATION { get { return 'BrokerAgentRegistrationAndUpdate'; } }
+    private static final String CASE_RT_DEV_NAME_BROKER_REGISTRATION { get { return 'Broker_Registration'; } }
     
     //Use this variable to disable this trigger from transaction
     public static Boolean isTriggerDisabled = false;
@@ -62,29 +62,18 @@ public class ContactTriggerHandler  implements ITriggerHandler{
     }
     
     public void afterUpdate(List<sObject> newList, Map<Id, sObject> newMap,  List<sObject> oldList, Map<Id, sObject> oldMap) {
-        ContactTriggerHelper.handleAfterUpdateFieldUpdates(newList,(Map<Id, Contact>) oldMap);    
-        ContactTriggerHelper.handleContactUpdates(newList,(Map<Id, Contact>) oldMap);    
+	ContactTriggerHelper.handleContactUpdates(newList,(Map<Id, Contact>) oldMap);  
         Set<Id> caseIds = new Set<Id>();
-        Set<Id> applicantIds = new Set<Id>();
         for (Contact con : (List<Contact>) newList) {
             if (con.CaseId__c != null) {
                 caseIds.add(con.CaseId__c);
             }
-            if (con.BrokerApplicant__c != null) {
-                applicantIds.add(con.BrokerApplicant__c);
-            }
         }
         Set<Id> validCaseIds = CaseService.getValidBrokerCaseIds(caseIds, CASE_RT_DEV_NAME_BROKER_REGISTRATION);
         if (!validCaseIds.isEmpty()) {
-            system.debug('validCaseIds-->'+validCaseIds);
-            //ContactTriggerHelper.syncCaseDocumentsToContact((List<Contact>) newList,(Map<Id, Contact>) oldMap,validCaseIds);
-             ContactTriggerHelper.syncDocumentsToContact((List<Contact>) newList, validCaseIds, 'CASE');
+            ContactTriggerHelper.syncCaseDocumentsToContact((List<Contact>) newList,(Map<Id, Contact>) oldMap,validCaseIds);
         }
-        if (!applicantIds.isEmpty()) {
-            //ContactTriggerHelper.syncApplicantDocumentsToContact((List<Contact>) newList,(Map<Id, Contact>) oldMap,applicantIds);
-             ContactTriggerHelper.syncDocumentsToContact((List<Contact>) newList, applicantIds, 'APPLICANT');
-        }
-        
+
         // Document Update Support
         Id brokerContactRecordTypeId = Utility.getRecordTypeIdByDevName(Contact.SObjectType, CONTACT_RT_DEV_NAME_BROKER);
         List<Contact> contacts = (List<Contact>)newList;

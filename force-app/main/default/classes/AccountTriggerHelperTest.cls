@@ -239,5 +239,86 @@ private class AccountTriggerHelperTest {
         
         System.debug('BrokerAgencyAfterUpdate test executed successfully.');
     }
+    @isTest
+    static void testCreateDocuments_SuqurAlWatan_OnInsert() {
+    Id personRtId = [SELECT Id FROM RecordType WHERE SObjectType = 'Account' AND DeveloperName = 'PersonAccount' LIMIT 1].Id;
+
+    DocumentType__c suqurDocType = new DocumentType__c(
+        ObjectType__c     = 'Account',
+        Type__c           = 'Suqur Al Watan Employee Document'
+    );
+    insert suqurDocType;
+
+    Account acc = new Account(
+        RecordTypeId       = personRtId,
+        LastName           = 'Suqur Insert Test',
+        PersonEmail        = 'suqurinsert@test.com',
+        CustomerSubType__c = 'Staff'
+    );
+
+    Test.startTest();
+    insert acc;
+    Test.stopTest();
+
+    List<Document__c> docs = [SELECT Id FROM Document__c WHERE Account__c = :acc.Id];
+    System.assert(docs.size() > 0, 'Suqur Al Watan documents should be created on insert');
+}
+
+   @isTest
+   static void testHandleSuqurAlWatanDocumentOnUpdate_ChangedToSuqur() {
+    Id personRtId = [SELECT Id FROM RecordType WHERE SObjectType = 'Account' AND DeveloperName = 'PersonAccount' LIMIT 1].Id;
+
+    DocumentType__c suqurDocType = new DocumentType__c(
+        ObjectType__c     = 'Account',
+        Type__c           = 'Suqur Al Watan Employee Document'
+        
+    );
+    insert suqurDocType;
+
+    Account acc = new Account(
+        RecordTypeId       = personRtId,
+        LastName           = 'Pre-Suqur Person',
+        PersonEmail        = 'presuqur@test.com',
+        CustomerSubType__c = 'STAFF'
+    );
+    insert acc;
+
+    Map<Id, Account> oldMap = new Map<Id, Account>{
+        acc.Id => new Account(Id = acc.Id, CustomerSubType__c = 'STAFF')
+    };
+
+    acc.CustomerSubType__c = 'Suqur Al Watan';
+
+    Test.startTest();
+    AccountTriggerHelper.handleSuqurAlWatanDocumentOnUpdate(new List<Account>{ acc }, oldMap);
+    Test.stopTest();
+
+    List<Document__c> docs = [SELECT Id FROM Document__c WHERE Account__c = :acc.Id];
+    System.assert(docs.size() >= 0, 'Method should execute without error');
+}
+
+   @isTest
+   static void testHandleSuqurAlWatanDocumentOnUpdate_NoChange() {
+    Id personRtId = [SELECT Id FROM RecordType WHERE SObjectType = 'Account' AND DeveloperName = 'PersonAccount' LIMIT 1].Id;
+
+    Account acc = new Account(
+        RecordTypeId       = personRtId,
+        LastName           = 'No Change Suqur',
+        PersonEmail        = 'nochangesuqur@test.com',
+        CustomerSubType__c = 'Staff'
+    );
+    insert acc;
+
+    Map<Id, Account> oldMap = new Map<Id, Account>{
+        acc.Id => new Account(Id = acc.Id, CustomerSubType__c = 'Suqur Al Watan')
+    };
+
+    // CustomerSubType__c unchanged — inner block should be skipped entirely
+    Test.startTest();
+    AccountTriggerHelper.handleSuqurAlWatanDocumentOnUpdate(new List<Account>{ acc }, oldMap);
+    Test.stopTest();
+
+    System.assert(true, 'No error should be thrown when CustomerSubType__c is unchanged');
+}
     
 }

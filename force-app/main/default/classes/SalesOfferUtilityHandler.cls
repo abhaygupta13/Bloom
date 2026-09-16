@@ -562,9 +562,8 @@ public with sharing class SalesOfferUtilityHandler {
                         System.debug('maxUnitPaymentPlan'+maxUnitPaymentPlan);
                         if(maxUnitPaymentPlan!=null && minUnitPaymentPlan!=null && maxUnitPaymentPlan>=SelectedUnitCount && minUnitPaymentPlan<=SelectedUnitCount ){
                             salesOfferObj.availablePaymentPlans.add(new map<string,string>{'label' =>allRelatedPaymentPlans.get(tempPaymentId).Name , 'value' => allRelatedPaymentPlans.get(tempPaymentId).Id});
-                        isAvailablePlan=true;
                         }
-                        
+                        isAvailablePlan=true;
                         if(allRelatedPaymentPlans.get(tempPaymentId).StandardFlag__c!=null && allRelatedPaymentPlans.get(tempPaymentId).StandardFlag__c == 'Yes'){ //Constant Constants.YES replaced 
                             standardPlans.add(tempPaymentId);
                         }

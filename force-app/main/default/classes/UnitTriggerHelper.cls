@@ -12,6 +12,8 @@ public class UnitTriggerHelper {
     
     private static final string INSTALLMENT_LINE_INTEGRATION_STATUS_IN_PROGRESS { get { return 'In Progress'; } }
     private static final string MTD_ENABLE_GIS_PE_INTEGRATION { get { return 'EnableGISPEIntegration'; } }
+    private static final string UNIT_INACTIVE_STATUS_CHANGE_RESPONSIBLE_TO { get { return 'FadiUsernameForSendNotifications'; } }
+    private static final string UNIT_INACTIVE_STATUS_NOTIFICATION_EMAIL { get { return 'UnitInactiveNotification'; } }
     
     public static void doPushToGIS(List<Unit__c> newList, Map<Id,Unit__c> oldMap){
         
@@ -90,5 +92,39 @@ public class UnitTriggerHelper {
                 unit.GISIntegrationMessage__c = NULL;
             }
         }
+    }
+
+    public static void handleAfterUpdate(List<Unit__c> newList, Map<Id, Unit__c> oldMap) {
+        Set<Id> unitIds = new Set<Id>();
+        for (Unit__c newUnit : newList) {
+            Unit__c oldUnit = oldMap.get(newUnit.Id);
+            if (oldUnit != null && oldUnit.IsInactive__c == false && newUnit.IsInactive__c == true) 
+                unitIds.add(newUnit.Id);
+        }
+        if (unitIds.isEmpty()) return;
+
+        MetadataService metadataService = MetadataService.getInstance();
+        EmailService emailService =  EmailService.getInstance();
+        UserService userService = UserService.getInstance();
+        Id templateId = metadataService.getAppSettingTextValue(UNIT_INACTIVE_STATUS_NOTIFICATION_EMAIL);
+        String username = metadataService.getAppSettingTextValue(UNIT_INACTIVE_STATUS_CHANGE_RESPONSIBLE_TO);
+
+        List<User> unserIds = userService.getUserIdByUserName(username);
+        if(unserIds.size() == 0)
+            return;
+            
+        List<User> users = userService.getUsersByIds(new Set<Id>{unserIds[0].Id});
+        if(users.size() == 0)
+            return;
+        if (templateId == null || users.isEmpty() || String.isBlank(users[0].Email)) return;
+
+        List<Messaging.SingleEmailMessage> emailList = new List<Messaging.SingleEmailMessage>();
+        for (Id unitId : unitIds) {
+            Messaging.SingleEmailMessage renderedMail = Messaging.renderStoredEmailTemplate(templateId, users[0].Id, unitId);
+            Messaging.SingleEmailMessage mail = emailService.getSingleEmailMessage(new List<String>{users[0].Email}, unitId, users[0].Id, renderedMail.getSubject(), renderedMail.getHtmlBody());
+             mail.setSaveAsActivity(false);
+            emailList.add(mail);
+        }
+        emailService.sendEmail(emailList);
     }
 }

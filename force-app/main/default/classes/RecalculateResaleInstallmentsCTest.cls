@@ -34,7 +34,7 @@ public class RecalculateResaleInstallmentsCTest {
         unit.UnitType__c = 'Townhouse';
         insert unit;
 
-        SalesOrder__c salesOrder = TestDataFactory.createSalesOrder(acc.Id, opp.Id, 'Booked', date.newinstance(2025, 01, 10), unit.Id, 18181818);
+        SalesOrder__c salesOrder = TestDataFactory.createSalesOrder(acc.Id, opp.Id, 'Sold', date.newinstance(2025, 01, 10), unit.Id, 18181818);
         salesOrder.NetAmount__c = 10000;
         insert salesOrder;
 
@@ -82,6 +82,7 @@ public class RecalculateResaleInstallmentsCTest {
         Case caseObj = TestDataFactory.createCase('Resale_Property_Under_Construction', 'Email', 'In Progress', 'Test case', null, acc.Id, unit.Id, con.Id);
         caseObj.ServiceCatalog__c = catalog.id;
         caseObj.TypeOfResale__c = 'Resale';
+        caseObj.InitialOwnerRemoved__c = 'Yes';
         caseObj.Sales_Order__c = salesOrder.id;
         caseObj.NewSalesOrder__c = newSalesOrder.id;
         insert caseObj;
@@ -159,10 +160,10 @@ public class RecalculateResaleInstallmentsCTest {
     static void testCalculateInstallmentsAndReceiptsForPHPP() {
 
         SalesOrder__c existingSO = [
-            SELECT Id FROM SalesOrder__c WHERE NetAmount__c = 10000 LIMIT 1
+            SELECT Id FROM SalesOrder__c WHERE Status__c = 'Sold' LIMIT 1
         ];
         SalesOrder__c newSO = [
-            SELECT Id, PreviousSalesOrder__c FROM SalesOrder__c WHERE NetAmount__c = 1000 LIMIT 1
+            SELECT Id, PreviousSalesOrder__c FROM SalesOrder__c WHERE  Status__c = 'Booked' LIMIT 1
         ];
 
         InstallmentLines__c i1 = new InstallmentLines__c(
@@ -181,16 +182,32 @@ public class RecalculateResaleInstallmentsCTest {
         );
         insert new List<InstallmentLines__c>{ i1, i2 };
 
-        Case c = [SELECT Id FROM Case WHERE Sales_Order__c = :existingSO.Id LIMIT 1];
-        c.TypeOfResale__c = 'Gifting';
+        Case c = [SELECT Id,InitialOwnerRemoved__c FROM Case WHERE Sales_Order__c = :existingSO.Id LIMIT 1];
+        c.TypeOfResale__c = 'Addition/Deletion';
+        c.ProjectStatus__c = 'Under Construction';
         c.InitialOwnerRemoved__c = 'Yes';
         update c;
 
         Test.startTest();
-        //String response = RecalculateResaleInstallmentsController.createInstallmentsReceipts(newSO.Id);
+        String response = RecalculateResaleInstallmentsController.createInstallmentsReceipts(newSO.Id);
         Test.stopTest();
 
         //System.assertEquals('Installments and Receipts created successfully.', response);
     }
+    @isTest
+static void testNoCaseFound() {
+    SalesOrder__c newSO = [
+        SELECT Id FROM SalesOrder__c WHERE NetAmount__c = 1000 LIMIT 1
+    ];
+
+    // Delete case to simulate no case
+    delete [SELECT Id FROM Case WHERE NewSalesOrder__c = :newSO.Id];
+
+    Test.startTest();
+    String result = RecalculateResaleInstallmentsController.createInstallmentsReceipts(newSO.Id);
+    Test.stopTest();
+
+    System.assertEquals('Installments and Receipts created successfully.', result);
+}
 
 }

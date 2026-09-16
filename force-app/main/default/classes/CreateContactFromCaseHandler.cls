@@ -41,8 +41,8 @@ public with sharing class CreateContactFromCaseHandler {
             con.LastName = cs.Last_Name__c;
             con.PrimaryMobilePhone__c = cs.PhoneNumber__c;
             con.Email = cs.Email_Address__c;
-            con.Emirates_Id__c = cs.NationalID__c;
-            con.EID_Expiry_Date__c = cs.NationalIDExpiryDate__c;
+            con.NationalIdNumber__c = cs.NationalID__c;
+            con.NationalIdExpiryDate__c = cs.NationalIDExpiryDate__c;
             con.PassportNumber__c = cs.PassportNumber__c;
             con.PassportExpiryDate__c = cs.PassportExpiryDate__c;
             con.Birthdate = cs.DateOfBirth__c;

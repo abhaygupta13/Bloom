@@ -27,8 +27,7 @@ public class CaseTriggerHandler implements ITriggerHandler{
     private static final string CHEQUE_WITHDRAWAL_REQUEST_RT { get { return 'ChequeWithdrawalRequest'; } }*/
     private static final string VEHICLE_PARKING_REQUEST_RT { get { return 'VehicleParkingRequest'; } }
     private static final string RESALE_MASTER_RT { get {return 'Resale_Master' ; } }
-    private static final string CASE_RT_DEV_NAME_BROKER_REGISTRATION { get { return 'BrokerAgentRegistrationAndUpdate'; } }
-    private static final string Broker_Agreement_Renewal { get { return 'BrokerAgreementRenewal'; } }
+    private static final string CASE_RT_DEV_NAME_BROKER_REGISTRATION { get { return 'Broker_Registration'; } }
      
     private static final string ACCESS_PERMIT_RT { get { return 'Access_Permit'; } }
     private static final string MOVE_IN_RT { get { return 'Move_In'; } }
@@ -130,25 +129,16 @@ public class CaseTriggerHandler implements ITriggerHandler{
         CaseDocumentCreation.DocumentCreation((Map<Id,Case>)newMap);
         
         CaseTriggerHelper.createDocuments((List<Case>) newList);
+
         
         CaseTriggerHelper.handleAfterInsert(newList);
         //allow 
         Id recordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get('Access Permit').getRecordTypeId();
-        Id brokerAgreementRenewalRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, Broker_Agreement_Renewal);
-        Id brokerAgreementRenewalTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get('Broker Agreement Renewal').getRecordTypeId();
         List<Case> accessPermitCases = new List<Case>();
-        List<Case> brokerAgreementRenewalCases = new List<Case>();
         for(case rec:(List<Case>)newList){
            if(rec.Status=='Approved'  && rec.recordTypeId==recordTypeId){
                  accessPermitCases.add(rec);
            }
-            if (rec.RecordTypeId == brokerAgreementRenewalRTId) {
-                brokerAgreementRenewalCases.add(rec);
-            }
-           
-        }
-        if (!brokerAgreementRenewalCases.isEmpty()) {
-            BrokerAgreementRenewalSRHandler.generateBrokerAgreement(brokerAgreementRenewalCases);
         }
         if(!accessPermitCases.isEmpty()){
             System.enqueueJob(new accessPermitEmailHelperQueuable(newList));
@@ -192,26 +182,24 @@ public class CaseTriggerHandler implements ITriggerHandler{
         Id resaleMasterRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, RESALE_MASTER_RT);
           
         CaseTriggerHelper.updateCaseApplicantDocuments((List<Case>) newList, (Map<Id, Case>) newMap, (List<Case>) oldList, (Map<Id, Case>) oldMap);
+
         List<Case> objCaseList = new  List<Case>();
         List<Case> objBrokerCaseList = new List<Case>();
         Map<Id,Case> oldCaseMap = (Map<Id, Case>) oldMap;
-        List<Case> closedDefaultUnitCases = new List<Case>();
-        
         for(Case objCase :(List<Case>)newList){
             if(objCase.RecordTypeId == defaultUnitRecordTypeId && objCase.Status == 'Closed' && oldCaseMap.get(objCase.Id).Status != 'Closed' 
                 && objCase.CaseSubClosureReason__c == 'Forwarded to the concerned department'){
-                closedDefaultUnitCases.add(objCase);
+                CaseTriggerHelper.handleDefaultUnitCaseClosure((List<Case>) newList);
             }
             if(objCase.RecordTypeId != caseSocialMediaRecordTypeId && objCase.RecordTypeId !=accessPermitRecordTypeId  && objCase.RecordTypeId !=postSalePaymentDeferralRecordTypeId  && objCase.RecordTypeId !=bfmServiceRequestRecordTypeId && objCase.RecordTypeId !=contactCenterDigitalCaseRecordTypeId && objCase.RecordTypeId !=resaleForCompletedProjectRecordTypeId && objCase.RecordTypeId !=resaleWithPHPPRecordTypeId && objCase.RecordTypeId !=resaleUnderConstructionRecordTypeId && objCase.recordTypeId != caseANPRRecordTypeId && objCase.recordTypeId != accessPermitServiceRequestRecordTypeId && objCase.recordTypeId != moveINServiceRequestRecordTypeId && objCase.recordTypeId != moveINHolidayHomesServiceRequestRecordTypeId && objCase.recordTypeId != moveINOwnerServiceRequestRecordTypeId && objCase.recordTypeId != moveOUTServiceRequestRecordTypeId && objCase.recordTypeId != renewalServiceRequestRecordTypeId && objCase.recordTypeId != resaleMasterRecordTypeId){ 
                 objCaseList.add(objCase);
             }
             
             // Add for Broker Contact creation
-            if (objCase.RecordTypeId == caseBrokerRegistrationRecordTypeId && objCase.TypeofEstablishment__c != null && objCase.SubType__c == 'Broker New Agent Registration') {
+            if (objCase.RecordTypeId == caseBrokerRegistrationRecordTypeId && objCase.TypeofEstablishment__c != null) {
                     Case oldCase = (Case) oldMap.get(objCase.Id);
                     if (oldCase != null) {
-                    if (objCase.ApprovalStatus__c == 'Approved' && objCase.FinalApprovalStage__c == 'Second Approval' && objCase.SubStatus__c == 'Closed' &&
-                        (oldCase.ApprovalStatus__c != 'Approved' || oldCase.FinalApprovalStage__c != 'Second Approval' || oldCase.SubStatus__c != 'Closed')) {
+                    if (objCase.ApprovalStatus__c == 'Approved' && ((objCase.FinalApprovalStage__c == 'First Approval' && oldCase.ApprovalStatus__c == 'Approved By BBM') || (objCase.FinalApprovalStage__c == 'Second Approval' && oldCase.ApprovalStatus__c == 'Approved By BL'))) {
                         objBrokerCaseList.add(objCase);
                         }   
                     }
@@ -221,16 +209,8 @@ public class CaseTriggerHandler implements ITriggerHandler{
             }
         }
 
-        if(!closedDefaultUnitCases.isEmpty()){
-            CaseTriggerHelper.handleDefaultUnitCaseClosure(closedDefaultUnitCases);
-        }
-
         // Create Broker Contacts
         if (!objBrokerCaseList.isEmpty()) {
-            // Fetch record type metadata
-            //Map<Id, RecordType> recordTypeMap = new Map<Id, RecordType>([SELECT Id, DeveloperName FROM RecordType WHERE SObjectType = 'Case']);
-            // Do not modify trigger records — pass recordTypeMap to helper
-            //CaseTriggerHelper.createBrokerContacts(objBrokerCaseList, recordTypeMap);
             CaseTriggerHelper.createBrokerContacts(objBrokerCaseList); // US-745
         }
 
@@ -242,114 +222,51 @@ public class CaseTriggerHandler implements ITriggerHandler{
         
         // Query once for all conditions
         List<Case> casesWithService = [
-            SELECT Id, RecordTypeId, ApprovalStatus__c,ParentId,AccountId, ContactId, Type, SubType__c, TradeLicenseExpiryDate__c, VATUndertakingIssue_Date__c, IsVATRegistered__c, Address1__c, Address2__c, PhoneNumber__c, TaxRegistrationNumber__c, CommercialLicenseExpiryDate__c, ServiceCatalog__c, ServiceCatalog__r.Category__c, ServiceCatalog__r.SubCategory__c, BrokerContactRole__c, NationalIDExpiryDate__c, PassportExpiryDate__c, BRN_RERA_Expiry_Date__c, AccountNumber__c, BankName__c, BankAddress__c, IBANNumber__c, SwiftCode__c, Broker_Agent__c,PostApprovalAction__c, AgencyName__c,AgencyType__c
+            SELECT Id, RecordTypeId, ApprovalStatus__c, AccountId, ContactId, Type, SubType__c, TradeLicenseExpiryDate__c, VATUndertakingIssue_Date__c, IsVATRegistered__c, Address1__c, Address2__c, PhoneNumber__c, TaxRegistrationNumber__c, CommercialLicenseExpiryDate__c, ServiceCatalog__c, ServiceCatalog__r.Category__c, ServiceCatalog__r.SubCategory__c, BrokerContactRole__c, NationalIDExpiryDate__c, PassportExpiryDate__c, BRN_RERA_Expiry_Date__c, AccountNumber__c, BankName__c, BankAddress__c, IBANNumber__c, SwiftCode__c, Broker_Agent__c
             FROM Case
             WHERE Id IN :caseIds
         ];
         
         // Get RecordType Ids
-        Id brokerAgencyDetailsRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('BrokerAgencyDetailsUpdate').getRecordTypeId();
-        Id brokerAgentDetailsRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('BrokerAgentRegistrationAndUpdate').getRecordTypeId();
-        Id brokerCommissionRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('BrokerCommissionIssue').getRecordTypeId();
-        Id brokerOtherRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('BrokerGeneralServiceRequest').getRecordTypeId();
-        Id brokerAgreementRenewalRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, Broker_Agreement_Renewal);
+        Id brokerAgencyDetailsRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Broker_Agency_Details_Update').getRecordTypeId();
+        Id brokerAgentDetailsRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('BrokerAgentDetailsUpdate').getRecordTypeId();
         
         // Separate lists
         List<Case> casesToApprove = new List<Case>();
         List<Case> brokerCases = new List<Case>();
-        List<Case> childCases = new List<Case>();
         List<Case> brokerAgentCases = new List<Case>();
-        Set<Id> parentCaseIds = new Set<Id>();
-        Set<Id> childCaseIds = new Set<Id>();
-
         
         // Single loop — handle all conditions
         for (Case cs : casesWithService) {
             if (cs.ServiceCatalog__r == null) continue;
             
-            Case oldCase = (Case) oldMap.get(cs.Id);
-
-            // Update Account from ParentCase when child case Approved
-            if (cs.RecordTypeId == brokerAgreementRenewalRTId && cs.ServiceCatalog__r.Category__c == 'Broker Service Request' && cs.ServiceCatalog__r.SubCategory__c == 'Broker Agreement Renewal' && cs.ApprovalStatus__c == 'Approved' &&
-                oldCase.ApprovalStatus__c != cs.ApprovalStatus__c) {
-                    if(cs.ParentId !=null){
-                    ParentCaseIds.add(cs.ParentId);
-                    }
-                    childCaseIds.add(cs.Id);
-                    system.debug('ParentCaseIds-->'+ParentCaseIds);
-                }
-
-            
          
             // Create Broker Accounts -> update Account
-            if (cs.RecordTypeId == brokerAgencyDetailsRTId && cs.ServiceCatalog__r.Category__c == 'Broker Service Request' && cs.ServiceCatalog__r.SubCategory__c == 'Broker Agency Details Update' && cs.ApprovalStatus__c == 'Approved' &&
-                oldCase.ApprovalStatus__c != cs.ApprovalStatus__c) {
-                childCases.add(cs);
-                    
-                    Boolean createsChildCase = false;
-                    if ((cs.PostApprovalAction__c == 'Generate Renewal Agreement' && (cs.SubType__c == 'Bank Details Update' || cs.SubType__c == 'Trade License Expiry Update' ||
-                                                                                      cs.SubType__c == 'VAT Details Update' || cs.SubType__c == 'Legal Documents Update')) || 
-                        cs.SubType__c == 'Agency Name or Type Update'|| cs.SubType__c == 'Broker Agreement Renewal Complete Details Update') {
-                            
-                            createsChildCase = true;
-                        }
-                    
-                    // Only update Account if no child case is created
-                    if (!createsChildCase) {
-                        brokerCases.add(cs);
-                    }
-                }
+            if (cs.RecordTypeId == brokerAgencyDetailsRTId && cs.ServiceCatalog__r.Category__c == 'Broker Service Request' && cs.ServiceCatalog__r.SubCategory__c == 'Broker Agency Details Update' && cs.ApprovalStatus__c == 'Approved') {
+                brokerCases.add(cs);
+            }
             
             // Broker Agent Service Request -> update Contact
   
             if (cs.RecordTypeId == brokerAgentDetailsRTId && cs.ServiceCatalog__r.Category__c == 'Broker Service Request' && cs.ServiceCatalog__r.SubCategory__c == 'Broker Agent Details Update' && cs.ApprovalStatus__c == 'Approved') {
-                system.debug('Cs-->'+cs);
                 brokerAgentCases.add(cs);
             }
         }
         
-         Boolean updateAgreementRenewalStatus = false;
+
         if (!brokerCases.isEmpty()) {
-            CaseTriggerHelper.updateBrokerAccounts(brokerCases,updateAgreementRenewalStatus);
+            System.debug('Agency info Update');
+            CaseTriggerHelper.updateBrokerAccounts(brokerCases);
         }
         if (!brokerAgentCases.isEmpty()) {
             CaseTriggerHelper.updateBrokerContactSR(brokerAgentCases);
         }
-        if (!childCases.isEmpty()) {
-            BrokerAgreementRenewalSRHandler.createChildCases(childCases);
-        }
-        if (!ParentCaseIds.isEmpty()) {
-             updateAgreementRenewalStatus = true;
-            list<case> caseRecords = CaseService.getInstance().getCaseByIds(ParentCaseIds);
-            CaseTriggerHelper.updateBrokerAccounts(caseRecords,updateAgreementRenewalStatus);
-        }
-        if (!childCaseIds.isEmpty()) {
-            list<case> caseRecords = CaseService.getInstance().getCaseByIds(childCaseIds);
-            BrokerAgreementRenewalSRHandler.moveSignedAgreementdToAccount(caseRecords);
-        }
-        // Send BBM queue notifications
+        //Rushikesh: Send BBM queue notifications
         CaseTriggerHelper.sendBBMQueueEmails(newList);
 
         //Vehicle Parking Registration logic 
         CaseTriggerHelper.handleVehicleParkingRegistrationReqAfterUpdate((List<Case>)newList, (Map<Id, Case>)oldMap); 
         CaseTriggerHelper.handleSendEmailActions(newList,oldMap);
-
-        // BAPP Complete tasks when broker cases are closed
-        Set<Id> brokerRecordTypeIds = new Set<Id>{
-            brokerAgentDetailsRTId, brokerAgencyDetailsRTId, brokerCommissionRTId, brokerOtherRTId
-        };
-        List<Case> brokerCasesForTaskCompletion = new List<Case>();
-        for (Case cs : (List<Case>) newList) {
-            if (brokerRecordTypeIds.contains(cs.RecordTypeId)) {
-                brokerCasesForTaskCompletion.add(cs);
-            }
-        }
-        if (!brokerCasesForTaskCompletion.isEmpty()) {
-            CaseTriggerHelper.completeRelatedTasks(
-                brokerCasesForTaskCompletion,
-                (Map<Id, Case>) oldMap
-            );
-        }
     }
     
     public void beforeDelete(List<sObject> oldList , Map<Id, sObject> oldMap) {

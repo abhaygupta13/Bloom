@@ -44,8 +44,6 @@ public with sharing class BAPPLeadGenerationHandler {
         public String project;
         public String unitType;
         public String numberOfBedrooms;
-        public String unitNumberId; // Added by Ashish Rana
-
     }
 
     public class OrganizationLeadDetails {
@@ -294,12 +292,6 @@ public with sharing class BAPPLeadGenerationHandler {
         leadRec.Project__c = req.project;
         leadRec.UnitType__c = req.unitType;
         leadRec.NumberOfBedrooms__c = req.numberOfBedrooms;
-        
-        // Added by Ashish Rana
-        if(!String.isBlank(req.unitNumberId)){
-        leadRec.Unit__c = req.unitNumberId;
-        }
-
 
         if ('OrganizationLead'.equalsIgnoreCase(req.leadType) && req.organizationDetails != null) {
             leadRec.Company = req.organizationDetails.organizationName;

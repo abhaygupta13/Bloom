@@ -46,7 +46,8 @@ public without sharing class SalesOrderOtherChargesTriggerHelper {
                         'Cheque Withdrawal Fee',
                         'Cheque with Withdrawal Fee',
                         'Cheque Postponement Fee',
-                        'Admin Charges'
+                        'Admin Charges',
+                        'Resale Renewal Fees'
                         };
                             
                             public static void handleBeforeInsert(List<SalesOrderOtherCharges__c> newList){

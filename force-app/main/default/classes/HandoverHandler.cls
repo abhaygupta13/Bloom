@@ -164,7 +164,7 @@ public inherited sharing class HandoverHandler {
         
         ActivityService objActivityService = ActivityService.getInstance();
         ServiceCatalogService servObj = ServiceCatalogService.getInstance();
-        HandoverPhaseService objHandoverPhaseService = HandoverPhaseService.getInstance();
+          HandoverPhaseService objHandoverPhaseService = HandoverPhaseService.getInstance();
 
         List<Task> taskToInsert = new List<Task>(); 
         List<Task> tasksToReopen = new List<Task>();
@@ -174,7 +174,10 @@ public inherited sharing class HandoverHandler {
         }
         
         Map<Id,Map<String,ServiceAction__c>> serviceCatalogIdToActionOrderToServiceActionMap = servObj.getHOTaskServiceActions(new List<Handover__c>{handoverRecord});
-
+		System.debug(handoverRecord.Id);
+        System.debug(serviceCatalogIdToActionOrderToServiceActionMap);
+        System.debug(serviceCatalogIdToActionOrderToServiceActionMap.containsKey(handoverRecord.ServiceCatalog__c));
+        System.debug(serviceCatalogIdToActionOrderToServiceActionMap.get(handoverRecord.ServiceCatalog__c).containsKey(nextStep));
         if(!serviceCatalogIdToActionOrderToServiceActionMap.isEmpty() 
                 && serviceCatalogIdToActionOrderToServiceActionMap.containsKey(handoverRecord.ServiceCatalog__c)
                 && serviceCatalogIdToActionOrderToServiceActionMap.get(handoverRecord.ServiceCatalog__c).containsKey(nextStep)) {
@@ -206,50 +209,34 @@ public inherited sharing class HandoverHandler {
         objActivityService.closeTasks(new List<Task>{currentOpenTask});
         if(!taskToInsert.isEmpty()) objActivityService.insertTasks(taskToInsert); 
         if(!tasksToReopen.isEmpty()) objActivityService.updateTasks(tasksToReopen);
-        
-        HandoverPhase__c handoverPhase;
+         HandoverPhase__c handoverPhase;
     if (handoverRecord.Handover_Phase__c != null) {
         Map<Id, HandoverPhase__c> phaseMap = new Map<Id, HandoverPhase__c>(
             objHandoverPhaseService.getHandoverPhaseInfo(new Set<Id>{ handoverRecord.Handover_Phase__c })
         );
         handoverPhase = phaseMap.get(handoverRecord.Handover_Phase__c);
     }
-        
-        if(lastChar == '2'){
+          if(lastChar == '2'){
             if(!handoverRecord.PropertyHomeOrientationReport_Sent__c && handoverRecord.Customer_Availability_for_CHO__c == 'Customer Available'&& String.isNotBlank(handoverPhase.CHOAttendedbyCustomerEmailTempId__c)) {
 
                 SendEmailInvocable.sendEmail(handoverPhase.CHOAttendedbyCustomerEmailTempId__c, handoverRecord.Id);
-               // SendEmailInvocable.EmailRequest emailReq = new SendEmailInvocable.EmailRequest();
-             //   emailReq.templateName = 'Handover Completion Customer Attended';
-              //  emailReq.recordId = handoverRecord.Id;
-              //  SendEmailInvocable.sendEmail(new List<SendEmailInvocable.EmailRequest>{emailReq});
+              
             } else if(!handoverRecord.PropertyHomeOrientationByBloom__c && handoverRecord.Customer_Availability_for_CHO__c == 'Customer Delegate to BLoom'&& String.isNotBlank(handoverPhase.ChoCustomerNotattendedEmailTempId__c)) {
 
                 SendEmailInvocable.sendEmail(handoverPhase.ChoCustomerNotattendedEmailTempId__c, handoverRecord.Id);
 
             
-               // SendEmailInvocable.EmailRequest emailReq = new SendEmailInvocable.EmailRequest();
-               // emailReq.templateName = 'Handover Completion Customer Not Attended';
-              //  emailReq.recordId = handoverRecord.Id;
-              //  SendEmailInvocable.sendEmail(new List<SendEmailInvocable.EmailRequest>{emailReq});
             } else if(!handoverRecord.PropertyHomeOrientationWOCustomer__c && handoverRecord.Customer_Availability_for_CHO__c == 'Customer Not available'&& String.isNotBlank(handoverPhase.HomeOrientationByBloomEmailTempId__c)) {
 
                 SendEmailInvocable.sendEmail(handoverPhase.HomeOrientationByBloomEmailTempId__c, handoverRecord.Id);
-            
-               // SendEmailInvocable.EmailRequest emailReq = new SendEmailInvocable.EmailRequest();
-              //  emailReq.templateName = 'Home Orientation By Bloom';
-              //  emailReq.recordId = handoverRecord.Id;
-              //  SendEmailInvocable.sendEmail(new List<SendEmailInvocable.EmailRequest>{emailReq});
+           
             }
         }
         else if(lastChar == '3' && !handoverRecord.HasCHODesnaggingemailsent__c){
             if (String.isNotBlank(handoverPhase.CHODesnaggingEmailTempId__c)) {
                 SendEmailInvocable.sendEmail(handoverPhase.CHODesnaggingEmailTempId__c, handoverRecord.Id);
             
-          //  SendEmailInvocable.EmailRequest emailReq = new SendEmailInvocable.EmailRequest();
-          //  emailReq.templateName = 'CHO Desnagging Communication Email Template';
-         //   emailReq.recordId = handoverRecord.Id;
-         //   SendEmailInvocable.sendEmail(new List<SendEmailInvocable.EmailRequest>{emailReq});
+         
         }
         }
 
@@ -258,7 +245,6 @@ public inherited sharing class HandoverHandler {
         }
         return response;
     }
-
     public Map<String, Object> validatePHPPHandoverForNextReview(Handover__c handoverRecord, Boolean updateHandover) {
         HandoverService handoverServiceObj = HandoverService.getInstance();
         DocumentService objDocumentService = DocumentService.getInstance();
@@ -291,7 +277,7 @@ public inherited sharing class HandoverHandler {
                     handoverToUpdate = true;
                 }
 
-                if(handoverRecord.Sub_Status__c == HandoverConstants.Handover_Sub_Status_Upload_Signed_Tawtheeq_Agreement && handoverRecord.Payment_Type__c == Handover_Payment_Type_PHPP){
+                /* if(handoverRecord.Sub_Status__c == HandoverConstants.Handover_Sub_Status_Upload_Signed_Tawtheeq_Agreement && handoverRecord.Payment_Type__c == Handover_Payment_Type_PHPP){
 
                     SalesOrderService salesOrderService = SalesOrderService.getInstance();
                     Map<Id, InstallmentLines__c> latestInstallmentLinesMap = new Map<Id, InstallmentLines__c>();
@@ -313,12 +299,12 @@ public inherited sharing class HandoverHandler {
                         handoverRecord.Lease_End_Date__c = latestInstallment.InstallmentDate__c.addDays(60);
                     }
                     handoverToUpdate = true;
-                }
+                } */
 
-                if(handoverRecord.Sub_Status__c == HandoverConstants.Handover_Sub_Status_Lease_Agreement && handoverRecord.Payment_Type__c == Handover_Payment_Type_PHPP){
+                /* if(handoverRecord.Sub_Status__c == HandoverConstants.Handover_Sub_Status_Lease_Agreement && handoverRecord.Payment_Type__c == Handover_Payment_Type_PHPP){
                     handoverRecord.Leasing_Agent__c = UserInfo.getUserId();
                     handoverToUpdate = true;
-                }
+                } */
 
                 if(handoverRecord.Sub_Status__c == HandoverConstants.Handover_Sub_Status_ADREC_Approval_and_Mortgage_Release){
                     handoverRecord.Payment_Settled__c = true;
@@ -888,6 +874,7 @@ public inherited sharing class HandoverHandler {
         for(Handover__c handoverRec : listOfHandovers){
             userIdList.add(handoverRec.HO_Agent_Assigned_User__c);
             userIdList.add(handoverRec.CRM_Team_Assigned_User__c);
+             userIdList.add(handoverRec.FinanceTeamAssingedUser__c);
         }
         List<User> userList = [SELECT Id, Name, BusinessHour__c FROM User WHERE Id IN :userIdList];
         for(User userRec : userList){
@@ -901,6 +888,7 @@ public inherited sharing class HandoverHandler {
                 && serviceCatalogIdToHanoverStatusToServiceActionMap.get(handoverObj.ServiceCatalog__c).containsKey(HANDOVER_SUB_STATUS_QA_SNAGGING)) {
                 
                 ServiceAction__c currentAction = serviceCatalogIdToHanoverStatusToServiceActionMap.get(handoverObj.ServiceCatalog__c).get(HANDOVER_SUB_STATUS_QA_SNAGGING);
+                System.debug(currentAction + ' '+ handoverObj.id);
                 List<Task> existingTask = objActivityService.fetchTasksFromServiceAction(currentAction, handoverObj.id);
                 if(existingTask.isEmpty()){
                     Task tsk = new Task();
@@ -1001,6 +989,11 @@ public inherited sharing class HandoverHandler {
                             tsk.OwnerId = handoverObj.CRM_Team_Assigned_User__c;
                             tsk.AssignedDateTime__c  = System.now();
                         }
+                        else if(tsk.Department__c == 'Finance' && handoverObj.FinanceTeamAssingedUser__c != NULL) {
+                            tsk.OwnerId = handoverObj.FinanceTeamAssingedUser__c;
+                            tsk.AssignedDateTime__c = System.now();
+                            
+                        }
                         else {
                             tsk.OwnerId = currentAction.OwnerId;//handoverObj.OwnerId; // nextAction.AssignToOwner__c ? handoverObj.OwnerId : nextAction.OwnerId;  
                         }
@@ -1020,6 +1013,10 @@ public inherited sharing class HandoverHandler {
                         }
                         else if(existingClosedTasks[0].Department__c == 'CRM') {
                             existingClosedTasks[0].OwnerId = handoverObj.CRM_Team_Assigned_User__c;
+                        }
+                        else if(existingClosedTasks[0].Department__c == 'Finance' && handoverObj.FinanceTeamAssingedUser__c != NULL) {
+                            existingClosedTasks[0].OwnerId = handoverObj.FinanceTeamAssingedUser__c;
+                            
                         }
                         else {
                             existingClosedTasks[0].OwnerId = currentAction.OwnerId;
@@ -1067,7 +1064,11 @@ public inherited sharing class HandoverHandler {
                     handoverToUpdate.OwnerId = handoverObj.CRM_Team_Assigned_User__c;
                 } else if(currentAction.AssignToHOAgent__c){
                     handoverToUpdate.OwnerId = handoverObj.HO_Agent_Assigned_User__c;
-                } else {
+                }
+                  else if(handoverToUpdate.PendingWithDepartment__c == 'Finance' && handoverObj.FinanceTeamAssingedUser__c != NULL) {
+        handoverToUpdate.OwnerId = handoverObj.FinanceTeamAssingedUser__c;
+    }                    
+                    else {
                     handoverToUpdate.OwnerId = currentAction.OwnerId;
                 }
                 //handoversToUpdate.add(handoverToUpdate);
@@ -1137,4 +1138,5 @@ public inherited sharing class HandoverHandler {
         }
     }*/
     
+   
 }

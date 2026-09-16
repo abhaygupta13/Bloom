@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Priority__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Priority</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>P3</fullName>
+                    <default>false</default>
+                    <label>P3</label>
+                </value>
+                <value>
+                    <fullName>P2</fullName>
+                    <default>false</default>
+                    <label>P2</label>
+                </value>
+                <value>
+                    <fullName>P1</fullName>
+                    <default>false</default>
+                    <label>P1</label>
+                </value>
+                <value>
+                    <fullName>P4</fullName>
+                    <default>false</default>
+                    <label>P4</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SubCategory__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Sub Category</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <label>BFM Subcategory Priority Mapping</label>
+    <pluralLabel>BFM Subcategory Priority Mappings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

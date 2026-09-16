@@ -1,9 +1,0 @@
-.full-width-lookup {
-    width: 100%;
-}
-.disabled-lookup lightning-input,
-.disabled-lookup input,
-.disabled-lookup {
-    pointer-events: none;
-    opacity: 0.6;
-}

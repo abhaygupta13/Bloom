@@ -1,165 +1,269 @@
-@isTest
-public class SendEmailInvocableTest {
+@IsTest
+private class SendEmailInvocableTest {
+
     @TestSetup
     static void setupTestData() {
-        
-        Profile profile = [Select Id,Name FROM Profile Where Name ='HO Agent' LIMIT 1];
-        User testUser = new User(
-            Username = 'testhoagent@gmail.com', // Make sure this is unique in your org
-            LastName = 'Test',
-            Email = 'testuser@example.com',
-            Alias = 'test',
-            TimeZoneSidKey = 'America/Los_Angeles',
-            LocaleSidKey = 'en_US',
-            EmailEncodingKey = 'UTF-8',
-            ProfileId = profile.Id,
-            LanguageLocaleKey = 'en_US'
-        );
-        insert testUser;      
-        
-        Profile profileCrm = [Select Id,Name FROM Profile Where Name ='CRM Team' LIMIT 1];
-        User testCRMUser = new User(
-            Username = 'testcrmuser23@gmail.com', // Make sure this is unique in your org
-            LastName = 'Test Crm User',
-            Email = 'testuser23@example.com',
-            Alias = 'testur',
-            TimeZoneSidKey = 'America/Los_Angeles',
-            LocaleSidKey = 'en_US',
-            EmailEncodingKey = 'UTF-8',
-            ProfileId = profileCrm.Id,
-            LanguageLocaleKey = 'en_US'
-        );
-        insert testCRMUser;  
-        
-        Profile profileOper = [Select Id,Name FROM Profile Where Name ='Operations Team' LIMIT 1];
-        User testOprUser = new User(
-            Username = 'testopruser@gmail.com', // Make sure this is unique in your org
-            LastName = 'Test Oper User',
-            Email = 'testuser263@example.com',
-            Alias = 'testurop',
-            TimeZoneSidKey = 'America/Los_Angeles',
-            LocaleSidKey = 'en_US',
-            EmailEncodingKey = 'UTF-8',
-            ProfileId = profileOper.Id,
-            LanguageLocaleKey = 'en_US'
-        );
-        insert testOprUser;  
-        
-        Project__c pr = new Project__c();
-        pr.Name = 'testProject';        
-        insert pr;     
-        
-        BuildingSection__c bld = new BuildingSection__c();
-        bld.Name = 'testBuilding';
-        bld.BuildingSectionCode__c = '1234567890';
-        bld.Project__c = pr.Id; 
-        insert bld;        
-        
-        Unit__c unt = new Unit__c();
-        unt.Name = 'Unit Test A1435';
-        unt.Status__c = 'Unassigned';
-        unt.HO_Agent__c = testUser.Id;
-        unt.BuildingSectionName__c = bld.Id;
-        insert unt;
-        
-         Schema.RecordTypeInfo recordTypeInfo = Schema.getGlobalDescribe().get('Account').getDescribe().getRecordTypeInfosByDeveloperName().get('PersonAccount');
-        
-        Account acc = new Account();
-        acc.LastName = 'Test Acc';
-        acc.RecordTypeId = recordTypeInfo.getRecordTypeId();
-        acc.PersonEmail = 'test@example.com';
-        insert acc;
-        
-        Handover__c hand = new Handover__c();
-        hand.Status__c = 'In Progress';
-        hand.Unit__c = unt.Id; 
-        hand.account__c = acc.id;
-        hand.Sub_Status__c ='Home Orientation Sent';
-        hand.Is_BCC_Announcement_Sent__c = true;
-        hand.Customer_Email__c ='test34@gmail.com';
-        hand.HO_Agent_Assigned_User__c = testUser.Id;
-        hand.CRM_Team_Assigned_User__c = testCRMUser.Id;
-        hand.Operation_Team_Assigned_User__c = testOprUser.Id;
-        hand.Customer_Availability_for_CHO__c = 'Customer Available';
-        hand.OwnerId = testUser.Id;
-        insert hand;
-        system.debug('con version');
-          
-        
-    }
-    
-    @isTest
-    public static void sendEmailTest(){  
-        List<Id> unitId = new List<Id>();
-        Unit__c unt = [Select Id,Name,Status__c from Unit__c where Name ='Unit Test A1435' Limit 1];
-        System.debug('unt ' + unt);
-        unitId.add(unt.Id);
-        Handover__c handover = [SELECT Id,Name,Unit__c, Customer_Email__c,Sub_Status__c,ownerId,Customer_Availability_for_CHO__c FROM Handover__c WHERE Unit__c=:unt.Id LIMIT 1];
-        
-        
-        Event evn = new Event();
-        evn.WhatId = handover.Id;
-        evn.Subject = 'Other';
-        evn.StartDateTime = DateTime.newInstance(2024, 6, 20, 8, 43, 38); 
-        evn.EndDateTime = DateTime.newInstance(2024, 6, 22, 8, 43, 38); 
-        evn.CurrencyIsoCode ='AED';
-        insert evn;
-        
-        Test.startTest();
-        BCCAnnouncementEmailBatch batchJob = new BCCAnnouncementEmailBatch(unitId);
-        Database.executeBatch(batchJob);
-        BCCAnnouncementEmailBatch.method();
-        Test.stopTest();
-        
-        SendEmailInvocable.EmailRequest sendEmail = new SendEmailInvocable.EmailRequest();
-        sendEmail.recordId = handover.Id ;
-        sendEmail.templateName = Constants.PAYMENT_Confirmation_Template;
-        SendEmailInvocable.sendEmail(new List<SendEmailInvocable.EmailRequest>{sendEmail});
-        
-       
+        User testUser = createTestUser();
 
+        Project__c projectRecord = new Project__c(
+            Name = 'Send Email Test Project'
+        );
+        insert projectRecord;
+
+        BuildingSection__c buildingRecord = new BuildingSection__c(
+            Name = 'Send Email Test Building',
+            BuildingSectionCode__c = 'SE001',
+            Project__c = projectRecord.Id
+        );
+        insert buildingRecord;
+
+        Unit__c unitRecord = new Unit__c(
+            Name = 'Send Email Test Unit',
+            Status__c = 'Unassigned',
+            HO_Agent__c = testUser.Id,
+            BuildingSectionName__c = buildingRecord.Id,
+            Project__c = projectRecord.Id
+        );
+        insert unitRecord;
+
+        Id personAccountRecordTypeId =
+            Schema.SObjectType.Account
+                .getRecordTypeInfosByDeveloperName()
+                .get('PersonAccount')
+                .getRecordTypeId();
+
+        Account accountRecord = new Account(
+            RecordTypeId = personAccountRecordTypeId,
+            LastName = 'Send Email Test Customer',
+            PersonEmail = 'sendemailcustomer@example.com'
+        );
+        insert accountRecord;
+
+        // A second, independent Account guarantees an 8th unique Id
+        // without relying on org-level Ids that may collide across orgs.
+        Account secondAccountRecord = new Account(
+            RecordTypeId = personAccountRecordTypeId,
+            LastName = 'Send Email Test Customer Two',
+            PersonEmail = 'sendemailcustomer2@example.com'
+        );
+        insert secondAccountRecord;
+
+        /*
+         * CRITICAL: every value below must be DISTINCT.
+         * The production if/else-if chain checks these fields in order,
+         * so any duplicate value causes an earlier branch to intercept
+         * the match and the intended branch is never reached.
+         */
+        HandoverPhase__c phaseRecord = new HandoverPhase__c(
+            Name = 'Send Email Test Phase',
+            Project__c = projectRecord.Id,
+
+            HOTitleDeedEmailTempID__c            = String.valueOf(projectRecord.Id),
+            HOOutstandingConfirmationTempId__c   = String.valueOf(buildingRecord.Id),
+            CHOAttendedbyCustomerEmailTempId__c  = String.valueOf(unitRecord.Id),
+            HomeOrientationByBloomEmailTempId__c = String.valueOf(accountRecord.Id),
+            ChoCustomerNotattendedEmailTempId__c = String.valueOf(secondAccountRecord.Id),
+            ChoDesnaggingEmailTempId__c          = String.valueOf(testUser.Id),
+            HOCongratulationEmailTempId__c       = String.valueOf(UserInfo.getUserId()),
+            KeyHandoverInvitationEmailTempId__c  = String.valueOf(Test.getStandardPricebookId())
+        );
+        insert phaseRecord;
+
+        Boolean previousTriggerState =
+            HandoverTriggerHandler.isTriggerDisabled;
+
+        HandoverTriggerHandler.isTriggerDisabled = true;
+
+        try {
+            Handover__c handoverRecord = new Handover__c(
+                Status__c = 'In Progress',
+                Unit__c = unitRecord.Id,
+                Account__c = accountRecord.Id,
+                Handover_Phase__c = phaseRecord.Id,
+                Project__c = projectRecord.Id,
+                Sub_Status__c = 'Book Appointment With Customer',
+                Customer_Email__c = 'sendemailcustomer@example.com',
+                Customer_Availability_for_CHO__c = 'Customer Available',
+                HO_Agent_Assigned_User__c = testUser.Id,
+                OwnerId = testUser.Id
+            );
+
+            insert handoverRecord;
+        } finally {
+            HandoverTriggerHandler.isTriggerDisabled =
+                previousTriggerState;
+        }
     }
-    @isTest
-    public static void sendEmailTest2(){  
-        Unit__c unt = [Select Id,Name,Status__c from Unit__c where Name ='Unit Test A1435' Limit 1];
-        
-        Handover__c handover = [SELECT Id,Name,Unit__c, Customer_Email__c,CustomerEmail__c,Sub_Status__c,ownerId,Customer_Availability_for_CHO__c FROM Handover__c WHERE Unit__c=:unt.Id LIMIT 1];
-        SendEmailInvocable.EmailRequest sendEmail = new SendEmailInvocable.EmailRequest();
-        sendEmail.recordId = handover.Id ;
-        sendEmail.templateName = Constants.Handover_Completion_Customer_Attended;
-        SendEmailInvocable.sendEmail(new List<SendEmailInvocable.EmailRequest>{sendEmail});
+
+    @IsTest
+    static void testSendEmailWithNullTemplateId() {
+        Handover__c handoverRecord = getHandover();
+
+        Test.startTest();
+        SendEmailInvocable.sendEmail(null, handoverRecord.Id);
+        Test.stopTest();
+
+        System.assertEquals(
+            0,
+            Limits.getEmailInvocations(),
+            'No email should be sent when template Id is null.'
+        );
     }
-     @isTest
-    public static void sendEmailTest3(){  
-        Unit__c unt = [Select Id,Name,Status__c from Unit__c where Name ='Unit Test A1435' Limit 1];
-        
-        Handover__c handover = [SELECT Id,Name,Unit__c, Customer_Email__c,CustomerEmail__c,Sub_Status__c,ownerId,Customer_Availability_for_CHO__c FROM Handover__c WHERE Unit__c=:unt.Id LIMIT 1];
-        SendEmailInvocable.EmailRequest sendEmail = new SendEmailInvocable.EmailRequest();
-        sendEmail.recordId = handover.Id ;
-        sendEmail.templateName = Constants.Handover_Congratulation_Email_Template;
-        SendEmailInvocable.sendEmail(new List<SendEmailInvocable.EmailRequest>{sendEmail});
-        
+
+    @IsTest
+    static void testSendEmailWithNullRecordId() {
+        HandoverPhase__c phaseRecord = [
+            SELECT HOTitleDeedEmailTempID__c
+            FROM HandoverPhase__c
+            LIMIT 1
+        ];
+
+        Test.startTest();
+        SendEmailInvocable.sendEmail(
+            phaseRecord.HOTitleDeedEmailTempID__c,
+            null
+        );
+        Test.stopTest();
+
+        System.assertEquals(
+            0,
+            Limits.getEmailInvocations(),
+            'No email should be sent when record Id is null.'
+        );
     }
-     @isTest
-    public static void sendEmailTest4(){  
-        Unit__c unt = [Select Id,Name,Status__c from Unit__c where Name ='Unit Test A1435' Limit 1];
-        
-        Handover__c handover = [SELECT Id,Name,Unit__c, Customer_Email__c,CustomerEmail__c,Sub_Status__c,ownerId,Customer_Availability_for_CHO__c FROM Handover__c WHERE Unit__c=:unt.Id LIMIT 1];
-        SendEmailInvocable.EmailRequest sendEmail = new SendEmailInvocable.EmailRequest();
-        sendEmail.recordId = handover.Id ;
-        sendEmail.templateName = Constants.KHO_Appointment_Scheduled_Template;
-        SendEmailInvocable.sendEmail(new List<SendEmailInvocable.EmailRequest>{sendEmail});
-        
+
+    @IsTest
+    static void testSendEmailForAllTemplateBranches() {
+        Handover__c handoverRecord = getHandover();
+
+        HandoverPhase__c phaseRecord = [
+            SELECT
+                HOTitleDeedEmailTempID__c,
+                HOOutstandingConfirmationTempId__c,
+                CHOAttendedbyCustomerEmailTempId__c,
+                HomeOrientationByBloomEmailTempId__c,
+                ChoCustomerNotattendedEmailTempId__c,
+                ChoDesnaggingEmailTempId__c,
+                HOCongratulationEmailTempId__c,
+                KeyHandoverInvitationEmailTempId__c
+            FROM HandoverPhase__c
+            WHERE Id = :handoverRecord.Handover_Phase__c
+            LIMIT 1
+        ];
+
+        List<Id> templateIds = new List<Id>{
+            (Id) phaseRecord.HOTitleDeedEmailTempID__c,
+            (Id) phaseRecord.HOOutstandingConfirmationTempId__c,
+            (Id) phaseRecord.CHOAttendedbyCustomerEmailTempId__c,
+            (Id) phaseRecord.HomeOrientationByBloomEmailTempId__c,
+            (Id) phaseRecord.ChoCustomerNotattendedEmailTempId__c,
+            (Id) phaseRecord.ChoDesnaggingEmailTempId__c,
+            (Id) phaseRecord.HOCongratulationEmailTempId__c,
+            (Id) phaseRecord.KeyHandoverInvitationEmailTempId__c
+        };
+
+        Test.startTest();
+
+        for (Id templateId : templateIds) {
+            SendEmailInvocable.sendEmail(
+                templateId,
+                handoverRecord.Id
+            );
+        }
+
+        Test.stopTest();
+
+        System.assertEquals(
+            8,
+            templateIds.size(),
+            'All configured template branches should be exercised.'
+        );
     }
-     @isTest
-    public static void sendEmailTest5(){  
-        Unit__c unt = [Select Id,Name,Status__c from Unit__c where Name ='Unit Test A1435' Limit 1];
-        
-        Handover__c handover = [SELECT Id,Name,Unit__c, Customer_Email__c,CustomerEmail__c,Sub_Status__c,ownerId,Customer_Availability_for_CHO__c FROM Handover__c WHERE Unit__c=:unt.Id LIMIT 1];
-        SendEmailInvocable.EmailRequest sendEmail = new SendEmailInvocable.EmailRequest();
-        sendEmail.recordId = handover.Id ;
-        sendEmail.templateName = Constants.Title_Deed_Registration;
-        SendEmailInvocable.sendEmail(new List<SendEmailInvocable.EmailRequest>{sendEmail});
+
+    @IsTest
+    static void testSendEmailWithUnmappedTemplateId() {
+        Handover__c handoverRecord = getHandover();
+
+        Project__c unrelatedProject = new Project__c(
+            Name = 'Unmapped Template Project'
+        );
+        insert unrelatedProject;
+
+        Test.startTest();
+        SendEmailInvocable.sendEmail(
+            unrelatedProject.Id,
+            handoverRecord.Id
+        );
+        Test.stopTest();
+
+        System.assertEquals(
+            0,
+            Limits.getEmailInvocations(),
+            'An unmapped template should not send an email.'
+        );
     }
-    
+
+    @IsTest
+    static void testSendEmailHandlesExceptionGracefully() {
+        HandoverPhase__c phaseRecord = [
+            SELECT HOTitleDeedEmailTempID__c
+            FROM HandoverPhase__c
+            LIMIT 1
+        ];
+
+        // A syntactically valid but non-existent Handover__c Id forces
+        // HandoverService.getHandoverById() to throw, exercising the
+        // catch block and ErrorLogHandler.logError call.
+        Id fakeHandoverId = HandoverPhase__c.SObjectType
+            .getDescribe()
+            .getKeyPrefix() + '000000000000AAA';
+
+        Test.startTest();
+        SendEmailInvocable.sendEmail(
+            phaseRecord.HOTitleDeedEmailTempID__c,
+            fakeHandoverId
+        );
+        Test.stopTest();
+
+        System.assertEquals(
+            0,
+            Limits.getEmailInvocations(),
+            'No email should be sent when the underlying query throws.'
+        );
+    }
+
+    private static Handover__c getHandover() {
+        return [
+            SELECT Id, Handover_Phase__c
+            FROM Handover__c
+            LIMIT 1
+        ];
+    }
+
+    private static User createTestUser() {
+        Profile standardProfile = [
+            SELECT Id
+            FROM Profile
+            WHERE UserType = 'Standard'
+            LIMIT 1
+        ];
+
+        String uniqueValue =
+            String.valueOf(DateTime.now().getTime());
+
+        User testUser = new User(
+            Username = 'sendemailtest' + uniqueValue + '@example.com',
+            LastName = 'Send Email Test User',
+            Email = 'sendemailtest@example.com',
+            Alias = 'seinv',
+            TimeZoneSidKey = 'Asia/Kolkata',
+            LocaleSidKey = 'en_IN',
+            EmailEncodingKey = 'UTF-8',
+            LanguageLocaleKey = 'en_US',
+            ProfileId = standardProfile.Id
+        );
+
+        insert testUser;
+        return testUser;
+    }
 }

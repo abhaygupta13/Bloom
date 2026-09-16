@@ -10,7 +10,7 @@ public without sharing class LeasingRASyncBatch implements Database.Batchable<SO
         Date requiredDate = Date.today().addDays(-1);
         String query = 'SELECT Id, Name, SendToSAP__c ' +
             'FROM LeasingReceiptAcknowledgment__c ' +
-            'WHERE HoldDate__c = :requiredDate AND SAPDocumentNumber__c = Null';
+            'WHERE HoldDate__c = :requiredDate';
         return Database.getQueryLocator(query);
     }
     

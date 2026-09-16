@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Days_Spent_Business__c</fullName>
+        <externalId>false</externalId>
+        <label>Days Spent Business</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Days_Spent__c</fullName>
+        <externalId>false</externalId>
+        <label>Days Spent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Goal_Days__c</fullName>
+        <externalId>false</externalId>
+        <label>Goal (Days)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HadoverSLAStatus__c</fullName>
+        <label>Hadover SLA Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Created - QA Snagging Completed</fullName>
+                    <default>false</default>
+                    <label>Created - QA Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>QA Snagging Completed - QA De-Snagging Completed</fullName>
+                    <default>false</default>
+                    <label>QA Snagging Completed - QA De-Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>QA De-Snagging Completed - Home Orientation Sent</fullName>
+                    <default>false</default>
+                    <label>QA De-Snagging Completed - Home Orientation Sent</label>
+                </value>
+                <value>
+                    <fullName>Home Orientation Sent - Appointment Booked with Customer</fullName>
+                    <default>false</default>
+                    <label>Home Orientation Sent - Appointment Booked with Customer</label>
+                </value>
+                <value>
+                    <fullName>Appointment Booked with Customer - Pre CHO Check Completed</fullName>
+                    <default>false</default>
+                    <label>Appointment Booked with Customer - Pre CHO Check Completed</label>
+                </value>
+                <value>
+                    <fullName>Pre CHO Check Completed - CHO Snagging Completed</fullName>
+                    <default>false</default>
+                    <label>Pre CHO Check Completed - CHO Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>CHO Snagging Completed - CHO De-Snagging Completed</fullName>
+                    <default>false</default>
+                    <label>CHO Snagging Completed - CHO De-Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>CHO De-Snagging Completed - Notice of Completion sent</fullName>
+                    <default>false</default>
+                    <label>CHO De-Snagging Completed - Notice of Completion sent</label>
+                </value>
+                <value>
+                    <fullName>Notice of Completion sent - Settlement Follow up</fullName>
+                    <default>false</default>
+                    <label>Notice of Completion sent - Settlement Follow up</label>
+                </value>
+                <value>
+                    <fullName>Settlement Follow up - Finance Verified</fullName>
+                    <default>false</default>
+                    <label>Settlement Follow up - Finance Verified</label>
+                </value>
+                <value>
+                    <fullName>Finance Verified - Mortgage Release Initiated</fullName>
+                    <default>false</default>
+                    <label>Finance Verified - Mortgage Release Initiated</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Release Initiated - Mortgage Release Document Uploaded</fullName>
+                    <default>false</default>
+                    <label>Mortgage Release Initiated - Mortgage Release Document Uploaded</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Release Document Uploaded - Mortgage Release Completed</fullName>
+                    <default>false</default>
+                    <label>Mortgage Release Document Uploaded - Mortgage Release Completed</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Release Completed - Escrow Letter Generated</fullName>
+                    <default>false</default>
+                    <label>Mortgage Release Completed - Escrow Letter Generated</label>
+                </value>
+                <value>
+                    <fullName>Escrow Letter Generated - Title Deed Registration Completed</fullName>
+                    <default>false</default>
+                    <label>Escrow Letter Generated - Title Deed Registration Completed</label>
+                </value>
+                <value>
+                    <fullName>Title Deed Registration Completed - Utilities Transfer Completed</fullName>
+                    <default>false</default>
+                    <label>Title Deed Registration Completed - Utilities Transfer Completed</label>
+                </value>
+                <value>
+                    <fullName>Utilities Transfer Completed - KHO Appointment Scheduled</fullName>
+                    <default>false</default>
+                    <label>Utilities Transfer Completed - KHO Appointment Scheduled</label>
+                </value>
+                <value>
+                    <fullName>KHO Appointment Scheduled - Handover Completed</fullName>
+                    <default>false</default>
+                    <label>KHO Appointment Scheduled - Handover Completed</label>
+                </value>
+                <value>
+                    <fullName>Finance Verified - Property Registration Completed</fullName>
+                    <default>false</default>
+                    <label>Finance Verified - Property Registration Completed</label>
+                </value>
+                <value>
+                    <fullName>Property Registration Completed - Lease Agreement</fullName>
+                    <default>false</default>
+                    <label>Property Registration Completed - Lease Agreement</label>
+                </value>
+                <value>
+                    <fullName>Lease Agreement - PHPP - KHO Appointment Scheduled</fullName>
+                    <default>false</default>
+                    <label>Lease Agreement - PHPP - KHO Appointment Scheduled</label>
+                </value>
+                <value>
+                    <fullName>PHPP - KHO Appointment Scheduled - Key Handed Over PHPP</fullName>
+                    <default>false</default>
+                    <label>PHPP - KHO Appointment Scheduled - Key Handed Over PHPP</label>
+                </value>
+                <value>
+                    <fullName>PHPP Completion Pending - PHPP Finance Clearance</fullName>
+                    <default>false</default>
+                    <label>PHPP Completion Pending - PHPP Finance Clearance</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Release Completed - Title Deed Registration Completed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Mortgage Release Completed - Title Deed Registration Completed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Handover__c</fullName>
+        <label>Handover</label>
+        <referenceTo>Handover__c</referenceTo>
+        <relationshipLabel>Handover SLAS</relationshipLabel>
+        <relationshipName>Handover_SLAS</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Hours_Spent_Business__c</fullName>
+        <externalId>false</externalId>
+        <label>Hours Spent Business</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hours_Spent__c</fullName>
+        <externalId>false</externalId>
+        <label>Hours Spent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Updated_Date__c</fullName>
+        <label>Last Updated Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>SLAStage__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+    Days_Spent__c &gt; Goal_Days__c,
+    &quot;Breached&quot;,
+    IF(
+        Days_Spent__c &lt;= Goal_Days__c,
+        &quot;In Compliance&quot;,
+        &quot;&quot;  
+    )
+)</formula>
+        <label>SLA Stage</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SLA_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+    Days_Spent__c &gt;  Goal_Days__c ,
+    &quot;Breached &quot; &amp; IMAGE(&quot;/resource/1729575807000/WrongIconImage&quot; , &quot;No image&quot;, 20, 20),
+    IF(
+        Days_Spent__c &lt;= Goal_Days__c,
+        &quot;In Compliance &quot; &amp; IMAGE(&quot;/resource/1729575807000/RightIconImage&quot;, &quot;No image&quot;, 20, 20),
+        &quot;&quot;
+    )
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SLA Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status_API_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Status API Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <label>Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Started</fullName>
+                    <default>false</default>
+                    <label>Not Started</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Completed</fullName>
+                    <default>false</default>
+                    <label>Completed</label>
+                </value>
+                <value>
+                    <fullName>Not Applicable</fullName>
+                    <default>false</default>
+                    <label>Not Applicable</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Handover SLA</label>
+    <nameField>
+        <label>Handover SLA Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Handover SLAS</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

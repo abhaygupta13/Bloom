@@ -10,6 +10,7 @@
 @isTest
 public class TestDataFactory {
     
+
     public static Account createPersonalAccount(String lastName, string Emirates_Id, String phone, String email){
         Id personAccountRecordTypeId =  Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('PersonAccount').getRecordTypeId();
         Account account = new Account();
@@ -21,9 +22,8 @@ public class TestDataFactory {
         account.PersonEmail = email;
         return account;
     }
-    
     public static ServiceAction__c createServiceAction(Id catalogId,String type,String subType,String subject,String department,Integer Order){
-        ServiceAction__c action = new ServiceAction__c(
+         ServiceAction__c action = new ServiceAction__c(
             ServiceCatalog__c = catalogId,
             TaskType__c = type,
             TaskSubType__c = subType,
@@ -34,7 +34,7 @@ public class TestDataFactory {
         );
         return action;
     }
-    
+
     public static ServiceAction__c createServiceActionForHandover(Id catalogId,String handoverStatus,String subType,String subject,String department,Integer Order){
         ServiceAction__c action = new ServiceAction__c(
             ServiceCatalog__c = catalogId,
@@ -47,7 +47,7 @@ public class TestDataFactory {
         );
         return action;
     }
-    
+
     public static Account createBrokerAccount(String name, Boolean blackListed, String phone){
         Id brokerAgencyAccountRecordTypeId =  Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Broker_Agency').getRecordTypeId();
         Account account = new Account();
@@ -56,7 +56,7 @@ public class TestDataFactory {
         account.Phone = phone;
         return account;
     }
-    
+
     public static Contact createContact(String lname,String accountId, Boolean isPrimary, String email){
         Contact con = new Contact();
         con.AccountId = accountId != null ? accountId : null;
@@ -65,20 +65,20 @@ public class TestDataFactory {
         con.LastName = lname;
         return con;
     }
-    
+
     public static Project__c createProject(String projectName){
         Project__c project = new Project__c();
         project.name = projectName;
         return Project;
     }
-    
+
     public static Project__c createProject(String projectName, Date regDate){
         Project__c project = new Project__c();
         project.Name = projectName;
         project.ProjectRegistrationDate__c = regDate;
         return Project;
     }
-    
+
     public static Document__c createDoc(String documentId, String salesOrderId, String projectId){
         Document__c document = new Document__c();
         document.DocumentType__c = documentId;
@@ -86,7 +86,7 @@ public class TestDataFactory {
         document.Project__c = projectId;
         return document;
     }
-    
+       
     public static Document__c createDoc(String documentId, String brokerCommissionId, String accId, String salesOrderId, String unitId, String projectId){
         Document__c document = new Document__c();
         document.DocumentType__c = documentId;
@@ -97,7 +97,7 @@ public class TestDataFactory {
         document.Project__c = projectId;
         return document;
     }
-    
+       
     public static Unit__c createUnit(Id projectId, String unitName, string Status){
         Unit__c unit = new Unit__c();
         unit.Name = unitName;
@@ -134,7 +134,7 @@ public class TestDataFactory {
         testLead.OwnerId = adminUser.Id;
         return testLead;
     }    
-    
+
     public static CommissionSchedule__c createCommissionSchedule(String project, Integer precentage, Decimal rangeStartAmount, Decimal rangeEndAmount){ 
         CommissionSchedule__c comSchedule = new CommissionSchedule__c();
         comSchedule.Project__c = project;
@@ -143,7 +143,6 @@ public class TestDataFactory {
         comSchedule.Amount_Range_End__c = rangeEndAmount;
         return comSchedule;
     }
-    
     public static Opportunity createOpportunity(String accountId, String winReason, String contact, String brokerAgencyId,String brokerAgentContact, String stageName, String closeDate, Decimal amount){
         String defaultStageName = 'Closed Won';
         Date defaultCloseDate = Date.today().addDays(30);
@@ -162,7 +161,7 @@ public class TestDataFactory {
         opp.Amount = amount != null ? amount : defaultAmount;
         return opp;
     }
-    
+
     public static SalesOrder__c createSalesOrder(String accountId, String oppId, String status, Date soldDate, String unit, Decimal netAmount){
         SalesOrder__c salesOrder = new SalesOrder__c();
         salesOrder.Account__c = accountId;
@@ -173,7 +172,7 @@ public class TestDataFactory {
         salesOrder.NetAmount__c = netAmount;
         return salesOrder;
     }
-    
+
     public static InstallmentLines__c createInstallmentLines(String salesOrder, Decimal installmentAmount, Decimal clearedAmount, Integer installmentNumber, String paymentPlanId, String paymentInstallmentId){
         InstallmentLines__c installment = new InstallmentLines__c();
         installment.SalesOrder__c = salesOrder;
@@ -186,14 +185,14 @@ public class TestDataFactory {
         installment.PaymentInstallments__c = paymentInstallmentId;
         return installment;
     }
-    
+
     public static PaymentPlan__c createPaymentPlan(String name){
         PaymentPlan__c paymentPlan = new PaymentPlan__c();
         paymentPlan.Name = name;
         paymentPlan.Description__c = 'Test description';
         return paymentPlan;
     }
-    
+
     public static PaymentInstallments__c createPaymentInstallment(String paymentPlanId, Decimal installmentNumber, Integer installmentPercentage){
         PaymentInstallments__c paymentInstallments = new PaymentInstallments__c();
         paymentInstallments.PaymentPlan__c = paymentPlanId;
@@ -209,14 +208,14 @@ public class TestDataFactory {
         documentType.Type__c = placeholderName;
         return documentType;
     }
-    
+
     public static Document__c createDocument(String invoiceId, String docTypeId, String docType){
         Document__c doc = new Document__c();
         doc.DocumentType__c = docTypeId;
         doc.Document_Name__c = docType;
         return doc;
     }
-    
+
     public static ContentVersion createContentVersion(String base64, String fileName, String title) {
         ContentVersion cv = new ContentVersion();
         Blob fileBody = EncodingUtil.base64Decode(base64);
@@ -226,7 +225,6 @@ public class TestDataFactory {
         cv.IsMajorVersion = true;
         return cv;
     }
-    
     public static ContentDocumentLink createContentDocumentLink(Id contentDocumentId, Id recordId, string shareType, string visibility) {
         ContentDocumentLink cdl = new ContentDocumentLink();
         cdl.ContentDocumentId = contentDocumentId;
@@ -235,7 +233,7 @@ public class TestDataFactory {
         cdl.ShareType = shareType!= null ? shareType : 'I';
         return cdl;
     }
-    
+
     public static BrokerCommission__c createBrokerCommission(Decimal amount, Integer vatPercentage, String invoiceId, Date startDate, String commissionFor, String projectId, String salesOrderId, String agencyId, String agentId, String commissionScheduleId){
         BrokerCommission__c brokerCommission = new BrokerCommission__c();
         brokerCommission.CommissionAmount__c = amount != null ? amount : 15000;
@@ -249,7 +247,7 @@ public class TestDataFactory {
         brokerCommission.StartDate__c = startDate != null ? startDate : System.today();
         return brokerCommission;
     }
-    
+
     public static User createUser(String profileId, String email, String username, String firstName, String lastName){
         User testUser = new User(
             Username = username, 
@@ -267,7 +265,7 @@ public class TestDataFactory {
         );
         return testUser;
     }
-    
+
     public static SalesTarget__c createSalesTarget(String externalIdentifier, Decimal directTargetAmount, Decimal indirectTargetAmount, String year, String quarter){
         SalesTarget__c target = new SalesTarget__c(
             ExternalIdentifier__c = externalIdentifier, 
@@ -290,7 +288,7 @@ public class TestDataFactory {
         );
         return target;
     }
-    
+
     public static Project__c createProject(String projectName, Date regDate, Date preLaunchStartDate, Date preLaunchEndDate, Date launchStartDate, Date launchEndDate, Date postLaunchStartDate){
         Project__c project = new Project__c();
         project.Name = projectName;
@@ -302,7 +300,7 @@ public class TestDataFactory {
         project.PostLaunchStartDate__c = postLaunchStartDate;
         return Project;
     }
-    
+
     public static ReceiptAcknowledgement__c createReceiptAcknowledgement(String oppId, String paymentType, Decimal amount, String accId, String status, Date maturityDate, String salesOrderId){
         ReceiptAcknowledgement__c testRecAck1= new ReceiptAcknowledgement__c(
             Opportunity__c = oppId,
@@ -316,7 +314,7 @@ public class TestDataFactory {
         );
         return testRecAck1;
     }
-    
+
     public static ReceiptAllocation__c createReceiptAllocation(Id receiptAckId, Id accId, Id installmentId, Decimal amount, Id otherChargesId){
         ReceiptAllocation__c receiptAllocation = new ReceiptAllocation__c();
         receiptAllocation.ReceiptAcknowledgement__c = receiptAckId;
@@ -326,7 +324,7 @@ public class TestDataFactory {
         receiptAllocation.SalesOrderOtherCharges__c = otherChargesId;
         return receiptAllocation;
     }
-    
+
     public static BankAccount__c createBankAccount(String name, String type, String projectId){
         return new BankAccount__c(
             Name = name,
@@ -334,7 +332,7 @@ public class TestDataFactory {
             Project__c = projectId
         );
     }
-    
+
     public static Case createBFMCase(String origin, String status, String description, String subject, String bfmRequestStatus,String requesterEmail, String requesterConNumber){
         Id BFMServiceRecordTypeId =  Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('BFMServiceRequest').getRecordTypeId();
         return new Case(
@@ -346,22 +344,22 @@ public class TestDataFactory {
             Subject = subject,
             RequesterEmail__c = requesterEmail,
             RequesterContactNumber__c = requesterConNumber
-        );
+            );
     }
     
     public static Case createCase(String recordTypeDevName, String origin, String status, String description, String Subject, String accId, String unitId, String conId){
         Case caseObj = new Case();
-        if(recordTypeDevName != null){caseObj.RecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get(recordTypeDevName).getRecordTypeId();}
-        caseObj.Origin = origin;
-        caseObj.Status = status;
-        caseObj.Description = description;
-        caseObj.Subject = subject;
-        caseObj.AccountId = accId;
-        caseObj.Unit__c = unitId;
-        caseObj.ContactId = conId;
-        return caseObj;
+            if(recordTypeDevName != null){caseObj.RecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get(recordTypeDevName).getRecordTypeId();}
+            caseObj.Origin = origin;
+            caseObj.Status = status;
+            caseObj.Description = description;
+            caseObj.Subject = subject;
+            caseObj.AccountId = accId;
+            caseObj.Unit__c = unitId;
+            caseObj.ContactId = conId;
+            return caseObj;
     }
-    
+
     public static ServiceCatalog__c createServiceCatalog(String name, String processType, String type, String category, String subCategory, String objNames, String recordTypeDevName){
         ServiceCatalog__c scObj = new ServiceCatalog__c();
         scObj.Name = name;
@@ -380,7 +378,7 @@ public class TestDataFactory {
         building.Project__c = projectId;
         return building;
     }
-    
+
     public static Unit_Allocation__c createUnitAllocation(Boolean isActive, Id accId, Id unitId){
         Unit_Allocation__c scObj = new Unit_Allocation__c();
         scObj.Active__c = isActive;
@@ -388,7 +386,7 @@ public class TestDataFactory {
         scObj.Unit__c = unitId;
         return scObj;
     }
-    
+
     public static SalesOrderOtherCharges__c createOtherCharge(Id salesOrderId, Id accId, String typeOfCharges, Boolean sendToSAP, String category, String reason, String remarks, String conditionType, Date duedate, Decimal amount) {
         SalesOrderOtherCharges__c otherCharge = new SalesOrderOtherCharges__c(
             SalesOrder__c = salesOrderId,
@@ -404,7 +402,7 @@ public class TestDataFactory {
         );
         return otherCharge;
     }
-    
+
     public static BuildingSection__c createbuildingSection(String name, String sectionCode, Id projectId){
         BuildingSection__c bs = new BuildingSection__c();
         bs.Name = Name;
@@ -412,7 +410,6 @@ public class TestDataFactory {
         bs.Project__c = projectId;
         return bs;
     }
-    
     //Shruti - Added a method to create custom User records
     public static User__c createCustomUser(Boolean azureActive, Boolean isActive, String username, String name, String contactId, String accountId, String emailId, String azureUserId){
         User__c testUser = new User__c(
@@ -429,7 +426,7 @@ public class TestDataFactory {
         );
         return testUser;
     }
-    
+
     //Shruti - Added a method to create OTP records
     public static OTP__c createOTP(Integer otpExpirationMinutes, String commType, String processType, String accountId, String contactId, String randomOtp, Boolean isVerified, String transactionId ){
         OTP__c otpData = new OTP__c(
@@ -446,7 +443,7 @@ public class TestDataFactory {
         );
         return otpData;
     }
-    
+
     //Shruti - Added a method to create OTP records
     public static Contact createBrokerContact(String lname,String accountId, Boolean isSuspended, Boolean isTerminated, Boolean isActive, String email){
         Contact con = new Contact();
@@ -497,7 +494,6 @@ public class TestDataFactory {
         insert app;
         return app;
     }
-    
     // Rushikesh - Added method to create broker applicant
     public static BrokerApplicant__c createBrokerApplicant(Id applicationId) {
         BrokerApplicant__c applicant = new BrokerApplicant__c(
@@ -550,7 +546,7 @@ public class TestDataFactory {
         vp.EndDate__c = endDate;
         return vp;
     }
-    
+
     public static VehicleParkingDetails__c createVehicleParkingDetails(String modelName, String plateNumber, Id unitId, Id caseId){
         VehicleParkingDetails__c vpd = new VehicleParkingDetails__c();
         vpd.VehicleMakeModel__c = modelName;
@@ -559,40 +555,12 @@ public class TestDataFactory {
         vpd.Case__c = caseId;
         return vpd;
     }
-    
+
     public static Group createGroup(String name, String type) {
         Group groupObj = new Group();
-        groupObj.Name = name;
-        groupObj.Type = type;
+            groupObj.Name = name;
+            groupObj.Type = type;
         return groupObj;
-    }
-    
-    public static User createUserWithPermissionSet(String profileName, String permSetName, String userName, String userEmail) {
-        User u;
-
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            Profile p = [SELECT Id FROM Profile WHERE Name = :profileName LIMIT 1];
-            
-            u = new User(
-                FirstName = userName.split(' ')[0],
-                LastName = 'TestUser',
-                Alias = 'testU',
-                Email = userEmail,
-                EmailEncodingKey = 'UTF-8',
-                ProfileId = p.Id,
-                LocaleSidKey = 'en_US',
-                LanguageLocaleKey = 'en_US',
-                TimeZoneSidKey = 'America/Los_Angeles',
-                UserName = userEmail + '.test'
-            );
-            insert u;
-
-            if (String.isNotBlank(permSetName)) {
-                PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = :permSetName LIMIT 1];
-                insert new PermissionSetAssignment(AssigneeId = u.Id, PermissionSetId = ps.Id);
-            }
-        }
-        return u;
     }
 
     public static CommonArea__c createCommonArea(String commonAreaCode, String commonAreaName, Id buildingId, Id projectId, Id communityId){
@@ -626,5 +594,60 @@ public class TestDataFactory {
         tokenAssignment.AssignmentId__c = assignmentId;
         tokenAssignment.QMSToken__c = tokenId;
         return tokenAssignment;
+    }
+
+      public static List<AppointmentSlot__c> createAppointmentSlots(Integer count, String status, Id userId, Date slotDate) {
+        List<AppointmentSlot__c> slots = new List<AppointmentSlot__c>();
+        DateTime baseStart = DateTime.newInstance(slotDate, Time.newInstance(9, 0, 0, 0));
+        
+        for (Integer i = 0; i < count; i++) {
+            slots.add(new AppointmentSlot__c(
+                Status__c = status,
+            User__c = userId,
+            StartDateTime__c = baseStart.addMinutes(i * 30),
+            EndDateTime__c = baseStart.addMinutes((i * 30) + 30)
+                ));
+        }
+        insert slots;
+        return slots;
+    }
+
+    public static Event createEvent(Id whoId, DateTime startDateTime, DateTime endDateTime, String location) {
+        Event evt = new Event(
+            WhoId = whoId,
+            Subject = 'Test Appointment',
+            Type = 'Appointment',
+            StartDateTime = startDateTime,
+            EndDateTime = endDateTime,
+            Location = location,
+            OwnerId = UserInfo.getUserId()
+        );
+        return evt;
+    }
+
+    public static Map<String, String> createAppointmentTemplateFieldValues() {
+        return new Map<String, String>{
+            'customerName' => 'Test Customer',
+            'customerNameArabic' => 'Test Customer Arabic',
+            'location' => 'Test Location',
+            'accountManagerName' => 'Test Manager',
+            'accountManagerPhone' => '0501234567',
+            'NoReplyBloomEmail' => null
+        };
+    }
+
+    public static Event createAppointmentEvent(Id whoId, DateTime startDateTime, DateTime endDateTime, String location) {
+        Event evt = new Event(
+            WhoId = whoId,
+            Subject = 'Test Appointment',
+            Type = 'Appointment',
+            OwnerId = UserInfo.getUserId(),
+            StartDateTime = startDateTime,
+            EndDateTime = endDateTime,
+            Location = location,
+            AppointmentStatus__c = 'Scheduled'
+        );
+        insert evt;
+        return evt;
     }
 }

@@ -143,15 +143,8 @@ public class ServiceCatalogService {
         for (Case caseObj : listOfCases) {
             if (caseObj.ServiceCatalog__c != null && caseObj.Status != 'Closed') {
                 mapOfCaseIdAndServiceCatalogId.put(caseObj.Id, caseObj.ServiceCatalog__c);
-                System.debug('caseObj.Step__c------' + caseObj.Step__c);
                 if (caseObj.Step__c != 'Final') {
-                    //Integer nextOrder = Integer.valueOf(caseObj.Step__c) + 1;
-                    Integer nextOrder;
-                    if (caseObj.Step__c == null || caseObj.Step__c == '0') {
-                        nextOrder = 1;
-                    } else {
-                        nextOrder = Integer.valueOf(caseObj.Step__c) + 1;
-                    } 
+                    Integer nextOrder = Integer.valueOf(caseObj.Step__c) + 1;
                     mapOfCaseIdAndNextActionNewOrder.put(caseObj.Id, nextOrder);
                 }
             }
@@ -238,14 +231,7 @@ public class ServiceCatalogService {
             if (caseObj.ServiceCatalog__c != null && caseObj.Status != 'Closed') {
                 mapOfCaseIdAndServiceCatalogId.put(caseObj.Id, caseObj.ServiceCatalog__c);
                 if (caseObj.Step__c!='Final') {
-                    Integer currentOrder;
-                    if (caseObj.Step__c == null) {
-                        currentOrder = 1;
-                    } else {
-                        //Integer 
-                            currentOrder = Integer.valueOf(caseObj.Step__c);
-                    } 
-                    
+                    Integer currentOrder = Integer.valueOf(caseObj.Step__c);
                     mapOfCaseIdAndCurrentActionOrder.put(caseObj.Id, currentOrder);
                 }
                 else if(caseObj.Step__c=='Final'){
@@ -316,116 +302,15 @@ public class ServiceCatalogService {
                 AND RecordTypeDevName__c = :recordTypeDevName];
     }
 
-    /* public Map<Id, ServiceAction__c> getNextHandoverServiceAction(List<Handover__c> listOfHandovers) {
-        // Initialize the result map to hold the mapping of case Id to ServiceAction
-        Map<Id, ServiceAction__c> catalogVsActionMap = new Map<Id, ServiceAction__c>();
-        
-        // Create maps for storing necessary details about the cases
-        Map<Id, String> mapOfHandoverIdAndServiceCatalogId = new Map<Id, String>();
-        Map<Id, Integer> mapOfHandoverIdAndNextActionNewOrder = new Map<Id, Integer>();
-        
-        // Collect relevant data from listOfHandovers
-        for (Handover__c handoverObj : listOfHandovers) {
-            if (handoverObj.ServiceCatalog__c != null && handoverObj.Sub_Status__c != 'Handover Completed') {
-                mapOfHandoverIdAndServiceCatalogId.put(handoverObj.Id, handoverObj.ServiceCatalog__c);
-                if (handoverObj.Step__c != 'Final') {
-                    System.debug('step val'+handoverObj.Step__c);
-                    Integer nextOrder = Integer.valueOf(handoverObj.Step__c);// + 1;
-                    System.debug('nextOrder'+nextOrder);
-                    mapOfHandoverIdAndNextActionNewOrder.put(handoverObj.Id, nextOrder);
-                }
-            }
-        }
-        
-        // If there's any next action, fetch the corresponding service actions
-        if (!mapOfHandoverIdAndNextActionNewOrder.isEmpty()) {
-            
-            List<ServiceAction__c> serviceActions = getServActionsByCatalogIdAndOrder(
-                mapOfHandoverIdAndServiceCatalogId.values(), 
-                mapOfHandoverIdAndNextActionNewOrder.values()
-            );
-            // Populate the map with the fetched service actions
-            if (!serviceActions.isEmpty()) {
-                for (ServiceAction__c action : serviceActions) {
-                    catalogVsActionMap.put(action.ServiceCatalog__c, action);
-                }
-            }
-        }
-        
-        return catalogVsActionMap;
-    }
-
-    public Map<Id, ServiceAction__c> getCurrentHandoverServiceAction(List<Handover__c> listOfHandovers) {
-        
-        
-        // Initialize the result map to hold the mapping of case Id to ServiceAction
-        Map<Id, ServiceAction__c> catalogVsActionMap = new Map<Id, ServiceAction__c>();
-        
-        // Create maps for storing necessary details about the cases
-        Map<Id, String> mapOfCaseIdAndServiceCatalogId = new Map<Id, String>();
-        Map<Id, Integer> mapOfCaseIdAndCurrentActionOrder = new Map<Id, Integer>();
-        
-        // Collect relevant data from listOfHandovers
-        for (Handover__c handoverObj : listOfHandovers) {
-            
-            
-            if (handoverObj.ServiceCatalog__c != null && handoverObj.Sub_Status__c != 'Closed') {
-                mapOfCaseIdAndServiceCatalogId.put(handoverObj.Id, handoverObj.ServiceCatalog__c);
-                if (handoverObj.Step__c !='Final') {
-                    if(handoverObj.Step__c == '4' && handoverObj.Sales_Order__c != null){
-                        Integer currentOrder = Integer.valueOf('2');
-                        mapOfCaseIdAndCurrentActionOrder.put(handoverObj.Id, currentOrder);
-                    } else {
-                        Integer currentOrder = Integer.valueOf(handoverObj.Step__c) - 1;
-                        mapOfCaseIdAndCurrentActionOrder.put(handoverObj.Id, currentOrder);
-                    }
-                }
-                else if(handoverObj.Step__c =='Final'){
-                    
-                    List<ServiceAction__c> actions=getFinalServActionsByCatalogId(new Set<Id>{handoverObj.ServiceCatalog__c});
-                    Integer currentOrder = Integer.valueOf(actions[0].Order__c);
-                    mapOfCaseIdAndCurrentActionOrder.put(handoverObj.Id, currentOrder);
-                }
-            }
-        }
-        
-        
-        if (!mapOfCaseIdAndCurrentActionOrder.isEmpty()) {
-            
-            List<ServiceAction__c> serviceActions = getServActionsByCatalogIdAndOrder(
-                mapOfCaseIdAndServiceCatalogId.values(), 
-                mapOfCaseIdAndCurrentActionOrder.values() 
-            );
-            System.debug('serviceActions'+serviceActions);
-            // Populate the map with the fetched service actions
-            if (!serviceActions.isEmpty()) {
-                for (ServiceAction__c action : serviceActions) {
-                    catalogVsActionMap.put(action.ServiceCatalog__c, action);
-                }
-            }
-        }
-        
-        System.debug('catalogVsActionMap'+catalogVsActionMap);
-        return catalogVsActionMap; 
-        
-    } */
-
     public Map<Id,Map<String,ServiceAction__c>> getCurrentAndNextHandoverServiceAction(List<Handover__c> listOfHandovers) {
-        // Initialize the result map to hold the mapping of case Id to ServiceAction
-        //Map<Id, ServiceAction__c> catalogVsActionMap = new Map<Id, ServiceAction__c>();
         Map<Id,Map<String,ServiceAction__c>> serviceCatalogIdToHanoverStatusToServiceActionMap = new Map<Id,Map<String,ServiceAction__c>>();
-        // Create maps for storing necessary details about the cases
         Map<Id, String> mapOfHandoverIdAndServiceCatalogId = new Map<Id, String>();
-        //Map<Id, Integer> mapOfHandoverIdAndCurrentActionStatus = new Map<Id, Integer>();
-        //Map<Id, Integer> mapOfHandoverIdAndNextActionStatus = new Map<Id, Integer>();
         List<String> handoverStatuses = new List<String>();
         
         // Collect relevant data from listOfHandovers
         for (Handover__c handoverObj : listOfHandovers) {
             if (handoverObj.ServiceCatalog__c != null){ //&& handoverObj.Sub_Status__c != 'Handover Completed') {
                 mapOfHandoverIdAndServiceCatalogId.put(handoverObj.Id, handoverObj.ServiceCatalog__c);
-                //mapOfHandoverIdAndCurrentActionStatus.put(handoverObj.Id, handoverObj.Sub_Status__c);
-                //mapOfHandoverIdAndNextActionStatus.put(handoverObj.Id, handoverObj.Next_Step__c);
                 if(handoverObj.Previous_HO_Status__c != NULL) handoverStatuses.add(handoverObj.Previous_HO_Status__c);
                 if(handoverObj.Sub_Status__c != NULL) handoverStatuses.add(handoverObj.Sub_Status__c);
                 //if(handoverObj.Next_Step__c != NULL) handoverStatuses.add(handoverObj.Next_Step__c);
@@ -485,7 +370,7 @@ public class ServiceCatalogService {
                                                         TaskSubType__c, TaskSubject__c, TaskType__c, Department__c, DefaultQueueId__c, 
                                                         SLAHours__c, HandoverStatus__c
                                                         FROM ServiceAction__c 
-                                                        WHERE ServiceCatalog__c In :serviceCatalogIdList
+                                                        WHERE ServiceCatalog__c IN :serviceCatalogIdList
                                                         AND TaskSubType__c LIKE 'Handover Team Task 2.%'];
             
             for(ServiceAction__c saRec : serviceActions){
@@ -510,8 +395,26 @@ public class ServiceCatalogService {
                AND  SubCategory__c =:selectedSubCategory AND IsAvailableForSuperApp__c = true LIMIT 1];
         
     }
-    public ServiceAction__c getServiceActionByCatalogAndDepartment(Id serviceCatalogId,String team){
-         return [SELECT Id,Department__c,OwnerId,Due_in_days__c,TaskSubject__c,TaskType__c,TaskSubType__c,FinalTask__c,Order__c,AssignToOwner__c FROM ServiceAction__c
-                 WHERE ServiceCatalog__c = :serviceCatalogId AND Department__c = :team LIMIT 1];
+    
+    public ServiceCatalog__c getServiceCatalogByNameAndSubCategory( String serviceCatalogName, String subCategory){
+        return [ SELECT Id, Name, SubCategory__c, Category__c FROM ServiceCatalog__c WHERE Name = :serviceCatalogName AND SubCategory__c = :subCategory LIMIT 1 ];
+    }
+    
+    public List<ServiceCatalog__c> getServiceCatalogBySubCategory(String subCategory){
+        return [SELECT Id, Name, RecordTypeDevName__c FROM ServiceCatalog__c WHERE SubCategory__c =: subCategory];
+    }
+    
+    public List<Service_Catalogue__c> getServiceCatalogBySubCategoryAndIncidentDesc(Set<String> subCategorySet, Set<String> incidentDescriptionSet) {
+        if(subCategorySet.isEmpty() || incidentDescriptionSet.isEmpty()) {
+            return new List<Service_Catalogue__c>();
+        }
+        
+        return [   
+                    SELECT Id, Name, Location__c, Replace__c, Repair__c, Closure_Reason__c, Category__c, Sub_category__c, 
+                            Incident_description__c, Resolution_Priority__c, Resolution_Typology__c, Problem_Code__c
+                    FROM Service_Catalogue__c
+                    WHERE Sub_category__c IN :subCategorySet 
+                    AND Incident_description__c IN :incidentDescriptionSet
+                ];
     }
 }

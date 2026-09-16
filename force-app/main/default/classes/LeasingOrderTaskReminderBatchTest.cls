@@ -108,7 +108,9 @@ private class LeasingOrderTaskReminderBatchTest {
             LeaseTerminationRefundType__c = 'Normal Termination without Refund - N',
             AdminFee__c = 100,
             FitOutSecurityDeposit__c  = 300,
-            EjariTawtheeqFee__c = 200
+            EjariTawtheeqFee__c = 200,
+            Status__c = 'Pending',
+            LeasingContractSignedDate__c = Date.today().addDays(-3)
             
         );
         insert lo;

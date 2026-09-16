@@ -184,8 +184,7 @@ public inherited sharing class IntegrationRecordService {
                                                              Param32__c = paramMap.containsKey('Param32') ? paramMap.get('Param32') : null,
                                                              Param33__c = paramMap.containsKey('Param33') ? paramMap.get('Param33') : null,
                                                              Param34__c = paramMap.containsKey('Param34') ? paramMap.get('Param34') : null,
-                                                             LongTextParam1__c = paramMap.containsKey('LongTextParam1') ? paramMap.get('LongTextParam1') : null,
-                                                             LongTextParam2__c = paramMap.containsKey('LongTextParam2') ? paramMap.get('LongTextParam2') : null
+                                                             LongTextParam1__c = paramMap.containsKey('LongTextParam1') ? paramMap.get('LongTextParam1') : null
                                                          );
                                                          return integrationRecord;        
                                                      }

@@ -153,4 +153,75 @@ otherChargesAmountTotal = 0;
             salesOrderWrapperList.add(new SalesOrderWrapper(orders[0]));
         }
     }
+    @AuraEnabled
+      public static String generateAndAttachPdf(Id salesOrderId) {
+
+    if (salesOrderId == null) {
+        throw new AuraHandledException(
+            'Sales Order Id is required.'
+        );
+    }
+
+    PageReference pdfPage = Page.SalesReceiptPDFPage;
+
+    pdfPage.getParameters().put(
+        'id',
+        salesOrderId
+    );
+
+    Blob pdfBlob;
+
+    if (Test.isRunningTest()) {
+        pdfBlob = Blob.valueOf('Test PDF Content');
+    } else {
+        pdfBlob = pdfPage.getContent();
+    }
+
+    SalesOrderService service =
+        SalesOrderService.getInstance();
+
+    List<Salesorder__c> salesOrders =
+        service.getSalesOrderWithInstallmentLinesReceiptAllocation(
+            salesOrderId
+        );
+
+    if (salesOrders.isEmpty()) {
+        throw new AuraHandledException(
+            'Sales Order not found.'
+        );
+    }
+
+    String soNumber = salesOrders[0].Name;
+
+    String receiptFileName =
+        'Receipt-Acknowledgment-' + soNumber;
+
+    ContentVersion cv = new ContentVersion();
+
+    cv.Title = receiptFileName;
+    cv.PathOnClient = receiptFileName + '.pdf';
+    cv.VersionData = pdfBlob;
+    cv.IsMajorVersion = true;
+
+    insert cv;
+
+    cv = [
+        SELECT Id, ContentDocumentId
+        FROM ContentVersion
+        WHERE Id = :cv.Id
+        LIMIT 1
+    ];
+
+    ContentDocumentLink cdl =
+        new ContentDocumentLink();
+
+    cdl.ContentDocumentId = cv.ContentDocumentId;
+    cdl.LinkedEntityId = salesOrderId;
+    cdl.ShareType = 'V';
+    cdl.Visibility = 'AllUsers';
+
+    insert cdl;
+
+    return cv.Id;
+}
 }

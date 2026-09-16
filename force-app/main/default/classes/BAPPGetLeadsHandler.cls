@@ -10,7 +10,7 @@
 *****************************************************************************************************/
 public class BAPPGetLeadsHandler {
     
-    private static final List<String> DEFAULT_STATUSES = new List<String>{ 'New', 'In Progress', 'Closed','Converted' };
+    private static final List<String> DEFAULT_STATUSES = new List<String>{ 'New', 'In Progress', 'Closed' };
         
         // ===== Request =====
         public class LeadFilterRequest {
@@ -88,9 +88,6 @@ public class BAPPGetLeadsHandler {
         public String brokerAgentName;
         public String brokerAgentId;
         public String title;
-        public String unitNumberId; // Added by Ashish Rana
-        public String unitNumber; // Added by Ashish Rana
-
     }
     
     public class BrokerSummaryResponse {
@@ -288,8 +285,6 @@ public class BAPPGetLeadsHandler {
             r.brokerAgentName = l.Broker_Agent_Name__c;
             r.brokerAgentId = l.BrokerAgent__c;
         }
-        r.unitNumberId = l.Unit__c;  // Added by Ashish Rana
-        r.unitNumber = l.Unit__r.Name;  // Added by Ashish Rana
         return r;
     }
     
@@ -342,8 +337,6 @@ public class BAPPGetLeadsHandler {
             writeStringOrNull(gen, 'leadType', l.leadType);
             writeStringOrNull(gen, 'brokerAgentName', l.brokerAgentName);
             writeStringOrNull(gen, 'brokerAgentId', l.brokerAgentId);
-            writeStringOrNull(gen, 'unitNumberId', l.unitNumberId); // Added by Ashish Rana
-            writeStringOrNull(gen, 'unitNumber', l.unitNumber); // Added by Ashish Rana
             gen.writeEndObject();
         }
         gen.writeEndArray();
@@ -567,7 +560,7 @@ public class BAPPGetLeadsHandler {
         if (String.isBlank(rolesStr)) return false;
         
         // Expanded admin roles (all lowercase)
-        Set<String> adminRoles = new Set<String>{'admin', 'superadmin', 'ceo', 'owner', 'partner', 'authorizedsignatoryofficer', 'sponsor'};
+        Set<String> adminRoles = new Set<String>{'admin', 'superadmin', 'ceo', 'owner', 'partner', 'authorizedsignatoryofficer'};
             
             for (String role : rolesStr.split(';')) {
                 if (role != null && adminRoles.contains(role.trim().toLowerCase())) {

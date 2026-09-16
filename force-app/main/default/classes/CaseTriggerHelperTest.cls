@@ -9,7 +9,7 @@ public class CaseTriggerHelperTest {
         accountRecord.Azure_UserPrincipal_Id__c='testttt';
         insert accountRecord;
         
-        
+      
         
         Contact cntRecord= BCAPP_TestDataFactory.createContact(accountRecord.id,'ewew@dasds.com');
         cntRecord.PrimaryContact__c=true;
@@ -33,7 +33,6 @@ public class CaseTriggerHelperTest {
         testCase.Service_Catalog__c=testServiceCatalog.id;
         insert testCase;
         
-              
     }    
     
     @isTest static void CaseTriggerHandlerTest(){
@@ -208,13 +207,13 @@ public class CaseTriggerHelperTest {
         testCase.VehicleRegistrationStatus__c = 'Rejected';
         update testCase;
         testCase.VehicleRegistrationStatus__c = 'Approved';
-        update testCase;
+          update testCase;
         //CaseTriggerHelper.handleVehicleParkingRegistrationReqAfterUpdate(new List<Case> {testCase},caseOld);
         
     }
     @IsTest
     static void testPostSaleDeferralCaseProcess() {
-        // Create Contact with Email
+          // Create Contact with Email
         Contact testContact = [Select id,LastName,Email from Contact limit 1];
         Id caseRecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Post_Sale_Payment_Deferral').getRecordTypeId();
         Case testCase = new Case(
@@ -223,14 +222,14 @@ public class CaseTriggerHelperTest {
             RecordTypeId = caseRecordTypeId,
             CaseType__c = 'Service Request',
             ContactId = testContact.Id
-        );
+      );
         test.startTest();
         insert testCase;
         test.stopTest();
     }
-    @IsTest
+     @IsTest
     static void testPostSaleDeferralUpdateCaseProcess() {
-        // Create Contact with Email
+   // Create Contact with Email
         Contact testContact = [Select id,LastName,Email from Contact limit 1];
         Id caseRecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Post_Sale_Payment_Deferral').getRecordTypeId();
         Case testCase = new Case(
@@ -239,7 +238,7 @@ public class CaseTriggerHelperTest {
             RecordTypeId = caseRecordTypeId,
             CaseType__c = 'Service Request',
             ContactId = testContact.Id
-        );
+      );
         
         insert testCase;
         testCase.SubStatus__c = 'No Reply';
@@ -247,12 +246,12 @@ public class CaseTriggerHelperTest {
         update testCase;
         test.stopTest();
         
-        
+       
     }
-    
-    
-    // Bapp   
-    @isTest
+
+
+// Bapp   
+@isTest
     static void testCreateDocuments_AllScenarios() {
         Map<String, Id> rtMap = new Map<String, Id>();
         for (RecordType rt : [
@@ -300,113 +299,113 @@ public class CaseTriggerHelperTest {
                     ObjectType__c = 'Case',
                     RecordTypeDevName__c = 'OtherServiceRequest'
                 )};
-                    insert docTypes;
+            insert docTypes;
+            
+            List<Case> caseList = new List<Case>();
+            
+            if (rtMap.containsKey('Broker_Registration')) {
+                caseList.add(new Case(
+                    RecordTypeId = rtMap.get('Broker_Registration'),
+                    BrokerContactRole__c = 'Admin',
+                    TypeOfEstablishment__c = 'Domestic',
+                    Status = 'New',
+                    Origin = 'Phone'
+                ));
+            }
+            
+            if (rtMap.containsKey('Broker_Agency_Details_Update')) {
+                caseList.add(new Case(
+                    RecordTypeId = rtMap.get('Broker_Agency_Details_Update'),
+                    TypeOfEstablishment__c = 'Domestic',
+                    Status = 'New',
+                    Origin = 'Phone'
+                ));
+            }
+            
+            if (rtMap.containsKey('BrokerAgentDetailsUpdate')) {
+                caseList.add(new Case(
+                    RecordTypeId = rtMap.get('BrokerAgentDetailsUpdate'),
+                    BrokerContactRole__c = 'Admin',
+                    TypeOfEstablishment__c = 'Domestic',
+                    Status = 'New',
+                    Origin = 'Phone'
+                ));
+            }
+            
+            if (rtMap.containsKey('DelayedCommissionPayment')) {
+                caseList.add(new Case(
+                    RecordTypeId = rtMap.get('DelayedCommissionPayment'),
+                    Status = 'New',
+                    Origin = 'Phone'
+                ));
+            }
+            
+            if (rtMap.containsKey('IncorrectCommissionAmount')) {
+                caseList.add(new Case(
+                    RecordTypeId = rtMap.get('IncorrectCommissionAmount'),
+                    Status = 'New',
+                    Origin = 'Phone'
+                ));
+            }
+            
+            if (rtMap.containsKey('OtherServiceRequest')) {
+                caseList.add(new Case(
+                    RecordTypeId = rtMap.get('OtherServiceRequest'),
+                    Status = 'New',
+                    Origin = 'Phone'
+                ));
+            }
+            
+            insert caseList;
+            
+            Test.startTest();
+            CaseTriggerHelper.createDocuments(caseList);
+            Test.stopTest();
+            
+            List<Document__c> insertedDocs = [
+                SELECT Id, Case__c, DocumentType__c, Document_Name__c 
+                FROM Document__c
+            ];
+            
+            System.assert(insertedDocs.size() > 0, 'Documents should be created for valid Cases');
+            
+            Set<Id> caseIds = new Set<Id>();
+            for (Document__c doc : insertedDocs) caseIds.add(doc.Case__c);
+            
+            System.assert(caseIds.containsAll(new Map<Id, Case>(caseList).keySet()),
+                          'Each case should have corresponding document(s)');
+        }
         
-        List<Case> caseList = new List<Case>();
-        
-        if (rtMap.containsKey('Broker_Registration')) {
-            caseList.add(new Case(
-                RecordTypeId = rtMap.get('Broker_Registration'),
-                BrokerContactRole__c = 'Admin',
-                TypeOfEstablishment__c = 'Domestic',
+        @isTest
+        static void testCreateDocuments_NoMatchingRecordType() {
+            Id unrelatedRtId;
+            List<RecordType> rts = [
+                SELECT Id 
+                FROM RecordType 
+                WHERE SObjectType = 'Case' 
+                AND DeveloperName = 'UnrelatedType' 
+                LIMIT 1
+            ];
+            if (!rts.isEmpty()) {
+                unrelatedRtId = rts[0].Id;
+            } else {
+                unrelatedRtId = [SELECT Id FROM RecordType WHERE SObjectType = 'Case' LIMIT 1].Id;
+            }
+            
+            Case c = new Case(
+                RecordTypeId = unrelatedRtId,
                 Status = 'New',
-                Origin = 'Phone'
-            ));
+                Origin = 'Email'
+            );
+            insert c;
+            
+            Test.startTest();
+            CaseTriggerHelper.createDocuments(new List<Case>{ c });
+            Test.stopTest();
+            
+            System.assertEquals(0, [SELECT COUNT() FROM Document__c WHERE Case__c = :c.Id],
+                                'No documents should be created for unrelated Record Type');
         }
-        
-        if (rtMap.containsKey('Broker_Agency_Details_Update')) {
-            caseList.add(new Case(
-                RecordTypeId = rtMap.get('Broker_Agency_Details_Update'),
-                TypeOfEstablishment__c = 'Domestic',
-                Status = 'New',
-                Origin = 'Phone'
-            ));
-        }
-        
-        if (rtMap.containsKey('BrokerAgentDetailsUpdate')) {
-            caseList.add(new Case(
-                RecordTypeId = rtMap.get('BrokerAgentDetailsUpdate'),
-                BrokerContactRole__c = 'Admin',
-                TypeOfEstablishment__c = 'Domestic',
-                Status = 'New',
-                Origin = 'Phone'
-            ));
-        }
-        
-        if (rtMap.containsKey('DelayedCommissionPayment')) {
-            caseList.add(new Case(
-                RecordTypeId = rtMap.get('DelayedCommissionPayment'),
-                Status = 'New',
-                Origin = 'Phone'
-            ));
-        }
-        
-        if (rtMap.containsKey('IncorrectCommissionAmount')) {
-            caseList.add(new Case(
-                RecordTypeId = rtMap.get('IncorrectCommissionAmount'),
-                Status = 'New',
-                Origin = 'Phone'
-            ));
-        }
-        
-        if (rtMap.containsKey('OtherServiceRequest')) {
-            caseList.add(new Case(
-                RecordTypeId = rtMap.get('OtherServiceRequest'),
-                Status = 'New',
-                Origin = 'Phone'
-            ));
-        }
-        
-        insert caseList;
-        
-        Test.startTest();
-        CaseTriggerHelper.createDocuments(caseList);
-        Test.stopTest();
-        
-        List<Document__c> insertedDocs = [
-            SELECT Id, Case__c, DocumentType__c, Document_Name__c 
-            FROM Document__c
-        ];
-        
-        System.assert(insertedDocs.size() > 0, 'Documents should be created for valid Cases');
-        
-        Set<Id> caseIds = new Set<Id>();
-        for (Document__c doc : insertedDocs) caseIds.add(doc.Case__c);
-        
-        //System.assert(caseIds.containsAll(new Map<Id, Case>(caseList).keySet()),'Each case should have corresponding document(s)');
-    }
-    
-    @isTest
-    static void testCreateDocuments_NoMatchingRecordType() {
-        Id unrelatedRtId;
-        List<RecordType> rts = [
-            SELECT Id 
-            FROM RecordType 
-            WHERE SObjectType = 'Case' 
-            AND DeveloperName = 'UnrelatedType' 
-            LIMIT 1
-        ];
-        if (!rts.isEmpty()) {
-            unrelatedRtId = rts[0].Id;
-        } else {
-            unrelatedRtId = [SELECT Id FROM RecordType WHERE SObjectType = 'Case' LIMIT 1].Id;
-        }
-        
-        Case c = new Case(
-            RecordTypeId = unrelatedRtId,
-            Status = 'New',
-            Origin = 'Email'
-        );
-        insert c;
-        
-        Test.startTest();
-        CaseTriggerHelper.createDocuments(new List<Case>{ c });
-        Test.stopTest();
-        
-        System.assertEquals(0, [SELECT COUNT() FROM Document__c WHERE Case__c = :c.Id],
-                            'No documents should be created for unrelated Record Type');
-    }
-    
     
     @isTest
     static void testCreateBrokerContacts() {
@@ -437,7 +436,11 @@ public class CaseTriggerHelperTest {
             Designation__c = 'Manager',
             Mobile_Country_Code__c = '91',
             AccountId = acc.Id,
-            RecordTypeId = caseRTId
+            RecordTypeId = caseRTId,
+            ApprovalStatus__c = 'Approved',
+            Subject = 'Test Case',
+            Status = 'New',
+            Origin = 'Web'
         );
         
         insert cs;
@@ -445,7 +448,6 @@ public class CaseTriggerHelperTest {
         CaseTriggerHelper.createBrokerContacts(new List<Case>{ cs });
         Test.stopTest();
     }
-    
     
     @isTest
     private static void testCreateBrokerAccounts() {
@@ -478,7 +480,7 @@ public class CaseTriggerHelperTest {
         
         String recordTypeCaseId = Schema.SObjectType.Case.getRecordTypeInfosByName().get('Broker Registration').getRecordTypeId();
         
-        
+
         List<Case> cases = new List<Case>{
             new Case(
                 AccountId = accList[0].Id,
@@ -537,13 +539,12 @@ public class CaseTriggerHelperTest {
                 };
                     insert cases;
         
-        
+
         Test.startTest();
-        //  CaseTriggerHelper.updateBrokerAccounts(cases);
-        CaseTriggerHelper.updateBrokerAccounts(cases,false);
+        CaseTriggerHelper.updateBrokerAccounts(cases);
         Test.stopTest();
         
-        
+
         Account updatedAcc = [
             SELECT Trade_License_Expiry_Date__c,
             VATUndertakingIssueDate__c,
@@ -557,20 +558,20 @@ public class CaseTriggerHelperTest {
         
         System.assertNotEquals(null, updatedAcc.Trade_License_Expiry_Date__c, 'Trade License should be updated');
         
-        
+
         BankAccount__c updatedBank = [
             SELECT AccountNumberCorporate__c, BankNameCorporate__c, BankAddress__c, IBANNoCorporate__c, SwiftCodeCorporate__c
             FROM BankAccount__c
             WHERE Id = :bankAcc.Id
         ];
         
-        //System.assertEquals('ACC12345', updatedBank.AccountNumberCorporate__c, 'AccountNumber should update');
-        
+        System.assertEquals('ACC12345', updatedBank.AccountNumberCorporate__c, 'AccountNumber should update');
+      
     }
     
     @isTest
     private static void testCreateBrokerContactSR() {
-        
+  
         Id accountRTId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName()
             .get('Broker_Agency').getRecordTypeId();
         Id contactRTId = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName()
@@ -578,416 +579,64 @@ public class CaseTriggerHelperTest {
         Id caseRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName()
             .get('Broker_Registration').getRecordTypeId();
         
-        
+
         Account acc = new Account(
             Name = 'Test Broker Agency',
             RecordTypeId = accountRTId
         );
         insert acc;
         
-        /*Contact con = new Contact(
-FirstName = 'Test',
-LastName = 'User',
-AccountId = acc.Id,
-RecordTypeId = contactRTId,
-BrokerContactRole__c = 'Agent',
-NationalIdExpiryDate__c = Date.today(),
-PassportExpiryDate__c = Date.today(),
-BRN_RERA_Expiry_Date__c = Date.today(),
-Email = 'test1233@test.com'
-);
-insert con;
-
-Case agentUpdateCase = new Case(
-Subject = 'Agent Details Update Case',
-AccountId = acc.Id,
-ContactId = con.Id,
-RecordTypeId = caseRTId,
-Type = 'Agent Details Update',
-BrokerContactRole__c = 'Agent',
-NationalIDExpiryDate__c = Date.today().addYears(1),
-PassportExpiryDate__c = Date.today().addYears(2),
-BRN_RERA_Expiry_Date__c = Date.today().addMonths(6),
-Status = 'New',
-Origin = 'Web'
-);
-insert agentUpdateCase;
-
-Test.startTest();
-CaseTriggerHelper.updateBrokerContactSR(new List<Case>{ agentUpdateCase });
-Test.stopTest();
-
-Contact updatedCon = [
-SELECT CaseId__c,
-BrokerContactRole__c,
-NationalIdExpiryDate__c,
-PassportExpiryDate__c,
-BRN_RERA_Expiry_Date__c,
-AccountId,
-RecordType.DeveloperName
-FROM Contact
-WHERE Id = :con.Id
-];
-
-System.assertEquals(agentUpdateCase.Id, updatedCon.CaseId__c, 'CaseId__c should update on Contact');
-System.assertEquals('Agent', updatedCon.BrokerContactRole__c, 'BrokerContactRole__c should update');
-System.assertEquals(Date.today().addYears(1), updatedCon.NationalIdExpiryDate__c, 'National ID Expiry should update');
-System.assertEquals(Date.today().addYears(2), updatedCon.PassportExpiryDate__c, 'Passport Expiry should update');
-System.assertEquals(Date.today().addMonths(6), updatedCon.BRN_RERA_Expiry_Date__c, 'BRN/RERA Expiry should update');
-System.assertEquals(acc.Id, updatedCon.AccountId, 'AccountId should remain linked');
-System.assertEquals('Broker', updatedCon.RecordType.DeveloperName, 'Contact RecordType should remain Broker');*/
-    }
-    
-    @isTest
-    static void testCreateDocuments_BAPPNewRecordTypesCoverage() {
-        Id brokerAgentRTId = Schema.SObjectType.Case
-            .getRecordTypeInfosByDeveloperName()
-            .get('BrokerAgentRegistrationAndUpdate')
-            .getRecordTypeId();
-        
-        Id brokerAgencyRTId = Schema.SObjectType.Case
-            .getRecordTypeInfosByDeveloperName()
-            .get('BrokerAgencyDetailsUpdate')
-            .getRecordTypeId();
-        
-        Id brokerCommissionRTId = Schema.SObjectType.Case
-            .getRecordTypeInfosByDeveloperName()
-            .get('BrokerCommissionIssue')
-            .getRecordTypeId();
-        
-        Id otherServiceRequestRTId = Schema.SObjectType.Case
-            .getRecordTypeInfosByDeveloperName()
-            .get('BrokerGeneralServiceRequest')
-            .getRecordTypeId();
-        
-        List<DocumentType__c> docTypes = new List<DocumentType__c>{
-            // Agent detail update - normal matching document
-            new DocumentType__c(
-                Type__c = 'Trade License',
-                ObjectType__c = 'Case',
-                RecordTypeDevName__c = 'BrokerAgentRegistrationAndUpdate',
-                BrokerContactRole__c = 'Admin;Agent',
-                TypeOfEstablishment__c = 'Domestic'
-            ),
-                
-                // Agent detail update - passport doc, should be skipped for Domestic + Broker Agent Details Update
-                new DocumentType__c(
-                    Type__c = 'Passport Front',
-                    ObjectType__c = 'Case',
-                    RecordTypeDevName__c = 'BrokerAgentRegistrationAndUpdate',
-                    BrokerContactRole__c = 'Admin',
-                    TypeOfEstablishment__c = 'Domestic'
-                ),
-                
-                // Agency details update
-                new DocumentType__c(
-                    Type__c = 'Broker Agreement',
-                    ObjectType__c = 'Case',
-                    RecordTypeDevName__c = 'BrokerAgencyDetailsUpdate',
-                    TypeOfEstablishment__c = 'Domestic'
-                ),
-                
-                // Broker commission issue
-                new DocumentType__c(
-                    Type__c = 'Supporting Document 1',
-                    ObjectType__c = 'Case',
-                    RecordTypeDevName__c = 'BrokerCommissionIssue'
-                ),
-                
-                // Other service request
-                new DocumentType__c(
-                    Type__c = 'Supporting Document 1',
-                    ObjectType__c = 'Case',
-                    RecordTypeDevName__c = 'BrokerGeneralServiceRequest'
-                )
-                };
-                    insert docTypes;
-        
-        Account acc = new Account(Name = 'BAPP Test Account');
-        insert acc;
-        
-        List<Case> caseList = new List<Case>{
-            new Case(
-                RecordTypeId = brokerAgentRTId,
-                Status = 'New',
-                Origin = 'Phone',
-                AccountId = acc.Id,
-                Subject = 'Broker Agent Details Update',
-                SubType__c = 'Broker Agent Details Update',
-                BrokerContactRole__c = 'Admin',
-                TypeOfEstablishment__c = 'Domestic'
-            ),
-                new Case(
-                    RecordTypeId = brokerAgencyRTId,
-                    Status = 'New',
-                    Origin = 'Phone',
-                    AccountId = acc.Id,
-                    Subject = 'Broker Agency Details Update',
-                    SubType__c = 'Broker Agency Details Update',
-                    TypeOfEstablishment__c = 'Domestic'
-                ),
-                new Case(
-                    RecordTypeId = brokerCommissionRTId,
-                    Status = 'New',
-                    Origin = 'Phone',
-                    AccountId = acc.Id,
-                    Subject = 'Delayed Commission Payment',
-                    SubType__c = 'Delayed Commission Payment'
-                ),
-                new Case(
-                    RecordTypeId = otherServiceRequestRTId,
-                    Status = 'New',
-                    Origin = 'Phone',
-                    AccountId = acc.Id,
-                    Subject = 'Other Service Request',
-                    SubType__c = 'Other Service Request'
-                )
-                };
-                    insert caseList;
-        
-        Test.startTest();
-        CaseTriggerHelper.createDocuments(caseList);
-        Test.stopTest();
-        
-        List<Document__c> createdDocs = [
-            SELECT Id, Case__c, DocumentType__c, Document_Name__c
-            FROM Document__c
-            WHERE Case__c IN :caseList
-        ];
-        
-        System.assert(
-            createdDocs.size() >= 4,
-            'Documents should be created for Broker Agent, Agency, Commission, and Other SR cases'
-        );
-        
-        Set<String> createdDocNames = new Set<String>();
-        for (Document__c doc : createdDocs) {
-            createdDocNames.add(doc.Document_Name__c);
-        }
-        
-        System.assert(
-            createdDocNames.contains('Trade License'),
-            'Agent detail update document should be created'
-        );
-        //System.assert(createdDocNames.contains('Agency Trade License'),'Agency details update document should be created');
-        //System.assert(createdDocNames.contains('Commission Proof'),'Broker commission document should be created');
-        //System.assert(createdDocNames.contains('Other Supporting Document'),'Other service request document should be created');
-    }
-    
-    @isTest
-    static void testUpdateBrokerContactSR_CoversBrokerAgentAndContactId() {
-        Account acc = [SELECT Id FROM Account LIMIT 1];
-        
-        Id brokerContactRTId = Schema.SObjectType.Contact
-            .getRecordTypeInfosByDeveloperName()
-            .get('Broker')
-            .getRecordTypeId();
-        
-        Id brokerAgentCaseRTId = Schema.SObjectType.Case
-            .getRecordTypeInfosByDeveloperName()
-            .get('BrokerAgentRegistrationAndUpdate')
-            .getRecordTypeId();
-        
-        String brokerRole = 'Agent';
-        for (Schema.PicklistEntry pe : Case.BrokerContactRole__c.getDescribe().getPicklistValues()) {
-            if (pe.isActive()) {
-                brokerRole = pe.getValue();
-                break;
-            }
-        }
-        
-        Contact conForBrokerAgent = new Contact(
-            FirstName = 'Broker',
-            LastName = 'Agent Contact',
-            Email = 'brokeragent@test.com',
+ 		/*Contact con = new Contact(
+            FirstName = 'Test',
+            LastName = 'User',
             AccountId = acc.Id,
-            RecordTypeId = brokerContactRTId
+            RecordTypeId = contactRTId,
+            BrokerContactRole__c = 'Agent',
+            NationalIdExpiryDate__c = Date.today(),
+            PassportExpiryDate__c = Date.today(),
+            BRN_RERA_Expiry_Date__c = Date.today(),
+            Email = 'test1233@test.com'
         );
-        
-        Contact conForContactId = new Contact(
-            FirstName = 'Case',
-            LastName = 'Contact',
-            Email = 'casecontact@test.com',
+        insert con;
+
+		Case agentUpdateCase = new Case(
+            Subject = 'Agent Details Update Case',
             AccountId = acc.Id,
-            RecordTypeId = brokerContactRTId
-        );
-        
-        insert new List<Contact>{ conForBrokerAgent, conForContactId };
-            
-            Case caseUsingBrokerAgent = new Case(
-                RecordTypeId = brokerAgentCaseRTId,
-                AccountId = acc.Id,
-                Status = 'New',
-                Origin = 'Web',
-                Type = 'Broker Service Request',
-                SubType__c = 'Broker Agent Details Update',
-                Broker_Agent__c = conForBrokerAgent.Id,
-                BrokerContactRole__c = brokerRole,
-                NationalIDExpiryDate__c = Date.today().addYears(1),
-                PassportExpiryDate__c = Date.today().addYears(2),
-                BRN_RERA_Expiry_Date__c = Date.today().addYears(3)
-            );
-        
-        Case caseUsingContactId = new Case(
-            RecordTypeId = brokerAgentCaseRTId,
-            AccountId = acc.Id,
-            Status = 'New',
-            Origin = 'Web',
-            Type = 'Other Type',
-            SubType__c = 'Broker Agent Details Update',
-            ContactId = conForContactId.Id,
-            BrokerContactRole__c = brokerRole,
+            ContactId = con.Id,
+            RecordTypeId = caseRTId,
+            Type = 'Agent Details Update',
+            BrokerContactRole__c = 'Agent',
             NationalIDExpiryDate__c = Date.today().addYears(1),
             PassportExpiryDate__c = Date.today().addYears(2),
-            BRN_RERA_Expiry_Date__c = Date.today().addYears(3)
+            BRN_RERA_Expiry_Date__c = Date.today().addMonths(6),
+            Status = 'New',
+            Origin = 'Web'
         );
-        
-        insert new List<Case>{ caseUsingBrokerAgent, caseUsingContactId };
-            
-            CaseTriggerHelper.updateBrokerContactSR(
-                new List<Case>{ caseUsingBrokerAgent, caseUsingContactId }
-            );
-        
-        Map<Id, Contact> updatedContacts = new Map<Id, Contact>([
-            SELECT Id,
-            CaseId__c,
-            BrokerContactRole__c,
-            EID_Expiry_Date__c,
-            PassportExpiryDate__c,
-            BRN_RERA_Expiry_Date__c,
-            AccountId
-            FROM Contact
-            WHERE Id IN :new Set<Id>{ conForBrokerAgent.Id, conForContactId.Id }
-        ]);
-        
-        System.assertEquals(
-            caseUsingBrokerAgent.Id,
-            updatedContacts.get(conForBrokerAgent.Id).CaseId__c,
-            'Broker_Agent__c contact should be updated with Case Id'
-        );
-        
-        System.assertEquals(
-            caseUsingContactId.Id,
-            updatedContacts.get(conForContactId.Id).CaseId__c,
-            'ContactId contact should be updated with Case Id'
-        );
-        
-        System.assertEquals(
-            brokerRole,
-            updatedContacts.get(conForBrokerAgent.Id).BrokerContactRole__c,
-            'Broker role should be updated'
-        );
-        
-        System.assertEquals(
-            acc.Id,
-            updatedContacts.get(conForContactId.Id).AccountId,
-            'Contact AccountId should be updated from Case'
-        );
-    }
-    
-    @isTest
-    static void testCompleteRelatedTasks_StatusAndApprovalCoverage() {
-        Account acc = [SELECT Id FROM Account LIMIT 1];
-        
-        Id brokerCommissionRTId = Schema.SObjectType.Case
-            .getRecordTypeInfosByDeveloperName()
-            .get('BrokerCommissionIssue')
-            .getRecordTypeId();
-        
-        Id otherServiceRTId = Schema.SObjectType.Case
-            .getRecordTypeInfosByDeveloperName()
-            .get('BrokerGeneralServiceRequest')
-            .getRecordTypeId();
-        
-        Id agencyUpdateRTId = Schema.SObjectType.Case
-            .getRecordTypeInfosByDeveloperName()
-            .get('BrokerAgencyDetailsUpdate')
-            .getRecordTypeId();
-        
-        Id agentUpdateRTId = Schema.SObjectType.Case
-            .getRecordTypeInfosByDeveloperName()
-            .get('BrokerAgentRegistrationAndUpdate')
-            .getRecordTypeId();
-        
-        List<Case> brokerCases = new List<Case>{
-            new Case(
-                RecordTypeId = brokerCommissionRTId,
-                AccountId = acc.Id,
-                Status = 'New',
-                Origin = 'Web',
-                Subject = 'Closed Broker Commission'
-            ),
-                new Case(
-                    RecordTypeId = otherServiceRTId,
-                    AccountId = acc.Id,
-                    Status = 'New',
-                    Origin = 'Web',
-                    Subject = 'Cancelled Other Service'
-                ),
-                new Case(
-                    RecordTypeId = agencyUpdateRTId,
-                    AccountId = acc.Id,
-                    Status = 'New',
-                    Origin = 'Web',
-                    Subject = 'Rejected Agency Update',
-                    ApprovalStatus__c = 'Pending'
-                ),
-                new Case(
-                    RecordTypeId = agentUpdateRTId,
-                    AccountId = acc.Id,
-                    Status = 'New',
-                    Origin = 'Web',
-                    Subject = 'Rejected Agent Update',
-                    ApprovalStatus__c = 'Pending'
-                )
-                };
-                    
-                    insert brokerCases;
-        
-        List<Task> taskList = new List<Task>();
-        for (Case c : brokerCases) {
-            taskList.add(new Task(
-                WhatId = c.Id,
-                Subject = 'Open Broker Task',
-                Status = 'Not Started',
-                Priority = 'Normal'
-            ));
-        }
-        insert taskList;
-        
-        Map<Id, Case> oldMap = new Map<Id, Case>();
-        
-        for (Case c : brokerCases) {
-            oldMap.put(
-                c.Id,
-                new Case(
-                    Id = c.Id,
-                    Status = 'New',
-                    ApprovalStatus__c = 'Pending'
-                )
-            );
-        }
-        
-        brokerCases[0].Status = 'Closed';
-        brokerCases[1].Status = 'Cancelled';
-        brokerCases[2].ApprovalStatus__c = 'Rejected';
-        brokerCases[3].ApprovalStatus__c = 'Rejected';
+        insert agentUpdateCase;
         
         Test.startTest();
-        CaseTriggerHelper.completeRelatedTasks(brokerCases, oldMap);
+        CaseTriggerHelper.updateBrokerContactSR(new List<Case>{ agentUpdateCase });
         Test.stopTest();
         
-        System.assertEquals(
-            4,
-            [
-                SELECT COUNT()
-                FROM Task
-                WHERE WhatId IN :brokerCases
-            ],
-            'Tasks should exist for broker cases'
-        );
+        Contact updatedCon = [
+            SELECT CaseId__c,
+            BrokerContactRole__c,
+            NationalIdExpiryDate__c,
+            PassportExpiryDate__c,
+            BRN_RERA_Expiry_Date__c,
+            AccountId,
+            RecordType.DeveloperName
+            FROM Contact
+            WHERE Id = :con.Id
+        ];
+        
+        System.assertEquals(agentUpdateCase.Id, updatedCon.CaseId__c, 'CaseId__c should update on Contact');
+        System.assertEquals('Agent', updatedCon.BrokerContactRole__c, 'BrokerContactRole__c should update');
+        System.assertEquals(Date.today().addYears(1), updatedCon.NationalIdExpiryDate__c, 'National ID Expiry should update');
+        System.assertEquals(Date.today().addYears(2), updatedCon.PassportExpiryDate__c, 'Passport Expiry should update');
+        System.assertEquals(Date.today().addMonths(6), updatedCon.BRN_RERA_Expiry_Date__c, 'BRN/RERA Expiry should update');
+        System.assertEquals(acc.Id, updatedCon.AccountId, 'AccountId should remain linked');
+        System.assertEquals('Broker', updatedCon.RecordType.DeveloperName, 'Contact RecordType should remain Broker');*/
     }
-    
-   
-    
+
 }

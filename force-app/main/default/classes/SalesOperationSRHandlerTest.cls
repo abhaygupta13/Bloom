@@ -41,7 +41,7 @@ private class SalesOperationSRHandlerTest {
         );
         insert sc;
 
-      
+       
         Id rtId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName()
             .get('SalesOperationService').getRecordTypeId();
 
@@ -62,7 +62,6 @@ private class SalesOperationSRHandlerTest {
                 FROM Case LIMIT 1];
     }
 
-    
     @isTest
     static void testGetInstance() {
         Test.startTest();
@@ -72,7 +71,6 @@ private class SalesOperationSRHandlerTest {
     }
 
 
-    
     @isTest
     static void testValidateEligibility() {
         SalesOrder__c so = [SELECT Id FROM SalesOrder__c LIMIT 1];
@@ -85,7 +83,6 @@ private class SalesOperationSRHandlerTest {
         System.assertEquals(null, result);
     }
 
-   
     @isTest
     static void testCreateCaseRecord_WithSalesOrder() {
 
@@ -105,7 +102,7 @@ private class SalesOperationSRHandlerTest {
 
         Test.startTest();
         Case newCase = SalesOperationSRHandler.getInstance().createCaseRecord(
-            so, sc, null, null, 'Service Request', 'Test Desc', 'Web'
+            so, sc, null, null, 'Service Request', 'Test Desc', 'Web',false
         );
         Test.stopTest();
 
@@ -114,7 +111,6 @@ private class SalesOperationSRHandlerTest {
         System.assertEquals('Web', newCase.Origin);
     }
 
-    
     @isTest
     static void testCreateCaseRecord_WithoutSalesOrder() {
 
@@ -128,7 +124,7 @@ private class SalesOperationSRHandlerTest {
 
         Test.startTest();
         Case newCase = SalesOperationSRHandler.getInstance().createCaseRecord(
-            null, sc, acc.Id, unit.Id, 'Service Request', 'No SO', 'Email'
+            null, sc, acc.Id, unit.Id, 'Service Request', 'No SO', 'Email',false
         );
         Test.stopTest();
 
@@ -137,9 +133,6 @@ private class SalesOperationSRHandlerTest {
         System.assertEquals('Email', newCase.Origin);
     }
 
-    
-
-    
     @isTest
     static void testValidateCaseForNextReview_Null() {
 
@@ -152,7 +145,7 @@ private class SalesOperationSRHandlerTest {
         System.assertEquals('Invalid Case ID.', res.get('message'));
     }
 
-  
+   
     @isTest
     static void testValidateCase_InvalidStep() {
 

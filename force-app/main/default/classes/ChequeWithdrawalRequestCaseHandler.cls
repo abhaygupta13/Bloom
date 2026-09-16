@@ -245,8 +245,8 @@ public inherited sharing class ChequeWithdrawalRequestCaseHandler {
         String paymentReceiptCVId;
         Map<Id, ContentVersion> contentVersionMap;
         if(salesOrderId != NULL) {
-            SOACVId = DocumentGenerationPDFHandler.generateAndAttachPdf(salesOrderId, 'generateStatement');
-            paymentReceiptCVId = DocumentGenerationPDFHandler.generateAndAttachPdf(salesOrderId, 'generateReceipt');
+            SOACVId = SalesSOAPDFController.generateAndAttachPdf(salesOrderId);
+            paymentReceiptCVId = SalesReceiptController.generateAndAttachPdf(salesOrderId);
             System.debug('SOACVId ::::: '+ SOACVId);
             List<Id> contentVersionIdList = new List<Id>();
             if((SOACVId != NULL && SOACVId != '') || (paymentReceiptCVId != NULL && paymentReceiptCVId != '')){

@@ -526,7 +526,7 @@
                 <tr>
                     
                     <td colspan="2">
-                        Dear
+                        Dear <b>{!wrapper.tenantName}</b>,
                     </td>
                     
                 </tr>

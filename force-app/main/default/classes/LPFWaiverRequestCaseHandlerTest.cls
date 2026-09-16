@@ -110,21 +110,21 @@ public class LPFWaiverRequestCaseHandlerTest{
     
      @isTest
     static void validatyTest(){
-        SalesOrder__c so = [Select id from Salesorder__c limit 1];
-        ServiceRequestController.validateEligibility(so.id,'LPF Waiver Request',false);
+        SalesOrder__c so = [Select Id,Account__c,Unit__c from Salesorder__c limit 1];
+        ServiceRequestController.validateEligibility(so.id,'LPF Waiver Request',so.Account__c,so.Unit__c,false);
     }
     
     @isTest
     static void createCaseTest(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
-        ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email');
+        ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email',false);
     }
     
     @isTest
     static void validateCaseTest(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         LPFWaiverRequestCaseHandler i = LPFWaiverRequestCaseHandler.getInstance();
@@ -135,7 +135,7 @@ public class LPFWaiverRequestCaseHandlerTest{
     static void validateCaseTest1(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         caseservice service = caseservice.getInstance();
@@ -150,7 +150,7 @@ public class LPFWaiverRequestCaseHandlerTest{
     static void validateCaseTest2(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         caseservice service = caseservice.getInstance();
@@ -166,7 +166,7 @@ public class LPFWaiverRequestCaseHandlerTest{
     static void validateCaseTest3(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         caseservice service = caseservice.getInstance();
@@ -179,10 +179,27 @@ public class LPFWaiverRequestCaseHandlerTest{
     }
     
     @isTest
+    static void validateCaseTest4(){
+        SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
+        test.StartTest();
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email',false);
+        test.stopTest();
+        ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
+        caseservice service = caseservice.getInstance();
+        Case cs = service.getCasebyId(caseData.get('caseId'));
+        cs.step__c = 'Final';
+        cs.LPFWaiverRequestApprovalStatus__c = 'Approved';
+        cs.Finance_document_verified__c = 'Yes';
+        update cs;
+        LPFWaiverRequestCaseHandler i = LPFWaiverRequestCaseHandler.getInstance();
+        i.validateCaseForNextReview(cs);
+    }
+    
+    @isTest
     static void validateEligibilityTest() {
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','LPF Waiver Request',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         caseservice service = caseservice.getInstance();

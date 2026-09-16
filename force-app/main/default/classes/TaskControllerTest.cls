@@ -51,36 +51,6 @@ public class TaskControllerTest {
         );
     }
 
-   /* @isTest
-    static void testCalculateSlaPercentage_NoAssignedDate() {
-
-      
-        Task tsk = new Task();
-
-        tsk.Subject = 'No Assigned Date';
-
-        tsk.Status = 'Not Started';
-
-        tsk.Priority = 'Normal';
-
-        tsk.SLAHours__c = 4;
-
-        insert tsk;
-
-       
-        Test.startTest();
-
-        Decimal result =
-            TaskController.calculateSlaPercentage(
-                tsk.Id
-            );
-
-        Test.stopTest();
-
-     
-        //System.assertEquals(1,result);
-    }*/
-
     @isTest
     static void testCalculateSlaPercentage_NoSLAHours() {
 

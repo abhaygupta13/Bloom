@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Leasing_Receipt_Allocation_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Leasing_Receipt_Allocation_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Leasing Receipt Allocations</relationshipLabel>
+        <relationshipName>Leasing_Receipt_Allocations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AmountApplied__c</fullName>
+        <label>Amount Applied</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ConditionType__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( LeasingOrderOtherCharges__c != Null,   TEXT(LeasingOrderOtherCharges__r.ConditionType__c) ,
+	IF( PaymentPlanSchedule__c != Null,
+		IF( ISPICKVAL(LeasingOrder__r.Unit__r.PropertyUsage__c, &quot;Residential&quot;), &quot;R001&quot; ,
+			IF(ISPICKVAL(LeasingOrder__r.Unit__r.PropertyUsage__c, &quot;Commercial&quot;), &quot;R024&quot; ,
+				IF(ISPICKVAL(LeasingOrder__r.Unit__r.PropertyUsage__c, &quot;Retail&quot;), &quot;R028&quot;,&quot;&quot;)
+			)
+		),&quot;&quot;
+	)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Condition Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CustomerBankAccount__c</fullName>
+        <externalId>false</externalId>
+        <label>CustomerBankAccount</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DateofApplication__c</fullName>
+        <label>Date of Application</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DateofUnapplication__c</fullName>
+        <label>Date of Unapplication</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>IntegrationMessage__c</fullName>
+        <label>Integration Message</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IntegrationStatus__c</fullName>
+        <label>Integration Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Integrated</fullName>
+                    <default>false</default>
+                    <label>Not Integrated</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Success</fullName>
+                    <default>false</default>
+                    <label>Success</label>
+                </value>
+                <value>
+                    <fullName>Failed</fullName>
+                    <default>false</default>
+                    <label>Failed</label>
+                </value>
+                <value>
+                    <fullName>Data Migration</fullName>
+                    <default>false</default>
+                    <label>Data Migration</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>InvoiceDocNo__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(PaymentPlanSchedule__c != Null &amp;&amp; PaymentPlanSchedule__r.RefDocno__c != Null, PaymentPlanSchedule__r.RefDocno__c, IF( LeasingOrderOtherCharges__c != Null &amp;&amp;  LeasingOrderOtherCharges__r.RefDocno__c != Null, LeasingOrderOtherCharges__r.RefDocno__c, &quot;&quot;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Invoice Doc No</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsReversed__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK( ReversalDate__c ) , &quot; &quot;, &quot;X&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Reversed</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeasingOrderOtherCharges__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Order Other Charges</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>LeasingOrdersOtherCharges__c.LeasingOrder__c</field>
+                <operation>equals</operation>
+                <valueField>$Source.LeasingOrder__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>LeasingOrdersOtherCharges__c</referenceTo>
+        <relationshipLabel>Leasing Receipt Allocations</relationshipLabel>
+        <relationshipName>Leasing_Receipt_Allocations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LeasingOrder__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Order</label>
+        <referenceTo>LeasingOrder__c</referenceTo>
+        <relationshipLabel>Leasing Receipt Allocations</relationshipLabel>
+        <relationshipName>LeasingReceiptAllocations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LeasingReceiptAcknowledgment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Receipt Acknowledgment</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>LeasingReceiptAcknowledgment__c.LeasingOrder__c</field>
+                <operation>equals</operation>
+                <valueField>$Source.LeasingOrder__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>LeasingReceiptAcknowledgment__c</referenceTo>
+        <relationshipLabel>Leasing Receipt Allocations</relationshipLabel>
+        <relationshipName>LeasingReceiptAllocations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LeasingReceiptAllocationUniqueKey__c</fullName>
+        <externalId>true</externalId>
+        <label>Leasing Receipt Allocation Unique Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OriginalCreationDate__c</fullName>
+        <label>OriginalCreationDate</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>PaymentPlanSchedule__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Payment Plan Schedule</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>PaymentPlanSchedule__c.LeasingOrder__c</field>
+                <operation>equals</operation>
+                <valueField>$Source.LeasingOrder__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>PaymentPlanSchedule__c</referenceTo>
+        <relationshipLabel>Leasing Receipt Allocations</relationshipLabel>
+        <relationshipName>Leasing_Receipt_Allocations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ReceiptHold__c</fullName>
+        <formula>If(LeasingReceiptAcknowledgment__r.HoldDate__c != Null , true, false)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Receipt Hold</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ReversalComments__c</fullName>
+        <externalId>false</externalId>
+        <label>Reversal Comments</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReversalDate__c</fullName>
+        <label>Reversal Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>SAPDocumentNo3__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Document No I</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPDocumentNoI__c</fullName>
+        <externalId>false</externalId>
+        <formula>LeasingReceiptAcknowledgment__r.SAPDocumentNumber__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Acknowledgement SAP Document No</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPDocumentNo__c</fullName>
+        <externalId>false</externalId>
+        <label>Allocation SAP Document No</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPReversalDocumentNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Reversal Document Number</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SendtoSAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>SendtoSAP</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ThisApplicationisfor__c</fullName>
+        <label>This Application is for</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Installment</fullName>
+                    <default>false</default>
+                    <label>Installment</label>
+                </value>
+                <value>
+                    <fullName>Other Charges</fullName>
+                    <default>false</default>
+                    <label>Other Charges</label>
+                </value>
+                <value>
+                    <fullName>Payment Plan</fullName>
+                    <default>false</default>
+                    <label>Payment Plan</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TypeofInvoice__c</fullName>
+        <label>Type of Invoice</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>ADM</fullName>
+                    <default>false</default>
+                    <label>ADM</label>
+                </value>
+                <value>
+                    <fullName>SC</fullName>
+                    <default>false</default>
+                    <label>SC</label>
+                </value>
+                <value>
+                    <fullName>LPC</fullName>
+                    <default>false</default>
+                    <label>LPC</label>
+                </value>
+                <value>
+                    <fullName>TF</fullName>
+                    <default>false</default>
+                    <label>TF</label>
+                </value>
+                <value>
+                    <fullName>AC</fullName>
+                    <default>false</default>
+                    <label>AC</label>
+                </value>
+                <value>
+                    <fullName>Installment</fullName>
+                    <default>false</default>
+                    <label>Installment</label>
+                </value>
+                <value>
+                    <fullName>Refund</fullName>
+                    <default>false</default>
+                    <label>Refund</label>
+                </value>
+                <value>
+                    <fullName>WriteOff</fullName>
+                    <default>false</default>
+                    <label>WriteOff</label>
+                </value>
+                <value>
+                    <fullName>Tax</fullName>
+                    <default>false</default>
+                    <label>Tax</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Unapply__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Unapply ?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>UnitType__c</fullName>
+        <externalId>false</externalId>
+        <label>Unit Type</label>
+        <length>200</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Leasing Receipt Allocation</label>
+    <nameField>
+        <displayFormat>LRA{0000000}</displayFormat>
+        <label>Leasing Receipt Allocation Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Leasing Receipt Allocations</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>FullAmountValidation</fullName>
+        <active>true</active>
+        <errorConditionFormula>LeasingReceiptAcknowledgment__r.FullAmountAllocation__c &amp;&amp;  (LeasingReceiptAcknowledgment__r.Amount__c !=  AmountApplied__c )</errorConditionFormula>
+        <errorMessage>Kindly allocate full amount for respective acknowledgement.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>InvoiceAmountCheck</fullName>
+        <active>false</active>
+        <errorConditionFormula>(PaymentPlanSchedule__c != Null &amp;&amp;  PaymentPlanSchedule__r.TotalInstallmentAmount__c &lt;  AmountApplied__c )||
+	(LeasingOrderOtherCharges__c != Null &amp;&amp;  LeasingOrderOtherCharges__r.TotalAmount__c  &lt; AmountApplied__c)</errorConditionFormula>
+        <errorMessage>Applied amount cannot be greater than Invoice Amount</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>acnledgmntAmntGrtrThnApliedAmnt</fullName>
+        <active>true</active>
+        <errorConditionFormula>LeasingReceiptAcknowledgment__c != Null &amp;&amp; AmountApplied__c &gt;  LeasingReceiptAcknowledgment__r.Amount__c</errorConditionFormula>
+        <errorMessage>Applied amount cannot be greater than Amount on Receipt Acknowledgement.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

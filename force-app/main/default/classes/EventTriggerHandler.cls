@@ -27,6 +27,8 @@ public class EventTriggerHandler implements ITriggerHandler{
     public void afterInsert(List<sObject> newList , Map<Id, sObject> newMap) {
          EventTriggerHelper.createServiceResourceAbsence((List<Event>) newList);
          EventTriggerHelper.handleEventNotificationToCustomer((List<Event>) newList);
+        EventTriggerHelper.handleAfterInsert((List<Event>) newList);
+
     }
     
     public void beforeUpdate(List<sObject> newList, Map<Id, sObject> newMap, List<sObject> oldList, Map<Id, sObject> oldMap) {
@@ -34,7 +36,7 @@ public class EventTriggerHandler implements ITriggerHandler{
     }
     
     public void afterUpdate(List<sObject> newList, Map<Id, sObject> newMap,  List<sObject> oldList, Map<Id, sObject> oldMap) {
-        
+        EventTriggerHelper.handleAfterUpdate((List<Event>) newList, (Map<Id, Event>) oldMap);
     }
     
     public void beforeDelete(List<sObject> oldList , Map<Id, sObject> oldMap) {

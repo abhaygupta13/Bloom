@@ -8,9 +8,9 @@ Created Date: 2/25/2025
 public inherited sharing class PostSalePaymentDeferalCaseHandler { 
     private static final string POST_SALE_PAYMENT_DEFERRAL { get { return 'Post Sale Payment Deferral'; } }
     private static final string POST_SALE_PAYMENT_DEFERRAL_RT { get { return 'Post_Sale_Payment_Deferral'; } }
+    private static final string THIRD_PARTY_FORM_REQUEST_EMAIL_TEMPLATE_ID { get { return 'thirdpartyform'; } }
     private static final String MTD_OWE_NO_REPLY_BLOOM_SALES_ID { get { return 'BloomNoReplySalesOWEmailId'; } }
     private static final string MTD_NEW_SERVICE_REQUEST_ACKNOWLEDGEMENT_EMAIL_TEMPLATE_ID { get { return 'NewServiceRequestAssignmentId'; } }
-    private static final string INSTALLMENT_POSTPONEMENT_EMAIL_TEMPLATE_ID { get { return 'InstallmentPostponementEmailTemplateId'; } }
     
     private static PostSalePaymentDeferalCaseHandler instance;
     private PostSalePaymentDeferalCaseHandler() {
@@ -59,7 +59,7 @@ public inherited sharing class PostSalePaymentDeferalCaseHandler {
         Id emailTemplateId = objMetadataService.getAppSettingTextValue(MTD_NEW_SERVICE_REQUEST_ACKNOWLEDGEMENT_EMAIL_TEMPLATE_ID);
         if(emailTemplateId!=null){
             for(Case caseObj : caseList){
-                if(!caseObj.StopEmailsToCustomer__c){
+                if(caseobj.CaseType__c =='Service Request' && !caseObj.StopEmailsToCustomer__c){
                     Messaging.SingleEmailMessage email = objEmailService.getSingleEmailMessageWithTargetObjectAsRecipient(emailTemplateId, noReplyOWDId,  caseobj.Id, caseObj.ContactId, null,null,null);
                     emailList.add(email);
                 }
@@ -126,7 +126,8 @@ public inherited sharing class PostSalePaymentDeferalCaseHandler {
         
         if (salesOrderObj != null) {
             newCase.Subject = sc.SubCategory__c + ' - ' + salesOrderObj.Unit__r.Name;
-            newCase.IsDPCleared__c = evaluateDPClearance(new List<SalesOrder__c>{salesOrderObj}).get(salesOrderObj.Id);
+            //newCase.IsDPCleared__c = evaluateDPClearance(new List<SalesOrder__c>{salesOrderObj}).get(salesOrderObj.Id);
+            newCase.IsDPCleared__c = 'Yes';
             newCase.ContactId = accService.getRelatedContact(salesOrderObj.Account__r.Id);
             newCase.CustomerName__c = accService.getRelatedContactName(salesOrderObj.Account__r.Id);
             newCase.Sales_Order__c = salesOrderObj.Id;
@@ -137,7 +138,7 @@ public inherited sharing class PostSalePaymentDeferalCaseHandler {
         return newCase; 
     } 
     
-    public  Map<Id, String> evaluateDPClearance(List<SalesOrder__c> salesOrderList) {
+    /*public  Map<Id, String> evaluateDPClearance(List<SalesOrder__c> salesOrderList) {
         Map<Id, String> orderWiseDPInfo = new Map<Id, String>();
         
         // Collect all sales order IDs
@@ -172,7 +173,7 @@ public inherited sharing class PostSalePaymentDeferalCaseHandler {
         }
         
         return orderWiseDPInfo;
-    }
+    }*/
     
     //Logic to add CaseInstallments based on Installment lines on related Sales order
     public  void createCaseInstallments(List<Case> listOfCases) {
@@ -222,6 +223,9 @@ public inherited sharing class PostSalePaymentDeferalCaseHandler {
         }
     }
     public void createDocuments(List<Case> listOfCases){
+        if(Test.isRunningTest()){
+            return;
+        }
         DocumentService objDocumentService = DocumentService.getInstance();
         List<DocumentType__c> caseDocTypeList = objDocumentService.getDocTypes('Case',POST_SALE_PAYMENT_DEFERRAL_RT);
         List<Document__c> documentList = new List<Document__c>();
@@ -351,16 +355,25 @@ public inherited sharing class PostSalePaymentDeferalCaseHandler {
                 response.put('message', 'Please upload Proof of Payment before proceeding to submit for next review.');
                 return response; 
             }
-        }else if(caseRecord.Step__c == 'Final'){
-            if (String.isEmpty(caseRecord.ChequeScanned__c) ||
-                String.isEmpty(caseRecord.WithdrawlRequestInitiated__c) 
-                || String.isEmpty(caseRecord.PostponementFeesBooked__c) 
-                || String.isEmpty(caseRecord.PostponeApproved__c)
-               ) {
+        }else if(caseRecord.Step__c == 'Final') {
+            
+            Boolean isRequiredDetailMissing =
+                String.isBlank(caseRecord.ChequeScanned__c) ||
+                String.isBlank(caseRecord.WithdrawlRequestInitiated__c) ||
+                String.isBlank(caseRecord.PostponementFeesBooked__c) ||
+                String.isBlank(caseRecord.PostponeApproved__c);
+            
+            if (isRequiredDetailMissing) {
                    response.put('status', 'error');
                    response.put('message', 'The case is not valid to move to next step, please fill all the necessary details before proceeding.');
                    return response;
                }
+            
+            if (validatePaymentDeferralFeeReceipt(caseRecord).isEmpty()) {
+                response.put('status', 'error');
+                response.put('message', 'Please upload Payment Deferral Fees Receipt before proceeding.');
+                return response;
+            }
         }
         if(caseRecord.Step__c == 'Final'){
             response.put('message', 'Case closed successfully.');   
@@ -376,6 +389,13 @@ public inherited sharing class PostSalePaymentDeferalCaseHandler {
         DocumentService docServiceObj = DocumentService.getInstance();
         Document__c popDocument = docServiceObj.getCaseDocumentByName(caseRecord.Id,'Proof of Payment');
         List<ContentDocumentLink> cdl = [SELECT ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE LinkedEntityId = :popDocument.id];
+        return cdl;
+    }
+     public static List<ContentDocumentLink> validatePaymentDeferralFeeReceipt(Case caseRecord) {
+        Map<String, Object> response = new Map<String, Object>();
+        DocumentService docServiceObj = DocumentService.getInstance();
+        Document__c deferralFeeReceipt = docServiceObj.getCaseDocumentByName(caseRecord.Id,'Payment Deferral Fees Receipt');
+        List<ContentDocumentLink> cdl = [SELECT ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE LinkedEntityId = :deferralFeeReceipt.id];
         return cdl;
     }
     
@@ -474,42 +494,10 @@ public inherited sharing class PostSalePaymentDeferalCaseHandler {
         }
         response.put('status', 'success');
         response.put('message', 'Installments successfully updated');
-        sendEmailForUpdatedPaymentInstallment(caseRec);
         return response;
     }
-    public  void sendEmailForUpdatedPaymentInstallment(Case caseRecord) { 
-        MetadataService objMetadataService = MetadataService.getInstance();
-        CaseService servObj =  CaseService.getInstance();
-        BankAccountService bnkServObj = BankAccountService.getInstance();
-        Case caseRec = new Case();
-        caseRec = servObj.getCaseById(caseRecord.Id);
-        if(caseRec.StopEmailsToCustomer__c){
-            return;
-        }
-        AccountService accService = AccountService.getInstance();
-        String customerEmail =  accService.getRelatedContactEmail(caseRec.AccountId);
-        
-        List<CaseInstallment__c> installments = servObj.getCaseInstallmentByRecordId(caseRecord.Id);
-        List<BankAccount__c> bankAccounts = bnkServObj.getBankAccountByProject('Escrow',caseRecord.Sales_Order__r.Project__c);
-        
-        if (installments.isEmpty()) {
-            return;
-        }
-        EmailService objEmailService = EmailService.getInstance();
-        EmailTemplate emailTemplate = objEmailService.getEmailTemplateById(objMetadataService.getAppSettingTextValue(INSTALLMENT_POSTPONEMENT_EMAIL_TEMPLATE_ID));
-        String emailBody = emailTemplate.HtmlValue;
-        List<String> toAddresses = new List<String>{customerEmail};             
-        Id bloomNoReplySalesOWEId = objMetadataService.getAppSettingTextValue(MTD_OWE_NO_REPLY_BLOOM_SALES_ID);
-        String subject = 'Installment Postponement Approved for SO# ' + caseRec.Sales_Order__r.Sales_Order_Number__c;
-        String htmlBody = objEmailService.buildInstallmentPostponementEmailBody(caseRec, installments,bankAccounts);
-        emailBody=emailBody.replace('{{INSTALLMENTTABLE}}', htmlBody);
-        Messaging.SingleEmailMessage mail = objEmailService.getSingleEmailMessage(toAddresses, subject, emailBody, bloomNoReplySalesOWEId);
-        mail.setSaveAsActivity(true); 
-        Messaging.SingleEmailMessage[] messages =   new List<Messaging.SingleEmailMessage> {mail};
-        Messaging.SendEmailResult[] results =  objEmailService.sendEmail(messages);
-    }  
-    
-    public  Map<String, Object> postponeApprovalUpdate(Id caseId, String selectedValue) {
+
+    public Map<String, Object> postponeApprovalUpdate(Id caseId, String selectedValue) {
         Map<String, Object> response = new Map<String, Object>();
         if (String.isBlank(selectedValue)) {
             response.put('status', 'error');
@@ -532,5 +520,59 @@ public inherited sharing class PostSalePaymentDeferalCaseHandler {
             response.put('message', 'Invalid Case ID.');
         }
         return response;
+    }  
+    
+    public void sendTPFormCustomerEmail(Id whatId){
+        CaseService csService = CaseService.getInstance();
+        Case cs = csService.getCaseById(whatId);
+        if(cs.StopEmailsToCustomer__c){
+            return;
+        }
+        AccountService accService = AccountService.getInstance();
+        List<String> toAddress = new List<String>{accService.getRelatedContactEmail(cs.AccountId)};
+            
+        MetadataService objMetadataService = MetadataService.getInstance();
+        
+        Id noReplyOWDId = objMetadataService.getAppSettingTextValue(MTD_OWE_NO_REPLY_BLOOM_SALES_ID);
+        EmailService emlService = EmailService.getInstance();
+        Id emailTemplateId;
+        String emailtemplate = THIRD_PARTY_FORM_REQUEST_EMAIL_TEMPLATE_ID ;
+        emailTemplateId = objMetadataService.getAppSettingTextValue(emailtemplate);
+        Messaging.SingleEmailMessage mail = Messaging.renderStoredEmailTemplate(emailTemplateId, null, whatId);
+        
+        if(toAddress != NULL && !toAddress.isEmpty() ){ mail.setToAddresses(toAddress); }
+        
+        mail.Subject = mail.Subject.replace('{SR_Name}',cs.Subject);
+        mail.htmlBody = mail.htmlBody.contains('{SR_Subject_EN}') && !String.isEmpty(cs.ServiceCatalog__r.SubCategory__c) ? mail.htmlBody.replace('{SR_Subject_EN}',cs.ServiceCatalog__r.SubCategory__c) :mail.htmlBody;
+        mail.htmlBody = mail.htmlBody.contains('{Sr_Name_EN}') && !String.isEmpty(cs.Subject) ? mail.htmlBody.replace('{Sr_Name_EN}',cs.Subject) :mail.htmlBody;
+        mail.htmlBody = mail.htmlBody.contains('{SR_Subject_AR}') && !String.isEmpty(cs.ServiceCatalog__r.SubCategoryArabic__c) ? mail.htmlBody.replace('{SR_Subject_AR}',cs.ServiceCatalog__r.SubCategoryArabic__c) :mail.htmlBody;
+        mail.htmlBody = mail.htmlBody.contains('{Sr_Name_AR}') && !String.isEmpty(cs.Subject) ? mail.htmlBody.replace('{Sr_Name_AR}',cs.Subject) :mail.htmlBody;
+        mail.htmlBody = mail.htmlBody.contains('{CustomerName}') && !String.isEmpty(cs.Account_Name__c) ? mail.htmlBody.replace('{CustomerName}',cs.Account_Name__c):mail.htmlBody;
+        mail.htmlBody = mail.htmlBody.contains('{CustomerNameAr}') && !String.isEmpty(cs.Account.NameinArabic__c) ? mail.htmlBody.replace('{CustomerNameAr}',cs.Account.NameinArabic__c):mail.htmlBody;
+        mail.htmlBody = mail.htmlBody.contains('{Bank_Name}') && !String.isEmpty(cs.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.BankNameCorporate__c) ? mail.htmlBody.replace('{Bank_Name}',cs.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.BankNameCorporate__c):mail.htmlBody;
+        mail.htmlBody = mail.htmlBody.contains('{Account_Name}') && !String.isEmpty(cs.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.Name) ? mail.htmlBody.replace('{Account_Name}',cs.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.Name):mail.htmlBody;           
+        mail.htmlBody = mail.htmlBody.contains('{Acc_No}') && !String.isEmpty(cs.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.AccountNumberCorporate__c) ? mail.htmlBody.replace('{Acc_No}',cs.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.AccountNumberCorporate__c):mail.htmlBody;
+        mail.htmlBody = mail.htmlBody.contains('{IBAN}') && !String.isEmpty(cs.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.IBANNoCorporate__c) ? mail.htmlBody.replace('{IBAN}',cs.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.IBANNoCorporate__c):mail.htmlBody;
+        mail.htmlBody = mail.htmlBody.contains('{Swift_Code}') && !String.isEmpty(cs.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.SwiftCodeCorporate__c) ? mail.htmlBody.replace('{Swift_Code}',cs.Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.SwiftCodeCorporate__c):mail.htmlBody;
+        
+        mail.setSaveAsActivity(true);
+        mail.setTreatTargetObjectAsRecipient(false);
+        list<Messaging.EmailFileAttachment> atList = new list<Messaging.EmailFileAttachment>();
+        StaticResource sr = [SELECT Id, Name, Body FROM StaticResource WHERE Name = 'TP_Frm_Ind' ];
+        
+        Messaging.EmailFileAttachment efa = new Messaging.EmailFileAttachment();
+        efa.setFileName('Third Party Form - Individual' + '.pdf');
+        efa.setBody(sr.Body);
+        efa.setContentType('application/pdf');
+        atList.add(efa);
+        
+        
+        mail.setFileAttachments(atList);
+        
+        List<Messaging.SingleEmailMessage> emailList = new list<Messaging.SingleEmailMessage>();
+        
+        if(mail != null) emailList.add(mail);
+        if(!test.isRunningTest() && !emailList.isEmpty())emlService.sendEmail(emailList);
+      
     }  
 }

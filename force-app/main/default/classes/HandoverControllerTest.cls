@@ -5,41 +5,50 @@ public class HandoverControllerTest {
         
         User testUser = [SELECT Id FROM User WHERE IsActive = true LIMIT 1];
       EmailTemplate emailTemplate;
+      EmailTemplate nocEmailTemplate;
+      
    System.runAs(testUser) {
             emailTemplate = TestDataFactory.createEmailTemplate('templateName');
             emailTemplate.DeveloperName = 'templateName_' + DateTime.now().getTime(); 
             emailTemplate.Subject = 'BCC Announcement';
-            
-            // --- ADD THESE LINES TO FIX THE NULL POINTER ---
             emailTemplate.HtmlValue = 'Hello {{{Handover__c.Customer_Name__c}}}, your unit {{{Handover__c.Unit_Code__c}}} is ready.';
             emailTemplate.Body = 'Hello {{{Handover__c.Customer_Name__c}}}, your unit {{{Handover__c.Unit_Code__c}}} is ready.';
             // -----------------------------------------------
             
             insert emailTemplate;
+       
+         nocEmailTemplate = TestDataFactory.createEmailTemplate('nocEmailTemplate');
+            nocEmailTemplate.DeveloperName = 'templateName_noc' + DateTime.now().getTime(); 
+            nocEmailTemplate.Subject = 'nocEmailTemplate';
+            nocEmailTemplate.HtmlValue = 'Hellonoc {{{Handover__c.Customer_Name__c}}}, your unit {{{Handover__c.Unit_Code__c}}} is ready.';
+            nocEmailTemplate.Body = 'Hello {{{Handover__c.Customer_Name__c}}}, your unit {{{Handover__c.Unit_Code__c}}} is ready.';
+            // -----------------------------------------------
+            
+            insert nocEmailTemplate;
         }
         
         User u = new User();
         System.runAs ( new User(Id = UserInfo.getUserId()) ) {
             Profile p = [SELECT Id FROM Profile WHERE Name='HO Agent'];
-            PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = 'Handover_HO_Agent'];
+            PermissionSet ps = [SELECT Id,Name FROM PermissionSet WHERE Name = 'Handover_HO_Agent'];
             
             u = new User(FirstName = 'Ho Agent', LastName='User', Alias = 'op', Email='hoagent@bloom.com', EmailEncodingKey='UTF-8',ProfileId = p.Id, 
                          LocaleSidKey = 'en_US', LanguageLocaleKey='en_US', TimeZoneSidKey='America/Los_Angeles', UserName='hoagent@bloom.com.u1');
             insert u;
             
             insert new PermissionSetAssignment(AssigneeId = u.Id,PermissionSetId = ps.Id);
-        }
+
         User crmUser = new User();
         System.runAs ( new User(Id = UserInfo.getUserId()) ) {
-            Profile p = [SELECT Id FROM Profile WHERE Name='CRM Operations'];
-            PermissionSet ps = [SELECT Id,Name FROM PermissionSet WHERE Name = 'Handover_CRM_Team'];
-            system.debug('permission'+ps.Name);
+            Profile pr = [SELECT Id FROM Profile WHERE Name='CRM Operations'];
+            PermissionSet psi = [SELECT Id,Name FROM PermissionSet WHERE Name = 'Handover_CRM_Team'];
+           
             
             crmUser = new User(FirstName = 'CRM', LastName='User', Alias = 'op', Email='crmUser@bloom.com', EmailEncodingKey='UTF-8',ProfileId = p.Id, 
                                LocaleSidKey = 'en_US', LanguageLocaleKey='en_US', TimeZoneSidKey='America/Los_Angeles', UserName='crmUser@bloom.com.u1');
             insert crmUser;
             
-            insert new PermissionSetAssignment(AssigneeId = crmUser.Id,PermissionSetId = ps.Id);
+            insert new PermissionSetAssignment(AssigneeId = crmUser.Id,PermissionSetId = psi.Id);
         }
         
       
@@ -56,7 +65,10 @@ public class HandoverControllerTest {
         
         HandoverPhase__c  hphase = new HandoverPhase__c();
         hphase.Project__c = project.id;
+        hphase.NOCCHOEmailtemplateId__c = nocEmailTemplate.id;
+        hphase.DoorNumberClarificationrequired__c= true;
         hphase.Name = 'Test';
+        hphase.BCCRequired__c= true;
         hphase.BCCEmailTemplateId__c = emailTemplate.id;
         insert hphase;
         
@@ -118,7 +130,7 @@ public class HandoverControllerTest {
         servicecatalog.ProcessFlowType__c= 'Handover';
         servicecatalog.ProcessType__c = 'Sales';
         servicecatalog.Active__c= true;
-        servicecatalog.RecordTypeDevName__c = 'Handover';
+        servicecatalog.RecordTypeDevName__c = 'Non PHPP';
         insert servicecatalog;
         
         
@@ -247,7 +259,7 @@ public class HandoverControllerTest {
             HandoverController.getHandoverData(project.Id,hphase.id,'NOC-CHO');
              HandoverController.validateForNextReview(handover1.id);
              HandoverController.updateHandoverOwner(handover1.id);
-            // HandoverController.getSurveyLink(handover1.id);
+           
             
          
            
@@ -257,4 +269,4 @@ public class HandoverControllerTest {
         }
     }
     
-}
+    }}

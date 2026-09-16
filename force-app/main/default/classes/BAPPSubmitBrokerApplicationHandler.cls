@@ -75,10 +75,6 @@ public class BAPPSubmitBrokerApplicationHandler {
         public String taxRegistrationNumber;
         public String vatUndertakingIssueDate;
         public String typeOfEstablishment;
-
-        public String ornExpiryDate; 
-        public String admExpiryDate;
-
     }
 
     public class AgencyAddress {
@@ -254,13 +250,6 @@ public class BAPPSubmitBrokerApplicationHandler {
             } else if (String.isNotBlank(info.adm) && info.adm != 'null' && info.registeredEmirate == 'Abu Dhabi') {
                 app.ORNADM__c = info.adm;
             }
-
-           if (String.isNotBlank(info.ornExpiryDate) && info.ornExpiryDate != 'null' && info.registeredEmirate == 'Dubai') {
-                app.ADMORNExpiryDate__c = Date.valueOf(info.ornExpiryDate);
-            } else if (String.isNotBlank(info.admExpiryDate) && info.admExpiryDate != 'null' && info.registeredEmirate == 'Abu Dhabi') {
-                app.ADMORNExpiryDate__c = Date.valueOf(info.admExpiryDate);
-            }
-
             
             
             app.RegisteredEmirate__c = info.registeredEmirate;
@@ -344,21 +333,6 @@ public class BAPPSubmitBrokerApplicationHandler {
                 if (info.registeredEmirate == 'Abu Dhabi') {
                     checkRequired(info.adm, 'adm', Label.BAAP_ADMRequiredForAbuDhabi, errors);
                 }
-                if (info.registeredEmirate == 'Dubai' && String.isNotBlank(info.ornExpiryDate)) {
-                    Date ornDate = Date.valueOf(info.ornExpiryDate);
-                    if (ornDate <= Date.today()) {
-                        errors.add(buildError('ornExpiryDate', Label.BAAP_ORNFutureExpiryDateForDubai));
-                        return errors;
-                    }
-                }
-                if (info.registeredEmirate == 'Abu Dhabi' && String.isNotBlank(info.admExpiryDate)) {
-                    Date ornDate = Date.valueOf(info.admExpiryDate);
-                    if (ornDate <= Date.today()) {
-                        errors.add(buildError('admExpiryDate', Label.BAAP_ADMFutureExpiryDateForAbuDhabi));
-                        return errors;
-                    }
-                }
-
                 return errors;
             }else if (typeOfEstablishment == 'International') {
                 //checkRequired(info.companyName, 'companyName', Label.BAAP_CompanyNameRequired, errors);
@@ -642,9 +616,7 @@ public class BAPPSubmitBrokerApplicationHandler {
             String emirate = app.RegisteredEmirate__c.trim();
             if (emirate.equalsIgnoreCase('Abu Dhabi')) {
                 agInfo.adm = String.valueOf(app.ORNADM__c);
-                agInfo.admExpiryDate = String.valueOf(app.ADMORNExpiryDate__c); 
             } else if (emirate.equalsIgnoreCase('Dubai')) {
-                agInfo.ornExpiryDate = String.valueOf(app.ADMORNExpiryDate__c);
                 agInfo.orn = String.valueOf(app.ORNADM__c);
             }
         }

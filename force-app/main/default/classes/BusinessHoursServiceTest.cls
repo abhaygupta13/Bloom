@@ -39,19 +39,8 @@ private class BusinessHoursServiceTest {
         List<BusinessHours> bHours = service.getBusinessHoursByName('BloomBrokerBusinessHours');
         Test.stopTest();
     }
-    //PRASHANT
-    @isTest
-    static void testGetEndOfDayByBusinessHoursIds() {
-        Id defaultBHId = MetadataService.getInstance().getAppSettingTextValue('DefaultBusinessHoursId');
-        Set<Id> busHourIds = new Set<Id>{defaultBHId};
-            // Call method under test
-            BusinessHoursService service = BusinessHoursService.getInstance();
-        Test.startTest();
-        Map<Id, Datetime> busHoursIdToEndOfDayMap = service.getEndOfDayByBusinessHoursIds(busHourIds);
-        Test.stopTest();
-    }
-    //Prashant
-    @isTest
+    //prashant
+     @isTest
     static void testCalculateWorkingDaysSpent() {
         
         BusinessHours testBusinessHours = [SELECT Id FROM BusinessHours WHERE IsDefault = true LIMIT 1];
@@ -68,5 +57,4 @@ private class BusinessHoursServiceTest {
         System.assertEquals(1, workingDays);
         System.assertEquals(0, nullResult);
     }
-    
 }

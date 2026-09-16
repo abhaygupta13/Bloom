@@ -114,7 +114,7 @@ public without sharing class RaiseServiceRequestHandler{
             
             insert newCase;
             
-            System.debug(salesorderothercharge);
+          /*  System.debug(salesorderothercharge);
             salesorderothercharge.Case__c = newCase.id;
             
             List<Salesorder__c>salesorderdetail = [Select id,Account__c From Salesorder__c Where id=:salesOrderId  LIMIT 1];
@@ -124,7 +124,7 @@ public without sharing class RaiseServiceRequestHandler{
             salesorderothercharge.Account__c = salesorderdetail[0].Account__c;
             if(salesorderothercharge.Amount__c!=null ){
                 insert salesorderothercharge;
-            }
+            }*/
             
             
             return newCase.Id;
@@ -154,14 +154,14 @@ public without sharing class RaiseServiceRequestHandler{
         
         insert newCase;
         
-        if(salesorderothercharge != null && salesorderothercharge.Amount__c!=null){
+     /*   if(salesorderothercharge != null && salesorderothercharge.Amount__c!=null){
             salesorderothercharge.Case__c = newCase.id;
             List<Salesorder__c>salesorderdetail = [Select id,Account__c From Salesorder__c Where id=:salesOrderId  LIMIT 1];
             if(salesorderdetail.size()>0)
                 salesorderothercharge.Account__c = salesorderdetail[0].Account__c;
             insert salesorderothercharge;
             
-        }
+        }*/
         try{
             if(joinwerOwnerids!=null){
                 for(JointOwner__c jc: [Select id,Name,Case__c From JointOwner__c where id=:joinwerOwnerids]){

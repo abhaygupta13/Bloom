@@ -17,7 +17,7 @@ public class ContactTriggerHelperTest {
         );
         insert contact1;
     }
-    
+
     @IsTest
     static void testHandleBeforeInsertFieldUpdates() {
         // Create a new contact to test before insert
@@ -32,39 +32,39 @@ public class ContactTriggerHelperTest {
             TertiaryMobileCountryCode__c = '55',
             TertiaryMobilePhone__c = '33333333'
         );
-        
+
         // Simulate before insert operation
         List<Contact> newList = new List<Contact>{newContact};
-            Test.startTest();
+        Test.startTest();
         ContactTriggerHelper.handleBeforeInsertFieldUpdates(newList);
         Test.stopTest();
-        
+
         // Validate the updates
         System.assertEquals(Utility.formatEmiratesId(newContact.Emirates_Id__c), newContact.Emirates_Id__c, 'Emirates ID should be formatted');
         System.assertEquals(Utility.formatPhoneNumber(newContact.PrimaryMobileCountryCode__c, newContact.PrimaryMobilePhone__c), newContact.MobilePhone, 'MobilePhone should be formatted');
         System.assertEquals(Utility.formatPhoneNumber(newContact.SecondaryMobileCountryCode__c, newContact.SecondaryMobilePhone__c), newContact.HomePhone, 'HomePhone should be formatted');
         System.assertEquals(Utility.formatPhoneNumber(newContact.TertiaryMobileCountryCode__c, newContact.TertiaryMobilePhone__c), newContact.OtherPhone, 'OtherPhone should be formatted');
     }
-    
+
     @IsTest
     static void testHandleBeforeUpdateFieldUpdates() {
         // Fetch the existing contact and modify values to simulate an update
         Contact existingContact = [SELECT Id, Emirates_Id__c, PrimaryMobileCountryCode__c, PrimaryMobilePhone__c, SecondaryMobileCountryCode__c, SecondaryMobilePhone__c, TertiaryMobileCountryCode__c, TertiaryMobilePhone__c FROM Contact LIMIT 1];
-        
+
         existingContact.Emirates_Id__c = '999999999'; // Change Emirates ID
         existingContact.PrimaryMobilePhone__c = '44444444'; // Change PrimaryMobilePhone
         existingContact.SecondaryMobilePhone__c = '55555555'; // Change SecondaryMobilePhone
         existingContact.TertiaryMobilePhone__c = '66666666'; // Change TertiaryMobilePhone
-        
+
         // Simulate old map
         Map<Id, Contact> oldMap = new Map<Id, Contact>{existingContact.Id => [SELECT Id, Emirates_Id__c, PrimaryMobileCountryCode__c, PrimaryMobilePhone__c, SecondaryMobileCountryCode__c, SecondaryMobilePhone__c, TertiaryMobileCountryCode__c, TertiaryMobilePhone__c FROM Contact WHERE Id = :existingContact.Id]};
-            
-            // Simulate before update operation
-            List<Contact> newList = new List<Contact>{existingContact};
-                Test.startTest();
+
+        // Simulate before update operation
+        List<Contact> newList = new List<Contact>{existingContact};
+        Test.startTest();
         ContactTriggerHelper.handleBeforeUpdateFieldUpdates(newList, oldMap);
         Test.stopTest();
-        
+
         // Validate the updates
         System.assertEquals(Utility.formatEmiratesId(existingContact.Emirates_Id__c), existingContact.Emirates_Id__c, 'Updated Emirates ID should be formatted');
         System.assertEquals(Utility.formatPhoneNumber(existingContact.PrimaryMobileCountryCode__c, existingContact.PrimaryMobilePhone__c), existingContact.MobilePhone, 'Updated MobilePhone should be formatted');
@@ -181,14 +181,12 @@ public class ContactTriggerHelperTest {
                 Type__c = 'National ID Front',
                 ObjectType__c = 'Contact',
                 Active__c = true,
-                TypeofEstablishment__c = 'Domestic',
                 BrokerContactRole__c = 'Admin'
             ),
                 new DocumentType__c(
                     Type__c = 'Passport Front',
                     ObjectType__c = 'Contact',
                     Active__c = true,
-                    TypeofEstablishment__c = 'Domestic',
                     BrokerContactRole__c = 'CEO'
                 )
                 };
@@ -201,8 +199,7 @@ public class ContactTriggerHelperTest {
         Contact con = new Contact(
             FirstName = 'Role',
             LastName = 'Match',
-            BrokerContactRole__c = 'Admin',
-            TypeOfEstablishment__c = 'Domestic',
+            BrokerContactRole__c = 'Admin;CEO',
             RecordTypeId = brokerRTId
         );
         insert con;
@@ -320,7 +317,7 @@ public class ContactTriggerHelperTest {
         
         // Verify
         List<User__c> users = [SELECT Id, Name, Email__c, Contact__c, User_Account__c, User_Type__c FROM User__c];
-        
+       
     }
     
     @IsTest
@@ -334,14 +331,12 @@ public class ContactTriggerHelperTest {
                 Type__c = 'National ID Front',
                 ObjectType__c = 'Contact',
                 Active__c = true,
-                TypeofEstablishment__c = 'Domestic',
                 BrokerContactRole__c = 'Admin'
             ),
                 new DocumentType__c(
                     Type__c = 'Trade License',
                     ObjectType__c = 'Contact',
                     Active__c = true,
-                    TypeofEstablishment__c = 'Domestic',
                     BrokerContactRole__c = 'SuperAdmin'
                 )
                 };
@@ -387,6 +382,7 @@ public class ContactTriggerHelperTest {
         ];
         
     }
+    
     @isTest
     static void testSyncCaseDocumentsToContactTrigger() {
         Id caseRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Broker_Registration').getRecordTypeId();
@@ -447,141 +443,5 @@ public class ContactTriggerHelperTest {
         update con;
         Test.stopTest();
     }
-    
-    @IsTest
-    static void testHandleAfterUpdateFieldUpdates_SuspendBroker() {
-        
-        Account acc = new Account(Name = 'Test Account');
-        insert acc;
-        
-        Contact con = new Contact(
-            FirstName = 'John',
-            LastName = 'Broker',
-            Email = 'broker@test.com',
-            AccountId = acc.Id,
-            IsSuspended__c = false,
-            ApprovalStatus__c = 'Approved By Line Manager',
-            Broker_Restriction_Type__c = 'Suspend'
-        );
-        insert con;
-        
-        Contact oldCon = con.clone(false, true, false, false);
-        con.ApprovalStatus__c = 'Approved By Executive Sales Director';
-        
-        Test.startTest();
-        ContactTriggerHelper.handleAfterUpdateFieldUpdates(new List<Contact>{con},new Map<Id, Contact>{con.Id => oldCon});
-        Test.stopTest();
-        
-        Contact result = [SELECT IsSuspended__c FROM Contact WHERE Id = :con.Id];
-        System.assertEquals(true,result.IsSuspended__c);
-    }
-    @isTest
-    static void testSyncDocumentsToContact() {
-        
-        Id caseRTId = Schema.SObjectType.Case
-            .getRecordTypeInfosByDeveloperName()
-            .get('Broker_Registration')
-            .getRecordTypeId();
-        
-        Account acc = new Account(
-            Name = 'Test Account'
-        );
-        insert acc;
-        
-        Case cs = new Case(
-            RecordTypeId = caseRTId,
-            Subject = 'Test Case',
-            Status = 'New',
-            Origin = 'Web',
-            AccountId = acc.Id
-        );
-        insert cs;
-        
-        Contact con = new Contact(
-            FirstName = 'John',
-            LastName = 'Doe',
-            AccountId = acc.Id,
-            Email = 'test@test.com',
-            CaseId__c = cs.Id
-        );
-        insert con;
-        
-        // Parent (Case) Document
-        ContentVersion caseCV = new ContentVersion(
-            Title = 'Passport',
-            PathOnClient = 'Passport.pdf',
-            VersionData = Blob.valueOf('Case File')
-        );
-        insert caseCV;
-        
-        caseCV = [
-            SELECT Id, ContentDocumentId
-            FROM ContentVersion
-            WHERE Id = :caseCV.Id
-        ];
-        
-        Document__c caseDoc = new Document__c(
-            Case__c = cs.Id,
-            Document_Name__c = 'Passport',
-            FileName__c = 'Passport.pdf',
-            FileType__c = 'pdf',
-            FileSizeMB__c = '0.01',
-            ContentDocumentId__c = caseCV.ContentDocumentId,
-            Content_Version_Id__c = caseCV.Id
-        );
-        insert caseDoc;
-        
-        // Contact Document with different version
-        ContentVersion contactCV = new ContentVersion(
-            Title = 'OldPassport',
-            PathOnClient = 'OldPassport.pdf',
-            VersionData = Blob.valueOf('Old File')
-        );
-        insert contactCV;
-        
-        contactCV = [
-            SELECT Id, ContentDocumentId
-            FROM ContentVersion
-            WHERE Id = :contactCV.Id
-        ];
-        
-        Document__c contactDoc = new Document__c(
-            Contact__c = con.Id,
-            Document_Name__c = 'Passport',
-            FileName__c = 'OldPassport.pdf',
-            FileType__c = 'pdf',
-            FileSizeMB__c = '0.01',
-            ContentDocumentId__c = contactCV.ContentDocumentId,
-            Content_Version_Id__c = contactCV.Id
-        );
-        insert contactDoc;
-        
-        Test.startTest();
-        
-        ContactTriggerHelper.syncDocumentsToContact(
-            new List<Contact>{con},
-            new Set<Id>{cs.Id},
-            'CASE'
-        );
-        
-        Test.stopTest();
-        
-        Document__c updatedDoc = [
-            SELECT ContentDocumentId__c,
-            Content_Version_Id__c
-            FROM Document__c
-            WHERE Id = :contactDoc.Id
-        ];
-        
-        System.assertEquals(
-            caseCV.ContentDocumentId,
-            updatedDoc.ContentDocumentId__c
-        );
-        
-        System.assertEquals(
-            caseCV.Id,
-            updatedDoc.Content_Version_Id__c
-        );
-    }    
     
 }

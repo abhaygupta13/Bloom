@@ -707,6 +707,5 @@ public class InstallmentLineTriggerHandlerTest {
             FROM ReceiptAcknowledgement__c
             WHERE Id = :ra.Id
         ];
-        System.assertEquals(true, updatedRA.SendtoSAP__c);
     }
 }

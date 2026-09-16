@@ -1,0 +1,2953 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Project_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Project_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Project_Compact_Layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Project_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>Community__c</fields>
+        <fields>Company__c</fields>
+        <fields>Leasing_Company__c</fields>
+        <fields>RegistrationStatus__c</fields>
+        <fields>ProjectRegistrationNumber__c</fields>
+        <label>Project Compact Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object used to define all the projects and manage project documents to be shown to all the internal and broker portal users.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>ADDCConditionType__c</fullName>
+        <externalId>false</externalId>
+        <label>ADDC Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ADHAProjectID__c</fullName>
+        <externalId>false</externalId>
+        <label>ADHA Project ID</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ADMAdminFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>ADM Admin Fee Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ADMFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>ADM Fee Condition Type</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ADM_Fee_Amount_Charged__c</fullName>
+        <defaultValue>0</defaultValue>
+        <label>ADM Fee Amount Charged</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ADM_Fee_Charged_Percentage__c</fullName>
+        <defaultValue>0</defaultValue>
+        <label>ADM Fee Charged Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>AccountManagerEmail__c</fullName>
+        <externalId>false</externalId>
+        <label>AccountManagerEmail</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AdditionalADMFeeConditionType__c</fullName>
+        <externalId>false</externalId>
+        <label>Additional ADM Fee Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Additional_Terms_Conds__c</fullName>
+        <label>Additional Terms Conds</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Address__c</fullName>
+        <label>Address</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Address</type>
+    </fields>
+    <fields>
+        <fullName>AdminChargesCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Admin Charges Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AdminFee__c</fullName>
+        <label>Admin Fee(%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Amenities__c</fullName>
+        <label>Amenities</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Gym</fullName>
+                    <default>false</default>
+                    <label>Gym</label>
+                </value>
+                <value>
+                    <fullName>Swimming Pool</fullName>
+                    <default>false</default>
+                    <label>Swimming Pool</label>
+                </value>
+                <value>
+                    <fullName>Built-in Wardrobes</fullName>
+                    <default>false</default>
+                    <label>Built-in Wardrobes</label>
+                </value>
+                <value>
+                    <fullName>Balcony</fullName>
+                    <default>false</default>
+                    <label>Balcony</label>
+                </value>
+                <value>
+                    <fullName>Pets Allowed</fullName>
+                    <default>false</default>
+                    <label>Pets Allowed</label>
+                </value>
+                <value>
+                    <fullName>Covered Parking</fullName>
+                    <default>false</default>
+                    <label>Covered Parking</label>
+                </value>
+                <value>
+                    <fullName>Jogging Track</fullName>
+                    <default>false</default>
+                    <label>Jogging Track</label>
+                </value>
+                <value>
+                    <fullName>Restaurant</fullName>
+                    <default>false</default>
+                    <label>Restaurant</label>
+                </value>
+                <value>
+                    <fullName>Children Play Area</fullName>
+                    <default>false</default>
+                    <label>Children Play Area</label>
+                </value>
+                <value>
+                    <fullName>20,000 sqm of Retail and F&amp;B</fullName>
+                    <default>false</default>
+                    <label>20,000 sqm of Retail and F&amp;B</label>
+                </value>
+                <value>
+                    <fullName>Central Lake with Abundant Greenery</fullName>
+                    <default>false</default>
+                    <label>Central Lake with Abundant Greenery</label>
+                </value>
+                <value>
+                    <fullName>Cycling Tracks</fullName>
+                    <default>false</default>
+                    <label>Cycling Tracks</label>
+                </value>
+                <value>
+                    <fullName>Gated Community 24-Hour Security Service</fullName>
+                    <default>false</default>
+                    <label>Gated Community 24-Hour Security Service</label>
+                </value>
+                <value>
+                    <fullName>Kids’ Outdoor and Indoor Play Area</fullName>
+                    <default>false</default>
+                    <label>Kids’ Outdoor and Indoor Play Area</label>
+                </value>
+                <value>
+                    <fullName>Nursery</fullName>
+                    <default>false</default>
+                    <label>Nursery</label>
+                </value>
+                <value>
+                    <fullName>Parking Space</fullName>
+                    <default>false</default>
+                    <label>Parking Space</label>
+                </value>
+                <value>
+                    <fullName>Serene Lake View</fullName>
+                    <default>false</default>
+                    <label>Serene Lake View</label>
+                </value>
+                <value>
+                    <fullName>State-Of-The-Art Gymnasium with Sauna</fullName>
+                    <default>false</default>
+                    <label>State-Of-The-Art Gymnasium with Sauna</label>
+                </value>
+                <value>
+                    <fullName>Swimming Pools with Kids&apos; Areas</fullName>
+                    <default>false</default>
+                    <label>Swimming Pools with Kids&apos; Areas</label>
+                </value>
+                <value>
+                    <fullName>Veterinary Services</fullName>
+                    <default>false</default>
+                    <label>Veterinary Services</label>
+                </value>
+                <value>
+                    <fullName>Walking and Jogging Tracks</fullName>
+                    <default>false</default>
+                    <label>Walking and Jogging Tracks</label>
+                </value>
+                <value>
+                    <fullName>Worship Places</fullName>
+                    <default>false</default>
+                    <label>Worship Places</label>
+                </value>
+                <value>
+                    <fullName>Central Plaza for Events &amp; Activations</fullName>
+                    <default>false</default>
+                    <label>Central Plaza for Events &amp; Activations</label>
+                </value>
+                <value>
+                    <fullName>Medical Clinic</fullName>
+                    <default>false</default>
+                    <label>Medical Clinic</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ApplyADRECBrokerCommissionPolicy__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Apply ADREC Broker Commission Policy</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Authorization_Date__c</fullName>
+        <label>Authorization Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>AvailableForCommunityApp__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Available for Community Ap</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BankAccount__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Bank Account</label>
+        <referenceTo>BankAccount__c</referenceTo>
+        <relationshipLabel>Projects</relationshipLabel>
+        <relationshipName>Projects</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Bank_Account_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Bank Account Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bank_IBAN__c</fullName>
+        <externalId>false</externalId>
+        <label>Bank IBAN</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bank_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Bank Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Beneficiary_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Beneficiary Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BloomEmail__c</fullName>
+        <externalId>false</externalId>
+        <label>Bloom Email</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BloomLogoCDId__c</fullName>
+        <externalId>false</externalId>
+        <label>Bloom Logo Content Document Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BloomPhoneArabic__c</fullName>
+        <externalId>false</externalId>
+        <label>Bloom Phone Arabic</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BloomPhone__c</fullName>
+        <externalId>false</externalId>
+        <label>Bloom Phone</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bloom_Logo__c</fullName>
+        <label>Bloom Logo</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>BounceChequeFeeAmount__c</fullName>
+        <label>Bounce Cheque Fee Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>BounceChequeFeeERPCondition__c</fullName>
+        <externalId>false</externalId>
+        <label>Bounce Cheque Fee ERP Condition</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BounceChequeFeeThresholdDays__c</fullName>
+        <externalId>false</externalId>
+        <label>Bounce Cheque Fee Threshold Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BounceChequeFeeVATApplicable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Bounce Cheque Fee VAT Applicable</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Building_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Building Number</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChequeBounceFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Cheque Bounce Fee Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChequePostponementFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Cheque Postponement Fee Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChequeReplacementFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Cheque Replacement Fee Condition Type</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChequeWithWithdrawalFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Cheque with Withdrawal Fee Cond Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChequeWithdrawalFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Cheque Withdrawal Fee Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChequeWithdrawalFee__c</fullName>
+        <externalId>false</externalId>
+        <label>Cheque Replace/Withdrawal Fee Per Cheque</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChequesUnavailable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Cheques Unavailable</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>City__c</fullName>
+        <description>City is a dependent picklist of Country, Values listed have to be mapped to &apos;United Arab Emirates&apos;</description>
+        <label>City</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Abu Dhabi</fullName>
+                    <default>false</default>
+                    <label>Abu Dhabi</label>
+                </value>
+                <value>
+                    <fullName>Dubai</fullName>
+                    <default>false</default>
+                    <label>Dubai</label>
+                </value>
+                <value>
+                    <fullName>Sharjah</fullName>
+                    <default>false</default>
+                    <label>Sharjah</label>
+                </value>
+                <value>
+                    <fullName>Ajman</fullName>
+                    <default>false</default>
+                    <label>Ajman</label>
+                </value>
+                <value>
+                    <fullName>Umm Al Quwain</fullName>
+                    <default>false</default>
+                    <label>Umm Al Quwain</label>
+                </value>
+                <value>
+                    <fullName>Ras Al Khaimah</fullName>
+                    <default>false</default>
+                    <label>Ras Al Khaimah</label>
+                </value>
+                <value>
+                    <fullName>Fujairah</fullName>
+                    <default>false</default>
+                    <label>Fujairah</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Comment__c</fullName>
+        <label>Comment</label>
+        <length>32768</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CommunityCode__c</fullName>
+        <externalId>false</externalId>
+        <label>Community Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CommunityNameArabic__c</fullName>
+        <externalId>false</externalId>
+        <label>Community Name (Arabic)</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CommunityName__c</fullName>
+        <label>Community Name</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Community</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CommunityServiceChargeStartDate__c</fullName>
+        <label>Community Service Charge Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Community_Image_Url__c</fullName>
+        <externalId>false</externalId>
+        <label>Community Image Url</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Community__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Community</label>
+        <referenceTo>Community__c</referenceTo>
+        <relationshipLabel>Projects</relationshipLabel>
+        <relationshipName>Projects</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Company__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Sales Company</label>
+        <referenceTo>Company__c</referenceTo>
+        <relationshipLabel>Projects</relationshipLabel>
+        <relationshipName>Projects</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ConstructionPlanRemarks__c</fullName>
+        <label>Remarks</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Construction_Plan__c</fullName>
+        <externalId>false</externalId>
+        <label>Cumulative Percentage Upto Date</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contractor_Appointed__c</fullName>
+        <label>Main Contractor Appointed</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Contractor__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Contractor</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>User.ProfileName__c</field>
+                <operation>equals</operation>
+                <value>Contractor</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Projects</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Customer_communication_Bcc_Email_address__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer communication Bcc Email address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_communication_cc_Email_address__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer communication cc Email address</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DailyLPFPercentage__c</fullName>
+        <formula>LPFAnnualPercentage__c / 36000</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Daily LPF %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>12</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>DariTitleDeedFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Dari Title Deed Fee Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DefaultNotificationDays__c</fullName>
+        <externalId>false</externalId>
+        <label>Default Notification Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DefaultUnpaidAmountPercentage__c</fullName>
+        <label>Default Unpaid Amount Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>DefaultUnpaidAmount__c</fullName>
+        <externalId>false</externalId>
+        <label>Default Unpaid Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <label>Description</label>
+        <length>1000</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Developer_ID_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Developer ID Number</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Developer_Registration_No__c</fullName>
+        <externalId>false</externalId>
+        <label>Developer Registration No</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Disclosure__c</fullName>
+        <label>Disclosure</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>DistrictCode__c</fullName>
+        <externalId>false</externalId>
+        <label>District Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DistrictNameAr__c</fullName>
+        <externalId>false</externalId>
+        <label>District Name Ar</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DistrictNameEN__c</fullName>
+        <externalId>false</externalId>
+        <label>District Name EN</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EjariTawtheeqFee__c</fullName>
+        <label>Ejari / Tawtheeq Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Email_Address__c</fullName>
+        <externalId>false</externalId>
+        <label>Email Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EnableLPFCustomerNotification__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Enable LPF Customer Notification</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>EnableLPFInternalNotification__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Enable LPF Internal Notification</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>EnableLatePaymentFee__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Enable Late Payment Fee</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>EnableSalesInvoicePosting__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Enable Sales Invoice Posting</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>EnableVehicleParking__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Enable Vehicle Parking</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Enabling_Contractor_Appointed__c</fullName>
+        <label>Enabling Contractor Appointed</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Enabling_Works_Date__c</fullName>
+        <label>Enabling Works Commencement Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Enabling_Works_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Enabling Works Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Enabling_Works__c</fullName>
+        <label>Enabling Works Contractor</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Edrafor Emirates</fullName>
+                    <default>false</default>
+                    <label>Edrafor Emirates</label>
+                </value>
+                <value>
+                    <fullName>Emirates Link Maltauro,</fullName>
+                    <default>false</default>
+                    <label>Emirates Link Maltauro,</label>
+                </value>
+                <value>
+                    <fullName>LLC Other</fullName>
+                    <default>false</default>
+                    <label>LLC Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <label>End Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>EstimatedCompletionDate__c</fullName>
+        <label>Estimated Completion Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>EstimatedServiceChargeRate__c</fullName>
+        <description>This field holds the estimated service charge rate per square meter per annum for the first service charge period. This is being used in SPA document.</description>
+        <externalId>false</externalId>
+        <label>Estimated Service Charge Rate (Sq Mt)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>EvaluationFeesCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Evaluation Fees Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FMRecipientEmail__c</fullName>
+        <externalId>false</externalId>
+        <label>FM Recipient Email</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Finance_Delay_Confirmation_Message__c</fullName>
+        <externalId>false</externalId>
+        <label>Finance Delay Confirmation Message</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Financier_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Financier Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FirstPaymentReminder__c</fullName>
+        <externalId>false</externalId>
+        <label>First Payment Reminder</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GISServiceQueryURL__c</fullName>
+        <label>GIS Service Query URL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>GIS_Service_URL__c</fullName>
+        <externalId>false</externalId>
+        <label>GIS Service URL</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Gate_Name__c</fullName>
+        <label>Gate Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>BG Gate 8</fullName>
+                    <default>false</default>
+                    <label>BG Gate 8</label>
+                </value>
+                <value>
+                    <fullName>BG Gate 1</fullName>
+                    <default>false</default>
+                    <label>BG Gate 1</label>
+                </value>
+                <value>
+                    <fullName>Aldhay Gate 1</fullName>
+                    <default>false</default>
+                    <label>Aldhay Gate 1</label>
+                </value>
+                <value>
+                    <fullName>Aldhay Gate 2</fullName>
+                    <default>false</default>
+                    <label>Aldhay Gate 2</label>
+                </value>
+                <value>
+                    <fullName>SS Gate A</fullName>
+                    <default>false</default>
+                    <label>SS Gate A</label>
+                </value>
+                <value>
+                    <fullName>SS Gate B</fullName>
+                    <default>false</default>
+                    <label>SS Gate B</label>
+                </value>
+                <value>
+                    <fullName>PV Gate 1</fullName>
+                    <default>false</default>
+                    <label>PV Gate 1</label>
+                </value>
+                <value>
+                    <fullName>BL Gate 1</fullName>
+                    <default>false</default>
+                    <label>BL Gate 1</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>HOCEmailTemplateFullyPaid__c</fullName>
+        <label>HOC Email Template Fully Paid</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>HOCEmailTemplatePartiallyPaid__c</fullName>
+        <label>HOC Email Template Partially Paid</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>HandoverLPFGracePeriod__c</fullName>
+        <externalId>false</externalId>
+        <label>Handover LPF Grace Period</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HandoverNoticeCalculationDays__c</fullName>
+        <externalId>false</externalId>
+        <label>Handover Notice Calculation Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Handover_Community_Guidelines_Arabic__c</fullName>
+        <label>Handover Community Guidelines Arabic</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Handover_Community_Guidelines_English__c</fullName>
+        <label>Handover Community Guidelines English</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>HassantukFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Hassantuk Fee Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InstallmentLPFGracePeriod__c</fullName>
+        <externalId>false</externalId>
+        <label>Installment LPF Grace Period</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsActive__c</fullName>
+        <formula>(EndDate__c &gt;= Today()  ||  ISBLANK(EndDate__c ) )&amp;&amp; (StartDate__c &lt;=Today()  ||  ISBLANK(StartDate__c ))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Active</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsAvailableForBroker__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Available For Broker</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsAvailableForCommunity__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Available For Community</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsAvailableForFacilitiesManagement__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Available for Facilities Management</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsAvailableForLeasing__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Available for Leasing</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsAvailableForSales__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Available for Sales</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsByPassHOStatus__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is By Pass HO Status</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsCompleted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Completed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsPublic__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Public</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Issuance__c</fullName>
+        <externalId>false</externalId>
+        <label>Issuer</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LPFAnnualPercentage__c</fullName>
+        <externalId>false</externalId>
+        <label>Annual LPF %</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LPFSAPConditionCode__c</fullName>
+        <externalId>false</externalId>
+        <label>LPF SAP Condition Code</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LPFThresholdAmount__c</fullName>
+        <label>LPF Threshold Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LastProjectRegEmailReminder__c</fullName>
+        <label>Last Project Reg Email Reminder</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LatePaymentChargesCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Late Payment Charges Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LatePaymentFeeCalculationStartDate__c</fullName>
+        <label>Late Payment Fee Calculation Start Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LatitudeLongitude__c</fullName>
+        <displayLocationInDecimal>false</displayLocationInDecimal>
+        <label>Latitude &amp; Longitude</label>
+        <required>false</required>
+        <scale>5</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>LaunchEndDate__c</fullName>
+        <label>Launch End Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LaunchStartDate__c</fullName>
+        <label>Launch Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LeasingApartmentSecurityDepositAmount__c</fullName>
+        <label>Leasing Apartment Security Deposit Amoun</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeasingBankAccount__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Bank Account</label>
+        <referenceTo>BankAccount__c</referenceTo>
+        <relationshipLabel>Projects (Leasing Bank Account)</relationshipLabel>
+        <relationshipName>Projects1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LeasingCompany__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Company</label>
+        <referenceTo>LeasingCompany__c</referenceTo>
+        <relationshipLabel>Projects</relationshipLabel>
+        <relationshipName>Projects</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LeasingMunicipalityArea__c</fullName>
+        <externalId>false</externalId>
+        <label>Leasing Municipality Area</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeasingProjectManager__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Project Manager</label>
+        <lookupFilter>
+            <active>true</active>
+            <booleanFilter>1 OR 2</booleanFilter>
+            <filterItems>
+                <field>User.Profile.Name</field>
+                <operation>contains</operation>
+                <value>Leasing</value>
+            </filterItems>
+            <filterItems>
+                <field>$Profile.Name</field>
+                <operation>contains</operation>
+                <value>Administrator</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Projects1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LeasingServiceCharge__c</fullName>
+        <label>Leasing Service Charge per sqm</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LeasingVillaSecurityDepositAmount__c</fullName>
+        <label>Leasing Villa Security Deposit Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Leasing_Company__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Company</label>
+        <referenceTo>Company__c</referenceTo>
+        <relationshipLabel>Projects (Leasing Company)</relationshipLabel>
+        <relationshipName>Projects1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ListofFinishes__c</fullName>
+        <label>ListofFinishes</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Location_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Location Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MainDeveloperNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Main Developer #</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Main_Contractor_Date__c</fullName>
+        <label>Main Contractor Commencement Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Main_Contractor_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Main Contractor Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Main_Contractor__c</fullName>
+        <label>Main Contractor</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Edrafor Emirates</fullName>
+                    <default>false</default>
+                    <label>Edrafor Emirates</label>
+                </value>
+                <value>
+                    <fullName>Emirates Link Maltauro</fullName>
+                    <default>false</default>
+                    <label>Emirates Link Maltauro</label>
+                </value>
+                <value>
+                    <fullName>LLC Other</fullName>
+                    <default>false</default>
+                    <label>LLC Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Master_Community_Name__c</fullName>
+        <label>Master Community Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Jumeirah Village Circle</fullName>
+                    <default>false</default>
+                    <label>Jumeirah Village Circle</label>
+                </value>
+                <value>
+                    <fullName>Al Bateen, Marina</fullName>
+                    <default>false</default>
+                    <label>Al Bateen, Marina</label>
+                </value>
+                <value>
+                    <fullName>Eastern Mangrove Corniche</fullName>
+                    <default>false</default>
+                    <label>Eastern Mangrove Corniche</label>
+                </value>
+                <value>
+                    <fullName>Saadiyat island</fullName>
+                    <default>false</default>
+                    <label>Saadiyat island</label>
+                </value>
+                <value>
+                    <fullName>Zayed City (Khalifa City C)</fullName>
+                    <default>false</default>
+                    <label>Zayed City (Khalifa City C)</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Master_Developer_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Master Developer Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Master_Plan__c</fullName>
+        <label>Master Plan</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>MergedPaidInstallmentConditionType__c</fullName>
+        <externalId>false</externalId>
+        <label>Merged Paid Installment Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ModificationAdvanceFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Modification Advance Fee Cond Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MortgageFeesCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Mortgage Fees Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MortgageUnitAdminFeeApt__c</fullName>
+        <label>Mortgage Unit Admin Fee Apartment</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MortgageUnitAdminFeeVilla__c</fullName>
+        <label>Mortgage Unit Admin Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MortgageUnitTitleDeedFeeApt__c</fullName>
+        <label>Mortgage Unit Title Deed Fee Apartment</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MortgageUnitTitleDeedFeeVilla__c</fullName>
+        <label>Mortgage Unit Title Deed Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MunicipalityCode__c</fullName>
+        <externalId>false</externalId>
+        <label>Municipality Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MunicipalityNameAR__c</fullName>
+        <externalId>false</externalId>
+        <label>Municipality Name AR</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MunicipalityNameEN__c</fullName>
+        <externalId>false</externalId>
+        <label>Municipality Name EN</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NewSaleADMFeeApt__c</fullName>
+        <label>New Sale ADM Fee Apartment</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>NewSaleADMFeeVilla__c</fullName>
+        <label>New Sale ADM Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>NewSaleAdminFeeApt__c</fullName>
+        <label>New Sale Admin Fee Apartment</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>NewSaleAdminFeeVilla__c</fullName>
+        <label>New Sale Admin Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>NewSaleEvaluationFeeApt__c</fullName>
+        <label>New Sale Evaluation Fee Apartment</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>NewSaleEvaluationFeeVilla__c</fullName>
+        <label>New Sale Evaluation Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>NewSaleWithMortgageADMFeeApt__c</fullName>
+        <label>New Sale with Mortgage ADM Fee Apt</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>NewSaleWithMortgageADMFeeVilla__c</fullName>
+        <label>New Sale with Mortgage ADM Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>NewSaleWithMortgageAdminFeeApt__c</fullName>
+        <label>New Sale with Mortgage Admin Fee Apt</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>NewSaleWithMortgageAdminFeeVilla__c</fullName>
+        <label>New Sale with Mortgage Admin Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>NewSaleWithMortgageEvaluationFeeApt__c</fullName>
+        <label>New Sale with Mortgage Evaluation Fee Ap</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>NewSaleWithMortgageEvaluationFeeVilla__c</fullName>
+        <label>New Sale with Mortgage Evaluation Fee Vi</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OccupiedLeasingUnits__c</fullName>
+        <externalId>false</externalId>
+        <label>Occupied Leasing Units</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Office_Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Office Location</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Ownership_Share__c</fullName>
+        <label>Ownership Share</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>P_O_Box__c</fullName>
+        <externalId>false</externalId>
+        <label>P.O Box</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PendingFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Pending Fee Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Percentage_Of_Share_Sold__c</fullName>
+        <label>Percentage Of Share Sold</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Place_of_Issuance__c</fullName>
+        <label>Place of Issuance</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>PostLaunchEndDate__c</fullName>
+        <label>Post-Launch End Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>PostLaunchStartDate__c</fullName>
+        <label>Post-Launch Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>PreLaunchEndDate__c</fullName>
+        <label>Pre-Launch End Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>PreLaunchStartDate__c</fullName>
+        <label>Pre-Launch Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Premium_Finish__c</fullName>
+        <label>Premium Finish</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>ProjectId__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectLogoCDId__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Logo Content Document Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectNameArabic__c</fullName>
+        <description>Field to manage project name.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Field to manage project name.</inlineHelpText>
+        <label>Project Arabic Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectRegistrationDate__c</fullName>
+        <label>Project Registration Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ProjectRegistrationNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Registration #</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectRegistrationRemark__c</fullName>
+        <label>Project Registration Remark</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Project_Address__c</fullName>
+        <label>Project Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Project_Logo__c</fullName>
+        <label>Project Logo</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Project_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Number</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project_s_Developer_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Project’s Developer Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project_s_Land_Acquisition_by_seller__c</fullName>
+        <externalId>false</externalId>
+        <label>Project’s Land Acquisition by seller</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PropertyEnrollmentUnderTawtheeqCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>PropertyEnrollmentUnderTawtheeqCondType</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RebateConditionType__c</fullName>
+        <externalId>false</externalId>
+        <label>Rebate Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RecoveryFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Recovery Fee Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RegisteredUnitTitleDeedFeeApt__c</fullName>
+        <label>Registered Unit Title Deed Fee Apartment</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>RegisteredUnitTitleDeedFeeVilla__c</fullName>
+        <label>Registered Unit Title Deed Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>RegistrationStatus__c</fullName>
+        <label>Registration Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Registered</fullName>
+                    <default>false</default>
+                    <label>Registered</label>
+                </value>
+                <value>
+                    <fullName>Not Registered</fullName>
+                    <default>false</default>
+                    <label>Not Registered</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Registration__c</fullName>
+        <externalId>false</externalId>
+        <label>Registration Authority</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Representation_Type_Arabic__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(Representation_Type__c , &apos;Power of Attorney&apos;, &apos;وكالة&apos;, &apos;Father&apos;, &apos;ولي&apos;, &apos;Guardian&apos;, &apos;وصي&apos;, &apos;POA&apos;, &apos;وكالة&apos;, &apos;PoA&apos;, &apos;وكالة&apos;, &apos;&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Representation Type Arabic</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Representation_Type__c</fullName>
+        <label>Representation Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>GM</fullName>
+                    <default>false</default>
+                    <label>GM</label>
+                </value>
+                <value>
+                    <fullName>POA</fullName>
+                    <default>false</default>
+                    <label>Power of attorney</label>
+                </value>
+                <value>
+                    <fullName>Liquidator</fullName>
+                    <default>false</default>
+                    <label>Liquidator</label>
+                </value>
+                <value>
+                    <fullName>Judicial Guard</fullName>
+                    <default>false</default>
+                    <label>Judicial Guard</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ResaleAdminFeeCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Resale Admin Fee</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ResaleEligibleAmoutPercentage__c</fullName>
+        <label>Resale Eligible Amout Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ResaleRenewalFeesCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Resale Renewal Fees Condition Type</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ResaleUnitADMFeeApt__c</fullName>
+        <label>Resale Unit ADM Fee Apartment</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ResaleUnitADMFeeVilla__c</fullName>
+        <label>Resale Unit ADM Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ResaleUnitAdminFeeApt__c</fullName>
+        <label>Resale Unit Admin Fee Apartment</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ResaleUnitAdminFeeVilla__c</fullName>
+        <label>Resale Unit Admin Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ResaleUnitEvaluationFeeApt__c</fullName>
+        <label>Resale Unit Evaluation Fee Apartment</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ResaleUnitEvaluationFeeVilla__c</fullName>
+        <label>Resale Unit Evaluation Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ResaleWithMortgageADMFeeApt__c</fullName>
+        <label>Resale with Mortgage ADM Fee Apartment</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ResaleWithMortgageADMFeeVilla__c</fullName>
+        <label>Resale with Mortgage ADM Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ResaleWithMortgageAdminFeeApt__c</fullName>
+        <label>Resale with Mortgage Admin Fee Apartment</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ResaleWithMortgageAdminFeeVilla__c</fullName>
+        <label>Resale with Mortgage Admin Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ResaleWithMortgageEvaluationFeeApt__c</fullName>
+        <label>Resale with Mortgage Evaluation Fee Apt</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ResaleWithMortgageEvaluationFeeVilla__c</fullName>
+        <label>Resale with Mortgage Evaluation Fee Vila</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ResaleWithMortgageMortgageFeeApt__c</fullName>
+        <label>Resale with Mortgage Mortgage Fee Apt</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ResaleWithMortgageMortgageFeeVilla__c</fullName>
+        <label>Resale with Mortgage Mortgage Fee Villa</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>RoadId__c</fullName>
+        <externalId>false</externalId>
+        <label>Road Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPBusinessEntity__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Business Entity</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPEntityName__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Entity Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPProfitCenter__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Profit Center</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SecondPaymentReminder__c</fullName>
+        <externalId>false</externalId>
+        <label>Second Payment Reminder</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SecurityDeposit__c</fullName>
+        <label>Security Deposit %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Seller_Name_Arabic__c</fullName>
+        <externalId>false</externalId>
+        <label>Seller Name Arabic</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Seller_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Seller Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Seller_s_Representative__c</fullName>
+        <externalId>false</externalId>
+        <label>Seller&apos;s Representative</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SendDefaultNotice__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Send Default Notice</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SendPaymentReminder__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Send Payment Reminder</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SendQuaterlyPaymentReminder__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Send Quaterly Payment Reminder</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SendWeeklyPaymentReminder__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Send Weekly Payment Reminder</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Strata_Mgmt_Arabic_Stmt__c</fullName>
+        <label>Strata Mgmt Arabic Stmt</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Strata_Mgmt_English_Stmt__c</fullName>
+        <label>Strata Mgmt English Stmt</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Swift_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Swift Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TammFeeConditionType__c</fullName>
+        <externalId>false</externalId>
+        <label>Tamm Fee Condition Type</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TechnologyFeeConditionType__c</fullName>
+        <description>Condition Type for Technology Fee.</description>
+        <externalId>false</externalId>
+        <label>Technology Fee Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ThirdPaymentReminder__c</fullName>
+        <externalId>false</externalId>
+        <label>Third Payment Reminder</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalLeasingUnits__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Leasing Units</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Trade_License_No__c</fullName>
+        <externalId>false</externalId>
+        <label>Trade License No</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Transfer_Settlement_Percentage__c</fullName>
+        <label>Transfer Settlement Percentage</label>
+        <precision>17</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>UAEPassFeeConditionType__c</fullName>
+        <externalId>false</externalId>
+        <label>UAE Pass Fee Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UnitCancellationFeesCondType__c</fullName>
+        <externalId>false</externalId>
+        <label>Unit Cancellation Fees Condition Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Upgrade_Finish__c</fullName>
+        <label>Upgrade Finish</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>VATPercentage__c</fullName>
+        <label>VAT Percentage</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>VideoLink__c</fullName>
+        <description>To capture the Video Link</description>
+        <label>Video Link</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>VirtualTour__c</fullName>
+        <description>To capture the Virtual Tour URL</description>
+        <label>Virtual Tour</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>chequePostponeFeeLongTerm__c</fullName>
+        <label>Cheque Postponement Fee (16–30 Days)</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>chequePostponeFeeShortTerm__c</fullName>
+        <label>Cheque Postponement Fee (Up to 15 Days)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>isEnabledMIP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>isEnabledMIP</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isHandoverAvailable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>is Handover Available</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Project</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>CommunityName__c</columns>
+        <columns>Project_Number__c</columns>
+        <columns>Project_s_Developer_Name__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>SendPaymentReminder__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Sales_Projects</fullName>
+        <columns>NAME</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsAvailableForSales__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All Sales Projects</label>
+    </listViews>
+    <nameField>
+        <label>Project Name</label>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Projects</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>NewFromDocument</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Import</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>PrintableListView</excludedStandardButtons>
+        <searchResultsAdditionalFields>ProjectNameArabic__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CommunityName__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CommunityNameArabic__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IsActive__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Amenities__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>VideoLink__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>VirtualTour__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Private</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

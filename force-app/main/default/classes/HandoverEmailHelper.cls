@@ -1,8 +1,8 @@
 /***
-Class       : HandoverRoundRobin
+Class       : HandoverEmailHelper
 Author      : Rajat Rastogi
 Description : 
-TestClass   : HandoverTriggerTest
+TestClass   : HandoverEmailHelperTest
 ----------------------------------------------------------------------------------------------------------------
 -- History --
 ----------------------------------------------------------------------------------------------------------------
@@ -25,51 +25,41 @@ public without sharing class HandoverEmailHelper {
             DocumentService DocumentService = DocumentService.getInstance();
             HandoverService HandoverService = HandoverService.getInstance();
             HandoverPhaseService objHandoverPhaseService = HandoverPhaseService.getInstance();
-            EmailTemplate mailTemplate = [SELECT Id, Name,DeveloperName, Subject, Body, HTMLValue, TemplateType FROM EmailTemplate WHERE Id = :templateId
-                                          AND IsActive = true LIMIT 1];
+            EmailTemplate mailTemplate = [SELECT Id, Name,DeveloperName, Subject, Body, HTMLValue, TemplateType FROM EmailTemplate WHERE Id = :templateId LIMIT 1];
             
             // If any field is added in below query then add it to HandoverAppointmentReminderBatch and HandoverPaymentReminderBatch also
-           // String templateDevName = mailTemplate.DeveloperName;
+           
             String templateName = mailTemplate.Name;            
             Handover__c handover = HandoverService.getHandoverById(handoverId);
             HandoverPhase__c phaseRec = objHandoverPhaseService.getHandoverPhaseDetails(handover.Handover_Phase__c);
-            System.debug('handover'+handover);
-          /*  if(templateName.equalsIgnoreCase(Constants.Appointment_Booked_Template) || templateName.equalsIgnoreCase(Constants.KHO_Appointment_Scheduled_Template) ||
-               templateName.equalsIgnoreCase(Constants.Home_Orientation_Appointment_Rescheduling)){
-                   
-                   Event meeting = new Event();
-                   List<Event> events = [SELECT Id, Subject, WhatId,StartDateTime, EndDateTime, Time__c,Location,  FORMAT(CreatedDate) FROM Event
-                                         WHERE WhatId =: handoverId ORDER BY createdDate ASC ];
-                   if((templateName.equalsIgnoreCase(Constants.Appointment_Booked_Template) || templateName.equalsIgnoreCase(Constants.Home_Orientation_Appointment_Rescheduling)) && events.size()>0){
-                       meeting = events[0];
-                   }else if( templateName.equalsIgnoreCase(Constants.KHO_Appointment_Scheduled_Template)){
-                       meeting = events[events.size()-1];
-                   }
-                   if( meeting != null && meeting.StartDateTime!= null){
-                       meetingDate = meeting.StartDateTime.format('dd-MM-yyyy');
-                   }
-                   if( meeting != null & meeting.StartDateTime!= null){
-                       meetingTime = meeting.StartDateTime.format('hh:mm a') + ' - ' + events[0].EndDateTime.format('hh:mm a');
-                   }
-               }*/
-            Boolean isHomeOrientationMeeting = (templateId == phaseRec.CHOAppointmentConfirmEmailTempId__c);
+           
+          
+            Boolean isHomeOrientationMeeting = (templateId == phaseRec.CHOAppointmentConfirmEmailTempId__c)
+                || (templateId == phaseRec.CHOReschedulingappoingmentTempId__c)|| mailTemplate.DeveloperName.containsIgnoreCase('CHO')
+                || mailTemplate.Name.containsIgnoreCase('Home Orientation');
+               
                                                
-            Boolean isKHOMeeting = (templateId == phaseRec.KeyHandoverInvitationEmailTempId__c);
+          Boolean isKHOMeeting = (templateId == phaseRec.KeyHandoverInvitationEmailTempId__c)
+                || mailTemplate.DeveloperName.containsIgnoreCase('KHO');
+                
+            Boolean isSignDocMeeting = (templateId == phaseRec.SignHoDOCInvitationTempId__c)
+                || mailTemplate.DeveloperName.containsIgnoreCase('Sign');
             
-            if (isHomeOrientationMeeting || isKHOMeeting) {
+            if (isHomeOrientationMeeting || isKHOMeeting||isSignDocMeeting) {
                 Event meeting = new Event();
                 List<Event> events = [
                     SELECT Id, Subject, WhatId, StartDateTime, EndDateTime, Time__c, Location, FORMAT(CreatedDate) 
                     FROM Event
                     WHERE WhatId = :handoverId 
-                    ORDER BY CreatedDate ASC
+                    ORDER BY CreatedDate DESC
                 ];
-
-                if (isHomeOrientationMeeting && !events.isEmpty()) {
+                
+               
+                if (!events.isEmpty()) {
+                    // Pick the latest scheduled meeting for this handover
                     meeting = events[0];
-                } else if (isKHOMeeting && !events.isEmpty()) {
-                    meeting = events[events.size() - 1];
                 }
+
                 if (meeting != null && meeting.StartDateTime != null) {
                     meetingDate = meeting.StartDateTime.format('dd-MM-yyyy');
                     if (meeting.EndDateTime != null) {
@@ -192,6 +182,11 @@ public without sharing class HandoverEmailHelper {
                         ho.PropertyHomeOrientationByBloom__c = true;
                     } else if (templateId == phaseRec.ChoDesnaggingEmailTempId__c) {                 
                          ho.HasCHODesnaggingemailsent__c = true;
+                    } else if (templateId == phaseRec.HOOutstandingConfirmationTempId__c) {                 
+                         ho.IsOustandingPaymentconfirmedsent__c = true;
+                    }
+                    else if (templateId == phaseRec.SignHoDOCInvitationTempId__c) {                 
+                         ho.IsHandoverSigningInvitationSent__c = true;
                     } 
                    
                     
@@ -213,6 +208,7 @@ public without sharing class HandoverEmailHelper {
             return 'Mail not Send';
         }
     }
+    
     
     
     
@@ -240,16 +236,15 @@ public without sharing class HandoverEmailHelper {
         body = body.replace('[DD-MM-YYYY]',String.isNotBlank(meetingDate) ? meetingDate : 'N/A');
         body = body.replace('{{{Handover__c.HO_DD_MM_YYYY__c}}}', handover.HO_DD_MM_YYYY__c != null ? String.valueOf(handover.HO_DD_MM_YYYY__c) : 'N/A');
         body = body.replace('[TIME_SLOT_FROM_TO]',String.isNotBlank(meetingTime) ? meetingTime : 'N/A');
-        body = body.replace('{{{Handover__c.Location__c}}}',String.isNotBlank(handover.Location__c) ? handover.Location__c : 'N/A');
-        body = body.replace('{{{Handover__c.Location_Name__c}}}', String.isNotBlank(handover.Location_Name__c) ? handover.Location_Name__c : 'N/A'); 
-        body = body.replace('{{{Handover__c.Date__c}}}', handover.Date__c != null ? String.valueOf(handover.Date__c) : 'N/A');
+         body = body.replace('{{{Handover__c.Location__c}}}',String.isNotBlank(handover.Location__c) ? handover.Location__c : 'N/A');
+        body = body.replace('{{{Handover__c.Location_Name__c}}}', String.isNotBlank(handover.Location_Name__c) ? handover.Location_Name__c : 'N/A');  body = body.replace('{{{Handover__c.Date__c}}}', handover.Date__c != null ? String.valueOf(handover.Date__c) : 'N/A');
         body = body.replace('{{{Handover__c.Customer_Email__c}}}', String.isNotBlank(handover.CustomerEmail__c)? handover.CustomerEmail__c : 'N/A');// done
         body = body.replace('{{{Handover__c.Promise_to_Pay_Date__c}}}',handover.Promise_to_Pay_Date__c != null ? String.valueOf(handover.Promise_to_Pay_Date__c) : 'N/A');
         body = body.replace('{{{Handover__c.Customer_Number__c}}}',handover.Customer_Number__c  != null ? String.valueOf(handover.Customer_Number__c) : 'N/A');
         body = body.replace('{{{Handover__c.Address__c}}}',handover.Address__c != null ? String.valueOf(handover.Address__c) : 'N/A');
         body = body.replace('{{{Handover__c.Project__r.Handover_Community_Guidelines_English__c}}}',handover.Project__r.Handover_Community_Guidelines_English__c != null ? String.valueOf(handover.Project__r.Handover_Community_Guidelines_English__c) : 'N/A');
         body = body.replace('{{{Handover__c.Project__r.Handover_Community_Guidelines_Arabic__c}}}',handover.Project__r.Handover_Community_Guidelines_Arabic__c != null ? String.valueOf(handover.Project__r.Handover_Community_Guidelines_Arabic__c) : 'N/A');
-         body = body.replace('{{{Handover__c.Unit__r.DoorNumber__c}}}',handover.Unit__r.DoorNumber__c != null ? String.valueOf(handover.Unit__r.DoorNumber__c) : 'N/A');
+        body = body.replace('{{{Handover__c.Unit__r.DoorNumber__c}}}',handover.Unit__r.DoorNumber__c != null ? String.valueOf(handover.Unit__r.DoorNumber__c) : 'N/A');
         body = body.replace('{{{Handover__c.Unit_Plot_Number__c}}}',handover.Unit_Plot_Number__c != null ? String.valueOf(handover.Unit_Plot_Number__c) : 'N/A');
        
         body = body.replace('{{{Handover__c.NOC_Expiry_Date__c}}}',handover.NOC_Expiry_Date__c != null ? String.valueOf(handover.NOC_Expiry_Date__c) : 'N/A');
@@ -278,9 +273,10 @@ public without sharing class HandoverEmailHelper {
         body = body.replace('[TIME_SLOT_FROM_TO_Arabic]',String.isNotBlank(meetingTime) ? meetingTime : 'N/A');
         body = body.replace('{{{Handover__c.Location__c}}}',String.isNotBlank(handover.LocationName__c) ? handover.LocationName__c : 'N/A');// done
         body = body.replace('{{{Handover__c.Bloom_Phone__c}}}', String.isNotBlank(handover.BloomPhone__c) ? handover.BloomPhone__c : 'N/A');
-       body = body.replace('{{{Handover__c.Project__r.BloomPhoneArabic__c}}}', String.isNotBlank(handover.Project__r.BloomPhoneArabic__c) ? handover.Project__r.BloomPhoneArabic__c : 'N/A');
+        body = body.replace('{{{Handover__c.Project__r.BloomPhoneArabic__c}}}', String.isNotBlank(handover.Project__r.BloomPhoneArabic__c) ? handover.Project__r.BloomPhoneArabic__c : 'N/A');
         body = body.replace('{{{Handover__c.Bloom_Email__c}}}', String.isNotBlank(handover.BloomEmail__c) ? handover.BloomEmail__c : 'N/A');
         
+     
         return body;
     }
 }

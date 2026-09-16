@@ -21,6 +21,7 @@ public class AccountServiceTest {
             recordTypeId= personAccountRecordTypeId,
             PersonMobilePhone  = '12345678',
             PersonEmail = 'test@gmail.com',
+            Phone__c = '12345678',
             Owner__c = true,
             Tenant__c = true,
             SAP_BP_No__c = 'BP001',

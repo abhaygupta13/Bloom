@@ -17,12 +17,13 @@ public without sharing class CaseTriggerHelper {
     private static final string DEFAULT_UNIT_RT_DEV_NAME { get { return 'DefaultUnit'; } }
     private static final string RESALE_PROPERTY_UNDER_CONSTRUCTION_RT { get { return 'Resale_Property_Under_Construction'; } }
     private static final string RESALE_MASTER_RT_DEV_NAME { get {return 'Resale_Master' ; } }
-    private static final string MTD_COMPLAINT_CLOSURE_EMAIL_TEMPLATE_ID {get { return 'ComplaintClosureId';}}
+    
     private static final string ACKNOWLEDGEMENT_RECEIPT_RT { get { return 'Acknowledgment_Receipt'; } }//Pranav
     private static final string PAYMENT_DUE_DATE_UPDATE_RT { get { return 'Payment_Due_Date_Update'; } }//Pranav
     private static final string THIRD_PARTY_FORM_RT { get { return 'ThirdPartyForm'; } }//Pranav
     private static final string PAYMENT_SR_RT { get { return 'Payment_SR'; } }//Pranav
     private static final string LPF_WAIVER_REQUEST_RT { get { return 'LPFWaiverRequest'; } }//Pranav
+    private static final string BROKER_REGISTRATION_RT_DEV_NAME { get { return 'Broker_Registration'; } }
     private static final string BROKER_RT_NAME { get { return 'Broker'; } }
     
     
@@ -35,53 +36,25 @@ public without sharing class CaseTriggerHelper {
     private static final string BANK_ACC_DTAIL_SR_RT { get { return 'BankAccountDetailsInquiry'; } }//Pranav
     private static final string COMMUNITY_GSR_RT { get { return 'Community General Service Request'; } }//eagles
     private static final string MOVEIN_RT { get { return 'Move In'; } }//eagles
-    private static final String Broker_COMMISSION_Issue_RT {get { return 'BrokerCommissionIssue'; }}//BAPP
-    private static final String OTHER_SERVICE_REQUEST_RT {get { return 'BrokerGeneralServiceRequest'; }}//BAPP
-    private static final String BROKER_AGENCY_DETAILS_UPDATE_RT {get { return 'BrokerAgencyDetailsUpdate'; }}//BAPP
-    private static final String BROKER_AGENT_DETAILS_UPDATE_RT {get { return 'BrokerAgentRegistrationAndUpdate'; }}//BAPP
+    private static final String BROKER_REGISTRATION_RT {get { return 'Broker_Registration'; }}//BAPP
+    private static final String INCORRECT_COMMISSION_AMOUNT_RT {get { return 'IncorrectCommissionAmount'; }}//BAPP
+    private static final String DELAYED_COMMISSION_PAYMENT_RT {get { return 'DelayedCommissionPayment'; }}//BAPP
+    private static final String OTHER_SERVICE_REQUEST_RT {get { return 'OtherServiceRequest'; }}//BAPP
+    private static final String BROKER_AGENCY_DETAILS_UPDATE_RT {get { return 'Broker_Agency_Details_Update'; }}//BAPP
+    private static final String BROKER_AGENT_DETAILS_UPDATE_RT {get { return 'BrokerAgentDetailsUpdate'; }}//BAPP
     private static final string GENERAL_ENQUIRY_RT { get { return 'GeneralEnquiry'; } } //samiksha
     private static final string SALES_OPERATION_RT { get { return 'SalesOperationService'; } }
-    private static final Set<String> RESTRICTED_ROLES = new Set<String>{'CEO','SuperAdmin','FinancialAdmin','Agent'};
-    private static final Set<String> ALLOWED_PASSPORT_ROLES = new Set<String>{'Owner','Partner','AuthorizedSignatoryOfficer','Admin'};
     private static final string COMMON_AREA_REQUEST_RT { get { return 'Common_Area_Request'; } }
-    private static final string COMPLAINT_REQUEST_RT { get { return 'ComplaintRequest'; } }
-    private static final string CANCELLATION_REQUEST_RT { get { return 'CancellationRequest'; } }
     private static final string MTD_OWE_NO_REPLY_BLOOM_SALES_ID { get { return 'BloomNoReplySalesOWEmailId'; } }
     private static final string MTD_CRM_TEAM_NOTIFICATION_TEMPLATE_ID { get { return 'DefaultServiceRequestClosedNotification'; } }
     private static final string TAWTHEEQ_ENROLLMENT_RT { get { return 'TawtheeqEnrollment'; } }
     private static final string CLOSED_STR { get { return 'Closed'; } }
     private static final string CANCELLED_STR { get { return 'Cancelled'; } }
-    private static final string Broker_Agency_Details_Update { get { return 'BrokerAgencyDetailsUpdate'; } }
-    private static final string KYC_UPDATE_REQUEST_RT { get { return 'KYCUpdateRequest'; } }
-
-    
-    /* public static void caseandJointOwnerSharePercentage(List<Case> trgNewList) {
-for (Case c : trgNewList) {
-Decimal mainBuyerPercentage = c.Main_Buyer_Share_Percentage__c;
-
-Decimal jointOwnersPercentage = 0;
-for (JointOwner__c jointOwner : [
-SELECT SharePercentage__c
-FROM JointOwner__c
-WHERE Case__c = :c.Id
-]) {
-jointOwnersPercentage += jointOwner.SharePercentage__c;
-}
-
-if (mainBuyerPercentage != null && jointOwnersPercentage != null) {
-if (mainBuyerPercentage + jointOwnersPercentage > 100) {
-c.addError(
-'Total Share Percentage of Main Buyer and Joint Owner should not exceed 100%.'
-);
-}
-}
-}
-    } */
+      private static final string COMPLAINT_REQUEST_RT { get { return 'ComplaintRequest'; } }
+     private static final string BROKER_GENERAL_REQUEST_RT { get { return 'Broker_General_Services'; } }
     
     public static void handleBeforeUpdate(List<Case> newCases, Map<Id,Case> oldCaseMap){
         MetadataService objMetadataService = MetadataService.getInstance();
-        AccountService accService = AccountService.getInstance(); 
-        
         Map<Id,ServiceCatalog__c> serviceCatalogMap = new Map<Id,ServiceCatalog__c>(ServiceCatalogService.getInstance().getServiceCatalogByIds());
         Map<String, String> priorityMap = BFMServiceRequestHandler.getInstance().getPriorityBySubCategory();
         
@@ -102,19 +75,8 @@ c.addError(
         Id bnkAccDtlRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,BANK_ACC_DTAIL_SR_RT);
         Id generalEnquiryRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,GENERAL_ENQUIRY_RT);
         Id salesOperationRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,SALES_OPERATION_RT);
-        Id brokerAgencyDetailsRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, Broker_Agency_Details_Update);
-        
-        Set<Id> accountIds = new Set<Id>();
-        for (Case c : newCases) {
-            if (c.AccountId != null) {
-                accountIds.add(c.AccountId);
-            }
-        }
-        
-        Map<Id, Account> accountMap = new Map<Id, Account>(accService.getAccountByIds(accountIds));   
         
         for (Case caseRecord : newCases) {
-            Case oldCase = (Case) oldCaseMap.get(caseRecord.Id);
             if (
                 !String.isEmpty(caseRecord.SubStatus__c) 
                 && (caseRecord.RecordTypeId == postSalePaymentDeferralRecordTypeId
@@ -160,19 +122,7 @@ c.addError(
             if(String.isNotBlank(caseRecord.SubCategory__c) && priorityMap.containsKey(caseRecord.SubCategory__c) && caseRecord.SubCategory__c != oldCaseMap.get(caseRecord.Id).SubCategory__c && caseRecord.RecordTypeId == bfmServiceRequestRecordTypeId){
                 caseRecord.Priority = priorityMap.get(caseRecord.SubCategory__c);
             }
-            if (caseRecord.RecordTypeId == brokerAgencyDetailsRTId && caseRecord.Type == 'Broker Service Request' && caseRecord.ApprovalStatus__c == 'Approved' &&
-                oldCase.ApprovalStatus__c != caseRecord.ApprovalStatus__c && caseRecord.PostApprovalAction__c == null &&
-                (caseRecord.SubType__c == 'Bank Details Update' ||caseRecord.SubType__c == 'VAT Details Update' || caseRecord.SubType__c == 'Legal Documents Update')) {
-                  caseRecord.addError('Please select a Post Approval Action before proceeding.');
-                }
-            if (caseRecord.RecordTypeId == brokerAgencyDetailsRTId && caseRecord.Type == 'Broker Service Request' && caseRecord.ApprovalStatus__c == 'Approved' &&
-                oldCase.ApprovalStatus__c != caseRecord.ApprovalStatus__c && caseRecord.PostApprovalAction__c == null && 
-                caseRecord.SubType__c == 'Trade License Expiry Update'){
-                    Account acc = accountMap.get(caseRecord.AccountId);
-                    if(acc.AgreementExpiryDate__c < Date.today()){
-                        caseRecord.addError('Agency Agreement is expired please select the Post Approval Action before proceeding.');
-                    }
-                }
+            
         }
     }
     
@@ -335,10 +285,10 @@ c.addError(
         Id popShareSRRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,POP_SHARE_SR_RT);//Pranav
         Id bnkAccDtlRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,BANK_ACC_DTAIL_SR_RT);//Pranav
         Id salesOperationRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,SALES_OPERATION_RT);
-        Id complaintRequestID = Utility.getRecordTypeIdByDevName(Case.SObjectType,COMPLAINT_REQUEST_RT);
-        Id cancellationRequestID = Utility.getRecordTypeIdByDevName(Case.SObjectType,CANCELLATION_REQUEST_RT);
         Id tawtheeqEnrollmentRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,TAWTHEEQ_ENROLLMENT_RT); 
         Id commonAreaRequestRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType,COMMON_AREA_REQUEST_RT); 
+         Id complaintRequestID = Utility.getRecordTypeIdByDevName(Case.SObjectType,COMPLAINT_REQUEST_RT);
+        Id brokergeneralRequestID = Utility.getRecordTypeIdByDevName(Case.SObjectType,BROKER_GENERAL_REQUEST_RT);
         
         List<Case> vehicleRegistrationServiceCaseList = new List<Case>();
         List<Case> postSalePaymentDeferralCaseList = new List<Case>();
@@ -346,8 +296,8 @@ c.addError(
         List<Case> resaleCaseList = new List<Case>();
         List<Case> serviceRequestAcknowledgementList = new List<Case>();
         List<Case> generalEnquiryList = new List<Case>();
-        List<Case> complaintRequestList = new List<Case>();
-         List<Case> cancellationRequestList = new List<Case>();
+         List<Case> complaintRequestList = new List<Case>();
+         List<Case> brokerGeneralRequestList = new List<Case>();
         
         for(Case objCase :newList){
             if(objCase.RecordTypeId == postSalePaymentDeferralRecordTypeId){
@@ -365,11 +315,11 @@ c.addError(
             else if(objCase.RecordTypeId == generalEnquiryRTID){
                 generalEnquiryList.add(objCase);
             }
-            else if(objCase.RecordTypeId == complaintRequestID){
+                else if(objCase.RecordTypeId == complaintRequestID){
                 complaintRequestList.add(objCase);
             }
-               else if(objCase.RecordTypeId == cancellationRequestID){
-                cancellationRequestList.add(objCase);
+               else if(objCase.RecordTypeId == brokergeneralRequestID){
+                brokerGeneralRequestList.add(objCase);
             }
             
             if(objCase.RecordTypeId == postSalePaymentDeferralRecordTypeId 
@@ -382,9 +332,9 @@ c.addError(
                 || objCase.RecordTypeId == ptmntSrRTID
                 || objCase.RecordTypeId == popShareSRRTID
                 || objCase.RecordTypeId == bnkAccDtlRTID
-                || objCase.RecordTypeId == salesOperationRTID
                 || objCase.RecordTypeId == tawtheeqEnrollmentRTID
                 || objCase.RecordTypeId == commonAreaRequestRTId
+              || objCase.RecordTypeId == complaintRequestID
                 ){
                    serviceRequestAcknowledgementList.add(objCase);
                }
@@ -393,7 +343,7 @@ c.addError(
         
         objServiceRequestHandler.serviceRequestAcknowledgementEmailNotification(serviceRequestAcknowledgementList);
         
-        //Payment deferral SR
+        //Payment deferral SRsalesorder
         if(!postSalePaymentDeferralCaseList.isEmpty()){
             PostSalePaymentDeferalCaseHandler obj = PostSalePaymentDeferalCaseHandler.getInstance();
             obj.createDocuments(postSalePaymentDeferralCaseList); 
@@ -409,59 +359,38 @@ c.addError(
             CommunitySiteController.invokeANPRApprovaProcess(vehicleRegistrationServiceCaseList);
         }     
          if(!generalEnquiryList.isEmpty()){
-             GeneralEnquirySRHandler.getInstance().createFirstTask(generalEnquiryList);
+            //GeneralEnquirySRHandler.getInstance().createFirstTask(generalEnquiryList);
             GeneralEnquirySRHandler.getInstance().createDocumentPlaceholder(generalEnquiryList);
         } 
-         if(!complaintRequestList.isEmpty()){
-             CRMComplaintRequestHandler.getInstance().createFirstTask(complaintRequestList);
-           
+         if(!brokerGeneralRequestList.isEmpty()){
+            BrokerGeneralSRHandler.getInstance().createFirstTask(brokerGeneralRequestList);
+            
         } 
-          if(!cancellationRequestList.isEmpty()){
-             CancellationRequestSRHandler.getInstance().createFirstTask(cancellationRequestList);
-           
-        } 
+        
     }
 
     public static void handleAfterUpdate(List<Case> newList, Map<Id,Case> oldMap){
-           List<Case> complaintCases = new List<Case>();
-          List<Case> cancellationRequestCases = new List<Case>();
 
         List<Case> serviceRequestList = new List<Case>();
+          List<Case> complaintCases = new List<Case>();
         Set<String> eligibleStatusSet = new Set<String>{CLOSED_STR, CANCELLED_STR};
 
         Id commonAreaRequestRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType,COMMON_AREA_REQUEST_RT);
-        Id complaintRequestID = Utility.getRecordTypeIdByDevName(Case.SObjectType,COMPLAINT_REQUEST_RT);
-        Id KYCUpdateRequestRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, KYC_UPDATE_REQUEST_RT);
-         Id cancellationRequestID = Utility.getRecordTypeIdByDevName(Case.SObjectType,COMPLAINT_REQUEST_RT);
-
+          Id complaintRequestID = Utility.getRecordTypeIdByDevName(Case.SObjectType,COMPLAINT_REQUEST_RT);
         
         for(Case objCase :newList){
             if(objCase.RecordTypeId == commonAreaRequestRTId && objCase.RequesterEmail__c != null && objCase.Status != oldMap.get(objCase.Id).Status && eligibleStatusSet.contains(objCase.Status)){
                 serviceRequestList.add(objCase);
             }
-            if((objCase.RecordTypeId == complaintRequestID ||  objCase.RecordTypeId == KYCUpdateRequestRTId) && objCase.Status  == 'Closed'){
-                complaintCases.add(objCase);
-                 ActivityService activityService = ActivityService.getInstance();
-                List<Task> tasksToClose = activityService.fetchOpenTaskForCase(objCase);               
-                  activityService.closeTasks(tasksToClose);
-                
-            }
-             if(objCase.RecordTypeId == cancellationRequestID && objCase.PendingWith__c  == 'CRM'){
-                objCase.Refund_Type__c = 'No Refund';
-                 cancellationRequestCases.add(objCase);
-                
-            }
         }
          
-        if(!complaintCases.isEmpty()){
-    CRMComplaintRequestHandler.getInstance().sendComplaintClosureEmails(complaintCases);
-}
-                    if(!cancellationRequestCases.isEmpty()){
-    CaseService.getInstance().updateCases(cancellationRequestCases);
-}
         if(!serviceRequestList.isEmpty()){
             ServiceRequestHandler.getInstance().serviceRequestClosureEmailNotification(serviceRequestList);
         } 
+              
+        if(!complaintCases.isEmpty()){
+    CRMComplaintRequestHandler.getInstance().sendComplaintClosureEmails(complaintCases);
+}
     }
     
     
@@ -491,12 +420,8 @@ c.addError(
                 if(c.VehicleParkingDetails__r.isEmpty()){
                     continue;
                 }
-                System.debug('test-----size--------'+c.VehicleParkingDetails__r.size());
                 for(VehicleParkingDetails__c vpd : c.VehicleParkingDetails__r){
-                    System.debug('test-------------'+vpd);
-                 //   vehicleParkingList.add(new VehicleParking__c(VehicleMakeModel__c = vpd.VehicleMakeModel__c, VehiclePlateNumber__c = vpd.VehiclePlateNumber__c, Status__c = 'Active', Unit__c = vpd.Unit__c, StartDate__c = Date.today()));
-                    vehicleParkingList.add(new VehicleParking__c( VehicleMakeModel__c = vpd.VehicleMakeModel__c, VehiclePlateNumber__c = vpd.VehiclePlateNumber__c, CountryRegion__c = vpd.CountryRegion__c, Category__c = vpd.Category__c, Status__c = 'Active', Unit__c = vpd.Unit__c, StartDate__c = vpd.EffectiveStartDate__c, EndDate__c = vpd.EffectiveEndDate__c ));
-                    
+                    vehicleParkingList.add(new VehicleParking__c(VehicleMakeModel__c = vpd.VehicleMakeModel__c, VehiclePlateNumber__c = vpd.VehiclePlateNumber__c, Status__c = 'Active', Unit__c = vpd.Unit__c, StartDate__c = Date.today()));
                     unitIdSet.add(vpd.Unit__c);
                 }
             }
@@ -521,7 +446,9 @@ c.addError(
         Id bfmServiceRequestRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType,BFM_SERVICE_REQUEST_RT);
         Id bfmcommonAreaSRRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType,COMMON_AREA_REQUEST_RT);
         
-        Id brokerCommissionIssueRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, Broker_COMMISSION_Issue_RT);//BAPP
+        Id brokerRegistrationRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, BROKER_REGISTRATION_RT);//BAPP
+        Id incorrectCommissionAmountRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, INCORRECT_COMMISSION_AMOUNT_RT);//BAPP
+        Id delayedCommissionPaymentRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, DELAYED_COMMISSION_PAYMENT_RT);//BAPP
         Id otherServiceRequestRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, OTHER_SERVICE_REQUEST_RT);//BAPP
         Id brokerAgencyDetailsUpdateRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, BROKER_AGENCY_DETAILS_UPDATE_RT);//BAPP
         Id brokerAgentDetailsUpdateRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, BROKER_AGENT_DETAILS_UPDATE_RT);//BAPP
@@ -538,7 +465,9 @@ c.addError(
         for(Case caseObj : listOfCases){
             if (caseObj.RecordTypeId != bfmServiceRequestRecordTypeId &&
                 caseObj.RecordTypeId != bfmcommonAreaSRRecordTypeId &&
-                caseObj.RecordTypeId != brokerCommissionIssueRecordTypeId &&
+                caseObj.RecordTypeId != brokerRegistrationRecordTypeId &&
+                caseObj.RecordTypeId != incorrectCommissionAmountRecordTypeId &&
+                caseObj.RecordTypeId != delayedCommissionPaymentRecordTypeId &&
                 caseObj.RecordTypeId != otherServiceRequestRecordTypeId &&
                 caseObj.RecordTypeId != brokerAgencyDetailsUpdateRecordTypeId &&
                 caseObj.RecordTypeId != brokerAgentDetailsUpdateRecordTypeId &&
@@ -591,30 +520,38 @@ c.addError(
         List<DocumentType__c> caseDocTypeList = objDocumentService.getDocTypes('Case');
         
         // Get RecordType Id for 'Broker_Registration'
+        Id brokerRegRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName()
+            .get('Broker_Registration')
+            .getRecordTypeId();
         
         Id brokerAgencyDetailsRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName()
-            .get('BrokerAgencyDetailsUpdate')
+            .get('Broker_Agency_Details_Update')
             .getRecordTypeId();
         
         Id agentDetailUpdateRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName()
-            .get('BrokerAgentRegistrationAndUpdate')
+            .get('BrokerAgentDetailsUpdate')
             .getRecordTypeId();
         
-        Id BrokerCommissionRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName()
-            .get('BrokerCommissionIssue')
+        Id delayedCommissionRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName()
+            .get('DelayedCommissionPayment')
+            .getRecordTypeId();
+        
+        Id incorrectCommissionAmountRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName()
+            .get('IncorrectCommissionAmount')
             .getRecordTypeId();
         
         Id otherServiceRequestRTId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName()
-            .get('BrokerGeneralServiceRequest')
+            .get('OtherServiceRequest')
             .getRecordTypeId();
-
         
         // Collect Case Ids
         Set<Id> caseIds = new Set<Id>();
         for (Case cs : newList) {
-            if (cs.RecordTypeId == brokerAgencyDetailsRTId 
+            if (cs.RecordTypeId == brokerRegRTId 
+                || cs.RecordTypeId == brokerAgencyDetailsRTId 
                 || cs.RecordTypeId == agentDetailUpdateRTId
-                || cs.RecordTypeId == BrokerCommissionRTId
+                || cs.RecordTypeId == delayedCommissionRTId
+                || cs.RecordTypeId == incorrectCommissionAmountRTId
                 || cs.RecordTypeId == otherServiceRequestRTId) {
                     caseIds.add(cs.Id);
                 }
@@ -640,7 +577,7 @@ c.addError(
         for (Case cs : newList) {
             
             // ---- Logic for Broker_Registration & Agent_Detail_Update ----
-            if (cs.RecordTypeId == agentDetailUpdateRTId) {
+            if (cs.RecordTypeId == brokerRegRTId || cs.RecordTypeId == agentDetailUpdateRTId) {
                 
                 if (!String.isBlank(cs.BrokerContactRole__c)) {
                     Set<String> caseRoles = new Set<String>();
@@ -679,44 +616,15 @@ c.addError(
                             }
                         }
                         
-                        /*Boolean skipPassportDocs = false;
-                        if (cs.TypeOfEstablishment__c == 'Domestic' && (dt.Type__c == 'Passport Front' || dt.Type__c == 'Passport Back')) {
-                            Set<String> allowedMatch = new Set<String>(caseRoles);
-                            allowedMatch.retainAll(ALLOWED_PASSPORT_ROLES);
-                            if (allowedMatch.isEmpty()) {
-                                skipPassportDocs = true;
-                            }
-                        }*/
-                        
-                        Boolean skipPassportDocs = false;
-                        Boolean skipNationalIdDocs = false;
-                        Boolean isPassportDoc = dt.Type__c == 'Passport Front' || dt.Type__c == 'Passport Back';
-                        Boolean isNationalIdDoc = dt.Type__c == 'National ID Front' || dt.Type__c == 'National ID Back';
-                        
-                        if (cs.TypeOfEstablishment__c == 'Domestic') {
-                            if (isPassportDoc) {
-                                if (cs.SubType__c == 'Broker New Agent Registration') {
-                                    if (cs.PassportExpiryDate__c == null) {
-                                        skipPassportDocs = true;
-                                    } else {
-                                        Set<String> allowedMatch = new Set<String>(caseRoles);
-                                        allowedMatch.retainAll(ALLOWED_PASSPORT_ROLES);
-                                        skipPassportDocs = allowedMatch.isEmpty();
-                                    }
-                                }
-                                if (cs.SubType__c == 'Broker Agent Details Update' && cs.PassportExpiryDate__c == null) {
-                                    skipPassportDocs = true;
-                                }
-                            }
-                            if (isNationalIdDoc) {
-                                if (cs.SubType__c == 'Broker Agent Details Update' && cs.NationalIDExpiryDate__c == null) {
-                                    skipNationalIdDocs = true;
-                                }
-                            }
-                        }
-                        
-                        if (!intersection.isEmpty() && typeMatch && !skipPassportDocs && !skipNationalIdDocs && !existingDocTypeIds.contains(dt.Id)) {
-                            documentList.add(new Document__c(Case__c = cs.Id,DocumentType__c = dt.Id,Document_Name__c = dt.Type__c));
+                        if (!intersection.isEmpty() &&
+                            typeMatch &&
+                            !existingDocTypeIds.contains(dt.Id)) {
+                                
+                                documentList.add(new Document__c(
+                                    Case__c = cs.Id,
+                                    DocumentType__c = dt.Id,
+                                    Document_Name__c = dt.Type__c
+                                ));
                         }
                     }
                 }
@@ -733,7 +641,7 @@ c.addError(
                 }
                 
                 for (DocumentType__c dt : caseDocTypeList) {
-                    if (dt.RecordTypeDevName__c == 'BrokerAgencyDetailsUpdate' &&
+                    if (dt.RecordTypeDevName__c == 'Broker_Agency_Details_Update' &&
                         dt.ObjectType__c == 'Case' &&
                         dt.TypeOfEstablishment__c != null &&
                         !existingDocTypeIds.contains(dt.Id)) {
@@ -762,7 +670,7 @@ c.addError(
             }
             
             // ---- Logic for DelayedCommissionPayment ----
-            else if (cs.RecordTypeId == BrokerCommissionRTId) {
+            else if (cs.RecordTypeId == delayedCommissionRTId) {
                 
                 Set<Id> existingDocTypeIds = new Set<Id>();
                 if (existingDocsMap.containsKey(cs.Id)) {
@@ -772,7 +680,7 @@ c.addError(
                 }
                 
                 for (DocumentType__c dt : caseDocTypeList) {
-                    if (dt.RecordTypeDevName__c == 'BrokerCommissionIssue' &&
+                    if (dt.RecordTypeDevName__c == 'DelayedCommissionPayment' &&
                         dt.ObjectType__c == 'Case' &&
                         String.isBlank(dt.TypeOfEstablishment__c) &&
                         !existingDocTypeIds.contains(dt.Id)) {
@@ -785,7 +693,30 @@ c.addError(
                         }
                 }
             }
-           
+            // ---- Logic for IncorrectCommissionAmount ----
+            else if (cs.RecordTypeId == incorrectCommissionAmountRTId) {
+                
+                Set<Id> existingDocTypeIds = new Set<Id>();
+                if (existingDocsMap.containsKey(cs.Id)) {
+                    for (Document__c existingDoc : existingDocsMap.get(cs.Id)) {
+                        existingDocTypeIds.add(existingDoc.DocumentType__c);
+                    }
+                }
+                
+                for (DocumentType__c dt : caseDocTypeList) {
+                    if (dt.RecordTypeDevName__c == 'IncorrectCommissionAmount' &&
+                        dt.ObjectType__c == 'Case' &&
+                        String.isBlank(dt.TypeOfEstablishment__c) &&
+                        !existingDocTypeIds.contains(dt.Id)) {
+                                                        
+                            documentList.add(new Document__c(
+                                Case__c = cs.Id,
+                                DocumentType__c = dt.Id,
+                                Document_Name__c = dt.Type__c
+                            ));
+                        }
+                }
+            }
             // ---- Logic for OtherServiceRequest ----
             else if (cs.RecordTypeId == otherServiceRequestRTId) {
                 
@@ -797,7 +728,7 @@ c.addError(
                 }
                 
                 for (DocumentType__c dt : caseDocTypeList) {
-                    if (dt.RecordTypeDevName__c == 'BrokerGeneralServiceRequest' &&
+                    if (dt.RecordTypeDevName__c == 'OtherServiceRequest' &&
                         dt.ObjectType__c == 'Case' &&
                         String.isBlank(dt.TypeOfEstablishment__c) &&
                         !existingDocTypeIds.contains(dt.Id)) {
@@ -815,6 +746,7 @@ c.addError(
         if (!documentList.isEmpty()) {
             objDocumentService.insertDocuments(documentList);
         } else {
+            System.debug('No matching documents for Cases.');
         }
     }
     
@@ -846,17 +778,11 @@ c.addError(
     public static void createBrokerContacts(List<Case> caseList) {
     
         List<Contact> toInsert = new List<Contact>();
-        Map<Id, Contact> toUpdate = new Map<Id, Contact>();
-        
+        List<Contact> toUpdate = new List<Contact>();
         Set<String> nationalIds = new Set<String>();
         Set<Id> accountIds = new Set<Id>();
-        
         Id brokerRTId = Utilities.getRecordTypeId('Contact', BROKER_RT_NAME);
-        Id brokerAgentDetailsUpdateRecordTypeId = Utility.getRecordTypeIdByDevName(
-            Case.SObjectType, BROKER_AGENT_DETAILS_UPDATE_RT
-        );
         
-        // Collect National IDs and Account IDs
         for (Case cs : caseList) {
             if (String.isNotBlank(cs.NationalID__c)) {
                 nationalIds.add(cs.NationalID__c.trim());
@@ -867,87 +793,64 @@ c.addError(
         }
         
         ContactService objConService = ContactService.getInstance();
-        
-        // Only NationalID based existing contact map
+        List<Contact> existingContacts = objConService.getContactsByNationalIds(nationalIds, accountIds);
         Map<String, Contact> existingMap = new Map<String, Contact>();
-        for (Contact c : objConService.getContactsByNationalIds(nationalIds, accountIds)) {
-            existingMap.put(c.Emirates_Id__c + '_' + c.AccountId, c);
+        
+        for (Contact c : existingContacts) {
+            String key = c.NationalIdNumber__c + '_' + c.AccountId;
+            existingMap.put(key, c);
         }
         
         for (Case cs : caseList) {
-            
-            // Skip if both NationalID and PassportNumber are blank
-            if (String.isBlank(cs.NationalID__c) && String.isBlank(cs.PassportNumber__c)) {
+            if (String.isBlank(cs.NationalID__c)) {
                 continue;
             }
+            String key = cs.NationalID__c.trim() + '_' + cs.AccountId;
             
             Contact con;
-            
-            Boolean isDomestic     = cs.RecordTypeId == brokerAgentDetailsUpdateRecordTypeId 
-                                  && cs.TypeofEstablishment__c == 'Domestic' 
-                                  && String.isNotBlank(cs.NationalID__c) 
-                                  && cs.AccountId != null;
-            
-            Boolean isInternational = cs.RecordTypeId == brokerAgentDetailsUpdateRecordTypeId 
-                                   && cs.TypeofEstablishment__c == 'International' 
-                                   && String.isNotBlank(cs.PassportNumber__c);
-            
-            if (isDomestic) {
-                // PATH 1 — Domestic + NationalID → duplicate merge check
-                String key = cs.NationalID__c.trim() + '_' + cs.AccountId;
                 if (existingMap.containsKey(key)) {
                     con = existingMap.get(key);
-                    toUpdate.put(con.Id, con);
+                toUpdate.add(con);
                 } else {
                     con = new Contact();
                     con.RecordTypeId = brokerRTId;
                     toInsert.add(con);
+                
+                // Add to map to prevent duplicate inserts in same transaction
                     existingMap.put(key, con);
                 }
                 
-            } else if (isInternational) {
-                // PATH 2 — International + PassportNumber → always direct create
-                con = new Contact();
-                con.RecordTypeId = brokerRTId;
-                toInsert.add(con);
-                
-            } else {
-                // PATH 3 — anything else → skip, don't process
-                continue;
-            }
-            
-            // Common Field Mapping
-            con.IsActive__c                 = true;
-            con.BrokerContactRole__c        = cs.BrokerContactRole__c;
-            con.Title                       = cs.Title__c;
-            con.FirstName                   = cs.First_Name__c;
-            con.MiddleName                  = cs.MiddleName__c;
-            con.LastName                    = cs.Last_Name__c;
-            con.PrimaryMobilePhone__c       = cs.PhoneNumber__c;
-            con.Email                       = cs.Email_Address__c;
-            con.Emirates_Id__c              = cs.NationalID__c;
-            con.EID_Expiry_Date__c          = cs.NationalIDExpiryDate__c;
-            con.PassportNumber__c           = cs.PassportNumber__c;
-            con.PassportExpiryDate__c       = cs.PassportExpiryDate__c;
-            con.Birthdate                   = cs.DateOfBirth__c;
-            con.Nationality__c              = cs.Country__c;
-            con.CountryOfResidence__c       = 'United Arab Emirates';
-            con.TypeofEstablishment__c      = cs.TypeofEstablishment__c;
-            con.CaseId__c                   = cs.Id;
-            con.BRN_RERA_Number__c          = cs.BRN_RERA_Number__c;
-            con.BRN_RERA_Expiry_Date__c     = cs.BRN_RERA_Expiry_Date__c;
-            con.AccountId                   = cs.AccountId;
-            con.ShareHoldingPercentage__c   = cs.ShareHoldingPercentage__c;
-            con.Designation__c              = cs.Designation__c;
+            con.IsActive__c = true;
+            con.BrokerContactRole__c = cs.BrokerContactRole__c;
+            con.Title = cs.Title__c;
+            con.FirstName = cs.First_Name__c;
+            con.MiddleName = cs.MiddleName__c;
+            con.LastName = cs.Last_Name__c;
+            con.PrimaryMobilePhone__c = cs.PhoneNumber__c;
+            con.Email = cs.Email_Address__c;
+            con.NationalIdNumber__c = cs.NationalID__c;
+            con.NationalIdExpiryDate__c = cs.NationalIDExpiryDate__c;
+            con.PassportNumber__c = cs.PassportNumber__c;
+            con.PassportExpiryDate__c = cs.PassportExpiryDate__c;
+            con.Birthdate = cs.DateOfBirth__c;
+            con.Nationality__c = cs.Country__c;
+            con.CountryOfResidence__c = 'United Arab Emirates';
+            //con.CountryOfResidence__c = cs.Country__c;
+            con.TypeofEstablishment__c = cs.TypeofEstablishment__c;
+            con.CaseId__c = cs.Id;
+            con.BRN_RERA_Number__c = cs.BRN_RERA_Number__c;
+            con.BRN_RERA_Expiry_Date__c = cs.BRN_RERA_Expiry_Date__c;
+            con.AccountId = cs.AccountId;
+            con.ShareHoldingPercentage__c = cs.ShareHoldingPercentage__c;
+            con.Designation__c = cs.Designation__c;
             con.PrimaryMobileCountryCode__c = cs.Mobile_Country_Code__c;
         }
         
         objConService.insertContacts(toInsert);
-        objConService.updateContacts(toUpdate.values());
+        objConService.updateContacts(toUpdate);
     }
     
-    
-    public static void updateBrokerAccounts(List<Case> brokerCases, Boolean updateAgreementRenewalStatus) {
+    public static void updateBrokerAccounts(List<Case> brokerCases) {
         if (brokerCases.isEmpty()) return;
         // Collect Account Ids from Cases
         Set<Id> accountIds = new Set<Id>();
@@ -973,31 +876,28 @@ c.addError(
             Account acc = accountMap.get(cs.AccountId);
             if (acc == null) continue;
             
-            acc.AgreementRenewalStatus__c = updateAgreementRenewalStatus ? 'Agreement Signed' : acc.AgreementRenewalStatus__c;
-            Boolean isAgreementRenewal = cs.SubType__c == 'Broker Agreement Renewal Complete Details Update';
-            
             caseToAccountMap.put(cs.Id, cs.AccountId);
             
             // ---- Account-level updates ----
-            // Trade License
-            if (cs.SubType__c == 'Trade License Expiry Update' || isAgreementRenewal) {
+            if (cs.Type == 'Trade License Expiry Update') {
                 acc.Trade_License_Expiry_Date__c = cs.TradeLicenseExpiryDate__c;
                 accountsForDocuments.add(acc);
-            }
-            
-            // VAT Details
-            if (cs.SubType__c == 'VAT Details Update' || isAgreementRenewal) {
+                
+            } else if (cs.Type == 'VAT Details Update') {
                 acc.VATUndertakingIssueDate__c = cs.VATUndertakingIssue_Date__c;
                 acc.TaxRegistrationNumber__c = cs.TaxRegistrationNumber__c;
-                acc.Is_VAT_Registered__c = cs.IsVATRegistered__c ? 'Yes' : 'No';
-                accountsForDocuments.add(acc);
-            }
-            
-            // Agency Address
-            if (cs.SubType__c == 'Agency Address Update' || isAgreementRenewal) {
+                if(cs.IsVATRegistered__c == true){
+                    acc.Is_VAT_Registered__c = 'Yes';
+                }else{
+                    acc.Is_VAT_Registered__c = 'No';
+                }
                 
+                accountsForDocuments.add(acc);
+                
+            } else if (cs.Type == 'Agency Address Update') {
                 acc.Phone__c = cs.PhoneNumber__c;
                 
+                // Combine Address1 + Address2 into BillingStreet
                 String address1 = cs.Address1__c != null ? cs.Address1__c.trim() : '';
                 String address2 = cs.Address2__c != null ? cs.Address2__c.trim() : '';
                 
@@ -1008,43 +908,31 @@ c.addError(
                 } else if (!String.isBlank(address2)) {
                     acc.BillingStreet = address2;
                 }
-            }
-            
-            // Commercial License
-            if (cs.SubType__c == 'Commercial License Expiry Update' || isAgreementRenewal) {
+                
+            } else if (cs.Type == 'Commercial License Expiry Update') {
                 acc.CommercialLicenseExpiryDate__c = cs.CommercialLicenseExpiryDate__c;
                 accountsForDocuments.add(acc);
             }
             
-            // Legal Documents
-            if (cs.SubType__c == 'Legal Documents Update' || isAgreementRenewal) {
-                accountsForDocuments.add(acc);
-            }
-            
-            // Agency Name or Type
-            if (cs.SubType__c == 'Agency Name or Type Update' || isAgreementRenewal) {
-                acc.Name = cs.AgencyName__c;
-                acc.Type__c = cs.AgencyType__c;
+            else if(cs.Type == 'Legal Documents Update'){
                 accountsForDocuments.add(acc);
             }
             
             accountsToUpdate.add(acc);
             
-            // ---- BankAccount updates ----
-            if ((cs.SubType__c == 'Bank Details Update' || isAgreementRenewal) && acc.BankAccount__c != null) {
-                    
-                    BankAccount__c bankAcc = new BankAccount__c(
-                        Id = acc.BankAccount__c,
-                        AccountNumberCorporate__c = cs.AccountNumber__c,
-                        Name = cs.BankName__c,
-                        BankAddress__c = cs.BankAddress__c,
-                        IBANNoCorporate__c = cs.IBANNumber__c,
-                        SwiftCodeCorporate__c = cs.SwiftCode__c
-                    );
-                    
-                    bankAccountsToUpdate.add(bankAcc);
-                    accountsForDocuments.add(acc);
-                }
+            // ---- BankAccount (Parent) updates ----
+            if (cs.Type == 'Bank Details Update' && acc.BankAccount__c != null) {
+                BankAccount__c bankAcc = new BankAccount__c(
+                    Id = acc.BankAccount__c,
+                    AccountNumberCorporate__c = cs.AccountNumber__c,
+                    Name = cs.BankName__c,
+                    BankAddress__c = cs.BankAddress__c,
+                    IBANNoCorporate__c = cs.IBANNumber__c,
+                    SwiftCodeCorporate__c = cs.SwiftCode__c
+                );
+                bankAccountsToUpdate.add(bankAcc);
+                accountsForDocuments.add(acc);
+            }
         }
         
         if (!accountsToUpdate.isEmpty()) {
@@ -1087,15 +975,13 @@ c.addError(
             Contact con = contactMap.get(targetContactId);
             if (con == null) continue;
             
-            if (cs.Type == 'Broker Service Request' || cs.SubType__c == 'Broker Agent Details Update') {
+            if (cs.Type == 'Agent Details Update') {
                 // con.RecordTypeId = brokerContactRTId;
                 con.CaseId__c = cs.Id;
                 con.BrokerContactRole__c = cs.BrokerContactRole__c;
                 //con.Phone = cs.PhoneNumber__c;
-                //con.EID_Expiry_Date__c = cs.NationalIDExpiryDate__c;
-                con.EID_Expiry_Date__c = cs.NationalIDExpiryDate__c != null ? cs.NationalIDExpiryDate__c : con.EID_Expiry_Date__c;
-                //con.PassportExpiryDate__c = cs.PassportExpiryDate__c;
-                con.PassportExpiryDate__c = cs.PassportExpiryDate__c != null ? cs.PassportExpiryDate__c : con.PassportExpiryDate__c;
+                con.NationalIdExpiryDate__c = cs.NationalIDExpiryDate__c;
+                con.PassportExpiryDate__c = cs.PassportExpiryDate__c;
                 //con.MobileCountryCode__c = cs.Mobile_Country_Code__c;
                 con.BRN_RERA_Expiry_Date__c = cs.BRN_RERA_Expiry_Date__c;
                 con.AccountId = cs.AccountId;
@@ -1108,11 +994,9 @@ c.addError(
         }
         
         if (!contactsToUpdate.isEmpty()) {
-            system.debug('contactsToUpdate-->'+contactsToUpdate);
             ContactService.updateExistingContacts(contactsToUpdate);
         }
         if (!caseToContactMap.isEmpty()) {
-            system.debug('caseToContactMap-->'+caseToContactMap);
             System.enqueueJob(new BAPPCopyDocumentsJob(caseToContactMap, 'Contact'));
         }
         
@@ -1141,40 +1025,6 @@ c.addError(
         }        
         
     }
-    // BAPP: Close open tasks when a broker case is Closed, Cancelled, or Rejected
-    public static void completeRelatedTasks(List<Case> brokerCases, Map<Id, Case> oldMap) {
-        if (brokerCases == null || brokerCases.isEmpty()) return;
-        
-        Set<Id> caseIdsToClose = new Set<Id>();
-        
-        Set<String> brokerRecordTypes = new Set<String>{
-            'BrokerCommissionIssue',
-            'BrokerGeneralServiceRequest',
-            'BrokerAgencyDetailsUpdate',
-            'BrokerAgentRegistrationAndUpdate'
-        };
-        
-        for (Case cs : brokerCases) {
-            String rtDevName = cs.RecordTypeId != null ? Schema.SObjectType.Case.getRecordTypeInfosById().get(cs.RecordTypeId).getDeveloperName() : '';
-            if (!brokerRecordTypes.contains(rtDevName)) continue;
-            
-            Case oldCase = oldMap.get(cs.Id);
-            if (oldCase == null) continue;
-            
-            Boolean statusChanged = cs.Status != oldCase.Status;
-            Boolean approvalChanged = cs.ApprovalStatus__c != oldCase.ApprovalStatus__c;
-            
-            if ((statusChanged && (cs.Status == 'Closed' || cs.Status == 'Cancelled')) ||
-                (approvalChanged && cs.ApprovalStatus__c == 'Rejected')) {
-                caseIdsToClose.add(cs.Id);
-            }
-        }
-        
-        if (!caseIdsToClose.isEmpty()) {
-            ServiceRequestTaskHandler.getInstance().closeAllOpenTasksOnCancel(caseIdsToClose);
-        }
-    }
-    
     public static void sendBBMQueueEmails(List<Case> casesToSend) {
         if (casesToSend == null || casesToSend.isEmpty()) return;
         
@@ -1201,7 +1051,7 @@ c.addError(
         EmailTemplate template = EmailTemplateService.getEmailTemplateByDeveloperName('BAPPCommissionUpdates');
         if (template == null) return;
         
-        // Get Org-Wide Email Address ID 
+        // Get Org-Wide Email Address ID ✅
         String orgWideEmail = MetadataService.getInstance().getAppSettingTextValue('BAPPOrgWideEmailAddress');
         
         // Re-query cases with related Account fields
@@ -1215,11 +1065,11 @@ c.addError(
         for (Case cs : fullCases) {
             Boolean shouldSend = false;
             
-            if ((cs.SubType__c == 'Bank Details Update' || cs.SubType__c == 'VAT Details Update' ||
-                 cs.SubType__c == 'Trade License Expiry Update' || cs.SubType__c == 'Commercial License Expiry Update') &&
-                cs.ApprovalStatus__c == 'Approved' && !cs.StopEmailsToCustomer__c) {
+            if ((cs.Type == 'Bank Details Update' || cs.Type == 'VAT Details Update' ||
+                 cs.Type == 'Trade License Expiry Update' || cs.Type == 'Commercial License Expiry Update') &&
+                cs.ApprovalStatus__c == 'Approved') {
                     shouldSend = true;
-                } else if (cs.SubType__c == 'Broker Agent Details Update'  && cs.ApprovalStatus__c == 'Approved') {
+                } else if (cs.Type == 'Agent Details Update' && cs.ApprovalStatus__c == 'Approved') {
                     List<String> roles = cs.BrokerContactRole__c != null ? cs.BrokerContactRole__c.split(';') : new List<String>();
                     if (roles.contains('AuthorizedSignatoryOfficer')) shouldSend = true;
                 }

@@ -3,16 +3,10 @@
         <template if:false={isComponentShown}>
 
             <div class="slds-p-around_medium">
-                <lightning-combobox name="actionSelect" value={selectedAction} placeholder="Choose one"
-                    options={options} onchange={handleChange}>
+                <lightning-combobox name="actionSelect" value={selectedAction}
+                    placeholder="Choose one" options={options} onchange={handleChange}>
                 </lightning-combobox>
-                <template if:true={showSOAPDate}>
-                    <div class="slds-m-top_medium">
-                        <lightning-input type="date" label="Statement Date" value={statementDate}
-                            onchange={handleDateChange}>
-                        </lightning-input>
-                    </div>
-                </template>
+
                 <div class="slds-m-top_medium">
                     <lightning-button label="Proceed" variant="brand" onclick={handleProceed} disabled={isDisabled}>
                     </lightning-button>
@@ -40,6 +34,10 @@
         <template if:true={showFourth}>
             <c-generate-leasing-order-full-soa record-id={recordId} onclosequickaction={handleCloseQuickAction}>
             </c-generate-leasing-order-full-soa>
+        </template>
+         <template if:true={showFifth}>
+            <c-leasing-exit-letter-generator record-id={recordId} onclosequickaction={handleCloseQuickAction}>
+            </c-leasing-exit-letter-generator>
         </template>
     </lightning-quick-action-panel>
 </template>

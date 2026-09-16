@@ -106,7 +106,7 @@ public inherited sharing class BankAccDetailInquirySRHandler {
         autoCreateDocument(listOfCases,listOfCases[0].Sales_Order__c); 
     }
 
-    public void sendNewServiceRequestAssignmnmentEmailNotification(List<Case> caseList){
+    /*public void sendNewServiceRequestAssignmnmentEmailNotification(List<Case> caseList){
         if(!caseList[0].StopEmailsToCustomer__c){
             MetadataService objMetadataService = MetadataService.getInstance();
             EmailService objEmailService = EmailService.getInstance();
@@ -119,7 +119,7 @@ public inherited sharing class BankAccDetailInquirySRHandler {
                 objEmailService.sendEmail(emailList);  
             }
         }
-    }
+    }*/
 
     public void createFirstTask(List<Case> listOfCases) {
         ServiceRequestTaskHandler obj = ServiceRequestTaskHandler.getInstance();

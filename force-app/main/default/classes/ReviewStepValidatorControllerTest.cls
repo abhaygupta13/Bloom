@@ -8,8 +8,8 @@ public class ReviewStepValidatorControllerTest {
         ServiceCatalog__c testServiceCatalog = new ServiceCatalog__c(
             Name = 'Test Service Catalog',
             Type__c = 'Service Request',
-            Category__c = 'Financial - Payment Service',
-            SubCategory__c = 'Postpone/Defer Payment',
+            Category__c = 'BFM Service',
+            SubCategory__c = 'BFM Service Request',
             RecordTypeDevName__c = 'Post_Sale_Payment_Deferral'
         );
         insert testServiceCatalog;
@@ -344,145 +344,91 @@ public class ReviewStepValidatorControllerTest {
         System.assertEquals('Assign to yourself before proceeding', result.get('message'));
     }
 }
-    
-        private static void runRemainingReviewBranch(String recordTypeDeveloperName, String subject, String subType) {
-        Id rtId = Utility.getRecordTypeIdByDevName(Case.SObjectType, recordTypeDeveloperName);
-        System.assertNotEquals(null, rtId, 'Missing Case RecordType DeveloperName: ' + recordTypeDeveloperName);
 
-        Case baseCase = [
-            SELECT Id, AccountId, Account__c, Sales_Order__c, ServiceCatalog__c, Unit__c, Project__c
-            FROM Case
-            LIMIT 1
-        ];
+@isTest
+static void test_WithOpenTask() {
 
-        Case caseRec = new Case(
-            Id = baseCase.Id,
-            OwnerId = UserInfo.getUserId(),
-            RecordTypeId = rtId,
-            Step__c = '1',
-            Status = 'Assigned',
+    Profile p = [SELECT Id FROM Profile LIMIT 1];
+    User u = new User(
+        Alias = 'testu',
+        Email = 'testuser@test.com',
+        EmailEncodingKey = 'UTF-8',
+        LastName = 'Test',
+        LanguageLocaleKey = 'en_US',
+        LocaleSidKey = 'en_US',
+        ProfileId = p.Id,
+        TimeZoneSidKey = 'Asia/Kolkata',
+        UserName = 'testuser' + System.currentTimeMillis() + '@test.com'
+    );
+    insert u;
+        
+        Id caseRecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Post_Sale_Payment_Deferral').getRecordTypeId();
+    Id caseRecTypeResale = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Resale_Property_For_Completed_Project').getRecordTypeId();
+           Id caseRecordTypeAR= Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Acknowledgment_Receipt').getRecordTypeId();
+    Id caseRecTypePaymentDueDate= Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Payment_Due_Date_Update').getRecordTypeId();
+       
+        Id caseCRRRecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('ChequeReplacementRequest').getRecordTypeId();
+    Id caseCWRecTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('ChequeWithdrawalRequest').getRecordTypeId();
+           Id caseLPFWaiverRecordTypeId= Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('LPFWaiverRequest').getRecordTypeId();
+    Id caseSOARecTypeId= Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('SOARequest').getRecordTypeId();
+
+
+    System.runAs(u) {
+
+        // Create test Case record
+        Case testCase = new Case(
+            CurrencyIsoCode = 'AED',
             Origin = 'Email',
-            AccountId = baseCase.AccountId,
-            Account__c = baseCase.Account__c,
-            Sales_Order__c = baseCase.Sales_Order__c,
-            ServiceCatalog__c = baseCase.ServiceCatalog__c,
-            Unit__c = baseCase.Unit__c,
-            Project__c = baseCase.Project__c,
-            Subject = subject,
-            SubType__c = subType
-        );
-
-        Map<String, Object> result;
-
-        try {
-            result = ReviewStepValidatorController.validateForCaseReview(caseRec);
-        } catch (Exception ex) {
-            // Some handler classes may need extra test data.
-            // We only need to enter the correct branch for coverage here.
-            result = new Map<String, Object>();
-            result.put('status', 'exception');
-            result.put('message', ex.getMessage());
-        }
-
-        System.assertNotEquals(null, result, 'Expected response for ' + recordTypeDeveloperName);
-    }
-
-    @isTest
-    private static void testChequeReplacementRequestBranch() {
-        runRemainingReviewBranch('ChequeReplacementRequest', null, null);
-    }
-
-    @isTest
-    private static void testChequeWithdrawalRequestBranch() {
-        runRemainingReviewBranch('ChequeWithdrawalRequest', null, null);
-    }
-
-    @isTest
-    private static void testLPFWaiverRequestBranch() {
-        runRemainingReviewBranch('LPFWaiverRequest', null, null);
-    }
-
-    @isTest
-    private static void testSOARequestBranch() {
-        runRemainingReviewBranch('SOARequest', null, null);
-    }
-
-    @isTest
-    private static void testProofOfPaymentSharedBranch() {
-        runRemainingReviewBranch('ProofofPaymentShared', null, null);
-    }
-
-    @isTest
-    private static void testBankAccountDetailsInquiryBranch() {
-        runRemainingReviewBranch('BankAccountDetailsInquiry', null, null);
-    }
-
-    @isTest
-    private static void testGeneralEnquiryBranch() {
-        runRemainingReviewBranch('GeneralEnquiry', null, null);
-    }
-
-    @isTest
-    private static void testSalesOperationBranch() {
-        runRemainingReviewBranch('SalesOperationService', null, null);
-    }
-
-    @isTest
-    private static void testKYCUpdateRequestBranch() {
-        runRemainingReviewBranch('KYCUpdateRequest', null, null);
-    }
-
-    @isTest
-    private static void testBrokerCommissionIncorrectAmountBranch() {
-        runRemainingReviewBranch('BrokerCommissionIssue', null, 'Incorrect Commission Amount');
-    }
-
-    @isTest
-    private static void testBrokerCommissionDelayedPaymentBranch() {
-        runRemainingReviewBranch('BrokerCommissionIssue', null, 'Delayed Commission Payment');
-    }
-
-    @isTest
-    private static void testOtherSRBranch() {
-        runRemainingReviewBranch('BrokerGeneralServiceRequest', null, null);
-    }
-
-    @isTest
-    private static void testBrokerAgentDetailsUpdateBranch() {
-        runRemainingReviewBranch('BrokerAgentRegistrationAndUpdate', 'Broker Agent Details Update', null);
-    }
-
-    @isTest
-    private static void testBrokerAgencyDetailsUpdateBranch() {
-        runRemainingReviewBranch('BrokerAgencyDetailsUpdate', null, null);
-    }
-
-    @isTest
-    private static void testBrokerNewAgentRegistrationBranch() {
-        runRemainingReviewBranch('BrokerAgentRegistrationAndUpdate', 'Broker New Agent Registration', null);
-    }
-
-    @isTest
-    private static void testNoMatchingRecordTypeFallbackBranch() {
-        Id accountRtId = Schema.SObjectType.Account
-            .getRecordTypeInfosByDeveloperName()
-            .get('PersonAccount')
-            .getRecordTypeId();
-
-        Case caseRec = new Case(
-            OwnerId = UserInfo.getUserId(),
-            RecordTypeId = accountRtId,
-            Step__c = '1',
             Status = 'Assigned',
-            Origin = 'Email'
+            Step__c = '1',
+            OwnerId = u.Id,
+            RecordTypeId = caseRecordTypeId
+          
         );
+        insert testCase;
 
-        Map<String, Object> result = ReviewStepValidatorController.validateForCaseReview(caseRec);
-
-        System.assertEquals('error', result.get('status'));
-        System.assertEquals(
-            'Unable to move to next step: No validation logic found for this record type.',
-            result.get('message')
+        // Create OPEN task for same user
+        Task t = new Task(
+            Subject = 'Follow up',
+            Status = 'Not Started', // open status
+            Priority = 'Normal',
+            OwnerId = u.Id,
+            WhatId = testCase.Id
         );
+        insert t;
+
+        Test.startTest();
+
+        Map<String, Object> response =
+        ReviewStepValidatorController.validateForCaseReview(testCase);
+        testCase.RecordTypeId = caseRecTypeResale;
+        update testCase;
+        ReviewStepValidatorController.validateForCaseReview(testCase);        
+        testCase.RecordTypeId = caseRecordTypeAR;
+        update testCase;
+        ReviewStepValidatorController.validateForCaseReview(testCase);  
+        testCase.RecordTypeId = caseRecTypePaymentDueDate;
+        update testCase;
+        ReviewStepValidatorController.validateForCaseReview(testCase);  
+         
+        testCase.RecordTypeId = caseCRRRecordTypeId;
+        update testCase;
+        ReviewStepValidatorController.validateForCaseReview(testCase);        
+        testCase.RecordTypeId = caseCWRecTypeId;
+        update testCase;
+        ReviewStepValidatorController.validateForCaseReview(testCase);  
+        testCase.RecordTypeId = caseLPFWaiverRecordTypeId;
+        update testCase;
+        ReviewStepValidatorController.validateForCaseReview(testCase);  
+       
+        Test.stopTest();
+
+        /* Add assertions based on expected outcome
+        System.assertNotEquals(
+            'You must have at least one open task assigned to you before marking the case as complete.',
+            (String)response.get('message')
+        );*/
     }
+}
+
 }

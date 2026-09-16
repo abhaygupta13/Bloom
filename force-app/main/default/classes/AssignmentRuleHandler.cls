@@ -14,11 +14,13 @@ public inherited sharing class AssignmentRuleHandler {
     private static final string CONTACT_CENTER_PROFILE_ID { get { return 'ContactCentreProfileId'; } }
     private static final string ASSIGNMENT_RULE_RECORD_TYPE_LEAD { get { return 'Lead'; } }
     private static final string ASSIGNMENT_RULE_PROCESS_TYPE_LEASING { get { return 'Leasing'; } }
+    private static final string ASSIGNMENT_RULE_PROCESS_TYPE_HANDOVER { get { return 'Handover'; } }
+	
     private static final string ASSIGNMENT_RULE_RECORD_TYPE_CASE { get { return 'Case'; } }
-    private static final string ASSIGNMENT_RULE_RECORD_TYPE_HANDOVER { get { return 'Handover'; } }
+    
     private static final string ASSIGNMENT_RULE_PROCESS_DIGITAL_LEAD_ASSIGNMENT { get { return 'Digital Lead Assignment'; } }
-    private static final string ASSIGNMENT_RULE_PROCESS_ADHA_LEAD_ASSIGNMENT { get { return 'ADHA Lead Assignment'; } }
     private static final string ASSIGNMENT_RULE_PROCESS_DIGITAL_LEASING_LEAD_ASSIGNMENT { get { return 'Digital Leasing Lead Assignment'; } }
+     private static final string ASSIGNMENT_RULE_PROCESS_ADHA_LEAD_ASSIGNMENT { get { return 'ADHA Lead Assignment'; } }
     private static final string ASSIGNMENT_RULE_PROCESS_DIGITAL_CASE_ASSIGNMENT { get { return 'Digital Case Assignment'; } }
     private static final string ASSIGNMENT_RULE_PROCESS_ANPR_SERVICE_REQUEST_ASSIGNMENT { get { return 'ANPR Service Request Assignment'; } }
     private static final string ASSIGNMENT_RULE_PROCESS_BFM_EMAIL_TO_CASE_ASSIGNMENT { get { return 'BFM Email To Case Assignment'; } }
@@ -26,9 +28,9 @@ public inherited sharing class AssignmentRuleHandler {
     private static final string ASSIGNMENT_RULE_PROCESS_DIGITAL_QUALIFIED_LEAD_ASSIGNMENT { get { return 'Qualified Lead Assignment'; } }
     private static final string ASSIGNMENT_RULE_PROCESS_LEASING_RESIDENTIAL_QUALIFIED_LEAD_ASSIGNMENT { get { return 'Leasing Residential Qualified Lead Assignment'; } }
     private static final string ASSIGNMENT_RULE_PROCESS_LEASING_COMMERCIAL_QUALIFIED_LEAD_ASSIGNMENT { get { return 'Leasing Commercial Qualified Lead Assignment'; } }
-    private static final string ASSIGNMENT_RULE_PROCESS_CRM_CASE_ASSIGNMENT { get { return 'CRM Case Assignment'; } }
-      private static final string ASSIGNMENT_RULE_PROCESS_CRM_COMPLAINT_CASE_ASSIGNMENT { get { return 'CRM Complaint Case Assignment'; } }
     private static final string ASSIGNMENT_RULE_PROCESS_CRM_HANDOVER_ASSIGNMENT { get { return 'Handover CRM Agent Assignment'; } }
+    private static final string ASSIGNMENT_RULE_PROCESS_CRM_CASE_ASSIGNMENT { get { return 'CRM Case Assignment'; } }
+    private static final string ASSIGNMENT_RULE_PROCESS_CRM_COMPLAINT_CASE_ASSIGNMENT { get { return 'CRM Complaint Case Assignment'; } }
     private static final string ASSIGNMENT_RULE_PROCESS_CRM_RESALE_CASE_ASSIGNMENT { get { return 'CRM Resale Case Assignment'; } }
     private static final string MTD_LEASING_LEAD_DEFAULT_QUEUE_ID { get { return 'LeasingLeadDefaultQueueId'; } }
     private static final string LEASING_LEAD_CREATED_BY_IDS { get { return 'LeasingLeadCreatedByIds'; } }
@@ -40,14 +42,12 @@ public inherited sharing class AssignmentRuleHandler {
     private static final string MTD_COMMUNITY_SR_ASSIGNMENT_EMAIL_TEMPLATE_ID { get { return 'CommunityAppSRAssignmentEmailTempId'; } }
     private static final String MTD_OWE_NO_REPLY_BLOOM_SALES_ID { get { return 'BloomNoReplySalesOWEmailId'; } }
     private static final String SUPER_APP_REGISTRATION_CASE_ASSIGNMENT { get { return 'Super App Registration Case Assignment'; } }
-    private static final String SUPER_APP_OPERATION_TEAM_CASE_ASSIGNMENT { get { return 'Super App Operation Team Case Assignment'; } }
     private static final String SUPER_APP_STR = 'Super App';
     private static final string BLC_CASE_ASSIGNMENT { get { return 'BLC Common Area SR Assignment'; } }
     private static final string DLP_CASE_ASSIGNMENT { get { return 'DLP Common Area SR Assignment'; } }
     private static final string SUBMITTED_STR { get { return 'Submitted'; } }
-
-
-    
+	private static final string ASSIGNMENT_RULE_RECORD_TYPE_HANDOVER { get { return 'Handover'; } }
+   
     //Digital Marketing Sales Lead Auto Assignment
     public static void salesDigitalLeadAssignment(List<Id> recordIds){
         //MetadataService objMetadataService = MetadataService.getInstance();
@@ -114,7 +114,7 @@ public inherited sharing class AssignmentRuleHandler {
         }
     }
     
-    //ADHA Lead Auto Assignment
+     //ADHA Lead Auto Assignment
     public static void adhaLeadAssignment(List<Id> recordIds){
         
         LeadService objLeadService = LeadService.getInstance();
@@ -140,6 +140,7 @@ public inherited sharing class AssignmentRuleHandler {
             }
         }
     }
+   
     
     public static void leasingLeadAssignment(List<Id> recordIds) {
         LeadService objLeadService = LeadService.getInstance();
@@ -234,8 +235,6 @@ public inherited sharing class AssignmentRuleHandler {
             AssignmentRule__c objAssignmentRule = objAssignmentRuleService.getAssignmentRuleAndUsers(ASSIGNMENT_RULE_RECORD_TYPE_LEAD, ASSIGNMENT_RULE_PROCESS_DIGITAL_QUALIFIED_LEAD_ASSIGNMENT,'Sales');
             if(objAssignmentRule != NULL){
                 Map<Id, AssignmentUser__c> assignmentUserMap = objAssignmentRuleService.getAvailableAssignmentUserMap(objAssignmentRule.AssignmentUsers__r);
-                System.debug('Available Users Count = ' + assignmentUserMap.size());
-                System.debug('Available User Ids = ' + assignmentUserMap.keySet());
                 Integer assignmentAgentIndex = 0;
                 Integer roundRobinNumber = 0;
                 if (!assignmentUserMap.isEmpty()) {
@@ -309,12 +308,12 @@ public inherited sharing class AssignmentRuleHandler {
         if(Test.isRunningTest()){
             communityCaseCreatedUserIds.add(UserInfo.getUserId());
         }
-        
+
         List<Case> caseList = objCaseService.getCaseByIdsAndCreatedByIds(new Set<Id>(recordIds), communityCaseCreatedUserIds);
         AssignmentRuleService objAssignmentRuleService = AssignmentRuleService.getInstance();
         List<AssignmentRule__c> objAssignmentRuleList = objAssignmentRuleService.getAssignmentRules(ASSIGNMENT_RULE_RECORD_TYPE_CASE, ASSIGNMENT_RULE_PROCESS_NAME_COMMUNITY_APP_SERVICE_REQUEST_ASSIGNMENT, COMMUNITY_MANAGEMENT_STR);
         List<Case> caseUpdateList = new List<Case>();
-        
+
         Set<Id> caseOwnerIdSet = new Set<Id>();
         for(Case objCase :caseList){
             if(String.isNotBlank(objCase.Projectname__c) && objCase.Status == SUBMITTED_STR){
@@ -422,7 +421,7 @@ public inherited sharing class AssignmentRuleHandler {
         CaseService objCaseService = CaseService.getInstance();
         Set<Id> caseIds = new Set<Id>(recordIds);
         List<Case> caseList = objCaseService.getCaseByIds(caseIds);
-        
+
         if(!caseList.isEmpty()){
             AssignmentRuleService objAssignmentRuleService = AssignmentRuleService.getInstance();
             List<AssignmentRule__c> objAssignmentRules = objAssignmentRuleService.getAssignmentRules(ASSIGNMENT_RULE_RECORD_TYPE_CASE, ASSIGNMENT_RULE_PROCESS_ANPR_SERVICE_REQUEST_ASSIGNMENT, COMMUNITY_MANAGEMENT_STR);
@@ -452,11 +451,6 @@ public inherited sharing class AssignmentRuleHandler {
         if(!caseList.isEmpty()){
             AssignmentRuleService objAssignmentRuleService = AssignmentRuleService.getInstance();
             List<AssignmentRule__c> assignmentRuleList = objAssignmentRuleService.getAssignmentRuleAndUsersByProcessName(ASSIGNMENT_RULE_RECORD_TYPE_CASE, ASSIGNMENT_RULE_PROCESS_GENERAL_COMPLAINT_CASE_ASSIGNMENT,'Sales');
-            /* if(objAssignmentRule != NULL){
-List<AssignmentUser__c> assignmentUserList = objAssignmentRuleService.getAvailableAssignmentUsers(objAssignmentRule.AssignmentUsers__r);
-caseList = objAssignmentRuleService.assignRecordOwner(caseList, objAssignmentRule, assignmentUserList);
-objCaseService.updateCasesWithoutTrigger(caseList); 
-} */
             
             for(Case cseRec : caseList){
                 if(cseRec.Projectname__c != NULL) {
@@ -470,7 +464,7 @@ objCaseService.updateCasesWithoutTrigger(caseList);
                 }
             }
         }
-        //objCaseService.updateCasesWithoutTrigger(caseList);
+        
         if(caseListToUpdate != NULL && caseListToUpdate.size() > 0){
             objCaseService.updateCasesWithoutTrigger(caseListToUpdate);
         }
@@ -523,52 +517,46 @@ objCaseService.updateCasesWithoutTrigger(caseList);
         }
     }
     
-     //CRM Handover Round Robin Assignment
-    public static void crmHandoverAssignment(Set<Id> recordIds){
+    public static void crmHandoverAssignment(List<Handover__c> recordIds) {
+        List<Handover__c> handoversToAssign = new List<Handover__c>();
+        List<AssignmentUser__c> assignmentUserList = new List<AssignmentUser__c>();
+        AssignmentRule__c ar;
+        AssignmentRuleService objAssignmentRuleService = AssignmentRuleService.getInstance();
+        List<AssignmentRule__c> assignmentRuleList = objAssignmentRuleService.getAssignmentRuleAndUsersByProcessName(ASSIGNMENT_RULE_RECORD_TYPE_HANDOVER, ASSIGNMENT_RULE_PROCESS_CRM_HANDOVER_ASSIGNMENT, ASSIGNMENT_RULE_PROCESS_TYPE_HANDOVER);
         
-        MetadataService objMetadataService = MetadataService.getInstance();
-     
-        HandoverService objHandoverService = HandoverService.getInstance();
-        List<Handover__c> handoverList = objHandoverService.getHandoverByIds(recordIds);
-        
-        List<Handover__c> handoverListToUpdate = new List<Handover__c>();
-        
-        if(!handoverList.isEmpty()){
-            AssignmentRuleService objAssignmentRuleService = AssignmentRuleService.getInstance();
-            List<AssignmentRule__c> assignmentRuleList = objAssignmentRuleService.getAssignmentRuleAndUsersByProcessName(ASSIGNMENT_RULE_RECORD_TYPE_CASE, ASSIGNMENT_RULE_PROCESS_CRM_CASE_ASSIGNMENT, 'Sales');
+        if(assignmentRuleList != null && !assignmentRuleList.isEmpty()) { 
+            ar = assignmentRuleList[0];
+            List<String> projectList = String.isNotBlank(ar.Project__c) ? ar.Project__c.split(';') : new List<String>();
+            assignmentUserList = objAssignmentRuleService.getAvailableAssignmentUsers(ar.AssignmentUsers__r);
             
-            for(Handover__c handoverRec : handoverList){
-                for(AssignmentRule__c assignmentRuleRec : assignmentRuleList){
-                    List<String> projectList = String.isNotBlank(assignmentRuleRec.Project__c) ? assignmentRuleRec.Project__c.split(';') : new List<String>();
-                    if(String.isNotBlank(handoverRec.Projectname__c) && projectList.contains(handoverRec.Projectname__c)){
-                        List<AssignmentUser__c> assignmentUserList = objAssignmentRuleService.getAvailableAssignmentUsers(assignmentRuleRec.AssignmentUsers__r);
-                        handoverListToUpdate.addAll((List<Handover__c>)objAssignmentRuleService.assignRecordOwner(new List<Handover__c>{handoverRec}, assignmentRuleRec, assignmentUserList));
-                        break;
-                    }
-                    else if(String.isBlank(handoverRec.Projectname__c) && String.isBlank(assignmentRuleRec.Project__c)){
-                        List<AssignmentUser__c> assignmentUserList = objAssignmentRuleService.getAvailableAssignmentUsers(assignmentRuleRec.AssignmentUsers__r);
-                        handoverListToUpdate.addAll((List<Handover__c>)objAssignmentRuleService.assignRecordOwner(new List<Handover__c>{handoverRec}, assignmentRuleRec, assignmentUserList));
-                        break;
-                    }
+            for(Handover__c handoverRec : recordIds) {
+                if(handoverRec.Projectname__c != null && projectList.contains(handoverRec.Projectname__c)) {
+                    handoversToAssign.add(handoverRec);
                 }
             }
         }
-       
-            objHandoverService.updateHandoverWithoutTrigger(handoverListToUpdate);
-        
+        if(!handoversToAssign.isEmpty()) {
+            objAssignmentRuleService.assignCRMTeamUserToHandover(handoversToAssign, ar, assignmentUserList);
+        }
     }
- public static void crmComplaintCaseAssignment(List<Id> recordIds){
+public static void crmComplaintCaseAssignment(List<Id> recordIds){
         
         MetadataService objMetadataService = MetadataService.getInstance();
-       
+        String contactCentreProfileIds = objMetadataService.getAppSettingTextValue(CONTACT_CENTER_PROFILE_ID);
+        List<Id> contactCentreProfileIdList = contactCentreProfileIds.split(',');
         
         Set<Id> caseIds = new Set<Id>(recordIds);
         CaseService objCaseService = CaseService.getInstance();
         List<Case> caseList = new List<Case>();
         
-        for (Case cse : objCaseService.getCaseByIds(caseIds)) {
+         for (Case cse : objCaseService.getCaseByIds(caseIds)) {
+            String createdByProfileId =
+                String.valueOf(cse.CreatedBy.ProfileId).substring(0, 15);
+            
+            if (contactCentreProfileIdList.contains(createdByProfileId)
+                || cse.Origin == SUPER_APP_STR) {
                     caseList.add(cse);
-                
+                }
         }
         List<Case> caseListToUpdate = new List<Case>();
         
@@ -595,29 +583,8 @@ objCaseService.updateCasesWithoutTrigger(caseList);
         if(caseListToUpdate != NULL && caseListToUpdate.size() > 0){
             objCaseService.updateCasesWithoutTrigger(caseListToUpdate);
         }
+   
     }
-    public static void crmHandoverAssignment(List<Handover__c> recordIds){
-        
-        AssignmentRuleService objAssignmentRuleService = AssignmentRuleService.getInstance();
-        List<AssignmentRule__c> assignmentRuleList = objAssignmentRuleService.getAssignmentRuleAndUsersByProcessName(ASSIGNMENT_RULE_RECORD_TYPE_HANDOVER, ASSIGNMENT_RULE_PROCESS_CRM_HANDOVER_ASSIGNMENT, 'Handover');
-        HandoverService objHandoverService =  HandoverService.getInstance();
-        List<Handover__c>handoverList = objHandoverService.getHandoversByIds(recordIds);
-        for(Handover__c handoverRec : handoverList){
-            if(handoverRec.Projectname__c != NULL) {
-                for(AssignmentRule__c assignmentRuleRec : assignmentRuleList){
-                    List<String> projectList = String.isNotBlank(assignmentRuleRec.Project__c) ? assignmentRuleRec.Project__c.split(';') : new List<String>();
-                    if(projectList.contains(handoverRec.Projectname__c)){
-                        List<AssignmentUser__c> assignmentUserList = objAssignmentRuleService.getAvailableAssignmentUsers(assignmentRuleRec.AssignmentUsers__r);
-                        handoverList.addAll((List<Handover__c>)objAssignmentRuleService.assignRecordOwner(new List<Handover__c>{handoverRec}, assignmentRuleRec, assignmentUserList));
-                    }
-                }
-            }
-        }
-        if(handoverList != NULL && handoverList.size() > 0){
-            objHandoverService.updateHandoverWithoutTrigger(handoverList);
-        }
-    }
-    
     //CRM Resale Case Round Robin Assignment
     public static void crmResaleCaseAssignment(List<Id> recordIds){
         
@@ -629,11 +596,11 @@ objCaseService.updateCasesWithoutTrigger(caseList);
         CaseService objCaseService = CaseService.getInstance();
         List<Case> caseList = objCaseService.getCasesByCreatedByIds(caseIds, contactCentreProfileIdList); 
         List<Case> caseListToUpdate = new List<Case>();
-        
+
         AssignmentRuleService objAssignmentRuleService = AssignmentRuleService.getInstance();
         List<AssignmentRule__c> assignmentRuleList = objAssignmentRuleService.getAssignmentRuleAndUsersByProcessName(ASSIGNMENT_RULE_RECORD_TYPE_CASE, ASSIGNMENT_RULE_PROCESS_CRM_RESALE_CASE_ASSIGNMENT, 'Sales');
-        
-        
+
+
         for(Case cseRec : caseList){
             if(cseRec.Projectname__c != NULL) {
                 for(AssignmentRule__c assignmentRuleRec : assignmentRuleList){
@@ -645,7 +612,7 @@ objCaseService.updateCasesWithoutTrigger(caseList);
                 }
             }
         }
-        
+
         if(caseListToUpdate != NULL && caseListToUpdate.size() > 0){
             objCaseService.updateCasesWithoutTrigger(caseListToUpdate);
         }
@@ -663,12 +630,12 @@ objCaseService.updateCasesWithoutTrigger(caseList);
             if(objAssignmentRule != NULL){
                 List<AssignmentUser__c> assignmentUserList = objAssignmentRuleService.getAvailableAssignmentUsers(objAssignmentRule.AssignmentUsers__r);
                 caseList = objAssignmentRuleService.assignRecordOwner(caseList, objAssignmentRule, assignmentUserList);
-                objCaseService.updateCasesWithoutTrigger(caseList); 	
+                objCaseService.updateCasesWithoutTrigger(caseList); 
             }
         }
         objCaseService.updateCasesWithoutTrigger(caseList);
     }
-    
+
     public static void superAppCaseAssignment(List<Id> recordIds){
         CaseService objCaseService = CaseService.getInstance();
         Set<Id> caseIds = new Set<Id>(recordIds);
@@ -676,7 +643,6 @@ objCaseService.updateCasesWithoutTrigger(caseList);
         if(!caseList.isEmpty()){
             AssignmentRuleService objAssignmentRuleService = AssignmentRuleService.getInstance();
             AssignmentRule__c objAssignmentRule = objAssignmentRuleService.getAssignmentRuleAndUsers(ASSIGNMENT_RULE_RECORD_TYPE_CASE, SUPER_APP_REGISTRATION_CASE_ASSIGNMENT,'Sales');
-
             if(objAssignmentRule != NULL){
                 List<AssignmentUser__c> assignmentUserList = objAssignmentRuleService.getAvailableAssignmentUsers(objAssignmentRule.AssignmentUsers__r);
                 caseList = objAssignmentRuleService.assignRecordOwner(caseList, objAssignmentRule, assignmentUserList);
@@ -697,7 +663,7 @@ objCaseService.updateCasesWithoutTrigger(caseList);
             AssignmentRuleService objAssignmentRuleService = AssignmentRuleService.getInstance();
             AssignmentRule__c objAssignmentRule = objAssignmentRuleService.getAssignmentRuleAndUsers(ASSIGNMENT_RULE_RECORD_TYPE_CASE, processName, processType);
 
-            if(objAssignmentRule != NULL){
+            if(objAssignmentRule != NULL){ 
                 List<AssignmentUser__c> assignmentUserList = objAssignmentRuleService.getAvailableAssignmentUsers(objAssignmentRule.AssignmentUsers__r);
                 caseList = objAssignmentRuleService.assignRecordOwner(caseList, objAssignmentRule, assignmentUserList);
                 objCaseService.updateCasesWithoutTrigger(caseList); 
@@ -705,4 +671,6 @@ objCaseService.updateCasesWithoutTrigger(caseList);
         }
         return new Map<Id, Case>(caseList);
     }
+    
+    
 }

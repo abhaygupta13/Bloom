@@ -59,9 +59,6 @@ global class BAPPWebService {
             when 'submitAgencyCase' {
                 BAPPAgencyInfoUpdateHandler.handleAgencyInfoUpdate(requestBodyString);
             }
-            when 'verifyDocument' {
-                BAPPVerifyDocumentHandler.handleVerifyDocument(requestBodyString);
-            }
         }
     }
     ////Handles HTTP GET requests

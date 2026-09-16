@@ -1,0 +1,2128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>ADMAdminFee</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ADMAdminFee</shortDescription>
+        <value>420</value>
+    </labels>
+    <labels>
+        <fullName>AzureUserEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AzureUserEmail</shortDescription>
+        <value>bloomprodb2c.onmicrosoft.com</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ADMRequiredForAbuDhabi</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required ADM when emirate is Abu Dhabi</shortDescription>
+        <value>ADM is required for Registered Emirate is Abu Dhabi.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_AccountNumberRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Account Number</shortDescription>
+        <value>Account Number is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_AddressLine1Required</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Address Line 1</shortDescription>
+        <value>Address Line 1 is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_AgencyEmailRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Agency Email</shortDescription>
+        <value>Agency Email is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_AgencyInformationRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Agency Information Required Error.</shortDescription>
+        <value>Agency Information is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_AgencyNameRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Agency Name</shortDescription>
+        <value>Agency Name is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_AgencyTypeRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Agency Type</shortDescription>
+        <value>Agency Type is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicantDOBRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Date of Birth</shortDescription>
+        <value>Date of Birth is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicantEmailRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Email</shortDescription>
+        <value>Email is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicantFirstNameRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for First Name</shortDescription>
+        <value>First Name is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicantLastNameRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Last Name</shortDescription>
+        <value>Last Name is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicantNationalIdExpiryRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for National ID Expiry Date</shortDescription>
+        <value>National ID Expiry Date is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicantNationalIdRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for National ID</shortDescription>
+        <value>National ID is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicantPassportExpiryRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Passport Expiry Date</shortDescription>
+        <value>Passport Expiry Date is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicantPassportNumberRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Passport Number</shortDescription>
+        <value>Passport Number is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicantPhoneNumberRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Phone Number</shortDescription>
+        <value>Phone Number is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicantRoleRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Role</shortDescription>
+        <value>Role is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicantShareHoldingRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Shareholding Percentage</shortDescription>
+        <value>Shareholding Percentage is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicantTitleRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Title</shortDescription>
+        <value>Title is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicationIdRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Application Id</shortDescription>
+        <value>Application Id is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ApplicationNotFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message shown for no application is found for the given application number</shortDescription>
+        <value>Application Not Found.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_BankBranchAddressRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Bank Branch Address</shortDescription>
+        <value>Bank Branch Address is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_BankCountryRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Bank Country</shortDescription>
+        <value>Bank Country is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_BankDetailsRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bank Details Required Error.</shortDescription>
+        <value>Bank Details are required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_BankNameRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Bank Name</shortDescription>
+        <value>Bank Name is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_BeneficiaryNameRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Beneficiary Name</shortDescription>
+        <value>Beneficiary Name is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_CityRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for City.</shortDescription>
+        <value>City is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_CompanyPhoneNumberRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Company Phone Number</shortDescription>
+        <value>Company Phone Number is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_CountryCodeRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Country Code</shortDescription>
+        <value>Country Code is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_CountryRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Country</shortDescription>
+        <value>Country is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_EmirateRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Emirate</shortDescription>
+        <value>Emirate is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_IBANRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for IBAN</shortDescription>
+        <value>IBAN is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_InvalidApplicationNumber</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Application Number</shortDescription>
+        <value>Invalid Application Number, no matching record found!</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_IsVATRegisteredRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required VAT status for Commercial license</shortDescription>
+        <value>VAT Registration status is required for Commercial license.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_LicenseTypeRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for License Type</shortDescription>
+        <value>License Type is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_MissingApplicationNumber</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error message shown when application number is missing in Track Application API</shortDescription>
+        <value>Missing Application Number.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ORNRequiredForDubai</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required ORN when emirate is Dubai</shortDescription>
+        <value>ORN is required for Registered Emirate is Dubai.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_RegisteredCountryRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Registered Country</shortDescription>
+        <value>Registered Country is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_RegisteredEmirateRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Registered Emirate</shortDescription>
+        <value>Registered Emirate is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_SwiftCodeRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Swift Code</shortDescription>
+        <value>Swift Code is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_TaxRegistrationNumberRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Tax Registration Number</shortDescription>
+        <value>Tax Registration Number is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_TradeLicenseExpiryDateRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Trade License Expiry Date</shortDescription>
+        <value>Trade License Expiry Date is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_TradeLicenseNumberRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Trade License Number</shortDescription>
+        <value>Trade License Number is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_TypeOfEstablishmentRequired</fullName>
+        <categories>validation</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Type of Establishment</shortDescription>
+        <value>Type of Establishment is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_VATUndertakingIssueDateRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for VAT Undertaking Issue Date</shortDescription>
+        <value>VAT Undertaking Issue Date is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAAP_ZipCodePOBoxRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Zip Code / P.O. Box</shortDescription>
+        <value>Zip Code / P.O. Box is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPPAccountURL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP Account URL</shortDescription>
+        <value>https://bloomholding--uat.sandbox.my.salesforce.com/</value>
+    </labels>
+    <labels>
+        <fullName>BAPPAgencyAgreementPendingReminderSubject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPPAgencyAgreementPendingReminderSubject</shortDescription>
+        <value>Reminder: Agreement Pending Signature – Ref:</value>
+    </labels>
+    <labels>
+        <fullName>BAPPBrokerAgencyRFIReminderSubject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPPBrokerAgencyRFIReminderSubject</shortDescription>
+        <value>Action Required on Your Agency Application Ref -</value>
+    </labels>
+    <labels>
+        <fullName>BAPPCaseURL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP Case URL</shortDescription>
+        <value>https://bloomholding--uat.sandbox.my.salesforce.com/</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_90DaysDateRangeExceed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_90DaysDateRangeExceed</shortDescription>
+        <value>The date range cannot be longer than 90 days.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_AccessDeniedRole</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_AccessDeniedRole</shortDescription>
+        <value>Access denied. This contact is not assigned an Admin, Super Admin, Owner, Partner, Authorized Signatory Officer or CEO role.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_AccountAndContactRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_AccountAndContactRequired</shortDescription>
+        <value>accountId and contactId are required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_AccountIdRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_AccountIdRequired</shortDescription>
+        <value>accountId is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_AccountId_Required</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_AccountId_Required</shortDescription>
+        <value>accountId is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Account_Contact_Required</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Account_Contact_Required</shortDescription>
+        <value>accountId and contactId are required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Assign_Success</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Assign_Success</shortDescription>
+        <value>Assignments created successfully.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Assign_Unassign_Partial_Success</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Assign_Unassign_Partial_Success</shortDescription>
+        <value>Records created, updated, or unassigned successfully.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_BloomConnectLoginPageLink</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_BloomConnectLoginPageLink</shortDescription>
+        <value>https://partners.bloomholding.com/login</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Bloom_Signatory</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP Bloom Signatory</shortDescription>
+        <value>mdoei@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_BrokerCommissionNotFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_BrokerCommissionNotFound</shortDescription>
+        <value>Broker commission not found for invoice:</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_BrokerSummaryFetchSuccess</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_BrokerSummaryFetchSuccess</shortDescription>
+        <value>Broker summary fetched successfully.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CaseAlreadyApproved</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error:Case Already Approved</shortDescription>
+        <value>Case cannot be updated. It has already been approved.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CaseCreatedSuccess</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_CaseCreatedSuccess</shortDescription>
+        <value>Service Request created successfully.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CaseNotCreated</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_CaseNotCreated</shortDescription>
+        <value>Case could not be created.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CaseNotRetrieved</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_CaseNotRetrieved</shortDescription>
+        <value>Case created but could not be retrieved.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CaseStatusRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error: Missing caseStatus</shortDescription>
+        <value>caseStatus is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CaseUpdatedSuccess</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Case Updated Success</shortDescription>
+        <value>Service request updated successfully.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CategoryBrokerServiceRequest</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Category Broker Service Request</shortDescription>
+        <value>Broker Service Request</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CategoryInvalid</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error: Invalid category</shortDescription>
+        <value>Invalid category.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CategoryRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_CategoryRequired</shortDescription>
+        <value>Category are required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CommercialLicenseExpiryDateRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Commercial License Expiry Date Required.</shortDescription>
+        <value>Commercial license expiry date is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CommercialLicenseNumberRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Commercial License Number Required.</shortDescription>
+        <value>Commercial license number is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CompanyEmailRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Company Email Required.</shortDescription>
+        <value>Company email is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CompanyNameRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Company Name Required.</shortDescription>
+        <value>Company name is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_ContactIdRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_ContactIdRequired</shortDescription>
+        <value>contactId is required</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_ContactIdRequiredForCreate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_ContactIdRequiredForCreate</shortDescription>
+        <value>contactId is required for create.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_ContactId_Required</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_ContactId_Required</shortDescription>
+        <value>contactId is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Contact_Not_Belong_To_Account</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Contact_Not_Belong_To_Account</shortDescription>
+        <value>Contact does not belong to the given Account.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_CountryCodeIsRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_CountryCodeIsRequired</shortDescription>
+        <value>Please choose a country code.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_DefaultLeadFetchLimit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_DefaultLeadFetchLimit</shortDescription>
+        <value>100</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_DesignationRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field error for Designation</shortDescription>
+        <value>Designation is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_DuplicateLeadDetected</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_DuplicateLeadDetected</shortDescription>
+        <value>Duplicate detected: The lead is already present in the system.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_DuplicateSearchFetchLimit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_DuplicateSearchFetchLimit</shortDescription>
+        <value>5</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_DuplicateSearchRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_DuplicateSearchRequired</shortDescription>
+        <value>Duplicate Lead Search flag is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_EmailRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_EmailRequired</shortDescription>
+        <value>Please enter your email address.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Escalation_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP Escalation Email</shortDescription>
+        <value>akhairnar324@gmai.com</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_FilterCriteriaMustBeNullForAll</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_FilterCriteriaMustBeNullForAll</shortDescription>
+        <value>When scenario is ALL, filterCriteria must be null.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_FilterCriteriaRequiredForFilter</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_FilterCriteriaRequiredForFilter</shortDescription>
+        <value>filterCriteria is required when scenario is FILTER.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_FilterCriteriaValueRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_FilterCriteriaValueRequired</shortDescription>
+        <value>At least one field in filterCriteria must have a value for FILTER.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_FirstNameRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_FirstNameRequired</shortDescription>
+        <value>Please enter your first name.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_FromAndToDatesRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_FromAndToDatesRequired</shortDescription>
+        <value>Please enter both “From” and “To” dates together.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_FromDateCannotFuture</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_FromDateCannotFuture</shortDescription>
+        <value>The “From” date cannot be in the future.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_FromDateGreaterThanToDate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_FromDateGreaterThanToDate</shortDescription>
+        <value>From Date must be less than or equal to To Date.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_FromDateMissing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_FromDateMissing</shortDescription>
+        <value>“From” date is missing.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_InvalidAccountContactRelation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_InvalidAccountContactRelation</shortDescription>
+        <value>Invalid relationship between Account and Contact.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_InvalidAccountId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_InvalidAccountId</shortDescription>
+        <value>Invalid accountId. Record not found in org.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_InvalidAgencyOrAgent</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Agency or Agent</shortDescription>
+        <value>Access denied. You can update cases only for your own agency or agent.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_InvalidContactId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_InvalidContactId</shortDescription>
+        <value>Invalid contactId. Record not found in org.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_InvalidScenario</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_InvalidScenario</shortDescription>
+        <value>Invalid scenario. Allowed values: ALL or FILTER.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_InvalidSubCategory</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_InvalidSubCategory</shortDescription>
+        <value>Invalid subCategory. No matching Case RecordType found.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Invalid_Request_Body</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Invalid_Request_Body</shortDescription>
+        <value>Request body is missing or invalid.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_LastNameRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_LastNameRequired</shortDescription>
+        <value>Please enter your last name.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_LeadCreatedSuccess</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_LeadCreatedSuccess</shortDescription>
+        <value>Lead created successfully.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_LeadIdOrContactIdRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_LeadIdOrContactIdRequired</shortDescription>
+        <value>Either leadId (for update) or contactId (for create) is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_LeadStatusCountsFetchSuccess</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_LeadStatusCountsFetchSuccess</shortDescription>
+        <value>Lead status counts fetched successfully</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_LeadTypeRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_LeadTypeRequired</shortDescription>
+        <value>Please choose a lead type.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_LeadUpdatedSuccess</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_LeadUpdatedSuccess</shortDescription>
+        <value>Lead updated successfully.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_MinArea_Greater_Than_MaxArea</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_MinArea_Greater_Than_MaxArea</shortDescription>
+        <value>minimumArea should be less than maximumArea.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_MinBudget_Greater_Than_MaxBudget</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_MinBudget_Greater_Than_MaxBudget</shortDescription>
+        <value>minimumBudget should be less than maximumBudget.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_MissingRequestBody</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_MissingRequestBody</shortDescription>
+        <value>Missing JSON body</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_MobileUpdateNotAllowed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error : Mobile Update Not Allowed</shortDescription>
+        <value>Mobile Number Update Not Allowed.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_MobileUpdateSuccess</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mobile Update Success</shortDescription>
+        <value>Mobile number updated successfully.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_NoAccessToUpdate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Access To Update</shortDescription>
+        <value>User does not have access to create case or update mobile number.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_NoActiveAgentForAgency</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_NoActiveAgentForAgency</shortDescription>
+        <value>No active agent found for the agency.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_NoResultsFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_NoResultsFound</shortDescription>
+        <value>Sorry, no results found.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_NoServiceCatalogFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_NoServiceCatalogFound</shortDescription>
+        <value>No Service Catalog found for given subCategory.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_NoServiceRequestsFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_NoServiceRequestsFound</shortDescription>
+        <value>No service requests found for this contact.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_NoUserFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_NoUserFound</shortDescription>
+        <value>No user found with provided token.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_No_Access_Assign_Unassign</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_No_Access_Assign_Unassign</shortDescription>
+        <value>Contact has no access to assign/unassign.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_No_Units_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_No_Units_Found</shortDescription>
+        <value>No units found for the given criteria.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_No_Valid_Assignments</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_No_Valid_Assignments</shortDescription>
+        <value>No valid assignments or unassignments processed.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_OnlyDraftUpdate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Record update allowed only in Draft stage.</shortDescription>
+        <value>You cannot update the Service Request once Submitted.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_OrgNameRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_OrgNameRequired</shortDescription>
+        <value>Please enter your organization name.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_OrgWideEmailAddress</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_OrgWideEmailAddress</shortDescription>
+        <value>noreply@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_OwnerRoleAssignmentRestriction</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Owner Role Assignment Restriction</shortDescription>
+        <value>Only users with the Owner role can assign the Owner role.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_PhoneNumberRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_PhoneNumberRequired</shortDescription>
+        <value>Please enter your phone number.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_PreferredLanguageRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_PreferredLanguageRequired</shortDescription>
+        <value>Please choose a preferred language.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_ProfileFetchedSuccess</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_ProfileFetchedSuccess</shortDescription>
+        <value>Profile fetched successfully.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_RegisteredCityRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Registered City Required.</shortDescription>
+        <value>Registered city is required</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_RegisteredStateRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Registered State Required.</shortDescription>
+        <value>Registered state is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_ScenarioRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_ScenarioRequired.</shortDescription>
+        <value>scenario is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_SearchKeyRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_SearchKeyRequired</shortDescription>
+        <value>Search key is required when duplicateSearch is false</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_SearchLettersOnly</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_SearchLettersOnly</shortDescription>
+        <value>Please enter letters only in the search.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_ServerErrorPrefix</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_ServerErrorPrefix</shortDescription>
+        <value>Server error occurred:</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Server_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Server_Error</shortDescription>
+        <value>Server Error</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_ServiceRequestTypeAgentDetailsUpdate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Service Request Type Agent Details Update</shortDescription>
+        <value>Agent Details Update</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_ServiceRequestTypeInvalid</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error: Invalid serviceRequestType</shortDescription>
+        <value>Invalid serviceRequestType.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_ServiceRequestTypeRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error: Missing serviceRequestType</shortDescription>
+        <value>serviceRequestType is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_SubCategoryBrokerAgentDetailsUpdate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sub Category Broker Agent Details Update</shortDescription>
+        <value>Broker Agent Details Update</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_SubCategoryInvalid</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error: Invalid subCategory</shortDescription>
+        <value>Invalid subCategory.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_SubCategoryRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_SubCategoryRequired</shortDescription>
+        <value>Sub Category are required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_TitleRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_TitleRequired</shortDescription>
+        <value>Please enter the title.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_ToDateCannotFuture</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_ToDateCannotFuture</shortDescription>
+        <value>The “To” date cannot be in the future.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_ToDateMissing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_ToDateMissing</shortDescription>
+        <value>“To” date is missing.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP URL</shortDescription>
+        <value>https://bloomholding.lightning.force.com/</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_UnauthorizedRole</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_UnauthorizedRole</shortDescription>
+        <value>Your role is not authorized. Only Admin, Super Admin, CEO, Owner, Partner, Authorized Signatory Officer or Agent roles have access.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Units_Fetched_Successfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Units_Fetched_Successfully</shortDescription>
+        <value>Units fetched successfully.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Update_Success</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Update_Success</shortDescription>
+        <value>Assignments updated successfully.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_UpdatedOnDatesCannotFuture</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_UpdatedOnDatesCannotFuture</shortDescription>
+        <value>updatedOnFrom and updatedOnTo cannot be a future date.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_UpdatedOnFromFuture</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error: updatedOnFrom is a future date</shortDescription>
+        <value>updatedOnFrom cannot be a future date.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_UpdatedOnRangeInvalid</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error: updatedOnFrom after updatedOnTo</shortDescription>
+        <value>updatedOnFrom cannot be after updatedOnTo.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_UpdatedOnToFuture</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error: updatedOnTo is a future date</shortDescription>
+        <value>updatedOnTo cannot be a future date.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_UpdatedOnToRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Error: updatedOnTo missing when updatedOnFrom provided</shortDescription>
+        <value>updatedOnTo is required when updatedOnFrom is provided.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Upload_All_Success</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Upload_All_Success</shortDescription>
+        <value>All documents uploaded and linked successfully.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Upload_Document_Validation_Failure</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Upload_Document_Validation_Failure</shortDescription>
+        <value>Validation failed for {0} document of {1}</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Upload_File_Size_Exceeded</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Upload_File_Size_Exceeded</shortDescription>
+        <value>File size exceeds the maximum limit of 5 MB. Please upload a smaller file.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Upload_Invalid_DocumentType</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Upload_Invalid_DocumentType</shortDescription>
+        <value>Invalid document type: {0}</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Upload_Invalid_File_Type</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Upload_Invalid_File_Type</shortDescription>
+        <value>Invalid file type. Please upload a PDF, JPG, JPEG, or PNG file.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Upload_Missing_Document_Record</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Upload_Missing_Document_Record</shortDescription>
+        <value>Missing Document__c record for documentType: {0}, parentId: {1}</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Upload_RequiredField_Missing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Upload_RequiredField_Missing</shortDescription>
+        <value>{0} is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_Upload_Validation_Failure_Summary</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_Upload_Validation_Failure_Summary</shortDescription>
+        <value>One or more document uploads failed validation.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_UserInactive</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_UserInactive</shortDescription>
+        <value>User is not active.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_UserTerminated</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_UserTerminated</shortDescription>
+        <value>User is terminated.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_UserTokenRequired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_UserTokenRequired</shortDescription>
+        <value>userToken is required.</value>
+    </labels>
+    <labels>
+        <fullName>BAPP_ValidationFailed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BAPP_ValidationFailed</shortDescription>
+        <value>Validation Failed</value>
+    </labels>
+    <labels>
+        <fullName>BCAPP_Admin_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCAPP_Admin_Email</shortDescription>
+        <value>admin@yopmail.com</value>
+    </labels>
+    <labels>
+        <fullName>BCAPP_BCM_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCAPP_BCM_Email</shortDescription>
+        <value>bcm@yopmail.com</value>
+    </labels>
+    <labels>
+        <fullName>BCAPP_OrgWideEmailAddress</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCAPP_OrgWideEmailAddress</shortDescription>
+        <value>noreply@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>BCAPP_Security_Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BCAPP_Security_Email</shortDescription>
+        <value>security@yopmail.com</value>
+    </labels>
+    <labels>
+        <fullName>BillInstallmentReminder</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BillInstallmentReminder</shortDescription>
+        <value>Email_alert_Milestone_Reached_bill_all_Installments_and_send_reminders</value>
+    </labels>
+    <labels>
+        <fullName>BillToAddress</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BillToAddress</shortDescription>
+        <value>Bloom Central, Sheikh Rashid Bin Saeed St. Rd.18th, P.O. Box 28928, Abu Dhabi, UAE</value>
+    </labels>
+    <labels>
+        <fullName>Bloom_Garden</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bloom_Garden</shortDescription>
+        <value>Soho Square</value>
+    </labels>
+    <labels>
+        <fullName>Booking_Win_Reason</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Booking Win Reason</shortDescription>
+        <value>New Project Launch</value>
+    </labels>
+    <labels>
+        <fullName>Brokeremailregistartionexpirydatetemplateid</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Brokeremailregistartionexpirydatetemplateid</shortDescription>
+        <value>00X1X000006eXRDUA2</value>
+    </labels>
+    <labels>
+        <fullName>BusinessHoursID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BusinessHoursID</shortDescription>
+        <value>01m8d0000012SC3</value>
+    </labels>
+    <labels>
+        <fullName>Case_Updates_Approved</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Case_Updates_Approved</shortDescription>
+        <value>Case_Updates_Approved</value>
+    </labels>
+    <labels>
+        <fullName>Case_Updates_Rejected</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Case_Updates_Rejected</shortDescription>
+        <value>Case_Updates_Rejected</value>
+    </labels>
+    <labels>
+        <fullName>Case_Updates_ReturnToCustomer</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Case_Updates_ReturnToCustomer</shortDescription>
+        <value>Case_Updates_ReturnToCustomer</value>
+    </labels>
+    <labels>
+        <fullName>ChequeBounceCC</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ChequeBounceCC</shortDescription>
+        <value>falissa@bloomholding.com,mkandy@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>ChequeBounceRecipient</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ChequeBounceRecipient</shortDescription>
+        <value>R</value>
+    </labels>
+    <labels>
+        <fullName>CommercialLeaseCCAddress</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CommercialLeaseCCAddress</shortDescription>
+        <value>acaringal@bloomholding.com,drehman@bloomholding.com,clopez@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>Community_Template_for_Owner</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Community Template for Owner</shortDescription>
+        <value>Bloom_Welcome_Email_Template_1749456253567</value>
+    </labels>
+    <labels>
+        <fullName>Day1Call2SlaTime</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Day1Call2SlaTime</shortDescription>
+        <value>4</value>
+    </labels>
+    <labels>
+        <fullName>Day1_Call1_Folllow_Up</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Day1 Call1- Folllow Up</shortDescription>
+        <value>Day1 Call1- Follow Up</value>
+    </labels>
+    <labels>
+        <fullName>Day1_Call2_Folllow_Up</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Day1 Call2- Folllow Up</shortDescription>
+        <value>Day1 Call2- Follow Up</value>
+    </labels>
+    <labels>
+        <fullName>Day1call1SlaTime</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Day1call1SlaTime</shortDescription>
+        <value>1</value>
+    </labels>
+    <labels>
+        <fullName>Day2Call1SlaTime</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Day2Call1SlaTime</shortDescription>
+        <value>4</value>
+    </labels>
+    <labels>
+        <fullName>Day2Call2SlaTime</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Day2Call2SlaTime</shortDescription>
+        <value>4</value>
+    </labels>
+    <labels>
+        <fullName>Day2_Call1_Folllow_Up</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Day2 Call1- Folllow Up</shortDescription>
+        <value>Day2 Call1- Follow Up</value>
+    </labels>
+    <labels>
+        <fullName>Day2_Call2_Folllow_Up</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Day2 Call2- Follow Up</shortDescription>
+        <value>Day2 Call2- Follow Up</value>
+    </labels>
+    <labels>
+        <fullName>Day5Call_SlaTime</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Day5Call SlaTime</shortDescription>
+        <value>16</value>
+    </labels>
+    <labels>
+        <fullName>Day5_Call_Folllow_Up</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Day5 Call- Folllow Up</shortDescription>
+        <value>Day5 Call- Follow Up</value>
+    </labels>
+    <labels>
+        <fullName>DocusignApproverEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignApproverEmail</shortDescription>
+        <value>jpereira@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>DocusignApproverName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignApproverName</shortDescription>
+        <value>Joel Pereira</value>
+    </labels>
+    <labels>
+        <fullName>DocusignBloomSMgrEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignBloomSMgrEmail</shortDescription>
+        <value>halbakri@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>DocusignBloomSMgrName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignBloomSMgrName</shortDescription>
+        <value>Hani Zaki Al Bakri</value>
+    </labels>
+    <labels>
+        <fullName>DocusignBloomSOpsEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignBloomSOpsEmail</shortDescription>
+        <value>bsamal@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>DocusignBloomSOpsName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignBloomSOpsName</shortDescription>
+        <value>Maaz Khan SOps</value>
+    </labels>
+    <labels>
+        <fullName>DocusignBloomSigner0Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignBloomSigner0Email -- NOT IN USE</shortDescription>
+        <value>halbakri@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>DocusignBloomSigner0Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignBloomSigner0Name -- NOT IN USE</shortDescription>
+        <value>Hani Zaki Al Bakri</value>
+    </labels>
+    <labels>
+        <fullName>DocusignBloomSigner1Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignBloomSigner1Email</shortDescription>
+        <value>mdoei@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>DocusignBloomSigner1Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignBloomSigner1Name</shortDescription>
+        <value>Maram Abdulsalam Obaid Doei</value>
+    </labels>
+    <labels>
+        <fullName>DocusignBloomSigner2Email</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignBloomSigner2Email</shortDescription>
+        <value>kalmulla@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>DocusignBloomSigner2Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignBloomSigner2Name</shortDescription>
+        <value>Khalid Mohammed Ali Saadi Almulla</value>
+    </labels>
+    <labels>
+        <fullName>DocusignInitialsReqd</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusignInitialsReqd</shortDescription>
+        <value>False</value>
+    </labels>
+    <labels>
+        <fullName>DocusigneSeal</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusigneSeal</shortDescription>
+        <value>False</value>
+    </labels>
+    <labels>
+        <fullName>DocusigneSealEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusigneSealEmail</shortDescription>
+        <value>bsamal@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>DocusigneStamperEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusigneStamperEmail</shortDescription>
+        <value>amdiaz@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>DocusigneStamperName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocusigneStamperName</shortDescription>
+        <value>Amy Diaz</value>
+    </labels>
+    <labels>
+        <fullName>EmirateReaderUpdateFields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>EmirateReaderUpdateFields</shortDescription>
+        <value>Last Name,First Name,Middle Name,Full Name English,DOB,Gender,Id Number,Expiry Date,Home Mobile #,Home Email,EID Expiry Issue Date,Title Arabic,Full Name Arabic,Nationality English,Passport #,Passport Country,Passport Ex Dt,Place of Birth English,Phone,Occupation,Company,Marital Status,Qualification,Address,Mailing Country,Mailing Street,Mailing City,Mailing State/Province,Mailing Zip/Postal Code</value>
+    </labels>
+    <labels>
+        <fullName>Finance_Group</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Finance_Group</shortDescription>
+        <value>Finance_Group</value>
+    </labels>
+    <labels>
+        <fullName>Financeemailtemplate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Financeemailtemplate</shortDescription>
+        <value>Finance_user_milestone_date_notification_email</value>
+    </labels>
+    <labels>
+        <fullName>HO_Manager_Email</fullName>
+        <categories>Handover</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HO Manager Email</shortDescription>
+        <value>bsamal@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>HandoverAccountManagerEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HandoverAccountManagerEmail</shortDescription>
+        <value>bsamal@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>HandoverBloomEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HandoverBloomEmail</shortDescription>
+        <value>bsamal@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>HandoverBloomPhone</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HandoverBloomPhone</shortDescription>
+        <value>800-Bloom (25666)</value>
+    </labels>
+    <labels>
+        <fullName>HandoverCHOTasksUserIds</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HandoverCHOTasksUserIds</shortDescription>
+        <value>005J7000000kzyaIAA,0058d0000086xZDAAY</value>
+    </labels>
+    <labels>
+        <fullName>HandoverFromEmailAddress</fullName>
+        <categories>Handover</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HandoverFromEmailAddress</shortDescription>
+        <value>bsamal@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>HandoverNoReplyAddress</fullName>
+        <categories>Handover</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>HandoverNoReplyAddress</shortDescription>
+        <value>bsamal@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>Handover_HOAgent_Profiles</fullName>
+        <categories>Handover</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Handover_HOAgent_Profiles</shortDescription>
+        <value>HO Agent</value>
+    </labels>
+    <labels>
+        <fullName>Handover_Operation_Team_Profiles</fullName>
+        <categories>Handover</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Handover_Operation_Team_Profiles</shortDescription>
+        <value>CRM Operations,Operation Manager,Operations Team,SO Inv Mgmt</value>
+    </labels>
+    <labels>
+        <fullName>InvalidOTP</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid OTP</shortDescription>
+        <value>Invalid OTP</value>
+    </labels>
+    <labels>
+        <fullName>LOFinananceTaskSubject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LOFinananceTaskSubject</shortDescription>
+        <value>Finance Task :</value>
+    </labels>
+    <labels>
+        <fullName>LOFinananceTaskSubjectTeamOnly</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LOFinananceTaskSubject(Team Only))</shortDescription>
+        <value>Finance Task :</value>
+    </labels>
+    <labels>
+        <fullName>LRAUpdateChequeTaskSubject</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LRAUpdateChequeTaskSubject</shortDescription>
+        <value>Finance Task :</value>
+    </labels>
+    <labels>
+        <fullName>Lead_Channel_OCR</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead_Channel_OCR</shortDescription>
+        <value>Email</value>
+    </labels>
+    <labels>
+        <fullName>Lead_Retired_Reason</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead Retired Reason</shortDescription>
+        <value>No Answer</value>
+    </labels>
+    <labels>
+        <fullName>Lead_Retirement_Comments</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead Retirement Comments</shortDescription>
+        <value>No Answer</value>
+    </labels>
+    <labels>
+        <fullName>Lead_Source_OCR</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead_Source_OCR</shortDescription>
+        <value>Offline</value>
+    </labels>
+    <labels>
+        <fullName>Lead_SubSource_OCR</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead_SubSource_OCR</shortDescription>
+        <value>Billboards</value>
+    </labels>
+    <labels>
+        <fullName>LocationName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LocationName</shortDescription>
+        <value>Google Map</value>
+    </labels>
+    <labels>
+        <fullName>MarketingNOCEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Marketing NOC Email</shortDescription>
+        <value>drehman@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>MarketingNOCName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MarketingNOCName</shortDescription>
+        <value>Danish Rehman</value>
+    </labels>
+    <labels>
+        <fullName>MemoDirectCommission</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Memo Direct Commission</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>MemoIndirectCommission</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Memo Indirect Commission</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>MilestoneDelayedApprover</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MilestoneDelayedApprover</shortDescription>
+        <value>0058d000007P5jAAAS</value>
+    </labels>
+    <labels>
+        <fullName>MissingRequiredParameterCommType</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Missing Required Parameter - Comm Type</shortDescription>
+        <value>Missing required parameter: commType</value>
+    </labels>
+    <labels>
+        <fullName>MissingRequiredParameterContactIdorEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Missing Required Parameter - ContactId or Email</shortDescription>
+        <value>Missing required parameter: contactId or email</value>
+    </labels>
+    <labels>
+        <fullName>MissingRequiredParameterCustomerKey</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Missing Required Parameter - Customer Key</shortDescription>
+        <value>Missing required parameter: customerKey</value>
+    </labels>
+    <labels>
+        <fullName>MissingRequiredParameterEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Missing Required Parameter - Email</shortDescription>
+        <value>Missing required parameter: email</value>
+    </labels>
+    <labels>
+        <fullName>MissingRequiredParameterOTP</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Missing Required Parameter - OTP</shortDescription>
+        <value>Missing required parameter: otpValue</value>
+    </labels>
+    <labels>
+        <fullName>MissingRequiredParameterProcessType</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Missing Required Parameter - Process Type</shortDescription>
+        <value>Missing required parameter: processType</value>
+    </labels>
+    <labels>
+        <fullName>MissingRequiredParameterTransactionId</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Missing Required Parameter - Transaction Id</shortDescription>
+        <value>Missing required parameter: transactionId</value>
+    </labels>
+    <labels>
+        <fullName>Move_In_Case_Updates_Approved</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Move_In_Case_Updates_Approved</shortDescription>
+        <value>Move_In_Case_Updates_Approved</value>
+    </labels>
+    <labels>
+        <fullName>Move_In_Case_Updates_Approved_Owner</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Move_In_Case_Updates_Approved_Owner</shortDescription>
+        <value>Move_In_Case_Updates_Approved_Owner</value>
+    </labels>
+    <labels>
+        <fullName>OCR_Key</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OCR_Key</shortDescription>
+        <value>AAEAAGlfEZ6C/fXPJTl7lnlMviMotTUfsEUHxEDkiFeBC0MV4cWj96Q/GUUUxwzsOAipsD6SNkqybtIEKKkZyWWG6CWbsNNrZHhM9uDpDIhTTpvBTWnRK3p2CuZgWcg94zM0H41wvYGwdkRVuiPz86HyWug21IEQU78cbjQoB+jV1vO9d6t9JPfKuvTUlofTet2kHJkRwaaMicBwQDo07mvJwAN32py1pQDXlOaxn1BPubxoguq3aDqjqIPwK9BdnCsUdwI0HA8k+bod0cuxhZEC01JqT4+GQCiHsICfrkzILPRigLGq8Scau/yuHDnrP6wh0tg0itmDch2DAdhSZiUN9Y3kAAAAAAAAEFOPc5q6bxjwZgzS9HBKJ1eq2cpKg1ZjJYFOPh4XaZyY/WRBRJMsm9iudApT24/EHXrno90wamDzHAapyK3lv+N2e+bwj5eSlIRBnXgTHvHKhbRcb9w61aZe37WvSZf113JotFQggymHEJLGBAI1MznAJRrZoxSvYts5X4Bb1/fv6DiAlv3hmCzJ6Bin9jkc4FglIakPLI62BemFz796Eq+DNbI5novoeXfliK1iT+/bOjWFioaAEwRO5soLSASWNLGj4gXnhwnf5M3R3AtVxfAF/dDWiNPSKN5CHNJUkKth</value>
+    </labels>
+    <labels>
+        <fullName>OTPAlreadyVerified</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OTP Already Verified</shortDescription>
+        <value>OTP already verified</value>
+    </labels>
+    <labels>
+        <fullName>OTPExpirationMinutes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OTPExpirationMinutes</shortDescription>
+        <value>10</value>
+    </labels>
+    <labels>
+        <fullName>OTPExpired</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OTP expired</shortDescription>
+        <value>OTP expired</value>
+    </labels>
+    <labels>
+        <fullName>OTPLength</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OTPLength</shortDescription>
+        <value>4</value>
+    </labels>
+    <labels>
+        <fullName>OTPNotFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OTP not found</shortDescription>
+        <value>OTP not found</value>
+    </labels>
+    <labels>
+        <fullName>OTPSentSuccessfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OTP Sent Successfully Success Message</shortDescription>
+        <value>OTP sent successfully</value>
+    </labels>
+    <labels>
+        <fullName>OTPVerifiedSuccessfully</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OTP Verified Successfully</shortDescription>
+        <value>OTP Verified Successfully</value>
+    </labels>
+    <labels>
+        <fullName>OpeningEventContactName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OpeningEventContactName</shortDescription>
+        <value>Maria Haddad</value>
+    </labels>
+    <labels>
+        <fullName>OpeningEventEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Opening Event Email</shortDescription>
+        <value>mhaddad@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>Operations_Team</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Operations_Team</shortDescription>
+        <value>Operations_Team</value>
+    </labels>
+    <labels>
+        <fullName>OppBookingExtendedTimerValue</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OppBookingExtendedTimerValue</shortDescription>
+        <value>5</value>
+    </labels>
+    <labels>
+        <fullName>OppBookingTimerStartFromValue</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OppBookingTimerStartFromValue</shortDescription>
+        <value>13</value>
+    </labels>
+    <labels>
+        <fullName>OppDuplicateNotificationRecipients</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OppDuplicateNotificationRecipients</shortDescription>
+        <value>bsamal@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>OrientationEmailSent</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OrientationEmailSent</shortDescription>
+        <value>Home Orientation sent successfully</value>
+    </labels>
+    <labels>
+        <fullName>PaymentModes</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PaymentModes</shortDescription>
+        <value>Cash;Online;Cheque;Wire Transfer;Credit Card;Mortgage Cheque;Security Cheque</value>
+    </labels>
+    <labels>
+        <fullName>ProfilesToSkipValidationForHandover</fullName>
+        <categories>Handover</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProfilesToSkipValidationForHandover</shortDescription>
+        <value>System Administrator,Handover Manager</value>
+    </labels>
+    <labels>
+        <fullName>Projects_Available_for_Community</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Projects_Available_for_Community</shortDescription>
+        <value>Bloom Gardens,AD Hills Villas,Bloom Heights,Bloom Towers</value>
+    </labels>
+    <labels>
+        <fullName>RenewedSuccessfullyMessage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Renewed Successfully Message</shortDescription>
+        <value>renewed successfully</value>
+    </labels>
+    <labels>
+        <fullName>SalesClosureDays</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SalesClosureDays</shortDescription>
+        <value>3</value>
+    </labels>
+    <labels>
+        <fullName>SalesOrderCancellationApprovalLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SalesOrderCancellationApprovalLabel</shortDescription>
+        <value>Sales_Order_Cancellation_Process</value>
+    </labels>
+    <labels>
+        <fullName>SalesforceURL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SalesforceURL</shortDescription>
+        <value>https://bloomholding.lightning.force.com/lightning.force.com</value>
+    </labels>
+    <labels>
+        <fullName>Salesforce_OCR_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Salesforce OCR URL</shortDescription>
+        <value>https://bloomholding.lightning.force.com</value>
+    </labels>
+    <labels>
+        <fullName>SevenDaysFromToday</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SevenDaysFromToday</shortDescription>
+        <value>7</value>
+    </labels>
+    <labels>
+        <fullName>SkipRRR_Profiles</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SkipRRR_Profiles</shortDescription>
+        <value>CRM Operations</value>
+    </labels>
+    <labels>
+        <fullName>TenantEnquiryEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Tenant Enquiry Email</shortDescription>
+        <value>tenantenquiry@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>Test_Label</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Test Label</shortDescription>
+        <value>test</value>
+    </labels>
+    <labels>
+        <fullName>TradelicenseexpiryTemplate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TradelicenseexpiryTemplate</shortDescription>
+        <value>00X1X000006edj7UAA</value>
+    </labels>
+    <labels>
+        <fullName>UnitApprovalProcessLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UnitApprovalProcessLabel</shortDescription>
+        <value>Unit_Assignment_Approval_Process</value>
+    </labels>
+    <labels>
+        <fullName>UnitBookingTimeExtendApproval</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UnitBookingTimeExtendApproval</shortDescription>
+        <value>OpportunityUnitBookingTimeExtendApproval</value>
+    </labels>
+    <labels>
+        <fullName>UserIsNotActive</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User Is Not Active</shortDescription>
+        <value>User is not active.</value>
+    </labels>
+    <labels>
+        <fullName>UserIsTerminated</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User is Terminated</shortDescription>
+        <value>User is Terminated.</value>
+    </labels>
+    <labels>
+        <fullName>UserNotFoundwithContactIdorEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>User not found with ContactId or Email</shortDescription>
+        <value>If an account exists with this email address, an OTP has been sent.</value>
+    </labels>
+    <labels>
+        <fullName>WrokorderEntitlementActiveVersionName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wrokorder Entitlement Active Version Name</shortDescription>
+        <value>Workorder Entitlement V2</value>
+    </labels>
+    <labels>
+        <fullName>bccButtonLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>bccButtonLabel</shortDescription>
+        <value>Send BCC</value>
+    </labels>
+    <labels>
+        <fullName>bccEmailError</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>bccEmailError</shortDescription>
+        <value>Email failed to send!</value>
+    </labels>
+    <labels>
+        <fullName>bccEmailSent</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>bccEmailSent</shortDescription>
+        <value>BCC Email sent successfully</value>
+    </labels>
+    <labels>
+        <fullName>booking_ShowValidation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>booking_ShowValidation</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>communityName</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>communityName</shortDescription>
+        <value>Sohosquare</value>
+    </labels>
+    <labels>
+        <fullName>defaultOrgWideEmailAddress</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>defaultOrgWideEmailAddress</shortDescription>
+        <value>noreply-salesit@bloomholding.com</value>
+    </labels>
+    <labels>
+        <fullName>loSyncUser</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>loSyncUser for finance task creation</shortDescription>
+        <value>Mahammood Kamal Nadiyan Kandy</value>
+    </labels>
+    <labels>
+        <fullName>milestoneDelayedEmailTemplate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>milestoneDelayedEmailTemplate</shortDescription>
+        <value>milestoneDelayedEmailTemplate</value>
+    </labels>
+    <labels>
+        <fullName>noRecordFound</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>noRecordFound</shortDescription>
+        <value>No record found</value>
+    </labels>
+    <labels>
+        <fullName>nocButtonLabel</fullName>
+        <categories>Handover</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>nocButtonLabel</shortDescription>
+        <value>Send NOC</value>
+    </labels>
+    <labels>
+        <fullName>opportunityUpdateApiFields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>opportunityUpdateApiFields</shortDescription>
+        <value>LeadSource,LeadSubSource__c,AgentType__c,BrokerAgencyAccount__c,BrokerAgentContact__c,Broker_Company_Agent_Name__c,Sale_Type__c,PurposeOfUse__c</value>
+    </labels>
+    <labels>
+        <fullName>paymentReminderSchedule_Days</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>paymentReminderSchedule_Days</shortDescription>
+        <value>15</value>
+    </labels>
+    <labels>
+        <fullName>personAccountUpdateApiFields</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>personAccountUpdateApiFields</shortDescription>
+        <value>Salutation,FirstName,MiddleName,LastName,NameinArabic__c,Gender__pc,CustomerType__c,CustomerSubType__c,ResidentStatus__pc,PassportNumber__pc,PlaceofIssue__pc,Nationality__c,Religion__pc,AnnualIncome__pc,MaritalStatus__pc,No_of_Children__pc,CurrentHome__c,First_Purchase__c,No_of_Properties_Owned__c,EmploymentStatus__pc,Company__pc,NoofYearswithCompany__pc,Position__pc,PersonMailingAddress</value>
+    </labels>
+    <labels>
+        <fullName>selectAtleastOneRecord</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>selectAtleastOneRecord</shortDescription>
+        <value>Please select at least one record</value>
+    </labels>
+    <labels>
+        <fullName>sendBCCLWCHeading</fullName>
+        <categories>Handover</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sendBCCLWCHeading</shortDescription>
+        <value>Select units to send BCC</value>
+    </labels>
+    <labels>
+        <fullName>sendCHOInviteHeading</fullName>
+        <categories>Handover</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sendCHOInviteHeading</shortDescription>
+        <value>Send CHO Invite</value>
+    </labels>
+    <labels>
+        <fullName>sendNOCLWCHeading</fullName>
+        <categories>Handover</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sendNOCLWCHeading</shortDescription>
+        <value>Send NOC</value>
+    </labels>
+    <labels>
+        <fullName>subStatus_SO_Validation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>subStatus_SO_Validation</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>thirtyDaysFromToday</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>thirtyDaysFromToday</shortDescription>
+        <value>30</value>
+    </labels>
+    <labels>
+        <fullName>unitButtonLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>unitButtonLabel</shortDescription>
+        <value>Search Units</value>
+    </labels>
+</CustomLabels>

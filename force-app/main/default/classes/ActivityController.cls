@@ -56,7 +56,6 @@ public class ActivityController {
         Date nextDate = Date.today().addDays(1);
         String subject = '';
         Date dueDate; 
-        Integer slaHours = 3;
         
         Map<String, String> followUpMapping = new Map<String, String>{TASK_SUBJECT_DAY_1_CALL_1 => TASK_SUBJECT_DAY_2_CALL_1,
             TASK_SUBJECT_DAY_2_CALL_1 => TASK_SUBJECT_DAY_3_CALL_1
@@ -75,13 +74,8 @@ public class ActivityController {
                         System.debug('subject'+subject);
                     }
                 }
-        Id tempBussinessHourId =  objLead.BusinessHour__c != null ? objLead.BusinessHour__c : defaultBHId;
-        DateTime slaDateTime = Utility.calculateSLAEndDate( tempBussinessHourId, DateTime.now(), slaHours);
-        Task objNewTask = objActivityService.getActivityWithSLA(subject, dueDate, dueDate, '', 
-                                                                TASK_OPEN_STATUS, TASK_TYPE, TASK_PRIORITY, 1, objTask.OwnerId, objTask.WhoId, slaDateTime, tempBussinessHourId, slaHours, 0);
-                            
-    //    Task objNewTask = objActivityService.getActivity(subject, dueDate, dueDate, '', 
-      //                                                   TASK_OPEN_STATUS, TASK_TYPE, TASK_PRIORITY, 1, objTask.OwnerId, objTask.WhoId); 
+        Task objNewTask = objActivityService.getActivity(subject, dueDate, dueDate, '', 
+                                                         TASK_OPEN_STATUS, TASK_TYPE, TASK_PRIORITY, 1, objTask.OwnerId, objTask.WhoId); 
         return objNewTask;
     }
 }

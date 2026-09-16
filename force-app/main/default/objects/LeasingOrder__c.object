@@ -1,0 +1,2152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Leasing_Contract_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Leasing_Contract_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Leasing_Order_Compact_layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Leasing_Order_Compact_layout</fullName>
+        <fields>LeasingOrderNumber__c</fields>
+        <fields>Account__c</fields>
+        <fields>Opportunity__c</fields>
+        <fields>LeasingStartDate__c</fields>
+        <fields>LeasingEndDate__c</fields>
+        <fields>SubStatus__c</fields>
+        <fields>OwnerId</fields>
+        <label>Leasing Order Compact layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fieldSets>
+        <fullName>SAP_Integration_Fields</fullName>
+        <description>List of fields to monitor for initiating SAP integration upon any value changes.</description>
+        <label>SAP Integration Fields</label>
+    </fieldSets>
+    <fields>
+        <fullName>Account_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>If(Account__r.IsPersonAccount, Account__r.FirstName &amp;&quot; &quot;&amp; Account__r.LastName, Account__r.Name)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Account Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Leasing Orders</relationshipLabel>
+        <relationshipName>Leasing_Orders</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AdditionalSecurityDeposite__c</fullName>
+        <label>Additional Security Deposite</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AdminFee__c</fullName>
+        <label>Admin Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AnnualRenewalRent__c</fullName>
+        <formula>AnnualRent__c +  RERAIndex__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Annual Renewal Rent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AnnualRentVATAmount__c</fullName>
+        <formula>If( (ISPICKVAL(Unit__r.PropertyUsage__c, &apos;Commercial&apos;) ||
+ISPICKVAL(Unit__r.PropertyUsage__c, &apos;Retail&apos;)) &amp;&amp; isVATApplied__c = true, RentalAmountAfterDiscount__c * Unit__r.Project__r.Leasing_Company__r.LeasingVAT__c,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Annual Rent VAT</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AnnualRent__c</fullName>
+        <label>Annual Rent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AppliedAnnualRent__c</fullName>
+        <label>Applied Annual Rent</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ApprovalStatus__c</fullName>
+        <defaultValue>&quot;Pending&quot;</defaultValue>
+        <label>Approval Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>true</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Documents Approved</fullName>
+                    <default>false</default>
+                    <label>Documents Approved</label>
+                </value>
+                <value>
+                    <fullName>Documents Rejected</fullName>
+                    <default>false</default>
+                    <label>Documents Rejected</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+                <value>
+                    <fullName>Submitted</fullName>
+                    <default>false</default>
+                    <label>Submitted</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>BloomEmployee__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Bloom Employee</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BloomSisterCompanyEmployee__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Bloom Sister Company Employee</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BloomTeamApprovalStatus__c</fullName>
+        <label>Bloom Team Approval Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>false</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+                <value>
+                    <fullName>Submitted</fullName>
+                    <default>false</default>
+                    <label>Submitted</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>BookingAmount__c</fullName>
+        <label>Booking Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Building__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Building</label>
+        <referenceTo>Building__c</referenceTo>
+        <relationshipLabel>Leasing Orders</relationshipLabel>
+        <relationshipName>LeasingOrders</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CEO__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>CEO</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Leasing_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CaseClosed__c</fullName>
+        <label>Case Closed</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cancellation with no refund</fullName>
+                    <default>false</default>
+                    <label>Cancellation with no refund</label>
+                </value>
+                <value>
+                    <fullName>Cancellation with refund</fullName>
+                    <default>false</default>
+                    <label>Cancellation with refund</label>
+                </value>
+                <value>
+                    <fullName>Cancellation with compensation and refund</fullName>
+                    <default>false</default>
+                    <label>Cancellation with compensation and refund</label>
+                </value>
+                <value>
+                    <fullName>Case closed by Court</fullName>
+                    <default>false</default>
+                    <label>Case closed by Court</label>
+                </value>
+                <value>
+                    <fullName>Claim Rejected by Court</fullName>
+                    <default>false</default>
+                    <label>Claim Rejected by Court</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ContractPeriodAR__c</fullName>
+        <description>Stores the leasing contract period dynamically formatted in Arabic. Used for Nintex DocGen.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Automatically calculated in Arabic based on Start and End dates.</inlineHelpText>
+        <label>Contract Period (AR)</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ContractPeriodEN__c</fullName>
+        <description>Stores the leasing contract period dynamically formatted in English (e.g., &quot;5 months and 2 days&quot;). Used for Nintex DocGen.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Automatically calculated in English based on Start and End dates.</inlineHelpText>
+        <label>Contract Period (EN)</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ContractPeriod__c</fullName>
+        <description>Stores the dynamically calculated contract period duration in months and days.</description>
+        <externalId>false</externalId>
+        <label>Contract Period</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ContractTerm__c</fullName>
+        <externalId>false</externalId>
+        <label>Contract Term</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CreditBalance__c</fullName>
+        <defaultValue>0</defaultValue>
+        <label>Credit Balance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>CurrentCondition__c</fullName>
+        <label>Current Condition</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Shell and Core</fullName>
+                    <default>false</default>
+                    <label>Shell and Core</label>
+                </value>
+                <value>
+                    <fullName>Fitted</fullName>
+                    <default>false</default>
+                    <label>Fitted</label>
+                </value>
+                <value>
+                    <fullName>As is</fullName>
+                    <default>false</default>
+                    <label>As is</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CustomerApprovalStatus__c</fullName>
+        <label>Customer Approval Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>false</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CustomerName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account__r.Name</formula>
+        <label>Customer Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DiscountAmount__c</fullName>
+        <label>Discount Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>DiscountPercentageRounded__c</fullName>
+        <externalId>false</externalId>
+        <formula>VALUE(TEXT(FLOOR( DiscountPercentage__c * 100)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Discount Percentage Rounded</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DiscountPercentage__c</fullName>
+        <label>Discount(%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>DiscountType__c</fullName>
+        <label>Discount Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Percentage</fullName>
+                    <default>false</default>
+                    <label>Percentage</label>
+                </value>
+                <value>
+                    <fullName>Amount</fullName>
+                    <default>false</default>
+                    <label>Amount</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>DocusignEnvId__c</fullName>
+        <externalId>false</externalId>
+        <label>DocusignEnvId</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Drawloop_Next_1__c</fullName>
+        <description>this is for Moveout form generation</description>
+        <externalId>false</externalId>
+        <label>Drawloop_Next_1</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Drawloop_Next__c</fullName>
+        <externalId>false</externalId>
+        <label>Drawloop Next</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dubaireraindexattached__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Dubai rera index attached</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>EjariReceived__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Ejari / Tawtheeq Received?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>EjariTawtheeqExpiryDate__c</fullName>
+        <label>Ejari/Tawtheeq Expiry Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>EjariTawtheeqFee__c</fullName>
+        <label>Ejari / Tawtheeq Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ExecutiveDirector__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Executive Director</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Leasing_Contracts1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ExtraChequeFee__c</fullName>
+        <label>Extra Cheque Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>FamilyStatus__c</fullName>
+        <label>Family Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Individual</fullName>
+                    <default>false</default>
+                    <label>Individual</label>
+                </value>
+                <value>
+                    <fullName>Family</fullName>
+                    <default>false</default>
+                    <label>Family</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>FitOutSecurityDeposit__c</fullName>
+        <label>Fit Out Security Deposit</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>GracePeriodFormula__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(GracePeriod__c/30 &gt; 1, TEXT(GracePeriod__c/30)+&apos; Months&apos;, TEXT(GracePeriod__c/30)+&apos; Month&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Grace Period</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GracePeriod__c</fullName>
+        <externalId>false</externalId>
+        <label>Grace Period</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HandoverCondition__c</fullName>
+        <label>Handover Condition</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Shell and Core</fullName>
+                    <default>false</default>
+                    <label>Shell and Core</label>
+                </value>
+                <value>
+                    <fullName>Fitted</fullName>
+                    <default>false</default>
+                    <label>Fitted</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>InitiateOfferSignature__c</fullName>
+        <defaultValue>true</defaultValue>
+        <label>Send offer Letter thru DocuSign</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IntegrationMessage__c</fullName>
+        <label>Integration Message</label>
+        <length>32768</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IntegrationStatus__c</fullName>
+        <label>Integration Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Integrated</fullName>
+                    <default>false</default>
+                    <label>Not Integrated</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Success</fullName>
+                    <default>false</default>
+                    <label>Success</label>
+                </value>
+                <value>
+                    <fullName>Failed</fullName>
+                    <default>false</default>
+                    <label>Failed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>IntegrationTriggeredDate__c</fullName>
+        <label>Integration Triggered Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LeaseTerminationRefundType__c</fullName>
+        <label>Lease Termination Refund Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Early Termination with Refund - E</fullName>
+                    <default>false</default>
+                    <label>Early Termination with Refund - E</label>
+                </value>
+                <value>
+                    <fullName>Early Termination without Refund - T</fullName>
+                    <default>false</default>
+                    <label>Early Termination without Refund - T</label>
+                </value>
+                <value>
+                    <fullName>Normal Termination with Refund - R</fullName>
+                    <default>false</default>
+                    <label>Normal Termination with Refund - R</label>
+                </value>
+                <value>
+                    <fullName>Normal Termination without Refund - N</fullName>
+                    <default>false</default>
+                    <label>Normal Termination without Refund - N</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>LeaseType__c</fullName>
+        <label>Lease Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>false</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>Renewal</fullName>
+                    <default>false</default>
+                    <label>Renewal</label>
+                </value>
+                <value>
+                    <fullName>Termination</fullName>
+                    <default>false</default>
+                    <label>Termination</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Lease_Terminated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Lease Terminated</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LeasingContractMonths__c</fullName>
+        <externalId>false</externalId>
+        <label>Contract In Months</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeasingContractSignedDate__c</fullName>
+        <label>Leasing Contract Signed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LeasingEndDate__c</fullName>
+        <label>End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LeasingOfferAssignedDate__c</fullName>
+        <label>Leasing Offer Assigned Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LeasingOfferSignedDate__c</fullName>
+        <label>Leasing Offer Signed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LeasingOffer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Offer</label>
+        <referenceTo>LeasingOffer__c</referenceTo>
+        <relationshipLabel>Leasing Orders</relationshipLabel>
+        <relationshipName>Leasing_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LeasingOrderApproved__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>LeasingOrderApproved</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LeasingOrderDataMigrationUniqueKey__c</fullName>
+        <externalId>true</externalId>
+        <label>Leasing Order Data Migration Unique Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeasingOrderNumber__c</fullName>
+        <displayFormat>LO{00000}</displayFormat>
+        <externalId>false</externalId>
+        <label>Leasing Order Number</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>LeasingSAPContractId__c</fullName>
+        <externalId>true</externalId>
+        <label>Leasing SAP Contract Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeasingStartDate__c</fullName>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LegacyContratNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Legacy Contract Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LegalStatus__c</fullName>
+        <label>Legal Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Legal Verification in process</fullName>
+                    <default>false</default>
+                    <label>Legal Verification in process</label>
+                </value>
+                <value>
+                    <fullName>Case filed</fullName>
+                    <default>false</default>
+                    <label>Case filed</label>
+                </value>
+                <value>
+                    <fullName>With Lawyer</fullName>
+                    <default>false</default>
+                    <label>With Lawyer</label>
+                </value>
+                <value>
+                    <fullName>Waiting for next hearing</fullName>
+                    <default>false</default>
+                    <label>Waiting for next hearing</label>
+                </value>
+                <value>
+                    <fullName>Waiting for Judgement</fullName>
+                    <default>false</default>
+                    <label>Waiting for Judgement</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>MasterLeasingOrder__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Master Leasing Order</label>
+        <referenceTo>LeasingOrder__c</referenceTo>
+        <relationshipLabel>Renewal Leasing Orders</relationshipLabel>
+        <relationshipName>RenewalLeasingOrders</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>MoveOutDate__c</fullName>
+        <label>Move Out Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>NoofAdults__c</fullName>
+        <externalId>false</externalId>
+        <label>No of Adults</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NoofChildren__c</fullName>
+        <externalId>false</externalId>
+        <label>No of Children</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NoofPDCRecieved__c</fullName>
+        <externalId>false</externalId>
+        <label>No of PDC Recieved</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NoofParking__c</fullName>
+        <externalId>false</externalId>
+        <label>No of Parking</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NumberofPets__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Pets</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OfferValidityDays__c</fullName>
+        <externalId>false</externalId>
+        <label>Offer Validity Days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipName>Leasing_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>OrderIssueDate__c</fullName>
+        <formula>DATEVALUE( CreatedDate )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Order Issue Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>OwnerName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.FirstName  &amp;&quot; &quot; &amp;  Owner:User.LastName</formula>
+        <label>Owner Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OwnerSAPBPNumber__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.SAP_BP_No__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Owner SAP BP Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PDCHandedOverTo__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>PDC Handed Over To</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Leasing_Orders</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PDCReceiveDate__c</fullName>
+        <label>PDC Receive Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>PaymentTerm__c</fullName>
+        <label>Annual Payment Term</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1 Installment</fullName>
+                    <default>false</default>
+                    <label>1 Installment</label>
+                </value>
+                <value>
+                    <fullName>2 Installments</fullName>
+                    <default>false</default>
+                    <label>2 Installments</label>
+                </value>
+                <value>
+                    <fullName>3 Installments</fullName>
+                    <default>false</default>
+                    <label>3 Installments</label>
+                </value>
+                <value>
+                    <fullName>4 Installments</fullName>
+                    <default>false</default>
+                    <label>4 Installments</label>
+                </value>
+                <value>
+                    <fullName>6 Installments</fullName>
+                    <default>false</default>
+                    <label>6 Installments</label>
+                </value>
+                <value>
+                    <fullName>12 Installments</fullName>
+                    <default>false</default>
+                    <label>12 Installments</label>
+                </value>
+                <value>
+                    <fullName>0 Installment</fullName>
+                    <default>false</default>
+                    <label>0 Installment</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>Leasing Orders</relationshipLabel>
+        <relationshipName>LeasingOrders</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PropertyID__c</fullName>
+        <externalId>false</externalId>
+        <label>Property ID</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PropertyName__c</fullName>
+        <label>Property Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>ProjectLeadOpportunity</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>PropertyUsage__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Unit__r.PropertyUsage__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Property Usage</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RERAIndex__c</fullName>
+        <label>RERA Index</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>RERANumber__c</fullName>
+        <externalId>false</externalId>
+        <label>RERA Number (Ejari/Tawtheeq))</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReasonforTermination__c</fullName>
+        <externalId>false</externalId>
+        <label>Reason for Termination</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RefundSettledByFinance__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>this will be updated by finance team through the action at layout level</description>
+        <label>Refund Settled By Finance</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Refundformattached__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Refund form attached</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>RejectionReason__c</fullName>
+        <externalId>false</externalId>
+        <label>Rejection Reason</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RelatedPartyBloomHolding__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Related Party (Bloom Holding)</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Remarks__c</fullName>
+        <label>Remarks</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>RenewalFee__c</fullName>
+        <label>Renewal Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>RentForPeriod__c</fullName>
+        <formula>if(TotalRentAfterDiscount__c &gt; 0, TotalRentAfterDiscount__c , RentalAmountAfterDiscount__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>RentForPeriod</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>RentPerArea__c</fullName>
+        <formula>AnnualRent__c / Unit__r.LeasingUnitSizesqm__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Rent per Area</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>RentalAmountAfterDiscount__c</fullName>
+        <label>Rental Amount After Discount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>SAPAnnualRenewal__c</fullName>
+        <defaultValue>0</defaultValue>
+        <label>SAP Annual Renewal</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>SAPBPNumber__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account__r.SAP_BP_No__c</formula>
+        <label>SAP BP Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPCompanyCode__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Company Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPConditionFrequency__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>SAP Condition Frequency</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SecurityDepositPercent__c</fullName>
+        <label>Security Deposit(%)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>SecurityDepositType__c</fullName>
+        <label>Security Deposit Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Amount</fullName>
+                    <default>false</default>
+                    <label>Amount</label>
+                </value>
+                <value>
+                    <fullName>Percentage</fullName>
+                    <default>false</default>
+                    <label>Percentage</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SecurityDeposit__c</fullName>
+        <defaultValue>0</defaultValue>
+        <label>Security Deposit Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>SendToSAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Send To SAP</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ServiceChargeFee__c</fullName>
+        <label>Service Charge Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Leasing Offer</fullName>
+                    <default>true</default>
+                    <label>Leasing Offer</label>
+                </value>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>false</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Approve Pending</fullName>
+                    <default>false</default>
+                    <label>Approve Pending</label>
+                </value>
+                <value>
+                    <fullName>Leased</fullName>
+                    <default>false</default>
+                    <label>Leased</label>
+                </value>
+                <value>
+                    <fullName>Cancelled</fullName>
+                    <default>false</default>
+                    <label>Cancelled</label>
+                </value>
+                <value>
+                    <fullName>Terminated</fullName>
+                    <default>false</default>
+                    <label>Terminated</label>
+                </value>
+                <value>
+                    <fullName>Occupied</fullName>
+                    <default>false</default>
+                    <label>Occupied</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SubStatus__c</fullName>
+        <label>Sub Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Offer Generated</fullName>
+                    <default>false</default>
+                    <label>Offer Generated</label>
+                </value>
+                <value>
+                    <fullName>Offer Sent to Customer</fullName>
+                    <default>false</default>
+                    <label>Offer Sent to Customer</label>
+                </value>
+                <value>
+                    <fullName>Offer PO Approval - in Progress</fullName>
+                    <default>false</default>
+                    <label>Offer PO Approval - in Progress</label>
+                </value>
+                <value>
+                    <fullName>Offer Approved</fullName>
+                    <default>false</default>
+                    <label>Offer Approved</label>
+                </value>
+                <value>
+                    <fullName>Sent to Customer</fullName>
+                    <default>false</default>
+                    <label>Sent to Customer</label>
+                </value>
+                <value>
+                    <fullName>Customer Documents Pending</fullName>
+                    <default>false</default>
+                    <label>Customer Documents Pending</label>
+                </value>
+                <value>
+                    <fullName>Customer Documents Approved</fullName>
+                    <default>false</default>
+                    <label>Customer Documents Approved</label>
+                </value>
+                <value>
+                    <fullName>Agreement Signed</fullName>
+                    <default>false</default>
+                    <label>Agreement Signed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TORType__c</fullName>
+        <label>TOR Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Natural</fullName>
+                    <default>false</default>
+                    <label>Natural</label>
+                </value>
+                <value>
+                    <fullName>Artificial</fullName>
+                    <default>false</default>
+                    <label>Artificial</label>
+                </value>
+                <value>
+                    <fullName>None</fullName>
+                    <default>true</default>
+                    <label>None</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TOR__c</fullName>
+        <label>TOR%</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>TerminationDate__c</fullName>
+        <label>Termination Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TerminationInitiatedBy__c</fullName>
+        <label>Termination Initiated By</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Tenant</fullName>
+                    <default>false</default>
+                    <label>Tenant</label>
+                </value>
+                <value>
+                    <fullName>Company</fullName>
+                    <default>false</default>
+                    <label>Company</label>
+                </value>
+                <value>
+                    <fullName>Landlord</fullName>
+                    <default>false</default>
+                    <label>Landlord</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TerminationMaintenanceCharge__c</fullName>
+        <label>Termination Maintenance Charge</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>TerminationNoticeDate__c</fullName>
+        <label>Termination Notice Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>TerminationOtherCharge__c</fullName>
+        <label>Termination Other Charge</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>TerminationPenalityCharge__c</fullName>
+        <label>Termination Penality Charge</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>TerminationType__c</fullName>
+        <label>Termination Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Break- Lease</fullName>
+                    <default>false</default>
+                    <label>Break- Lease</label>
+                </value>
+                <value>
+                    <fullName>Early</fullName>
+                    <default>false</default>
+                    <label>Early</label>
+                </value>
+                <value>
+                    <fullName>Financial reason</fullName>
+                    <default>false</default>
+                    <label>Financial reason</label>
+                </value>
+                <value>
+                    <fullName>Low budget</fullName>
+                    <default>false</default>
+                    <label>Low budget</label>
+                </value>
+                <value>
+                    <fullName>Restricted use</fullName>
+                    <default>false</default>
+                    <label>Restricted use</label>
+                </value>
+                <value>
+                    <fullName>Legal case</fullName>
+                    <default>false</default>
+                    <label>Legal case</label>
+                </value>
+                <value>
+                    <fullName>Relocation</fullName>
+                    <default>false</default>
+                    <label>Relocation</label>
+                </value>
+                <value>
+                    <fullName>Leaving Country</fullName>
+                    <default>false</default>
+                    <label>Leaving Country</label>
+                </value>
+                <value>
+                    <fullName>Unit upgrade</fullName>
+                    <default>false</default>
+                    <label>Unit upgrade</label>
+                </value>
+                <value>
+                    <fullName>Downsizing</fullName>
+                    <default>false</default>
+                    <label>Downsizing</label>
+                </value>
+                <value>
+                    <fullName>End of contract</fullName>
+                    <default>false</default>
+                    <label>End of contract</label>
+                </value>
+                <value>
+                    <fullName>Maintenance issue</fullName>
+                    <default>false</default>
+                    <label>Maintenance issue</label>
+                </value>
+                <value>
+                    <fullName>Parking issue</fullName>
+                    <default>false</default>
+                    <label>Parking issue</label>
+                </value>
+                <value>
+                    <fullName>Lack of Facilities (Gym, play</fullName>
+                    <default>false</default>
+                    <label>Lack of Facilities (Gym, play</label>
+                </value>
+                <value>
+                    <fullName>Job lost (termination)</fullName>
+                    <default>false</default>
+                    <label>Job lost (termination)</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TermofPayment__c</fullName>
+        <label>Term of Payment</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+                <value>
+                    <fullName>5</fullName>
+                    <default>false</default>
+                    <label>5</label>
+                </value>
+                <value>
+                    <fullName>6</fullName>
+                    <default>false</default>
+                    <label>6</label>
+                </value>
+                <value>
+                    <fullName>7</fullName>
+                    <default>false</default>
+                    <label>7</label>
+                </value>
+                <value>
+                    <fullName>8</fullName>
+                    <default>false</default>
+                    <label>8</label>
+                </value>
+                <value>
+                    <fullName>9</fullName>
+                    <default>false</default>
+                    <label>9</label>
+                </value>
+                <value>
+                    <fullName>10</fullName>
+                    <default>false</default>
+                    <label>10</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TotalAnnualRentwithVAT__c</fullName>
+        <formula>AnnualRentVATAmount__c  +  RentalAmountAfterDiscount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Rent with VAT</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>TotalDiscount__c</fullName>
+        <label>Total Discount</label>
+        <summarizedField>LeasingEscalationSchedule__c.Discount__c</summarizedField>
+        <summaryForeignKey>LeasingEscalationSchedule__c.LeasingOrder__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TotalInstallment__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+    OR(ISBLANK(LeasingEndDate__c), ISBLANK(LeasingStartDate__c), ISBLANK(TEXT(PaymentTerm__c))),
+    &quot;0 installments&quot;,
+    TEXT(
+        ROUND(
+            ((LeasingEndDate__c - LeasingStartDate__c) / 365) * VALUE(LEFT(TEXT(PaymentTerm__c), FIND(&quot; &quot;, TEXT(PaymentTerm__c)) - 1)), 
+            0
+        )
+    ) &amp; &quot; installments&quot;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Installment</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TotalRentAfterDiscount__c</fullName>
+        <label>Total Rent Amount</label>
+        <summarizedField>LeasingEscalationSchedule__c.AfterDiscount__c</summarizedField>
+        <summaryForeignKey>LeasingEscalationSchedule__c.LeasingOrder__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TotalRentForPeriodWithVAT__c</fullName>
+        <formula>IF(isVATApplied__c, TotalRentForPeriod__c * 1.05, TotalRentForPeriod__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Rent For Period With VAT</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>TotalRentForPeriod__c</fullName>
+        <description>This field aggregates the sum of all rent installments from the associated Payment Plan Schedules. It was created to replace the static &apos;RentForPeriod&apos; formula field, ensuring that the exact prorated contract value is accurately reflected based on the generated payment plan.</description>
+        <inlineHelpText>This amount is automatically calculated by summing up the total rent installments from your generated payment plan. It represents the exact prorated rent for this specific contract duration.</inlineHelpText>
+        <label>Total Rent For Period</label>
+        <summarizedField>PaymentPlanSchedule__c.Amount__c</summarizedField>
+        <summaryForeignKey>PaymentPlanSchedule__c.LeasingOrder__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TotalRent__c</fullName>
+        <label>Total Rent with Escalations</label>
+        <summarizedField>LeasingEscalationSchedule__c.TotalRent__c</summarizedField>
+        <summaryForeignKey>LeasingEscalationSchedule__c.LeasingOrder__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>UnitHandOverDate__c</fullName>
+        <label>Unit Hand Over Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>UnitSellingPrice__c</fullName>
+        <formula>Unit__r.SellingPrice__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unit Selling Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Unit__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Unit</label>
+        <referenceTo>Unit__c</referenceTo>
+        <relationshipName>Leasing_Contracts</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Waiveof2monthspenaltyattached__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Waive of 2 months penalty attached</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isChequebouncecase__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>is Cheque bounce case</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isLeasingContractSigned__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Attach_Signed_Leasing_Offer_to_Leasing_Order this flow trigger is updating to true</description>
+        <label>Leasing Contract Signed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isLeasingOfferSigned__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>this is updating from Attach_Signed_Leasing_Offer_to_Leasing_Order flow trigger</description>
+        <label>Leasing Offer Signed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isLegalCase__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>is Legal Case</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isVATApplied__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>VAT Applied</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Leasing Order</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>LeasingStartDate__c</columns>
+        <columns>LeasingEndDate__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>OwnerName__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Leasing_Finance_queue_LeasingOrder</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Leasing Finance queue</label>
+        <queue>Leasing_Finance_queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>Leasing Order Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Leasing Orders</pluralLabel>
+    <profileSearchLayouts>
+        <fields>NAME</fields>
+        <fields>SAPCompanyCode__c</fields>
+        <fields>LeasingSAPContractId__c</fields>
+        <fields>LeasingOrderDataMigrationUniqueKey__c</fields>
+        <fields>LeasingOrderNumber__c</fields>
+        <fields>LeasingStartDate__c</fields>
+        <fields>LeasingEndDate__c</fields>
+        <profileName>Support Administrator</profileName>
+    </profileSearchLayouts>
+    <searchLayouts>
+        <searchResultsAdditionalFields>SAPCompanyCode__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>LeasingSAPContractId__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>LeasingOrderDataMigrationUniqueKey__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>LeasingOrderNumber__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>LeasingStartDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>LeasingEndDate__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>RequireSignedOfferForNewLease</fullName>
+        <active>true</active>
+        <description>For New Leasing Orders, a signed Leasing Offer is required before Bloom Team Approval.</description>
+        <errorConditionFormula>AND(
+    ISPICKVAL(LeaseType__c, &apos;New&apos;),
+    ISPICKVAL(BloomTeamApprovalStatus__c, &apos;Approved&apos;),
+    isLeasingOfferSigned__c = FALSE,
+    OR(
+        ISNEW(),
+        ISCHANGED(BloomTeamApprovalStatus__c)
+    )
+)</errorConditionFormula>
+        <errorDisplayField>BloomTeamApprovalStatus__c</errorDisplayField>
+        <errorMessage>For new leasing orders, a signed leasing offer is required before Bloom Team Approval.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

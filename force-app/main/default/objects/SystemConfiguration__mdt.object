@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Metadata to store Object level settings</description>
+    <fields>
+        <fullName>IsRunAfterDelete__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To be checked when a trigger has to be executed after deleting</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>To be checked when a trigger has to be executed after deleting</inlineHelpText>
+        <label>Is Run After Delete</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsRunAfterInsert__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To be checked when a trigger has to be executed after inserting</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>To be checked when a trigger has to be executed after inserting</inlineHelpText>
+        <label>Is Run After Insert</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsRunAfterUpdate__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To be checked when a trigger has to be executed after update</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>To be checked when a trigger has to be executed after update</inlineHelpText>
+        <label>Is Run After Update</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsRunBeforeDelete__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To be checked when a trigger has to be executed before delete</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>To be checked when a trigger has to be executed before delete</inlineHelpText>
+        <label>Is Run Before Delete</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsRunBeforeInsert__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To be checked when a trigger has to be executed before inserting</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>To be checked when a trigger has to be executed before inserting</inlineHelpText>
+        <label>Is Run Before Insert</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsRunBeforeUpdate__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To be checked when a trigger has to be executed before update</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>To be checked when a trigger has to be executed before update</inlineHelpText>
+        <label>Is Run Before Update</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsRunTrigger__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Field is to capture whether the object trigger has to be executed or not</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>Field is to capture whether the object trigger has to be executed or not</inlineHelpText>
+        <label>Is Run Trigger</label>
+        <type>Checkbox</type>
+    </fields>
+    <label>System Configuration</label>
+    <pluralLabel>System Configurations</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

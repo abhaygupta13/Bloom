@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>WhiteGoodsOfferedWithoutDiscount__c</fullName>
-    <formula>IF(Discount__c == 0.00, IF(Unit_Model__c ==&quot;Studio&quot;,false,IF(Unit_Model__c=&quot;1BHK&quot;,false,IF(Unit_Model__c=&quot;1BHK+1&quot;,false,IF(Unit_Model__c=&quot;2BHK&quot;,false,true)))), false)</formula>
-    <label>White Goods Offered Without Discount</label>
-    <trackHistory>false</trackHistory>
-    <trackTrending>false</trackTrending>
-    <type>Checkbox</type>
-</CustomField>

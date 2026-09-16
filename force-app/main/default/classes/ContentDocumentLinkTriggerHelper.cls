@@ -11,24 +11,23 @@
 
 public without sharing class ContentDocumentLinkTriggerHelper {
     private static final List<String> leasingDocumentList = new List<String>{'Leasing Offer - Signed','Leasing Contract - Signed'};
-        private static final List<String> caseDocumentList = new List<String>{'Broker Agreement - Signed','Signed KYC'};
-            
-            public static void handleFileBeforeInsert(List<ContentDocumentLink> newList) {
-                Set<Id> documentIds = new Set<Id>();
-                
-                // Collect LinkedEntityId values for Document__c
-                for (ContentDocumentLink link : newList) {
-                    if ( link.LinkedEntityId != null && link.LinkedEntityId.getSObjectType() == Document__c.SObjectType && link.ShareType == 'V') {
-                        documentIds.add(link.LinkedEntityId);
-                    }
-                }
-                
-                if (!documentIds.isEmpty()) {
-                    ContentDocumentLinkService objContentDocumentLinkService = ContentDocumentLinkService.getInstance();
-                    List<ContentDocumentLink> existingCDLinkList = objContentDocumentLinkService.getcontentDocumentLinksByIds(documentIds);
-                    objContentDocumentLinkService.deleteContentDocumentLinks(existingCDLinkList);
-                }
+    
+    public static void handleFileBeforeInsert(List<ContentDocumentLink> newList) {
+        Set<Id> documentIds = new Set<Id>();
+        
+        // Collect LinkedEntityId values for Document__c
+        for (ContentDocumentLink link : newList) {
+            if ( link.LinkedEntityId != null && link.LinkedEntityId.getSObjectType() == Document__c.SObjectType && link.ShareType == 'V') {
+                documentIds.add(link.LinkedEntityId);
             }
+        }
+        
+        if (!documentIds.isEmpty()) {
+            ContentDocumentLinkService objContentDocumentLinkService = ContentDocumentLinkService.getInstance();
+            List<ContentDocumentLink> existingCDLinkList = objContentDocumentLinkService.getcontentDocumentLinksByIds(documentIds);
+            objContentDocumentLinkService.deleteContentDocumentLinks(existingCDLinkList);
+        }
+    }
     
     
     public static void handleAfterFileInsert(List<ContentDocumentLink> newList) {
@@ -85,7 +84,7 @@ public without sharing class ContentDocumentLinkTriggerHelper {
                 docUpdate.ContentDocumentId__c = cdId;
                 docUpdate.Content_Version_Id__c = contentVersionId;
                 //Applicable for Broker Implementation
-                if (docRecord.BrokerApplication__c != null || docRecord.BrokerApplicant__c != null || docRecord.Case__c != null) {
+                if (docRecord.BrokerApplication__c != null || docRecord.BrokerApplicant__c != null) {
                     docUpdate.FileName__c = fullCV.Title;
                     docUpdate.FileType__c = fullCV.FileType;
                     docUpdate.FileSizeMB__c = String.valueOf(
@@ -107,7 +106,7 @@ public without sharing class ContentDocumentLinkTriggerHelper {
                 }
             }
         }
-        
+    
         DocumentService.getInstance().updateDocuments(documentsToUpdate);
         
         // Update BrokerApplication__c records
@@ -144,7 +143,7 @@ public without sharing class ContentDocumentLinkTriggerHelper {
         if (!contentDocumentIds.isEmpty()) {
             // Query ContentDocuments to ensure the records exist and have the proper IDs
             Map<Id, ContentDocument> contentDocumentMap = new Map<Id, ContentDocument>(
-                // [
+                 // [
                 //     SELECT Id, Title, LatestPublishedVersionId
                 //     FROM ContentDocument
                 //     WHERE Id IN :contentDocumentIds
@@ -261,7 +260,7 @@ public without sharing class ContentDocumentLinkTriggerHelper {
         
         // Step 5: Update the links
         if (!newLinksToInsert.isEmpty()) {
-            
+           
             //insert newLinksToInsert;
             ContentService.getInstance().insertContentDocumentLink(newLinksToInsert);
             // Optional: Delete old links (must clone, not delete Trigger.new)
@@ -279,93 +278,7 @@ public without sharing class ContentDocumentLinkTriggerHelper {
             }
         }
     }
-    public static void moveBrokerAgreementSignedFilesToDocument(List<ContentDocumentLink> newLinks) {
-        if (newLinks.isEmpty()) return;
-        system.debug('newLinks-->'+newLinks);
-        
-        Set<Id> caseIds = new Set<Id>();
-        Set<Id> contentDocIds = new Set<Id>();
-        DocumentService docService = DocumentService.getInstance();
-        
-        for (ContentDocumentLink link : newLinks) {
-            if (link.LinkedEntityId != null && link.LinkedEntityId.getSObjectType() == Case.SObjectType) { 
-                caseIds.add(link.LinkedEntityId);
-                contentDocIds.add(link.ContentDocumentId);
-            }
-        }
-        
-        if (caseIds.isEmpty() || contentDocIds.isEmpty()) return;
-        
-        // Step 2: Get latest ContentVersion for each ContentDocument
-        Map<Id, ContentVersion> latestVersions = new Map<Id, ContentVersion>();
-        
-        for (ContentVersion ver :ContentService.getInstance().getContentVersionsByCDIds(contentDocIds)){
-            latestVersions.put(ver.ContentDocumentId, ver);
-        }
-        
-        if (latestVersions.isEmpty()) return;
-        
-        // Step 3: Fetch related Document__c records
-        Map<Id, Id> brokerAgreementDocMap = new Map<Id, Id>();
-     
-        
-        for (Document__c doc : docService.getCaseSignDocuments(caseIds, caseDocumentList)) {
-            if (doc.Document_Name__c == 'Broker Agreement - Signed') {
-                brokerAgreementDocMap.put(doc.Case__c, doc.Id);
-            } 
-          
-            
-            
-            if (brokerAgreementDocMap.isEmpty()) return;
-            
-            // Step 4: Prepare list of ContentDocumentLinks to update
-            List<ContentDocumentLink> newLinksToInsert = new List<ContentDocumentLink>();
-            
-            for (ContentDocumentLink link : newLinks) {
-                ContentVersion ver = latestVersions.get(link.ContentDocumentId);
-                if (ver == null || String.isBlank(ver.Title)) continue;
-                
-                String title = ver.Title;
-                Id caseId = link.LinkedEntityId;
-                Id newParentId;
-                
-                // Match based on latest version title keywords
-                if (title.contains('Broker Agreement')) {
-                    newParentId = brokerAgreementDocMap.get(caseId);
-                }         
-             
-                if (newParentId != null) {
-                    newLinksToInsert.add(new ContentDocumentLink(
-                        ContentDocumentId = link.ContentDocumentId,
-                        LinkedEntityId = newParentId,
-                        ShareType = 'V', // Viewer
-                        Visibility = 'AllUsers'
-                    ));
-                }
-            }
-            
-            // Step 5: Update the links
-            if (!newLinksToInsert.isEmpty()) {
-                
-                //insert newLinksToInsert;
-                ContentService.getInstance().insertContentDocumentLink(newLinksToInsert);
-                // Optional: Delete old links (must clone, not delete Trigger.new)
-                List<ContentDocumentLink> linksToDelete = new List<ContentDocumentLink>();
-                for (ContentDocumentLink link : newLinks) {
-                    for (ContentDocumentLink created : newLinksToInsert) {
-                        if (link.ContentDocumentId == created.ContentDocumentId) {
-                            linksToDelete.add(new ContentDocumentLink(Id = link.Id));
-                        }
-                    }
-                }
-                if (!linksToDelete.isEmpty()) {
-                    //delete linksToDelete;
-                    ContentService.getInstance().deleteContentDocumentLink(linksToDelete);
-                }
-            }
-        }
-    }
-    public static void moveSignedKYCFilesToDocument(List<ContentDocumentLink> newLinks) {
+      public static void moveSignedKYCFilesToDocument(List<ContentDocumentLink> newLinks) {
     if (newLinks.isEmpty()) {
         return;
     }

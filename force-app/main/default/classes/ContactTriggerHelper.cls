@@ -9,16 +9,8 @@
 * 2.0           Raza         				 Initial draft 
 *****************************************************************************************************/
 public class ContactTriggerHelper {
-    
+
     private static final string CONTACT_RT_DEV_NAME_BROKER { get { return 'Broker'; } }
-    private static final Set<String> ALLOWED_PASSPORT_ROLES = new Set<String>{'Owner','Partner','AuthorizedSignatoryOfficer','Admin'};
-        private static final String LINE_MANAGER_USER_ID { get { return 'LineManagerUserId'; } } //BAPP
-    private static final String EXEC_SALES_DIR_USER_ID { get { return 'ExecutiveSalesDirectorUserId'; } }//BAPP
-    private static final string BROKER_RT_NAME { get { return 'Broker'; } }//BAPP
-    private static final string MTD_BROKER_TERMINATION_INITIATION_EMAIL_TEMPLATE_ID { get { return 'BrokerTerminationInitiationEmailTemplate'; } } // BAPP
-    private static final string MTD_BROKER_TERMINATION_COMPLETION_EMAIL_TEMPLATE_ID { get { return 'BrokerTerminationCompletionEmailTemplate'; } } // BAPP 
-    private static final string MTD_BROKER_SUSPEND_EMAIL_TEMPLATE_ID { get { return 'BrokerSuspendNotification'; } } // BAPP    
-    private static final string NO_REPLY_OWEID { get { return 'BloomNoReplyOWEmailId'; } }//BAPP
     
     // to create the Document PlaceHolder for Contacts - Updated by Akshay (Role-based logic)
     public static void createDocuments(List<Contact> newList) {
@@ -45,7 +37,6 @@ public class ContactTriggerHelper {
         
         // Query existing documents for these contacts
         Map<String, Document__c> existingDocsMap = new Map<String, Document__c>();
-        Set<String> processedDocKeys = new Set<String>();
         for (Document__c doc : DocumentService.getInstance().getDocumentByContactIds(contactIds)) {
             String key = doc.Contact__c + '-' + doc.DocumentType__c;
             existingDocsMap.put(key, doc);
@@ -63,41 +54,12 @@ public class ContactTriggerHelper {
                         contactRoles.add(role.trim());
                     }
                     
-                    /*for (DocumentType__c dt : contactDocTypeList) {
-if (String.isBlank(dt.BrokerContactRole__c)) {
-continue; // skip doc types that don't define a role
-}
-
-Set<String> docRoles = new Set<String>();
-for (String role : dt.BrokerContactRole__c.split(';')) {
-docRoles.add(role.trim());
-}
-
-Set<String> intersection = new Set<String>(contactRoles);
-intersection.retainAll(docRoles);
-
-if (!intersection.isEmpty() &&
-String.valueOf(dt.TypeOfEstablishment__c) == String.valueOf(con.TypeOfEstablishment__c)) {
-
-String key = con.Id + '-' + dt.Id;
-
-if (!existingDocsMap.containsKey(key)) { // <-- prevent duplicates
-documentList.add(new Document__c(
-Contact__c = con.Id,
-DocumentType__c = dt.Id,
-Document_Name__c = dt.Type__c
-));
-}
-}
-}*/
                     for (DocumentType__c dt : contactDocTypeList) {
-                        
                         if (String.isBlank(dt.BrokerContactRole__c)) {
-                            continue;
+                            continue; // skip doc types that don't define a role
                         }
                         
                         Set<String> docRoles = new Set<String>();
-                        
                         for (String role : dt.BrokerContactRole__c.split(';')) {
                             docRoles.add(role.trim());
                         }
@@ -105,67 +67,27 @@ Document_Name__c = dt.Type__c
                         Set<String> intersection = new Set<String>(contactRoles);
                         intersection.retainAll(docRoles);
                         
-                        // Skip if no matching role
-                        if (intersection.isEmpty()) {
-                            continue;
-                        }
-                        
-                        // Type Of Establishment check
-                        if (!String.valueOf(dt.TypeOfEstablishment__c)
-                            .contains(String.valueOf(con.TypeOfEstablishment__c))) {
-                                continue;
+                        if (!intersection.isEmpty() &&
+                            String.valueOf(dt.TypeOfEstablishment__c) == String.valueOf(con.TypeOfEstablishment__c)) {
+                                
+                                String key = con.Id + '-' + dt.Id;
+                                
+                                if (!existingDocsMap.containsKey(key)) { // <-- prevent duplicates
+                                    documentList.add(new Document__c(
+                                        Contact__c = con.Id,
+                                        DocumentType__c = dt.Id,
+                                        Document_Name__c = dt.Type__c
+                                    ));
+                                }
                             }
-                        
-                        // Create Passport Front / Passport Back
-                        // only for allowed contact roles
-                        if (con.TypeOfEstablishment__c == 'Domestic' &&
-                            (dt.Type__c == 'Passport Front' ||
-                             dt.Type__c == 'Passport Back')) {
-                                 
-                                 Set<String> allowedMatch = new Set<String>(contactRoles);
-                                 allowedMatch.retainAll(ALLOWED_PASSPORT_ROLES);
-                                 
-                                 if (allowedMatch.isEmpty()) {
-                                     continue;
-                                 }
-                             }
-                        
-                        String existingKey = con.Id + '-' + dt.Id;
-                        
-                        // Prevent duplicate document names for same contact
-                        String docKey = con.Id + '-' + dt.Type__c;
-                        
-                        if (existingDocsMap.containsKey(existingKey)) {
-                            continue;
-                        }
-                        
-                        if (processedDocKeys.contains(docKey)) {
-                            continue;
-                        }
-                        
-                        processedDocKeys.add(docKey);
-                        
-                        documentList.add(
-                            new Document__c(
-                                Contact__c = con.Id,
-                                DocumentType__c = dt.Id,
-                                Document_Name__c = dt.Type__c
-                            )
-                        );
                     }
-                    
                 }
             }
         }
-        system.debug('documentList-->'+documentList);
         objDocumentService.insertDocuments(documentList);
     }
     
     public static void handleBeforeInsertFieldUpdates(List<Contact> newList) {
-        MetadataService objMetadataService = MetadataService.getInstance();
-        Id brokerRTId = Utilities.getRecordTypeId('Contact', BROKER_RT_NAME);
-        String lineManagerUserId = objMetadataService.getAppSettingTextValue(LINE_MANAGER_USER_ID);//BAPP
-        String executiveSalesDirectorUserId = objMetadataService.getAppSettingTextValue(EXEC_SALES_DIR_USER_ID);//BAPP
         for(Contact objContact :newList){
             objContact.Emirates_Id__c = Utility.formatEmiratesId(objContact.Emirates_Id__c);
             if(objContact.PrimaryMobileCountryCode__c != NULL && objContact.PrimaryMobilePhone__c != NULL ){
@@ -176,11 +98,6 @@ Document_Name__c = dt.Type__c
             }
             if(objContact.TertiaryMobileCountryCode__c != NULL && objContact.TertiaryMobilePhone__c != NULL ){
                 objContact.OtherPhone = Utility.formatPhoneNumber(objContact.TertiaryMobileCountryCode__c, objContact.TertiaryMobilePhone__c);
-            }
-            // Suspension/Termination Process
-            if(objContact.RecordTypeId == brokerRTId){
-                objContact.LineManager__c = lineManagerUserId;
-                objContact.ExecutiveSalesDirector__c = executiveSalesDirectorUserId;
             }
         }
     }
@@ -207,7 +124,7 @@ Document_Name__c = dt.Type__c
         }
     }
     
-    // BAPP : This method is added to update the Azure User on update of contact Record
+   // BAPP : This method is added to update the Azure User on update of contact Record
     public static void handleContactUpdates(List<Contact> newList, Map<Id, Contact> oldMap) {
         List<User__c> usersToUpdate = new List<User__c>();
         for (Contact newCon : newList) {
@@ -228,7 +145,7 @@ Document_Name__c = dt.Type__c
                    if (String.isNotBlank(newCon.MiddleName)) nameParts.add(newCon.MiddleName);
                    if (String.isNotBlank(newCon.LastName)) nameParts.add(newCon.LastName);
                    objUser.Name = String.join(nameParts, ' ');
-                   if (newCon.Blacklisted__c == true || newCon.IsActive__c == false) {// || newCon.IsSuspended__c == true
+                   if (newCon.Blacklisted__c == true || newCon.IsActive__c == false || newCon.IsSuspended__c == true) {
                        objUser.IsActive__c = false;
                    }else{
                        objUser.IsActive__c = true;
@@ -289,43 +206,43 @@ Document_Name__c = dt.Type__c
         }
     }
     
-    
-    public static void updateCaseWithContactLookup(List<Contact> newList) {
-        if (newList == null || newList.isEmpty()) return;
         
-        Set<Id> caseIds = new Set<Id>();
-        Map<Id, Id> caseIdToContactId = new Map<Id, Id>();
-        
-        for (Contact con : newList) {
-            if (con != null && con.CaseId__c != null) {
-                try {
-                    Id caseId = (Id) con.CaseId__c;
-                    caseIds.add(caseId);
-                    caseIdToContactId.put(caseId, con.Id);
-                } catch (Exception e) {
-                    // If casting fails, skip this record
+        public static void updateCaseWithContactLookup(List<Contact> newList) {
+            if (newList == null || newList.isEmpty()) return;
+            
+            Set<Id> caseIds = new Set<Id>();
+            Map<Id, Id> caseIdToContactId = new Map<Id, Id>();
+            
+            for (Contact con : newList) {
+                if (con != null && con.CaseId__c != null) {
+                    try {
+                        Id caseId = (Id) con.CaseId__c;
+                        caseIds.add(caseId);
+                        caseIdToContactId.put(caseId, con.Id);
+                    } catch (Exception e) {
+                        // If casting fails, skip this record
+                    }
                 }
             }
-        }
-        
-        if (caseIds.isEmpty()) return;
-        
-        List<Case> casesToUpdate = new List<Case>();
+            
+            if (caseIds.isEmpty()) return;
+            
+            List<Case> casesToUpdate = new List<Case>();
         list<case> caseRecords = CaseService.getInstance().getCaseByIds(caseIds);
-        
-        for (Case cs :caseRecords) {
-            Id contactId = caseIdToContactId.get(cs.Id);
-            if (contactId != null && cs.Broker_Agent__c != contactId) {
-                cs.Broker_Agent__c = contactId;
-                casesToUpdate.add(cs);
+            
+            for (Case cs :caseRecords) {
+                Id contactId = caseIdToContactId.get(cs.Id);
+                if (contactId != null && cs.Broker_Agent__c != contactId) {
+                    cs.Broker_Agent__c = contactId;
+                    casesToUpdate.add(cs);
+                }
+            }
+            
+            if (!casesToUpdate.isEmpty()) {
+                CaseService csService1 = CaseService.getInstance();
+                csService1.updateCasesWithoutTrigger(casesToUpdate);
             }
         }
-        
-        if (!casesToUpdate.isEmpty()) {
-            CaseService csService1 = CaseService.getInstance();
-            csService1.updateCasesWithoutTrigger(casesToUpdate);
-        }
-    }
     
     public static void updateContactDocuments(
         List<sObject> newList, Map<Id, sObject> newMap,
@@ -362,276 +279,61 @@ Document_Name__c = dt.Type__c
         }
         if (!contactsToReset.isEmpty()) update contactsToReset;
     }
-    
-    /*public static void syncCaseDocumentsToContact(List<Contact> newList, Map<Id, Contact> oldMap, Set<Id> validCaseIds) {
-Set<Id> contactIds = new Set<Id>();
-DocumentService objDocService = DocumentService.getInstance();
 
-for (Contact con : newList) {
-if (con.CaseId__c != null && validCaseIds.contains(con.CaseId__c)) {
-contactIds.add(con.Id);
-}
-}
-
-if (contactIds.isEmpty()) return;
-
-Map<Id, Map<String, Document__c>> contactDocsMap = new Map<Id, Map<String, Document__c>>();
-for (Document__c doc : objDocService.getDocumentByContactIds(contactIds)) {
-
-if (!contactDocsMap.containsKey(doc.Contact__c)) {
-contactDocsMap.put(doc.Contact__c, new Map<String, Document__c>());
-}
-contactDocsMap.get(doc.Contact__c).put(doc.Document_Name__c, doc);
-}
-
-Map<Id, Map<String, Document__c>> caseDocsMap = new Map<Id, Map<String, Document__c>>();
-for (Document__c doc : objDocService.getCaseDocuments(validCaseIds)) {
-
-if (doc.Case__c == null) continue;
-if (!caseDocsMap.containsKey(doc.Case__c)) {
-caseDocsMap.put(doc.Case__c, new Map<String, Document__c>());
-}
-caseDocsMap.get(doc.Case__c).put(doc.Document_Name__c, doc);
-}
-
-List<Document__c> docsToUpdate = new List<Document__c>();
-
-for (Contact con : newList) {
-if (!validCaseIds.contains(con.CaseId__c)) continue;
-Map<String, Document__c> contactDocs = contactDocsMap.get(con.Id);
-Map<String, Document__c> caseDocs = caseDocsMap.get(con.CaseId__c);
-
-if (contactDocs == null || caseDocs == null) continue;
-
-for (String docName : caseDocs.keySet()) {
-
-Document__c contactDoc = contactDocs.get(docName);
-if (contactDoc == null) continue;
-
-Document__c caseDoc = caseDocs.get(docName);
-
-if (contactDoc.Content_Version_Id__c != caseDoc.Content_Version_Id__c) {
-contactDoc.ContentDocumentId__c = caseDoc.ContentDocumentId__c;
-contactDoc.Content_Version_Id__c = caseDoc.Content_Version_Id__c;
-docsToUpdate.add(contactDoc);
-}
-}
-}
-objDocService.updateDocuments(docsToUpdate);
-}*/
-    
-    public static void syncDocumentsToContact(List<Contact> newList,Set<Id> parentIds,String syncType){
+    public static void syncCaseDocumentsToContact(List<Contact> newList, Map<Id, Contact> oldMap, Set<Id> validCaseIds) {
         Set<Id> contactIds = new Set<Id>();
         DocumentService objDocService = DocumentService.getInstance();
         
-        // Fetch DocumentTypes for Contacts
-        List<DocumentType__c> contactDocTypeList = objDocService.getDocTypes('Contact');
-        
-        Map<String, Id> contactDocTypeMap = new Map<String, Id>();
-        
-        for (DocumentType__c docType : contactDocTypeList) {
-            contactDocTypeMap.put(docType.Type__c, docType.Id);
-        }
-
-        
-        // Collect contact ids
         for (Contact con : newList) {
-            
-            if (syncType == 'CASE' && con.CaseId__c != null && parentIds.contains(con.CaseId__c)){
-                contactIds.add(con.Id);
-            }
-            
-            if (syncType == 'APPLICANT' && con.BrokerApplicant__c != null && parentIds.contains(con.BrokerApplicant__c)){
+            if (con.CaseId__c != null && validCaseIds.contains(con.CaseId__c)) {
                 contactIds.add(con.Id);
             }
         }
         
-        if (contactIds.isEmpty()) {
-            return;
-        }
+        if (contactIds.isEmpty()) return;
         
-        // Contact documents
         Map<Id, Map<String, Document__c>> contactDocsMap = new Map<Id, Map<String, Document__c>>();
-        
         for (Document__c doc : objDocService.getDocumentByContactIds(contactIds)) {
             
-            if (!contactDocsMap.containsKey(doc.Contact__c)){
+            if (!contactDocsMap.containsKey(doc.Contact__c)) {
                 contactDocsMap.put(doc.Contact__c, new Map<String, Document__c>());
             }
-            
             contactDocsMap.get(doc.Contact__c).put(doc.Document_Name__c, doc);
         }
         
-        // Parent documents
-        Map<Id, Map<String, Document__c>> parentDocsMap = new Map<Id, Map<String, Document__c>>();
-        
-        List<Document__c> parentDocs = new List<Document__c>();
-        
-        if (syncType == 'CASE') {
-            parentDocs = objDocService.getCaseDocuments(parentIds);
-        } else if (syncType == 'APPLICANT') {
-            parentDocs = objDocService.getDocumentsByBrokerApplicantIds(parentIds);
-        }
-        
-        for (Document__c doc : parentDocs) {
+        Map<Id, Map<String, Document__c>> caseDocsMap = new Map<Id, Map<String, Document__c>>();
+        for (Document__c doc : objDocService.getCaseDocuments(validCaseIds)) {
             
-            Id parentId;
-            
-            if (syncType == 'CASE') {
-                parentId = doc.Case__c;
-            } else {
-                parentId = doc.BrokerApplicant__c;
+            if (doc.Case__c == null) continue;
+            if (!caseDocsMap.containsKey(doc.Case__c)) {
+                caseDocsMap.put(doc.Case__c, new Map<String, Document__c>());
             }
-            
-            if (parentId == null) {
-                continue;
-            }
-            
-            if (!parentDocsMap.containsKey(parentId)) {
-                parentDocsMap.put(parentId, new Map<String, Document__c>());
-            }
-            
-            parentDocsMap.get(parentId).put(doc.Document_Name__c, doc);
+            caseDocsMap.get(doc.Case__c).put(doc.Document_Name__c, doc);
         }
         
         List<Document__c> docsToUpdate = new List<Document__c>();
-        List<Document__c> docsToInsert = new List<Document__c>();
         
         for (Contact con : newList) {
-            
-            Id parentId;
-            
-            if (syncType == 'CASE') {
-                parentId = con.CaseId__c;
-            } else {
-                parentId = con.BrokerApplicant__c;
-            }
-            
-            if (!parentIds.contains(parentId)) {
-                continue;
-            }
-            
+            if (!validCaseIds.contains(con.CaseId__c)) continue;
             Map<String, Document__c> contactDocs = contactDocsMap.get(con.Id);
-            Map<String, Document__c> parentDocuments = parentDocsMap.get(parentId);
+            Map<String, Document__c> caseDocs = caseDocsMap.get(con.CaseId__c);
             
-            if (contactDocs == null || parentDocuments == null) {
-                continue;
-            }
-            for (String docName : parentDocuments.keySet()) {
+            if (contactDocs == null || caseDocs == null) continue;
+            
+            for (String docName : caseDocs.keySet()) {
                 
-                Document__c parentDoc = parentDocuments.get(docName);
                 Document__c contactDoc = contactDocs.get(docName);
+                if (contactDoc == null) continue;
                 
-                // Contact document doesn't exist, create a new one
-                if (contactDoc == null) {
-                    Document__c newDoc = new Document__c();
-                    newDoc.Document_Name__c = parentDoc.Document_Name__c;
-                    newDoc.Contact__c = con.Id;                        
-                    newDoc.ContentDocumentId__c = parentDoc.ContentDocumentId__c;
-                    newDoc.Content_Version_Id__c = parentDoc.Content_Version_Id__c;
-                    newDoc.DocumentType__c = contactDocTypeMap.get(parentDoc.Document_Name__c);
-                    docsToInsert.add(newDoc);
-                    continue;
-                }
-                                
-                if (contactDoc.Content_Version_Id__c != parentDoc.Content_Version_Id__c && parentDoc.Content_Version_Id__c !=null &&
-                    parentDoc.ContentDocumentId__c !=null) {
-                    contactDoc.ContentDocumentId__c = parentDoc.ContentDocumentId__c;
-                    contactDoc.Content_Version_Id__c = parentDoc.Content_Version_Id__c;
+                Document__c caseDoc = caseDocs.get(docName);
+                
+                if (contactDoc.Content_Version_Id__c != caseDoc.Content_Version_Id__c) {
+                    contactDoc.ContentDocumentId__c = caseDoc.ContentDocumentId__c;
+                    contactDoc.Content_Version_Id__c = caseDoc.Content_Version_Id__c;
                     docsToUpdate.add(contactDoc);
                 }
             }
         }
-        
-        if (!docsToUpdate.isEmpty()) {
-            objDocService.updateDocuments(docsToUpdate);
-        }
-        if (!docsToInsert.isEmpty()) {
-            objDocService.insertDocuments(docsToInsert);
-        }
-    }
-    public static void handleAfterUpdateFieldUpdates(List<Contact> newList, Map<Id, Contact> oldMap){
-        Date currentDate = System.today();
-        List<Contact> contactsToUpdate = new List<Contact>();
-        MetadataService objMetadataService = MetadataService.getInstance();
-        EmailService objEmailService = EmailService.getInstance();
-        Id brokerTerminationInitiatedTemplateId  = objMetadataService.getAppSettingTextValue(MTD_BROKER_TERMINATION_INITIATION_EMAIL_TEMPLATE_ID);
-        Id brokerTerminationCompletedTemplateId  = objMetadataService.getAppSettingTextValue(MTD_BROKER_TERMINATION_COMPLETION_EMAIL_TEMPLATE_ID);
-        Id brokerSuspendTemplateId  = objMetadataService.getAppSettingTextValue(MTD_BROKER_SUSPEND_EMAIL_TEMPLATE_ID);
-        Id noReplyOWEId = objMetadataService.getAppSettingTextValue(NO_REPLY_OWEID);
-        List<Messaging.SingleEmailMessage> emailList = new List<Messaging.SingleEmailMessage>();
-        
-        Set<Id> accountIds = new Set<Id>();
-        Set<Id> contactIds = new Set<Id>();
-        
-        for(Contact newCon : newList){
-            Contact oldCon = oldMap.get(newCon.Id);
-            
-            if (newCon.Blacklisted__c == false && newCon.TerminationApprovalStatus__c == 'Approved' && newCon.ApprovalStatus__c == 'Approved By Executive Sales Director' && oldCon.TerminationApprovalStatus__c != newCon.TerminationApprovalStatus__c && newCon.Broker_Restriction_Type__c == 'Terminate') {
-                accountIds.add(newCon.AccountId);
-                contactIds.add(newCon.Id);
-            }
-        }
-        
-        Map<Id,List<BrokerCommission__c>> pendingCommissionMap = BrokerCommissionService.getInstance().getPendingBrokerCommissionByAccountAndContact(accountIds,contactIds);
-        
-        for(Contact newCon : newList){
-            Contact oldCon = oldMap.get(newCon.Id);
-            
-            if (newCon.Blacklisted__c == false && newCon.TerminationApprovalStatus__c == 'Approved' && newCon.ApprovalStatus__c == 'Approved By Executive Sales Director' && oldCon.TerminationApprovalStatus__c != newCon.TerminationApprovalStatus__c && newCon.Broker_Restriction_Type__c == 'Terminate') {
-                System.debug('Termination condition matched for Contact Id: ' + newCon.Id);
-                
-                List<BrokerCommission__c> pendingCommissions = pendingCommissionMap.containsKey(newCon.Id) ? pendingCommissionMap.get(newCon.Id) : new List<BrokerCommission__c>();
-                
-                if (pendingCommissions.isEmpty()) {
-                    contactsToUpdate.add(new Contact(Id = newCon.Id, Blacklisted__c = true, IsActive__c = false));
-                    
-                    //New email notification for Termination Completed 
-                    if(newCon.Email != null){
-                        emailList.add(objEmailService.getSingleEmailMessageWithTargetObjectAsRecipient(brokerTerminationCompletedTemplateId,noReplyOWEId,null,newCon.Id,null,null,null));
-                    }
-                }
-                
-                if(newCon.Email != null && !pendingCommissions.isEmpty()){
-                    emailList.add(objEmailService.getSingleEmailMessageWithTargetObjectAsRecipient(brokerTerminationInitiatedTemplateId,noReplyOWEId,null,newCon.Id,null,null,null));
-                }
-            }
-            
-            if (newCon.IsSuspended__c == false && newCon.ApprovalStatus__c == 'Approved By Executive Sales Director' && oldCon.ApprovalStatus__c != newCon.ApprovalStatus__c &&
-                newCon.Broker_Restriction_Type__c == 'Suspend') {
-                    contactsToUpdate.add(new Contact(Id = newCon.Id, IsSuspended__c = true));
-                    if(newCon.Email != null){
-                        emailList.add(objEmailService.getSingleEmailMessageWithTargetObjectAsRecipient(brokerSuspendTemplateId,noReplyOWEId,null,newCon.Id,null,null,null));
-                    }
-                }
-            
-            if (newCon.IsSuspended__c == true) {
-                Boolean isNationalIdExpiryDateUpdate = newCon.EID_Expiry_Date__c != oldCon.EID_Expiry_Date__c;
-                Boolean isPassportExpiryDateUpdate = newCon.PassportExpiryDate__c != oldCon.PassportExpiryDate__c;
-                Boolean isPassportExpiryFutureDate = newCon.PassportExpiryDate__c != null && newCon.PassportExpiryDate__c > currentDate;
-                Boolean isNationalIdExpiryFutureDate = newCon.EID_Expiry_Date__c != null && newCon.EID_Expiry_Date__c > currentDate;
-
-                if(newCon.EID_Expiry_Date__c != null && newCon.PassportExpiryDate__c != null){
-                    if((isNationalIdExpiryDateUpdate || isPassportExpiryDateUpdate) && isPassportExpiryFutureDate && isNationalIdExpiryFutureDate){
-                        contactsToUpdate.add(new Contact(Id = newCon.Id, IsSuspended__c = false,IsActive__c = true));
-                        system.debug('newContest-->'+newCon);
-                    }
-                }
-                if(newCon.EID_Expiry_Date__c != null && newCon.PassportExpiryDate__c == null){
-                    if(isNationalIdExpiryDateUpdate  && isNationalIdExpiryFutureDate){
-                        contactsToUpdate.add(new Contact(Id = newCon.Id, IsSuspended__c = false,IsActive__c = true));
-                    }
-                }
-                if(newCon.EID_Expiry_Date__c == null && newCon.PassportExpiryDate__c != null){
-                    if(isPassportExpiryDateUpdate && isPassportExpiryFutureDate){
-                        contactsToUpdate.add(new Contact(Id = newCon.Id, IsSuspended__c = false,IsActive__c = true));
-                    }
-                }
-            }
-        }
-        
-        
-        ContactService.updateExistingContacts(contactsToUpdate);
-        objEmailService.sendEmail(emailList);
+        objDocService.updateDocuments(docsToUpdate);
     }
 }

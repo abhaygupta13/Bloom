@@ -48,7 +48,8 @@
             return [
                 SELECT Id, LeasingOrder__c , DueDate__c
                 FROM PaymentPlanSchedule__c 
-                WHERE LeasingOrder__c IN :leasingOrderIds ORDER by DueDate__c ASC
+            //WHERE LeasingOrder__c IN :leasingOrderIds AND DueDate__c <= Today
+            WHERE LeasingOrder__c IN :leasingOrderIds ORDER BY DueDate__c ASC
             ];
         }
         
@@ -68,8 +69,8 @@
         public List<PaymentPlanSchedule__c> getpaymentPlanByIds(Set<Id> paymentPlanIds) {
             
             return [ SELECT Id,Name,Schedule_End_Date__c, LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c ,LeasingOrder__r.Opportunity__r.Account.IsPersonAccount,
-                    LeasingOrder__r.LeasingSAPContractId__c, LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPContractTypeCode__c,IsPosting__c ,
-                    PaymentStartDate__c, isVATApplied__c, DueDate__c, Amount__c , IsReversed__c, ReversedDate__c,PostingDate__c ,RelatedPartyBloomHolding__c,LeasingContractTypeCode__c,
+                LeasingOrder__r.LeasingSAPContractId__c, LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPContractTypeCode__c,LeasingContractTypeCode__c,IsPosting__c ,
+                PaymentStartDate__c, isVATApplied__c, DueDate__c, Amount__c , IsReversed__c, ReversedDate__c,PostingDate__c ,RelatedPartyBloomHolding__c,
                     ReversedReason__c, ReversedRemarks__c, ReversalCategory__c, Refdocno__c, Paymentdoc__c, LeasingOrder__r.Id,
                     LeasingOrder__r.Unit__r.PropertyUsage__c, LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPCommercialContractTypeCode__c,
                     LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPResContractTypeCode__c, LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPRentfreeConditionType__c
@@ -133,9 +134,9 @@
             } else {
                 paramMap.put('Param5', '');
             }
-            if ((!leasingPaymentPlan.IsReversed__c && leasingPaymentPlan.DueDate__c <= System.Today() &&  leasingPaymentPlan.LeasingContractTypeCode__c != 'R999') || (leasingPaymentPlan.IsPosting__c )) {
+        if ((!leasingPaymentPlan.IsReversed__c && leasingPaymentPlan.DueDate__c <= System.Today() && leasingPaymentPlan.LeasingContractTypeCode__c != 'R999') || (leasingPaymentPlan.IsPosting__c )) {
                 paramMap.put('Param6', 'X');
-            } else {
+        }else {
                 paramMap.put('Param6', '');
                 //paramMap.put('Param15',  '');
             }

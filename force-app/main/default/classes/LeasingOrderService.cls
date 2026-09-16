@@ -29,14 +29,14 @@ public inherited sharing class LeasingOrderService {
     public LeasingOrder__c getLeasingOrderById(Id recordId){
         return [
             SELECT Id, AnnualRent__c, RentalAmountAfterDiscount__c, DiscountPercentage__c, ApprovalStatus__c,Opportunity__c,Owner.name,
-            GracePeriodFormula__c,Unit__r.BuildingSectionName__r.Project__c,Unit__r.BuildingSectionName__c,Unit__c,PropertyUsage__c,Category__c,
-            Building__r.BuildingNumber__c, LeasingOffer__c,AppliedAnnualRent__c,DiscountType__c,Name,LeasingOrderNumber__c,SubCategory__c,
+            GracePeriodFormula__c,Unit__r.BuildingSectionName__r.Project__c,Unit__r.BuildingSectionName__c,Unit__c,PropertyUsage__c,
+            Building__r.BuildingNumber__c, LeasingOffer__c,AppliedAnnualRent__c,DiscountType__c,Name,LeasingOrderNumber__c,
             CreditBalance__c,MasterLeasingOrder__r.CreditBalance__c,MasterLeasingOrder__c,Dubaireraindexattached__c,Waiveof2monthspenaltyattached__c,Refundformattached__c,
-            SecurityDeposit__c, EjariTawtheeqFee__c, AdminFee__c, ServiceChargeFee__c, AdditionalSecurityDeposite__c,FitOutdays__c,
+            SecurityDeposit__c, EjariTawtheeqFee__c, AdminFee__c, ServiceChargeFee__c, AdditionalSecurityDeposite__c,
             ExtraChequeFee__c, FitOutSecurityDeposit__c,Account__r.Name,Account__r.IsPersonAccount,Account__r.Nationality__pc,
             Account__r.PassportNumber__pc,Account__r.Emirates_Id__pc,Account__r.MaritalStatus__pc,Account__r.ResidentStatus__pc,
-            Account__r.EmploymentStatus__pc,Account__r.NumberOfEmployees,Account__r.Position__pc,Account__r.CompanyAddress__pc,PermittedUse__c,
-            Unit__r.Project__r.Leasing_Company__r.LeasingVAT__c,Unit__r.PropertyUsage__c,RERANumber__c,RenewalFee__c,UnitHandOverDate__c,
+            Account__r.EmploymentStatus__pc,Account__r.NumberOfEmployees,Account__r.Position__pc,Account__r.CompanyAddress__pc,
+            Unit__r.Project__r.Leasing_Company__r.LeasingVAT__c,Unit__r.PropertyUsage__c,RERANumber__c,RenewalFee__c,
             GracePeriod__c,LeasingContractMonths__c,ContractPeriodEN__c,ContractPeriodAR__c,PaymentTerm__c,DiscountAmount__c,RelatedPartyBloomHolding__c,
             LeasingStartDate__c, Project__r.LeasingBankAccount__r.BeneficiaryNameCorporate__c, Project__r.LeasingBankAccount__r.BankNameCorporate__c, 
             Project__r.LeasingBankAccount__r.AccountNumberCorporate__c, Project__r.LeasingBankAccount__r.IBANNoCorporate__c, 
@@ -57,7 +57,7 @@ public inherited sharing class LeasingOrderService {
             Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.BranchCorporate__c,
             Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.AccountNumberCorporate__c,
             Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.SwiftCodeCorporate__c,
-            Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.IBANNoCorporate__c, Opportunity__r.Account.Name,Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c, Unit__r.SAP_Business_Entity_No__c, 
+            Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.IBANNoCorporate__c,
             (SELECT Id,Name, DueDate__c, ClearedAmount__c, DueAmount__c, TotalInstallmentAmount__c,RefDocno__c
              FROM Payment_Plan_Schedules__r 
              ORDER BY ID ASC),
@@ -68,7 +68,7 @@ public inherited sharing class LeasingOrderService {
              FROM LeasingReceiptAcknowledgment_s__r
              ORDER BY ID ASC),SAPBPNumber__c,CustomerName__c,
             LeaseType__c,Project__r.Leasing_Company__r.Name ,Project__r.Leasing_Company__r.LeasingBankAccountName__c,Project__r.Leasing_Company__r.LeasingBankAccountNumber__c,
-            Project__r.Leasing_Company__r.LeasingBankName__c,Project__r.Leasing_Company__r.LeasingIBAN__c,Project__r.Leasing_Company__r.LeasingSWIFTCode__c FROM LeasingOrder__c WHERE Id = :recordId
+            Project__r.Leasing_Company__r.LeasingBankName__c,Project__r.Leasing_Company__r.LeasingIBAN__c,Project__r.Leasing_Company__r.LeasingSWIFTCode__c, Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c FROM LeasingOrder__c WHERE Id = :recordId
         ];
     }
     
@@ -87,7 +87,7 @@ public inherited sharing class LeasingOrderService {
                 Project__r.Leasing_Company__r.LeasingSAPContractTypeCode__c, Unit__r.LeasingUnitNumber__c,Unit__r.SAP_Unit_Number__c, EjariTawtheeqFee__c, Name,TerminationNoticeDate__c,
                 LeasingOrderNumber__c, Project__r.Leasing_Company__r.LeasingTenancyLaw__c, Account__r.SAP_BP_No__c,RejectionReason__c ,IntegrationStatus__c,
                 SecurityDeposit__c, OwnerSAPBPNumber__c, TotalAnnualRentwithVAT__c, Project__r.Leasing_Company__r.LeasingVAT__c,CreatedDate,
-                AppliedAnnualRent__c, LeasingContractMonths__c, LeasingSAPContractId__c,AdminFee__c, PaymentTerm__c , LeaseType__c ,
+                AppliedAnnualRent__c, LeasingContractMonths__c, LeasingSAPContractId__c,AdminFee__c, PaymentTerm__c , LeaseType__c ,RelatedPartyBloomHolding__c ,
                 AdditionalSecurityDeposite__c, Owner.Email, Project__r.Leasing_Company__r.LeasingSAPCommercialContractTypeCode__c,AnnualRent__c,
                 Project__r.Leasing_Company__r.LeasingSAPResContractTypeCode__c, isVATApplied__c ,LeaseTerminationRefundType__c ,TerminationDate__c,
                 TerminationType__c, IntegrationMessage__c, SAPAnnualRenewal__c, SAPConditionFrequency__c, Project__r.Leasing_Company__r.LeasingPostingClosureDate__c 
@@ -169,7 +169,6 @@ leasingOrder.LeaseType__c == 'Renewal'
 : String.valueOf(leasingOrder.SecurityDeposit__c)
 ); */
         paramsMap.put('Param14', '0'); 
-        
         paramsMap.put('Param15',String.valueOf((leasingOrder.SAPAnnualRenewal__c == null || leasingOrder.SAPAnnualRenewal__c == 0) ? leasingOrder.AppliedAnnualRent__c : leasingOrder.SAPAnnualRenewal__c ));
         if (leasingOrder.isVATApplied__c) {
             paramsMap.put('Param16', 'X');
@@ -177,7 +176,7 @@ leasingOrder.LeaseType__c == 'Renewal'
             paramsMap.put('Param16', '');
         }
         paramsMap.put('Param17',String.valueOf(leasingOrder.AnnualRent__c)); 
-        if (leasingOrder.LeasingContractMonths__c == 12) {
+        /*if (leasingOrder.LeasingContractMonths__c == 12) {
             paramsMap.put('Param18', String.valueOf(1)); 
             paramsMap.put('Param19', String.valueOf(0)); 
             paramsMap.put('Param20', String.valueOf(0));
@@ -208,7 +207,51 @@ leasingOrder.LeaseType__c == 'Renewal'
             paramsMap.put('Param18', String.valueOf(years)); 
             paramsMap.put('Param19', String.valueOf(months)); 
             paramsMap.put('Param20', String.valueOf(days));
+}*/
+        Date startDate = leasingOrder.LeasingStartDate__c;
+        Date endDate = leasingOrder.LeasingEndDate__c;
+        Integer totalMonths = 0;
+        Date tempStart = startDate;
+        
+        // Count complete contract months
+        while (true) {
+            Date nextMonthStart = tempStart.addMonths(1);
+            
+            // Standard leasing rule:
+            // A contract month ends one day before the same day of the next month
+            Date contractMonthEnd = nextMonthStart.addDays(-1);
+            
+            // Special case: End-of-month to end-of-month
+            Boolean isStartEOM =
+                tempStart.day() == Date.daysInMonth(tempStart.year(), tempStart.month());
+            
+            Boolean isNextMonthEOM =
+                nextMonthStart.day() == Date.daysInMonth(nextMonthStart.year(), nextMonthStart.month());
+            
+            if (isStartEOM && isNextMonthEOM) {
+                contractMonthEnd = nextMonthStart;
+            }
+            
+            if (contractMonthEnd <= endDate) {
+                totalMonths++;
+                tempStart = nextMonthStart;
+            } else {
+                break;
+            }
         }
+        
+        // Calculate remaining days (inclusive)
+        Integer days = 0;
+        
+        if (tempStart <= endDate) {
+            days = tempStart.daysBetween(endDate) + 1;
+        }
+        
+        Integer years = totalMonths / 12;
+        Integer months = Math.mod(totalMonths, 12);
+        paramsMap.put('Param18', String.valueOf(years)); 
+        paramsMap.put('Param19', String.valueOf(months)); 
+        paramsMap.put('Param20', String.valueOf(days));
         
         paramsMap.put('Param25', '0');
         paramsMap.put('Param21','');
@@ -284,6 +327,13 @@ paramsMap.put('Param26', String.valueOf(leasingOrder.AdminFee__c));
         } else {
             paramsMap.put('Param27', actionType);
         }
+        
+        paramsMap.put('Param28',UserInfo.getUserEmail());
+        if (leasingOrder.RelatedPartyBloomHolding__c) {
+            paramsMap.put('Param29', 'Y');
+        } else {
+            paramsMap.put('Param29', 'N');
+        }
         return integService.getIntegrationRecord(INTEGRATION_TYPE_LEASINGORDER_SAP_INTEGRATION, actionType,'','', LEASINGORDER_OBJECT_API_NAME, leasingOrder.Id,paramsMap);
     }
     
@@ -299,6 +349,21 @@ paramsMap.put('Param26', String.valueOf(leasingOrder.AdminFee__c));
     public List<LeasingOrder__c> getLeasingOrdersByOwners(Set<Id> userIds){
         return [SELECT Id, LeasingOrderNumber__c, OwnerId, Owner.Email, Owner.Name,
                 Name, Unit__r.UnitNumber__c FROM LeasingOrder__c where OwnerId IN :userIds];
+    }
+    
+    public List<LeasingOrder__c> getPendingEjariOrdersByOwners(Set<Id> userIds){
+        return [
+            SELECT Id, LeasingOrderNumber__c, OwnerId, Owner.Email, Owner.Name, Name, Unit__r.UnitNumber__c 
+            FROM LeasingOrder__c 
+            WHERE OwnerId IN :userIds
+                AND RERANumber__c = NULL 
+                AND Owner.Email != NULL 
+                AND Status__c NOT IN ('Cancelled','Terminated','Leased')
+                AND LeasingSAPContractId__c != NULL 
+                AND IntegrationStatus__c = 'Success' 
+                AND PropertyUsage__c = 'Residential' 
+                AND LeasingStartDate__c <= TODAY
+        ];
     }
     public Map<Id, Unit__c> getUnitsWithPropertyUsage(Set<Id> unitIds) {
         

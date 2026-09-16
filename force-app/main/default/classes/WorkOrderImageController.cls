@@ -1,3 +1,12 @@
+/*
+* @Author : Biswajeet Samal
+* @CreatedDate :15th MAY 2025
+* @Description : Work Order Image Controller
+*/
+/*****************************************************************************************************
+* Version       Author      Date             Comment                                                                       
+* 2.0           Abhay       09SEP2026        Renamed the service method name
+*****************************************************************************************************/
 public with sharing class WorkOrderImageController {
     public WorkOrder workOrder { get; set; }
     public List<List<String>> beforeImagePairs { get; set; }
@@ -123,7 +132,7 @@ public with sharing class WorkOrderImageController {
             wo.Check_Out__c = true;
             wo.ScheduledAppointmentTimeStarted__c = false;
             WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
-            List<WorkOrder> updatedWo = objWorkOrderService.updateWorkOrdersWithTrigger(new List<WorkOrder>{wo}); 
+            List<WorkOrder> updatedWo = objWorkOrderService.updateWorkOrders(new List<WorkOrder>{wo}); 
             
             if(!updatedWo.isEmpty() && updatedWo[0].status == Constants.CLOSED && updatedWo[0].Closure_Reason__c == Constants.WORK_COMPLETED){
                 List<EmailMessage> msgRec = [SELECT Id FROM EmailMessage WHERE RelatedToId =:recordId ORDER BY CreatedDate DESC LIMIT 1];

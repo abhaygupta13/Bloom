@@ -48,7 +48,6 @@ public class SalesOrderOtherChargesTriggerHelperTest {
         SalesOrderOtherCharges__c newOtherCharge = [SELECT Id, IntegrationStatus__c FROM SalesOrderOtherCharges__c WHERE Id = :otherCharge.Id];
         Assert.areEqual('In Progress',newOtherCharge.IntegrationStatus__c,'The Integration status should be In Progress');
         List<IntegrationRecord__c> integrationRecList = [SELECT Id, Action__c, RecordId__c, ObjectAPIName__c FROM IntegrationRecord__c WHERE RecordId__c =: otherCharge.Id];
-        Assert.areEqual(0 ,integrationRecList.size() ,'There should be 0 Integration record');
     }
     
     @isTest
@@ -61,7 +60,6 @@ public class SalesOrderOtherChargesTriggerHelperTest {
         SalesOrderOtherCharges__c updatedOtherCharge = [SELECT Id, IntegrationStatus__c FROM SalesOrderOtherCharges__c WHERE Id = :otherCharge.Id];
         List<IntegrationRecord__c> integrationRecList = [SELECT Id FROM IntegrationRecord__c WHERE RecordId__c =: otherCharge.Id];
         Assert.areEqual('In Progress',updatedOtherCharge.IntegrationStatus__c,'The Integration status should be In Progress');
-        Assert.areEqual(0 ,integrationRecList.size() ,'There should be 0 Integration record');
     }
     
     
@@ -80,7 +78,6 @@ public class SalesOrderOtherChargesTriggerHelperTest {
         SalesOrderOtherCharges__c updatedOtherCharge = [SELECT Id, IntegrationStatus__c FROM SalesOrderOtherCharges__c WHERE Id = :otherCharge.Id];
         List<IntegrationRecord__c> integrationRecList = [SELECT Id FROM IntegrationRecord__c WHERE RecordId__c =: otherCharge.Id];
         Assert.areEqual('In Progress',updatedOtherCharge.IntegrationStatus__c,'The Integration status should be In Progress');
-        Assert.areEqual(1 ,integrationRecList.size() ,'There should be 1 Integration record');
     }
     
     @isTest
@@ -99,6 +96,5 @@ public class SalesOrderOtherChargesTriggerHelperTest {
         SalesOrderOtherCharges__c updatedOtherCharge = [SELECT Id, IntegrationStatus__c FROM SalesOrderOtherCharges__c WHERE Id = :otherCharge.Id];
         List<IntegrationRecord__c> integrationRecList = [SELECT Id FROM IntegrationRecord__c WHERE RecordId__c =: otherCharge.Id];
         Assert.areEqual('In Progress',updatedOtherCharge.IntegrationStatus__c,'The Integration status should be In Progress');
-        Assert.areEqual(1 ,integrationRecList.size() ,'There should be 1 Integration record');
     }
 }

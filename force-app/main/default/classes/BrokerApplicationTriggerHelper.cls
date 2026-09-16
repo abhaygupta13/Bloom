@@ -11,7 +11,6 @@ public class BrokerApplicationTriggerHelper {
     
     private static final string ACCOUNT_RT_DEV_NAME_BROKER_AGENCY_ACCOUNT { get { return 'Broker_Agency'; } }
     private static final String BROKER { get { return 'Broker'; } }
-
     
     /**
      * @description Creates documents for BrokerApplication records
@@ -75,12 +74,9 @@ public class BrokerApplicationTriggerHelper {
         
         // STEP 3: Identify BrokerApplications that do NOT have matching Accounts
         List<BrokerApplication__c> appsToCreate = new List<BrokerApplication__c>();
-        Map<BrokerApplication__c, Account> bAppToUpdateMap = new Map<BrokerApplication__c, Account>();// Added by Ashish Rana
+        Map<BrokerApplication__c, Account> bAppToUpdateMap = new Map<BrokerApplication__c, Account>();
         for (BrokerApplication__c bApp : newList) {
             if (bApp.TypeofEstablishment__c == 'Domestic') {
-                //if (!domesticAccMap.containsKey(bApp.TradeLicenseNumber__c)) {
-                   // appsToCreate.add(bApp);
-                //}
                 if (domesticAccMap.containsKey(bApp.TradeLicenseNumber__c)) {
                     bAppToUpdateMap.put(bApp, domesticAccMap.get(bApp.TradeLicenseNumber__c));
                 } else {
@@ -88,9 +84,6 @@ public class BrokerApplicationTriggerHelper {
                 }
             }
             else if (bApp.TypeofEstablishment__c == 'International') {
-                //if (!internationalAccMap.containsKey(bApp.CommercialLicenseNumber__c)) {
-                   // appsToCreate.add(bApp);
-                //}
                 if (internationalAccMap.containsKey(bApp.CommercialLicenseNumber__c)) {
                     bAppToUpdateMap.put(bApp, internationalAccMap.get(bApp.CommercialLicenseNumber__c));
                 } else {
@@ -103,15 +96,13 @@ public class BrokerApplicationTriggerHelper {
         if (!appsToCreate.isEmpty()) {
             createBankAccount(appsToCreate);
         }
-        // Added by Ashish Rana
+        // update existing account based on TL number
         if (!bAppToUpdateMap.isEmpty()) {
             updateExistingAccounts(bAppToUpdateMap);
         }
-
     }
-
-    // Added by Ashish Rana
-    public static void updateExistingAccounts(Map<BrokerApplication__c, Account> bAppToUpdateMap) {
+    
+     public static void updateExistingAccounts(Map<BrokerApplication__c, Account> bAppToUpdateMap) {
         
         List<Account> accListToUpdate = new List<Account>();
         Id brokerAgencyAccountRecordTypeId = Utility.getRecordTypeIdByDevName(
@@ -154,7 +145,6 @@ public class BrokerApplicationTriggerHelper {
             acc.Is_VAT_Registered__c = bApp.IsVATRegistered__c;
             acc.LicenseType__c = bApp.LicenseType__c;
             acc.ORNADM__c = bApp.ORNADM__c;
-            acc.ADMORNExpiryDate__c = bApp.ADMORNExpiryDate__c;
             acc.PhoneCountryCode__c = bApp.CountryCode__c;
             acc.Phone__c = bApp.CompanyPhone_Number__c;
             acc.RecordTypeId = brokerAgencyAccountRecordTypeId;
@@ -186,7 +176,7 @@ public class BrokerApplicationTriggerHelper {
             
         }
     }
-    // Added by ashish rana
+    // Create and update existing Contact based on Applicants Email and Emirates Id
     public static void createContactsFromApplicants(List<Account> updatedAccList) {
         
         Map<Id, Account> appToAccountMap = new Map<Id, Account>();
@@ -271,7 +261,7 @@ public class BrokerApplicationTriggerHelper {
                 existingContact.PassportNumber__c = ba.PassportNumber__c;
                 existingContact.PassportExpiryDate__c = ba.PassportExpiryDate__c;
                 existingContact.Emirates_Id__c = ba.NationalID__c;
-                existingContact.EID_Expiry_Date__c = ba.NationalIDExpiryDate__c;
+                existingContact.NationalIdExpiryDate__c = ba.NationalIDExpiryDate__c;
                 existingContact.Title = ba.Title__c;
                 existingContact.IsActive__c = true;
                 existingContact.Designation__c = ba.Designation__c;
@@ -310,7 +300,7 @@ public class BrokerApplicationTriggerHelper {
                 con.PassportNumber__c = ba.PassportNumber__c;
                 con.PassportExpiryDate__c = ba.PassportExpiryDate__c;
                 con.Emirates_Id__c = ba.NationalID__c;
-                con.EID_Expiry_Date__c = ba.NationalIDExpiryDate__c;
+                con.NationalIdExpiryDate__c = ba.NationalIDExpiryDate__c;
                 con.Title = ba.Title__c;
                 con.IsActive__c = true;
                 con.Designation__c = ba.Designation__c;
@@ -400,7 +390,6 @@ public class BrokerApplicationTriggerHelper {
                 acc.LicenseType__c = bApp.LicenseType__c;
                 acc.Name = bApp.Name;
                 acc.ORNADM__c = bApp.ORNADM__c;
-                acc.ADMORNExpiryDate__c = bApp.ADMORNExpiryDate__c;
                 acc.PhoneCountryCode__c = bApp.CountryCode__c;
                 acc.Phone__c = bApp.CompanyPhone_Number__c;
                 acc.RecordTypeId = brokerAgencyAccountRecordTypeId;
@@ -482,8 +471,8 @@ public class BrokerApplicationTriggerHelper {
             con.ShareHoldingPercentage__c = ba.ShareHoldingPercentage__c;
             con.PassportNumber__c = ba.PassportNumber__c;
             con.PassportExpiryDate__c = ba.PassportExpiryDate__c;
-            con.Emirates_Id__c = ba.NationalID__c;
-            con.EID_Expiry_Date__c = ba.NationalIDExpiryDate__c;
+            con.NationalIdNumber__c = ba.NationalID__c;
+            con.NationalIdExpiryDate__c = ba.NationalIDExpiryDate__c;
             con.Title = ba.Title__c;
             con.IsActive__c = true;
             con.Designation__c = ba.Designation__c;
@@ -720,7 +709,6 @@ public class BrokerApplicationTriggerHelper {
         List<Document__c> docsToUpdate = new List<Document__c>();
         
         for (Document__c conDoc : DocumentService.getInstance().getDocumentsByContactIds(contactIds)) {
-            system.debug('conDoc-->'+conDoc);
             Id brokerAppId = contactToBrokerAppMap.get(conDoc.Contact__c);
             Id caseId      = contactToCaseMap.get(conDoc.Contact__c);
             
@@ -785,7 +773,6 @@ public class BrokerApplicationTriggerHelper {
         }
         
         if (!docsToUpdate.isEmpty()) {
-            system.debug('docsToUpdate-->'+docsToUpdate);
             DocumentService docService = DocumentService.getInstance();
             docService.updateDocuments(docsToUpdate);
         }

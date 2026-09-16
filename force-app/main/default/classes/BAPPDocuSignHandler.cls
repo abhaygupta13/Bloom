@@ -105,18 +105,18 @@ public class BAPPDocuSignHandler {
                 }
             }
         }
-        
-        // Add Bloom Signatory Recipient
+
+            // Add Bloom Signatory Recipient
         String bloomEmail = System.Label.BAPP_Bloom_Signatory;
         Set<String> emailSet = new Set<String>{ bloomEmail };
-            List<User> bloomUsers = UserService.getInstance().getUsersByEmails(emailSet);
+        List<User> bloomUsers = UserService.getInstance().getUsersByEmails(emailSet);
         User bloomUser;
         if (!bloomUsers.isEmpty()) {
             bloomUser = bloomUsers[0];
         }
-        
-        
-        dfsle.Tab bloomSignHereTab = new dfsle.SignHereTab()
+
+            
+            dfsle.Tab bloomSignHereTab = new dfsle.SignHereTab()
             .withScale(1.25)
             .withRequired(true)
             .withAnchor(new dfsle.Tab.Anchor(
@@ -137,7 +137,7 @@ public class BAPPDocuSignHandler {
                 null,
                 null));
         System.debug('bloomSignHereTab added');
-        
+
         dfsle.Tab bloomDateSignedTab = new dfsle.DateSignedTab()
             .withAnchor(new dfsle.Tab.Anchor(
                 'BloomSignedDate:',
@@ -156,8 +156,8 @@ public class BAPPDocuSignHandler {
                 null,
                 null,
                 null));
-        
-        
+
+
         dfsle.Recipient bloomSignatory = dfsle.Recipient.fromSource(
             bloomUser.Name,
             bloomUser.Email,
@@ -166,13 +166,13 @@ public class BAPPDocuSignHandler {
             null
         ).withTabs(new List<dfsle.Tab> {
             bloomSignHereTab,
-                bloomDateSignedTab
-                //myBLStampTab
-                }).withRoutingOrder(2); // Assuming second signer
-        
-        
+            bloomDateSignedTab
+            //myBLStampTab
+        }).withRoutingOrder(2); // Assuming second signer
+
+
         allrecipients.add(bloomSignatory);
-        
+
         
         
         
@@ -255,7 +255,7 @@ public class BAPPDocuSignHandler {
                 'BBM Signatory:',
                 null
             ).withTabs(new List<dfsle.Tab> {
-                myBBMStampTab
+                    myBBMStampTab
                     }).withRoutingOrder(3); // Assuming Third signer
             
             
@@ -263,14 +263,14 @@ public class BAPPDocuSignHandler {
         }
         return allrecipients;
     }
-    
+
     @future(callout=true)
     public static void BlsendSPAEnvelope(String template, String description, Id recordId, Id bappId, String documentoutputname,String emailSubject) {
         if (String.isBlank(description)) {
             description = 'Generated Document';
         }
         documentoutputname = '%'+ documentoutputname + '%';
-        
+
         dfsle.Notifications notifySigner = new dfsle.Notifications(
             true,
             2,
@@ -280,32 +280,26 @@ public class BAPPDocuSignHandler {
             10,
             false
         );
-        
+
         dfsle.Envelope myEnvelope = dfsle.EnvelopeService.getEmptyEnvelope(
             new dfsle.Entity(bappId)
         );
         dfsle.UUID myTemplateId = dfsle.UUID.parse(template); 
-        System.debug('Template: ' + template);
-        System.debug('Template Id: ' + myTemplateId);
-        System.debug('Doc Output Name: ' + documentOutputName);
-        System.debug('recordId: ' + recordId);
         dfsle.Document myDocument = dfsle.Document.fromTemplate(
             myTemplateId,
             description);
-        
+
         ContentDocumentLink cdl = ContentDocumentLinkService.getLatestContentDocumentLinkByRecordAndTitle(recordId, documentOutputName);
         Id myDocumentId = Id.valueOf(cdl.ContentDocumentId);
         ContentVersion cv = [SELECT FileType, Title, ContentDocumentId From ContentVersion where ContentDocumentId = :myDocumentId LIMIT 1];
         myDocument = myDocument.withReplacement(dfsle.Document.fromFile(cv));
-        
+
         myEnvelope = myEnvelope.withDocuments(new List<dfsle.Document> { myDocument });
         myEnvelope = myEnvelope.withEmail(emailSubject,'Sign In Document');
         myEnvelope = myEnvelope.withNotifications(notifySigner);
 
-        List<dfsle.Recipient> allrecipients = getRecipients(bappId, documentoutputname);         
-        
-        myEnvelope = myEnvelope.withRecipients(allrecipients);	
-        System.debug('myEnvelope: ' + myEnvelope);
+        List<dfsle.Recipient> allrecipients = getRecipients(bappId, documentoutputname); 
+        myEnvelope = myEnvelope.withRecipients(allrecipients);		
         if (Test.isRunningTest()) {
             return; //  Skip the actual call during tests
         }

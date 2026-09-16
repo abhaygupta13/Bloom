@@ -37,16 +37,16 @@ public inherited sharing  class CaseService {
     
     public List<Case> getCaseByIds(Set<Id> caseIds){
         return [SELECT Id, deviceRegistrationId__c,CaseNumber,ContactId, OwnerId, CreatedById, RoundRobinNumber__c,Sales_Order__c,Owner.email,Status,CaseType__c,CaseClosureRemarks__c ,
-                RequesterEmail__c,BFMRequestStatus__c,BFMServiceRequestId__c,RecordType.DeveloperName,RequesterName__c,RequesterContactNumber__c,ApprovalStatus__c,Draft__c,PostApprovalAction__c,
+                RequesterEmail__c,BFMRequestStatus__c,NewSalesOrder__r.IsDraftOrder__c,BFMServiceRequestId__c,RecordType.DeveloperName,RequesterName__c,RequesterContactNumber__c,
                 Sales_Order__r.Offer__r.Name,Sales_Order__r.First_Installment_Received_Amount__c,Unit__c,Project__c,AccountId,IsDocumentAvailable__c,isNotRegistered__c,
-                Sales_Order__r.First_Installment_Amount__c,NewSalesOrder__r.IsDraftOrder__c,Sales_Order__r.Offer__c,RecordTypeId,ServiceCatalog__c,DeferralApprovalStatus__c,Deferral_Within_1_Month__c,
-                IsDPCleared__c,RecordType.Name,Sales_Order__r.Unit__r.Name,Step__c,PaymentDeferralReason__c,Account.isPersonAccount,SubType__c,AgreementRenewalStatus__c,
-                Payment_Booked__c, Payment_Due_Date__c,Case_Sub_Status__c, Finance_document_verified__c, SubStatus__c, Project__r.Name,Case_Contact_Name__c,Resolved__c,
+                Sales_Order__r.First_Installment_Amount__c,Sales_Order__r.Offer__c,RecordTypeId,ServiceCatalog__c,DeferralApprovalStatus__c,Deferral_Within_1_Month__c,
+                IsDPCleared__c,RecordType.Name,Sales_Order__r.Unit__r.Name,Step__c,PaymentDeferralReason__c,Account.isPersonAccount,SubType__c,
+                Payment_Booked__c, Payment_Due_Date__c,Case_Sub_Status__c, Finance_document_verified__c, SubStatus__c, Project__r.Name,Case_Contact_Name__c,
                 VehicleRegistrationStatus__c,Account.Name,Account.NameinArabic__c,Account.PersonContactId, FinanceDocumentsUploadedManually__c, Remarks__c, TPFType__c,
                 RequestRaisedToBank__c, Neccessory_fees_collected__c,Broker_Agent__c,CancellationFees__c,TotalADMFees__c,ChequeWithWithdrawlFees__c,No_of_Withdrawal_Cheques__c,
                 StopEmailsToCustomer__c,TradeLicenseExpiryDate__c,VATUndertakingIssue_Date__c,TaxRegistrationNumber__c,PhoneNumber__c,Address1__c,Address2__c,CommercialLicenseExpiryDate__c,
-                AccountNumber__c,BankName__c,BankAddress__c,IBANNumber__c,SwiftCode__c,IsVATRegistered__c,
-                EarlySettlement__c,Email_Address__c,Return_Comments__c,SendToBL__c,Unit__r.Project__c,CreatedBy.ProfileId,Origin,Projectname__c,Customer_Type__c,Customer_Sub_Type__c,NameofCorporate__c,AgencyName__c,AgencyType__c
+                AccountNumber__c,BankName__c,BankAddress__c,IBANNumber__c,SwiftCode__c,Requester_Phone__c,
+                EarlySettlement__c,Email_Address__c,Return_Comments__c,SendToBL__c,Unit__r.Project__c,CreatedBy.ProfileId,Origin,Projectname__c,Customer_Type__c,Customer_Sub_Type__c,NameofCorporate__c
                 FROM Case WHERE Id IN :caseIds ORDER BY CreatedDate];
         
     }
@@ -72,15 +72,15 @@ public inherited sharing  class CaseService {
     
     public Case getCaseById(Id caseId) {
         return [
-            SELECT CommonArea__r.CommonAreaName__c,CommonArea__r.Name,PendingWith__c,AssignTeam__c,CreatedBy.Name,PostApprovalAction__c,
+            SELECT Handover__c,CommonArea__r.CommonAreaName__c,CommonArea__r.Name,PendingWith__c,AssignTeam__c,CreatedBy.Name,
             Id, CaseNumber, Subject,deviceRegistrationId__c, Description, Status, Priority, Origin, Type, Category__c, SubCategory__c,SubType__c,TotalADMFees__c,No_of_Withdrawal_Cheques__c,IsDocumentAvailable__c,
             OwnerId, CreatedById, RecordTypeId, RecordType.Name, RecordType.DeveloperName, RequestType__c, Discipline__c, Area__c, User_Type__c, Request_Number__c,CaseClosureRemarks__c ,
             RequesterRemarks__c, RequesterName__c, RequesterContactNumber__c, RequesterEmail__c, Contacts_Case_Email__c, Comments, CaseType__c,ApprovalComments__c,RejectionComments__c,
             Contact.Name, Contact.Email, Owner.Name, Owner.Email,BrokerContactRole__c,TypeofEstablishment__c,NationalIDExpiryDate__c,PassportExpiryDate__c,BRN_RERA_Expiry_Date__c,ApprovalStatus__c,
             AccountId, Account__c, Account.Name, Account.NameinArabic__c, Account.Legal_Status__c, Account.PersonEmail, Account.RecordTypeId, Account.RecordType.DeveloperName, Account.IsPersonAccount, Account.PersonContactId,
             Account.IsBFMVIPCustomer__c, Address__c, Address__City__s, Address__CountryCode__s, Address__Latitude__s, Address__Longitude__s, Address__GeocodeAccuracy__s, Address__PostalCode__s, Address__StateCode__s, Address__Street__s,
-            First_Name__c, Last_Name__c, Name__c, Nationality__c, CustomerType__c, Customer_Type__c, Gender__c, Mobile_Number__c, Mobile_Country_Code__c, Account_Mobile_Number__c,
-            Email_Address__c, Account_Email__c, EmiratesID__c, Emirates_ID_expiry_date__c, EIDIssueDate__c, PassportNumber__c, PassportIssueDate__c, Passport_Expiry_Date__c, isLegalReviewRequired__c, LegalApprovalStatus__c,
+            First_Name__c, Last_Name__c, Name__c, Nationality__c, CustomerType__c, Customer_Type__c, Gender__c, Mobile_Number__c, Mobile_Country_Code__c, Account_Mobile_Number__c,Requester_Phone__c,
+            Email_Address__c, Account_Email__c, EmiratesID__c, Emirates_ID_expiry_date__c, EIDIssueDate__c, PassportNumber__c, PassportIssueDate__c, isLegalReviewRequired__c, LegalApprovalStatus__c,
             BuyerLegalApprovalStatus__c, BouncedChequeFees__c, LatePaymentFees__c, PendingFees__c, PostponementFeesBooked__c, PostponeApproved__c, RecoveryFee__c, ResalePaymentType__c, ChequeWithWithdrawlFees__c, DefaultNoticeSentTime__c,
             DefaultNoticeSentBy__c, NumberOfDefaultNoticeRemindersSent__c, IsPaymentReviewRequired__c, PaymentApprovalStatus__c, WillMakeMorePayment__c, Trade_License_No__c, Trade_License_Issue_Date__c, Trade_License_Expiry_Date__c, Registration_Authority__c, 
             Unit__c, Unit__r.Name, Unit__r.UnitType__c, Unit__r.RegistrationDate__c, Unit__r.BFMUnitNumber__c, Unit__r.Active_Sales_Order__c, Unit__r.Active_Sales_Order__r.Account__c, Unit__r.Project__r.Name, Unit__r.Project__r.ProjectNameArabic__c, Unit__r.Building__r.Name,
@@ -89,7 +89,7 @@ public inherited sharing  class CaseService {
             Sales_Order__r.Project__c, Sales_Order__r.Opportunity__r.WinReason__c, Sales_Order__r.Opportunity__r.LeadChannel__c, Sales_Order__r.Opportunity__r.CloseDate, NewSalesOrder__c, NewSalesOrder__r.Opportunity__c, PaymentReceived__c, RefundAmount__c, WithdrawlRequestInitiated__c, TotalInstalmentDue__c,
             DeferralApprovalStatus__c, Deferral_Within_1_Month__c, PaymentDeferralReason__c, Deferral_Fee_Paid__c, ChequeScanned__c, IsDPCleared__c, City__c, Project__c, Step__c, RoundRobinNumber__c,
             ServiceCatalog__c, Service_Catalog__c, InAMC__c, InScope__c, Drawloop_Next_1__c, BFMServiceRequestId__c, Pre_title_deed_shared__c, Seller_Settled__c, NewPDCReceived__c,
-            ReversalRequestSubmittedForPDCs__c, ADDCAmount__c, IsBuyerFinancing__c, HassantukFee__c, NewCustomerAccount__c,Resolved__c,
+            ReversalRequestSubmittedForPDCs__c, ADDCAmount__c, IsBuyerFinancing__c, HassantukFee__c, NewCustomerAccount__c,
             Payment_Booked__c, Payment_Due_Date__c, Finance_document_verified__c, SubStatus__c, Projectname__c,POPUploaded__c,IsThirdPartyNeeded__c, Account_Name__c, ServiceCatalog__r.SubCategoryArabic__c,DocumentsVerifiedUploaded__c, 
             ServiceCatalog__r.SubCategory__c,Unit__r.Project__r.chequePostponeFeeShortTerm__c,Unit__r.Project__r.chequePostponeFeeLongTerm__c,DeferralFee__c,Unit__r.Project__r.ResaleEligibleAmoutPercentage__c,
             Unit__r.Project__r.ChequesUnavailable__c,isNotRegistered__c,Unit__r.Project__r.FMRecipientEmail__c,Unit__r.Project__c,
@@ -97,7 +97,7 @@ public inherited sharing  class CaseService {
             SentOldChequesToCustomer__c, OldChequeReceivedFromBank__c, PDCSentToCustomer__c, NoOfChequesSelectedForReplacement__c, NewCustomerAccount__r.name,Sales_Order__r.ADMFeeAmount__c, NewCustomerAccount__r.RecordType.DeveloperName,
             FinanceDocumentsUploadedManually__c, Remarks__c, RequestRaisedToBank__c, Neccessory_fees_collected__c,TPFType__c,
             Sales_Order__r.ADM_Fee_Combined__c,Case_Sub_Status__c,Main_Buyer_Share_Percentage__c,CancellationFees__c,Customer_Sub_Type__c,NameofCorporate__c,
-            Sales_Order__r.ADM_Fee_Included__c,Draft__c,BRN_RERA_Number__c,Country__c,
+            Sales_Order__r.ADM_Fee_Included__c,BRN_RERA_Number__c,Country__c,
             Sales_Order__r.IsTaxable__c,NationalID__c,Title__c,IsVATRegistered__c,Address1__c,Address2__c,PhoneNumber__c,CommercialLicenseExpiryDate__c,BankName__c,AccountNumber__c,BankAddress__c,IBANNumber__c,SwiftCode__c,TaxRegistrationNumber__c,VATUndertakingIssue_Date__c,TradeLicenseExpiryDate__c,
             Sales_Order__r.ADMFeeWaivedAmount__c,
             Sales_Order__r.SellingPrice__c,
@@ -105,10 +105,6 @@ public inherited sharing  class CaseService {
             Sales_Order__r.Sales_Price_Excluding_ADM__c,
             Sales_Order__r.AmountPayable__c,
             Sales_Order__r.Amount_Payable_Excluding_ADM__c,
-            Sales_Order__r.ServiceChargesWaiverEndDate__c,
-            Sales_Order__r.ServiceChargesWaiverStartDate__c,
-            Sales_Order__r.ServiceChargeWaivedYears__c,
-            Sales_Order__r.ServiceChargeStartDate__c,
             Sales_Order__r.PaymentPlanDiscount__c,
             Sales_Order__r.BulkDiscount__c,
             Sales_Order__r.Management_Discount__c,
@@ -126,8 +122,13 @@ public inherited sharing  class CaseService {
             Sales_Order__r.ADDC__c,
             Sales_Order__r.PaymentPlan__c,
             Sales_Order__r.PaymentPlan__r.Name,
-            Owner.Phone, InitialOwnerRemoved__c,
+            Sales_Order__r.ServiceChargesWaiverEndDate__c,
+            Sales_Order__r.ServiceChargesWaiverStartDate__c,
+            Sales_Order__r.ServiceChargeWaivedYears__c,
+            Sales_Order__r.ServiceChargeStartDate__c,
             NewSalesOrder__r.Bloom_Signed_SPA_Date__c,
+            Owner.Phone, InitialOwnerRemoved__c,
+            NewCustomerAccount__r.IsPersonAccount,
             Unit__r.BuildingSectionName__r.Primary_Account_Installment__c,
             Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.BankNameCorporate__c,
             Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.Name,
@@ -142,7 +143,6 @@ public inherited sharing  class CaseService {
             Unit__r.BuildingSectionName__r.BounceChequeAccount__r.AccountNumberCorporate__c,
             Unit__r.BuildingSectionName__r.BounceChequeAccount__r.IBANNoCorporate__c,
             Sales_Order__r.Unit__r.Project__r.ResaleEligibleAmoutPercentage__c,
-            NewCustomerAccount__r.IsPersonAccount,
             IssuesWithFinancialDocument__c, FinancialDocumentAvailableInSF__c, DocumentUploadedFromSAP__c, LPFWaiverRequestApprovalStatus__c,
             ADMTotalFees__c,ADMFees__c,ADMAdminFees__c,EvaluationFees__c,MortgageRegistrationFees__c,TitleDeedFees__c,MortgageFees__c,PercentToBeSettled__c,CustomerPaidPercentage__c,
             BillingToCompleteAmount__c, BillingToCompleteAmountInArabic__c, ResalePrice__c, ResalePriceInArabicWords__c,
@@ -151,7 +151,7 @@ public inherited sharing  class CaseService {
             ExcludeRecoveryFee__c,ExcludeTitleDeedFee__c,ExcludeAdmFee__c,ExcludeAdminFee__c,ExcludeChequeBounceFee__c,ExcludeChequeWithdrawlFee__c,NameOfPOA__c,PlaceOfIssuance__c,PlaceOfRegistration__c,RepresentationType__c,
             TypeOfCompany__c,RepresentativeArabicName__c,PercentageOfSharePurchased__c,LPFCompoundedLPFOnOtherCharges__c,ResaleToCompleteAmount__c, ChequeUnavailableInSF__c,
             AppRegistration__c, AppRegistration__r.Name,Salutation__c,PlaceofIssue__c,LanguagePreference__c,UAEResident__c,Birthdate__c,DirectIndirect__c,BrokerAgency__c,Broker_Agent__c,Broker_Commission__c,MOUDate__c,
-            Unit__r.ADMAddressingNumber__c, EarlySettlement__c,SendToBL__c,BBMId__c, AmountReceived__c, Handover__c, StopEmailsToCustomer__c
+            Unit__r.ADMAddressingNumber__c, EarlySettlement__c, StopEmailsToCustomer__c
             FROM Case
             WHERE Id = :caseId
             LIMIT 1
@@ -165,7 +165,7 @@ public inherited sharing  class CaseService {
                                Sales_Order__r.NetAmount__c,Sales_Order__r.Account__c,Sales_Order__r.name,Mobile_Number__c,Account__c,
                                Account.Legal_Status__c,Last_Name__c,First_Name__c,Mobile_Country_Code__c,Emirates_ID_expiry_date__c,
                                Nationality__c,Email_Address__c,PostponementFeesBooked__c,PostponeApproved__c,Subject, RequesterRemarks__c, 
-                               Description, Unit__r.BFMUnitNumber__c, Unit__r.Building__r.Name, Unit__r.BuildingSectionName__r.Name, 
+                               Description,InitialOwnerRemoved__c, Unit__r.BFMUnitNumber__c, Unit__r.Building__r.Name, Unit__r.BuildingSectionName__r.Name, 
                                Customer_Name__c, Account_Mobile_Number__c, Account_Email__c, RequesterName__c, RequesterContactNumber__c, 
                                RequesterEmail__c, AccountId, Account.PersonEmail, Account.RecordTypeId, Account.RecordType.DeveloperName,
                                Unit__c,Unit__r.Active_Sales_Order__c,Unit__r.Active_Sales_Order__r.Account__c,BFMServiceRequestId__c,
@@ -213,14 +213,14 @@ public inherited sharing  class CaseService {
     
     public List<Case> getCasesByRecordTypeSalesOrderANDStatus(Id salesOrderId, List<Id> recordTypeIds, String status){
         List<Case> caseList = [SELECT 
-            Id, CaseNumber, Subject, Description, Status, Priority, Origin, Type, Category__c, SubCategory__c,
+            Id, CaseNumber, Subject, InitialOwnerRemoved__c,Description, Status, Priority, Origin, Type, Category__c, SubCategory__c,
             OwnerId, CreatedById, RecordTypeId, RecordType.Name, RecordType.DeveloperName, RequestType__c, Discipline__c, Area__c, User_Type__c, Request_Number__c,
             RequesterRemarks__c, RequesterName__c, RequesterContactNumber__c, RequesterEmail__c, Contacts_Case_Email__c, Comments, CaseType__c,
             Contact.Name, Contact.Email, Owner.Name, Owner.Email,
             AccountId, Account__c, Account.Name, Account.NameinArabic__c, Account.Legal_Status__c, Account.PersonEmail, Account.RecordTypeId, Account.RecordType.DeveloperName, Account.IsPersonAccount, Account.PersonContactId,
             Account.IsBFMVIPCustomer__c, Address__c, Address__City__s, Address__CountryCode__s, Address__Latitude__s, Address__Longitude__s, Address__GeocodeAccuracy__s, Address__PostalCode__s, Address__StateCode__s, Address__Street__s,
             First_Name__c, Last_Name__c, Name__c, Nationality__c, CustomerType__c, Customer_Type__c, Gender__c, Mobile_Number__c, Mobile_Country_Code__c, Account_Mobile_Number__c,
-            Email_Address__c, Account_Email__c, EmiratesID__c, Emirates_ID_expiry_date__c, EIDIssueDate__c, PassportNumber__c, PassportIssueDate__c, Passport_Expiry_Date__c, isLegalReviewRequired__c, LegalApprovalStatus__c,
+            Email_Address__c, Account_Email__c, EmiratesID__c, Emirates_ID_expiry_date__c, EIDIssueDate__c, PassportNumber__c, PassportIssueDate__c,PassportExpiryDate__c, isLegalReviewRequired__c, LegalApprovalStatus__c,
             BuyerLegalApprovalStatus__c, BouncedChequeFees__c, LatePaymentFees__c, PendingFees__c, PostponementFeesBooked__c, PostponeApproved__c, RecoveryFee__c, ResalePaymentType__c, ChequeWithWithdrawlFees__c, DefaultNoticeSentTime__c,
             DefaultNoticeSentBy__c, NumberOfDefaultNoticeRemindersSent__c, IsPaymentReviewRequired__c, PaymentApprovalStatus__c, WillMakeMorePayment__c, Trade_License_No__c, Trade_License_Issue_Date__c, Trade_License_Expiry_Date__c, Registration_Authority__c, 
             Unit__c, Unit__r.Name, Unit__r.UnitType__c, Unit__r.RegistrationDate__c, Unit__r.BFMUnitNumber__c, Unit__r.Active_Sales_Order__c, Unit__r.Active_Sales_Order__r.Account__c, Unit__r.Project__r.Name, Unit__r.Project__r.ProjectNameArabic__c, Unit__r.Building__r.Name,
@@ -245,6 +245,8 @@ public inherited sharing  class CaseService {
             Sales_Order__r.AmountPayable__c,
             Sales_Order__r.Amount_Payable_Excluding_ADM__c,
             Sales_Order__r.PaymentPlanDiscount__c,
+            Sales_Order__r.PaymentPlan__c,
+            Sales_Order__r.PaymentPlan__r.Name,
             Sales_Order__r.BulkDiscount__c,
             Sales_Order__r.Management_Discount__c,
             Sales_Order__r.Discount__c,
@@ -278,7 +280,7 @@ public inherited sharing  class CaseService {
 
     public List<Case> getCasesNVehicleParkingDetailsByIds(Set<Id> caseIds){
          return [SELECT Id,CaseNumber,
-                (SELECT Id,Name,VehicleMakeModel__c,VehiclePlateNumber__c,Unit__c, EffectiveStartDate__c, EffectiveEndDate__c, CountryRegion__c, Category__c FROM VehicleParkingDetails__r)
+                (SELECT Id,Name,VehicleMakeModel__c,VehiclePlateNumber__c,Unit__c FROM VehicleParkingDetails__r)
                 FROM Case WHERE Id IN :caseIds];
          
      }
@@ -517,14 +519,14 @@ public inherited sharing  class CaseService {
     
     public List<Case> getCasesByContactId(Id contactId) {
         return [
-            SELECT Id, Description, Status, ApprovalStatus__c, ApprovalComments__c, RejectionComments__c,AgencyName__c,BrokerAgency__c,
+            SELECT Id, Description, Status, ApprovalStatus__c, ApprovalComments__c, RejectionComments__c,BrokerAgency__c,
             PhoneNumber__c, TradeLicenseExpiryDate__c, CommercialLicenseExpiryDate__c,
             IsVATRegistered__c, TaxRegistrationNumber__c, AccountNumber__c, CaseNumber,
             BankName__c, BankAddress__c, IBANNumber__c, SwiftCode__c, TypeofEstablishment__c, Mobile_Country_Code__c,
             ServiceCatalog__r.Category__c, ServiceCatalog__r.SubCategory__c, BrokerCommission__c, Broker_Agent__c, CreatedDate, Address1__c, Address2__c, VATUndertakingIssue_Date__c,
-            NationalIDExpiryDate__c, PassportExpiryDate__c, BRN_RERA_Expiry_Date__c, Mobile_Number__c, Type, AgencyType__c
+            NationalIDExpiryDate__c, PassportExpiryDate__c, BRN_RERA_Expiry_Date__c, Mobile_Number__c, Type
             FROM Case
-            WHERE ContactId = :contactId AND RecordType.DeveloperName IN ('BrokerCommissionIssue','BrokerGeneralServiceRequest','BrokerAgencyDetailsUpdate','BrokerAgentRegistrationAndUpdate')
+            WHERE ContactId = :contactId AND RecordType.DeveloperName IN ('DelayedCommissionPayment','OtherServiceRequest','IncorrectCommissionAmount','Broker_Agency_Details_Update','BrokerAgentDetailsUpdate')
             ORDER BY CreatedDate DESC
         ];
     }
@@ -554,8 +556,8 @@ public inherited sharing  class CaseService {
             NationalIDExpiryDate__c, PassportNumber__c, PassportExpiryDate__c,
             DateOfBirth__c, Country__c, TypeofEstablishment__c, BRN_RERA_Number__c,
             BRN_RERA_Expiry_Date__c, AccountId, ShareHoldingPercentage__c,
-            Designation__c, Mobile_Country_Code__c, ApprovalStatus__c, ContactId, RecordType.DeveloperName,
-            Subject
+            Designation__c, Mobile_Country_Code__c, ApprovalStatus__c, ContactId, 
+            RecordTypeId, RecordType.DeveloperName, Subject
             FROM Case
             WHERE Id IN :caseIds
         ]);

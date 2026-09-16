@@ -6,13 +6,6 @@ public inherited sharing class ContentDocumentLinkService {
         return new ContentDocumentLinkService();
     }
     
-    public ContentDocumentLink insertContentDocumentLink(ContentDocumentLink contentDocumentLink){
-        if(contentDocumentLink != NULL){
-            insert contentDocumentLink;
-        }
-        return contentDocumentLink;
-    }
-    
     //insert ContentDocumentLink with trigger
     public List<ContentDocumentLink> insertContentDocumentLinkWithTrigger(List<ContentDocumentLink> contentDocumentLinkList){
         if(contentDocumentLinkList != NULL && !contentDocumentLinkList.isEmpty()){
@@ -28,13 +21,6 @@ public inherited sharing class ContentDocumentLinkService {
     public List<ContentDocumentLink> getExistingAccountLinks(Set<Id> accountIds) {
         if (accountIds != null && !accountIds.isEmpty()) {
             return [SELECT ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE LinkedEntityId IN :accountIds];
-        }
-        return new List<ContentDocumentLink>();
-    }
-    
-    public List<ContentDocumentLink> getExistingCasesLinks(Set<Id> caseIds) {
-        if (caseIds != null && !caseIds.isEmpty()) {
-            return [SELECT ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE LinkedEntityId IN :caseIds];
         }
         return new List<ContentDocumentLink>();
     }
@@ -67,8 +53,6 @@ public inherited sharing class ContentDocumentLinkService {
     }
 	// Docusing BAPP
     public static ContentDocumentLink getLatestContentDocumentLinkByRecordAndTitle(Id recordId, String documentTitlePattern) {
-        system.debug('recordId-->'+recordId);
-        system.debug('documentTitlePattern-->'+documentTitlePattern);
         List<ContentDocumentLink> cdlList = [
             SELECT Id, ContentDocument.Title, ContentDocumentId
             FROM ContentDocumentLink

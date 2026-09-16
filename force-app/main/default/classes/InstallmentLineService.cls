@@ -6,9 +6,7 @@ Test Class  :
 Created Date: 07 NOV 2024
 *****************************************************************************************/
 public inherited sharing class InstallmentLineService {
-    
     private static final string MTD_SALES_ORDER_STATUS_VALUE { get { return 'SalesOrderStatusForPaymentPlan'; } }
-    
     private static InstallmentLineService instance;
     
     private InstallmentLineService() {  
@@ -21,52 +19,68 @@ public inherited sharing class InstallmentLineService {
         return instance;
     }
     
-    /*
-* Get Future & Current month's-pending Installment Lines records by sales order id set
-*/
+    
+    //Get Future & past 45 days pending Installment Lines records by sales order id set
+    
     public List<InstallmentLines__c> getInstallmentLinesBySalesOrder(Set<Id> salesOrderIdSet){
         Date today = Date.today();
-        Date startOfMonth = Date.newInstance(today.year(), today.month(), 1);
-        return [SELECT Id, InstallmentAmount__c, ClearedAmount__c, SalesOrder__c,PendingAmount__c, Name,InstallmentDate__c,Installment_Amount_Excluding_ADM__c FROM InstallmentLines__c /*WHERE SalesOrder__c IN: salesOrderIdSet AND InstallmentDate__c > Today*/  
-                WHERE SalesOrder__c IN :salesOrderIdSet AND 
-                ( 
-                    Due_Date__c > :today
-                    OR 
-                    (Due_Date__c >= :startOfMonth AND Due_Date__c <= :today AND PendingAmount__c > 1)
-                )];
+        Date past45Days = today.addDays(-45);
+        
+        return [
+            SELECT Id,
+            InstallmentAmount__c,
+            ClearedAmount__c,
+            SalesOrder__c,
+            PendingAmount__c,
+            Name,
+            InstallmentDate__c,
+            Installment_Amount_Excluding_ADM__c
+            FROM InstallmentLines__c
+            WHERE SalesOrder__c IN :salesOrderIdSet
+            AND (
+                Due_Date__c > :today
+                OR (
+                    Due_Date__c >= :past45Days
+                    AND Due_Date__c <= :today
+                    AND PendingAmount__c > 1
+                )
+            )
+        ];
     }
     
+
+    
     /*
-* Get Handover and Post Handover Installment Lines ONLY by sales order id set
-*/
+	* Get Handover and Post Handover Installment Lines ONLY by sales order id set
+	*/
     public List<InstallmentLines__c> getHOAndPHPPInstallmentLinesBySalesOrderIds(Set<Id> salesOrderIdSet){
         return [SELECT Id, SalesOrder__c, Type__c, RevisedDate__c, Due_Date__c, InstallmentDate__c, Send_to_SAP__c FROM InstallmentLines__c WHERE SalesOrder__c IN :salesOrderIdSet AND Type__c IN ('Handover', 'Post Handover Installment')];
     }
-    
+
     /*
-* Get Handover Installment Lines ONLY by sales order id set
-*/
+    * Get Handover Installment Lines ONLY by sales order id set
+    */
     public List<InstallmentLines__c> getHandoverInstallmentLinesBySalesOrderIds(Set<Id> salesOrderIdSet){
         return [SELECT Id, SalesOrder__c, Type__c, RevisedDate__c, Due_Date__c, InstallmentDate__c, Send_to_SAP__c FROM InstallmentLines__c WHERE SalesOrder__c IN :salesOrderIdSet AND Type__c IN ('Handover')];
     }
-    
+
     /*
-* Get Post Handover Installment Lines ONLY by sales order id set
-*/
+    * Get Post Handover Installment Lines ONLY by sales order id set
+    */
     public List<InstallmentLines__c> getPostHandoverInstallmentLinesBySalesOrderIds(Set<Id> salesOrderIdSet){
         return [SELECT Id, SalesOrder__c, Type__c, RevisedDate__c, Due_Date__c, InstallmentDate__c, Send_to_SAP__c FROM InstallmentLines__c WHERE SalesOrder__c IN :salesOrderIdSet AND Type__c IN ('Post Handover Installment')];
     }
     
     public  List<InstallmentLines__c> getInstallmentLinesByProjectIds(Set<Id> projectIdList, List<String> salesOrderStatusValueList, Date currentDate, Date quaterlyDays){
-        return [SELECT Id,Name,SalesOrder__r.Unit__r.Project__r.Name,SalesOrder__r.Unit__r.Project__r.EnableLPFCustomerNotification__c,SalesOrder__r.Unit__r.Name,SalesOrder__r.Account__c,SalesOrder__r.Account__r.Name,
-                SalesOrder__r.Account__r.isPersonAccount,SalesOrder__r.Account__r.PersonContactId,SalesOrder__r.Account__r.PersonContact.Name,SalesOrder__r.Account__r.PersonEmail,
-                SalesOrder__r.Account__r.NameinArabic__c,SalesOrder__r.Contact__c,SalesOrder__r.Contact__r.Name,SalesOrder__r.Contact__r.Email,SalesOrder__r.Status__c,PendingAmount__c,
+        return [SELECT Id,Name,SalesOrder__r.Unit__r.Project__r.Name,SalesOrder__r.Unit__r.Name,SalesOrder__r.Account__c,SalesOrder__r.Account__r.Name,
+                SalesOrder__r.Account__r.isPersonAccount,SalesOrder__r.Account__r.PersonContactId,SalesOrder__r.Account__r.PersonContact.Name,
+                SalesOrder__r.Account__r.NameinArabic__c,SalesOrder__r.Contact__c,SalesOrder__r.Contact__r.Name,SalesOrder__r.Status__c,PendingAmount__c,
                 format(PendingAmount__c) pendingamount,InstallmentDate__c,Due_Date__c,ClearedAmount__c,InstallmentAmount__c,InstallmentNumber__c,Description__c,Type__c FROM InstallmentLines__c 
                 WHERE SalesOrder__r.Unit__r.Project__c IN: projectIdList AND SalesOrder__r.Status__c NOT IN :salesOrderStatusValueList  AND ClearedAmount__c >= 0  AND Due_Date__c  >= :currentDate AND  Due_Date__c <= :quaterlyDays];
     }
     /*
-* Get Installment Lines records by sales order id set
-*/
+	* Get Installment Lines records by sales order id set
+	*/
     public List<InstallmentLines__c> getAllInstallmentLinesBySalesOrder(Set<Id> salesOrderIdSet){
         return [SELECT Id, 
                 SalesOrder__c,
@@ -103,13 +117,12 @@ public inherited sharing class InstallmentLineService {
     }
     public List<InstallmentLines__c> getOldInstallmentLinesBySalesOrderandDueDate(Set<Id> salesOrderIdSet){
         
-        return [SELECT Id, 
-                InstallmentDate__c, 
-                Description__c
-                FROM InstallmentLines__c WHERE SalesOrder__c IN: salesOrderIdSet and Due_Date__c <= TODAY] ;
+         return [SELECT Id, 
+              InstallmentDate__c, 
+              Description__c
+              FROM InstallmentLines__c WHERE SalesOrder__c IN: salesOrderIdSet and Due_Date__c <= TODAY] ;
         
     }
-    
     
     public List<InstallmentLines__c> getAllInstallmentLinesBySalesOrderandDueDate(Set<Id> salesOrderIdSet){
         return [SELECT Id, 
@@ -140,29 +153,29 @@ public inherited sharing class InstallmentLineService {
                  from Receipt_Allocations__r)  
                 FROM InstallmentLines__c WHERE SalesOrder__c IN: salesOrderIdSet AND Due_Date__c > TODAY AND Type__c != 'Handover' ORDER BY Due_Date__c ASC];
     }
-    public List<InstallmentLines__c> getPaidInstallmentLinesBySalesOrder(Set<Id> salesOrderIdSet){
-        
-        return [SELECT Id, 
-                InstallmentDate__c, 
-                Description__c
-                FROM InstallmentLines__c WHERE SalesOrder__c IN: salesOrderIdSet AND Description__c = 'Resale' AND SAP_Condition_Type__c = 'P145'];
-        
-    }
+ public List<InstallmentLines__c> getPaidInstallmentLinesBySalesOrder(Set<Id> salesOrderIdSet){
+     
+      return [SELECT Id, 
+              InstallmentDate__c, 
+              Description__c
+              FROM InstallmentLines__c WHERE SalesOrder__c IN: salesOrderIdSet AND Description__c = 'Resale' AND SAP_Condition_Type__c = 'P145'];
+     
+ }
     public  List<InstallmentLines__c> getInstallmentLinesByProject(Set<Id> projectIds, List<String> salesOrderStatusValueList){
-        return [SELECT Id,Name,Due_Date__c,LastLPFCreatedDate__c,Type__c,LPFCalculationStopped__c,SalesOrder__c,SalesOrder__r.Account__c,SalesOrder__r.Account__r.isPersonAccount,SalesOrder__r.Account__r.PersonContactId,SalesOrder__r.Account__r.PersonEmail,SalesOrder__r.Contact__c,SalesOrder__r.Status__c,PendingAmount__c,InstallmentDate__c,SalesOrder__r.Unit__r.Project__c,
+        return [SELECT Id,Name,Due_Date__c,LastLPFCreatedDate__c,Type__c,LPFCalculationStopped__c,SalesOrder__c,SalesOrder__r.Account__c,SalesOrder__r.Account__r.isPersonAccount,SalesOrder__r.Contact__c,SalesOrder__r.Status__c,PendingAmount__c,InstallmentDate__c,SalesOrder__r.Unit__r.Project__c,
                 SalesOrder__r.Unit__r.Project__r.LPFSAPConditionCode__c,SalesOrder__r.Unit__r.Project__r.InstallmentLPFGracePeriod__c,SalesOrder__r.Unit__r.Project__r.HandoverLPFGracePeriod__c,SalesOrder__r.Unit__r.Project__r.LPFAnnualPercentage__c,SalesOrder__r.Unit__r.Project__r.DailyLPFPercentage__c,SalesOrder__r.Unit__r.Project__r.LatePaymentFeeCalculationStartDate__c,
-                SalesOrder__r.Unit__r.Project__r.LPFThresholdAmount__c,SalesOrder__r.Contact__r.Email,SalesOrder__r.Unit__r.Project__r.Name,SalesOrder__r.Unit__r.Project__r.EnableLPFCustomerNotification__c,OutstandingAmount__c,SalesOrder__r.Unit__r.Name
+                SalesOrder__r.Unit__r.Project__r.LPFThresholdAmount__c
                 FROM InstallmentLines__c WHERE SalesOrder__r.Unit__r.Project__c IN :projectIds AND SalesOrder__r.Status__c NOT IN :salesOrderStatusValueList AND SalesOrder__r.Unit__r.Project__r.EnableLatePaymentFee__c = TRUE AND SalesOrder__r.LPFCalculationStopped__c = FALSE AND LPFCalculationStopped__c = FALSE AND PendingAmount__c > 0 AND InstallmentDate__c != null AND InstallmentDate__c < TODAY];
     }
     
     /*
-* Get Installment Lines records by Installment Number (1,2) and Broker Commission not created and have Broker Agency on Parent Sales Order
-*/
+	* Get Installment Lines records by Installment Number (1,2) and Broker Commission not created and have Broker Agency on Parent Sales Order
+	*/
     public List<InstallmentLines__c> getFirstNSecInstallmentByCommissionCreated(Boolean isBrokerCommissionCreated, Set<Integer> installmentNumberSet, String status){
         return [SELECT Id, InstallmentNumber__c , BrokerCommissionCreated__c, InstallmentAmount__c, ClearedAmount__c, SalesOrder__c,SalesOrder__r.Broker_Agency__c 
                 ,SalesOrder__r.Opportunity__r.BrokerAgencyAccount__c,SalesOrder__r.Unit__r.Project__c
-                FROM InstallmentLines__c WHERE ClearedAmount__c > 0 AND  BrokerCommissionCreated__c =: isBrokerCommissionCreated AND InstallmentNumber__c IN :installmentNumberSet 
-                AND SalesOrder__r.Broker_Agency__c != null AND SalesOrder__r.Status__c =: status AND SalesOrder__r.SoldDate__c != null AND SalesOrder__r.Resale__c = FALSE];
+        FROM InstallmentLines__c WHERE ClearedAmount__c > 0 AND  BrokerCommissionCreated__c =: isBrokerCommissionCreated AND InstallmentNumber__c IN :installmentNumberSet 
+        AND SalesOrder__r.Broker_Agency__c != null AND SalesOrder__r.Status__c =: status AND SalesOrder__r.SoldDate__c != null AND SalesOrder__r.Resale__c = FALSE];
     }
     
     public  List<InstallmentLines__c> getDPInstallmentLinesBySalesOrder(Set<Id> salesOrderIdSet){
@@ -171,11 +184,12 @@ public inherited sharing class InstallmentLineService {
     
     public  List<InstallmentLines__c> getInstallmentLinesByIds(Set<Id> installmentIds){
         return [SELECT Id, SalesOrder__r.SAP_Contract_No__c,SalesOrder__r.Company_Code__c,SAP_Condition_Type__c,RevisedDate__c,SalesOrder__r.Unit__r.Project__r.TechnologyFeeConditionType__c,
-                SalesOrder__r.Account__r.PersonContactId, SalesOrder__r.Contact__c, SalesOrder__r.Unit__r.Name,SalesOrder__r.Unit__c,SalesOrder__c,SalesOrder__r.Opportunity__c,SalesOrder__r.Account__c,
-                SalesOrder__r.Unit__r.BuildingSectionName__r.HandoverAccountInstallment__c,SalesOrder__r.Unit__r.BuildingSectionName__r.PHPPAccountInstallment__c,Type__c,
-                SalesOrder__r.Unit__r.BuildingSectionName__r.Primary_Account_Installment__c,SalesOrder__r.Unit__r.BuildingSectionName__r.BounceChequeAccount__c,
-                InstallmentAmount__c,InstallmentDate__c,(Select id,ReceiptAcknowledgement__c from Receipt_Allocations__r)
-                FROM InstallmentLines__c WHERE Id IN :installmentIds];
+        SalesOrder__r.Account__r.PersonContactId, SalesOrder__r.Contact__c, SalesOrder__r.Unit__r.Name,SalesOrder__r.Unit__c,SalesOrder__c,SalesOrder__r.Opportunity__c,SalesOrder__r.Account__c,
+        SalesOrder__r.ADM_Fee_Included__c, Installment_Amount_Excluding_ADM__c, InstallmentNumber__c,SAP_Document_No__c,Due_Date__c,
+        SalesOrder__r.Unit__r.BuildingSectionName__r.HandoverAccountInstallment__c,SalesOrder__r.Unit__r.BuildingSectionName__r.PHPPAccountInstallment__c,Type__c,
+        SalesOrder__r.Unit__r.BuildingSectionName__r.Primary_Account_Installment__c,SalesOrder__r.Unit__r.BuildingSectionName__r.BounceChequeAccount__c,
+        InstallmentAmount__c,InstallmentDate__c,(Select id,ReceiptAcknowledgement__c from Receipt_Allocations__r)
+        FROM InstallmentLines__c WHERE Id IN :installmentIds];
     }
     
     public InstallmentLines__c getInstallmentLinesByIdWithBank(Id installmentId){
@@ -216,8 +230,16 @@ public inherited sharing class InstallmentLineService {
             paramMap.put('Param2',  objInstallmentLine.SalesOrder__r.SAP_Contract_No__c);
             paramMap.put('Param3',  objInstallmentLine.SAP_Condition_Type__c);
             paramMap.put('Param4',  String.valueOf(objInstallmentLine.RevisedDate__c != null ? objInstallmentLine.RevisedDate__c : objInstallmentLine.InstallmentDate__c));
-            paramMap.put('Param5',  String.valueOf(objInstallmentLine.InstallmentAmount__c));
+          
+              if(objInstallmentLine.SalesOrder__r.ADM_Fee_Included__c && Integer.valueOf(objInstallmentLine.InstallmentNumber__c) == 1){
+                paramMap.put('Param5', String.valueOf(objInstallmentLine.Installment_Amount_Excluding_ADM__c));
+            }else{
+                paramMap.put('Param5', String.valueOf(objInstallmentLine.InstallmentAmount__c));
+            }
             paramMap.put('Param6',  '0');
+             if(String.isBlank(objInstallmentLine.SAP_Document_No__c) && objInstallmentLine.Due_Date__c <= System.today()){
+                paramMap.put('Param15', 'X');
+            }
             objIntegrationRecordList.add(objIntegrationRecordService.getIntegrationRecord('Insert','InstallmentLines__c',String.valueOf(objInstallmentLine.id),paramMap));
         }
         return objIntegrationRecordList;
@@ -233,7 +255,11 @@ public inherited sharing class InstallmentLineService {
             paramMap.put('Param2',  objInstallmentLine.SalesOrder__r.SAP_Contract_No__c);
             paramMap.put('Param3',  objInstallmentLine.SAP_Condition_Type__c);
             paramMap.put('Param4',  String.valueOf(objInstallmentLine.RevisedDate__c != null ? objInstallmentLine.RevisedDate__c : objInstallmentLine.InstallmentDate__c));
-            paramMap.put('Param5',  String.valueOf(objInstallmentLine.InstallmentAmount__c));
+             if(objInstallmentLine.SalesOrder__r.ADM_Fee_Included__c && Integer.valueOf(objInstallmentLine.InstallmentNumber__c) == 1){
+                paramMap.put('Param5', String.valueOf(objInstallmentLine.Installment_Amount_Excluding_ADM__c));
+            }else{
+                paramMap.put('Param5', String.valueOf(objInstallmentLine.InstallmentAmount__c));
+            }
             paramMap.put('Param6',  '0');
             paramMap.put('Param15', 'X');
             objIntegrationRecordList.add(objIntegrationRecordService.getIntegrationRecord('Update','InstallmentLines__c',String.valueOf(objInstallmentLine.id),paramMap));
@@ -246,16 +272,16 @@ public inherited sharing class InstallmentLineService {
     }
     
     /*
-* update Installment Lines record
-*/
+	* update Installment Lines record
+	*/
     public List<InstallmentLines__c> updateInstallmentLinesLists(List<InstallmentLines__c> installmentLinesList){
         if(installmentLinesList != NULL && !installmentLinesList.isEmpty()){
             Database.update(installmentLinesList, true);
         }
         return installmentLinesList;
     }
-    
-    public List<InstallmentLines__c> getPastDueDatedInstallmentLinesBySalesOrderId(Set<Id> salesOrderIdSet){
+
+     public List<InstallmentLines__c> getPastDueDatedInstallmentLinesBySalesOrderId(Set<Id> salesOrderIdSet){
         return [SELECT Id, InstallmentAmount__c,OutstandingAmount__c,Installment_Amount_Excluding_ADM__c,
                 Installment_Type__c,BrokerPayoutPercentage__c,PendingAmount__c,AmountReceived__c,
                 InstallmentPercentage__c,InstallmentDate__c, ClearedAmount__c, SalesOrder__c, Due_Date__c
@@ -270,8 +296,8 @@ public inherited sharing class InstallmentLineService {
     }
     
     /*
-* update Installment Lines records
-*/
+	* update Installment Lines records
+	*/
     public List<InstallmentLines__c> updateInstallmentLines(List<InstallmentLines__c> installmentLines){
         if(installmentLines != NULL && !installmentLines.isEmpty()){
             update installmentLines;
@@ -282,7 +308,7 @@ public inherited sharing class InstallmentLineService {
     public InstallmentLines__c updateinstallmentLine(InstallmentLines__c installment){
         return updateinstallmentLines(new List<InstallmentLines__c>{installment})[0];
     }
-    
+
     public  List<InstallmentLines__c> getInstallmentLinesBySalesOrderId(Id salesOrderId){
         return [SELECT Id, Type__c, Due_Date__c, InstallmentAmount__c, ClearedAmount__c, SalesOrder__c, AmountReceived__c,InstallmentNumber__c,
                 Name,PendingAmount__c , InstallmentPercentage__c, PaymentStatus__c, SalesOrder__r.Unit__c, SalesOrder__r.Unit__r.Name,
@@ -292,7 +318,7 @@ public inherited sharing class InstallmentLineService {
                 SalesOrder__r.Unit__r.Project__r.Company__r.RevenuePercentage__c, SalesOrder__r.Unit__r.Project__r.Company__r.RevenueMID__c,Status__c
                 FROM InstallmentLines__c WHERE SalesOrder__c =: salesOrderId];
     }
-    
+
     public  List<InstallmentLines__c> getInstallmentLinesNAllocationBySalesOrderId(Id salesOrderId){
         return [SELECT Id, Name, (SELECT Id,Name,InstallmentLine__c FROM Receipt_Allocations__r) FROM InstallmentLines__c WHERE SalesOrder__c =: salesOrderId];
     }
@@ -320,24 +346,24 @@ public inherited sharing class InstallmentLineService {
     }
     
     /*
-* Get Installments Due till date
-*/
+	* Get Installments Due till date
+	*/
     public List<InstallmentLines__c> getInstallmentLinesDueTillDateBySalesOrder(Id salesOrderId){
         Date today = Date.today();
-        
+       
         return [SELECT Id, InstallmentAmount__c, ClearedAmount__c, SalesOrder__c,PendingAmount__c, Name,InstallmentDate__c,Installment_Amount_Excluding_ADM__c,InstallmentPercentage__c FROM InstallmentLines__c /*WHERE SalesOrder__c IN: salesOrderIdSet AND InstallmentDate__c > Today*/  
                 WHERE SalesOrder__c = :salesOrderId AND 
                 ( 
                     InstallmentDate__c <= today
                 )];
     }
-    public List<InstallmentLines__c> deleteInstallmentLines(List<InstallmentLines__c> installments){
-        InstallmentLineTriggerHandler.isTriggerDisabled = true;
-        delete installments;
-        InstallmentLineTriggerHandler.isTriggerDisabled = false;
+     public List<InstallmentLines__c> deleteInstallmentLines(List<InstallmentLines__c> installments){
+          InstallmentLineTriggerHandler.isTriggerDisabled = true;
+          delete installments;
+          InstallmentLineTriggerHandler.isTriggerDisabled = false;
         return installments;
     }
-    
+
     public List<InstallmentLines__c> getInstallmentLinesWithSalesOrderDetails(String installmentId) {
         return [SELECT Id, Type__c, Due_Date__c, InstallmentAmount__c, ClearedAmount__c, SalesOrder__c, AmountReceived__c,
                 Name,PendingAmount__c , InstallmentPercentage__c, PaymentStatus__c, SalesOrder__r.Unit__c, SalesOrder__r.Unit__r.Name,

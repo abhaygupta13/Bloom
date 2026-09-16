@@ -31,7 +31,6 @@ public without sharing class BrokerCommissionTriggerHandler implements ITriggerH
     public void afterUpdate(List<sObject> newList, Map<Id, sObject> newMap,  List<sObject> oldList, Map<Id, sObject> oldMap) {
         BrokerCommissionTriggerHelper.createIntegrationRecord((List<BrokerCommission__c>)newList, (Map<Id, BrokerCommission__c>)oldMap);
         BrokerCommissionTriggerHelper.sendEmailToRelatedContacts((List<BrokerCommission__c>)newList, (Map<Id, BrokerCommission__c>)oldMap);
-        //BrokerCommissionTriggerHelper.invokeThirdApprovalProcess((List<BrokerCommission__c>)newList, (Map<Id, BrokerCommission__c>)oldMap);
     }
     
     public void beforeDelete(List<sObject> oldList , Map<Id, sObject> oldMap) {

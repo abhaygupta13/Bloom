@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to track the booking memo units and its associated special offers for the unit like Additional Discount, Commissions, Rebate, Service Charge Waiver years etc.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>ADMFeeAmount__c</fullName>
+        <description>For capturing the ADM Fee Amount of the Memo Lines</description>
+        <formula>Unit__r.SellingPrice__c *  ADMFeePercentage__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>ADM Fee Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ADMFeePercentage__c</fullName>
+        <description>For capturing the ADM Fee Percentage of the Memo Lines</description>
+        <label>ADM Fee Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>AdditionalDiscountAmount__c</fullName>
+        <description>For capturing the Additional Discount Amount of the Memo Lines</description>
+        <formula>Unit__r.SellingPrice__c *  AdditionalDiscountPercentage__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Additional Discount Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AdditionalDiscountPercentage__c</fullName>
+        <description>For capturing the Additional Discount Percentage of the Memo Lines</description>
+        <label>Additional Discount Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>BookingMemo__c</fullName>
+        <description>For capturing the ADM Fee Percentage of the Memo Lines</description>
+        <label>Booking Memo</label>
+        <referenceTo>BookingMemo__c</referenceTo>
+        <relationshipLabel>Memo Lines</relationshipLabel>
+        <relationshipName>MemoLinesBookingMemo</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>BrokerCommissionAmount__c</fullName>
+        <description>For capturing the Broker Commission Amount of the Memo Lines</description>
+        <formula>Unit__r.SellingPrice__c *  BrokerCommissionPercentage__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Broker Commission Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>BrokerCommissionPercentage__c</fullName>
+        <description>For capturing the Broker Commission Percentage of the Memo Lines</description>
+        <label>Broker Commission Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>DiscountAmount__c</fullName>
+        <description>For capturing the Discount Amount of the Memo Lines</description>
+        <formula>Unit__r.SellingPrice__c *  DiscountPercentage__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Discount Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>DiscountPercentage__c</fullName>
+        <description>For capturing the Discount Percentage of the Memo Lines</description>
+        <label>Discount Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ExistingOffer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>For capturing the Existing Offer of the Memo Lines</description>
+        <label>Existing Offer</label>
+        <referenceTo>OffersPromotions__c</referenceTo>
+        <relationshipLabel>Memo Lines</relationshipLabel>
+        <relationshipName>Memo_Lines</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ExistingPaymentPlan__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>For capturing the Existing Payment Plan of the Memo Lines</description>
+        <label>Existing Payment Plan</label>
+        <referenceTo>PaymentPlan__c</referenceTo>
+        <relationshipLabel>Memo Lines</relationshipLabel>
+        <relationshipName>Memo_Lines</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>HomeMaintenanceYears__c</fullName>
+        <externalId>false</externalId>
+        <label>HomeMaintenanceYears</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IntCommissionAmount__c</fullName>
+        <description>For capturing the Int Commission Amount of the Memo Lines</description>
+        <formula>Unit__r.SellingPrice__c *  IntCommissionPercentage__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Int Commission Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>IntCommissionPercentage__c</fullName>
+        <description>For capturing the Int Commission Percentage of the Memo Lines</description>
+        <label>Int Commission Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>MembershipAmount__c</fullName>
+        <description>For capturing the Membership Amount of the Memo Lines</description>
+        <label>Membership Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>MembershipType__c</fullName>
+        <description>For capturing the Membership Type of the Memo Lines</description>
+        <externalId>false</externalId>
+        <label>Membership Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OriginalCreationDate__c</fullName>
+        <description>Date when the record was original created in the source system, which will be used for migration.</description>
+        <inlineHelpText>Date when the record was original created in the source system, which will be used for migration.</inlineHelpText>
+        <label>Original Creation Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>PMFeeAmount__c</fullName>
+        <description>For capturing the PM Fee Amount of the Memo Lines</description>
+        <formula>(Unit__r.BuildingSectionName__r.PropertyManagementFee__c)  *  Unit__r.MarketLeaseRent__c  * PMFeeYears__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>PM Fee Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PMFeeYears__c</fullName>
+        <description>For capturing the PM Fee Years of the Memo Lines</description>
+        <externalId>false</externalId>
+        <label>PM Fee Years</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PriceAfterDiscount__c</fullName>
+        <description>For capturing the Price After Discount of the Memo Lines</description>
+        <externalId>false</externalId>
+        <formula>Unit__r.SellingPrice__c -  DiscountAmount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Price After Discount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RebateAmount__c</fullName>
+        <description>For capturing the Rebate Amount of the Memo Lines</description>
+        <formula>Unit__r.SellingPrice__c *  RebatePercentage__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Rebate Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>RebatePercentage__c</fullName>
+        <description>For capturing the Rebate Percentage of the Memo Lines</description>
+        <label>Rebate Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>SCWaiverAmount__c</fullName>
+        <description>For capturing the SC Waiver Amount of the Memo Lines</description>
+        <formula>IF( ISBLANK( Unit__r.MeasuredArea__c )  , Unit__r.AnticipatedServiceCharges__c  *  SCWaiverYears__c *  Unit__r.SaleableArea__c ,  Unit__r.AnticipatedServiceCharges__c  *  SCWaiverYears__c * Unit__r.MeasuredArea__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SC Waiver Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>SCWaiverYears__c</fullName>
+        <description>For capturing the SC Waiver Years of the Memo Lines</description>
+        <externalId>false</externalId>
+        <label>SC Waiver Years</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SubsidyAmount__c</fullName>
+        <description>For capturing the Subsidy Amount of the Memo Lines</description>
+        <formula>(Unit__r.SellingPrice__c * 80 / 100) *  SubsidyPercentage__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Subsidy Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>SubsidyPercentage__c</fullName>
+        <description>For capturing the Subsidy Percentage of the Memo Lines</description>
+        <label>Subsidy Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Unit__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>For capturing the Unit of the Memo Lines</description>
+        <label>Unit</label>
+        <referenceTo>Unit__c</referenceTo>
+        <relationshipLabel>Memo Lines</relationshipLabel>
+        <relationshipName>Memo_Lines</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>VoucherAmount__c</fullName>
+        <description>For capturing the Voucher Amount of the Memo Lines</description>
+        <label>Voucher Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>VoucherName__c</fullName>
+        <description>For capturing the Voucher Name of the Memo Lines</description>
+        <externalId>false</externalId>
+        <label>Voucher Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Memo Lines</label>
+    <nameField>
+        <displayFormat>ML-{0000000}</displayFormat>
+        <label>Memo Lines Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Memo Lines</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>NewFromDocument</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Import</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>PrintableListView</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

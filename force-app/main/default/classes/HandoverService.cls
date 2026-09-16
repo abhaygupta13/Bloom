@@ -25,7 +25,7 @@ public inherited sharing class HandoverService {
     }
     
     public List<Handover__c> getHandoverByUnitId(Id unitId) {
-        return [SELECT Id,unit__r.UnitNumber__c,Name,Unit__r.ADMAddressingNumber__c,Unit__r.Name,Account__r.Name,Account__r.NameinArabic__c,
+        return [SELECT Id,Englishformatteddate__c,unit__r.UnitNumber__c,Name,Unit__r.ADMAddressingNumber__c,Unit__r.Name,Account__r.Name,Account__r.NameinArabic__c,
                 Unit_Plot_Number__c,Unit__r.DoorNumber__c, Unit__c,Unit__r.Status__c, Unit__r.SAP_Unit_Number__c, Sub_Status__c, 
                 Customer_Email__c,CustomerEmail__c, Customer_Name__c, Is_BCC_Announcement_Sent__c, 
                 Project__r.Name, Account_Manager_Name__c, Account_Manager_Email__c, Sales_Order__r.Status__c,
@@ -64,7 +64,7 @@ public inherited sharing class HandoverService {
     }
     
     public Handover__c getHandoverRecordById(Id recordId) {
-        return [SELECT Id, Name, Unit__c,Unit__r.Status__c, Unit__r.SAP_Unit_Number__c, Sub_Status__c, 
+        return [SELECT Id,FinanceTeamAssingedUser__c, Name, Unit__c,Unit__r.Status__c, Unit__r.SAP_Unit_Number__c, Sub_Status__c, 
                 Customer_Email__c,CustomerEmail__c, Customer_Name__c, Is_BCC_Announcement_Sent__c, 
                 Project__r.Name, Account_Manager_Name__c, Account_Manager_Email__c, Sales_Order__r.Status__c,
                 Account_Manager_Phone__c, Project__c, Project__r.ProjectNameArabic__c, Payment_Settled__c, Payment_Date__c,
@@ -107,7 +107,7 @@ public inherited sharing class HandoverService {
     }
     
     public Handover__c getHandoverById(Id handoverId) {
-        return [SELECT Id, Name,Project__r.BloomPhoneArabic__c,Unit_Plot_Number__c,Unit__r.DoorNumber__c,Unit__r.Status__c,ProjectName__c,Sub_Status__c,ProjectNameArabic__c,BuildingPhase__c,LocationName__c,
+        return [SELECT Id, Name,FinanceTeamAssingedUser__c,Englishformatteddate__c,IsOustandingPaymentconfirmedsent__c,IsHandoverSigningInvitationSent__c,Project__r.BloomPhoneArabic__c,Unit_Plot_Number__c,Unit__r.DoorNumber__c,Unit__r.Status__c,ProjectName__c,Sub_Status__c,ProjectNameArabic__c,BuildingPhase__c,LocationName__c,
                 BloomPhone__c,BloomEmail__c,NOC_Expiry_Date__c, Unit__c,Project__r.Handover_Community_Guidelines_English__c,
                 Project__r.Handover_Community_Guidelines_Arabic__c, Unit__r.SAP_Unit_Number__c, 
                 Customer_Email__c,CustomerEmail__c, Customer_Name__c, Project__r.Name, 
@@ -123,7 +123,7 @@ public inherited sharing class HandoverService {
                 PropertyHomeOrientationByBloom__c,PropertyHomeOrientationWOCustomer__c,HasCHODesnaggingemailsent__c,
                 Project_Name_Arabic__c,Project_Name__c,AccountManagerEmail__c,
                 Location__c,Customer_Number__c,Bloom_Email__c,Bloom_Phone__c,HO_Agent_Assigned_User__c,
-                Address__c, NOC_Date__c,SettlementFollowUpDate__c,OwnerId,Next_Step__c,
+                Address__c, NOC_Date__c,SettlementFollowUpDate__c,OwnerId,
                 HomeOrientationInvitationDate__c,HO_DD_MM_YYYY__c,Location_Name__c,Date__c,ServiceCatalog__c,
                 Previous_HO_Status__c, Customer_Availability_for_CHO__c, Handover_Phase__r.ExcludedHandoverStages__c,
                 HandoverType__c
@@ -142,11 +142,11 @@ public inherited sharing class HandoverService {
              Sales_Order__r.NetAmount__c,Unit__r.UnitType__c,UnitCategory__c,Mortgage_Value__c, CongratulationOnHandoverEmailsent__c,PropertyHomeOrientationReport_Sent__c,KeyHandoverInvitationSent__c,
              PropertyHomeOrientationByBloom__c,PropertyHomeOrientationWOCustomer__c,HasCHODesnaggingemailsent__c,Lease_Type__c,Lease_Amount__c,Lease_End_Date__c,
              Account__c, Account__r.PersonEmail, Account__r.FirstName, Account__r.LastName, Unit__c, Unit__r.UnitNumber__c,Unit__r.HO_Agent__c, Handover_Phase__r.ExcludedHandoverStages__c,
-             Sub_Status__c, Orientation_Appointment_Status__c, Is_Notice_of_Completion_Sent__c, Payment_Type__c, RecordTypeId, Is_Appointment_Booked__c, HandoverType__c
+             Sub_Status__c, Orientation_Appointment_Status__c, Is_Notice_of_Completion_Sent__c, Payment_Type__c, RecordTypeId, Is_Appointment_Booked__c, HandoverType__c, ProjectName__c
              FROM Handover__c WHERE Id IN :handoverIds];
     }
      public List<Handover__c> getHandoverByIds(Set<Id> handoverIds){
-        return [SELECT Id,Unit_Plot_Number__c,Unit__r.Status__c,Name,CRM_Team_Assigned_User__c,CRM_Team_Assigned_User__r.Email,HO_Agent_Assigned_User__c,OwnerId,Is_Property_keys_given__c, Date__c, Project__r.RegisteredUnitTitleDeedFeeApt__c, Project__r.RegisteredUnitTitleDeedFeeVilla__c, Project__c, Project_Name__c,
+        return [SELECT Id,FinanceTeamAssingedUser__c,Handover_Phase__c,ProjectName__c,Unit_Plot_Number__c,Unit__r.Status__c,Name,CRM_Team_Assigned_User__c,CRM_Team_Assigned_User__r.Email,HO_Agent_Assigned_User__c,OwnerId,Is_Property_keys_given__c, Date__c, Project__r.RegisteredUnitTitleDeedFeeApt__c, Project__r.RegisteredUnitTitleDeedFeeVilla__c, Project__c, Project_Name__c,
              Project__r.MortgageUnitAdminFeeApt__c, Project__r.MortgageUnitAdminFeeVilla__c, Project__r.ResaleWithMortgageEvaluationFeeApt__c, Project__r.ResaleWithMortgageEvaluationFeeVilla__c,
              Project__r.MortgageUnitTitleDeedFeeApt__c, Project__r.MortgageUnitTitleDeedFeeVilla__c, Project__r.ResaleUnitADMFeeApt__c, Project__r.ResaleUnitADMFeeVilla__c,
              PropertyHomeOrientationReport_Sent__c,CongratulationOnHandoverEmailsent__c,KeyHandoverInvitationSent__c,PropertyHomeOrientationByBloom__c,PropertyHomeOrientationWOCustomer__c,
@@ -155,7 +155,7 @@ public inherited sharing class HandoverService {
              Project__r.ResaleWithMortgageADMFeeApt__c, Project__r.ResaleWithMortgageADMFeeVilla__c, Project__r.ResaleWithMortgageAdminFeeApt__c, Project__r.ResaleWithMortgageAdminFeeVilla__c,
              Project__r.NewSaleADMFeeApt__c, Project__r.NewSaleADMFeeVilla__c, Project__r.NewSaleAdminFeeApt__c, Project__r.NewSaleAdminFeeVilla__c, Project__r.NewSaleWithMortgageEvaluationFeeVilla__c,
              Project__r.NewSaleEvaluationFeeApt__c, Project__r.NewSaleEvaluationFeeVilla__c, Project__r.NewSaleWithMortgageADMFeeApt__c, Project__r.NewSaleWithMortgageADMFeeVilla__c,
-             Project__r.NewSaleWithMortgageAdminFeeApt__c, Project__r.NewSaleWithMortgageAdminFeeVilla__c, Project__r.NewSaleWithMortgageEvaluationFeeApt__c, Next_Step__c, Customer_Availability_for_CHO__c,
+             Project__r.NewSaleWithMortgageAdminFeeApt__c, Project__r.NewSaleWithMortgageAdminFeeVilla__c, Project__r.NewSaleWithMortgageEvaluationFeeApt__c, Customer_Availability_for_CHO__c,
              Sales_Order__r.NetAmount__c,Unit__r.UnitType__c,UnitCategory__c,Mortgage_Value__c, ServiceCatalog__c, RecordTypeId, PendingWithDepartment__c, Previous_HO_Status__c,
              Account__c, Account__r.PersonEmail, Account__r.FirstName, Account__r.LastName, Unit__c, Unit__r.UnitNumber__c,Unit__r.HO_Agent__c, Sub_Status__c, Is_Manual__c,
              Orientation_Appointment_Status__c, Is_Notice_of_Completion_Sent__c, Payment_Type__c, Is_Appointment_Booked__c, Unit_Type__c, Handover_Phase__r.ExcludedHandoverStages__c, Handover_Phase__r.SkipHandoverCHOTasks__c,
@@ -221,9 +221,8 @@ public inherited sharing class HandoverService {
                 WHERE Unit_is_Ready__c = false 
                 AND Project__c = :projectId AND Is_Orientation_Letter_Sent__c = false LIMIT 10000];
     }
-    
     public List<Handover__c> getNOCCHOHandoversBasedOnProjectAndHandoverPhaseId(String projectId,String handoverPhaseId) {
-        return [SELECT Id,unit__r.Door_Number__c,ProjectbyFormula__c,Sales_Order__c,Unit__r.Status__c,ProjectNameArabic__c, Name, Unit__c, Unit__r.Name, Unit__r.Unit_Status__c,Building_Phase__c,BuildingPhase__c, Building_Phase__r.Name, Project__c, 
+        return [SELECT Id,unit__r.DoorNumber__c,ProjectbyFormula__c,Sales_Order__c,Unit__r.Status__c,ProjectNameArabic__c, Name, Unit__c, Unit__r.Name, Unit__r.Unit_Status__c,Building_Phase__c,BuildingPhase__c, Building_Phase__r.Name, Project__c, 
                 Project__r.Name, Customer_Email__c,CustomerEmail__c, Sales_Order__r.Name,CreatedDate, Owner_Name__c, Is_Orientation_Letter_Sent__c, 
                 Sub_Status__c FROM Handover__c WHERE Is_Notice_of_Completion_Sent__c = FALSE AND HasDoorNumberEmailSent__c=false
                 AND Handover_Phase__c = :handoverPhaseId AND (Is_BCC_Announcement_Sent__c = TRUE OR Handover_Phase__r.BCCRequired__c =False) AND Project__c = :projectId];
@@ -231,7 +230,7 @@ public inherited sharing class HandoverService {
     
     public List<Handover__c> getBCCWithHandoverPhaseAndProjectId(String projectId, String handoverPhaseId) {
         
-        return [SELECT Id,Name,Unit__r.Name,Handover_Phase__c,Handover_Phase__r.BCCRequired__c, Status__c,Owner.Name, CreatedDate, Project__c,unit__r.Door_Number__c,Unit__r.Status__c, Unit__c, Unit__r.Unit_Status__c,Building_Phase__c,BuildingPhase__c, Building_Phase__r.Name, 
+        return [SELECT Id,Name,Unit__r.Name,Handover_Phase__c,Handover_Phase__r.BCCRequired__c, Status__c,Owner.Name, CreatedDate, Project__c,unit__r.DoorNumber__c,Unit__r.Status__c, Unit__c, Unit__r.Unit_Status__c,Building_Phase__c,BuildingPhase__c, Building_Phase__r.Name, 
                 Project__r.Name, Customer_Email__c,CustomerEmail__c, Sales_Order__r.Name, Owner_Name__c, Is_Orientation_Letter_Sent__c, 
                 Sub_Status__c From Handover__c WHERE Handover_Phase__c = :handoverPhaseId 
                 AND Project__c = :projectId And  Is_BCC_Announcement_Sent__c =false AND Handover_Phase__r.BCCRequired__c =True];
@@ -275,6 +274,11 @@ public inherited sharing class HandoverService {
      public List<Handover__c> getHandoversByUnitIds(Set<Id> unitIds) {
         return [SELECT Id, Name,Sales_Order__c,Unit__r.SAP_Unit_Number__c,Unit__r.Status__c,Unit__r.Project__c,Unit__r.BuildingSectionName__r.Project__c,Unit__r.Active_Sales_Order__r.Account__c, Unit__r.Active_Sales_Order__c, Sub_Status__c, Unit__c FROM Handover__c WHERE Unit__c IN :unitIds];
     }
+    
+     public List<Handover__c> getHandoversByUnitIdForResale(Set<Id> unitIds) {
+        return [SELECT Id, Name,Sales_Order__c,Unit__r.SAP_Unit_Number__c,Unit__r.Status__c,Unit__r.Project__c,Unit__r.BuildingSectionName__r.Project__c,Unit__r.Active_Sales_Order__r.Account__c, Unit__r.Active_Sales_Order__c, Sub_Status__c, Unit__c FROM Handover__c WHERE Unit__c IN :unitIds and Is_Property_keys_given__c=:false];
+    }
+    
       public List<Handover__c> updateHandoversWithoutTrigger(List<Handover__c> handoverList){
         if(handoverList != NULL && !handoverList.isEmpty()){
             HandoverTriggerHandler.isTriggerDisabled = true;
@@ -334,9 +338,9 @@ public inherited sharing class HandoverService {
         ];
     }
      
-    public List<Handover__c> getNOCHOByHandoverIds(set<id>recordIds) {
+     public List<Handover__c> getNOCHOByHandoverIds(set<id>recordIds) {
         return[
-            SELECT Id,Handover_Phase__r.DoorNumberClarificationrequired__c,Handover_Phase__r.NOCCHOEmailtemplateId__c,contact__c,unit__r.UnitNumber__c,
+            SELECT Id,Englishformatteddate__c,Handover_Phase__r.AfterHONoticeSubstatus__c,Handover_Phase__r.DoorNumberClarificationrequired__c,Handover_Phase__r.NOCCHOEmailtemplateId__c,contact__c,unit__r.UnitNumber__c,
             Account__r.Name,Account__r.NameinArabic__c,
             Unit__r.ADMAddressingNumber__c,Name,Unit__r.Name,Unit_Plot_Number__c,
             Unit__r.DoorNumber__c,Purchase_Price__c,ProjectbyFormula__c,
@@ -381,7 +385,7 @@ public inherited sharing class HandoverService {
     
     public List<Handover__c> getHandoverRecordsByUnitId(Set<Id> recordIds) {
         return [
-            SELECT Id, Name,Unit__r.DoorNumber__c,Contact__c,Unit__r.UnitNumber__c,Unit__r.Name,Account__r.Name,Account__r.NameinArabic__c,Unit_Plot_Number__c,Purchase_Price__c,Handover_Phase__r.BCCEmailTemplateId__c,ProjectbyFormula__c,Unit__r.Status__c,ProjectNameArabic__c,ProjectName__c,BuildingPhase__c, Unit__c,LocationName__c,BloomPhone__c,BloomEmail__c,NOC_Expiry_Date__c,Project__r.Handover_Community_Guidelines_English__c,Project__r.Handover_Community_Guidelines_Arabic__c, Unit__r.SAP_Unit_Number__c, Sub_Status__c, 
+            SELECT Id, Name,Englishformatteddate__c,Unit__r.DoorNumber__c,Contact__c,Unit__r.UnitNumber__c,Unit__r.Name,Account__r.Name,Account__r.NameinArabic__c,Unit_Plot_Number__c,Purchase_Price__c,Handover_Phase__r.BCCEmailTemplateId__c,ProjectbyFormula__c,Unit__r.Status__c,ProjectNameArabic__c,ProjectName__c,BuildingPhase__c, Unit__c,LocationName__c,BloomPhone__c,BloomEmail__c,NOC_Expiry_Date__c,Project__r.Handover_Community_Guidelines_English__c,Project__r.Handover_Community_Guidelines_Arabic__c, Unit__r.SAP_Unit_Number__c, Sub_Status__c, 
             Customer_Email__c,CustomerEmail__c, Customer_Name__c, Project__r.Name, 
             Account_Manager_Name__c, Home_Orientation_Invitation_Date__c, 
             Promise_to_Pay_Date__c, Account_Manager_Email__c, Drawloop_Next_1__c,
@@ -395,7 +399,7 @@ public inherited sharing class HandoverService {
             Location__c,Customer_Number__c,Bloom_Email__c,Bloom_Phone__c,
             Address__c, NOC_Date__c,SettlementFollowUpDate__c,
             HomeOrientationInvitationDate__c,HO_DD_MM_YYYY__c,Location_Name__c,Date__c,Unit_Code__c,Unit__r.UnitType__c
-            FROM Handover__c WHERE Unit__c IN :recordIds
+            FROM Handover__c WHERE Id IN :recordIds
         ];
     }
 

@@ -44,7 +44,7 @@ public without sharing class LeasingReceiptAllocationTriggerHelper {
             for(LeasingReceiptAllocation__c allocation : newList){
                 if(allocation.LeasingOrder__c != Null && allocation.LeasingOrder__c != receiptMap.get(allocation.LeasingReceiptAcknowledgment__c).LeasingOrder__c){
                     String errorMsg = LEASING_ORDER_ERROR.replace('{LOName}',receiptMap.get(allocation.LeasingReceiptAcknowledgment__c).LeasingOrder__r.Name);
-                    allocation.addError(errorMsg);
+                    //allocation.addError(errorMsg);
                 }
                 if(receiptMap.get(allocation.LeasingReceiptAcknowledgment__c).VerifyDate__c <= Date.today())
                 allocation.SendtoSAP__c = true;
@@ -109,7 +109,7 @@ public without sharing class LeasingReceiptAllocationTriggerHelper {
             for ( LeasingOrdersOtherCharges__c oc : [Select Id, ClearedAmount__c, TotalAmount__c from LeasingOrdersOtherCharges__c where Id IN: ocAmountMap.keySet()]){
                 oc.ClearedAmount__c = oc.ClearedAmount__c != Null ? oc.ClearedAmount__c + ocAmountMap.get(oc.Id) : ocAmountMap.get(oc.Id);
                 if(oc.ClearedAmount__c > oc.TotalAmount__c || oc.ClearedAmount__c < 0){
-                    newAllocationMap.values()[0].addError(OC_AMOUNT_EXCEED_ERROR);
+                    //newAllocationMap.values()[0].addError(OC_AMOUNT_EXCEED_ERROR);
                 }
                 if(oc.ClearedAmount__c == oc.TotalAmount__c){
                     //oc.PaymentStatus__c = 'Paid';
@@ -166,7 +166,7 @@ public without sharing class LeasingReceiptAllocationTriggerHelper {
                     }
                     if(oc.ClearedAmount__c != null && oc.TotalInstallmentAmount__c != null && 
                        (oc.ClearedAmount__c > oc.TotalInstallmentAmount__c || oc.ClearedAmount__c < 0)){
-                          newAllocationMap.values()[0].addError(PPS_AMOUNT_EXCEED_ERROR);
+                          //newAllocationMap.values()[0].addError(PPS_AMOUNT_EXCEED_ERROR);
                        }
                     oc.PaymentDocumentNumber__c = ppsPaymentDocMap.containsKey(oc.Id) ? ppsPaymentDocMap.get(oc.Id) : '';
                     updatePymntSchduleList.add(oc);
@@ -209,7 +209,7 @@ public without sharing class LeasingReceiptAllocationTriggerHelper {
             for ( LeasingReceiptAcknowledgment__c oc : [Select Id, AppliedAmount__c, Amount__c from LeasingReceiptAcknowledgment__c where Id IN: rcptAcknowledgementAmountMap.keySet()]){
                 oc.AppliedAmount__c = oc.AppliedAmount__c != Null ? oc.AppliedAmount__c + rcptAcknowledgementAmountMap.get(oc.Id) : rcptAcknowledgementAmountMap.get(oc.Id);
                 if(oc.AppliedAmount__c > oc.Amount__c || oc.AppliedAmount__c < 0){
-                    newAllocationMap.values()[0].addError(ACkNOWLEDGEMENT_AMOUNT_EXCEED_ERROR);
+                    //newAllocationMap.values()[0].addError(ACkNOWLEDGEMENT_AMOUNT_EXCEED_ERROR);
                 }
                 updateRAList.add(oc);
             }
@@ -357,7 +357,7 @@ public without sharing class LeasingReceiptAllocationTriggerHelper {
         if(!orderToSum.isEmpty()){
             List<LeasingOrder__c> updateLOList = LeasingOrderService.getInstance().getLeasingOrdersByIds(orderToSum.keySet());
             For(LeasingOrder__c lo : updateLOList){
-                lo.CreditBalance__c = lo.MasterLeasingOrder__c != null && (lo.MasterLeasingOrder__r.CreditBalance__c != Null && lo.MasterLeasingOrder__r.CreditBalance__c != 0) ? lo.MasterLeasingOrder__r.CreditBalance__c + orderToSum.get(lo.Id) : orderToSum.get(lo.Id);
+                lo.CreditBalance__c = lo.MasterLeasingOrder__c != null && (lo.MasterLeasingOrder__r.CreditBalance__c != Null || lo.MasterLeasingOrder__r.CreditBalance__c != 0) ? lo.MasterLeasingOrder__r.CreditBalance__c + orderToSum.get(lo.Id) : orderToSum.get(lo.Id);
             }
             if(!updateLOList.isEmpty()){
                 LeasingOrderService.getInstance().updateLeasingOrders(updateLOList);

@@ -17,13 +17,14 @@ public without sharing class ServiceRequestController {
     private static final string CHEQUE_WITHDRAWAL_REQUEST { get { return 'Cheque Withdrawal Request'; } }
     private static final string BFM_SERVICE_REQUEST { get { return 'BFM Service Request'; } }
     private static final string COMMON_AREA_SERVICE_REQUEST { get { return 'Common Area Service Request'; } }
-    private static final string COMMUNITY_SERVICE_REQUEST { get { return 'Community Service Request'; } }
+    private static final string COMMUNITY_SERVICE_REQUEST { get { return 'Community Services'; } }
     private static final string SERVICE_REQUEST { get { return 'Service Request'; } }
     private static final string FINANCIAL_PAYMENT_SERVICE_CATEGORY{ get { return 'Financial - Payment Service'; } }
     private static final string GENERAL_ENQUIRY_CATEGORY { get { return 'General Enquiry'; } }
     private static final string BFM_SERVICE_CATEGORY{ get { return 'BFM Service'; } }
     private static final string RESALE_CATEGORY { get { return 'Resale'; } }
     private static final string RESALE_SUB_CATEGORY { get { return 'Resale'; } }
+    //private static final string ACKNOWLEDGEMENT_RECEIPT_SUB_CATEGORY  { get { return 'Acknowledgement Receipt'; } }//Pranav
     private static final string ACKNOWLEDGEMENT_RECEIPT_SUB_CATEGORY  { get { return 'Receipt Booking Query'; } }//Pranav
     private static final string PAYMENT_DUE_DATE_UPDATE_SUB_CATEGORY  { get { return 'Payment Due Date Update'; } }//Pranav
     private static final string THIRD_PARTY_FORM_SUB_CATEGORY  { get { return 'Third Party Form'; } }//Pranav
@@ -44,7 +45,7 @@ public without sharing class ServiceRequestController {
     private static final string SPA_SUB_CATEGORY { get { return 'SPA'; } }
     private static final string SITE_VISIT_PROPERTY_VIEWING_SUB_CATEGORY{ get { return 'Site Visit/Property Viewing'; } }
     private static final string LETTER_SUB_CATEGORY { get { return 'Letter'; } }
-    //private static final string OTHER_SUB_CATEGORY { get { return 'Other'; } }
+    private static final string OTHER_SUB_CATEGORY { get { return 'Other'; } }
     private static final string GENERAL_PAYMENT_ENQUIRY_SUB_CATEGORY { get { return 'General Payment Enquiry'; } } //Samiksha
     private static final string FLOOR_PLAN_COPY_SUB_CATEGORY { get { return 'Floor Plan Copy'; } }
     private static final string CONTACT_DETAILS_SUB_CATEGORY{ get { return 'Contact Details'; } }
@@ -60,23 +61,24 @@ public without sharing class ServiceRequestController {
     private static final String SALES_OPERATION_SUB_CATEGORY { get { return 'Sales Operation'; } }
     private static final String POST_SALES_OPERATION_SUB_CATEGORY { get { return 'Post Sales Operation'; } }
     private static final String CUSTOMER_FINANCE_SUB_CATEGORY { get { return 'Customer Finance'; } }
+    private static final String LEAD_MANAGEMENT_SUB_CATEGORY { get { return 'Leads Management'; } }
+    private static final String COMMUNICATION_SUB_CATEGORY { get { return 'Communication'; } }
     private static final String CUSTOMER_TYPE_UPDATE_SUB_CATEGORY { get { return 'Customer Type Update'; } }
-    private static final string DELAYED_COMMISSION_PAYMENT_SUB_CATEGORY  { get { return 'Delayed Commission Payment'; } } //BAPP
-    private static final string BROKER_SERVICE_REQUEST_CATEGORY  { get { return 'Broker Service Request'; } }
-    private static final string OTHER_SERVICE_REQUEST_CATEGORY  { get { return 'Other Service Request'; } }
-    private static final String INCORRECT_COMMISSION_AMOUNT_SUB_CATEGORY { get { return 'Incorrect Commission Amount'; } }
-    private static final String BROKER_AGENT_DETAILS_UPDATE_SUB_CATEGORY { get { return 'Broker Agent Details Update'; } }
-    private static final String BROKER_AGENCY_DETAILS_UPDATE_SUB_CATEGORY { get { return 'Broker Agency Details Update'; } }
-    private static final String AGENT_ONBOARDING_SUB_CATEGORY { get { return 'Broker New Agent Registration'; } }
-    private static final string COMPLAINT_REQUEST_TYPE { get { return 'Complaint'; } }
-    private static final String POOR_KNOWLEDGE_SUB_CATEGORY { get { return 'Poor Knowledge'; } }
-    private static final String EMPLOYEE_COD_SUB_CATEGORY { get { return 'Employee code of conduct'; } }
+    private static final String DATA_CLEANSING_SUB_CATEGORY { get { return 'Data Cleansing'; } }
     private static final string CRM_REQUESTS_CATEGORY { get { return 'CRM Services'; } }
     private static final string TAWTHEEQ_ENROLLMENT_SUB_CATEGORY { get { return 'Tawtheeq Enrollment'; } }
-    private static final String BROKER_AGREEMENT_RENEWAL_SUB_CATEGORY {get { return 'Broker Agreement Renewal'; }}
-        private static final string COMPLAINT_REQUEST_RT { get { return 'ComplaintRequest'; } }
-     private static final string UNIT_CANCELLATION_SUB_CATEGORY { get { return 'Unit Cancellation'; } }
-     private static final string CANCELLATION_REQUEST_CATEGORY { get { return 'Cancellation Request'; } }
+  private static final string COMPLAINT_REQUEST_RT { get { return 'ComplaintRequest'; } }
+   private static final string COMPLAINT_REQUEST_TYPE { get { return 'Complaint'; } }
+     private static final string BROKER_MANAGEMENT_REQUEST_CATEGORY { get { return 'Broker Management Services'; } }
+    private static final string BROKER_ENQUIRY_SUB_CATEGORY { get { return 'Broker Enquiry'; } }
+     private static final string HANDOVER_SERVICES_REQUEST_CATEGORY { get { return 'Handover Service Request'; } }
+    private static final string HANDOVER_SUB_CATEGORY { get { return 'Handover'; } }
+    private static final string SPECIAL_SERVICES_REQUEST_CATEGORY { get { return 'Special Services'; } }
+    private static final string DOWNGRADE_SUB_CATEGORY { get { return 'Downgrade'; } }
+    private static final string UPGRADE_SUB_CATEGORY { get { return 'Upgrade'; } }
+    private static final string CANCELLATION_SUB_CATEGORY { get { return 'Cancellation'; } }
+  
+   
     
     @AuraEnabled(cacheable=true)
     public static List<sobject> getRelatedUnits(Id recordId){
@@ -120,53 +122,57 @@ public without sharing class ServiceRequestController {
         PaymentSRHandler pymntSrObj = PaymentSRHandler.getInstance();//Pranav
         ProofofPaymentSharedSRHandler popShareSrObj = ProofofPaymentSharedSRHandler.getInstance();//Pranav
         BankAccDetailInquirySRHandler bnkAccDtlSrObj = BankAccDetailInquirySRHandler.getInstance();//Pranav
-       CRMComplaintRequestHandler complaintrequestObj = CRMComplaintRequestHandler.getInstance();
-         CancellationRequestSRHandler cancellationrequestObj = CancellationRequestSRHandler.getInstance();
-        Boolean isComplaintRecordType = true;
             
         List<ServiceCatalog__c> serviceCatalogList = servObj.getServiceCatalogBySubCategories(subCategory);
         Boolean isAvailableForTenant = serviceCatalogList[0].AvailableForTenant__c;
         Boolean isAvailableForOwner = serviceCatalogList[0].AvailableForOwner__c;
+        Boolean isComplaintRecordType = true;
         String message;
-        
-        if (String.isNotBlank(recordId) && recordId.getSObjectType() == Case.SObjectType) {
-              Case caseObj = caseServiceObj.getCaseById(recordId);
-
-            isComplaintRecordType =caseObj.RecordTypeId == Utility.getRecordTypeIdByDevName(Case.SObjectType,COMPLAINT_REQUEST_RT); }
         
         if(serviceCatalogList == null || serviceCatalogList.isEmpty()) {
             return 'Configuration for this Category/Sub Category not found. Please contact System Administrator.';
         }
+        
+         if (String.isNotBlank(recordId) && recordId.getSObjectType() == Case.SObjectType) {
+              Case caseObj = caseServiceObj.getCaseById(recordId);
+
+            isComplaintRecordType =caseObj.RecordTypeId == Utility.getRecordTypeIdByDevName(Case.SObjectType,COMPLAINT_REQUEST_RT); }
+        System.debug('accountRecId ::::: '+ accountRecId);
         if(!serviceCatalogList[0].AllowDuplicateCases__c) {
             String caseNumber = checkForOpenCase(serviceCatalogList[0], recordId, accountRecId, unitId);
             if(caseNumber != null){
                 return 'An open service request ('+ caseNumber +') already exists for selected account, unit, category and sub category.';
             }
         }
-        /*     if(String.isNotBlank(accountRecId) && String.isNotBlank(unitId) && String.isBlank(recordId)){
-return 'This unit is not eligible for the selected service request';
-}*/
+       
     List<String> subCategoryList = new List<String>{DEFAULT_CUSTOMER, CHEQUE_REPLACEMENT_REQUEST, CHEQUE_WITHDRAWAL_REQUEST, 
-        LPF_WAIVER_REQUEST, SOA_REQUEST, RESALE_SUB_CATEGORY, GENERAL_ENQUIRY_SUB_CATEGORY,BROKER_AGREEMENT_RENEWAL_SUB_CATEGORY,
+        LPF_WAIVER_REQUEST, SOA_REQUEST, RESALE_SUB_CATEGORY, GENERAL_ENQUIRY_SUB_CATEGORY,
         KYC_UPDATE_REQUEST, ADM_APPLICATIONS_REGISTRATION_SUB_CATEGORY, 
         CONSTRUCTION_UPDATE_SUB_CATEGORY, HANDOVER_UPDATE_SUB_CATEGORY, HASSANTUK_SUB_CATEGORY, 
-        PROPERTY_ENROLLMENT_SUB_CATEGORY, TAQA_SUB_CATEGORY, SPA_SUB_CATEGORY, BROKER_SERVICE_REQUEST_CATEGORY,OTHER_SERVICE_REQUEST_CATEGORY,
-        SITE_VISIT_PROPERTY_VIEWING_SUB_CATEGORY, LETTER_SUB_CATEGORY,DELAYED_COMMISSION_PAYMENT_SUB_CATEGORY,INCORRECT_COMMISSION_AMOUNT_SUB_CATEGORY,BROKER_AGENT_DETAILS_UPDATE_SUB_CATEGORY,BROKER_AGENCY_DETAILS_UPDATE_SUB_CATEGORY,AGENT_ONBOARDING_SUB_CATEGORY,
-        GENERAL_PAYMENT_ENQUIRY_SUB_CATEGORY,FLOOR_PLAN_COPY_SUB_CATEGORY,
+                                                        PROPERTY_ENROLLMENT_SUB_CATEGORY, TAQA_SUB_CATEGORY, SPA_SUB_CATEGORY, 
+                                                        SITE_VISIT_PROPERTY_VIEWING_SUB_CATEGORY, LETTER_SUB_CATEGORY, 
+                                                        OTHER_SUB_CATEGORY, GENERAL_PAYMENT_ENQUIRY_SUB_CATEGORY,FLOOR_PLAN_COPY_SUB_CATEGORY,
         CONTACT_DETAILS_SUB_CATEGORY,SPA_PRE_REGISTRATION_SUB_CATEGORY,TITLE_MORTGAGE_DEED_SUB_CATEGORY,
         RENT_SECURITY_DEPOSIT_REFUND_SUB_CATEGORY,RENT_REFUND_SUB_CATEGORY,DOCUMENT_CONTROLLER_SUB_CATEGORY,DATA_ANALYSTICS_SUB_CATEGORY,OFFICE_MANAGER_SUB_CATEGORY,BROKER_MANAGEMENT_SUB_CATEGORY,
-        SALES_OPERATION_SUB_CATEGORY,POST_SALES_OPERATION_SUB_CATEGORY,CUSTOMER_FINANCE_SUB_CATEGORY,CUSTOMER_TYPE_UPDATE_SUB_CATEGORY,POOR_KNOWLEDGE_SUB_CATEGORY,
-        TAWTHEEQ_ENROLLMENT_SUB_CATEGORY,UNIT_CANCELLATION_SUB_CATEGORY};
-            
+                                                         SALES_OPERATION_SUB_CATEGORY,POST_SALES_OPERATION_SUB_CATEGORY,CUSTOMER_FINANCE_SUB_CATEGORY,LEAD_MANAGEMENT_SUB_CATEGORY,COMMUNICATION_SUB_CATEGORY,CUSTOMER_TYPE_UPDATE_SUB_CATEGORY,DATA_CLEANSING_SUB_CATEGORY,
+                                                        TAWTHEEQ_ENROLLMENT_SUB_CATEGORY,BROKER_ENQUIRY_SUB_CATEGORY,HANDOVER_SUB_CATEGORY,DOWNGRADE_SUB_CATEGORY,CANCELLATION_SUB_CATEGORY,UPGRADE_SUB_CATEGORY };
+           List<String> complaintSubCategories = new List<String>();
+        
+
+for (ServiceCatalog__c record : [SELECT SubCategory__c FROM ServiceCatalog__c WHERE Type__c = 'Complaint' AND SubCategory__c != null]) {
+    complaintSubCategories.add(record.SubCategory__c);
+}
+        subCategoryList.addAll(complaintSubCategories);
             
         if(subCategory == POST_SALE_PAYMENT_DEFERRAL && String.isBlank(recordId)){
             return 'No active Sales Order is linked to this unit, Please choose other Account/Unit to proceed.';
         }
         
-        if (!isComplaintRecordType ||
+        if (
             (subCategory == POST_SALE_PAYMENT_DEFERRAL && String.isBlank(recordId)) ||
-            (!subCategoryList.contains(subCategory) && !isAvailableForTenant && isTenantUnit) ||
+            /*(!subCategoryList.contains(subCategory) && !isAvailableForTenant && isTenantUnit) ||*/
             (!subCategoryList.contains(subCategory) && !isAvailableForOwner && !isTenantUnit)
+            
         ) {
             return 'This unit is not eligible for the selected service request';
         }
@@ -182,9 +188,7 @@ return 'This unit is not eligible for the selected service request';
                 } else if (subCategory == DEFAULT_CUSTOMER) {
                     message = defaultUnitCaseHandlerobj.validateEligibility(objSalesOrderService.getSalesOrdersById(recordId), null);
                 } else if (subCategory == ACKNOWLEDGEMENT_RECEIPT_SUB_CATEGORY) {//Pranav
-                    message = ackObj.validateEligibility(objSalesOrderService.getSalesOrdersById(recordId));}
-                    else if (subCategory == UNIT_CANCELLATION_SUB_CATEGORY) {
-                        message = cancellationrequestObj.validateEligibility(objSalesOrderService.getSalesOrdersById(recordId));
+                    message = ackObj.validateEligibility(objSalesOrderService.getSalesOrdersById(recordId));
                 } else if (subCategory == PAYMENT_DUE_DATE_UPDATE_SUB_CATEGORY) {//Pranav
                     message = pmtDuDtdObj.validateEligibility(objSalesOrderService.getSalesOrdersById(recordId));
                 }  else if (subCategory == THIRD_PARTY_FORM_SUB_CATEGORY) {//Pranav
@@ -212,7 +216,11 @@ return 'This unit is not eligible for the selected service request';
                 else if (subCategory == RESALE_SUB_CATEGORY) {
                     message = resaleObj.validateEligibility(null, caseServiceObj.getCaseById(recordId));
                 }
-               
+                /*else if (subCategory == RESALE_PROPERTY_UNDER_CONSTRUCTION_SUB_CATEGORY
+                         ||subCategory == RESALE_PROPERTY_COMPLETED_PROJECT_SUB_CATEGORY
+                         ||subCategory == RESALE_PROPERTY_WITH_PPHP_SUB_CATEGORY) {
+                             message = resaleObj.validateEligibility(null, caseServiceObj.getCaseById(recordId));
+                }*/
             }
         }
         return message;
@@ -282,32 +290,6 @@ return 'This unit is not eligible for the selected service request';
         
     }
     
-    public static Map<String, String> createCaseRecord(
-        Id recordId,
-        String selectedType,
-        String selectedCategory,
-        String selectedSubCategory,
-        String accountId,
-        String unitId,
-        String description,
-        String origin
-    ) {
-        return createCaseRecord(
-            recordId,
-            selectedType,
-            selectedCategory,
-            selectedSubCategory,
-            accountId,
-            unitId,
-            description,
-            origin,
-            null,
-            null,
-            null,
-            false
-        );
-    }
-    
     @AuraEnabled
     public static Map<String, String> createCaseRecord(
         Id recordId,
@@ -318,9 +300,6 @@ return 'This unit is not eligible for the selected service request';
         String unitId,
         String description,
         String origin,
-        String brokerContactRole,
-        String contactId,
-        String typeOfEstablishment,
         Boolean stopEmailsToCustomer
     ) {
         
@@ -344,33 +323,10 @@ return 'This unit is not eligible for the selected service request';
         GeneralEnquirySRHandler generalEnquiryObj = GeneralEnquirySRHandler.getInstance();
         KYCUpdateRequestSRHandler objKYCUpdateRequestSRHandler = KYCUpdateRequestSRHandler.getInstance();
         SalesOperationSRHandler objSalesOperationSRHandler = SalesOperationSRHandler.getInstance();
-        BrokerCommissionSRHandler objBrokerCommissionSRHandler = BrokerCommissionSRHandler.getInstance();//BAPP
-        //IncorrectCommissionAmountSRHandler objIncorrectCommissionAmountSRHandler = IncorrectCommissionAmountSRHandler.getInstance();//BAPP
-        OtherSRHandler objOtherSRHandler = OtherSRHandler.getInstance();//BAPP
-        BrokerAgentRegiAndUpdateSRHandler objBrokerAgentRegiAndUpdateSRHandler = BrokerAgentRegiAndUpdateSRHandler.getInstance();//BAPP
-        BrokerAgencyDetailsUpdateSRHandler objBrokerAgencyDetailsUpdateSRHandler = BrokerAgencyDetailsUpdateSRHandler.getInstance();//BAPP
-        //BrokerRegistrationSRHandler objBrokerRegistrationSRHandler = BrokerRegistrationSRHandler.getInstance();//BAPP
-        CRMComplaintRequestHandler complaintRequestObj = CRMComplaintRequestHandler.getInstance();
         TawtheeqEnrollmentSRHandler objTawtheeqEnrollmentSRHandler = TawtheeqEnrollmentSRHandler.getInstance();
-        BrokerAgreementRenewalSRHandler objBrokerAgreementRenewalSRHandler = BrokerAgreementRenewalSRHandler.getInstance();//BAPP
-           CancellationRequestSRHandler cancellationrequestObj = CancellationRequestSRHandler.getInstance();
+        CRMComplaintRequestHandler complaintRequestObj = CRMComplaintRequestHandler.getInstance();
         
         Case newCase;
-        Id currentAccountId = (Id)accountId;
-        
-        String finalBrokerContactRole = brokerContactRole;
-        
-        if (
-            selectedSubCategory == BROKER_AGENT_DETAILS_UPDATE_SUB_CATEGORY &&
-            String.isNotBlank(contactId)
-        ) {
-            Contact selectedContact = ContactService.getInstance().getContactById((Id) contactId);
-            
-            if (selectedContact != null) {
-                finalBrokerContactRole = selectedContact.BrokerContactRole__c;
-            }
-        }
-        
         try {
             if (String.isNotBlank(recordId) && recordId.getSobjectType() == Salesorder__c.getSobjectType()){
                 if(selectedType == SERVICE_REQUEST && selectedCategory == FINANCIAL_PAYMENT_SERVICE_CATEGORY && selectedSubCategory == POST_SALE_PAYMENT_DEFERRAL) {
@@ -388,12 +344,14 @@ return 'This unit is not eligible for the selected service request';
                 
                 else if (selectedType == SERVICE_REQUEST && selectedCategory == RESALE_CATEGORY && selectedSubCategory == RESALE_SUB_CATEGORY) {
                     List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory);
-                    newCase = resaleObj.createCaseRecord(objSalesOrderService.getSalesOrdersById(recordId), scs[0], accountId, unitId, selectedType,description, origin, stopEmailsToCustomer);
+                    newCase = resaleObj.createCaseRecord(objSalesOrderService.getSalesOrdersById(recordId), scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);
+                    System.debug('newCase'+newCase);
                 }           
                 else if(selectedType == SERVICE_REQUEST && selectedCategory == FINANCIAL_PAYMENT_SERVICE_CATEGORY && selectedSubCategory == DEFAULT_CUSTOMER){
                     List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory);
                     newCase = objDefaultUnitCaseHandler.createCaseRecord(objSalesOrderService.getSalesOrdersById(recordId), scs[0], accountId, unitId, null, selectedType, description, origin, stopEmailsToCustomer);
                     if(newCase != null){
+                        //objDefaultUnitCaseHandler.createFirstTask(new List<Case>{newCase}); 
                     }     
                 } else if (selectedType == SERVICE_REQUEST && selectedCategory == FINANCIAL_PAYMENT_SERVICE_CATEGORY && selectedSubCategory == ACKNOWLEDGEMENT_RECEIPT_SUB_CATEGORY) { //Pranav                   
                     List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory);
@@ -432,7 +390,6 @@ return 'This unit is not eligible for the selected service request';
                     newCase = popShareSrObj.createCaseRecord(objSalesOrderService.getSalesOrdersById(recordId), scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);    
                 }
                 else if (selectedType == SERVICE_REQUEST && selectedCategory == FINANCIAL_PAYMENT_SERVICE_CATEGORY && selectedSubCategory == BANK_ACC_DTAIL_SUB_CATEGORY) {   //Pranav
-                    system.debug('selectedCategory......'+selectedCategory);
                     List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory);
                     newCase = bnkAccDtlSrObj.createCaseRecord(objSalesOrderService.getSalesOrdersById(recordId), scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer); 
                 }
@@ -444,11 +401,15 @@ return 'This unit is not eligible for the selected service request';
                     List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory);
                     newCase = generalEnquiryObj.createCaseRecord(objSalesOrderService.getSalesOrdersById(recordId), scs[0], accountId, unitId, selectedType,description, origin, stopEmailsToCustomer); 
                 }
-                  else if(selectedType == SERVICE_REQUEST && selectedCategory == CANCELLATION_REQUEST_CATEGORY){
+                 else if(selectedType == SERVICE_REQUEST && selectedCategory == HANDOVER_SERVICES_REQUEST_CATEGORY){
                     List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory);
-                    newCase = cancellationrequestObj.createCaseRecord(objSalesOrderService.getSalesOrdersById(recordId), scs[0], accountId, unitId, selectedType,description, origin, stopEmailsToCustomer); 
+                    newCase = generalEnquiryObj.createCaseRecord(objSalesOrderService.getSalesOrdersById(recordId), scs[0], accountId, unitId, selectedType,description, origin, stopEmailsToCustomer); 
                 }
-                else if(selectedType == COMPLAINT_REQUEST_TYPE){
+                else if(selectedType == SERVICE_REQUEST && selectedCategory == SPECIAL_SERVICES_REQUEST_CATEGORY){
+                    List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory);
+                    newCase = generalEnquiryObj.createCaseRecord(objSalesOrderService.getSalesOrdersById(recordId), scs[0], accountId, unitId, selectedType,description, origin, stopEmailsToCustomer); 
+                }
+                 else if(selectedType == COMPLAINT_REQUEST_TYPE){
                     List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory);
                     newCase = complaintRequestObj.createCaseRecord(objSalesOrderService.getSalesOrdersById(recordId), scs[0], accountId, unitId, selectedType,description, origin, stopEmailsToCustomer); 
                 }
@@ -459,30 +420,6 @@ return 'This unit is not eligible for the selected service request';
                 else if(selectedType == SERVICE_REQUEST && selectedCategory == CUSTOMER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == KYC_UPDATE_REQUEST){
                     List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory);
                     newCase = objKYCUpdateRequestSRHandler.createCaseRecord(objSalesOrderService.getSalesOrdersById(recordId), scs[0], accountId, unitId, selectedType,description, origin, stopEmailsToCustomer); 
-                }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == DELAYED_COMMISSION_PAYMENT_SUB_CATEGORY) {
-                    List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory); 
-                    newCase = objBrokerCommissionSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);  
-                }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == INCORRECT_COMMISSION_AMOUNT_SUB_CATEGORY) {
-                    List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory); 
-                    newCase = objBrokerCommissionSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);  
-                }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == OTHER_SERVICE_REQUEST_CATEGORY) {
-                    List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory); 
-                    newCase = objOtherSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);  
-                }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == BROKER_AGENT_DETAILS_UPDATE_SUB_CATEGORY) {
-                    List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory); 
-                    newCase = objBrokerAgentRegiAndUpdateSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin,brokerContactRole, finalBrokerContactRole, typeOfEstablishment, stopEmailsToCustomer);  
-                }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == BROKER_AGENCY_DETAILS_UPDATE_SUB_CATEGORY) {
-                    List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory); 
-                    newCase = objBrokerAgencyDetailsUpdateSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, typeOfEstablishment, stopEmailsToCustomer);  
-                }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == AGENT_ONBOARDING_SUB_CATEGORY) {
-                    List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory); 
-                    newCase = objBrokerAgentRegiAndUpdateSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, brokerContactRole, finalBrokerContactRole, typeOfEstablishment, stopEmailsToCustomer);  
                 }
                 else if(selectedType == SERVICE_REQUEST && selectedCategory == CRM_REQUESTS_CATEGORY && selectedSubCategory == TAWTHEEQ_ENROLLMENT_SUB_CATEGORY) {
                     List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory); 
@@ -502,70 +439,34 @@ return 'This unit is not eligible for the selected service request';
                 else if (selectedSubCategory == BFM_SERVICE_REQUEST) {
                     newCase = objBFM.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, null, stopEmailsToCustomer);
                 }
+                 else if(selectedType == COMPLAINT_REQUEST_TYPE){
+                  //  List<ServiceCatalog__c> scs = servObj.getServiceCatalog(selectedType, selectedCategory, selectedSubCategory);
+                    newCase = complaintRequestObj.createCaseRecord(null, scs[0], accountId, unitId, selectedType,description, origin, stopEmailsToCustomer); 
+                }
                 else if (selectedSubCategory == COMMON_AREA_SERVICE_REQUEST) {
                     newCase = objBFM.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, null, stopEmailsToCustomer);
                 }
-                
                 else if(selectedSubCategory == RESALE_SUB_CATEGORY){
-                    newCase = resaleObj.createCaseRecord(null, scs[0], accountId, unitId, selectedType,description, origin, stopEmailsToCustomer);                   
+                    newCase = resaleObj.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);                   
                 }
                 else if(selectedType == SERVICE_REQUEST && selectedCategory == GENERAL_ENQUIRY_CATEGORY){
                     newCase = generalEnquiryObj.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);
                 }
-                   else if(selectedType == SERVICE_REQUEST && selectedCategory == CANCELLATION_REQUEST_CATEGORY){
-                 
-                    newCase = cancellationrequestObj.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer); 
-                }
                 else if(selectedType == SERVICE_REQUEST && selectedCategory == SALES_OPERATION_CATEGORY){
                     newCase = objSalesOperationSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);
-                }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == FINANCIAL_PAYMENT_SERVICE_CATEGORY && selectedSubCategory == GENERAL_PAYMENT_ENQUIRY_SUB_CATEGORY){
-                    newCase = generalEnquiryObj.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);
                 }
                 else if(selectedType == SERVICE_REQUEST && selectedCategory == CUSTOMER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == KYC_UPDATE_REQUEST){
                     newCase = objKYCUpdateRequestSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer); 
                 }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == DELAYED_COMMISSION_PAYMENT_SUB_CATEGORY) {
-                    newCase = objBrokerCommissionSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);  
-                }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == INCORRECT_COMMISSION_AMOUNT_SUB_CATEGORY) {
-                    newCase = objBrokerCommissionSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);  
-                }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == OTHER_SERVICE_REQUEST_CATEGORY) {
-                    newCase = objOtherSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);  
-                }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == BROKER_AGENT_DETAILS_UPDATE_SUB_CATEGORY) {
-                    newCase = objBrokerAgentRegiAndUpdateSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, brokerContactRole, finalBrokerContactRole, typeOfEstablishment, stopEmailsToCustomer);  
-                }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == BROKER_AGENCY_DETAILS_UPDATE_SUB_CATEGORY) {
-                    newCase = objBrokerAgencyDetailsUpdateSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, typeOfEstablishment, stopEmailsToCustomer);  
-                }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == AGENT_ONBOARDING_SUB_CATEGORY) {
-                    newCase = objBrokerAgentRegiAndUpdateSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, brokerContactRole, finalBrokerContactRole, typeOfEstablishment, stopEmailsToCustomer);  
-                }
                 else if(selectedType == SERVICE_REQUEST && selectedCategory == CRM_REQUESTS_CATEGORY && selectedSubCategory == TAWTHEEQ_ENROLLMENT_SUB_CATEGORY) {
                     newCase = objTawtheeqEnrollmentSRHandler.createCaseRecord(null, scs[0], accountId, unitId, null, selectedType, description, origin, stopEmailsToCustomer);  
                 }
-                else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_SERVICE_REQUEST_CATEGORY && selectedSubCategory == BROKER_AGREEMENT_RENEWAL_SUB_CATEGORY) {
-                    newCase = BrokerAgreementRenewalSRHandler.createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, typeOfEstablishment);
+                    else if(selectedType == SERVICE_REQUEST && selectedCategory == BROKER_MANAGEMENT_REQUEST_CATEGORY && selectedSubCategory == BROKER_ENQUIRY_SUB_CATEGORY) {
+                    newCase = BrokerGeneralSRHandler.getInstance().createCaseRecord(null, scs[0], accountId, unitId, selectedType, description, origin, stopEmailsToCustomer);
                 }
             }
             
             if (newCase != null) {
-                if (String.isNotBlank(brokerContactRole) || String.isNotBlank(contactId)) {
-                    Case caseToUpdate = new Case(Id = newCase.Id);
-                    
-                    if (String.isNotBlank(brokerContactRole)) {
-                        caseToUpdate.BrokerContactRole__c = brokerContactRole;
-                    }
-                    
-                    if (String.isNotBlank(contactId)) {
-                        caseToUpdate.ContactId = contactId;
-                    }
-                    
-                    update caseToUpdate;
-                }
-                
                 result.put('status', 'success');
                 result.put('message', 'Case created successfully');
                 result.put('caseId', newCase.Id);
@@ -579,6 +480,7 @@ return 'This unit is not eligible for the selected service request';
             result.put('message', 'Failed to create Case: ' + ex.getMessage());
             result.put('message', 'Failed to create Case: ' +ex.getMessage()+' '+ ex.getLineNumber());
         }
+        System.debug('result'+result); 
         return result;
     }
     
@@ -691,7 +593,6 @@ return 'This unit is not eligible for the selected service request';
         return objDefaultUnitCaseHandler.fetchEmailTemplate(recordId);
     }
     
-    
     @AuraEnabled
     public static String sendDefaultNoticeEmail(Id recordId,  List<Map<String,String>> fileList){
         DefaultUnitCaseHandler objDefaultUnitCaseHandler = DefaultUnitCaseHandler.getInstance();
@@ -774,14 +675,5 @@ return 'This unit is not eligible for the selected service request';
         return solist;
     }
     
-    @AuraEnabled(cacheable=true)
-    public static List<Contact> getContactsByAccount(Id accountId) {
-        if (accountId == null) {
-            return new List<Contact>();
-        }
-        
-        ContactService contactServiceObj = ContactService.getInstance();
-        return contactServiceObj.getActiveContactsByAccount(accountId);
-    }
     
 }

@@ -270,13 +270,6 @@ public class BAWebServiceHelperTest {
                     AppRegistration__c = ar.Id,
                     ContentDocumentId__c = cv.ContentDocumentId,
                     Content_Version_Id__c = cv.Id
-                ),
-                new Document__c(
-                    SalesOrder__c = so.Id,
-                    DocumentType__c = docTypeMap.get('Title Deed'),
-                    Document_Name__c = 'Title Deed',
-                    ContentDocumentId__c = cv.ContentDocumentId,
-                    Content_Version_Id__c = cv.Id
                 )
                 };
                     insert lstDocument;

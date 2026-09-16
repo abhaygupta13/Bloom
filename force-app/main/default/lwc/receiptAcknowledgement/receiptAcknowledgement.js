@@ -98,13 +98,13 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
     showSalesorderOthercharge = false;
     @track totalInstAllocAmount = 0;
     @track totalOtherChAllocAmount = 0;
-    @track chequeLeftOverAmt=0;
+    @track chequeLeftOverAmt = 0;
     @track totalInstDueAmt = 0;
-    @track totalSaleOthDueAmt =0;
+    @track totalSaleOthDueAmt = 0;
     @track invoiceTypes;
     @track allocatedValues;
-    @track allocationValue;  
-    @track bankAccounts = []; 
+    @track allocationValue;
+    @track bankAccounts = [];
     @track remitterOptions = [];
     @track selectedRemitter;
     @track otherRemitterName;
@@ -121,7 +121,7 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
         { label: 'ADM Fee', value: 'ADM Fee' },
         { label: 'Service Charge', value: 'Service Charge' },
         { label: 'ADM Admin Fee', value: 'ADM Admin Fee' },
-        { label: 'Late Payment Charges', value: 'Late Payment Charges' }, 
+        { label: 'Late Payment Charges', value: 'Late Payment Charges' },
         { label: 'Transfer Fee', value: 'Transfer Fee' },
         { label: 'Admin Charges', value: 'Admin Charges' }
     ];
@@ -175,7 +175,7 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
 
 
     getFilterInstallmentRecord() {
-        if (this.overdueInDays||this.invoiceTypes) {
+        if (this.overdueInDays || this.invoiceTypes) {
             this.installmentRecord = [];
             this.salesorderOOtherinfo = [];
             this.installmentdetailItem = [];
@@ -183,31 +183,31 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
             this.selectedInstallments = [];
             this.selectedSalesorderOther = [];
             this.totalOtherChAllocAmount = 0;
-            this.chequeLeftOverAmt=this.amount;
+            this.chequeLeftOverAmt = this.amount;
             this.totalInstDueAmt = 0;
-            this.totalSaleOthDueAmt =0;
-            this.totalDue=0;
+            this.totalSaleOthDueAmt = 0;
+            this.totalDue = 0;
             this.totalAllocated = 0
-            this.totalInstAllocAmount=0;
-           
+            this.totalInstAllocAmount = 0;
 
-            getDetailOfInstallmentRecord({ recordId: this.salesOrderId, overdueInDays: this.overdueInDays,invoiceTypes:this.invoiceTypes, acrossUnitsChecked: this.acrossUnitsChecked, installmentAccount: this.installmentAccount })
+
+            getDetailOfInstallmentRecord({ recordId: this.salesOrderId, overdueInDays: this.overdueInDays, invoiceTypes: this.invoiceTypes, acrossUnitsChecked: this.acrossUnitsChecked, installmentAccount: this.installmentAccount })
                 .then(result => {
                     console.log(result);
-                    let instData =[];
-                    let salesOtherData =[];
-                    result.forEach(item=>{
-                        if(item.InstallmentLines__r)
-                     item.InstallmentLines__r.forEach(inst=>{
-                        instData.push(inst);
-                     })
-                     if(item.SalesOrdersOtherCharges__r)
-                     item.SalesOrdersOtherCharges__r.forEach(sooc=>{
-                        
-                        salesOtherData.push(sooc);
-                     })
+                    let instData = [];
+                    let salesOtherData = [];
+                    result.forEach(item => {
+                        if (item.InstallmentLines__r)
+                            item.InstallmentLines__r.forEach(inst => {
+                                instData.push(inst);
+                            })
+                        if (item.SalesOrdersOtherCharges__r)
+                            item.SalesOrdersOtherCharges__r.forEach(sooc => {
+
+                                salesOtherData.push(sooc);
+                            })
                     })
-                    this.installmentRecords = instData ;
+                    this.installmentRecords = instData;
                     console.log(this.installmentRecords);
                     this.salesorderOtherchargeRecord = salesOtherData;
                     this.installmentsInfo = this.installmentRecords;
@@ -241,92 +241,92 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
     }
 
     handleAllSelect(event) {
-    try{
-       
-        const isChecked = event.target.checked;
-        if (isChecked) {
-            let totalDueAmt = 0;
-            let totalAllocAmt=0;
-            let totalAllocOther=0
-            let totalDueOtherCha = 0;
-            let chequeAmt = Number(this.chequeLeftOverAmt);
-        
-            this.installmentdetailItem.forEach(item => {
-              console.log(typeof(chequeAmt))
-                item.isSelected = true;
-                
-                if (chequeAmt > item.PendingAmount__c) {
-                 
-                    item.allocatedAmount = item.PendingAmount__c;                   
-                    chequeAmt = chequeAmt - item.PendingAmount__c;
-                    item.PendingAmount__c = item.PendingAmount__c - item.allocatedAmount;
-                } else if(chequeAmt <= item.PendingAmount__c){
-                   
-                    item.allocatedAmount = chequeAmt;
-                    item.PendingAmount__c = item.PendingAmount__c - item.allocatedAmount;
-                    chequeAmt = 0;
-                }
+        try {
 
-                totalDueAmt += item.PendingAmount__c;
-                totalAllocAmt+=item.allocatedAmount;
-               
-            });
+            const isChecked = event.target.checked;
+            if (isChecked) {
+                let totalDueAmt = 0;
+                let totalAllocAmt = 0;
+                let totalAllocOther = 0
+                let totalDueOtherCha = 0;
+                let chequeAmt = Number(this.chequeLeftOverAmt);
 
-            this.selectedInstallments = this.installmentdetailItem;
+                this.installmentdetailItem.forEach(item => {
+                    console.log(typeof (chequeAmt))
+                    item.isSelected = true;
 
-            this.salesorderOtherchargeRecord.forEach(item => {
-                item.isSelected = true;
-                if (chequeAmt > item.PendingAmount__c) {
-                    item.allocatedAmountSalesother = item.PendingAmount__c;
-                    chequeAmt = chequeAmt - item.PendingAmount__c;
-                    item.PendingAmount__c = item.PendingAmount__c - item.allocatedAmountSalesother;
-                } else if(chequeAmt <= item.PendingAmount__c){
-                    item.allocatedAmountSalesother = chequeAmt;
-                    item.PendingAmount__c = item.PendingAmount__c - item.allocatedAmountSalesother;
-                    chequeAmt = 0;
-                } 
-                totalDueOtherCha += item.PendingAmount__c;
-                totalAllocOther= +item.allocatedAmountSalesother;
-            });
-            this.totalDue = totalDueAmt + totalDueOtherCha;
-            this.totalAllocated = totalAllocAmt + totalAllocOther;
-            this.totalInstAllocAmount = totalAllocAmt;
-            this.totalOtherChAllocAmount = totalAllocOther;
-            this.totalInstDueAmt = totalDueAmt;
-            this.totalSaleOthDueAmt = totalDueOtherCha;
-            this.selectedSalesorderOther = this.salesorderOtherchargeRecord;
-            this.chequeLeftOverAmt = chequeAmt;
-        } else {
+                    if (chequeAmt > item.PendingAmount__c) {
 
-            this.installmentdetailItem.forEach(item => {
-                item.isSelected = false;
-                item.PendingAmount__c = this.installmentsInfo.filter(filt=> filt.Id == item.Id)[0].PendingAmount__c;
-                item.allocatedAmount = 0;
-            });
-            this.salesorderOtherchargeRecord.forEach(item => {
-                item.isSelected = false;
-                item.PendingAmount__c = this.salesorderOOtherinfo.filter(filt=> filt.Id == item.Id)[0].PendingAmount__c;
-                item.allocatedAmountSalesother = 0;
-            });
-            this.selectedInstallments = [];
-            this.selectedSalesorderOther = [];
-            this.totalDue = 0;
-            this.totalAllocated=0;
-            this.totalOtherChAllocAmount = 0;
-            this.chequeLeftOverAmt= this.amount;
-            this.totalInstDueAmt = 0;
-            this.totalSaleOthDueAmt =0;        
-            this.totalInstAllocAmount=0;
+                        item.allocatedAmount = item.PendingAmount__c;
+                        chequeAmt = chequeAmt - item.PendingAmount__c;
+                        item.PendingAmount__c = item.PendingAmount__c - item.allocatedAmount;
+                    } else if (chequeAmt <= item.PendingAmount__c) {
 
+                        item.allocatedAmount = chequeAmt;
+                        item.PendingAmount__c = item.PendingAmount__c - item.allocatedAmount;
+                        chequeAmt = 0;
+                    }
+
+                    totalDueAmt += item.PendingAmount__c;
+                    totalAllocAmt += item.allocatedAmount;
+
+                });
+
+                this.selectedInstallments = this.installmentdetailItem;
+
+                this.salesorderOtherchargeRecord.forEach(item => {
+                    item.isSelected = true;
+                    if (chequeAmt > item.PendingAmount__c) {
+                        item.allocatedAmountSalesother = item.PendingAmount__c;
+                        chequeAmt = chequeAmt - item.PendingAmount__c;
+                        item.PendingAmount__c = item.PendingAmount__c - item.allocatedAmountSalesother;
+                    } else if (chequeAmt <= item.PendingAmount__c) {
+                        item.allocatedAmountSalesother = chequeAmt;
+                        item.PendingAmount__c = item.PendingAmount__c - item.allocatedAmountSalesother;
+                        chequeAmt = 0;
+                    }
+                    totalDueOtherCha += item.PendingAmount__c;
+                    totalAllocOther = +item.allocatedAmountSalesother;
+                });
+                this.totalDue = totalDueAmt + totalDueOtherCha;
+                this.totalAllocated = totalAllocAmt + totalAllocOther;
+                this.totalInstAllocAmount = totalAllocAmt;
+                this.totalOtherChAllocAmount = totalAllocOther;
+                this.totalInstDueAmt = totalDueAmt;
+                this.totalSaleOthDueAmt = totalDueOtherCha;
+                this.selectedSalesorderOther = this.salesorderOtherchargeRecord;
+                this.chequeLeftOverAmt = chequeAmt;
+            } else {
+
+                this.installmentdetailItem.forEach(item => {
+                    item.isSelected = false;
+                    item.PendingAmount__c = this.installmentsInfo.filter(filt => filt.Id == item.Id)[0].PendingAmount__c;
+                    item.allocatedAmount = 0;
+                });
+                this.salesorderOtherchargeRecord.forEach(item => {
+                    item.isSelected = false;
+                    item.PendingAmount__c = this.salesorderOOtherinfo.filter(filt => filt.Id == item.Id)[0].PendingAmount__c;
+                    item.allocatedAmountSalesother = 0;
+                });
+                this.selectedInstallments = [];
+                this.selectedSalesorderOther = [];
+                this.totalDue = 0;
+                this.totalAllocated = 0;
+                this.totalOtherChAllocAmount = 0;
+                this.chequeLeftOverAmt = this.amount;
+                this.totalInstDueAmt = 0;
+                this.totalSaleOthDueAmt = 0;
+                this.totalInstAllocAmount = 0;
+
+            }
+        } catch (e) {
+            console.log(e.message);
         }
-    }catch(e){
-        console.log(e.message);
-    }
     }
 
 
     handleOverdueChange(event) {
-      
+
         this.overdueInDays = event.target.value;
         this.validateInputs();
         window.clearTimeout(this.timer)
@@ -338,9 +338,9 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
 
 
     }
-    handleInvoiceTypeChange(event){
+    handleInvoiceTypeChange(event) {
         this.invoiceTypes = event.target.value;
-        
+
         this.timer = setTimeout(() => {
 
             this.getFilterInstallmentRecord()
@@ -350,8 +350,8 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
 
     handleAcrossUnitCheckbox(event) {
         this.acrossUnitsChecked = event.target.checked;
-            this.getFilterInstallmentRecord();
-          
+        this.getFilterInstallmentRecord();
+
     }
 
     handleCheckboxinstallment(event) {
@@ -360,21 +360,21 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
         if (event.target.checked) {
             this.selectedInstallments.push(this.installmentdetailItem[index]);
             let currentInst = this.installmentdetailItem[index];
-            if(this.chequeLeftOverAmt>currentInst.PendingAmount__c){
+            if (this.chequeLeftOverAmt > currentInst.PendingAmount__c) {
                 currentInst.allocatedAmount = currentInst.PendingAmount__c;
-                this.chequeLeftOverAmt = this.chequeLeftOverAmt- currentInst.PendingAmount__c;
+                this.chequeLeftOverAmt = this.chequeLeftOverAmt - currentInst.PendingAmount__c;
                 currentInst.PendingAmount__c = 0;
-            }else if(this.chequeLeftOverAmt<=currentInst.PendingAmount__c){
+            } else if (this.chequeLeftOverAmt <= currentInst.PendingAmount__c) {
                 currentInst.allocatedAmount = this.chequeLeftOverAmt;
-                this.chequeLeftOverAmt =0;
+                this.chequeLeftOverAmt = 0;
                 currentInst.PendingAmount__c = currentInst.PendingAmount__c - currentInst.allocatedAmount;
             }
         } else if (!event.target.checked) {
 
             this.selectedInstallments = this.selectedInstallments.filter((item) => item.Id !== this.installmentdetailItem[index].Id);
             this.chequeLeftOverAmt = this.chequeLeftOverAmt + this.installmentdetailItem[index].allocatedAmount;
-            this.installmentdetailItem[index].allocatedAmount =0;
-            this.installmentdetailItem[index].PendingAmount__c = this.installmentsInfo.filter(filt=> filt.Id == this.installmentdetailItem[index].Id)[0].PendingAmount__c;
+            this.installmentdetailItem[index].allocatedAmount = 0;
+            this.installmentdetailItem[index].PendingAmount__c = this.installmentsInfo.filter(filt => filt.Id == this.installmentdetailItem[index].Id)[0].PendingAmount__c;
 
         }
         let allocateAmt = 0;
@@ -387,7 +387,7 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
         this.totalInstDueAmt = totalDueAmt;
         this.totalAllocated = allocateAmt + this.totalOtherChAllocAmount;
         this.totalDue = totalDueAmt + this.totalSaleOthDueAmt;
-        
+
 
         if (this.totalAllocated > this.amount) {
             this.isTotalAllocatedAmountvalid = true;
@@ -401,7 +401,7 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
         } else {
             this.isTotalAllocatedAmountvalid = false;
         }
-        
+
         console.log('receiptitem' + JSON.stringify(this.selectedInstallments));
 
 
@@ -409,64 +409,65 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
     }
 
     handleCheckboxSalesorderOther(event) {
-        try{
-        const index = event.target.dataset.index;
-        console.log('index' + index + '---' + event.target.checked);
-        if (event.target.checked) {
-            this.selectedSalesorderOther.push(this.salesorderOtherchargeRecord[index]);
-            let currentInst = this.salesorderOtherchargeRecord[index];
-            if(this.chequeLeftOverAmt>currentInst.PendingAmount__c){
-                currentInst.allocatedAmountSalesother = currentInst.PendingAmount__c;
-                this.chequeLeftOverAmt = this.chequeLeftOverAmt- currentInst.PendingAmount__c;
-                currentInst.PendingAmount__c = 0;
-            }else if(this.chequeLeftOverAmt<=currentInst.PendingAmount__c){
-                currentInst.allocatedAmountSalesother = this.chequeLeftOverAmt;
-                this.chequeLeftOverAmt =0;
-                currentInst.PendingAmount__c = currentInst.PendingAmount__c - currentInst.allocatedAmountSalesother;
+        try {
+            const index = event.target.dataset.index;
+            console.log('index' + index + '---' + event.target.checked);
+            if (event.target.checked) {
+                this.selectedSalesorderOther.push(this.salesorderOtherchargeRecord[index]);
+                let currentInst = this.salesorderOtherchargeRecord[index];
+                if (this.chequeLeftOverAmt > currentInst.PendingAmount__c) {
+                    currentInst.allocatedAmountSalesother = currentInst.PendingAmount__c;
+                    this.chequeLeftOverAmt = this.chequeLeftOverAmt - currentInst.PendingAmount__c;
+                    currentInst.PendingAmount__c = 0;
+                } else if (this.chequeLeftOverAmt <= currentInst.PendingAmount__c) {
+                    currentInst.allocatedAmountSalesother = this.chequeLeftOverAmt;
+                    this.chequeLeftOverAmt = 0;
+                    currentInst.PendingAmount__c = currentInst.PendingAmount__c - currentInst.allocatedAmountSalesother;
+                }
+
+
+            } else if (!event.target.checked) {
+                this.chequeLeftOverAmt = this.chequeLeftOverAmt + this.salesorderOtherchargeRecord[index].allocatedAmountSalesother;
+
+                this.selectedSalesorderOther = this.selectedSalesorderOther.filter((item) => item.Id !== this.salesorderOtherchargeRecord[index].Id);
+                this.salesorderOtherchargeRecord[index].allocatedAmountSalesother = 0;
+                this.salesorderOtherchargeRecord[index].PendingAmount__c = this.salesorderOOtherinfo.filter(filt => filt.Id == this.salesorderOtherchargeRecord[index].Id)[0].PendingAmount__c;
+
+
+                console.log(JSON.stringify(this.selectedSalesorderOther));
+
             }
-            
+            let SalesOOtherallocateAmt = 0;
+            let SalesOOthertotalDueAmt = 0;
+            this.selectedSalesorderOther.forEach(item => {
+                SalesOOtherallocateAmt += Number(item.allocatedAmountSalesother);
+                SalesOOthertotalDueAmt += Number(item.PendingAmount__c);
+            })
+            this.totalSaleOthDueAmt = SalesOOthertotalDueAmt;
+            this.totalOtherChAllocAmount = SalesOOtherallocateAmt;
+            this.totalAllocated = SalesOOtherallocateAmt + this.totalInstAllocAmount;
+            this.totalDue = SalesOOthertotalDueAmt + this.totalInstDueAmt;
 
-        } else if (!event.target.checked) {
-            this.chequeLeftOverAmt = this.chequeLeftOverAmt + this.salesorderOtherchargeRecord[index].allocatedAmountSalesother;
-
-           this.selectedSalesorderOther = this.selectedSalesorderOther.filter((item) => item.Id !== this.salesorderOtherchargeRecord[index].Id);
-            this.salesorderOtherchargeRecord[index].allocatedAmountSalesother =0;
-            this.salesorderOtherchargeRecord[index].PendingAmount__c = this.salesorderOOtherinfo.filter(filt=> filt.Id == this.salesorderOtherchargeRecord[index].Id)[0].PendingAmount__c;
-
-
-            console.log(JSON.stringify(this.selectedSalesorderOther));
-
+            if (this.totalAllocated > this.amount) {
+                this.isTotalAllocatedAmountvalid = true;
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Error',
+                        variant: 'error',
+                        message: 'Allocated amount should not be greater than applied amount.'
+                    }),
+                );
+            } else {
+                this.isTotalAllocatedAmountvalid = false;
+            }
         }
-        let SalesOOtherallocateAmt = 0;
-        let SalesOOthertotalDueAmt = 0;
-        this.selectedSalesorderOther.forEach(item => {
-            SalesOOtherallocateAmt += Number(item.allocatedAmountSalesother);
-            SalesOOthertotalDueAmt += Number(item.PendingAmount__c);
-        })
-        this.totalSaleOthDueAmt = SalesOOthertotalDueAmt;
-        this.totalOtherChAllocAmount = SalesOOtherallocateAmt;
-        this.totalAllocated = SalesOOtherallocateAmt + this.totalInstAllocAmount;
-        this.totalDue = SalesOOthertotalDueAmt + this.totalInstDueAmt;
-
-        if (this.totalAllocated > this.amount) {
-            this.isTotalAllocatedAmountvalid = true;
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Error',
-                    variant: 'error',
-                    message: 'Allocated amount should not be greater than applied amount.'
-                }),
-            );
-        } else {
-            this.isTotalAllocatedAmountvalid = false;
-        }}
-        catch(e){
+        catch (e) {
             console.log(e.message);
             console.log(e);
             console.log(e.stack);
             console.log(e.linenumber);
         }
-        
+
 
     }
 
@@ -555,7 +556,7 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
                 label: value,
                 value: key
             }));
-            console.log('BankAccounts'+this.bankAccounts);
+            console.log('BankAccounts' + this.bankAccounts);
             console.log(JSON.stringify(this.bankAccounts));
         } else if (error) {
             console.error('Error fetching bank account map: ', error);
@@ -564,7 +565,7 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
 
     handleBankAccountChange(event) {
         this.bankAccount = event.detail.value;
-        console.log('this.bankAccount'+this.bankAccount);
+        console.log('this.bankAccount' + this.bankAccount);
     }
 
     //---- To get installment details
@@ -602,9 +603,9 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
                     this.bankAccount = data.installmentRec.SalesOrder__r.Unit__r.BuildingSectionName__r.Primary_Account_Installment__c;
                 } else if (data.installmentRec.Type__c == 'Handover' && data.installmentRec.SalesOrder__r.Unit__r.BuildingSectionName__r.HandoverAccountInstallment__c) {
                     this.bankAccount = data.installmentRec.SalesOrder__r.Unit__r.BuildingSectionName__r.HandoverAccountInstallment__c;
-                }else if (data.installmentRec.Type__c == 'Post Handover Installment' && data.installmentRec.SalesOrder__r.Unit__r.BuildingSectionName__r.PHPPAccountInstallment__c) {
+                } else if (data.installmentRec.Type__c == 'Post Handover Installment' && data.installmentRec.SalesOrder__r.Unit__r.BuildingSectionName__r.PHPPAccountInstallment__c) {
                     this.bankAccount = data.installmentRec.SalesOrder__r.Unit__r.BuildingSectionName__r.PHPPAccountInstallment__c;
-                }else{
+                } else {
                     this.bankAccount = data.installmentRec.SalesOrder__r.Unit__r.BuildingSectionName__r.Primary_Account_Installment__c;
                 }
             } else if (this.relatedObject == 'SalesOrdersOtherCharges__r') {
@@ -641,7 +642,7 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
     };
 
     fetchRemitterNames() {
-        console.log('this.accountId'+this.accountId);
+        console.log('this.accountId' + this.accountId);
         getRemitterNames({ accountId: this.accountId })
             .then(data => {
                 if (!data || data.length === 0) {
@@ -780,7 +781,7 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
             for (var key in data) {
                 temp.push({ label: key, value: data[key] });
             }
-            this.allocationValues= temp;
+            this.allocationValues = temp;
             console.log(JSON.stringify(this.currency));
         } else if (error) {
             this.error = error;
@@ -823,19 +824,19 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
         this.validateInputs();
     }
 
-    handleChangeallocateValues(event){
-       this.allocatedValues = event.target.value;
+    handleChangeallocateValues(event) {
+        this.allocatedValues = event.target.value;
     }
 
-    handleChangeallocationValues(event){
+    handleChangeallocationValues(event) {
         this.allocationValue = event.target.value;
 
     }
-   
+
     handleChange(event) {
         const field = event.target.dataset.name;
         const value = event.target.value;
-        console.log('value'+value);
+        console.log('value' + value);
         if (field === 'amount') {
             this.chequeLeftOverAmt = value;
             this.updatedAmount = value;
@@ -850,39 +851,39 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
     }
 
     validatePostingDate(inputCmp) {
-    if (!this.postingDate) {
-        inputCmp.setCustomValidity('');
-        inputCmp.reportValidity();
-        return;
+        if (!this.postingDate) {
+            inputCmp.setCustomValidity('');
+            inputCmp.reportValidity();
+            return;
+        }
+
+        const selectedDate = new Date(this.postingDate);
+        const today = new Date();
+
+        selectedDate.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
+
+        const firstDayOfMonth = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            1
+        );
+
+        let errorMessage = '';
+
+        if (selectedDate < today && selectedDate < firstDayOfMonth) {
+            errorMessage =
+                'For past dates, Posting Date must be within the current month.';
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Error',
+                    variant: 'error',
+                    message: 'For past dates, Posting Date must be within the current month.',
+                }),
+            );
+        }
+
     }
-
-    const selectedDate = new Date(this.postingDate);
-    const today = new Date();
-
-    selectedDate.setHours(0, 0, 0, 0);
-    today.setHours(0, 0, 0, 0);
-
-    const firstDayOfMonth = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        1
-    );
-
-    let errorMessage = '';
-
-    if (selectedDate < today && selectedDate < firstDayOfMonth) {
-        errorMessage =
-            'For past dates, Posting Date must be within the current month.';
-        this.dispatchEvent(
-                           new ShowToastEvent({
-                            title: 'Error',
-                            variant: 'error',
-                            message: 'For past dates, Posting Date must be within the current month.',
-                        }),
-                        );
-    }
-
-}
 
 
     handleCheckboxChange(event) {
@@ -902,11 +903,11 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
         this.disableAllocateOutStanding = [this.amount, this.overdueInDays].some(value => !value);
         this.disableAllocationButton = this.disableSave;
         console.log('Current user profileName -' + this.profileName);
-        if (this.paymentMode == 'Wire Transfer' && (this.profileName == 'Finance Team' || this.profileName == 'Operations Team' ) ) {
+        if (this.paymentMode == 'Wire Transfer' && (this.profileName == 'Finance Team' || this.profileName == 'Operations Team')) {
             //this.disableAllocationButton = false;
         }
-        else if(this.paymentMode == 'Wire Transfer' && (this.profileName != 'Finance Team' || this.profileName != 'Operations Team' )) {
-              //this.disableAllocationButton = true;
+        else if (this.paymentMode == 'Wire Transfer' && (this.profileName != 'Finance Team' || this.profileName != 'Operations Team')) {
+            //this.disableAllocationButton = true;
         }
         console.log('doNotCreateAllocation' + this.doNotCreateAllocation);
 
@@ -1035,7 +1036,7 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
             const posting = new Date(this.postingDate);
             const maturity = new Date(this.maturityDate);
             if (posting < maturity) {
-            const result = await LightningConfirm.open({
+                const result = await LightningConfirm.open({
                     message: 'Posting Date is earlier than Maturity Date. Do you want to continue?',
                     variant: 'header',
                     label: 'Confirmation Required',
@@ -1054,7 +1055,7 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
             this.disableAllocationButton = true;
             console.log('Sales Order - ' + this.salesOrderId + '- Account - ' + this.parentRecord.salesOrderRecord.Account__c);
             console.log('paymentMode - ' + this.paymentMode + ' amount - ' + this.amount);
-            console.log('this.updatedAmount'+this.updatedAmount);
+            console.log('this.updatedAmount' + this.updatedAmount);
             console.log('referenceNumber - ' + this.referenceNumber + '- remarks - ' + this.remarks);
             console.log('customerBankName - ' + this.customerBankName + '- customerBankNumber - ' + this.customerBankNumber);
             //alert(this.parentRecord.salesOrderRecord.Opportunity__c+'File Uploaded - '+this.uploadedFiles);
@@ -1071,7 +1072,7 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
             //Added by Jana - 09/08/2023
             receiptAcknowledgementRec.Unit__c = this.parentRecord.salesOrderRecord.Unit__c;
             receiptAcknowledgementRec.Account_Name__c = this.parentRecord.salesOrderRecord.AccountName__c;
-           
+
             receiptAcknowledgementRec.Allocate__c = this.allocatedValues;
             receiptAcknowledgementRec.Allocation__c = this.allocationValue;
             if (this.paymentMode == 'Wire Transfer') {
@@ -1097,12 +1098,12 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
                     receiptAcknowledgementRec.SAP_Special_GL_Indicator__c = 'X';
                 } else if (this.parentRecord.installmentRec.Installment_Type__c == 'Tax' && this.parentRecord.installmentRec.SalesOrder__r.Unit__r.BuildingSectionName__r.Primary_Account_ADM_Charges__c) {
                     receiptAcknowledgementRec.Bank_Account__c = this.bankAccount;
-                    receiptAcknowledgementRec.SAP_Special_GL_Indicator__c = '';
+                    receiptAcknowledgementRec.SAP_Special_GL_Indicator__c = 'X';
                 }
 
             } else if (this.relatedObject == 'SalesOrdersOtherCharges__r') {
                 receiptAcknowledgementRec.Bank_Account__c = this.bankAccount;
-                receiptAcknowledgementRec.SAP_Special_GL_Indicator__c = this.parentRecord.salesOrderOtherChargesRec.TypeOfCharge__c == 'ADM Fee' ?  'V' : '';
+                receiptAcknowledgementRec.SAP_Special_GL_Indicator__c = this.parentRecord.salesOrderOtherChargesRec.TypeOfCharge__c == 'ADM Fee' ? 'V' : '';
             }
 
 
@@ -1234,112 +1235,112 @@ export default class ReceiptAcknowledgement extends NavigationMixin(LightningEle
     }
 
 
-validateSalesOtherAllBeforeAllocateOutStanding(){
-    let isValid = true;
-  
-       
-    this.selectedSalesorderOther.forEach(item=>{
-      /*   console.log(typeof(item.allocateSalesOOtherAmountChange));
-        console.log(Number(item.allocateSalesOOtherAmountChange));
-        console.log(typeof(this.salesorderOOtherinfo.filter(val=>val.Id==item.Id)[0].PendingAmount__c));
-        console.log(this.salesorderOOtherinfo.filter(val=>val.Id==item.Id)[0].PendingAmount__c);
- */
-        if(Number(item.allocatedAmountSalesother)> this.salesorderOOtherinfo.filter(val=>val.Id==item.Id)[0].PendingAmount__c){
-            isValid=false;
-              this.dispatchEvent(
-                  new ShowToastEvent({
-                      title: 'Error',
-                      variant: 'error',
-                      message: 'Pending Amount Can Not Be Less Then Zero.'
-                  }),
-              );
-              
-          }
-    
-    
-
-    if(Number(item.allocatedAmountSalesother) > this.amount){
-        isValid=false;
-          this.dispatchEvent(
-              new ShowToastEvent({
-                  title: 'Error',
-                  variant: 'error',
-                  message: 'Allocated amount should not be greater than applied amount.'
-              }),
-          );
-          
-      }
-      if(Number(item.allocatedAmountSalesother)===0){
-        isValid=false;
-          this.dispatchEvent(
-              new ShowToastEvent({
-                  title: 'Error',
-                  variant: 'error',
-                  message: 'Allocated Amound Should Not Be Zero.'
-              }),
-          );
-          
-      }
+    validateSalesOtherAllBeforeAllocateOutStanding() {
+        let isValid = true;
 
 
-    })
+        this.selectedSalesorderOther.forEach(item => {
+            /*   console.log(typeof(item.allocateSalesOOtherAmountChange));
+              console.log(Number(item.allocateSalesOOtherAmountChange));
+              console.log(typeof(this.salesorderOOtherinfo.filter(val=>val.Id==item.Id)[0].PendingAmount__c));
+              console.log(this.salesorderOOtherinfo.filter(val=>val.Id==item.Id)[0].PendingAmount__c);
+       */
+            if (Number(item.allocatedAmountSalesother) > this.salesorderOOtherinfo.filter(val => val.Id == item.Id)[0].PendingAmount__c) {
+                isValid = false;
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Error',
+                        variant: 'error',
+                        message: 'Pending Amount Can Not Be Less Then Zero.'
+                    }),
+                );
 
-    this.selectedInstallments.forEach(item=>{
-        /*  console.log(item);
-         console.log(typeof(item.allocatedAmount));
-         console.log(item.allocatedAmount);
-         console.log(typeof(this.installmentsInfo.filter(val=>val.Id==item.Id)[0].PendingAmount__c));
-         console.log(this.installmentsInfo.filter(val=>val.Id==item.Id)[0].PendingAmount__c);
-  */
-         if(Number(item.allocatedAmount)> this.installmentsInfo.filter(val=>val.Id==item.Id)[0].PendingAmount__c){
-           isValid=false;
-             this.dispatchEvent(
-                 new ShowToastEvent({
-                     title: 'Error',
-                     variant: 'error',
-                     message: 'Pending Amount Can Not Be Less Then Zero.'
-                 }),
-             );
-             
-         }
-         
-         if(Number(item.allocatedAmount)> this.amount){
-             isValid=false;
-               this.dispatchEvent(
-                   new ShowToastEvent({
-                       title: 'Error',
-                       variant: 'error',
-                       message: 'Allocated amount should not be greater than applied amount.'
-                   }),
-               );
-               
-           }
-           if(Number(item.allocatedAmount)===0){
-             isValid=false;
-               this.dispatchEvent(
-                   new ShowToastEvent({
-                       title: 'Error',
-                       variant: 'error',
-                       message: 'Allocated Amound Should Not Be Zero.'
-                   }),
-               );
-               
-           }
- 
-        
- 
-     })
-    
-    
-
-    return isValid;
-}
+            }
 
 
-     handleAllocateOUtStanding(event) {
-          if ((this.selectedInstallments.length > 0 && this.selectedInstallments.length!='') || (this.selectedSalesorderOther.length > 0 && this.selectedSalesorderOther.length!='')) {
+
+            if (Number(item.allocatedAmountSalesother) > this.amount) {
+                isValid = false;
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Error',
+                        variant: 'error',
+                        message: 'Allocated amount should not be greater than applied amount.'
+                    }),
+                );
+
+            }
+            if (Number(item.allocatedAmountSalesother) === 0) {
+                isValid = false;
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Error',
+                        variant: 'error',
+                        message: 'Allocated Amound Should Not Be Zero.'
+                    }),
+                );
+
+            }
+
+
+        })
+
+        this.selectedInstallments.forEach(item => {
+            /*  console.log(item);
+             console.log(typeof(item.allocatedAmount));
+             console.log(item.allocatedAmount);
+             console.log(typeof(this.installmentsInfo.filter(val=>val.Id==item.Id)[0].PendingAmount__c));
+             console.log(this.installmentsInfo.filter(val=>val.Id==item.Id)[0].PendingAmount__c);
+      */
+            if (Number(item.allocatedAmount) > this.installmentsInfo.filter(val => val.Id == item.Id)[0].PendingAmount__c) {
+                isValid = false;
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Error',
+                        variant: 'error',
+                        message: 'Pending Amount Can Not Be Less Then Zero.'
+                    }),
+                );
+
+            }
+
+            if (Number(item.allocatedAmount) > this.amount) {
+                isValid = false;
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Error',
+                        variant: 'error',
+                        message: 'Allocated amount should not be greater than applied amount.'
+                    }),
+                );
+
+            }
+            if (Number(item.allocatedAmount) === 0) {
+                isValid = false;
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Error',
+                        variant: 'error',
+                        message: 'Allocated Amound Should Not Be Zero.'
+                    }),
+                );
+
+            }
+
+
+
+        })
+
+
+
+        return isValid;
+    }
+
+
+    handleAllocateOUtStanding(event) {
+        if ((this.selectedInstallments.length > 0 && this.selectedInstallments.length != '') || (this.selectedSalesorderOther.length > 0 && this.selectedSalesorderOther.length != '')) {
             console.log('selectedamount' + JSON.stringify(this.selectedInstallments));
-         
+
 
             let recpAckObj = { 'sobjectType': 'ReceiptAcknowledgement__c' };
             recpAckObj.PaymentType__c = this.paymentMode;
@@ -1390,42 +1391,42 @@ validateSalesOtherAllBeforeAllocateOutStanding(){
 
             })
             //  if(this.isTotalAllocatedAmountvalid==false && this.isNegativeAmount){
-           
+
             // alert('updateSalesorderOOther'+updateSalesorderOOther);
- 
-           
-               
-            if(this.validateSalesOtherAllBeforeAllocateOutStanding()){  
-            
-                
-                 this.showLoading = true;
-            insertAllocatedReceiptWthAmt({ updateInstallment: updateInstallments, recpAck: recpAckObj, updateSalesorderOOther: updateSalesorderOOther })
-                .then(result => {
 
 
-                    this.dispatchEvent(
-                        new ShowToastEvent({
-                            title: 'Success',
-                            message: 'ReceiptAcknowledgement Created Successfully',
-                            variant: 'success'
-                        }))
-                    this.isLoading = false;
-                    this.closeModal();
 
-                })
-                 .catch(error => {
-                    this.error = error;
-                    this.isLoading = false;
-                    this.dispatchEvent(
-                        new ShowToastEvent({
-                            title: 'Error',
-                            message: error.body.message,
-                            variant: 'error'
-                        }))
-                }) 
+            if (this.validateSalesOtherAllBeforeAllocateOutStanding()) {
+
+
+                this.showLoading = true;
+                insertAllocatedReceiptWthAmt({ updateInstallment: updateInstallments, recpAck: recpAckObj, updateSalesorderOOther: updateSalesorderOOther })
+                    .then(result => {
+
+
+                        this.dispatchEvent(
+                            new ShowToastEvent({
+                                title: 'Success',
+                                message: 'ReceiptAcknowledgement Created Successfully',
+                                variant: 'success'
+                            }))
+                        this.isLoading = false;
+                        this.closeModal();
+
+                    })
+                    .catch(error => {
+                        this.error = error;
+                        this.isLoading = false;
+                        this.dispatchEvent(
+                            new ShowToastEvent({
+                                title: 'Error',
+                                message: error.body.message,
+                                variant: 'error'
+                            }))
+                    })
             }
-         }
-        
+        }
+
 
         else {
             this.dispatchEvent(
@@ -1434,8 +1435,8 @@ validateSalesOtherAllBeforeAllocateOutStanding(){
                     message: 'Please select atleast one installment to proceed.',
                     variant: 'error'
                 }))
-        } 
- 
+        }
+
 
 
 

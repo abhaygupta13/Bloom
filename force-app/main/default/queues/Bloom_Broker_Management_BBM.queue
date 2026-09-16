@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <doesSendEmailToMembers>true</doesSendEmailToMembers>
+    <name>Bloom Broker Management (BBM)</name>
+    <queueMembers>
+        <users>
+            <user>fbtarkh@bloomholding.com</user>
+            <user>khamid@bloomholding.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>BrokerApplication__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>CaseAssignmentHistory__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>ServiceAction__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>ServiceCatalog__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Service_Catalog__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Task</sobjectType>
+    </queueSobject>
+</Queue>

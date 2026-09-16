@@ -120,7 +120,7 @@ public without sharing class ReceiptAcknowledgementTriggerHelper {
         Update allocationRecordList;
     }
     
-    //Send email notification and create record of Sales Order Other Charges when the cheque bounced
+    // send email notification and create record of Sales Order Other Charges when the cheque bounced
     public static void sendChequeBounceNotification(Map<Id,SObject> newMap,Map<Id,SObject> oldMap){
         Map<String, String> reasonMap = new Map<String, String>{
             'Cheque Presented by Mistake' => 'Cheque_Presented_by_Mistake',
@@ -284,17 +284,17 @@ public without sharing class ReceiptAcknowledgementTriggerHelper {
         if(!receiptAckIds.isEmpty()){
             InstallmentLineService objInstallmentLineService = InstallmentLineService.getInstance();
             List<ReceiptAllocation__c> receiptAllocationList = objReceiptAllocationService.getReceiptAllocationsByReceiptIds(receiptAckIds);
-            List<SalesOrderOtherCharges__c> salesOrderOtherChargesList = new List<SalesOrderOtherCharges__c>();
+            Map<id,SalesOrderOtherCharges__c> salesOrderOtherChargesMap = new Map<id,SalesOrderOtherCharges__c>();
             Set<Id> installmentIds = new Set<Id>();
             
             for(ReceiptAllocation__c objReceiptAllocation :receiptAllocationList){
                 if(objReceiptAllocation.InstallmentLine__c != NULL && objReceiptAllocation.InstallmentLine__r.SAP_Document_No__c == NULL){
                     installmentIds.add(objReceiptAllocation.InstallmentLine__c);
                 }else if(objReceiptAllocation.SalesOrderOtherCharges__c != NULL && objReceiptAllocation.SalesOrderOtherCharges__r.SAP_Document_No__c == NULL){
-                    salesOrderOtherChargesList.add(new SalesOrderOtherCharges__c(Id = objReceiptAllocation.SalesOrderOtherCharges__c, SendtoSAP__c = true));
+                    salesOrderOtherChargesMap.put(objReceiptAllocation.SalesOrderOtherCharges__c, new SalesOrderOtherCharges__c(Id = objReceiptAllocation.SalesOrderOtherCharges__c, SendtoSAP__c = true));
                 }
             }
-            SalesOrderOtherChargesService.getInstance().updateOtherCharges(salesOrderOtherChargesList);
+            SalesOrderOtherChargesService.getInstance().updateOtherCharges(salesOrderOtherChargesMap.values());
             
             if(!installmentIds.isEmpty()){
                 IntegrationRecordService objIntegrationRecordService = IntegrationRecordService.getInstance();
@@ -314,7 +314,7 @@ public without sharing class ReceiptAcknowledgementTriggerHelper {
         }
     }
     
-    public static void sendSOCToSap(Set<Id> socIds){
+    public static void sendSOCToSapdovera(Set<Id> socIds){
         SalesOrderOtherChargesService salesOrderOtherChargeService = SalesOrderOtherChargesService.getInstance();
         List<SalesOrderOtherCharges__c> listSalesOrderOtherCharge = salesOrderOtherChargeService.getSalesOrderOtherChargesByIds(socIds); 
         if(!listSalesOrderOtherCharge.isEmpty()){

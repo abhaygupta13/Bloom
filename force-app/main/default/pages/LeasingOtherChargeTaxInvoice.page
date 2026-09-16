@@ -148,9 +148,11 @@
                 <apex:param value="{!amount}" />
             </apex:outputText><!--{!amount}-->
         </td>
-        <td style="border:1px solid black; text-align:center;"><apex:outputPanel rendered="{!showVat}"><apex:outputText value="{0,number,#0.00}"><apex:param value="{!vatRate}" /></apex:outputText>%</apex:outputPanel><apex:outputPanel rendered="{!NOT(showVat)}">-</apex:outputPanel></td>
+        <td style="border:1px solid black; text-align:center;">5.00%</td>
         <td style="border:1px solid black; text-align:right;">
-            <apex:outputPanel rendered="{!showVat}"><apex:outputText value="{0,number,###,###.00}"><apex:param value="{!vatAmount}" /></apex:outputText></apex:outputPanel><apex:outputPanel rendered="{!NOT(showVat)}" style="display:block; text-align:center;">-</apex:outputPanel>
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!vatAmount}" />
+            </apex:outputText><!--{!amount}-->
         </td>
         <td style="border:1px solid black; text-align:right;">
             <apex:outputText value="{0,number,###,###.00}">
@@ -171,7 +173,10 @@
         </td>
         <td style="border:1px solid black;"></td>
         <td style="border:1px solid black; text-align:right; font-weight:bold;">
-            <apex:outputPanel rendered="{!showVat}"><apex:outputText value="{0,number,###,###.00}"><apex:param value="{!vatAmount}" /></apex:outputText></apex:outputPanel><apex:outputPanel rendered="{!NOT(showVat)}" style="display:block; text-align:center;">-</apex:outputPanel>
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!vatAmount}" />
+            </apex:outputText><!--{!amount}-->
+            <!-- {!vatAmount} -->
         </td>
         <td style="border:1px solid black; text-align:right; font-weight:bold;">
             <apex:outputText value="{0,number,###,###.00}">
@@ -218,7 +223,10 @@
             Total VAT Charged for the period
         </td>
         <td style="border-top:1px solid black; text-align:right; font-weight:bold;">
-           <apex:outputPanel rendered="{!showVat}"><apex:outputText value="{0,number,###,###.00}"><apex:param value="{!vatAmount}" /></apex:outputText></apex:outputPanel><apex:outputPanel rendered="{!NOT(showVat)}" style="display:block; text-align:center;">-</apex:outputPanel>
+            <apex:outputText value="{0,number,###,###.00}">
+                <apex:param value="{!vatAmount}" />
+            </apex:outputText><!--{!amount}-->
+            <!-- {!vatAmount} -->
         </td>
     </tr>
 </table>

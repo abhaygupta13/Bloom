@@ -32,9 +32,9 @@ public class LeadTriggerHandler  implements ITriggerHandler{
     }
     
     public void afterUpdate(List<sObject> newList, Map<Id, sObject> newMap,  List<sObject> oldList, Map<Id, sObject> oldMap) {
-    //    LeadTriggerHelper.createNewContactCenterLeadTask((List<Lead>)newList,(Map<Id,Lead>)oldMap); 
-    //    LeadTriggerHelper.createQualifiedLeadTask((List<Lead>)newList,(Map<Id,Lead>)oldMap);
-    //    LeadTriggerHelper.createLeadManagerTask((List<Lead>)newList,(Map<Id,Lead>)oldMap);
+        LeadTriggerHelper.createNewContactCenterLeadTask((List<Lead>)newList,(Map<Id,Lead>)oldMap); 
+        LeadTriggerHelper.createQualifiedLeadTask((List<Lead>)newList,(Map<Id,Lead>)oldMap);
+        LeadTriggerHelper.createLeadManagerTask((List<Lead>)newList,(Map<Id,Lead>)oldMap);
         LeadTriggerHelper.sendEmailOnOwnerUpdate((List<Lead>)newList,(Map<Id,Lead>)oldMap); 
         LeadTriggerHelper.markTaskComplete((List<Lead>)newList, (Map<Id,Lead>)oldMap); 
         LeadTriggerHelper.sendWaitingListUpdateEmail((List<Lead>)newList,(Map<Id,Lead>)oldMap); 

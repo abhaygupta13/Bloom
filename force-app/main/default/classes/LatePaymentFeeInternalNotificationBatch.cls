@@ -44,7 +44,7 @@ public class LatePaymentFeeInternalNotificationBatch implements Database.Batchab
             String csv = objEmailService.generateCSV(saleOrderChargeList);
             Blob csvBlob = Blob.valueOf(csv);
             Messaging.EmailFileAttachment attachment = new Messaging.EmailFileAttachment();
-            attachment.setFileName('LatePaymentFees.csv');
+            attachment.setFileName('UpcomingLatePaymentFee.csv');
             attachment.setBody(csvBlob);
             attachment.setContentType('text/csv');
             emailBody = emailBody.replace('{{LPF_TABLE}}', latePaymentFeeTable);

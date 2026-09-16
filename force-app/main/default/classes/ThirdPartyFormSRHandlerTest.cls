@@ -125,14 +125,14 @@ public class ThirdPartyFormSRHandlerTest{
     @isTest
     static void createCaseTest(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
-        ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email');
+        ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email',false);
     }
     
     @isTest
     static void validateCaseTest(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         ThirdPartyFormSRHandler i = ThirdPartyFormSRHandler.getInstance();
@@ -143,19 +143,39 @@ public class ThirdPartyFormSRHandlerTest{
     static void validateCaseTest1(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email');
-        Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email',false);
+        Case cs = [Select id, Step__c, Payment_Booked__c, Finance_Document_Verified__c, 
+                   FinanceDocumentsUploadedManually__c, ServiceCatalog__c, Status,
+                   CaseType__c, SubType__c, RecordTypeId, AccountId, StopEmailsToCustomer__c,
+                   Sales_Order__c, TPFType__c, DocumentsVerifiedUploaded__c
+                   from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         update cs;
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
+        ThirdPartyFormSRHandler i = ThirdPartyFormSRHandler.getInstance();
+        i.validateCaseForNextReview(cs);
+        cs.TPFType__c = 'Individual';
+        //cs.Finance_Document_Verified__c = 'Yes';
+        update cs;
+        i.validateCaseForNextReview(cs);
+        cs.Step__c = 'Final';
+        update cs;
+        i.validateCaseForNextReview(cs);
+        cs.Payment_Booked__c = 'Yes';
+        cs.Finance_Document_Verified__c = 'Yes';
+        update cs;
+        i.validateCaseForNextReview(cs);
+        cs.FinanceDocumentsUploadedManually__c = 'Yes';
+        update cs;
+        i.validateCaseForNextReview(cs);
     }
     
     @isTest
     static void validateCaseTest12(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.TPFType__c= 'Individual';
@@ -168,7 +188,7 @@ public class ThirdPartyFormSRHandlerTest{
     static void validateCaseTest2(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.DocumentsVerifiedUploaded__c = 'Yes';
@@ -181,7 +201,7 @@ public class ThirdPartyFormSRHandlerTest{
     static void validateCaseTest3(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.DocumentsVerifiedUploaded__c = 'Yes';
@@ -213,7 +233,7 @@ public class ThirdPartyFormSRHandlerTest{
     static void validateCaseTest4(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = 'Final';
         //cs.DocumentsVerifiedUploaded__c = 'Yes';
@@ -226,7 +246,7 @@ public class ThirdPartyFormSRHandlerTest{
     static void validateCaseTest5(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = 'Final';
         cs.Payment_Booked__c = 'Yes';
@@ -239,8 +259,8 @@ public class ThirdPartyFormSRHandlerTest{
     static void validateCaseTest6(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email');
-        Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Third Party Form',so.Account__c,so.Unit__c,'test','Email',false);
+        Case cs = [Select id, Step__c, StopEmailsToCustomer__c from case where id =: caseData.get('caseId')];
         cs.step__c = 'Final';
         cs.Payment_Booked__c = 'Yes';
         cs.Finance_Document_Verified__c = 'Yes';
@@ -248,5 +268,6 @@ public class ThirdPartyFormSRHandlerTest{
         update cs;
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
+        ThirdPartyFormSRHandler.getInstance().sendClarificationEmail(cs, new List<String>{'test description'}, 'Service Request');
     }
 }

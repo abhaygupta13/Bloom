@@ -5,23 +5,23 @@ private class CustomUserServiceTest {
         //Create Broker Account
         Account testAccount = TestDataFactory.createBrokerAccount('Test', false, '1111111111');
         insert testAccount;
-        
+
         //Create Contact
         Contact testContact = TestDataFactory.createContact('TestContact', testAccount.Id, true, 'test@gmail.com');
         testContact.Blacklisted__c=false;
         testContact.IsSuspended__c=false;
         testContact.SuspensionTenure__c='';
         insert testContact;
-        
+
         // Create Custom User
         User__c testUser = TestDataFactory.createCustomUser(true, true,'TestUser123@email.com', 'TestUser', testContact.Id, testAccount.Id, 'testUser@test.com', 'a4ed45a7-b964-4ed0-b2aa-111111111111');
         insert testUser;
         System.debug('testUser >> '+testUser);
     }
-    
+
     /**
-* Test getUserByEmail method of the class CustomUserService
-*/
+     * Test getUserByEmail method of the class CustomUserService
+     */
     @isTest
     static void testGetUserByEmail() {
         
@@ -35,13 +35,13 @@ private class CustomUserServiceTest {
         CustomUserService objCustomUserService = CustomUserService.getInstance();
         User__c result = objCustomUserService.getUserByEmail('testUser@test.com');
         Test.stopTest();
-        
+
         System.assertEquals(testAccount.Id, result.Account__c, 'Should return one record for valid email id');
     }
-    
+
     /**
-* Test getUserByContactIdOrEmail method of the class CustomUserService passing emailId as parameter
-*/
+     * Test getUserByContactIdOrEmail method of the class CustomUserService passing emailId as parameter
+     */
     @isTest
     static void testGetUserByContactIdOrEmailTestEmail() {
         
@@ -50,21 +50,21 @@ private class CustomUserServiceTest {
         
         //Get Contact
         Contact testContact = [SELECT Id from Contact Where LastName = 'TestContact'];
-        
+
         //Get User
         User__c testUser = [SELECT Id, Email__c from User__c where Name='TestUser'];
-        
+
         Test.startTest();
         CustomUserService objCustomUserService = CustomUserService.getInstance();
         User__c result = objCustomUserService.getUserByContactIdOrEmail('','testUser@test.com');
         Test.stopTest();
-        
+
         System.assertEquals(testUser.Email__c, result.Email__c, 'Should return one record for valid email id');
     }
-    
+
     /**
-* Test getUserByContactIdOrEmail method of the class CustomUserService passing contactId as parameter
-*/
+     * Test getUserByContactIdOrEmail method of the class CustomUserService passing contactId as parameter
+     */
     @isTest
     static void testGetUserByContactIdOrEmailTestContactId() {
         
@@ -73,21 +73,21 @@ private class CustomUserServiceTest {
         
         //Get Contact
         Contact testContact = [SELECT Id from Contact Where LastName = 'TestContact'];
-        
+
         //Get User
         User__c testUser = [SELECT Id, Contact__c from User__c where Name='TestUser'];
-        
+
         Test.startTest();
         CustomUserService objCustomUserService = CustomUserService.getInstance();
         User__c result = objCustomUserService.getUserByContactIdOrEmail(testContact.Id, '');
         Test.stopTest();
-        
+
         System.assertEquals(testUser.Contact__c, result.Contact__c, 'Should return one record for valid contact id');
     }
-    
+
     /**
-* Test getUserByContactIdOrEmail method of the class CustomUserService passing contactId and emailId both
-*/
+     * Test getUserByContactIdOrEmail method of the class CustomUserService passing contactId and emailId both
+     */
     @isTest
     static void testGetUserByContactIdOrEmailTestBoth() {
         
@@ -96,22 +96,22 @@ private class CustomUserServiceTest {
         
         //Get Contact
         Contact testContact = [SELECT Id from Contact Where LastName = 'TestContact'];
-        
+
         //Get User
         User__c testUser = [SELECT Id, Contact__c, Email__c from User__c where Name='TestUser'];
-        
+
         Test.startTest();
         CustomUserService objCustomUserService = CustomUserService.getInstance();
         User__c result = objCustomUserService.getUserByContactIdOrEmail(testContact.Id, 'testUser@test.com');
         Test.stopTest();
-        
+
         System.assertEquals(testUser.Contact__c, result.Contact__c, 'Should return one record for valid contact id');
         System.assertEquals(testUser.Email__c, result.Email__c, 'Should return one record for valid email id');
     }
-    
+
     /**
-* Test getUserByAzureToken method of the class CustomUserService passing Azure token as parameter
-*/
+     * Test getUserByAzureToken method of the class CustomUserService passing Azure token as parameter
+     */
     @isTest
     static void testGetUserByAzureToken() {
         
@@ -120,14 +120,14 @@ private class CustomUserServiceTest {
         
         //Get Contact
         Contact testContact = [SELECT Id from Contact Where LastName = 'TestContact'];
-        
+
         //Get User
         User__c testUser = [SELECT Id, Email__c, Contact__c from User__c where Name='TestUser'];
-        
+
         Test.startTest();
         User__c result = CustomUserService.getInstance().getUserByAzureToken('a4ed45a7-b964-4ed0-b2aa-111111111111');
         Test.stopTest();
-        
+
         System.assertEquals(testUser.Contact__c, result.Contact__c, 'Should return one record for valid Azure token');
     }
     @isTest static void testGetUsersByContactIds() {
@@ -139,11 +139,11 @@ private class CustomUserServiceTest {
     @isTest static void testUpdateUsers() {
         User__c user = [SELECT Id, Email__c FROM User__c WHERE Email__c = 'testUser@test.com' LIMIT 1];
         user.Email__c = 'updatedemail@test.com';
-        
+
         List<User__c> updatedList = CustomUserService.getInstance().updateUsers(new List<User__c>{user});
         System.assertEquals(1, updatedList.size());
         System.assertEquals('updatedemail@test.com', updatedList[0].Email__c);
-        
+
         // Query again to confirm update
         User__c updatedUser = [SELECT Email__c FROM User__c WHERE Id = :user.Id];
         System.assertEquals('updatedemail@test.com', updatedUser.Email__c);
@@ -151,11 +151,11 @@ private class CustomUserServiceTest {
     @isTest static void testUpdateUsersWithoutTrigger() {
         User__c user = [SELECT Id, Email__c FROM User__c WHERE Email__c = 'testUser@test.com' LIMIT 1];
         user.Email__c = 'withouttrigger@test.com';
-        
+
         List<User__c> updatedList = CustomUserService.getInstance().updateUsersWithoutTrigger(new List<User__c>{user});
         System.assertEquals(1, updatedList.size());
         System.assertEquals('withouttrigger@test.com', updatedList[0].Email__c);
-        
+
         // Confirm the flag is reset
         System.assertEquals(false, AzureUserTriggerHandler.isTriggerDisabled);
     }
@@ -169,7 +169,7 @@ private class CustomUserServiceTest {
         Test.stopTest();
     }
     
-    @isTest
+     @isTest
     static void testGetUsersByIdsNull() {
         User__c testUser = [SELECT Id FROM User__c WHERE Name = 'TestUser' LIMIT 1];
         Set<Id> userIds = new Set<Id>{testUser.Id};
@@ -193,7 +193,7 @@ private class CustomUserServiceTest {
         insert acc;
         
         //Contact con = new Contact(LastName = 'TestContact', AccountId = acc.Id);
-        // insert con;
+       // insert con;
         
         User__c newUser = new User__c(
             Username__c = 'inserted1@test.com',
@@ -209,32 +209,5 @@ private class CustomUserServiceTest {
         AzureUserTriggerHandler.isTriggerDisabled = false;
         Test.stopTest();
     }
-    @isTest
-    static void testGetAppRegistrationUser() {
-        
-        // Get Account
-        Account testAccount = [SELECT Id FROM Account WHERE Name = 'Test' LIMIT 1];
-        
-        // Get Contact
-        Contact testContact = [SELECT Id FROM Contact WHERE LastName = 'TestContact' LIMIT 1];
-        
-        // Create App Registration
-        AppRegistration__c appReg = new AppRegistration__c(
-            FirstName__c = 'John',
-            LastName__c = 'Doe',
-            Email__c = 'john.doe@test.com',
-            Contact__c = testContact.Id,
-            Account__c = testAccount.Id
-        );
-        
-        Test.startTest();
-        CustomUserService objCustomUserService = CustomUserService.getInstance();
-        User__c result = objCustomUserService.getAppRegistrationUser(appReg);
-        Test.stopTest();
-        
-        System.assertEquals('John Doe', result.Name);
-        System.assertEquals('John Doe', result.Name__c);
-        System.assertEquals('john.doe@test.com', result.Username__c);
-    }
-    
+
 }

@@ -5,7 +5,7 @@
 */
 /*****************************************************************************************************
 * Version       Author      Date             Comment       
-* 1.0           Jayprakash  30AUG2024        Test 
+* 1.0           Jayprakash  30AUG2024        Test  
 * 1.1           prashant Sahu  30April2026   testFindDuplicateLead 
 * 1.2           prashant Sahu  30April2026   testFilterStatusSummaryMethods 
 *****************************************************************************************************/
@@ -95,57 +95,34 @@ public class LeadServiceTest {
     }
     
     @isTest
-	static void testFindDuplicateLead() {
-
-    LeadService service = LeadService.getInstance();
-
-    // 🔹 Create original lead (duplicate target)
-    Lead l1 = new Lead(
-        FirstName = 'John',
-        MiddleName = 'A',
-        LastName = 'Doe',
-        Company = 'Test Company',
-        Status = 'New',
-        Email = 'john@test.com',
-        MobilePhoneNumber__c = '9999999999'
-    );
-    insert l1;
-
-    // 🔹 Create another lead (to test exclusion by Id)
-    Lead l2 = new Lead(
-        FirstName = 'John',
-        MiddleName = 'A',
-        LastName = 'Doe',
-        Company = 'Test Company',
-        Status = 'New',
-        Email = 'john@test.com',
-        MobilePhoneNumber__c = '9999999999'
-    );
-    insert l2;
-
-    // 🔹 Prepare request
-    BAPPLeadGenerationHandler.LeadGenerationRequest req = 
-        new BAPPLeadGenerationHandler.LeadGenerationRequest();
-
-    req.firstName = 'John';
-    req.middleName = 'A';
-    req.lastName = 'Doe';
-    req.email = 'john@test.com';
-    req.phoneNumber = '9999999999';
-    req.leadId = l2.Id; // exclude this one
-
-    Test.startTest();
-
-    List<Lead> result = service.findDuplicateLead(req);
-
-    Test.stopTest();
-
-    // 🔹 Assertions
-    System.assertNotEquals(null, result);
-    System.assert(result.size() > 0, 'Duplicate should be found');
-    System.assertEquals(l1.Id, result[0].Id, 'Should return first lead, not excluded one');
-}
+    static void testFindDuplicateLead() {
         
+        LeadService service = LeadService.getInstance();
+        
+        Lead l1 = new Lead( FirstName = 'John', MiddleName = 'A', LastName = 'Doe', Company = 'Test Company', Status = 'New', Email = 'john@test.com', MobilePhoneNumber__c = '9999999999' );
+        insert l1;
+        
+        Lead l2 = new Lead( FirstName = 'John', MiddleName = 'A', LastName = 'Doe', Company = 'Test Company', Status = 'New', Email = 'john@test.com', MobilePhoneNumber__c = '9999999999' );
+        insert l2;
+        
+        BAPPLeadGenerationHandler.LeadGenerationRequest req =  new BAPPLeadGenerationHandler.LeadGenerationRequest();
+        
+        req.firstName = 'John';
+        req.middleName = 'A';
+        req.lastName = 'Doe';
+        req.email = 'john@test.com';
+        req.phoneNumber = '9999999999';
+        req.leadId = l2.Id; // exclude this one
+        
+        Test.startTest();
+        List<Lead> result = service.findDuplicateLead(req);
+        Test.stopTest();
+        
+        System.assertNotEquals(null, result);
+        System.assert(result.size() > 0, 'Duplicate should be found');
+        System.assertEquals(l1.Id, result[0].Id, 'Should return first lead, not excluded one');
+    }
+    
     @isTest
     static void testFilterStatusSummaryMethods() {
         
@@ -164,18 +141,8 @@ public class LeadServiceTest {
         insert testContact;
         
         Profile p = [SELECT Id FROM Profile WHERE Name = 'System Administrator' LIMIT 1];
-        User u = new User(
-            FirstName = 'Test',
-            LastName = 'User',
-            Email = 'user@test.com',
-            Username = 'user' + System.currentTimeMillis() + '@test.com',
-            Alias = 'tst',
-            TimeZoneSidKey = 'Asia/Kolkata',
-            LocaleSidKey = 'en_US',
-            EmailEncodingKey = 'UTF-8',
-            LanguageLocaleKey = 'en_US',
-            ProfileId = p.Id
-        );
+
+        User u = new User( FirstName = 'Test', LastName = 'User', Email = 'user@test.com', Username = 'user' + System.currentTimeMillis() + '@test.com', Alias = 'tst', TimeZoneSidKey = 'Asia/Kolkata', LocaleSidKey = 'en_US', EmailEncodingKey = 'UTF-8', LanguageLocaleKey = 'en_US', ProfileId = p.Id );
         insert u;
         
         List<Lead> leads = new List<Lead>{
@@ -241,4 +208,5 @@ public class LeadServiceTest {
         System.assert(summary != null);
         Test.stopTest();
     }
+    
 }

@@ -17,6 +17,16 @@ public class DocumentServiceTest {
         
         DocumentType__c dc2 = TestDataFactory.createDocumentType('Project', 'ADM Registration Document');
         INSERT dc2;
+        
+        Opportunity opp = new Opportunity();
+        opp.Name = 'Test Opp';
+        opp.AccountId = account.Id;
+        opp.LeadChannel__c = 'Call';
+        // opp.LeadSubSource__c = 'Kiosk';
+        opp.StageName = 'New';
+        opp.WinReason__c = 'Price';
+        opp.CloseDate = Date.today();
+        insert opp;
 
                 
         Project__c project = new Project__c(Name = 'Test Project');
@@ -168,21 +178,13 @@ public class DocumentServiceTest {
             Document_Name__c = 'SOA',
             DocumentType__c= SalesorderSOAdoctype.id,
             Salesorder__c = salesOrder.id,
+            Opportunity__c = opp.Id,
             ContentDocumentId__c = con2.ContentDocumentId,
             Content_Version_Id__c = con2.Id
         );
         
         insert salesordeSodocument;
 
-        ServiceCatalog__c testServiceCatalog = new ServiceCatalog__c(
-            Name = 'Test Service Catalog',
-            Type__c = 'Service Request',
-            Category__c = 'Financial - Payment Service',
-            SubCategory__c = 'Postpone/Defer Payment',
-            ProcessFlowType__c = 'Handover',
-            RecordTypeDevName__c = 'Handover'
-        );
-        insert testServiceCatalog;
         
          DocumentType__c BCCdoctype = new DocumentType__c();
        // BCCdoctype.Type__c = 'BCC Announcement';
@@ -197,13 +199,25 @@ public class DocumentServiceTest {
             Content_Version_Id__c = con2.Id
         );
         insert document9;
-       
-        
+         ServiceCatalog__c  servicecatalog = new ServiceCatalog__c();
+        servicecatalog.ProcessFlowType__c= 'Handover';
+        servicecatalog.ProcessType__c = 'Sales';
+        servicecatalog.Active__c= true;
+        servicecatalog.RecordTypeDevName__c = 'Handover';
+        insert servicecatalog;
+        ServiceCatalog__c  servicecatalog1 = new ServiceCatalog__c();
+        servicecatalog1.ProcessFlowType__c= 'Handover';
+        servicecatalog1.ProcessType__c = 'Sales';
+        servicecatalog1.Active__c= true;
+        servicecatalog1.RecordTypeDevName__c = 'Non PHPP';
+        insert servicecatalog1;
+
          
         Handover__c handover = new Handover__c();
         handover.Account__c = account.Id;
         handover.Building_Phase__c = testBuilding.Id;
         handover.Unit__c = u.Id;
+        handover.ServiceCatalog__c = servicecatalog1.Id;
         handover.Sales_Order__c = salesOrder.id;
         insert handover;
         
@@ -271,6 +285,8 @@ public class DocumentServiceTest {
             Sales_Order__c= salesOrder.id
         );
         insert tempCase;
+        DocumentService.getInstance().getCaseDocuments(new Set<Id>{tempCase.Id});
+        DocumentService.getInstance().getDocumentsByCaseIds(new Set<Id>{tempCase.Id});
     }
     
    
@@ -278,12 +294,15 @@ public class DocumentServiceTest {
     static void testGetDocumentsByHandoverAndName() {
         Handover__c  ho = [SELECT Id, Project__c FROM Handover__c LIMIT 1];
 		Account acc = [Select Id from account limit 1];
+       
+        Opportunity opp = [Select Id from Opportunity limit 1];
         Document__c doc = [SELECT ID, Document_Name__c, Handover__c FROM Document__c WHERE Document_Name__c = 'Test Document1'];
         Project__c project = [SELECT Id FROM Project__c LIMIT 1];
         SalesOrder__c so = [SELECT Id FROM SalesOrder__c LIMIT 1];
         Unit__c u = [SELECT Id FROM Unit__c LIMIT 1];
         Contact con = [SELECT Id FROM Contact LIMIT 1];
         HandoverPhase__c  hphase = new HandoverPhase__c();
+        Case objCase = [SELECT Id FROM Case LIMIT 1];
         hphase.Project__c = project.id;
         hphase.Name = 'Test';
        
@@ -313,15 +332,21 @@ public class DocumentServiceTest {
 		List<Document__c> fetchedProjectDoc = DocumentService.getInstance().getDocumentsByParentId(project.Id);
 		List<Document__c> fetchedSODoc = DocumentService.getInstance().getDocumentsByParentId(so.Id);
 		List<Document__c> fetchedUnitDoc = DocumentService.getInstance().getDocumentsByParentId(u.Id);
+        Test.startTest();
 		Document__c fetchedDocs = DocumentService.getInstance().getDocumentByIdBAPP(doc.Id);
 		List<Document__c> fetchedAccDocList = DocumentService.getInstance().getAppDocumentsByParentId(acc.Id);
 		List<Document__c> fetcedConDocList = DocumentService.getInstance().getAppDocumentsByParentId(con.Id);
 		List<Document__c> fetchedHoDocList = DocumentService.getInstance().getDocumentsByParentIdsAndType(new Set<Id>{ho.Id},'SOA',Handover__c.SobjectType);
 		List<Document__c> fetchedProjectDocList = DocumentService.getInstance().getDocumentsByParentIdsAndType(new Set<Id>{project.Id},'FLOOR_PLAN',Project__c.SobjectType);
         DocumentService.getInstance().getDocumentsByParentIdsAndType(new Set<Id>{hphase.Id},'Handover Phase',HandoverPhase__c.SobjectType);
-         DocumentService.getInstance().getLeasingSignDocuments(new Set<Id>{leasingdoc.id},new List<String>{'Test'});
-       
-  
+        DocumentService.getInstance().getLeasingSignDocuments(new Set<Id>{leasingdoc.id},new List<String>{'Test'});
+        DocumentService.getInstance().getDocumentByAccountIdAndName(acc.Id, 'Emirates ID Back');
+        DocumentService.getInstance().getDocumentsWithAttachments(new Set<Id>{ho.Id}, new List<String>{'SOA'});
+        DocumentService.getInstance().getDocumentsOnHandoverWithAttachments(ho.Id);
+        DocumentService.getInstance().getDocumentsByOpportunityId(opp.Id);
+        Map<Id, Map<String, Document__c>> results1 = DocumentService.getInstance().getSalesOrderDocumentsByTypes(new Set<Id>{so.Id}, new List<String>{'SOA'});
+        DocumentService.getInstance().getCaseDocumentsWithFiles(objCase.Id);
+        Test.stopTest();
     }
      @IsTest
     static void testGetDocWithProfileAccess() {
@@ -744,61 +769,4 @@ public class DocumentServiceTest {
         List<ContentVersion> cvInsertedList = DocumentService.getInstance().insertContentVersions(cvList);
         System.assertEquals(false, cvList.isEmpty(), 'ContentVersion list should not be empty');
     }
-    
-    @IsTest
-static void testAdditionalDocumentMethods() {
-
-    DocumentService service = DocumentService.getInstance();
-
-    SalesOrder__c so = [SELECT Id, Account__c FROM SalesOrder__c LIMIT 1];
-    Account acc = [SELECT Id FROM Account LIMIT 1];
-    Contact con = [SELECT Id FROM Contact LIMIT 1];
-    BrokerCommission__c bc = [SELECT Id FROM BrokerCommission__c LIMIT 1];
-    Case cs = [SELECT Id FROM Case LIMIT 1];
-    Unit__c u = [SELECT Id FROM Unit__c LIMIT 1];
-
-    Opportunity opp = new Opportunity(
-        Name = 'Test Opp',
-        StageName = 'Prospecting',
-        CloseDate = Date.today(),
-        AccountId = acc.Id
-    );
-    insert opp;
-
-    // Updated Leasing Order
-    LeasingOrder__c lo = new LeasingOrder__c(
-        Name = 'Test',
-        Unit__c = u.Id,
-        Status__c = 'Cancelled'
-    );
-    insert lo;
-
-    insert new Document__c(LeasingOrder__c = lo.Id, Document_Name__c = 'Leasing Offer');
-    insert new Document__c(LeasingOrder__c = lo.Id, Document_Name__c = 'Leasing Contract - Signed');
-    insert new Document__c(Opportunity__c = opp.Id, Document_Name__c = 'Passport');
-    insert new Document__c(LeasingOrder__c = lo.Id, Document_Name__c = 'Passport');
-    insert new Document__c(Case__c = cs.Id, Document_Name__c = 'Case Doc');
-    insert new Document__c(Contact__c = con.Id, Document_Name__c = 'Contact Doc');
-    insert new Document__c(BrokerCommission__c = bc.Id, Document_Name__c = 'Commission Doc');
-
-    Test.startTest();
-
-    service.getLeasingOfferDocumentsByContractIds(new Set<Id>{lo.Id});
-    service.getLeasingSignedDocumentsByContractIds(new Set<Id>{lo.Id});
-    service.getDocumentsByOpportunityId(opp.Id);
-    service.getDocumentsByLeasingOrderId(lo.Id);
-    service.getRequiredLeasingOrderDocument(lo.Id, 'Passport');
-    service.getLeasingOfferDocumentsByOppIdAndCategory(opp.Id, 'Passport');
-    service.getCaseDocumentsByName(cs.Id, new Set<String>{'Case Doc'});
-    service.getExistingDocumentsByCaseId(new Set<Id>{cs.Id});
-    service.getDocumentByContactIds(new Set<Id>{con.Id});
-    service.getDocumentByContactIds(new Set<Id>());
-    service.getCommissionDocumentsByName(bc.Id, new List<String>{'Commission Doc'});
-    service.getDocumentByParentIdAndType(so.Id, 'SOA');
-    service.getDocumentByParentIdAndType(acc.Id, 'SOA');
-
-    Test.stopTest();
-
-    System.assert(true);
-}
 }

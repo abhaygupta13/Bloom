@@ -40,7 +40,7 @@ public inherited sharing class SalesOrderService {
     private static final string DOC_TYPE_PDF { get { return  'pdf'; } }
     private static final string SALES_ORDER_ADHA_STATUS_DEV_INITIAL_CANCEL { get { return 'DEV_INITIAL_CANCEL'; } }
     private static final string CUSTOMER_SUB_TYPE_STAFF { get { return 'STAFF'; } }
-    private static final string SALES_ORDER_SUB_STATUS_BOOKING_FORM_SIGNED { get { return 'Booking Form Signed'; } }
+    
     
     private static SalesOrderService instance;
     
@@ -76,7 +76,8 @@ public inherited sharing class SalesOrderService {
                 Unit__r.Project__r.ADDCConditionType__c,Unit__r.Project__r.MergedPaidInstallmentConditionType__c,Unit__r.Project__r.RebateConditionType__c,
                 Unit__r.Project__r.DariTitleDeedFeeCondType__c,Unit__r.Project__r.BounceChequeFeeVATApplicable__c,Unit__r.Project__r.ADMFeeCondType__c,
                 IsDraftOrder__c, Unit__r.Project__r.AdditionalADMFeeConditionType__c, Unit__r.Project__r.UAEPassFeeConditionType__c,
-                Unit__r.Project__r.AdminChargesCondType__c, Unit__r.Project__r.UnitCancellationFeesCondType__c,Unit__r.Project__r.ModificationAdvanceFeeCondType__c
+                Unit__r.Project__r.AdminChargesCondType__c, Unit__r.Project__r.UnitCancellationFeesCondType__c,Unit__r.Project__r.ModificationAdvanceFeeCondType__c,
+                Unit__r.Project__r.TammFeeConditionType__c,Unit__r.Project__r.ResaleRenewalFeesCondType__c
                 FROM SalesOrder__c
                 WHERE Id IN :salesOrderIds];
     }
@@ -128,7 +129,7 @@ public inherited sharing class SalesOrderService {
                 SalesOrderReceivedAmountinwords__c, Sales_Order_Installment_Total__c, Sales_Order_Cleared_Amount__c, Sales_Order_Pending_Amount__c, First_Installment_Amount__c, First_Installment_Received_Amount__c, 
                 Opportunity__c, Opportunity__r.BrokerAgencyAccount__c, Opportunity__r.BrokerAgentContact__c, Opportunity__r.BrokerAgentContact__r.Email, Offer__r.Name, PaymentPlan__c, PaymentPlan__r.Name, Unit__c, 
                 Unit__r.Name, Unit__r.UnitNumber__c, Unit__r.Building__c, Unit__r.Project__c, Unit__r.Project__r.City__c, Unit__r.Project__r.ResaleEligibleAmoutPercentage__c, Unit__r.Project__r.HOCEmailTemplateFullyPaid__c, 
-                Unit__r.Project__r.HOCEmailTemplatePartiallyPaid__c, Unit__r.Legal_Status__c, Unit__r.RegistrationDate__c,Unit__r.Status__c
+                Unit__r.Project__r.HOCEmailTemplatePartiallyPaid__c, Unit__r.Legal_Status__c, Unit__r.RegistrationDate__c
                 FROM SalesOrder__c
                 WHERE Id =:salesOrderId];
     }
@@ -153,8 +154,7 @@ public inherited sharing class SalesOrderService {
              Unit__r.BuildingSectionName__r.HandoverAccountInstallment__c, 
              Unit__r.BuildingSectionName__r.PHPPAccountInstallment__c, 
              CustomerDefaultStatus__c, Unit__r.Project__r.DefaultNotificationDays__c, Unit__r.Project__r.AdminFee__c,
-             SellingPrice__c, Resale__c, Service_Charges_Waiver_No_of_Years__c, ServiceChargeWaivedAmount__c,
-             ServiceChargesWaiverStartDate__c, ServiceChargesWaiverEndDate__c, ServiceChargeStartDate__c
+             SellingPrice__c,Resale__c 
              FROM SalesOrder__c WHERE Id IN :salesOrderIdSet]
         );
         /* Map<Id, SalesOrder__c> soMap = new Map<Id, SalesOrder__c>([SELECT Id, Unit__c,Account__c, Drawloop_Next_1__c
@@ -171,9 +171,9 @@ FROM SalesOrder__c WHERE ID IN :salesOrderId]);  */
     
     public List<SalesOrder__c> getUnitRegisteredSalesOrders(Set<Id> salesOrderIds){
         return [Select Id, Name, ProjectArabicName__c, Unit__c, Unit__r.Name, Unit__r.Project__r.Name, Unit__r.Project__c, Unit__r.Project__r.ProjectNameArabic__c, 
-                UnitRegistrationDate__c, Account__c, Account__r.Name, Account__r.PersonEmail, Contact__c, Account__r.PersonContactId,ADM_DLD_Pre_Registered_Date__c
+                UnitRegistrationDate__c, Account__c, Account__r.Name, Account__r.PersonEmail, Contact__c, Account__r.PersonContactId
                 FROM SalesOrder__c 
-                WHERE Id In :salesOrderIds AND ADM_DLD_Pre_Registered_Date__c != null];
+                WHERE Id In :salesOrderIds AND UnitRegistrationDate__c != null];
     }
     
     public List<SalesOrder__c> getSalesOrdersWithDocuments(List<String> salesOrderIds){
@@ -202,7 +202,12 @@ FROM SalesOrder__c WHERE ID IN :salesOrderId]);  */
                 UpgradedFrom__r.SoldDate__c, UpgradedFrom__r.ADM_Fee_Included__c, UpgradedFrom__r.Sales_Price_Excluding_ADM__c, UpgradedFrom__r.NetAmount__c
                 FROM SalesOrder__c WHERE Account__r.CustomerSubType__c != :CUSTOMER_SUB_TYPE_STAFF AND Status__c =: status AND  (SalesManager__c IN :salesManagerIdSet OR Secondary_Sales_Manager__c IN :salesManagerIdSet) AND Resold__c = false AND Resale__c = false AND CALENDAR_YEAR(SoldDate__c) =: selectedYear AND CALENDAR_QUARTER(SoldDate__c) =: selectedQuarter];
     }
-    
+       public SalesOrder__c getSalesOrderByCaseId(Id salesOrderId){   
+        return [SELECT Id, Name,Account__c, Company_Code__c, SAP_Contract_No__c,Sales_Order_Pending_Amount_in_Words_Arab__c,Sales_Order_Pending_Amount__c,IsDefaulted__c, Unit__r.Project__c,Unit__r.Project__r.City__c,Unit__r.Building__c,
+                Status__c, Unit__c,NetAmount__c,Account__r.Legal_Status__c, Unit__r.Name,First_Installment_Received_Amount__c,First_Installment_Amount__c,
+                Account__r.Id,Offer__r.Name,Unit__r.Project__r.ResaleEligibleAmoutPercentage__c, Account__r.Name, Account__r.IsPersonAccount, 
+                Account__r.PersonMobilePhone, Contact__c, Account__r.PersonContactId FROM SalesOrder__c WHERE Id =:salesOrderId];
+    }
     public List<SalesOrder__c> getSalesOrdersWithJointOwner(Set<Id> salesOrderIds){
         return [SELECT Id, Name,AccountName__c,Sales_Price_Excluding_ADM__c,Sales_Order_Received_Amount__c, SalesManager__c,Account__r.RecordType.DeveloperName,Account__r.PersonEmail,Account__r.Salutation,
                 Account__r.FirstName, Account__r.MiddleName, Account__r.LastName, Account__r.Name, Account__r.Title_Arabic__c, Account__r.NameinArabic__c,
@@ -232,8 +237,9 @@ FROM SalesOrder__c WHERE ID IN :salesOrderId]);  */
                 Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.BranchCorporate__c,Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.AccountNumberCorporate__c,Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.SwiftCodeCorporate__c,Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.IBANNoCorporate__c, Sales_Order_Number__c, SellingPrice__c, ProjectName__c, AccountName__c, Virtual_Bank_Account_Number__c, Virtual_Account_IBAN__c, Sales_Order_Cleared_Amount__c, Net_Amount_excl_ADMWaiver__c, Sales_Price_Excluding_ADM__c,ADMFeeWaivedAmount__c,ADMFeeAmount__c,ADM_Fee_Cleared_Amount__c,SoldDate__c,Tax_Percentage__c,
                 Amount_Payable_Excluding_ADM__c,TaxableAmount__c,ADM_Waiver__c,Unit__r.BuildingSectionName__r.BounceChequeAccount__r.BankNameCorporate__c,Unit__r.BuildingSectionName__r.BounceChequeAccount__r.BeneficiaryNameCorporate__c,Unit__r.BuildingSectionName__r.BounceChequeAccount__r.BranchCorporate__c,Unit__r.BuildingSectionName__r.BounceChequeAccount__r.AccountNumberCorporate__c,Unit__r.BuildingSectionName__r.BounceChequeAccount__r.SwiftCodeCorporate__c,Unit__r.BuildingSectionName__r.BounceChequeAccount__r.IBANNoCorporate__c,
                 (SELECT Id,InstallmentDate__c,InstallmentNumber__c,InstallmentAmount__c,Name,InstallmentPercentage__c,PendingAmount__c,LPCAmount__c,Due_Date__c FROM InstallmentLines__r ORDER BY InstallmentNumber__c),
-                (SELECT Id,Name,TypeOfCharge__c,Due_Date__c,Amount__c,PendingAmount__c FROM SalesOrdersOtherCharges__r),
-                (SELECT Id,Name,Date__c,Percentage__c,Amount__c,Status__c,ConditionType__c,InstallmentLine__c,InstallmentLine__r.Name FROM SalesOrderRebates__r ORDER BY Date__c),
+                (SELECT Id,Name,TypeOfCharge__c,Due_Date__c,Amount__c,PendingAmount__c FROM SalesOrdersOtherCharges__r WHERE Status__c != 'Reversed' ORDER BY Due_Date__c ASC),
+                (SELECT Id,Name,Date__c,Percentage__c,Amount__c,Status__c,ConditionType__c,InstallmentLine__c,InstallmentLine__r.Name FROM SalesOrderRebates__r WHERE Status__c != 'Reversed' ORDER BY Date__c ASC),
+                (SELECT Id,Name,SalesOrder__c,Receipt__c,Receipt__r.Name,Amount__c,CreatedDate,Remarks__c,ERPReferenceNo__c,Status__c,IntegrationStatus__c,IntegrationMessage__c FROM SalesOrderRefunds__r ORDER BY CreatedDate ASC),
                 (SELECT Id, Name,ReceiptStatus__c,Receipt_Reference__c,InstallmentLine__r.InstallmentDate__c,InstallmentLine__r.Due_Date__c,InstallmentLine__r.InstallmentNumber__c,InstallmentLine__r.InstallmentAmount__c,InstallmentLine__r.Name,InstallmentLine__r.InstallmentPercentage__c,InstallmentLine__r.PendingAmount__c,InstallmentLine__r.LPCAmount__c,InstallmentAmountOtherChargeAmount__c,Receipt_Type__c, Applied_To__c, Receipt_Number__c, ReceiptAcknowledgementAmount__c,
                  ReceiptAcknowledgement__r.BankName__c,ReceiptAcknowledgement__r.MaturityDate__c,ReceiptAcknowledgement__r.New_Maturity_Date__c,ReceiptAcknowledgement__r.Status__c,ReceiptAcknowledgement__r.Amount__c,DateOfApplication__c,
                  InstallmentNumberOrChargeType__c, AmountApplied__c, InstallmentLine__c, SalesOrderOtherCharges__c,SalesOrderOtherCharges__r.Name,SalesOrderOtherCharges__r.Due_Date__c,SalesOrderOtherCharges__r.TypeOfCharge__c,SalesOrderOtherCharges__r.Amount__c,SalesOrderOtherCharges__r.PendingAmount__c FROM ReceiptAllocations__r WHERE ReceiptStatus__c != 'Reversed' Order By InstallmentNumberOrChargeType__c ASC)
@@ -293,41 +299,31 @@ FROM SalesOrder__c WHERE ID IN :salesOrderId]);  */
     
     public IntegrationRecord__c prepareIntegrationRecord(SalesOrder__c salesOrder){
         Map<String,String> paramsMap = new Map<String,String>();
-        /* Map<String,String> statusValueMappings = new Map<String, String>{
+        Map<String,String> statusValueMappings = new Map<String, String>{
 SALES_ORDER_STATUS_BOOKED => SALES_ORDER_MULE_STATUS_DEV_NEW,
-SALES_ORDER_SUB_STATUS_BOOKING_FORM_SIGNED => SALES_ORDER_MULE_STATUS_DEV_SALES_OFFER_GENERATED,
+                SALES_ORDER_STATUS_RESERVED => SALES_ORDER_MULE_STATUS_DEV_SALES_OFFER_GENERATED,
 SALES_ORDER_STATUS_SOLD => SALES_ORDER_MULE_STATUS_DEV_RESERVATION_AGREEMENT_SIGNED,
 CUSTOMER_SIGNED_SUB_STATUS => SALES_ORDER_MULE_STATUS_DEV_SPA_SIGNED
-};*/
+                };
         IntegrationRecordService integService = IntegrationRecordService.getInstance();
-        //String muleStatus = statusValueMappings.get(salesOrder.SubStatus__c) ?? statusValueMappings.get(salesOrder.Status__c) ?? '' ;
-        String muleStatus;
-        if(salesOrder.Status__c == 'Booked' && salesOrder.SubStatus__c == 'Pending with Sales Manager'){
-            muleStatus = SALES_ORDER_MULE_STATUS_DEV_NEW;
-        }else if(salesOrder.Status__c == 'Booked' && salesOrder.SubStatus__c == 'Booking Forms Signed'){
-            muleStatus = SALES_ORDER_MULE_STATUS_DEV_SALES_OFFER_GENERATED;
-        }else if(salesOrder.Status__c == 'Sold' && salesOrder.SubStatus__c != 'SPA Counter Signed'){
-            muleStatus = SALES_ORDER_MULE_STATUS_DEV_RESERVATION_AGREEMENT_SIGNED;
-        }else if(salesOrder.Status__c == 'Sold' && salesOrder.SubStatus__c == 'SPA Counter Signed'){
-            muleStatus = SALES_ORDER_MULE_STATUS_DEV_SPA_SIGNED;
-        }
-        
-        
-        /*if( (muleStatus == SALES_ORDER_MULE_STATUS_DEV_NEW || muleStatus == SALES_ORDER_MULE_STATUS_DEV_SALES_OFFER_GENERATED) && String.isNotBlank(salesOrder.ADHACancellationReason__c) ){
-muleStatus = SALES_ORDER_ADHA_STATUS_DEV_INITIAL_CANCEL;
-}*/
-        
+        String muleStatus = statusValueMappings.get(salesOrder.SubStatus__c) ?? statusValueMappings.get(salesOrder.Status__c) ?? '' ;
+        if( (muleStatus == SALES_ORDER_MULE_STATUS_DEV_NEW ||
+             muleStatus == SALES_ORDER_MULE_STATUS_DEV_SALES_OFFER_GENERATED) &&
+           String.isNotBlank(salesOrder.ADHACancellationReason__c) ){
+               muleStatus = SALES_ORDER_ADHA_STATUS_DEV_INITIAL_CANCEL ;
+           }
         paramsMap.put('Param1',salesOrder.ADHAApplicationNumber__c);
         paramsMap.put('Param2',muleStatus);
         paramsMap.put('Param3',salesOrder.Opportunity__r?.Lead__c );
         String contentVersionId = '';
         String docName = '';
         for(Document__c doc : salesOrder.Documents__r ){
-            if(salesOrder.Status__c == 'Sold' && salesOrder.SubStatus__c == 'SPA Counter Signed' && doc.DocumentType__r.Type__c == 'SPA - Signed'){
+            if(salesOrder.SubStatus__c == CUSTOMER_SIGNED_SUB_STATUS && salesOrder.Status__c == SALES_ORDER_STATUS_SOLD &&
+               doc.DocumentType__r.Type__c == 'SPA - Signed'){
                 contentVersionId = doc.Content_Version_Id__c; 
                 docName = DOC_NAME_SPA_SIGNED;
                 break ;
-            }else if(salesOrder.Status__c == 'Booked' && salesOrder.SubStatus__c == 'Booking Forms Signed' && doc.DocumentType__r.Type__c == 'Booking Form - Signed'){
+               }else if(salesOrder.Status__c == SALES_ORDER_STATUS_SOLD && doc.DocumentType__r.Type__c == 'Booking Form - Signed'){
                 contentVersionId = doc.Content_Version_Id__c    ;   
                 docName = DOC_NAME_SIGNED_BOOKING_FORM;
                 break ;
@@ -362,7 +358,8 @@ muleStatus = SALES_ORDER_ADHA_STATUS_DEV_INITIAL_CANCEL;
         paramsMap.put('Param30', DOC_TYPE_PDF);
         paramsMap.put('Param31', docName);
         paramsMap.put('Param32', salesOrder.ADHACancellationReason__c);
-        return integService.getIntegrationRecord('SALESORDER_ADHA_INTEGRATION',UPDATE_STR,'','', SALES_ORDER_OBJECT_API_NAME,salesOrder.Id,paramsMap);
+        return integService.getIntegrationRecord('SALESORDER_ADHA_INTEGRATION',UPDATE_STR,'','',
+                                                 SALES_ORDER_OBJECT_API_NAME,salesOrder.Id,paramsMap);
     } 
     
     //Update Sales Orders without trigger
@@ -455,12 +452,6 @@ muleStatus = SALES_ORDER_ADHA_STATUS_DEV_INITIAL_CANCEL;
                 Account__r.Id,Offer__r.Name,Unit__r.Project__r.ResaleEligibleAmoutPercentage__c, Account__r.Name, Account__r.IsPersonAccount, 
                 Account__r.PersonMobilePhone, Contact__c, Account__r.PersonContactId FROM SalesOrder__c WHERE Id =:recordId];
     } 
-     public SalesOrder__c getSalesOrderByCaseId(Id salesorderId){   
-        return [SELECT Id, Name,Account__c, Company_Code__c, SAP_Contract_No__c,Sales_Order_Pending_Amount_in_Words_Arab__c,Sales_Order_Pending_Amount__c,IsDefaulted__c, Unit__r.Project__c,Unit__r.Project__r.City__c,Unit__r.Building__c,
-                Status__c, Unit__c,NetAmount__c,Account__r.Legal_Status__c, Unit__r.Name,First_Installment_Received_Amount__c,First_Installment_Amount__c,
-                Account__r.Id,Offer__r.Name,Unit__r.Project__r.ResaleEligibleAmoutPercentage__c, Account__r.Name, Account__r.IsPersonAccount, 
-                Account__r.PersonMobilePhone, Contact__c, Account__r.PersonContactId FROM SalesOrder__c WHERE Id =:salesorderId];
-    } 
     
     public List<SalesOrder__c> getSalesOrdersByAccountIds(Id accountIds){
         return [SELECT Id,Unit__c,Unit__r.Name,Account__r.Id FROM SalesOrder__c WHERE
@@ -475,16 +466,16 @@ muleStatus = SALES_ORDER_ADHA_STATUS_DEV_INITIAL_CANCEL;
         return [SELECT COUNT() FROM SalesOrder__c WHERE PaymentPlan__c = :paymentPlanId AND Status__c NOT IN :invalidStatus];  
     }
     
-     public List<String> getJointOwnerEmails(Id salesOrderId){
-
-    List<String> emailList = new List<String>();
-
-    List<JointOwner__c> jointOwnerList = [SELECT Id, Email__c FROM JointOwner__c WHERE SalesOrder__c = :salesOrderId AND Email__c != null];
-
-    for(JointOwner__c jo : jointOwnerList){
-        emailList.add(jo.Email__c);
+    public List<String> getJointOwnerEmails(Id salesOrderId){
+        
+        List<String> emailList = new List<String>();
+        
+        List<JointOwner__c> jointOwnerList = [SELECT Id, Email__c FROM JointOwner__c WHERE SalesOrder__c = :salesOrderId AND Email__c != null];
+        
+        for(JointOwner__c jo : jointOwnerList){
+            emailList.add(jo.Email__c);
+        }
+        
+        return emailList;
     }
-
-    return emailList;
-}
 }

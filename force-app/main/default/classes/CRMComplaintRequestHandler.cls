@@ -88,7 +88,7 @@ public class CRMComplaintRequestHandler {
        List<Task> prevTask = activityService.fetchOpenTaskForCase(caseRecord);
        activityService.closeTasks(prevTask);
              ServiceRequestTaskHandler.getInstance().createNewAndCloseCurrentTask(new List<Case>{caseRecord}); 
-            AssignmentRuleHandler.crmComplaintCaseAssignment(new List<Id>{caseRecord.Id});
+          
         }
         
         if (response.get('status') == 'error') {

@@ -16,7 +16,7 @@ public class LeasingRATriggerHelper {
 
         Set<Id> leasingOrderIds = new Set<Id>();
         for (LeasingReceiptAcknowledgment__c lca : newList) {
-            if ((oldMap != null && lca.VerifyDate__c != null /* && lca.VerifyDate__c  != oldMap.get(lca.Id).VerifyDate__c*/) || (oldMap == null && lca.VerifyDate__c != null))
+            if ((oldMap != null && lca.VerifyDate__c != null) || (oldMap == null && lca.VerifyDate__c != null))
                 leasingOrderIds.add(lca.LeasingOrder__c);
         }
 
@@ -33,7 +33,7 @@ public class LeasingRATriggerHelper {
             }
             for (LeasingReceiptAcknowledgment__c lca : newList) {
 
-                if ((oldMap != null && lca.VerifyDate__c != null /*&& lca.VerifyDate__c  != oldMap.get(lca.Id).VerifyDate__c*/) || (oldMap == null && lca.VerifyDate__c != null)) {
+                if ((oldMap != null && lca.VerifyDate__c != null) || (oldMap == null && lca.VerifyDate__c != null)) {
                     Date postingClosureDate = loToPCDateMap.get(lca.LeasingOrder__c);
 
                     if (postingClosureDate != null) {
@@ -77,7 +77,7 @@ public class LeasingRATriggerHelper {
             }
         } else{
             For(LeasingReceiptAcknowledgment__c lca : newMap.values()){
-                if(lca.HoldDate__c == Null && !lca.OnHold__c && !lca.Withdrawal__c && !lca.Replacement__c &&
+                if(lca.HoldDate__c == Null && !lca.OnHold__c && !lca.Withdrawal__c && !lca.Replacement__c && String.isNotBlank(lca.SAPDocumentNumber__c) &&
                 ((lca.MarkDeleteReverse__c != oldMap.get(lca.Id).MarkDeleteReverse__c && lca.MarkDeleteReverse__c)
                 || (lca.ChequeBounced__c != oldMap.get(lca.Id).ChequeBounced__c && lca.ChequeBounced__c))){
                     lca.SendtoSAP__c = true;

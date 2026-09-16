@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Offer_Lines_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Offer_Lines_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to define different offer applied (ADM, SC Waiver, Discount, Reate etc.) based on different conditions when the offer is selected.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>BudgetControl__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Budget Control</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BudgetTaskName__c</fullName>
+        <inlineHelpText>Budget Task Name that this offer line has to be mapped to.</inlineHelpText>
+        <label>Budget Task Name</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>ADM Fee</fullName>
+                    <default>false</default>
+                    <label>ADM Fee</label>
+                </value>
+                <value>
+                    <fullName>Home Maintenance</fullName>
+                    <default>false</default>
+                    <label>Home Maintenance</label>
+                </value>
+                <value>
+                    <fullName>Service Charges</fullName>
+                    <default>false</default>
+                    <label>Service Charges</label>
+                </value>
+                <value>
+                    <fullName>BrokerCommission</fullName>
+                    <default>false</default>
+                    <label>Broker Commission</label>
+                </value>
+                <value>
+                    <fullName>InternalCommission</fullName>
+                    <default>false</default>
+                    <label>Internal Commission</label>
+                </value>
+                <value>
+                    <fullName>Rebates</fullName>
+                    <default>false</default>
+                    <label>Rebates</label>
+                </value>
+                <value>
+                    <fullName>Discounts</fullName>
+                    <default>false</default>
+                    <label>Discounts</label>
+                </value>
+                <value>
+                    <fullName>PM Fee</fullName>
+                    <default>false</default>
+                    <label>PM Fee</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Bulk__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To be checked if the range has to be validated summarizing all the values in the booking</description>
+        <label>Bulk ?</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CustomerType__c</fullName>
+        <label>Customer Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>CORPORATE</fullName>
+                    <default>false</default>
+                    <label>CORPORATE</label>
+                </value>
+                <value>
+                    <fullName>VIP</fullName>
+                    <default>false</default>
+                    <label>VIP</label>
+                </value>
+                <value>
+                    <fullName>DOMESTIC</fullName>
+                    <default>false</default>
+                    <label>DOMESTIC</label>
+                </value>
+                <value>
+                    <fullName>INTERNATIONAL</fullName>
+                    <default>false</default>
+                    <label>INTERNATIONAL</label>
+                </value>
+                <value>
+                    <fullName>STAFF</fullName>
+                    <default>false</default>
+                    <label>STAFF</label>
+                </value>
+                <value>
+                    <fullName>BULK</fullName>
+                    <default>false</default>
+                    <label>BULK</label>
+                </value>
+                <value>
+                    <fullName>NORMAL</fullName>
+                    <default>false</default>
+                    <label>NORMAL</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DiscountType__c</fullName>
+        <label>Discount Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Bulk Discount</fullName>
+                    <default>false</default>
+                    <label>Bulk Discount</label>
+                </value>
+                <value>
+                    <fullName>Corporate Discount</fullName>
+                    <default>false</default>
+                    <label>Corporate Discount</label>
+                </value>
+                <value>
+                    <fullName>Additional Discount</fullName>
+                    <default>false</default>
+                    <label>Additional Discount</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>LeadSource__c</fullName>
+        <label>Lead Source</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>LeadSource</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>LowerBound__c</fullName>
+        <description>Lower bound of the value for the field specified in Range on Field</description>
+        <externalId>false</externalId>
+        <label>Lower Bound</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Nationality__c</fullName>
+        <label>Nationality</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>CountryPicklist</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>NumberOfBedrooms__c</fullName>
+        <externalId>false</externalId>
+        <label>Number Of Bedrooms</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OfferName__c</fullName>
+        <label>Offer Name</label>
+        <referenceTo>OffersPromotions__c</referenceTo>
+        <relationshipLabel>Offers Lines</relationshipLabel>
+        <relationshipName>Offers_Lines</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>OfferOn__c</fullName>
+        <label>Offer On</label>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>OfferType__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Selling Price</fullName>
+                    <default>false</default>
+                    <label>Selling Price</label>
+                </value>
+                <value>
+                    <fullName>Net Amount</fullName>
+                    <default>false</default>
+                    <label>Net Amount</label>
+                </value>
+                <value>
+                    <fullName>Installment</fullName>
+                    <default>false</default>
+                    <label>Installment</label>
+                </value>
+                <value>
+                    <fullName>ADM Fees</fullName>
+                    <default>false</default>
+                    <label>ADM Fees</label>
+                </value>
+                <value>
+                    <fullName>Transfer Charges</fullName>
+                    <default>false</default>
+                    <label>Transfer Charges</label>
+                </value>
+                <value>
+                    <fullName>Service Charges</fullName>
+                    <default>false</default>
+                    <label>Service Charges</label>
+                </value>
+                <value>
+                    <fullName>Home Maintenance Fees</fullName>
+                    <default>false</default>
+                    <label>Home Maintenance Fees</label>
+                </value>
+                <value>
+                    <fullName>Property Management Fees</fullName>
+                    <default>false</default>
+                    <label>Property Management Fees</label>
+                </value>
+                <value>
+                    <fullName>Car Park</fullName>
+                    <default>false</default>
+                    <label>Car Park</label>
+                </value>
+                <value>
+                    <fullName>First Installment</fullName>
+                    <default>false</default>
+                    <label>First Installment</label>
+                </value>
+                <value>
+                    <fullName>Last Installment</fullName>
+                    <default>false</default>
+                    <label>Last Installment</label>
+                </value>
+                <value>
+                    <fullName>Fixed Amount</fullName>
+                    <default>false</default>
+                    <label>Fixed Amount</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Additional Discount</controllingFieldValue>
+                <controllingFieldValue>Rebate</controllingFieldValue>
+                <controllingFieldValue>Commission</controllingFieldValue>
+                <valueName>Selling Price</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Rebate</controllingFieldValue>
+                <valueName>Installment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Voucher</controllingFieldValue>
+                <controllingFieldValue>ADM Waiver</controllingFieldValue>
+                <controllingFieldValue>Commission</controllingFieldValue>
+                <valueName>Fixed Amount</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>ADM Waiver</controllingFieldValue>
+                <valueName>ADM Fees</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Service Charge Waiver</controllingFieldValue>
+                <controllingFieldValue>Waiver</controllingFieldValue>
+                <valueName>Service Charges</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Service Charge Waiver</controllingFieldValue>
+                <controllingFieldValue>Waiver</controllingFieldValue>
+                <valueName>Property Management Fees</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Waiver</controllingFieldValue>
+                <valueName>Transfer Charges</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Waiver</controllingFieldValue>
+                <valueName>Home Maintenance Fees</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>OfferType__c</fullName>
+        <description>Select the offer type that needs to be given with this offer line.</description>
+        <inlineHelpText>Select the offer type that needs to be given with this offer line.</inlineHelpText>
+        <label>Offer Type</label>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Additional Discount</fullName>
+                    <default>false</default>
+                    <label>Additional Discount</label>
+                </value>
+                <value>
+                    <fullName>Rebate</fullName>
+                    <default>false</default>
+                    <label>Rebate</label>
+                </value>
+                <value>
+                    <fullName>Voucher</fullName>
+                    <default>false</default>
+                    <label>Voucher</label>
+                </value>
+                <value>
+                    <fullName>ADM Waiver</fullName>
+                    <default>false</default>
+                    <label>ADM Waiver</label>
+                </value>
+                <value>
+                    <fullName>Commission</fullName>
+                    <default>false</default>
+                    <label>Commission</label>
+                </value>
+                <value>
+                    <fullName>Service Charge Waiver</fullName>
+                    <default>false</default>
+                    <label>Service Charge Waiver</label>
+                </value>
+                <value>
+                    <fullName>Waiver</fullName>
+                    <default>false</default>
+                    <label>Waiver</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>OfferValueType__c</fullName>
+        <label>Offer Value Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>OfferOn__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>%</fullName>
+                    <default>false</default>
+                    <label>%</label>
+                </value>
+                <value>
+                    <fullName>AED</fullName>
+                    <default>false</default>
+                    <label>AED</label>
+                </value>
+                <value>
+                    <fullName>Years</fullName>
+                    <default>false</default>
+                    <label>Year/s</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Last Installment</controllingFieldValue>
+                <controllingFieldValue>Selling Price</controllingFieldValue>
+                <controllingFieldValue>Net Amount</controllingFieldValue>
+                <controllingFieldValue>Installment</controllingFieldValue>
+                <controllingFieldValue>ADM Fees</controllingFieldValue>
+                <controllingFieldValue>First Installment</controllingFieldValue>
+                <valueName>%</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Fixed Amount</controllingFieldValue>
+                <controllingFieldValue>Transfer Charges</controllingFieldValue>
+                <controllingFieldValue>Car Park</controllingFieldValue>
+                <valueName>AED</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Service Charges</controllingFieldValue>
+                <controllingFieldValue>Home Maintenance Fees</controllingFieldValue>
+                <controllingFieldValue>Property Management Fees</controllingFieldValue>
+                <valueName>Years</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>OfferValue__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Please provide number of years for all the waivers like PM, ADM, SC etc.
+Please provide the percentage for discounts &amp; rebate
+Please provide the amount for Vouchers, Premium, Points etc.</inlineHelpText>
+        <label>Offer Value</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RangeOnField__c</fullName>
+        <externalId>false</externalId>
+        <label>Range on Field</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ResidentStatus__c</fullName>
+        <label>Resident Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Resident</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>Non Resident</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>UnitModel__c</fullName>
+        <label>Unit Model</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>UnitModel</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>UnitType__c</fullName>
+        <label>Unit Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>UnitType</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Unit__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Unit</label>
+        <referenceTo>Unit__c</referenceTo>
+        <relationshipLabel>Offers Lines</relationshipLabel>
+        <relationshipName>OffersLinesUnit</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>UpperBound__c</fullName>
+        <externalId>false</externalId>
+        <label>Upper Bound</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VoucherName__c</fullName>
+        <externalId>false</externalId>
+        <label>Voucher Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Offer Lines</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Unit__c</columns>
+        <columns>UnitModel__c</columns>
+        <columns>OfferType__c</columns>
+        <columns>OfferValue__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>OL{0000000}</displayFormat>
+        <label>Offer Lines Name</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Offers Lines</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>NewFromDocument</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Import</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>PrintableListView</excludedStandardButtons>
+        <searchResultsAdditionalFields>OfferName__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Description__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Bulk__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OfferOn__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OfferType__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>DiscountType__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>OfferValue__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ResidentStatus__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Unit__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

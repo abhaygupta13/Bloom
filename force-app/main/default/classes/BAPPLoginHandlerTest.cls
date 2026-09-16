@@ -48,7 +48,6 @@ private class BAPPLoginHandlerTest {
         insert new List<User__c>{
             new User__c(
                 Name = 'Active User',
-                Username__c = 'test@1.com',
                 Azure_UserId__c = 'valid_token',
                 Is_Azure_Active__c = true,
                 IsActive__c = true,
@@ -57,7 +56,6 @@ private class BAPPLoginHandlerTest {
             ),
             new User__c(
                 Name = 'Inactive User',
-                Username__c = 'test@2.com',
                 Azure_UserId__c = 'inactive_token',
                 Is_Azure_Active__c = false,
                 IsActive__c = false,
@@ -66,7 +64,6 @@ private class BAPPLoginHandlerTest {
             ),
             new User__c(
                 Name = 'Blacklisted User',
-                Username__c = 'test@3.com',
                 Azure_UserId__c = 'blacklisted_token',
                 Is_Azure_Active__c = false,
                 IsActive__c = false,
@@ -75,7 +72,6 @@ private class BAPPLoginHandlerTest {
             ),
             new User__c(
                 Name = 'User No Contact',
-                Username__c = 'test@4.com',
                 Azure_UserId__c = 'no_contact_token',
                 Is_Azure_Active__c = true,
                 IsActive__c = true,

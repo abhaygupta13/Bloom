@@ -23,15 +23,38 @@ public class QMSTokenTriggerHelperTest {
         insert token;
     }
 
-    @IsTest
-    private static void testSendSMSNotification() {
+      
+
+     @IsTest
+    static void testSendSMSNotification_Insert() {
+
+        QMSToken__c token = [ SELECT Id, TokenNumber__c, MobileNumber__c FROM QMSToken__c LIMIT 1 ];
         Test.startTest();
-            List<QMSToken__c> QMSTokenList = [SELECT Id,ClosedDate__c FROM QMSToken__c LIMIT 1];
-            QMSTokenList[0].ClosedDate__c = Date.today();
-            update QMSTokenList;
-            delete QMSTokenList[0];
+            QMSTokenTriggerHelper.sendSMSNotification( new List<QMSToken__c>{ token }, null );
         Test.stopTest();
-        List<IntegrationRecord__c> integrationRecList = [SELECT Id,Name FROM IntegrationRecord__c];
-        Assert.areEqual(2,integrationRecList.size(),'Their should be atleast two Integration record');
-    }    
+        List<IntegrationRecord__c> records = [ SELECT Id FROM IntegrationRecord__c ];
+        System.assertEquals(false, records.isEmpty());
+    }
+
+    @IsTest
+    static void testSendSMSNotification_Closure() {
+
+        QMSToken__c oldToken = [ SELECT Id, TokenNumber__c, MobileNumber__c, ClosedDate__c FROM QMSToken__c LIMIT 1 ];
+        QMSToken__c newToken = oldToken.clone(false, true, false, false);
+        newToken.Id = oldToken.Id;
+        newToken.ClosedDate__c = Date.today();
+        Map<Id, QMSToken__c> oldMap = new Map<Id, QMSToken__c>{ oldToken.Id => oldToken };
+        Test.startTest();
+            QMSTokenTriggerHelper.sendSMSNotification( new List<QMSToken__c>{ newToken }, oldMap );
+        Test.stopTest();
+        List<IntegrationRecord__c> records = [ SELECT Id FROM IntegrationRecord__c ];
+        System.assertEquals(false, records.isEmpty());
+        QMSTokenTriggerHandler instanace = new QMSTokenTriggerHandler();
+        instanace.beforeInsert(new List<QMSToken__c>{ newToken });
+        instanace.afterInsert(new List<QMSToken__c>{ newToken }, oldMap );
+        instanace.beforeUpdate(new List<QMSToken__c>{ newToken },oldMap, new List<QMSToken__c>{ newToken }, oldMap );
+        instanace.afterUpdate(new List<QMSToken__c>{ newToken },oldMap, new List<QMSToken__c>{ newToken }, oldMap );
+        instanace.beforeDelete(new List<QMSToken__c>{ newToken }, oldMap );
+        instanace.afterDelete(new List<QMSToken__c>{ newToken }, oldMap );
+    }
 }

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Manage all the fields required during booking/reservation/EOI on Account and/or Contact and Opportunity.</description>
+    <fields>
+        <fullName>FieldAPI__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Field API</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>IsActive</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ObjectName__c</fullName>
+        <description>Object to which fields belongs to.</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>Object to which fields belongs to.</inlineHelpText>
+        <label>Object Name</label>
+        <required>true</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Account</fullName>
+                    <default>true</default>
+                    <label>Account</label>
+                </value>
+                <value>
+                    <fullName>Opportunity</fullName>
+                    <default>false</default>
+                    <label>Opportunity</label>
+                </value>
+                <value>
+                    <fullName>Contact</fullName>
+                    <default>false</default>
+                    <label>Contact</label>
+                </value>
+                <value>
+                    <fullName>InstallmentLines__c</fullName>
+                    <default>false</default>
+                    <label>InstallmentLines__c</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Process__c</fullName>
+        <description>Process for which the field is mandatory.</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>Process for which the field is mandatory.</inlineHelpText>
+        <label>Process</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Booking/Reservation</fullName>
+                    <default>true</default>
+                    <label>Booking/Reservation</label>
+                </value>
+                <value>
+                    <fullName>EOI</fullName>
+                    <default>false</default>
+                    <label>EOI</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>RecordType__c</fullName>
+        <description>Record Type for which the field needs to be validated.</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>Record Type for which the field needs to be validated.</inlineHelpText>
+        <label>Record Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Person Account</fullName>
+                    <default>false</default>
+                    <label>Person Account</label>
+                </value>
+                <value>
+                    <fullName>Organization Account</fullName>
+                    <default>false</default>
+                    <label>Organization Account</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Validation Field</label>
+    <listViews>
+        <fullName>All_C</fullName>
+        <columns>MasterLabel</columns>
+        <columns>ObjectName__c</columns>
+        <columns>DeveloperName</columns>
+        <columns>NamespacePrefix</columns>
+        <columns>FieldAPI__c</columns>
+        <columns>RecordType__c</columns>
+        <columns>IsActive__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All_C</label>
+    </listViews>
+    <pluralLabel>Validation Fields</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

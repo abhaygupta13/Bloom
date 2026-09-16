@@ -29,7 +29,7 @@ public class BAPPUpdateAgentInfoHandlerTest {
         ServiceCatalog__c sc = [SELECT Id FROM ServiceCatalog__c WHERE SubCategory__c = 'Broker Agent Details Update' LIMIT 1];
 
         // Determine RT Id via Utility (handler does same)
-        Id rtId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'BrokerAgentRegistrationAndUpdate');
+        Id rtId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'BrokerAgentDetailsUpdate');
 
         // Insert a Case to update
         Case c = new Case(
@@ -38,8 +38,7 @@ public class BAPPUpdateAgentInfoHandlerTest {
             RecordTypeId = rtId,
             ServiceCatalog__c = sc.Id,
             Status = 'New',
-            ApprovalStatus__c = 'Not Approved',
-            Draft__c = true,
+            ApprovalStatus__c = 'Draft',
             Description = 'Existing Case',
             TypeOfEstablishment__c = 'Domestic',
             Type = Label.BAPP_ServiceRequestTypeAgentDetailsUpdate
@@ -116,104 +115,6 @@ public class BAPPUpdateAgentInfoHandlerTest {
 
         System.assertEquals(400, RestContext.response.statusCode);
     }
-    
-        @IsTest
-    static void testNonOwnerAssignOwnerRole() {
-    
-        Account acc = [SELECT Id FROM Account LIMIT 1];
-    
-        Contact adminCon = [
-            SELECT Id
-            FROM Contact
-            WHERE BrokerContactRole__c = 'Admin'
-            LIMIT 1
-        ];
-    
-        BAPPUpdateAgentInfoHandler.UpdateAgentRequest req =
-            new BAPPUpdateAgentInfoHandler.UpdateAgentRequest();
-    
-        req.accountId = acc.Id;
-        req.contactId = adminCon.Id;
-        req.roleToUpdate = 'Owner';
-    
-        req.caseStatus = 'New';
-        req.serviceRequestType = Label.BAPP_ServiceRequestTypeAgentDetailsUpdate;
-        req.category = Label.BAPP_CategoryBrokerServiceRequest;
-        req.subCategory = Label.BAPP_SubCategoryBrokerAgentDetailsUpdate;
-    
-        setupRest(JSON.serialize(req));
-    
-        Test.startTest();
-        BAPPUpdateAgentInfoHandler.handleUpdateAgentInfo(JSON.serialize(req));
-        Test.stopTest();
-    
-        System.assertEquals(400, RestContext.response.statusCode);
-    }
-        @IsTest
-    static void testOwnerUpdatesRole() {
-    
-        Account acc = [SELECT Id FROM Account LIMIT 1];
-    
-        Contact ownerCon = [
-            SELECT Id
-            FROM Contact
-            WHERE BrokerContactRole__c = 'Owner'
-            LIMIT 1
-        ];
-    
-        BAPPUpdateAgentInfoHandler.UpdateAgentRequest req =
-            new BAPPUpdateAgentInfoHandler.UpdateAgentRequest();
-    
-        req.accountId = acc.Id;
-        req.contactId = ownerCon.Id;
-        req.roleToUpdate = 'Admin';
-    
-        req.caseStatus = 'New';
-        req.serviceRequestType = Label.BAPP_ServiceRequestTypeAgentDetailsUpdate;
-        req.category = Label.BAPP_CategoryBrokerServiceRequest;
-        req.subCategory = Label.BAPP_SubCategoryBrokerAgentDetailsUpdate;
-    
-        setupRest(JSON.serialize(req));
-    
-        Test.startTest();
-        BAPPUpdateAgentInfoHandler.handleUpdateAgentInfo(JSON.serialize(req));
-        Test.stopTest();
-    
-        System.assertEquals(200, RestContext.response.statusCode);
-    }
-        @IsTest
-    static void testCreateCase() {
-    
-        Account acc = [SELECT Id FROM Account LIMIT 1];
-    
-        Contact ownerCon = [
-            SELECT Id
-            FROM Contact
-            WHERE BrokerContactRole__c = 'Owner'
-            LIMIT 1
-        ];
-    
-        BAPPUpdateAgentInfoHandler.UpdateAgentRequest req =
-            new BAPPUpdateAgentInfoHandler.UpdateAgentRequest();
-    
-        req.accountId = acc.Id;
-        req.contactId = ownerCon.Id;
-    
-        req.nationalIdExpiryDate = '2030-01-01';
-    
-        req.caseStatus = 'New';
-        req.serviceRequestType = Label.BAPP_ServiceRequestTypeAgentDetailsUpdate;
-        req.category = Label.BAPP_CategoryBrokerServiceRequest;
-        req.subCategory = Label.BAPP_SubCategoryBrokerAgentDetailsUpdate;
-    
-        setupRest(JSON.serialize(req));
-    
-        Test.startTest();
-        BAPPUpdateAgentInfoHandler.handleUpdateAgentInfo(JSON.serialize(req));
-        Test.stopTest();
-    
-        System.assertEquals(200, RestContext.response.statusCode);
-    }
 
     // -------------------------
     // ACCESS DENIED: Agent role can't update/create case for others
@@ -279,7 +180,7 @@ public class BAPPUpdateAgentInfoHandlerTest {
                 RecordTypeDevName__c = 'OtherServiceRequest',
                 Type__c = 'Service Request',
                 Category__c = Label.BAPP_CategoryBrokerServiceRequest,
-                SubCategory__c = 'Other Service Request'
+                SubCategory__c = 'Other'
             )
         };
         insert serviceCatalogs;

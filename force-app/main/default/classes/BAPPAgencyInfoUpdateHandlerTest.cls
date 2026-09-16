@@ -10,10 +10,10 @@ public class BAPPAgencyInfoUpdateHandlerTest {
         Account acc = new Account(Name = 'Test Broker Agency');
         insert acc;
         
-        Contact conAgent = createContact(acc, 'Agent', true, 'Agent Contact', 'conAgent@invalid.com');
-        Contact conAdmin = createContact(acc, 'Admin', true, 'Admin Contact', 'conAdmin@invalid.com');
-        Contact conPartner = createContact(acc, 'Partner', true, 'Partner Contact', 'conPartner@invalid.com');
-        Contact conNullRole = createContact(acc, null, true, 'Null Role Contact', 'conNullRole@invalid.com');
+        Contact conAgent = createContact(acc, 'Agent', true, 'Agent Contact');
+        Contact conAdmin = createContact(acc, 'Admin', true, 'Admin Contact');
+        Contact conPartner = createContact(acc, 'Partner', true, 'Partner Contact');
+        Contact conNullRole = createContact(acc, null, true, 'Null Role Contact');
     }
     
     @IsTest
@@ -67,11 +67,11 @@ public class BAPPAgencyInfoUpdateHandlerTest {
         Contact con = [SELECT Id FROM Contact WHERE BrokerContactRole__c = 'Admin' LIMIT 1];
         ServiceCatalog__c sc = [SELECT Id FROM ServiceCatalog__c WHERE SubCategory__c = 'Broker Agency Details Update' LIMIT 1];
         System.debug('sc--->'+sc);
-        Id rtId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'BrokerAgencyDetailsUpdate');
+        Id rtId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'Broker_Agency_Details_Update');
         
         // Ensure document types exist
-        createDocumentType('Case', 'Other', 'BrokerAgencyDetailsUpdate', 'Admin;Agent', 'Domestic');
-        createDocumentType('Case', 'Other', 'BrokerAgencyDetailsUpdate', 'Admin;Agent', 'International');
+        createDocumentType('Case', 'Other', 'Broker_Agency_Details_Update', 'Admin;Agent', 'Domestic');
+        createDocumentType('Case', 'Other', 'Broker_Agency_Details_Update', 'Admin;Agent', 'International');
         
         // === Insert Case (existing one for update) ===
         Case c = new Case(
@@ -79,8 +79,8 @@ public class BAPPAgencyInfoUpdateHandlerTest {
             ContactId = con.Id,
             RecordTypeId = rtId,
             ServiceCatalog__c = sc.Id,
-            Status = 'Draft',
-            ApprovalStatus__c = 'Not Approved',
+            Status = 'New',
+            ApprovalStatus__c = 'Draft',
             Description = 'Existing',
             TypeOfEstablishment__c = 'Domestic'
         );
@@ -173,7 +173,7 @@ public class BAPPAgencyInfoUpdateHandlerTest {
         insert acc2;
         
         // Contact belongs to acc1
-        Contact con = new Contact(LastName = 'Mismatch', AccountId = acc1.Id, email = 'conEmail@invalid.com');
+        Contact con = new Contact(LastName = 'Mismatch', AccountId = acc1.Id);
         insert con;
         
         // Prepare input with different accountId (acc2)
@@ -209,7 +209,6 @@ public class BAPPAgencyInfoUpdateHandlerTest {
         Contact con = new Contact(
             LastName = 'NoRole',
             AccountId = acc.Id,
-            email = 'testemail@invalid.com',
             BrokerContactRole__c = null
         );
         insert con;
@@ -264,21 +263,20 @@ public class BAPPAgencyInfoUpdateHandlerTest {
 
         Contact con = new Contact(
             LastName = 'Test Contact',
-            AccountId = acc.Id,
-            email = 'testcontactemail@invalid.com'
+            AccountId = acc.Id
         );
         insert con;
         
         ServiceCatalog__c sc = [SELECT Id FROM ServiceCatalog__c WHERE SubCategory__c = 'Broker Agency Details Update' LIMIT 1];
-        Id rtId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'BrokerAgencyDetailsUpdate');
+        Id rtId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'Broker_Agency_Details_Update');
 
         Case c = new Case(
             AccountId = acc.Id,
             ContactId = con.Id,
             RecordTypeId = rtId,
             ServiceCatalog__c = sc.Id,
-            Status = 'Draft',
-            ApprovalStatus__c = 'Not Approved',
+            Status = 'New',
+            ApprovalStatus__c = 'Draft',
             Description = 'Existing',
             TypeOfEstablishment__c = 'Domestic'
         );
@@ -317,10 +315,10 @@ public class BAPPAgencyInfoUpdateHandlerTest {
         List<ServiceCatalog__c> serviceCatalogs = new List<ServiceCatalog__c>{
             new ServiceCatalog__c(
                 Name = 'Service-Request-Other-Service-Request',
-                RecordTypeDevName__c = 'BrokerGeneralServiceRequest',
+                RecordTypeDevName__c = 'OtherServiceRequest',
                 Type__c = 'Service Request',
                 Category__c = 'Broker Service Request',
-                SubCategory__c = 'Other Service Request'
+                SubCategory__c = 'Other'
             ),
                 new ServiceCatalog__c(
                     Name = 'Service-Request-Delayed-Commission-Payment',
@@ -338,14 +336,14 @@ public class BAPPAgencyInfoUpdateHandlerTest {
                 ),
                 new ServiceCatalog__c(
                     Name = 'Service-Request-Broker-Agent-Details-Update',
-                    RecordTypeDevName__c = 'BrokerAgentRegistrationAndUpdate',
+                    RecordTypeDevName__c = 'BrokerAgentDetailsUpdate',
                     Type__c = 'Service Request',
                     Category__c = 'Broker Service Request',
                     SubCategory__c = 'Broker Agent Details Update'
                 ),
                 new ServiceCatalog__c(
                     Name = 'Service-Request-Broker-Agency-Details-Update',
-                    RecordTypeDevName__c = 'BrokerAgencyDetailsUpdate',
+                    RecordTypeDevName__c = 'Broker_Agency_Details_Update',
                     Type__c = 'Service Request',
                     Category__c = 'Broker Service Request',
                     SubCategory__c = 'Broker Agency Details Update'
@@ -354,13 +352,12 @@ public class BAPPAgencyInfoUpdateHandlerTest {
                     insert serviceCatalogs;
     }
     
-    private static Contact createContact(Account acc, String role, Boolean isActive, String lastName, String email) {
+    private static Contact createContact(Account acc, String role, Boolean isActive, String lastName) {
         Contact con = new Contact(
             LastName = lastName,
             AccountId = acc.Id,
             BrokerContactRole__c = role,
             IsActive__c = isActive,
-            Email = email,
             RecordTypeId = Utility.getRecordTypeIdByDevName(Contact.SObjectType, 'Broker')
         );
         insert con;

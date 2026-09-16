@@ -18,6 +18,8 @@ public class SalesInvoicePostingBatch implements Database.Batchable<SObject>, Sc
                                          SalesOrder__r.Company_Code__c,
                                          SAP_Condition_Type__c, SAP_Document_No__c,
                                          RevisedDate__c,InstallmentAmount__c,
+                                          InstallmentNumber__c,
+                                         SalesOrder__r.ADM_Fee_Included__c, Installment_Amount_Excluding_ADM__c,
                                          InstallmentDate__c FROM InstallmentLines__c
                                          WHERE SalesOrder__r.Unit__r.Project__r.EnableSalesInvoicePosting__c = true
                                          AND Due_Date__c = :salesInvoicePostingDate 
@@ -34,7 +36,11 @@ public class SalesInvoicePostingBatch implements Database.Batchable<SObject>, Sc
             paramMap.put('Param2', objInstallmentLine.SalesOrder__r.SAP_Contract_No__c);
             paramMap.put('Param3', objInstallmentLine.SAP_Condition_Type__c);
             paramMap.put('Param4', String.valueOf(objInstallmentLine.RevisedDate__c != null ? objInstallmentLine.RevisedDate__c : objInstallmentLine.InstallmentDate__c));
-            paramMap.put('Param5', String.valueOf(objInstallmentLine.InstallmentAmount__c));
+            if(objInstallmentLine.SalesOrder__r.ADM_Fee_Included__c && Integer.valueOf(objInstallmentLine.InstallmentNumber__c) == 1){
+                paramMap.put('Param5', String.valueOf(objInstallmentLine.Installment_Amount_Excluding_ADM__c));
+            }else{
+                paramMap.put('Param5', String.valueOf(objInstallmentLine.InstallmentAmount__c));
+            }
             paramMap.put('Param6', '0');
             paramMap.put('Param15', 'X');
             objIntegrationRecordList.add(objIntegrationRecordService.getIntegrationRecord('Update','InstallmentLines__c',String.valueOf(objInstallmentLine.id),paramMap));

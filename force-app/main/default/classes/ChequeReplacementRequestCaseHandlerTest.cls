@@ -142,7 +142,7 @@ public class ChequeReplacementRequestCaseHandlerTest {
         
         // Act
         ChequeReplacementRequestCaseHandler handler = ChequeReplacementRequestCaseHandler.getInstance();
-        Case createdCase = handler.createCaseRecord(salesOrder, serviceCatalog, salesOrder.Account__c, salesOrder.Unit__c, 'Service Request', 'Description of case', 'Phone');
+        Case createdCase = handler.createCaseRecord(salesOrder, serviceCatalog, salesOrder.Account__c, salesOrder.Unit__c, 'Service Request', 'Description of case', 'Phone', false);
 
         // Assert
         //System.assertNotEquals(null, createdCase, 'Case should be created');

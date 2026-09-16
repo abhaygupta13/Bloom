@@ -62,7 +62,6 @@ public class PaymentPlanCreditInvoicePDFHandler {
         
         description   = 'Credit Note for rental period (Full installment period) ' + invoiceDate + ' to ' + EndDate;
         amountInWords = AmountToWordsUtil.convert(totalAmount);
-        companyName = pps.LeasingOrder__r.Project__r.Leasing_Company__r.Name;
         bankAccName = pps.LeasingOrder__r.Project__r.LeasingBankAccount__r.BeneficiaryNameCorporate__c;
         bankName = pps.LeasingOrder__r.Project__r.LeasingBankAccount__r.BankNameCorporate__c;
         accNumber = pps.LeasingOrder__r.Project__r.LeasingBankAccount__r.AccountNumberCorporate__c;

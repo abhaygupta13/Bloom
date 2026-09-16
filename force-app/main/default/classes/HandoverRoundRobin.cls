@@ -22,7 +22,6 @@ public class HandoverRoundRobin {
                                             WHERE Sobject__c=: HandoverConstants.HANDOVER_SOBJECT AND Team__c =:teamToBeAssigned AND Project__c =: newHOList[0].Project__c
                                             LIMIT 1];
                       
-            System.debug('rrList ::::: '+ rrList);
             List<Round_Robin_User__c> rruUpdate = new List<Round_Robin_User__c>();
             if(rrList.size()>0){ 
                 lastAssigned = Integer.ValueOf(rrList[0].Assigned_To__c);  
@@ -54,7 +53,7 @@ public class HandoverRoundRobin {
                                         break;
                                     }
                                 }
-                            }
+                            }   
                             if(teamToBeAssigned == HandoverConstants.TEAM_CRM && String.isNotBlank(assignedUserId)){                             
                                 HO.CRM_Team_Assigned_User__c = assignedUserId;
                               
@@ -72,8 +71,6 @@ public class HandoverRoundRobin {
                             handOverListToUpdate.add(HO);
                      
                     }
-
-                    System.debug('handOverListToUpdate ::::: '+ handOverListToUpdate);
                    
                     if(!handOverListToUpdate.isEmpty()){
                         update handOverListToUpdate;

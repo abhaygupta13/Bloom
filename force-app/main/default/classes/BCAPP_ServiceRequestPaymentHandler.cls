@@ -51,6 +51,7 @@ public without sharing class BCAPP_ServiceRequestPaymentHandler {
             payment = OnlinePaymentService.getInstance().insertPayment(payment);
             Unit__c unit = UnitService.fetchUnitDetailsById(unitId)[0];
             BankAccount__c ba = fetchBankDetailsByCompanyCode(unit.Project__r.BankAccount__c);
+
             // Lines (amount per request) (DML via service)
             List<OnlinePaymentLineItem__c> lineItems = new List<OnlinePaymentLineItem__c>();
             for (Object obj : requestObjs) {
@@ -66,7 +67,7 @@ public without sharing class BCAPP_ServiceRequestPaymentHandler {
 
         } catch (Exception ex) {
             BCAPP_WebServiceHelper.makeServerErrorResponse(new Map<String, Object>{
-                'errorMessage' => 'Error in submitPayment: ' + ex.getMessage() + ' | Line: ' + ex.getLineNumber() + ' | Stack: ' + ex.getStackTraceString()
+                'errorMessage' => 'Error in submitPayment: ' + ex.getMessage()
             });
         }
     }
@@ -124,7 +125,7 @@ public without sharing class BCAPP_ServiceRequestPaymentHandler {
 
         } catch (Exception ex) {
             BCAPP_WebServiceHelper.makeServerErrorResponse(new Map<String, Object>{
-                'errorMessage' => 'Error in updatePaymentStatus: ' + ex.getMessage() + ' | Line: ' + ex.getLineNumber() + ' | Stack: ' + ex.getStackTraceString()
+                'errorMessage' => 'Error in updatePaymentStatus: ' + ex.getMessage()+'-'+ex.getLineNumber()
             });
         }
     }

@@ -96,7 +96,7 @@ public with sharing class BCAPP_PushNotificationAPI implements Queueable, Databa
                                                         }
                         
                         request.setBody(JSON.serialize(payload));
-                        System.debug('---->>>>JSON.serialize(payload)--->>>'+JSON.serialize(payload));
+                        
                         try {
                             HttpResponse response = http.send(request);
                             if (response.getStatusCode() == 200 || response.getStatusCode() == 202) {

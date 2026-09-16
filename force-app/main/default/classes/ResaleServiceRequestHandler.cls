@@ -262,7 +262,8 @@ public inherited sharing class ResaleServiceRequestHandler {
         else if (step == '4') {
             resaleHandler.cancelAndReassignSalesOrdersForResale(caseRecord);
         }
-        else if (step == 'Final') {
+         else if (step == 'Final') {
+            resaleHandler.updateBrokerDetails(caseRecord);
             resaleHandler.cancelAndReassignSalesOrdersForResale(caseRecord);
         }
            
@@ -420,6 +421,10 @@ public inherited sharing class ResaleServiceRequestHandler {
                 cancelAndReassignSalesOrdersForResale(caseRecord);
                 
             }
+            if (caseRecord.Step__c == 'Final') {
+               updateBrokerDetails(caseRecord);
+          
+        }
             handleNextSteps(caseRecord); 
         }
         
@@ -505,6 +510,10 @@ public inherited sharing class ResaleServiceRequestHandler {
             if(caseRecord.Step__c =='5') {
                 resaleUnderConstructionObj.cancelAndReassignSalesOrdersForResale(caseRecord);
             }
+               if (caseRecord.Step__c == 'Final') {
+            resaleUnderConstructionObj.updateBrokerDetails(caseRecord);
+          
+        }
             
             handleNextSteps(caseRecord);
         }
@@ -1375,11 +1384,11 @@ private Boolean validatePersonDetails(Case caseObj) {
         else{
             newOppty.name =  caseRec.NewCustomerAccount__r.name;
             newOppty.AccountId = caseRec.NewCustomerAccount__c;
-        newOppty.StageName ='New';
+            newOppty.StageName ='New';
             newOppty.Name =   caseRec.NewCustomerAccount__r.name;   
-            }
+        }
         
-        
+             
         newOppty.LeadChannel__c = caseRec.Sales_Order__r.Opportunity__r.LeadChannel__c;
         newOppty.BrokerAgencyAccount__c = caseRec.Sales_Order__r.Opportunity__r.BrokerAgencyAccount__c;
         
@@ -1400,7 +1409,7 @@ private Boolean validatePersonDetails(Case caseObj) {
         SalesOrder__c ordr = new SalesOrder__c ();
         
         if(caseRec.NewCustomerAccount__c!=null){
-            ordr.Account__c  =   caseRec.NewCustomerAccount__c; 
+           ordr.Account__c  =   caseRec.NewCustomerAccount__c; 
         }
 
 
@@ -1606,6 +1615,7 @@ private Boolean validatePersonDetails(Case caseObj) {
         }
         Boolean hasBothInstallments = !handoverInstallments.isEmpty() && !posthandoverInstallments.isEmpty();
         Boolean isUnderConstruction = caseRec.ProjectStatus__c == 'Under Construction';
+        Boolean giftingResale = caseRec.TypeOfResale__c == 'Gifting';
         
         Boolean isValidResaleType =
             caseRec.TypeOfResale__c == 'Resale' ||
@@ -1628,7 +1638,7 @@ private Boolean validatePersonDetails(Case caseObj) {
         if (hasBothInstallments) {
             
             Boolean shouldProcessPHPP =
-                !isUnderConstruction || (isUnderConstruction && isValidResaleType);
+                !isUnderConstruction && !giftingResale|| (isUnderConstruction && isValidResaleType);
             
             if (shouldProcessPHPP) {
                 if (isDataMigration) {
@@ -2491,11 +2501,11 @@ charges.add(new ChargeWrapper(project.AdminFee__c* 0.01, 'ADM Admin Fee'));
         ReceiptAcknowledgementService receiptService = ReceiptAcknowledgementService.getInstance();
         ReceiptAllocationService allocService =  ReceiptAllocationService.getInstance();
         SalesOrderOtherChargesService otherChargeService = SalesOrderOtherChargesService.getInstance();
-        //List<InstallmentLines__c> resaleIns = lineService.getPaidInstallmentLinesBySalesOrder(new Set<Id>{caseObj.NewSalesOrder__c});
-        List<InstallmentLines__c> resaleIns =  lineService.getOldInstallmentLinesBySalesOrderandDueDate(new Set<Id>{caseObj.NewSalesOrder__c});          
-        List<ReceiptAcknowledgement__c> receipts =  receiptService.getAllReceiptAcknowledgementBySalesOrders(new Set<Id>{caseObj.NewSalesOrder__c});
-        List<ReceiptAllocation__c> allocs =  allocService.getAllReceiptAllocationBySO(caseObj.NewSalesOrder__c);
-        List<SalesOrderOtherCharges__c> charges = otherChargeService.getSalesOrderChargesBySalesOrder(caseObj.NewSalesOrder__c);
+       //List<InstallmentLines__c> resaleIns = lineService.getPaidInstallmentLinesBySalesOrder(new Set<Id>{caseObj.NewSalesOrder__c});
+       List<InstallmentLines__c> resaleIns =  lineService.getOldInstallmentLinesBySalesOrderandDueDate(new Set<Id>{caseObj.NewSalesOrder__c});          
+       List<ReceiptAcknowledgement__c> receipts =  receiptService.getAllReceiptAcknowledgementBySalesOrders(new Set<Id>{caseObj.NewSalesOrder__c});
+       List<ReceiptAllocation__c> allocs =  allocService.getAllReceiptAllocationBySO(caseObj.NewSalesOrder__c);
+       List<SalesOrderOtherCharges__c> charges = otherChargeService.getSalesOrderChargesBySalesOrder(caseObj.NewSalesOrder__c);
         Date todayDate = Date.today();
         DateTime dt = DateTime.newInstance(todayDate.year(), todayDate.month(), todayDate.day()+1);
         
@@ -2529,8 +2539,6 @@ charges.add(new ChargeWrapper(project.AdminFee__c* 0.01, 'ADM Admin Fee'));
             ordrToUpdate.Send_to_SAP__c = true;
             ordrToUpdate.Resale__c = true;
             ordrToUpdate.Name = caseObj.Unit__r.name + '-' + formattedDate;
-            //ordrToUpdate.Handover__c = Old Sales Order --> Handover__c;
-            updateHandoverDetails(caseObj);
             if(caseObj.TypeOfResale__c == 'Resale' 
                ||caseObj.TypeOfResale__c =='Swap'){
                    ordrToUpdate.ServiceChargeStartDate__c  =System.today().addDays(2);    
@@ -2590,31 +2598,30 @@ charges.add(new ChargeWrapper(project.AdminFee__c* 0.01, 'ADM Admin Fee'));
         }
         
         if(!Test.isRunningTest()){
-            if (!ordersToUpdate.isEmpty()) {
-                salesOrderService.updateSalesOrdersWithoutTrigger(ordersToUpdate);
-                //updateHandoverRecords(new List<Case>{caseObj});
-            }
-            if (!oppToUpdate.isEmpty()){
-                oppServiceObj.updateOpportunitiesWithoutTrigger(oppToUpdate);
-            }
-            if(!insToUpdate.isEmpty()){
-                lineService.updateInstallmentLines(insToUpdate);
-            }
-            if(!receiptsToUpdate.isEmpty()){
-                receiptService.updateReceiptAcknowledgementWithoutTrigger(receiptsToUpdate);
-            }
-            if(!allocsToUpdate.isEmpty()){
-                allocService.updateReceiptAllocationsWithoutTrigger(allocsToUpdate);
-                
-            }
-            if(!chargesToUpdate.isEmpty()){
-                otherChargeService.upsertSalesOrderOtherCharges(chargesToUpdate);
-            }
-            if(!unitToUpdate.isEmpty()){
-                UnitService.getInstance().updateUnitsWithoutTrigger(unitToUpdate);
-            } 
+        if (!ordersToUpdate.isEmpty()) {
+            salesOrderService.updateSalesOrdersWithoutTrigger(ordersToUpdate);
+        }
+        if (!oppToUpdate.isEmpty()){
+            oppServiceObj.updateOpportunitiesWithoutTrigger(oppToUpdate);
+        }
+        if(!insToUpdate.isEmpty()){
+            lineService.updateInstallmentLines(insToUpdate);
+        }
+        if(!receiptsToUpdate.isEmpty()){
+            receiptService.updateReceiptAcknowledgementWithoutTrigger(receiptsToUpdate);
+        }
+         if(!allocsToUpdate.isEmpty()){
+             allocService.updateReceiptAllocationsWithoutTrigger(allocsToUpdate);
+            
+        }
+         if(!chargesToUpdate.isEmpty()){
+            otherChargeService.upsertSalesOrderOtherCharges(chargesToUpdate);
+        }
+        if(!unitToUpdate.isEmpty()){
+            UnitService.getInstance().updateUnitsWithoutTrigger(unitToUpdate);
+        } 
+        }
         }   
-    }   
     
     // Define a wrapper to hold amount + charge type
     public class ChargeWrapper {
@@ -2631,7 +2638,7 @@ charges.add(new ChargeWrapper(project.AdminFee__c* 0.01, 'ADM Admin Fee'));
         return (value1 == null ? 0 : value1) + (value2 == null ? 0 : value2);
     }
     
-    /* public void updateHandoverRecords(List<Case> caseList) {
+    public void updateHandoverRecords(List<Case> caseList) {
 
         if(caseList == null || caseList.isEmpty()){
             return;
@@ -2652,7 +2659,7 @@ charges.add(new ChargeWrapper(project.AdminFee__c* 0.01, 'ADM Admin Fee'));
         }
 
     
-        List<Handover__c> handoversToUpdate = [SELECT Id,Sales_Order__c,Account__c,Sub_Status__c,Previous_HO_Status__c,Is_Property_keys_given__c FROM Handover__c WHERE Sales_Order__c IN :salesOrderCaseMap.keySet() AND Sub_Status__c = 'Under Resale' AND Is_Property_keys_given__c = false];
+    List<Handover__c> handoversToUpdate = [SELECT Id,Sales_Order__c,Account__c,Sub_Status__c,Previous_HO_Status__c,Is_Property_keys_given__c FROM Handover__c WHERE Sales_Order__c IN :salesOrderCaseMap.keySet() AND Sub_Status__c = 'Under Resale'];//AND Is_Property_keys_given__c = false];
 
         for(Handover__c handover : handoversToUpdate){
         Case relatedCase = salesOrderCaseMap.get(handover.Sales_Order__c);
@@ -2668,9 +2675,8 @@ charges.add(new ChargeWrapper(project.AdminFee__c* 0.01, 'ADM Admin Fee'));
         if(!handoversToUpdate.isEmpty()){
             HandoverService.getInstance().updateHandoversWithoutTrigger(handoversToUpdate);
         }
-        return;
-    } */
-
+     return;
+    }
     public void cancelDraftSalesOrders(Set<Id> caseIds) {
         CaseService caseObjService = CaseService.getInstance();
         List<Case> caseList = caseObjService.getCaseByIds(caseIds);
@@ -2687,8 +2693,27 @@ charges.add(new ChargeWrapper(project.AdminFee__c* 0.01, 'ADM Admin Fee'));
              SalesOrderService.getInstance().updateSalesOrdersWithoutTrigger(ordersToUpdate); 
         
     }
-    public void updateHandoverDetails(Case caseObj){
+     public void updateBrokerDetails(Case caseObj) {
         
+        SalesOrderService salesOrderService = SalesOrderService.getInstance();
+        List<SalesOrder__c> ordersToUpdate = new List<SalesOrder__c>();
+        
+        if (caseObj.NewSalesOrder__c != null) {
+            SalesOrder__c ordrToUpdate = new SalesOrder__c();
+            ordrToUpdate.Id = caseObj.NewSalesOrder__c;
+            if(caseObj.Broker_Agent__c!=null)
+                ordrToUpdate.ResaleBrokerAgent__c = caseObj.Broker_Agent__c;
+            if(caseObj.BrokerAgency__c!=null)
+                ordrToUpdate.ResaleBrokerAgency__c = caseObj.BrokerAgency__c;
+            ordersToUpdate.add(ordrToUpdate);
+        }
+        if(!Test.isRunningTest()){
+            if (!ordersToUpdate.isEmpty()) {
+                salesOrderService.updateSalesOrdersWithoutTrigger(ordersToUpdate);
+                
+            }   
+        }       
     }
+
     
 }

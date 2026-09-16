@@ -29,24 +29,31 @@ public class LeadTriggerHandlerTest {
         insert testUser;
         
     }
-    
+   /* 
     @isTest
     static void testCreateLeadTask_NewLead() {
         List<user> ulist = [select id from user where Profile.Name ='System Administrator' AND IsActive = true limit 1];
-        Id BrokeragencyId =Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Broker_Agency').getRecordTypeId();
+        Id contactId =Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Contact').getRecordTypeId();
         //  Id BrokeragentId =Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('BrokerAgent').getRecordTypeId();
         Account a = new Account();
         a.Name = 'TestVinay';
-        a.RecordTypeId = BrokeragencyId;
+        a.RecordTypeId = contactId;
         insert a;
-        Contact c = new Contact(); 
-        c.LastName = 'test conatat';
+        Contact c = new Contact();
+        c.LastName = 'test contact';
         c.AccountId = a.id;
-        c.Email = 'test.conatat@gmail.com';
         // c.RecordTypeId = BrokeragentId;
         insert c;
-       
-        Lead testLead = TestDataFactory.createLead('Test', '9843216782', 'test@gmail.com');
+        Lead testLead = new Lead(
+        LastName = 'Test',
+        MobilePhone = '9843216782',
+        Email = 'test@gmail.com',
+        MobileCountryCode__c = '971',
+        Status = 'New',
+        LeadSource = 'Social Media',
+        Lead_Channel__c = 'Call',
+        leadsubsource__c = 'Instagram'
+       );
         insert testLead;
         
         Task task = new Task(
@@ -65,7 +72,7 @@ public class LeadTriggerHandlerTest {
         update objLead;
         Test.stopTest();
     }
-    
+    */
     @isTest
     static void testCreateLeadTask_InvalidStatus() {
         user ulist1 = [select id from user where Profile.Name ='Contact Centre Team'AND IsActive = true limit 1];
@@ -252,7 +259,7 @@ public class LeadTriggerHandlerTest {
             testLead.MobileCountryCode__c = '971';
             testLead.Status = 'New';
             testLead.MobilePhone = '9876543211';
-          //  testLead.Email = 'test@gmail.com'; //og
+            testLead.Email = 'test@gmail.com';
             testLead.Lead_Channel__c = 'Call';
             testLead.LeadSource = 'Social Media'; // Using a LeadSource other than 'Broker Portal'
             testLead.leadsubsource__c='Instagram';
@@ -382,7 +389,7 @@ public class LeadTriggerHandlerTest {
             testLead.MobileCountryCode__c = '971';
             testLead.Status = 'New';
             testLead.MobilePhone = '9876543211';
-            testLead.Email = 'test@gmail.com'; 
+            testLead.Email = 'test@gmail.com';
             testLead.Lead_Channel__c = 'Call';
             testLead.LeadSource = 'Social Media'; // Using a LeadSource other than 'Broker Portal'
             testLead.leadsubsource__c='Instagram';

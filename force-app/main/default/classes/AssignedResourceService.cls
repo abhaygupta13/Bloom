@@ -1,13 +1,22 @@
-public class AssignedResourceService {
+/*
+*********************************************************
+Apex Class Name    : AssignedResourceService
+Created Date       : Dec 26, 2024
+@description       : This class handles record retrieval and DML operations.
+Modification Log   :
+Ver   Date         : Author                               Modification
+4.8   10-09-2026   : Abhay Gupta                          Optimised the class and removed uncommented code
+*********************************************************
+*/
+public inherited sharing class AssignedResourceService {
     private AssignedResourceService() {}
     
     public static AssignedResourceService getInstance() {
         return new AssignedResourceService();
     }
     
-    //Insert AssignedResource without trigger
     public List<AssignedResource> insertAssignedResourcesWithoutTrigger(List<AssignedResource> AssignedResourceList){
-        if(AssignedResourceList != NULL && !AssignedResourceList.isEmpty()){
+        if(AssignedResourceList != null && !AssignedResourceList.isEmpty()){
             //AssignedResourceTriggerHandler.isTriggerDisabled = true;
             insert AssignedResourceList;
             //AssignedResourceTriggerHandler.isTriggerDisabled = false;
@@ -15,17 +24,15 @@ public class AssignedResourceService {
         return AssignedResourceList;
     }
     
-    //Insert AssignedResource with trigger
-    public List<AssignedResource> insertAssignedResourcesWithTrigger(List<AssignedResource> AssignedResourceList){
-        if(AssignedResourceList != NULL && !AssignedResourceList.isEmpty()){
+    public List<AssignedResource> insertAssignedResources(List<AssignedResource> AssignedResourceList) {
+        if(AssignedResourceList != null && !AssignedResourceList.isEmpty()){
             insert AssignedResourceList;
         }
         return AssignedResourceList;
     }
     
-    //Update AssignedResource without trigger
     public List<AssignedResource> updateServiceAppointmentsWithoutTrigger(List<AssignedResource> AssignedResourceList){
-        if(AssignedResourceList != NULL && !AssignedResourceList.isEmpty()){
+        if(AssignedResourceList != null && !AssignedResourceList.isEmpty()) {
             //AssignedResourceTriggerHandler.isTriggerDisabled = true;
             update AssignedResourceList;
             //AssignedResourceTriggerHandler.isTriggerDisabled = false;
@@ -33,20 +40,14 @@ public class AssignedResourceService {
         return AssignedResourceList;
     }    
     
-    //Update AssignedResource
-    public List<AssignedResource> updateUnits(List<AssignedResource> AssignedResourceList){
-        if(AssignedResourceList != NULL && !AssignedResourceList.isEmpty()){
+    public List<AssignedResource> updateUnits(List<AssignedResource> AssignedResourceList) {
+        if(AssignedResourceList != null && !AssignedResourceList.isEmpty()){
             update AssignedResourceList;
         }
         return AssignedResourceList;
     } 
     
-     //get AssignedResources by ServiceAppointmentIds
-    public List<AssignedResource> getAssignedResourcesByServiceAppointmentSetIds(Set<Id> serviceAppointmentIds){
-        if(!serviceAppointmentIds.isEmpty() && serviceAppointmentIds.size() > 0){
-            return [SELECT Id, ServiceResource.RelatedRecordId,ServiceResource.ResourceType, ServiceAppointmentId, ServiceResource.Is_Contractor__c FROM
-                    AssignedResource WHERE ServiceAppointmentId IN :serviceAppointmentIds];            
-        } 
-        return null;
+    public List<AssignedResource> getAssignedResourcesByServiceAppointmentIds(Set<Id> serviceAppointmentIds) {
+        return [SELECT Id, ServiceResource.RelatedRecordId,ServiceResource.ResourceType, ServiceAppointmentId, ServiceResource.Is_Contractor__c FROM AssignedResource WHERE ServiceAppointmentId IN :serviceAppointmentIds];
     }
 }

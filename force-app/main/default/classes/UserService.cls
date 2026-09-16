@@ -36,25 +36,25 @@ public inherited sharing class UserService {
     }
     
     public User getUsersById(Id userId) {
-        return [SELECT Id, Name, Name_In_Arabic__c, ProfileId, Title, Email, Phone FROM User WHERE Id =: userId];
+        return [SELECT Id, Name, Name_In_Arabic__c, ProfileId, BusinessHour__c, Title, Email, Phone, ClickToDialSkill__c FROM User WHERE Id =: userId];
     }
     
     public List<User> getUsersByIds(Set<Id> userIds) {
-        return [SELECT Id, Name, ProfileId, Title, Email, BusinessHour__c FROM User WHERE Id IN :userIds AND isActive = true ORDER BY Name];
+        return [SELECT Id, Name, ProfileId, Title, BusinessHour__c, Email FROM User WHERE Id IN :userIds];
     }
-    
+
     public List<User> getUsersByEmails(Set<String> salesManagerEmailSet){
-        return [SELECT Id, Name, ProfileId, Email,BusinessHour__c, isActive  FROM User WHERE Email IN :salesManagerEmailSet];
+        return [SELECT Id, Name, ProfileId, Email, BusinessHour__c, isActive FROM User WHERE Email IN :salesManagerEmailSet];
     }
-    
-    public List<User> getUsersByEmail(String userEmail){
+     public List<User> getUsersByEmail(String userEmail){
         return [SELECT Id FROM User WHERE Email = :userEmail AND isActive = true LIMIT 1];
     }
     
+    
     public List<User> getUserIdByUserName(String userName) {
-        
+
         return [SELECT Id FROM User WHERE username=:userName];
-        
+    
     }
     //BAPP
     public List<User> getUsersByTitles(List<String> titles) {
@@ -73,15 +73,9 @@ public inherited sharing class UserService {
             AND Email != null
         ];
     }
-    
+
     public Map<Id, User> getActiveUsersByIds(Set<Id> userIds) {
-        Map<Id, User> userMap = new Map<Id, User>([SELECT Id, Email FROM User WHERE Id = :userIds AND isActive = true]);
+        Map<Id, User> userMap = new Map<Id, User>([SELECT Id, Name, Email, Phone, MobilePhone FROM User WHERE Id = :userIds AND isActive = true]);
         return userMap;
     }
-    
-    //PRASHANT 
-    public User getHeadOfSalesUser(){
-        return [SELECT Id, Name, Email FROM User WHERE Profile.Name='Executive Director Sales CRM & Leasing' AND IsActive=true LIMIT 1 ];
-    }
-    
 }

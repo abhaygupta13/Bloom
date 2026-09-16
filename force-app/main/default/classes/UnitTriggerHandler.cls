@@ -32,6 +32,7 @@ public class UnitTriggerHandler implements ITriggerHandler{
     
     public void afterUpdate(List<sObject> newList, Map<Id, sObject> newMap,  List<sObject> oldList, Map<Id, sObject> oldMap) {
         UnitTriggerHelper.assignHandoverToHOAgent((List<Unit__c>) newList, (Map<Id,Unit__c>) oldMap);
+        UnitTriggerHelper.handleAfterUpdate((List<Unit__c>) newList, (Map<Id,Unit__c>) oldMap);
         UserService objUserService = UserService.getInstance();
         if(!objUserService.hasBypassIntegration()){
             UnitTriggerHelper.doPushToGIS((List<Unit__c>)newList,(Map<Id,Unit__c>)oldMap);

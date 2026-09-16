@@ -40,7 +40,6 @@ export default class LeaseTerminationArchive extends LightningElement {
 
     get terminationTypeOptions() {
         return [
-           
             { label: 'Break- Lease', value: 'Break- Lease' },
             { label: 'No reason given', value: 'No reason given' },
             { label: 'Low budget', value: 'Low budget' },

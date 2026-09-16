@@ -79,7 +79,7 @@ public class CustomerSegmentationBatchTest {
         installmentLinesList.add(installmentLines2);
         insert installmentLinesList;
     }
-    /*@isTest
+    @isTest
     static void testCategoryWithGoldCustomers() {
         List<SalesOrder__c> salesorderList = [SELECT ID,Name,Account__r.Name,Account__c,SoldDate__c, Account__r.Segment__c,NetAmount__c,
                                               Account__r.Salutation,LastModifiedDate FROM SalesOrder__c ];
@@ -147,7 +147,7 @@ public class CustomerSegmentationBatchTest {
         for(Account acc : accListUpdated){
             Assert.areEqual('Platinum', acc.Segment__c, 'Expected Platinum category Customer');
         }
-    }*/
+    }
     
     @isTest
     static void testCategorySegmentationBatchSchedular() {

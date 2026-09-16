@@ -116,7 +116,7 @@ private class NotificationServiceTest {
         Test.startTest();
 
             NotificationService.sendBellNotification(recipients, c.Id);
-        
+        	NotificationService.getInstance().sendCustomNotification(new Set<Id>{c.Id});
 
         Test.stopTest();
 

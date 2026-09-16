@@ -49,7 +49,7 @@ public class UnitRegReminderEmailBatch implements Database.Batchable<SObject>, D
         
         for(Unit__c unit : [SELECT Id, Name, RegistrationDate__c, ADMPlotNumber__c, Active_Sales_Order__r.DocumentUploadedDate__c, Active_Sales_Order__c, Active_Sales_Order__r.Name,
                             Project__r.Name,Project__r.ProjectRegistrationDate__c, Project__c, ProjectName__c, Active_Sales_Order__r.Account__r.Name,Active_Sales_Order__r.FundReleaseRequested__c,
-                            Project__r.LastProjectRegEmailReminder__c, Active_Sales_Order__r.FundMovedToGRDate__c
+                            Project__r.LastProjectRegEmailReminder__c, Active_Sales_Order__r.FundMovedToGRDate__c, Active_Sales_Order__r.FundMovedtoGR__c
                             FROM Unit__c 
                             WHERE Project__c IN :scope AND Active_Sales_Order__c != null
                            ]){
@@ -59,7 +59,7 @@ public class UnitRegReminderEmailBatch implements Database.Batchable<SObject>, D
                                    }
                                    projectWithNotRegisteredUnits.get(unit.Project__c).add(unit);  
                                }  
-                               if (unit.Active_Sales_Order__r.FundReleaseRequested__c == true && unit.Active_Sales_Order__r.FundMovedToGRDate__c == null) {   
+                               if (unit.Active_Sales_Order__r.FundReleaseRequested__c == true && unit.Active_Sales_Order__r.FundMovedToGRDate__c == null && unit.Active_Sales_Order__r.FundMovedtoGR__c != 'Completed') {   
                                    if (!projectWithFundNotMovedUnits.containsKey(unit.Project__c)) {
                                        projectWithFundNotMovedUnits.put(unit.Project__c, new List<Unit__c>());
                                    }
@@ -71,7 +71,7 @@ public class UnitRegReminderEmailBatch implements Database.Batchable<SObject>, D
                                    }
                                    projectWithDocumentUploadedUnits.get(unit.Project__c).add(unit);  
                                }  
-                               if(unit.Active_Sales_Order__r.FundReleaseRequested__c == true && unit.Active_Sales_Order__r.FundMovedToGRDate__c != null && unit.Active_Sales_Order__r.FundMovedToGRDate__c == yesterdayDateValue){
+                               if(unit.Active_Sales_Order__r.FundReleaseRequested__c == true && unit.Active_Sales_Order__r.FundMovedToGRDate__c != null && unit.Active_Sales_Order__r.FundMovedToGRDate__c == yesterdayDateValue && unit.Active_Sales_Order__r.FundMovedtoGR__c == 'Completed'){
                                    if (!projectWithFundMovedDate.containsKey(unit.Project__c)) {
                                        projectWithFundMovedDate.put(unit.Project__c, new List<Unit__c>());
                                    }
@@ -84,7 +84,7 @@ public class UnitRegReminderEmailBatch implements Database.Batchable<SObject>, D
         if(projectWithFundMovedDate != null && !projectWithFundMovedDate.isEmpty()){
             sendProjectWithFundMovedDateEmail(projectWithFundMovedDate);
             sendGRNotificationEmail(projectWithFundMovedDate);
-        } 
+        }
     }
     
     // Post-batch processing

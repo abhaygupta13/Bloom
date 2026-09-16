@@ -78,7 +78,7 @@ private class LeasingEjariReminderBatchSchedulerTest {
         
         Unit__c unitRec = new Unit__c(Name='TestU', LeasingAnnualRent__c=10000,
                                       Project__c= objProject.Id, Building__c = building.Id, LeasingUnitStatus__c = 'Available',
-                                      IsAvailableforLeasing__c = true, PropertyUsage__c = 'Commercial' );
+                                      IsAvailableforLeasing__c = true, PropertyUsage__c = 'Residential' );
         insert unitRec;
         
         LeasingOfferPromotion__c objLeasingOfferPromo = new LeasingOfferPromotion__c();
@@ -111,8 +111,9 @@ private class LeasingEjariReminderBatchSchedulerTest {
             AdminFee__c = 100,
             FitOutSecurityDeposit__c  = 300,
             EjariTawtheeqFee__c = 200,
-            Status__c = 'Pending'
-            
+            Status__c = 'Pending',
+            LeasingSAPContractId__c = 'R10000001',
+            IntegrationStatus__c = 'Success'
         );
         insert lo;
         

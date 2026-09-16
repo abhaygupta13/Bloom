@@ -211,4 +211,280 @@ public class SalesReceiptControllerTest {
         Test.stopTest();
         SalesReceiptController.SalesOrderWrapper sow = controller.salesOrderWrapperList[0];
     }
+    @IsTest
+static void testGenerateAndAttachPdf() {
+
+    // -------------------------------------------------
+    // 1. Project
+    // -------------------------------------------------
+    Project__c proj = new Project__c(
+        Name = 'Test Project PDF'
+    );
+    insert proj;
+
+
+    // -------------------------------------------------
+    // 2. Building Section
+    // -------------------------------------------------
+    BuildingSection__c bs = new BuildingSection__c(
+        Name = 'BS PDF',
+        BuildingSectionCode__c = 'BS-PDF',
+        Project__c = proj.Id
+    );
+    insert bs;
+
+
+    // -------------------------------------------------
+    // 3. Unit
+    // -------------------------------------------------
+    Unit__c unit = new Unit__c(
+        Name = 'Unit PDF',
+        Status__c = 'Booked',
+        UnitType__c = 'Apartment',
+        BuildingSectionName__c = bs.Id,
+        Project__c = proj.Id,
+        PropertyUsage__c = 'Residential',
+        SellingPrice__c = 700000,
+        StartDate__c = Date.today().addDays(-5),
+        EndDate__c = Date.today().addDays(5)
+    );
+    insert unit;
+
+
+    // -------------------------------------------------
+    // 4. Payment Plan
+    // -------------------------------------------------
+    PaymentPlan__c plan = new PaymentPlan__c(
+        Name = 'PDF Plan',
+        Unit__c = unit.Id,
+        Description__c = 'PDF Test Plan',
+        Classification__c =
+            Constants.PAYMENT_PLAN_TYPE_STANDARD
+    );
+    insert plan;
+
+
+    // -------------------------------------------------
+    // 5. Payment Installment
+    // -------------------------------------------------
+    PaymentInstallments__c pi = new PaymentInstallments__c(
+        PaymentPlan__c = plan.Id,
+        InstallmentNumber__c = 1,
+        InstallmentPercentage__c = 25,
+        Description__c = 'PDF Installment'
+    );
+    insert pi;
+
+
+    // -------------------------------------------------
+    // 6. Person Account
+    // -------------------------------------------------
+    Id paRT = Schema.SObjectType.Account
+        .getRecordTypeInfosByDeveloperName()
+        .get('PersonAccount')
+        .getRecordTypeId();
+
+    Account acc = new Account(
+        RecordTypeId = paRT,
+        LastName = 'PDF Customer',
+        PersonEmail = 'pdf@test.com'
+    );
+    insert acc;
+
+
+    // -------------------------------------------------
+    // 7. Opportunity
+    // -------------------------------------------------
+    Opportunity opp = new Opportunity(
+        Name = 'PDF Opportunity',
+        StageName = 'New',
+        CloseDate = Date.today(),
+        AccountId = acc.Id,
+        WinReason__c = 'Bloom Brand'
+    );
+    insert opp;
+
+
+    // -------------------------------------------------
+    // 8. Offer
+    // -------------------------------------------------
+    OffersPromotions__c offer =
+        new OffersPromotions__c(
+            Name = 'PDF Offer',
+            OfferName__c = 'PDF Offer',
+            Project__c = proj.Id,
+            ADM_Fee_Included__c = false,
+            StartDate__c = Date.today().addDays(-1),
+            EndDate__c = Date.today().addDays(5)
+        );
+    insert offer;
+
+
+    // -------------------------------------------------
+    // 9. Sales Order
+    // -------------------------------------------------
+    SalesOrder__c so = new SalesOrder__c(
+        Name = 'SO-PDF-1',
+        Unit__c = unit.Id,
+        Account__c = acc.Id,
+        Opportunity__c = opp.Id,
+        Status__c = 'Booked',
+        Offer__c = offer.Id
+    );
+    insert so;
+
+
+    // -------------------------------------------------
+    // 10. Installment Line
+    // -------------------------------------------------
+    InstallmentLines__c inst =
+        new InstallmentLines__c(
+            SalesOrder__c = so.Id,
+            PaymentPlan__c = plan.Id,
+            PaymentInstallments__c = pi.Id,
+            InstallmentAmount__c = 100000,
+            InstallmentPercentage__c = 25,
+            InstallmentNumber__c = 1,
+            Description__c = 'PDF Test'
+        );
+    insert inst;
+
+
+    // -------------------------------------------------
+    // 11. Receipt Acknowledgement
+    // -------------------------------------------------
+    ReceiptAcknowledgement__c ack =
+        new ReceiptAcknowledgement__c(
+            SalesOrder__c = so.Id,
+            Opportunity__c = opp.Id,
+            PaymentType__c = 'Cheque',
+            Amount__c = 90000,
+            Status__c = 'Cleared',
+            MaturityDate__c = Date.today(),
+            ReferenceNumber__c = '567890'
+        );
+    insert ack;
+
+
+    // -------------------------------------------------
+    // 12. Receipt Allocation
+    // -------------------------------------------------
+    ReceiptAllocation__c ra =
+        new ReceiptAllocation__c(
+            SalesOrder__c = so.Id,
+            Account__c = acc.Id,
+            ReceiptAcknowledgement__c = ack.Id,
+            InstallmentLine__c = inst.Id,
+            AmountApplied__c = 90000
+        );
+    insert ra;
+
+
+    // -------------------------------------------------
+    // 13. Set VF Page
+    // -------------------------------------------------
+    Test.setCurrentPage(Page.SalesReceiptPDFPage);
+
+    ApexPages.currentPage()
+        .getParameters()
+        .put('id', so.Id);
+
+
+    // -------------------------------------------------
+    // 14. Call method
+    // -------------------------------------------------
+    Test.startTest();
+
+    String contentVersionId =
+        SalesReceiptController.generateAndAttachPdf(
+            so.Id
+        );
+
+    Test.stopTest();
+
+
+    // -------------------------------------------------
+    // 15. Validate returned ContentVersion Id
+    // -------------------------------------------------
+    System.assertNotEquals(
+        null,
+        contentVersionId,
+        'ContentVersion Id should be returned.'
+    );
+
+
+    // -------------------------------------------------
+    // 16. Validate ContentVersion
+    // -------------------------------------------------
+    ContentVersion cv = [
+        SELECT Id,
+               Title,
+               PathOnClient,
+               ContentDocumentId,
+               VersionData
+        FROM ContentVersion
+        WHERE Id = :contentVersionId
+        LIMIT 1
+    ];
+
+    System.assertEquals(
+        'Receipt-Acknowledgment-' + so.Name,
+        cv.Title,
+        'Incorrect receipt file title.'
+    );
+
+    System.assertEquals(
+        'Receipt-Acknowledgment-' + so.Name + '.pdf',
+        cv.PathOnClient,
+        'Incorrect receipt file name.'
+    );
+
+    System.assertNotEquals(
+        null,
+        cv.ContentDocumentId,
+        'ContentDocumentId should be created.'
+    );
+
+    System.assertNotEquals(
+        null,
+        cv.VersionData,
+        'PDF content should be created.'
+    );
+
+
+    // -------------------------------------------------
+    // 17. Validate ContentDocumentLink
+    // -------------------------------------------------
+    ContentDocumentLink cdl = [
+        SELECT Id,
+               ContentDocumentId,
+               LinkedEntityId,
+               ShareType,
+               Visibility
+        FROM ContentDocumentLink
+        WHERE ContentDocumentId = :cv.ContentDocumentId
+        AND LinkedEntityId = :so.Id
+        LIMIT 1
+    ];
+
+    System.assertEquals(
+        cv.ContentDocumentId,
+        cdl.ContentDocumentId
+    );
+
+    System.assertEquals(
+        so.Id,
+        cdl.LinkedEntityId
+    );
+
+    System.assertEquals(
+        'V',
+        cdl.ShareType
+    );
+
+    System.assertEquals(
+        'AllUsers',
+        cdl.Visibility
+    );
+}
 }

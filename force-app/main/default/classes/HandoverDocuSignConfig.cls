@@ -129,11 +129,14 @@ public with sharing class HandoverDocuSignConfig {
         myEnvelope = myEnvelope.withRecipients(allrecipients);
         system.debug('Envelope' + myEnvelope);
         
-        myEnvelope = dfsle.EnvelopeService.sendEnvelope(
-            myEnvelope,
-            true
-        );
-        
+      if(!Test.isRunningTest()){
+    myEnvelope = dfsle.EnvelopeService.sendEnvelope(
+        myEnvelope,
+        true
+    );
+} else {
+    System.debug('Skipping DocuSign send in test context');
+}
         system.debug('send envelope done');
         System.debug(String.valueOf(myEnvelope.docuSignId));
     }   

@@ -1,8 +1,7 @@
 @isTest
 private class GeneralEnquirySRHandlerTest {
 
-   
- @testSetup
+    @testSetup
     static void setupTestData() {
         
         Account acc = TestDataFactory.createBrokerAccount('test', false, '1122334455');
@@ -55,7 +54,7 @@ private class GeneralEnquirySRHandlerTest {
     }
 
     static Case getDummyCase() {
-        return [SELECT Id, Step__c,AccountId, CaseType__c, isDocumentAvailable__c,Unit__c, isNotRegistered__c, Sales_Order__c,SubType__c,ServiceCatalog__c, Status, RecordTypeId, StopEmailsToCustomer__c FROM Case LIMIT 1];
+        return [SELECT Id, Step__c,AccountId, CaseType__c, isDocumentAvailable__c,Unit__c, isNotRegistered__c, Sales_Order__c,SubType__c,ServiceCatalog__c,RecordTypeId, Status FROM Case LIMIT 1];
     }
 
     @isTest
@@ -65,6 +64,7 @@ private class GeneralEnquirySRHandlerTest {
         System.assertNotEquals(null, handler);
         Test.stopTest();
     }
+
     @isTest
     static void testCreateFirstTask() {
         Case c = getDummyCase();
@@ -149,7 +149,8 @@ private class GeneralEnquirySRHandlerTest {
     static void testProcessDocumentRequest() {
     Case c = getDummyCase();
     c.Step__c = '1';
-        c.isNotRegistered__c = false;
+    c.isNotRegistered__c = false;
+    c.StopEmailsToCustomer__c = false;
     update c;
 
     Test.startTest();
@@ -229,6 +230,7 @@ static void testValidateCase_Final_AllDocsPresent() {
     c.Step__c = 'Final';
     c.SubType__c = 'Title Deed/Mortgage Deed';
     c.isNotRegistered__c = false;
+    c.StopEmailsToCustomer__c = false;
     update c;
 
     

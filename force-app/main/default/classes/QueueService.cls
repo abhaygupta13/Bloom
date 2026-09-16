@@ -49,25 +49,4 @@ public class QueueService {
             WHERE GroupId = :groupId
         ];
     }
-    public Boolean isUserMemberOfQueue(
-    String queueDevName,
-    Id userId
-) {
-    Group queue = getGroupByDeveloperNameAndType(
-        queueDevName,
-        'Queue'
-    );
-
-    if (queue == null || userId == null) {
-        return false;
-    }
-
-    return ![
-        SELECT Id
-        FROM GroupMember
-        WHERE GroupId = :queue.Id
-        AND UserOrGroupId = :userId
-        LIMIT 1
-    ].isEmpty();
-}
 }

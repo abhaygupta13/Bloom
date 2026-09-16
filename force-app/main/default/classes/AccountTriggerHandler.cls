@@ -32,8 +32,7 @@ public class AccountTriggerHandler  implements ITriggerHandler{
     }
     
     public void afterUpdate(List<sObject> newList, Map<Id, sObject> newMap,  List<sObject> oldList, Map<Id, sObject> oldMap) {
-        AccountTriggerHelper.handleAfterUpdateFieldUpdates((List<Account>)newList,(Map<Id,Account>)oldMap);
-        AccountTriggerHelper.handleAgencyReactivationOnTradeLicenseUpdate((List<Account>)newList,(Map<Id,Account>)oldMap);
+        AccountTriggerHelper.handleAfterUpdateFieldUpdates((List<Account>)newList,(Map<Id,Account>)oldMap);        
         //Added By Ranjan        
         AccountTriggerHelper.handleSuqurAlWatanDocumentOnUpdate((List<Account>)newList,(Map<Id,Account>)oldMap);
         

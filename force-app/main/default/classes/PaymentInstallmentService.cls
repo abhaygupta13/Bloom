@@ -7,7 +7,7 @@
 * Version       Author      Date             Comment                                                                       
 * 1.0           Dhanraj   04MAY2026        Initial draft 
 *****************************************************************************************************/
-public inherited sharing class PaymentInstallmentService {
+public without sharing class PaymentInstallmentService {
     private static PaymentInstallmentService instance;
     
     public PaymentInstallmentService() {}

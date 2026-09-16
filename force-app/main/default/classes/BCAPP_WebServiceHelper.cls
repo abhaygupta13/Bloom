@@ -11,7 +11,7 @@
 *****************************************************************************************************/
 
 global class BCAPP_WebServiceHelper {
-
+	Public static final String DOC_AVAILABLE = 'Document Available';
 
      public static void createVacationRequest(String requestBodyString) {
 
@@ -1644,34 +1644,12 @@ makeServerErrorResponse(result);
                         contentDocumentIds
                     );
                     Map<Id, ContentVersion> contentVersionMap = new Map<Id, ContentVersion>();
-                    List<ContentDistribution> lstId = new List<ContentDistribution>();
+                    Map<Id, String> mapPublicLink = new Map<Id, String>();
                     System.debug('###$$##' + contentVersions);
-                    
                     for (ContentVersion version : contentVersions) {
-                        ContentDistribution cd = new ContentDistribution();
-                        cd.ContentVersionId = version.Id;
-                        cd.Name = 'My Public Link';
-                        cd.PreferencesAllowViewInBrowser = true;
-                        cd.PreferencesLinkLatestVersion = true;
-                        lstId.add(cd);
                         
                         contentVersionMap.put(version.ContentDocumentId, version);
-                    }
-                    insert lstId;
-                    List<ContentDistribution> cds = [
-                        SELECT ContentVersionId, DistributionPublicUrl, ContentDownloadUrl
-                        FROM ContentDistribution
-                        WHERE ContentDocumentID IN :contentDocumentIds
-                    ];
-                    System.debug('###$$##' + contentVersions);
-                    Map<Id, String> mapPublicLink = new Map<Id, String>();
-                    for (ContentDistribution eachRecord : cds) {
-                        if (eachRecord.DistributionPublicUrl != null) {
-                            mapPublicLink.put(
-                                eachRecord.ContentVersionId,
-                                eachRecord.ContentDownloadUrl
-                            );
-                        }
+                        mapPublicLink.put(version.Id, DOC_AVAILABLE);
                     }
                     // Prepare the response
                     System.debug('#####' + mapPublicLink);

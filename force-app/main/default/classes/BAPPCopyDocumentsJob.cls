@@ -132,7 +132,6 @@ public class BAPPCopyDocumentsJob implements Queueable, Database.AllowsCallouts 
             }
 
             if (!docsToUpdate.isEmpty()) {
-                system.debug('docsToUpdate-->'+docsToUpdate);
                 try {
                     Map<Id, Document__c> uniqueMap = new Map<Id, Document__c>();
                     for (Document__c d : docsToUpdate)

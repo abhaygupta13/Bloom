@@ -92,9 +92,6 @@ public inherited sharing class CustomUserService {
                                        Contact__r.Blacklisted__c,
                                        Contact__r.SuspensionTenure__c,
                                        contact__r.BrokerContactRole__c,
-                                       Contact__r.TerminationApprovalStatus__c,
-                                       Contact__r.SuspensionStartDate__c,
-                                       Contact__r.SuspensionEndDate__c,
                                        Contact__r.Account.TypeofEstablishment__c,
                                        Contact__r.Account.ShippingCountry
                                        FROM User__c
@@ -228,20 +225,5 @@ public inherited sharing class CustomUserService {
         objUser.isActive__c = true;
         objUser.AppType__c = 'Super App';
         return objUser;
-    }
-    // BAPP - Fetch user by contact details
-    public List<User__c> getUserByDetails(String email,String mobile,String emiratesId) {
-        if (String.isBlank(email) ||String.isBlank(mobile) ||String.isBlank(emiratesId)) {
-            return new List<User__c>();
-        }
-        return [SELECT Id,Name,Is_Azure_Active__c,UUID__c,Contact__c,Contact__r.Email,Contact__r.MobilePhone,Contact__r.Emirates_Id__c,Contact__r.EID_Expiry_Date__c,Contact__r.Blacklisted__c,Contact__r.IsSuspended__c,Contact__r.TerminationApprovalStatus__c,Contact__r.BrokerContactRole__c,
-                Contact__r.SuspensionTenure__c,Contact__r.Account.TypeofEstablishment__c,Contact__r.Account.ShippingCountry FROM User__c WHERE Contact__r.Email = :email AND Contact__r.MobilePhone = :mobile AND Contact__r.Emirates_Id__c = :emiratesId AND IsActive__c = true LIMIT 1];
-    }
-    public List<User__c> getUserByUUID(String uuid) {
-        if (String.isBlank(uuid)) {
-            return new List<User__c>();
-        }
-        return [SELECT Id,Name,Is_Azure_Active__c,UUID__c,Contact__c,Contact__r.Email,Contact__r.MobilePhone,Contact__r.Emirates_Id__c,Contact__r.EID_Expiry_Date__c,Contact__r.Blacklisted__c,Contact__r.IsSuspended__c,Contact__r.TerminationApprovalStatus__c,
-                Contact__r.BrokerContactRole__c,Contact__r.SuspensionTenure__c,Contact__r.Account.TypeofEstablishment__c,Contact__r.Account.ShippingCountry FROM User__c WHERE UUID__c = :uuid AND IsActive__c = true LIMIT 1];
     }
 }

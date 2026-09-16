@@ -299,8 +299,6 @@
                             
                         </td>
                     </tr>
-                    <!-- TENANT NAME                                           -->
-                    <!-- RIGHT SIDE EMPTY                                      -->
                     
                     <tr>
                         <td style="
@@ -351,8 +349,6 @@
                         </td>
                         
                     </tr>
-                    <!-- OCCUPANT NAME                                         -->
-                    <!-- RIGHT SIDE EMPTY                                      -->
                     <tr>
                         <td style="
                                    width:50%;
@@ -407,12 +403,10 @@
                     <!-- MAIN CONTRACT / REFUND DETAILS                       -->
                     
                     <tr>
-                        <!-- LEFT COLUMN                                       -->
                         <td style="
                                    width:50%;
                                    vertical-align:top;
                                    padding:0 15px 0 0;">
-                            <!-- CONTRACT INFORMATION                          -->
                             
                             <table style="
                                           width:100%;
@@ -452,9 +446,6 @@
                                     
                                 </tr>
                                 
-                                
-                                <!-- RENT -->
-                                
                                 <tr>
                                     
                                     <td style="
@@ -486,9 +477,6 @@
                                     
                                 </tr>
                                 
-                                
-                                <!-- PERIOD FROM -->
-                                
                                 <tr>
                                     
                                     <td style="
@@ -519,9 +507,6 @@
                                     </td>
                                     
                                 </tr>
-                                
-                                
-                                <!-- TO -->
                                 
                                 <tr>
                                     
@@ -852,6 +837,36 @@
                                         </apex:outputText>
                                         
                                     </td>
+                                </tr>
+                                
+                                <tr>
+                                    
+                                    <td style="
+                                               background:#d9d9d9;
+                                               border:1px solid #666;
+                                               font-weight:bold;
+                                               text-align:center;
+                                               vertical-align:middle;
+                                               padding:7px;
+                                               font-size:13px;">
+                                        
+                                        Due From (To) after POC Adj
+                                        
+                                    </td>
+                                    
+                                    <td style="
+                                               border:1px solid #666;
+                                               padding:7px 8px;
+                                               font-size:13px;
+                                               text-align:right;
+                                               font-weight:bold;
+                                               vertical-align:middle;">
+                                        
+                                        <apex:outputText value="{0,number,#,##0.00}">
+                                            <apex:param value="{!wrapper.dueAmountAfterPOCAdj}"/>
+                                        </apex:outputText>
+                                        
+                                    </td>
                                     
                                 </tr>
                                 
@@ -990,8 +1005,6 @@
                                                       padding:0;">
                                             
                                             <tr>
-                                                
-                                                <!-- GREY LABEL -->
                                                 <td style="
                                                            width:75%;
                                                            background:#d9d9d9;
@@ -1004,8 +1017,6 @@
                                                     Rent Diff. from Occupant
                                                     
                                                 </td>
-                                                
-                                                <!-- WHITE VALUE -->
                                                 <td style="
                                                            width:25%;
                                                            background:#ffffff;
@@ -1096,8 +1107,6 @@
                                                 
                                                 <tr>
                                                     
-                                                    <!-- CHECKBOX -->
-                                                    
                                                     <td style="
                                                                width:8%;
                                                                background:#ffffff;
@@ -1141,9 +1150,6 @@
                                                         
                                                     </td>
                                                     
-                                                    
-                                                    <!-- ATTACHMENT NAME -->
-                                                    
                                                     <td style="
                                                                width:62%;
                                                                background:#ffffff;
@@ -1153,9 +1159,6 @@
                                                         {!att.documentName}
                                                         
                                                     </td>
-                                                    
-                                                    
-                                                    <!-- DATE -->
                                                     
                                                     <td style="
                                                                width:30%;
@@ -1195,8 +1198,6 @@
                                               padding:0;">
                                     
                                     <tr>
-                                        
-                                        <!-- COR No. LABEL -->
                                         <td style="
                                                    width:25%;
                                                    background:#d9d9d9;
@@ -1209,8 +1210,6 @@
                                             COR No.
                                             
                                         </td>
-                                        
-                                        <!-- COR No. VALUE -->
                                         <td style="
                                                    width:25%;
                                                    background:#ffffff;
@@ -1220,8 +1219,6 @@
                                                    font-size:12px;">
                                             
                                         </td>
-                                        
-                                        <!-- DATE LABEL -->
                                         <td style="
                                                    width:20%;
                                                    background:#d9d9d9;
@@ -1234,8 +1231,6 @@
                                             Date
                                             
                                         </td>
-                                        
-                                        <!-- DATE VALUE -->
                                         <td style="
                                                    width:30%;
                                                    background:#ffffff;
@@ -1352,8 +1347,6 @@
                                     
                                     <tr>
                                         
-                                        <!-- S.NO -->
-                                        
                                         <td style="
                                                    border:1px solid #666;
                                                    padding:5px;
@@ -1364,9 +1357,6 @@
                                             
                                         </td>
                                         
-                                        
-                                        <!-- CHEQUE NO -->
-                                        
                                         <td style="
                                                    border:1px solid #666;
                                                    padding:5px;
@@ -1375,9 +1365,6 @@
                                             {!row.chequeNo}
                                             
                                         </td>
-                                        
-                                        
-                                        <!-- DUE DATE -->
                                         
                                         <td style="
                                                    border:1px solid #666;
@@ -1392,9 +1379,6 @@
                                             </apex:outputText>
                                             
                                         </td>
-                                        
-                                        
-                                        <!-- AMOUNT -->
                                         
                                         <td style="
                                                    border:1px solid #666;
@@ -1413,9 +1397,6 @@
                                     </tr>
                                     
                                 </apex:repeat>
-                                
-                                
-                                <!-- TOTAL -->
                                 
                                 <tr style="font-weight:bold;">
                                     
@@ -1449,14 +1430,11 @@
                             </table>
                             
                         </td>
-                        <!-- RIGHT SIDE - NOTE                                 -->
                         
                         <td style="
                                    width:50%;
                                    padding:0 0 0 10px;
                                    vertical-align:top;">
-                            
-                            <!-- NOTE BOX -->
                             
                             <table style="
                                           width:100%;
@@ -1475,8 +1453,6 @@
                                                vertical-align:top;
                                                font-size:11px;">
                                         
-                                        <!-- NOTE TITLE -->
-                                        
                                         <div style="
                                                     font-size:16px;
                                                     color:#5b5b9f;
@@ -1486,9 +1462,6 @@
                                             Note:
                                             
                                         </div>
-                                        
-                                        
-                                        <!-- NOTE CONTENT -->
                                         
                                         <div style="
                                                     font-size:11px;
@@ -1593,16 +1566,12 @@
                                    text-align:center;
                                    vertical-align:top;
                                    padding:0 10px;">
-                            
-                            <!-- Signature Line -->
                             <div style="
                                         width:80%;
                                         height:18px;
                                         margin:0 auto;
                                         border-bottom:1px solid #000;">
                             </div>
-                            
-                            <!-- Label -->
                             <div style="
                                         width:80%;
                                         margin:2px auto 0 auto;
@@ -1623,16 +1592,12 @@
                                    text-align:center;
                                    vertical-align:top;
                                    padding:0 10px;">
-                            
-                            <!-- Signature Line -->
                             <div style="
                                         width:80%;
                                         height:18px;
                                         margin:0 auto;
                                         border-bottom:1px solid #000;">
                             </div>
-                            
-                            <!-- Label -->
                             <div style="
                                         width:80%;
                                         margin:2px auto 0 auto;

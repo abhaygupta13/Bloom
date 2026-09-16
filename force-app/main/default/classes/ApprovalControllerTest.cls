@@ -141,4 +141,78 @@ public class ApprovalControllerTest {
 
         Assert.areEqual('Record has been send for approval successfully!', msg, 'Final approval should not be submitted unless second approval is Approved and status is Posted.');
     }
+   @IsTest
+static void testCustomerTypeUpdate_MissingFields() {
+
+    Id generalEnquiryRTId = Utility.getRecordTypeIdByDevName(
+        Case.SObjectType,
+        'GeneralEnquiry'
+    );
+
+    Case cs = new Case(
+        Subject = 'Test Case',
+        Status = 'New',
+        RecordTypeId = generalEnquiryRTId,
+        SubType__c = 'Customer Type Update'
+    );
+
+    CaseService.getInstance().insertCaseWithoutTrigger(
+        new List<Case>{ cs }
+    );
+
+    Boolean exceptionThrown = false;
+
+    Test.startTest();
+    try {
+        ApprovalController.sendApproval(cs.Id, 'Test');
+    } catch (AuraHandledException ex) {
+        exceptionThrown = true;
+    }
+    Test.stopTest();
+
+    System.assertEquals(
+        true,
+        exceptionThrown,
+        'Expected validation exception for missing fields.'
+    );
+}
+    @IsTest
+static void testCustomerTypeUpdate_SuqurAlWatan_NoDocument() {
+
+    Id generalEnquiryRTId = Utility.getRecordTypeIdByDevName(
+        Case.SObjectType,
+        'GeneralEnquiry'
+    );
+
+    Case cs = new Case(
+        Subject = 'Test Case',
+        Status = 'New',
+        RecordTypeId = generalEnquiryRTId,
+        SubType__c = 'Customer Type Update',
+        Customer_Type__c = 'Resident',
+        Customer_Sub_Type__c = 'Suqur Al Watan',
+        NameofCorporate__c = 'Armed Forces'
+    );
+
+    CaseService.getInstance().insertCaseWithoutTrigger(
+        new List<Case>{ cs }
+    );
+
+    Boolean exceptionThrown = false;
+
+    Test.startTest();
+    try {
+        ApprovalController.sendApproval(cs.Id, 'Test');
+    } catch (AuraHandledException ex) {
+        exceptionThrown = true;
+    }
+    Test.stopTest();
+
+    System.assertEquals(
+        true,
+        exceptionThrown,
+        'Expected document validation exception.'
+    );
+}
+  
 }

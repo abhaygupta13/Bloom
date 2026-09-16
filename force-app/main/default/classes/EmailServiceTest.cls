@@ -228,7 +228,7 @@ public class EmailServiceTest {
         EmailService emailService = EmailService.getInstance();
 
         SalesOrder__c baseSalesOrder = [
-            SELECT Id, Name, Account__c, Account__r.Name, Unit__c, Unit__r.Name, Unit__r.Project__c, Unit__r.Project__r.Name
+            SELECT Id, Name, Account__c, SellingPrice__c, Account__r.Name, Unit__c, Unit__r.Name, Unit__r.Project__c, Unit__r.Project__r.Name, Unit__r.ADMPlotNumber__c, OwnerSharePercentage__c
             FROM SalesOrder__c
             LIMIT 1
         ];
@@ -313,5 +313,7 @@ public class EmailServiceTest {
         emailService.generateCSV(new List<SalesOrderOtherCharges__c>{ socWithRel });
         emailService.generateCSV(new List<Lead>{ leadWithRel });
         emailService.generateCSV(new List<Lead>());
+        emailService.getEmailTemplatesByName(new Set<String>{'Customer Not Available'});
+        emailService.makeTable(1, baseSalesOrder, 'Test');
     }
 }

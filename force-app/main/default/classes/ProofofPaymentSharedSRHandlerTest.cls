@@ -142,21 +142,21 @@ public class ProofofPaymentSharedSRHandlerTest{
     
      @isTest
     static void validatyTest(){
-        SalesOrder__c so = [Select id from Salesorder__c limit 1];
-        ServiceRequestController.validateEligibility(so.id,'Proof of Payment Shared',false);
+        SalesOrder__c so = [Select id, Status__c from Salesorder__c limit 1];
+        ProofofPaymentSharedSRHandler.getInstance().validateEligibility(so);
     }
     
     @isTest
     static void createCaseTest(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
-        ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
     }
     
     @isTest
     static void validateCaseTest(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         ProofofPaymentSharedSRHandler i = ProofofPaymentSharedSRHandler.getInstance();
@@ -167,32 +167,60 @@ public class ProofofPaymentSharedSRHandlerTest{
     static void validateCaseTest1(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
-        Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
+        Case cs = [Select id, Step__c, Payment_Booked__c, Finance_Document_Verified__c, 
+                   FinanceDocumentsUploadedManually__c, ServiceCatalog__c, Status,
+                   CaseType__c, SubType__c, RecordTypeId, AccountId, StopEmailsToCustomer__c,
+                   Sales_Order__c, TPFType__c, DocumentsVerifiedUploaded__c, POPUploaded__c
+                   from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
+        cs.Payment_Booked__c = 'Yes';
         update cs;
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
+        ProofofPaymentSharedSRHandler i = ProofofPaymentSharedSRHandler.getInstance();
+        i.validateCaseForNextReview(cs);
+        i.finaliValidation(cs);
+        cs.Step__c = '3';
+        cs.TPFType__c = 'Individual';
+        cs.Finance_Document_Verified__c = 'Yes';
+        update cs;
+        i.validateCaseForNextReview(cs);
+        i.finaliValidation(cs);
+        //cs.FinanceDocumentsUploadedManually__c = 'Yes';
+        cs.Step__c = 'Final';
+        cs.POPUploaded__c = 'Yes';
+        cs.FinanceDocumentsUploadedManually__c = 'Yes';
+        update cs;
+        i.validateCaseForNextReview(cs);
+        i.finaliValidation(cs);
     }
     
     @isTest
     static void validateCaseTest2(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
-        Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
+        Case cs = [Select id, Step__c, Payment_Booked__c, Finance_Document_Verified__c, 
+                   FinanceDocumentsUploadedManually__c, ServiceCatalog__c, Status,
+                   CaseType__c, SubType__c, RecordTypeId, AccountId, StopEmailsToCustomer__c,
+                   Sales_Order__c, TPFType__c, DocumentsVerifiedUploaded__c, POPUploaded__c
+                   from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.POPUploaded__c = 'Yes';
         update cs;
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
+        ProofofPaymentSharedSRHandler i = ProofofPaymentSharedSRHandler.getInstance();
+        i.forceCloseCurrentTaks(cs);
+        i.sendClarificationEmail(cs, new List<String>{'test description'}, 'Service Request');
     }
     
     @isTest
     static void validateCaseTest3(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.POPUploaded__c = 'Yes';
@@ -223,7 +251,7 @@ public class ProofofPaymentSharedSRHandlerTest{
     static void validateCaseTest4(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.POPUploaded__c = 'No';
@@ -236,7 +264,7 @@ public class ProofofPaymentSharedSRHandlerTest{
     static void validateCaseTest5(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '2';
         cs.POPUploaded__c = 'Yes';
@@ -249,7 +277,7 @@ public class ProofofPaymentSharedSRHandlerTest{
     static void validateCaseTest6(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '2';
         cs.POPUploaded__c = 'Yes';
@@ -280,7 +308,7 @@ public class ProofofPaymentSharedSRHandlerTest{
     static void validateCaseTest7(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '2';
         cs.POPUploaded__c = 'No';
@@ -293,7 +321,7 @@ public class ProofofPaymentSharedSRHandlerTest{
     static void validateCaseTest8(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '3';
         update cs;
@@ -305,7 +333,7 @@ public class ProofofPaymentSharedSRHandlerTest{
     static void validateCaseTest9(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '3';
         update cs;
@@ -336,7 +364,7 @@ public class ProofofPaymentSharedSRHandlerTest{
     static void validateCaseTest10(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = 'Final';
         cs.POPUploaded__c = 'Yes';
@@ -365,7 +393,7 @@ public class ProofofPaymentSharedSRHandlerTest{
     static void validateCaseTest11(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = 'Final';
         cs.IsThirdPartyNeeded__c = 'No';
@@ -395,7 +423,7 @@ public class ProofofPaymentSharedSRHandlerTest{
     static void validateCaseTest12(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = 'Final';
         cs.IsThirdPartyNeeded__c = 'No';
@@ -427,7 +455,7 @@ public class ProofofPaymentSharedSRHandlerTest{
     static void validateCaseTest13(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Proof of Payment Shared',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = 'Final';
         cs.IsThirdPartyNeeded__c = 'Yes';

@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Document_and_Email_Templates_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Document_and_Email_Templates_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>Docomotion_Digital_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Docomotion Digital Name</label>
+        <length>250</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Docomotion_Form_Type__c</fullName>
+        <label>Docomotion Form Type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Booking Form</fullName>
+                    <default>false</default>
+                    <label>Booking Form</label>
+                </value>
+                <value>
+                    <fullName>Broker Form</fullName>
+                    <default>false</default>
+                    <label>Broker Form</label>
+                </value>
+                <value>
+                    <fullName>CIS Form</fullName>
+                    <default>false</default>
+                    <label>CIS Form</label>
+                </value>
+                <value>
+                    <fullName>SPA without JO</fullName>
+                    <default>false</default>
+                    <label>SPA without JO</label>
+                </value>
+                <value>
+                    <fullName>SPA with JO</fullName>
+                    <default>false</default>
+                    <label>SPA with JO</label>
+                </value>
+                <value>
+                    <fullName>Org SPA without JO</fullName>
+                    <default>false</default>
+                    <label>Org SPA without JO</label>
+                </value>
+                <value>
+                    <fullName>Org SPA with JO</fullName>
+                    <default>false</default>
+                    <label>Org SPA with JO</label>
+                </value>
+                <value>
+                    <fullName>Offer Letter</fullName>
+                    <default>false</default>
+                    <label>Offer Letter</label>
+                </value>
+                <value>
+                    <fullName>Receipt Acknowledgement</fullName>
+                    <default>false</default>
+                    <label>Receipt Acknowledgement</label>
+                </value>
+                <value>
+                    <fullName>Tax Invoice</fullName>
+                    <default>false</default>
+                    <label>Tax Invoice</label>
+                </value>
+                <value>
+                    <fullName>Receipt</fullName>
+                    <default>false</default>
+                    <label>Receipt</label>
+                </value>
+                <value>
+                    <fullName>Statement</fullName>
+                    <default>false</default>
+                    <label>Statement</label>
+                </value>
+                <value>
+                    <fullName>Booking Form With SPA</fullName>
+                    <default>false</default>
+                    <label>Booking Form With SPA</label>
+                </value>
+                <value>
+                    <fullName>CIS Form With SPA</fullName>
+                    <default>false</default>
+                    <label>CIS Form With SPA</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Docomotion_Output_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Docomotion Output Name</label>
+        <length>250</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DocuSign_Envelope_Configuration_Document__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>DocuSign Envelope Configuration Document</description>
+        <label>DocuSign Envelope Configuration Document</label>
+        <referenceTo>dfsle__EnvelopeConfiguration__c</referenceTo>
+        <relationshipLabel>Document and Email Templates</relationshipLabel>
+        <relationshipName>Document_and_Email_Templates</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Docusign_Envelope_Docusign_ID__c</fullName>
+        <externalId>false</externalId>
+        <formula>DocuSign_Envelope_Configuration_Document__r.dfsle__DocuSignId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Docusign Envelope Docusign ID</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Email_Template_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Email Template ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Milestone_Delayed_Email_Template_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Milestone Delayed Email Template ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Milestone_type__c</fullName>
+        <label>Milestone type</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Non Milestone</fullName>
+                    <default>false</default>
+                    <label>Non Milestone</label>
+                </value>
+                <value>
+                    <fullName>Milestone Enabling Works</fullName>
+                    <default>false</default>
+                    <label>Milestone Enabling Works</label>
+                </value>
+                <value>
+                    <fullName>Milestone Others</fullName>
+                    <default>false</default>
+                    <label>Milestone Others</label>
+                </value>
+                <value>
+                    <fullName>Delayed Milestone</fullName>
+                    <default>false</default>
+                    <label>Delayed Milestone</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Payment_Reminders__c</fullName>
+        <label>Payment Reminders</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1st Reminder</fullName>
+                    <default>false</default>
+                    <label>1st Reminder</label>
+                </value>
+                <value>
+                    <fullName>2nd Reminder</fullName>
+                    <default>false</default>
+                    <label>2nd Reminder</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Project_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Project__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>Document and Email Templates</relationshipLabel>
+        <relationshipName>Document_and_Email_Templates</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Document and Email Templates</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Project_Name__c</columns>
+        <columns>NAME</columns>
+        <columns>Docomotion_Output_Name__c</columns>
+        <columns>Docomotion_Digital_Name__c</columns>
+        <columns>Docomotion_Form_Type__c</columns>
+        <columns>DocuSign_Envelope_Configuration_Document__c</columns>
+        <columns>Docusign_Envelope_Docusign_ID__c</columns>
+        <columns>Email_Template_ID__c</columns>
+        <columns>Milestone_Delayed_Email_Template_ID__c</columns>
+        <columns>Milestone_type__c</columns>
+        <columns>Payment_Reminders__c</columns>
+        <columns>Project__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>D - {000000}</displayFormat>
+        <label>Document and Email Templates Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Document and Email Templates</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -49,9 +49,8 @@ public without sharing class IntegrationRecordTriggerHelper {
             paramsMap.put('Param33',record.Param33__c);
             paramsMap.put('Param34',record.Param34__c);
             paramsMap.put('LongTextParam1',record.LongTextParam1__c);
-            paramsMap.put('LongTextParam2',record.LongTextParam2__c);
             IntegrationEvent__e eventInstance = objIntegrationService.getIntegrationEvent(
-                record.Type__c,
+                 record.Type__c,
                 record.Action__c,
                 record.ObjectAPIName__c,
                 record.SubAction__c,
@@ -64,17 +63,6 @@ public without sharing class IntegrationRecordTriggerHelper {
         //publish the event
         if(!eventToPublish.isEmpty()){
             List<Database.SaveResult> results = EventBus.publish(eventToPublish);
-            //Debug each publish result
-            for (Integer i = 0; i < results.size(); i++) {
-                Database.SaveResult sr = results[i];
-                if (sr.isSuccess()) {
-                    System.debug('Event Published Successfully: ' + eventToPublish[i]);
-                } else {
-                    for (Database.Error err : sr.getErrors()) {
-                        System.debug('Failed to Publish Event: ' + eventToPublish[i] + ' | Error: ' + err.getStatusCode() + ' - ' + err.getMessage());
-                    }
-                }
-            }
         }
     }
 }

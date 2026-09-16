@@ -49,7 +49,7 @@ public without sharing class SalesOrderTriggerHelper {
             }
         }
         if(!salesorderUnitIds.isEmpty()){
-            handoversToUpdate = objHandoverService.getHandoversByUnitIds(salesorderUnitIds); 
+            handoversToUpdate = objHandoverService.getHandoversByUnitIdForResale(salesorderUnitIds); 
            
         }  
         List<Handover__c> updatedHandovers = new List<Handover__c>();
@@ -239,15 +239,9 @@ Document_Name__c = objDocumentType.Type__c
     }
     
     public static void handleBeforeUpdateFieldUpdates(List<SalesOrder__c> newList, Map<Id,SalesOrder__c> oldMap){
-        //Set<Id> soldSalesOrderUnitIds = new Set<Id>();
         for(SalesOrder__c objSalesOrder : newList){
-            if(objSalesOrder.Status__c != oldMap.get(objSalesOrder.Id).Status__c) {
-                if(objSalesOrder.Status__c == SALES_ORDER_STATUS_CANCELLED || objSalesOrder.Status__c == SALES_ORDER_STATUS_BOOK_CANCELLED){
+            if(objSalesOrder.Status__c != oldMap.get(objSalesOrder.Id).Status__c && (objSalesOrder.Status__c == SALES_ORDER_STATUS_CANCELLED || objSalesOrder.Status__c == SALES_ORDER_STATUS_BOOK_CANCELLED)){
                     objSalesOrder.SalesOrderCancelledDate__c = System.today();
-                }
-                /* if(objSalesOrder.Status__c == SO_STATUS_SOLD){
-                    soldSalesOrderUnitIds.add(objSalesOrder.Unit__c);
-                } */
             }
 
             if(objSalesOrder.SubStatus__c != oldMap.get(objSalesOrder.Id).SubStatus__c){
@@ -267,25 +261,5 @@ Document_Name__c = objDocumentType.Type__c
                 objSalesOrder.SoldDate__c = objSalesOrder.Bloom_Signed_SPA_Date__c;
             }
         }
-        /* if(!soldSalesOrderUnitIds.isEmpty()){
-            handleSoldSalesOrderDetailsUpdate(soldSalesOrderUnitIds, newList);
-        } */
     }
-
-    /* public static void handleSoldSalesOrderDetailsUpdate(Set<Id> soldSalesOrderUnitIds, List<SalesOrder__c> newList){
-        SalesOrderService objSalesOrderService = SalesOrderService.getInstance();
-        HandoverService objHandoverService = HandoverService.getInstance();
-        List<Handover__c> relatedHandovers = objHandoverService.getHandoversByUnitIds(soldSalesOrderUnitIds);
-        Map<Id,Handover__c> salesOrderTohandoverMap = new Map<Id,Handover__c>();
-        for(Handover__c ho : relatedHandovers) {
-            if (ho.Unit__r != null) {
-                salesOrderTohandoverMap.put(ho.Unit__r.Active_Sales_Order__c, ho);
-            }
-        }
-        for(SalesOrder__c soRec : newList){
-            if(salesOrderTohandoverMap != NULL && salesOrderTohandoverMap.containsKey(soRec.Id) ){
-                soRec.Handover__c = salesOrderTohandoverMap.get(soRec.Id).Id;
-            }
-        }
-    } */
 }

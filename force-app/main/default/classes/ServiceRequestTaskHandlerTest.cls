@@ -299,7 +299,7 @@ static void testopenOldAndCloseCurrentTask(){
     @isTest
     static void testNewAndCloseFinalTask(){
        
-        List<Case> testCases = [SELECT Id, ServiceCatalog__c,CaseType__c,Status,OwnerId,Step__c,Sales_Order__c,AccountId, RecordtypeId,StopEmailsToCustomer__c FROM Case where Step__c='Final' LIMIT 1];
+        List<Case> testCases = [SELECT Id, ServiceCatalog__c,CaseType__c,Status,OwnerId,Step__c,Sales_Order__c,AccountId, RecordtypeId, StopEmailsToCustomer__c FROM Case where Step__c='Final' LIMIT 1];
         List<ServiceAction__c> testServiceAction = [SELECT Id,Due_in_days__c,OwnerId,Order__c, FinalTask__c, Department__c,AssignToOwner__c,TaskSubject__c,TaskType__c, 
                                               TaskSubType__c,ServiceCatalog__c FROM ServiceAction__c where FinalTask__c = true];
         Contact ct =   [Select id from Contact where  LastName = 'Test Contact'];

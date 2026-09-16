@@ -92,10 +92,11 @@ public inherited sharing class EmailService {
     
     public Messaging.SingleEmailMessage getSingleEmailMessage(List<String> emailAddresses, String subject, String body, Id orgWideEmailAddressId) {
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-        mail.setToAddresses(emailAddresses);
-        mail.setSubject(subject);
-        mail.setHtmlBody(body);
-        mail.setOrgWideEmailAddressId(orgWideEmailAddressId);
+        if(emailAddresses != NULL && !emailAddresses.isEmpty() ){ mail.setToAddresses(emailAddresses); }
+        if(String.isNotBlank(orgWideEmailAddressId)){  mail.setOrgWideEmailAddressId(orgWideEmailAddressId); }
+        if(String.isNotBlank(orgWideEmailAddressId)){  mail.setOrgWideEmailAddressId(orgWideEmailAddressId); }
+        if(String.isNotBlank(subject)){  mail.setSubject(subject); }
+        if(String.isNotBlank(body)){  mail.setHtmlBody(body); }
         return mail;
     }
     
@@ -181,7 +182,6 @@ public inherited sharing class EmailService {
         return mail;
     }
     public Messaging.SingleEmailMessage getSingleEmailMessageWithTargetObjectAsRecipient(Id emailTemplateId, Id orgWideEmailAddressId, Id whatId, Id targetObjectId, List<String> toEmailAddresses, List<String> ccEmailAddresses, List<String> bccEmailAddresses) {
-       
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
         if(String.isNotBlank(emailTemplateId)){ mail.setTemplateId(emailTemplateId); }
         if(String.isNotBlank(orgWideEmailAddressId)){  mail.setOrgWideEmailAddressId(orgWideEmailAddressId); }
@@ -203,7 +203,6 @@ public inherited sharing class EmailService {
         if(bccEmailAddresses != NULL && !bccEmailAddresses.isEmpty() ){ mail.setBCCAddresses(bccEmailAddresses); }
         mail.setSaveAsActivity(true);
         mail.setTreatTargetObjectAsRecipient(false);
-        System.debug('mail'+mail);
         return mail;
     }
     
@@ -392,7 +391,7 @@ sendEmail(new Messaging.SingleEmailMessage[] { mail });
     public String makeTable(SalesOrder__c so){
         String unitLink = '<a href="'+BASE_URL+ '/' + so.Unit__c + '">' + so.Unit__r.Name + '</a>';
         String soLink = '<a href="'+BASE_URL+ '/' + so.Id + '">' + so.Name + '</a>';
-        String regDate = so.ADM_DLD_Pre_Registered_Date__c.format();
+        String regDate = so.UnitRegistrationDate__c.format();
         String htmlBody = '<tr>'; 
         htmlBody += ('<td style="border: 1px solid black; text-align: center; padding: 8px;">' + soLink + '</td>');
         htmlBody += ('<td style="border: 1px solid black; text-align: center; padding: 8px;">' + unitLink+ '</td>');
@@ -475,21 +474,22 @@ sendEmail(new Messaging.SingleEmailMessage[] { mail });
         return emailBody;
     }
     
-    public String customSalesOrderTableHeader(){
-        String emailBody = '<table style="border-collapse: collapse; width: 100%;">';
-        // Add table headers
-        emailBody += '<tr>';
-        emailBody += '<th style="border: 1px solid black; text-align: center; padding: 8px;">Serial Number</th>';
-        emailBody += '<th style="border: 1px solid black; text-align: center; padding: 8px;">Unit Number</th>';
-        emailBody += '<th style="border: 1px solid black; text-align: center; padding: 8px;">Plot Number</th>';
-        emailBody += '<th style="border: 1px solid black; text-align: center; padding: 8px;">Buyer Name</th>';
-        emailBody += '<th style="border: 1px solid black; text-align: center; padding: 8px;">Ownership Percentage (%)</th>';
-        emailBody += '<th style="border: 1px solid black; text-align: center; padding: 8px;">Joint Buyer(s)</th>';
-        emailBody += '<th style="border: 1px solid black; text-align: center; padding: 8px;">Total Fees (2%)</th>';
-        emailBody += '<th style="border: 1px solid black; text-align: center; padding: 8px;">Selling Price</th>';
-        emailBody += '<th style="border: 1px solid black; text-align: center; padding: 8px;">DARI Application Number</th>';
-        emailBody += '</tr>';
-        return emailBody;
+    public String customSalesOrderTableHeader() {
+        String tableStyle = 'width:100%;'+'border-collapse:collapse;'+'font-family:Arial,Helvetica,sans-serif;'+'font-size:10px;'+'line-height:140%;';
+        String headerStyle = 'border:1px solid #777;'+'background-color:#eeeeee;'+'padding:6px 5px;'+'text-align:center;'+'vertical-align:middle;'+'font-weight:bold;'+'word-break:normal;'+'overflow-wrap:normal;';
+        String htmlBody = '<table cellpadding="0" cellspacing="0" border="0" '+'style="' + tableStyle + '">';
+        htmlBody += '<tr>';
+        htmlBody += '<th width="6%" style="' + headerStyle + '">Serial Number</th>';
+        htmlBody += '<th width="10%" style="' + headerStyle + '">Unit Number</th>';
+        htmlBody += '<th width="8%" style="' + headerStyle + '">Plot Number</th>';
+        htmlBody += '<th width="18%" style="' + headerStyle + '">Buyer Name</th>';
+        htmlBody += '<th width="12%" style="' + headerStyle + '">Ownership Percentage (%)</th>';
+        htmlBody += '<th width="18%" style="' + headerStyle + '">Joint Buyer(s)</th>';
+        htmlBody += '<th width="10%" style="' + headerStyle + '">Total Fees (2%)</th>';
+        htmlBody += '<th width="10%" style="' + headerStyle + '">Selling Price</th>';
+        htmlBody += '<th width="8%" style="' + headerStyle + '">DARI Application Number</th>';
+        htmlBody += '</tr>';
+        return htmlBody;
     }
     
     public String makeTable(InstallmentLines__c il, Boolean isQuarterlyReminder){
@@ -575,24 +575,28 @@ sendEmail(new Messaging.SingleEmailMessage[] { mail });
         return htmlBody;
     }
     
-    public String makeTable(Integer serialNo,SalesOrder__c so,String jointOwners) {
+        public String makeTable(Integer serialNo,SalesOrder__c so,String jointOwners) {
         String unitNumber = so.Unit__r != null ? so.Unit__r.Name : '';
         String plotNumber = so.Unit__r != null ? String.valueOf(so.Unit__r.ADMPlotNumber__c) : '';
         String buyerName = so.Account__r != null ? so.Account__r.Name : '';
         String ownershipPercentage = so.OwnerSharePercentage__c != null ? String.valueOf(so.OwnerSharePercentage__c) : '';
-        String totalFees = so.SellingPrice__c != null ? String.valueOf(so.SellingPrice__c) : '';
-        String sellingPrice = so.SellingPrice__c != null ? String.valueOf(so.SellingPrice__c) : '';
-        //String dariApplicationNumber = so.DARIApplicationNumber__c != null ? so.DARIApplicationNumber__c : '';
+        String totalFees = so.SellingPrice__c != null ? formatCurrency(so.SellingPrice__c) : '';
+        String sellingPrice = so.SellingPrice__c != null ? formatCurrency(so.SellingPrice__c) : '';
+        String dariApplicationNumber = '';//so.DARIApplicationNumber__c != null ? so.DARIApplicationNumber__c : '';
+        String cellStyle = 'border:1px solid #777;'+'padding:5px 4px;'+'vertical-align:top;'+'font-family:Arial,Helvetica,sans-serif;'+'font-size:10px;'+'line-height:140%;';
+        String textCellStyle = cellStyle + 'text-align:left;'+'word-break:normal;'+'overflow-wrap:break-word;';
+        String centerCellStyle = cellStyle + 'text-align:center;'+'white-space:nowrap;';
+        String numberCellStyle = cellStyle + 'text-align:right;'+'white-space:nowrap;';
         String htmlBody = '<tr>';
-        htmlBody += '<td style="border: 1px solid black; text-align:center; padding:8px;">' + serialNo + '</td>';
-        htmlBody += '<td style="border: 1px solid black; text-align:center; padding:8px;">' + unitNumber + '</td>';
-        htmlBody += '<td style="border: 1px solid black; text-align:center; padding:8px;">' + plotNumber + '</td>';
-        htmlBody += '<td style="border: 1px solid black; text-align:center; padding:8px;">' + buyerName + '</td>';
-        htmlBody += '<td style="border: 1px solid black; text-align:center; padding:8px;">' + ownershipPercentage + '</td>';
-        htmlBody += '<td style="border: 1px solid black; text-align:center; padding:8px;">' + jointOwners + '</td>';
-        htmlBody += '<td style="border: 1px solid black; text-align:center; padding:8px;">' + totalFees + '</td>';
-        htmlBody += '<td style="border: 1px solid black; text-align:center; padding:8px;">' + sellingPrice + '</td>';
-        //htmlBody += '<td style="border: 1px solid black; text-align:center; padding:8px;">' + dariApplicationNumber + '</td>';
+        htmlBody += '<td style="' + centerCellStyle + '">' + serialNo + '</td>';
+        htmlBody += '<td style="' + centerCellStyle + '">' + unitNumber + '</td>';
+        htmlBody += '<td style="' + centerCellStyle + '">' + plotNumber + '</td>';
+        htmlBody += '<td style="' + textCellStyle + '">' + buyerName + '</td>';
+        htmlBody += '<td style="' + centerCellStyle + '">' + ownershipPercentage + '</td>';
+        htmlBody += '<td style="' + textCellStyle + '">' + jointOwners + '</td>';
+        htmlBody += '<td style="' + numberCellStyle + '">' + totalFees + '</td>';
+        htmlBody += '<td style="' + numberCellStyle + '">' + sellingPrice + '</td>';
+        htmlBody += '<td style="' + centerCellStyle + '">' + dariApplicationNumber + '</td>';
         htmlBody += '</tr>';
         return htmlBody;
     }
@@ -740,4 +744,42 @@ sendEmail(new Messaging.SingleEmailMessage[] { mail });
                                   }
         return fileAttachments;
     }
+    
+    private String formatCurrency(Decimal value) {
+        if (value == null) {
+            return '';
+        }
+        String result = String.valueOf(value.setScale(2));
+        List<String> parts = result.split('\\.');
+        String integerPart = parts[0];
+        String decimalPart = parts.size() > 1 ? parts[1] : '00';
+        Boolean negative = integerPart.startsWith('-');
+        if (negative) {
+            integerPart = integerPart.substring(1);
+        }
+        String formatted = '';
+        while (integerPart.length() > 3) {
+            formatted = ',' + integerPart.substring(integerPart.length() - 3) + formatted;
+            integerPart = integerPart.substring(0, integerPart.length() - 3);
+        }
+        formatted = integerPart + formatted;
+        if (negative) {
+            formatted = '-' + formatted;
+        }
+        return formatted + '.' + decimalPart;
+    }
+    
+    public Map<String, EmailTemplate> getEmailTemplatesByName(Set<String> templateNames) {
+        Map<String, EmailTemplate> templateNameVsEmailTemplateMap = new Map<String, EmailTemplate>();
+        for (EmailTemplate mailTemplate : [SELECT Id, Name, DeveloperName, OwnerId, IsActive, Subject, FolderId, FolderName,
+                                                    Description, Body, HTMLValue, TemplateType
+                                            FROM EmailTemplate
+                                            WHERE Name IN :templateNames
+        ]) {
+            templateNameVsEmailTemplateMap.put(mailTemplate.Name, mailTemplate);
+        }
+
+        return templateNameVsEmailTemplateMap;
+    }
+
 }

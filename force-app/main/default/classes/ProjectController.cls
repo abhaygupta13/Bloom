@@ -10,7 +10,6 @@ Sr.No.     version              Date                Details
 1.          V1.0               05-DEC-24            Initial Version 
 ****************************************************************************************************************/
 public without sharing class ProjectController {
-    
     private static final String UNIT_REG_DOC_FILE_NAME = 'Unit Registration'; 
     private static final string MTD_NO_REPLY_OWEID_SETTING { get { return 'NoReplySalesIT'; } }
     private static final string MTD_PROP_REG_CUST_EMAIL_TEMPLATE_ID { get { return 'PropertyRegCustEmailTemplateId'; } }
@@ -24,8 +23,8 @@ public without sharing class ProjectController {
     private static final string MTD_CRM_TEAM_EMAIL_ADDSS { get { return 'CRMTeamEmailAddresses'; } }
     private static final string MTD_PUBLIC_REL_TEAM_EMAIL_ADDSS { get { return 'PublicRelationTeamEmailAddresses'; } }
     private static final string MTD_SALES_FINANCE_TEAM_EMAIL_ADDSS { get { return 'SalesFinanceTeamEmailAddresses'; } }
-    private static final string MTD_GR_TEAM_EMAIL_ADDSS { get { return 'GRTeamEmailAddresses'; } }
     private static final string MTD_PROJ_UNIT_REG_BCC_EMAIL_ADDS { get { return 'ProjectUnitRegBCCEmailAddresses'; } }
+    private static final string MTD_GR_TEAM_EMAIL_ADDSS { get { return 'GRTeamEmailAddresses'; } }
     private static final string SO_SOLD_STATUS { get { return 'Sold'; } }
     private static final string MTD_PAYMENT_PLAN_INVALID_SALES_ORDER_STATUS_VALUE { get { return 'PaymentPlanInvalidSalesOrderStatus'; } }
     //private static final string RESIDENT_CUST_TYPE { get { return 'Resident'; } }
@@ -46,6 +45,12 @@ public without sharing class ProjectController {
     }
     
     @AuraEnabled
+    public static Project__c getProjectRecordUnitRegistration(String projectRecordId){
+        ProjectService ps = ProjectService.getInstance();
+        return ps.getProjectForUnitRegistration(projectRecordId);
+    }
+    
+    @AuraEnabled
     public static Project__c getProjectAndSoldUnits(String projectRecordId){
         ProjectService ps = ProjectService.getInstance();
         return ps.getProjectWithSoldUnits(projectRecordId, SO_SOLD_STATUS);
@@ -58,10 +63,10 @@ public without sharing class ProjectController {
     }
     
     /*@AuraEnabled
-public static List<Unit__c> getUnitsBasedOnProject(String projectRecordId){
-UnitService us = UnitService.getInstance();
-return us.getSoldUnitsOfProject(projectRecordId, SO_SOLD_STATUS);
-}*/
+    public static List<Unit__c> getUnitsBasedOnProject(String projectRecordId){
+        UnitService us = UnitService.getInstance();
+        return us.getSoldUnitsOfProject(projectRecordId, SO_SOLD_STATUS);
+    }*/
     
     @AuraEnabled
     public static Map<String, Document__c> getSalesOrderUnitDocument(List<String> salesOrderIds){
@@ -84,6 +89,7 @@ return us.getSoldUnitsOfProject(projectRecordId, SO_SOLD_STATUS);
         }
         return unitIdAndDocument;
     }
+
     
     @AuraEnabled
     public static void updateUnitRegDateOnSalesOrder(List<SalesOrder__c> selectedRecords){
@@ -93,19 +99,17 @@ return us.getSoldUnitsOfProject(projectRecordId, SO_SOLD_STATUS);
                 SalesOrderService service = SalesOrderService.getInstance();
                 service.updateSalesOrders(selectedRecords);
                 Set<Id> soIds = new Set<Id>();
-                System.debug('selectedRecords'+selectedRecords);
                 for(SalesOrder__c so : selectedRecords) soIds.add(so.Id);
                 List<SalesOrder__c> salesOrders = service.getUnitRegisteredSalesOrders(soIds);
-                System.debug('salesOrders'+salesOrders);
                 sendUnitPropRegistrationEmailToCustomer(salesOrders);
                 sendUnitPropRegistrationEmail(salesOrders);
             }
         }catch(Exception e){
             Database.rollback(sp);
-            System.debug(LoggingLevel.ERROR,'Exception: ' + e.getMessage() + '\nStack Trace:\n' + e.getStackTraceString()); 
-            throw e;
+            throw new AuraHandledException('Error: '+ e.getMessage());   
         }
     }  
+    
     
     //Using this method to download Sales Order Document
     //Except Unit Registration document
@@ -133,7 +137,7 @@ return us.getSoldUnitsOfProject(projectRecordId, SO_SOLD_STATUS);
                     mapOfContentDocIdAndDocName.put(document.ContentDocumentId__c, document.Document_Name__c);
                 }
             }
-            
+
             List<ContentVersion> versions = [
                 SELECT Id, Title, VersionData, FileExtension, ContentDocumentId
                 FROM ContentVersion 
@@ -176,6 +180,8 @@ return us.getSoldUnitsOfProject(projectRecordId, SO_SOLD_STATUS);
         }  
     }
     
+      
+    
     @AuraEnabled
     public static List<String> getSalesOrderRecordWithNoDocuments(List<String> salesOrderIds){
         // Step 1: Query documents grouped by SalesOrder__c
@@ -209,59 +215,90 @@ return us.getSoldUnitsOfProject(projectRecordId, SO_SOLD_STATUS);
     }
     
     /*@AuraEnabled
-public static List<String> getSalesOrdersWithMandatoryDocuments(List<String> salesOrderIds){
-List<String> salesOrderIdList = new List<String>();
-SalesOrderService sos = SalesOrderService.getInstance();
-List<SalesOrder__c> salesOrders = sos.getSalesOrdersWithDocuments(salesOrderIds);
-// Iterate through Sales Orders
-for (SalesOrder__c salesOrder : salesOrders) {
-Boolean hasSPA = false;
-Boolean hasEID = false;
-Boolean hasPassport = false;
-
-// Check document types
-for (Document__c doc : salesOrder.Documents__r) {
-if (doc.DocumentType__r.Type__c == SPA_SIGNED_DOC_TYPE) hasSPA = true;
-if (doc.DocumentType__r.Type__c == EID_DOC_TYPE) hasEID = true;
-if (doc.DocumentType__r.Type__c == PASSPORT_DOC_TYPE) hasPassport = true;
-}
-
-// Apply logic based on Customer Type
-if (hasSPA) {
-if ((salesOrder.Account__r.CustomerType__c == RESIDENT_CUST_TYPE || salesOrder.Account__r.CustomerType__c == UAE_NATIONAL_CUST_TYPE) && hasEID) {
-salesOrderIdList.add(salesOrder.Id);
-} else if ((salesOrder.Account__r.CustomerType__c == GCC_CUST_TYPE || salesOrder.Account__r.CustomerType__c == INTERNATIONAL_CUST_TYPE) && hasPassport) {
-salesOrderIdList.add(salesOrder.Id);
-}
-}
-}
-return salesOrderIdList;
-}*/
+    public static List<String> getSalesOrdersWithMandatoryDocuments(List<String> salesOrderIds){
+        List<String> salesOrderIdList = new List<String>();
+        SalesOrderService sos = SalesOrderService.getInstance();
+        List<SalesOrder__c> salesOrders = sos.getSalesOrdersWithDocuments(salesOrderIds);
+        // Iterate through Sales Orders
+        for (SalesOrder__c salesOrder : salesOrders) {
+            Boolean hasSPA = false;
+            Boolean hasEID = false;
+            Boolean hasPassport = false;
+            
+            // Check document types
+            for (Document__c doc : salesOrder.Documents__r) {
+                if (doc.DocumentType__r.Type__c == SPA_SIGNED_DOC_TYPE) hasSPA = true;
+                if (doc.DocumentType__r.Type__c == EID_DOC_TYPE) hasEID = true;
+                if (doc.DocumentType__r.Type__c == PASSPORT_DOC_TYPE) hasPassport = true;
+            }
+            
+            // Apply logic based on Customer Type
+            if (hasSPA) {
+                if ((salesOrder.Account__r.CustomerType__c == RESIDENT_CUST_TYPE || salesOrder.Account__r.CustomerType__c == UAE_NATIONAL_CUST_TYPE) && hasEID) {
+                    salesOrderIdList.add(salesOrder.Id);
+                } else if ((salesOrder.Account__r.CustomerType__c == GCC_CUST_TYPE || salesOrder.Account__r.CustomerType__c == INTERNATIONAL_CUST_TYPE) && hasPassport) {
+                    salesOrderIdList.add(salesOrder.Id);
+                }
+            }
+        }
+        return salesOrderIdList;
+    }*/
     
-    @AuraEnabled
-    public static String uploadUnitRegDocument(String unitRegistrationDocument){
-        try{
-            if(unitRegistrationDocument != null){
-                DocumentService documentService = DocumentService.getInstance();
-                UnitRegDocumentWrapper deserializedData = (UnitRegDocumentWrapper) JSON.deserialize(unitRegistrationDocument, UnitRegDocumentWrapper.class);
-                if(deserializedData != null){
-                    if(deserializedData.recordId.getSObjectType() == SalesOrder__c.SobjectType){
-                        List<Document__c> unitRegDocument = documentService.getDocumentBasedonType(deserializedData.recordId, UNIT_REG_DOC_FILE_NAME);
-                        return saveDocument(deserializedData.base64, deserializedData.fileName, unitRegDocument[0].Id);
-                    }else if(deserializedData.recordId.getSObjectType() == Unit__c.SobjectType){
-                        List<Document__c> unitRegDocument = documentService.getDocumentBasedonType(deserializedData.recordId, 'Project-Unit Registration Document');
-                        return saveDocument(deserializedData.base64, deserializedData.fileName, unitRegDocument[0].Id);
+        @AuraEnabled
+    public static String uploadUnitRegDocument(String unitRegistrationDocument) {
+        try {
+            if (String.isBlank(unitRegistrationDocument)) {
+                return null;
+            }
+            
+            DocumentService documentService = DocumentService.getInstance();
+            
+            UnitRegDocumentWrapper deserializedData = (UnitRegDocumentWrapper) JSON.deserialize(unitRegistrationDocument,UnitRegDocumentWrapper.class);
+            if (deserializedData == null) {
+                return null;
+            }
+            
+            //NEW FLOW: One file uploaded by the user and applied to all selected Sales Orders.
+            if (deserializedData.recordIds != null && !deserializedData.recordIds.isEmpty()) {
+                String contentDocumentId;
+                for (Id salesOrderId : deserializedData.recordIds) {
+                    if (salesOrderId.getSObjectType() != SalesOrder__c.SObjectType) {
+                        continue;
                     }
+                    List<Document__c> unitRegDocuments = documentService.getDocumentBasedonType(salesOrderId,UNIT_REG_DOC_FILE_NAME);
+                    if (unitRegDocuments == null || unitRegDocuments.isEmpty()) {
+                        throw new AuraHandledException('Unit Registration Document not found for Sales Order: ' + salesOrderId);
+                    }
+                    contentDocumentId = saveDocument(deserializedData.base64,deserializedData.fileName,unitRegDocuments[0].Id);
+                }
+                return contentDocumentId;
+            }
+            
+            //EXISTING SINGLE RECORD FLOW
+            if (deserializedData.recordId != null) {
+                if (deserializedData.recordId.getSObjectType() == SalesOrder__c.SObjectType) {
+                    List<Document__c> unitRegDocument = documentService.getDocumentBasedonType(deserializedData.recordId,UNIT_REG_DOC_FILE_NAME);
+                    if (unitRegDocument == null || unitRegDocument.isEmpty()) {
+                        throw new AuraHandledException('Unit Registration Document not found.');
+                    }
+                    return saveDocument(deserializedData.base64,deserializedData.fileName,unitRegDocument[0].Id);
+                } else if (deserializedData.recordId.getSObjectType() == Unit__c.SObjectType) {
+                    List<Document__c> unitRegDocument = documentService.getDocumentBasedonType(deserializedData.recordId,'Project-Unit Registration Document');
+                    if (unitRegDocument == null || unitRegDocument.isEmpty()) {
+                        throw new AuraHandledException('Unit Registration Document not found.');
+                    }
+                    return saveDocument(deserializedData.base64,deserializedData.fileName,unitRegDocument[0].Id);
                 }
             }
             return null;
-        }catch(Exception e){
-            throw new AuraHandledException('Error: '+ e.getMessage());   
+        } catch (Exception e) {
+            throw new AuraHandledException('Error: ' + e.getMessage());
         }
     }
     
     public class UnitRegDocumentWrapper{
         public Id recordId;
+        public List<Id> recordIds;
         public string base64;
         public string fileName;
     }
@@ -280,18 +317,14 @@ return salesOrderIdList;
         return objDocument.ContentDocumentId__c;
     }
     
-    //update the unit and project record based on user selection reg date
     @AuraEnabled
     public static void updateProjectRegistration(Project__c updateProjectRecord, Boolean isProjectAlreadyRegistered){
         try {
             ProjectService ps = ProjectService.getInstance();
-            
             ps.updateProject(updateProjectRecord);
-            
             if(!isProjectAlreadyRegistered){
                 sendProjectRegEmail(updateProjectRecord);
             }
-            
         } catch(Exception e){
             throw new AuraHandledException('Error: ' + e.getMessage());   
         }
@@ -299,19 +332,13 @@ return salesOrderIdList;
     
     @AuraEnabled
     public static void updateUnitRegistration(List<Unit__c> selectedUnits, Project__c projectRecord){
-        System.debug('selectedUnits'+selectedUnits);
-        System.debug('projectRecord'+projectRecord);
         try {
             UnitService us = UnitService.getInstance();
-            System.debug('selectedUnits'+selectedUnits);
             if(selectedUnits != null && !selectedUnits.isEmpty()){
                 us.updateUnits(selectedUnits);
                 sendProjectRegistrationWithUnitsEmail(projectRecord, selectedUnits);
             }
-            
         } catch(Exception e){
-            System.debug(e.getStackTraceString());
-         System.debug(e.getLineNumber());
             throw new AuraHandledException('Error: ' + e.getMessage());   
         }
     }
@@ -348,8 +375,7 @@ return salesOrderIdList;
             saveDocument(base64, filename, unitRegDocument[0].Id);
         }catch(Exception e){
             Database.rollback(sp);
-            System.debug(LoggingLevel.ERROR,'Exception: ' + e.getMessage() + '\nStack Trace:\n' + e.getStackTraceString()); 
-            throw e;   
+            throw new AuraHandledException('Error: '+ e.getMessage());   
         }
     }
     
@@ -418,7 +444,7 @@ return salesOrderIdList;
             }else if(so.Account__r.PersonContactId != null){
                 //emailList.add(objEmailService.getSingleEmailMessageWithTargetObjectAsRecipient(unitPropRegistrationET.Id, noReplyOWDId, so.Id, so.Account__r.PersonContactId, null, null, bccAddress));
                 Messaging.SingleEmailMessage email = objEmailService.getSingleEmailMessageWithTargetObjectAsRecipient(unitPropRegistrationET.Id, noReplyOWDId, so.Id, so.Account__r.PersonContactId, null, null, bccAddress);
-                if(mapOfSoIdAndAttachment.containsKey(so.Id)) email.setFileAttachments(mapOfSoIdAndAttachment.get(so.Id));
+            	if(mapOfSoIdAndAttachment.containsKey(so.Id)) email.setFileAttachments(mapOfSoIdAndAttachment.get(so.Id));
                 emailList.add(email);
             }  
         }
@@ -426,6 +452,8 @@ return salesOrderIdList;
         //List<Messaging.SendEmailResult> result = objEmailService.sendEmail(emailList);
         //System.debug('result==>'+result);
     }
+    
+    
     
     //Send email when project registration date has been added
     private static void sendProjectRegEmail(Project__c projectRecord){
@@ -486,62 +514,22 @@ return salesOrderIdList;
                 continue;
             }
         }
-        projectRecord = getProjectRecord(projectRecord.Id);
-        System.debug('projectRecord'+projectRecord);
-        if(projectRecord == null){
+        Project__c objProject = getProjectRecordUnitRegistration(projectRecord.Id);
+        if(objProject == null){
             throw new AuraHandledException('Project record not found.');
         }
-        String projectLink = '<a href="'+BASE_URL+ '/' + projectRecord.Id + '">'+projectRecord.Name+'</a>';
+        String projectLink = '<a href="'+BASE_URL+ '/' + objProject.Id + '">'+objProject.Name+'</a>';
         String emailSubject = projectRegWithUnitsEmailTemplate.Subject;
-        emailSubject = emailSubject.replace('[Project_Name]', projectRecord.Name);
+        emailSubject = emailSubject.replace('[Project_Name]', objProject.Name);
         String emailBody = projectRegWithUnitsEmailTemplate.HtmlValue;
         registrationTable += '</table>';
         emailBody = emailBody.replace('{{UNIT_REGISTRATION_TABLE}}', registrationTable);
-        emailBody = emailBody.replace('[Project_Name]', projectRecord.Name);
+        emailBody = emailBody.replace('[Project_Name]', objProject.Name);
         emailBody = emailBody.replace('[Project_Link]', projectLink);
-        emailBody = emailBody.replace('[Project_Registration_Date]', (projectRecord.ProjectRegistrationDate__c != null ? String.valueOf(projectRecord.ProjectRegistrationDate__c): ''));
+        emailBody = emailBody.replace('[Project_Registration_Date]', (objProject.ProjectRegistrationDate__c != null ? String.valueOf(objProject.ProjectRegistrationDate__c): ''));
         emailList.add(objEmailService.getSingleEmailMessage(toAddress, emailSubject, emailBody, noReplyOWDId)); 
         objEmailService.sendEmail(emailList);
-        //List<Messaging.SendEmailResult> result = objEmailService.sendEmail(emailList);
-        //System.debug('result==>'+result);
     }
-    
-    @AuraEnabled
-    public static Project__c getUnitsByProject(Id projectId) {
-        //return [SELECT Id, Name, IsMortgageReleased__c FROM Unit__c WHERE Project__c = :projectId AND IsMortgageReleased__c = false ];
-        /* return [SELECT Id, Name, ProjectRegistrationDate__c, ProjectRegistrationRemark__c, (SELECT),
-(SELECT Id, Name, RegistrationDate__c, Active_Sales_Order__c, ADM_Fee_Included__c, Active_Sales_Order__r.Name, Active_Sales_Order__r.SoldDate__c, 
-Status__c, Active_Sales_Order__r.UnitRegistrationDate__c, Active_Sales_Order__r.DocumentUploadedDate__c, ADMPlotNumber__c,
-Active_Sales_Order__r.FundMovedToGRDate__c, Active_Sales_Order__r.Status__c,
-Active_Sales_Order__r.Account__r.IsPersonAccount, Active_Sales_Order__r.Account__r.FirstName, Active_Sales_Order__r.Account__r.LastName, Active_Sales_Order__r.Account__r.Name, IsMortgageReleased__c
-FROM UnitsProject__r 
-WHERE Active_Sales_Order__c != null AND IsMortgageReleased__c = false)
-FROM Project__c 
-WHERE Id = :projectId ]; */
-        
-        return [SELECT Id, Name, ProjectRegistrationDate__c, ProjectRegistrationRemark__c, 
-                (SELECT Id, Unit__c, Unit__r.Name, Unit__r.RegistrationDate__c, Unit__r.Active_Sales_Order__c, Unit__r.ADM_Fee_Included__c, 
-                 Unit__r.Active_Sales_Order__r.Name, Unit__r.Active_Sales_Order__r.SoldDate__c, Unit__r.Status__c, 
-                 Unit__r.Active_Sales_Order__r.UnitRegistrationDate__c, Unit__r.Active_Sales_Order__r.DocumentUploadedDate__c, 
-                 Unit__r.ADMPlotNumber__c, Unit__r.Active_Sales_Order__r.FundMovedToGRDate__c, Unit__r.Active_Sales_Order__r.Status__c,
-                 Unit__r.Active_Sales_Order__r.Account__r.IsPersonAccount, Unit__r.Active_Sales_Order__r.Account__r.FirstName, 
-                 Unit__r.Active_Sales_Order__r.Account__r.LastName, Unit__r.Active_Sales_Order__r.Account__r.Name, Unit__r.IsMortgageReleased__c 
-                 FROM Handovers__r 
-                 WHERE Unit__r.Active_Sales_Order__c != null 
-                 //AND Unit__r.IsMortgageReleased__c = false
-                 AND IsADRECApproved__c = false
-                 ORDER BY Unit__r.Name) 
-                FROM Project__c 
-                WHERE Id = :projectId];
-    }
-    
-    /* @AuraEnabled
-public static void updateUnits(List<Unit__c> unitsToUpdate) {
-System.debug('unitsToUpdate'+unitsToUpdate);
-if(unitsToUpdate != null && !unitsToUpdate.isEmpty()) {
-update unitsToUpdate;
-}
-} */
     
     @AuraEnabled
     public static void updateUnits(List<Handover__c> handoversToUpdate) {
@@ -594,6 +582,7 @@ update unitsToUpdate;
         List<String> invalidSalesOrderStatusValueList = invalidSalesOrderStatusValue.split(',');
         return objSalesOrderService.getActiveSalesOrdersByPaymentPlanIds(paymentPlanId,invalidSalesOrderStatusValueList);
     }
+
     
     @AuraEnabled(cacheable=false)
     public static Boolean isPaymentPlanPendingApproval(Id paymentPlanId){  

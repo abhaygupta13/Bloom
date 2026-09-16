@@ -10,7 +10,7 @@ private class SalesOrderRebateServiceTest {
     
     @TestSetup
     static void setupData() {
-        Project__c testProject=new Project__c(Name='Test Project');
+        Project__c testProject=new Project__c(Name='Test Project',RebateConditionType__c = 'P073');
         insert testProject;
         
         BuildingSection__c testBuilding=new BuildingSection__c(Name='Test Building',BuildingSectionCode__c='BL-CAS',Project__c=testProject.Id);
@@ -105,7 +105,6 @@ private class SalesOrderRebateServiceTest {
             InstallmentLine__c = installmentLines.Id,
             Amount__c = 100,
             Date__c = Date.today(),
-            ConditionType__c = 'ZREB',
             SendtoSAP__c = true,
             SAP_Document_No__c = 'INV/123456/2026'
         ));
@@ -115,7 +114,6 @@ private class SalesOrderRebateServiceTest {
             InstallmentLine__c = installmentLines.Id,
             Amount__c = 200,
             Date__c = Date.today(),
-            ConditionType__c = 'ZREB',
             SendtoSAP__c = false
         ));
         insert rebates;

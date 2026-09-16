@@ -15,8 +15,6 @@ public class LatePaymentFeeBatch implements Database.Batchable<sObject>, Schedul
     private static final string MTD_SALES_ORDER_STATUS_VALUE { get { return 'SalesOrderStatusforPendingPayment'; } }
     private static final string MTD_LPF_CALCULATION_DAYS { get { return 'LatePaymentFeeCalculationDays'; } }
     private static final string TYPE_OF_CHARGE { get { return 'Late Payment Charges'; } }
-    private static final string MTD_OWE_NO_REPLY_BLOOM_SALES_ID { get { return 'BloomNoReplySalesOWEmailId'; } }
-    private static final string MTD_LPF_CUSTOMER_NOTIFICATION_EMAIL_TEMPLATE_ID { get { return 'LPFCustomerNotificationTemplateId'; } }
     
     public Database.QueryLocator start(Database.BatchableContext BC) {
         String query = 'SELECT Id,Name,EnableLatePaymentFee__c,DailyLPFPercentage__c FROM Project__c WHERE EnableLatePaymentFee__c = TRUE AND LatePaymentFeeCalculationStartDate__c != NULL';
@@ -29,7 +27,6 @@ public class LatePaymentFeeBatch implements Database.Batchable<sObject>, Schedul
         LatePaymentFeeService latePaymentService = LatePaymentFeeService.getInstance();
         SalesOrderOtherChargesService salesOrderOtherChargeService = SalesOrderOtherChargesService.getInstance();
         InstallmentLineService installmentLineService = InstallmentLineService.getInstance();
-        EmailService objEmailService = EmailService.getInstance();
         String salesOrderStatusValue = objMetadataService.getAppSettingTextValue(MTD_SALES_ORDER_STATUS_VALUE);
         List<String> salesOrderStatusValueList = salesOrderStatusValue.split(',');
         Integer lpfCalculationDays = objMetadataService.getAppSettingNumberValue(MTD_LPF_CALCULATION_DAYS);
@@ -44,14 +41,9 @@ public class LatePaymentFeeBatch implements Database.Batchable<sObject>, Schedul
         Map<Id, Id> installmentToSOChargeId = new Map<Id, Id>();
         Map<Id, Project__c> projectMap = new Map<Id, Project__c>(scope);
         Date currentDate = Date.today();
-        Set<Id> newlyCreatedInstallmentIds = new Set<Id>();
-        Id bloomNoReplySalesOWEId = objMetadataService.getAppSettingTextValue(MTD_OWE_NO_REPLY_BLOOM_SALES_ID);
-        Id lpfCustomerNotificationETId = objMetadataService.getAppSettingTextValue(MTD_LPF_CUSTOMER_NOTIFICATION_EMAIL_TEMPLATE_ID);
-        EmailTemplate lpfCustomerNotificationTemplate = objEmailService.getEmailTemplateById(lpfCustomerNotificationETId);
-        List<Messaging.SingleEmailMessage> msgList = new List<Messaging.SingleEmailMessage>();
-        List<InstallmentLines__c> lstInstallmentLines = installmentLineService.getInstallmentLinesByProject(projectMap.keySet(),salesOrderStatusValueList);
-        Map<Id, SalesOrderOtherCharges__c> installmentToSOCharge = new Map<Id, SalesOrderOtherCharges__c>();
         
+        List<InstallmentLines__c> lstInstallmentLines = installmentLineService.getInstallmentLinesByProject(projectMap.keySet(),salesOrderStatusValueList);
+
         for (InstallmentLines__c pi : lstInstallmentLines) {
             Date lastLPFDate = pi.LastLPFCreatedDate__c;
             Date calculationStartDate;
@@ -59,6 +51,11 @@ public class LatePaymentFeeBatch implements Database.Batchable<sObject>, Schedul
             Integer gracePeriodDays = 0;
             Boolean shouldCalculateLPF = false;
             Date projectLPFStartDate = pi.SalesOrder__r.Unit__r.Project__r.LatePaymentFeeCalculationStartDate__c;
+            Decimal lpfThresholdAmount = pi.SalesOrder__r.Unit__r.Project__r.LPFThresholdAmount__c;
+            
+            if (lpfThresholdAmount != null && (pi.PendingAmount__c == null || pi.PendingAmount__c < lpfThresholdAmount)) {
+                continue;
+            }
             
             if (pi.Type__c == 'Handover') {
                 gracePeriodDays = pi.SalesOrder__r.Unit__r.Project__r.HandoverLPFGracePeriod__c != null ? 
@@ -94,21 +91,13 @@ public class LatePaymentFeeBatch implements Database.Batchable<sObject>, Schedul
             if (shouldCalculateLPF) {
                 Integer daysToCharge = calculationStartDate.daysBetween(currentDate) + 1; // Include current date
                 Decimal dailyLPFPercent = pi.SalesOrder__r.Unit__r.Project__r.DailyLPFPercentage__c;
-                Decimal lpfThresholdAmount = pi.SalesOrder__r.Unit__r.Project__r.LPFThresholdAmount__c;
                 
                 // Skip calculation if Daily LPF Percentage is not configured
                 if (dailyLPFPercent == null || dailyLPFPercent <= 0) {
                     continue;
                 }
-                
                 Decimal fee = pi.PendingAmount__c * (dailyLPFPercent / 100) * daysToCharge;
                 fee = fee.setScale(3, RoundingMode.HALF_UP);
-                
-                // Skip LPF creation if calculated LPF amount is below threshold
-                if (lpfThresholdAmount != null && fee < lpfThresholdAmount) {
-                    continue;
-                }
-                
                 LatePaymentFee__c objLatePaymentFee = new LatePaymentFee__c(
                     DueAmount__c = pi.PendingAmount__c, DueDate__c = pi.Due_Date__c,
                     InstallmentLine__c = pi.Id, LatePaymentFeePercentage__c = dailyLPFPercent,
@@ -140,11 +129,11 @@ public class LatePaymentFeeBatch implements Database.Batchable<sObject>, Schedul
                     SalesOrder__c = pi.SalesOrder__c,
                     SAP_Condition_Type__c = pi.SalesOrder__r.Unit__r.Project__r.LPFSAPConditionCode__c ?? ''
                 );
-                newlyCreatedInstallmentIds.add(pi.Id);
             }
             Decimal existingFee = soc.TotalLatePaymentFee__c != null ? soc.TotalLatePaymentFee__c : 0;
             Decimal updatedFee = existingFee > 0 ? existingFee + totalFee : totalFee;
             updatedFee = updatedFee.setScale(2, RoundingMode.HALF_UP);
+            soc.Due_Date__c = currentDate;
             soc.EndDate__c = currentDate;
             soc.Amount__c = updatedFee;
             soc.TotalLatePaymentFee__c = updatedFee;
@@ -155,7 +144,6 @@ public class LatePaymentFeeBatch implements Database.Batchable<sObject>, Schedul
             List<SalesOrderOtherCharges__c> insertedCharges = salesOrderOtherChargeService.upsertSalesOrderOtherCharges(lstSOCharges);
             for (SalesOrderOtherCharges__c soc : insertedCharges) {
                 installmentToSOChargeId.put(soc.Installment_Line__c, soc.Id);
-                installmentToSOCharge.put(soc.Installment_Line__c, soc);
             }
         }
         
@@ -165,24 +153,6 @@ public class LatePaymentFeeBatch implements Database.Batchable<sObject>, Schedul
         latePaymentService.insertLatePaymentFeeLists(latePaymentFeeList);
         
         installmentLineService.updateInstallmentLines(installmentLinesToUpdate);
-        
-        if (!newlyCreatedInstallmentIds.isEmpty()) {
-            if (lpfCustomerNotificationTemplate != null) {
-                for (InstallmentLines__c pi : installmentList) {
-                    
-                    if (!newlyCreatedInstallmentIds.contains(pi.Id)) {
-                        continue;
-                    }
-                    SalesOrderOtherCharges__c soc = installmentToSOCharge.get(pi.Id);
-                    Messaging.SingleEmailMessage emailMsg = getEmailContent(pi,soc,objEmailService,lpfCustomerNotificationTemplate,bloomNoReplySalesOWEId);
-                    
-                    if (emailMsg != null) {
-                        msgList.add(emailMsg);
-                    }
-                }
-            }
-            objEmailService.sendEmail(msgList);
-        }
     }
     
     public void finish(Database.BatchableContext BC) {
@@ -190,39 +160,5 @@ public class LatePaymentFeeBatch implements Database.Batchable<sObject>, Schedul
     
     public void execute(SchedulableContext sc){
         Database.executeBatch(new LatePaymentFeeBatch(),1);
-    }
-    
-    public Messaging.SingleEmailMessage getEmailContent(InstallmentLines__c pi,SalesOrderOtherCharges__c soc,EmailService objEmailService,EmailTemplate emailTemplate,Id bloomNoReplySalesOWEId) {
-        if (pi == null || pi.Due_Date__c == null) return null;
-        
-        Id contactId = pi.SalesOrder__r.Account__r.IsPersonAccount
-            ? pi.SalesOrder__r.Account__r.PersonContactId
-            : pi.SalesOrder__r.Contact__c;
-        
-        String email = pi.SalesOrder__r.Account__r.IsPersonAccount
-            ? pi.SalesOrder__r.Account__r.PersonEmail
-            : pi.SalesOrder__r.Contact__r.Email;
-        
-        if (contactId == null || String.isBlank(email)) {
-            return null;
-        }
-        Messaging.SingleEmailMessage mail = Messaging.renderStoredEmailTemplate(emailTemplate.Id,contactId,pi.SalesOrder__c);
-        String body = mail.getHtmlBody();
-        String subject = mail.getSubject();
-        Datetime dt = Datetime.newInstance(pi.Due_Date__c.year(),pi.Due_Date__c.month(),pi.Due_Date__c.day());
-        String formattedDate = dt.format('dd-MM-yyyy');
-        
-        body = body.replace('[Project_Name]', pi.SalesOrder__r.Unit__r.Project__r.Name != null ? pi.SalesOrder__r.Unit__r.Project__r.Name : '')
-            .replace('[Amount]', soc.Amount__c != null ? String.valueOf(soc.Amount__c) : '')
-            .replace('[Installment_Date]', formattedDate != null ? formattedDate : '');
-        
-        mail.setHtmlBody(body);
-        subject = subject
-            .replace('[Project_Name]', pi.SalesOrder__r.Unit__r.Project__r.Name != null ? pi.SalesOrder__r.Unit__r.Project__r.Name : '')
-            .replace('[Unit_Code]', pi.SalesOrder__r.Unit__r.Name != null ? pi.SalesOrder__r.Unit__r.Name : '');
-        mail.setSubject(subject);
-        mail.setOrgWideEmailAddressId(bloomNoReplySalesOWEId);
-        
-        return mail;
     }
 }

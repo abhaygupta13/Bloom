@@ -34,12 +34,9 @@ public without sharing class LeadAsyncTriggerHandler implements IAsyncTriggerHan
         
         List<Id> digitalLeadIds = new List<Id>();
         List<Id> qualifiedLeadIds = new List<Id>();
-        List<Id> adhaLeadIds = new List<Id>();
         List<Id> leasingLeadIds = new List<Id>();
-        List<Id> contactCentreAndQualifiedLeadIds = new List<Id>();
-        List<Id> createSMAndLOLeadTaskLeadIds = new List<Id>();
         List<Id> leadEmailNotificationIds = new List<Id>();
-        
+        List<Id> adhaLeadIds = new List<Id>();
         for (LeadChangeEvent event : objLeadChangeEventList) {
             //Get event header fields
             EventBus.ChangeEventHeader header = event.ChangeEventHeader;
@@ -51,23 +48,14 @@ public without sharing class LeadAsyncTriggerHandler implements IAsyncTriggerHan
                         adhaLeadIds.addAll(header.getRecordIds());  
                     }
                     if(event.get('Email') != Null){
-                        leadEmailNotificationIds.addAll(header.getRecordIds());  
+                        leadEmailNotificationIds.addAll(header.getRecordIds()); 
                     }
                 }
                 when 'UPDATE'{
                     if(event.get('ContactCentreLeadStatus__c') != NULL && event.get('ContactCentreLeadStatus__c') == 'Qualified'){
                         qualifiedLeadIds.addAll(header.getRecordIds());
                     }
-                    if(event.get('OwnerId') != NULL ){
-                        Id recOwnerId = String.valueOf(event.get('OwnerId'));
-                        if( recOwnerId.getsObjectType() == User.SobjectType){
-                            System.debug('contactCentreAndQualifiedLeadIds');
-                            contactCentreAndQualifiedLeadIds.addAll(header.getRecordIds());
-                        }
-                    }
-                    if(event.get('FollowUpDate__c') != NULL || event.get('WaitingListDate__c') != NULL ){
-                        createSMAndLOLeadTaskLeadIds.addAll(header.getRecordIds());
-                    }
+                   
                 }
                 when 'DELETE'{
                     
@@ -77,25 +65,17 @@ public without sharing class LeadAsyncTriggerHandler implements IAsyncTriggerHan
                 }
             }
         }
-        
+        if(!leadEmailNotificationIds.isEmpty()){
+            LeadAsyncTriggerHelper.leadEmailNotificationToCustomer(leadEmailNotificationIds);
+        }
         if(!digitalLeadIds.isEmpty()){
             AssignmentRuleHandler.salesDigitalLeadAssignment(digitalLeadIds);
         }    
         if(!qualifiedLeadIds.isEmpty()){
             AssignmentRuleHandler.qualifiedLeadAssignment(qualifiedLeadIds);
         }
-        if(!adhaLeadIds.isEmpty()){
+         if(!adhaLeadIds.isEmpty()){
             AssignmentRuleHandler.adhaLeadAssignment(adhaLeadIds);
-        }
-        if(!contactCentreAndQualifiedLeadIds.isEmpty()){
-            LeadAsyncTriggerHelper.createContactCenterLeadTask(contactCentreAndQualifiedLeadIds);
-            LeadAsyncTriggerHelper.createQualifiedSMAndLOLeadTask(contactCentreAndQualifiedLeadIds);
-        }
-        if(!createSMAndLOLeadTaskLeadIds.isEmpty()){
-            LeadAsyncTriggerHelper.createSMAndLOLeadTask(createSMAndLOLeadTaskLeadIds);
-        }
-        if(!leadEmailNotificationIds.isEmpty()){
-            LeadAsyncTriggerHelper.leadEmailNotificationToCustomer(leadEmailNotificationIds);
         }
     }
 }

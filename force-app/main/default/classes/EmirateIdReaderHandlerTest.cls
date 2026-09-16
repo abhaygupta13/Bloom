@@ -7,22 +7,22 @@ public class EmirateIdReaderHandlerTest {
         // Create a new Account with the specified RecordTypeId and Name
         Account acc = new Account();
         acc.RecordTypeId = AccountRecordTypeId;
-        acc.FirstName = 'Test Account';
-        acc.LastName ='test';
-        acc.MiddleName ='test';
-        acc.Emirates_Id__pc = '34353';
-        acc.PersonMobilePhone= '53535';
-        acc.PersonEmail ='abc@gmail.com';
-        acc.PassportNumber__pc ='5353';
-        acc.NameinArabic__c='test';
-        acc.Title_Arabic__c ='test';
+        acc.FirstName = 'Test Account 1';
+        acc.LastName ='test 1';
+        acc.MiddleName ='test 1 ';
+        acc.Emirates_Id__pc = '343531';
+        acc.PersonMobilePhone= '535351';
+        acc.PersonEmail ='abc1@gmail.com';
+        acc.PassportNumber__pc ='53531';
+        acc.NameinArabic__c='test 1';
+        acc.Title_Arabic__c ='test 1';
         acc.PersonGenderIdentity = 'Male';
         acc.PersonBirthdate = System.today();
         acc.EID_Expiry_Date__pc = System.today();
         acc.EID_Issue_Date__pc = System.today();
         acc.PassportExpiryDate__pc = System.today();
         acc.PersonHomePhone = '345353';
-        acc.Company__pc ='abc';
+        acc.Company__pc ='abc 1';
         acc.MaritalStatus__pc = 'Married';
         acc.Place_of_Issuance__c ='Dubai';
         acc.Qualification__c ='test';
@@ -44,25 +44,33 @@ public class EmirateIdReaderHandlerTest {
         acc.CustomerSubType__c = 'CORPORATE';
         
         
-        
-        
         Account acc1 = new Account(
             RecordTypeId = AccountRecordTypeId,
             FirstName = 'Test Account',
-            LastName ='test',
-            Emirates_Id__pc = '34353',
-            PersonMobilePhone= '53535',
-            PersonEmail ='abc@gmail.com',
-            PassportNumber__pc ='5353'
+            LastName = 'test',
+            Emirates_Id__pc = '11111',
+            PersonMobilePhone = '999991111',
+            PersonEmail = 'test1@test.com',
+            PassportNumber__pc = 'P11111'
         );
-        insert acc1;
-        
         EmirateIdReaderHandler.getAccountByDocumentAndEmirateId(acc);
         // EmirateIdReaderHandler.createPersonAccount(acc,false);
-        EmirateIdReaderHandler.createPersonAccount(acc,true);
-        EmirateIdReaderHandler.updateAccount(acc,acc1.id);
+        String AccId = EmirateIdReaderHandler.createPersonAccount(acc,true);
+        
+        acc.Emirates_Id__pc = '22222';
+        acc.PersonMobilePhone = '999992222';
+        acc.PersonEmail = 'test2@test.com';
+        acc.PassportNumber__pc = 'P22222';
+        
+        //EmirateIdReaderHandler.updateAccount(acc,acc1.id);
+        try {
+            EmirateIdReaderHandler.updateAccount(acc, acc1.Id);
+            System.assert(false, 'Expected exception was not thrown');
+        } catch (Exception e) {
+            System.assert(true);
+        }
         EmirateIdReaderHandler.getAccountByDocumentAndEmirateId(null);
-        EmirateIdReaderHandler.createOpportunity(acc1.id);
+        EmirateIdReaderHandler.createOpportunity(AccId);
         
         
     }

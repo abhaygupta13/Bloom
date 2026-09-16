@@ -28,22 +28,17 @@
             <!-- Vehicle Parking Details -->
             <template if:true={unitFound}>
                 <div class="slds-align_absolute-center">
-                    <div class="slds-box slds-theme_default slds-m-top_medium" style="width: 95%">
+                    <div class="slds-box slds-theme_default slds-m-top_medium" style="width: 60%">
                         <div class="slds-text-heading_small slds-m-bottom_medium">
                             Parking details for <strong>{projectName} - {buildingName}</strong>:
                         </div>
-                      <!--<div class="slds-scrollable_x" style="height: 13rem;">-->
-                        <div class="vehicle-table-container">
+
                         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_edit">
                             <thead>
                                 <tr class="slds-line-height_reset">
                                     <th><div class="slds-truncate slds-p-vertical_x-small">#</div></th>
                                     <th class = "slds-text-align_center slds-p-vertical_x-small"><div class="slds-truncate"><span class="slds-required" title="required">*</span>Make & Model</div></th>
                                     <th class = "slds-text-align_center slds-p-vertical_x-small"><div class="slds-truncate"><span class="slds-required" title="required">*</span>Plate Number</div></th>
-                                    <th class = "slds-text-align_center slds-p-vertical_x-small"><div class="slds-truncate"><span class="slds-required" title="required">*</span>Category</div></th>
-                                    <th class = "slds-text-align_center slds-p-vertical_x-small"><div class="slds-truncate"><span class="slds-required" title="required">*</span>Country/Region</div></th>
-                                    <th class = "slds-text-align_center slds-p-vertical_x-small"><div class="slds-truncate"><span class="slds-required" title="required">*</span>Effective Start Date</div></th>
-                                    <th class = "slds-text-align_center slds-p-vertical_x-small"><div class="slds-truncate"><span class="slds-required" title="required">*</span>Effective End Date</div></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,76 +71,10 @@
                                                 required>
                                             </lightning-input>
                                         </td>
-                                        <td>
-                                            <lightning-input
-                                                style="margin-bottom:0px"
-                                                name="Category"
-                                                type="text"
-                                                value={row.Category}
-                                                variant="label-hidden"
-                                                placeholder="Enter category"
-                                                data-index={index}
-                                                onchange={handleInputChange}
-                                                min="0"
-                                                max="9999"
-                                                step="1"
-                                                required>
-                                            </lightning-input>
-                                        </td>
-                                        <td>
-                                            <lightning-combobox
-                                                style="margin-bottom:0px"
-                                                name="CountryRegion"
-                                                value={row.CountryRegion}
-                                                options={countryOptions}
-                                                variant="label-hidden"
-                                                data-index={index}
-                                                onchange={handleInputChange}
-                                                 onclick={handleCountryClick}
-                                                dropdown-alignment="bottom-left"> 
-                                               
-                                            </lightning-combobox>
-                                        </td> 
-                                        <!-- <td>
-                                            <lightning-combobox
-                                                name="Group"
-                                                value={row.Group}
-                                                options={groupOptions}
-                                                variant="label-hidden"
-                                                data-index={index}
-                                                onchange={handleInputChange}
-                                                dropdown-alignment="auto">
-                                            </lightning-combobox>
-                                        </td>  -->
-                                         <!-- Category -->
-                                            
-                                        <td>
-                                        <lightning-input
-                                            style="margin-bottom:0px"
-                                            type="date"
-                                            name="EffectiveStartDate"
-                                            value={row.EffectiveStartDate}
-                                            variant="label-hidden"
-                                            data-index={index}
-                                            onchange={handleInputChange}>
-                                        </lightning-input>
-                                    </td> 
-                                    <td>
-                                    <lightning-input
-                                        style="margin-bottom:0px"
-                                        type="date"
-                                        name="EffectiveEndDate"
-                                        value={row.EffectiveEndDate}
-                                        variant="label-hidden"
-                                        data-index={index}
-                                        onchange={handleInputChange}>
-                                    </lightning-input>
-                                  </td>
                                     </tr>
                                 </template>
                             </tbody>
                         </table>
-                      </div>
                         <!-- File uploader -->
                         <div class="slds-m-top_medium slds-form-element">
                             <lightning-input 

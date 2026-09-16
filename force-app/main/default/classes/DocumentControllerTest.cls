@@ -126,9 +126,7 @@ LeasingOrder__c lsOrder = [SELECT Id FROM LeasingOrder__c LIMIT 1];
         DocumentController.addFile(base64, fileName, document.Id); 
         DocumentController.deleteFile(document.Id);
         DocumentController.shareDocument(document.Id);
-        //added by Ranjan
         DocumentController.getArchiveDocuments(document.Id);
-        
         Test.stopTest();
 
     }

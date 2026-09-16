@@ -95,9 +95,6 @@ public class UnitRegTreasuryTeamEmailBatch implements Database.Batchable<SObject
             email.setFileAttachments(new Messaging.EmailFileAttachment[] { attachment});
             
             Messaging.SendEmailResult[] results = objEmailService.sendEmail(new List<Messaging.SingleEmailMessage>{email});        
-        
-        
-        
     }
     
     public void finish(Database.BatchableContext bc) {

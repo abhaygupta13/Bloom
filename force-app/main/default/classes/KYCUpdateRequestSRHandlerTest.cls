@@ -40,9 +40,33 @@ private class KYCUpdateRequestSRHandlerTest {
         
         ServiceCatalog__c sc = new ServiceCatalog__c(Name = 'KYC Update', RecordTypeDevName__c = 'KYCUpdateRequest', 
                                                      Category__c = 'Customer Service Request', 
-                                                     SubCategory__c = 'KYC Update Request', Type__c = 'Service Request',IsAvailableForSuperApp__c = true);
+                                                     SubCategory__c = 'KYC Update Request', Type__c = 'Service Request',
+                                                     IsAvailableForSuperApp__c = true);
         insert sc;
-        
+        List<ServiceAction__c> stepList = new list<ServiceAction__c>();
+        // Create test ServiceAction record
+        ServiceAction__c testServiceAction1 = new ServiceAction__c(
+            ServiceCatalog__c = sc.Id,
+            //TaskType__c = 'Default Unit',
+            TaskSubType__c = 'CRM Team Task',
+            TaskSubject__c = 'CRM Team Task',
+            Due_in_days__c = 2,
+            Order__c = 1
+        );
+        stepList.add(testServiceAction1);
+              
+        ServiceAction__c testServiceAction2 = new ServiceAction__c(
+            ServiceCatalog__c = sc.Id,
+           // TaskType__c = 'Default Unit',
+            TaskSubType__c = 'Finance Team Task',
+            TaskSubject__c = 'Finance Team Task',
+            //Due_in_days__c = 2,
+            Order__c = 2,
+            FinalTask__c = true
+        );
+        stepList.add(testServiceAction2);
+
+        insert stepList;
         SalesOrder__c so = new SalesOrder__c(Account__c = acc.Id, Unit__c = unit.Id);
         insert so;
     }
@@ -93,6 +117,7 @@ private class KYCUpdateRequestSRHandlerTest {
     @IsTest
     static void testValidateCaseForNextReview_SignedKYCMissing1() {
         Account acc = [SELECT Id, PersonContactId FROM Account LIMIT 1];
+        ServiceCatalog__c sc = [SELECT Id, RecordTypeDevName__c FROM ServiceCatalog__c LIMIT 1];
         AppRegistration__c ar = new AppRegistration__c(
             Contact__c = acc.PersonContactId,
             Status__c = 'Under Review',
@@ -104,7 +129,9 @@ private class KYCUpdateRequestSRHandlerTest {
         insert ar;
         // Prepare Case without Signed KYC
         String recordTypeCaseId = Schema.SObjectType.Case.getRecordTypeInfosByName().get('KYC Update Request').getRecordTypeId();
-        Case c = new Case(Status = 'New', Step__c = 'Final', Email_Address__c = 'test@test.com', PhoneNumber__c = '99999999', RecordTypeId=recordTypeCaseId,AppRegistration__c=ar.Id,ApprovalStatus__c='Approved');
+        Case c = new Case(Status = 'New', Step__c = 'Final', Email_Address__c = 'test@test.com', PhoneNumber__c = '99999999', 
+                          RecordTypeId=recordTypeCaseId,AppRegistration__c=ar.Id,ApprovalStatus__c='Approved', 
+                          ServiceCatalog__c= sc.Id);
         insert c;
         
         Test.startTest();
@@ -143,14 +170,16 @@ private class KYCUpdateRequestSRHandlerTest {
             DeviceId__c = 'DEVICE-1'
         );
         insert ar;
+        ServiceCatalog__c sc = [SELECT Id, RecordTypeDevName__c FROM ServiceCatalog__c LIMIT 1];
         
         KYCUpdateRequestSRHandler handler = KYCUpdateRequestSRHandler.getInstance();
         
         Test.startTest();
         handler.updateAppRegistration(ar.Id, 'Approved','test@gmail.com');
+        //handler.createCaseRecordFromAppRegistrationTrigger(ar, sc, acc.Id, 'Service Request', 'test description', 'Email');
         Test.stopTest();
         
-        AppRegistration__c updated = [SELECT Status__c FROM AppRegistration__c WHERE Id = :ar.Id];
+        //AppRegistration__c updated = [SELECT Status__c FROM AppRegistration__c WHERE Id = :ar.Id];
     }
     
     @IsTest

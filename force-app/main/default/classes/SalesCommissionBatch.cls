@@ -19,7 +19,7 @@ public class SalesCommissionBatch implements Database.Batchable<sObject>, Schedu
     private List<BrokerCommission__c> commissionList = new List<BrokerCommission__c>();
 
     public Database.QueryLocator start(Database.BatchableContext bc) {  
-        String query = 'SELECT Id, Name, UnitType__c, UnitModel__c, StartDate__c, EndDate__c, LaunchType__c,  Project__c, Project__r.VATPercentage__c,Project__r.ProjectRegistrationDate__c, Percentage__c, Amount_Range_Start__c, Amount_Range_End__c,CommissionSchedule__c.BrokerAccount__c FROM CommissionSchedule__c WHERE ApprovalStatus__c = \'Approved\'';//AND Project__r.ProjectRegistrationDate__c != null
+        String query = 'SELECT Id, Name, UnitType__c, UnitModel__c, StartDate__c, EndDate__c, LaunchType__c,  Project__c, Project__r.VATPercentage__c,Project__r.ProjectRegistrationDate__c, Percentage__c, Amount_Range_Start__c, Amount_Range_End__c,CommissionSchedule__c.BrokerAccount__c FROM CommissionSchedule__c WHERE ApprovalStatus__c = \'Approved\'';
         return Database.getQueryLocator(query);
     }
     // Main logic of processing each batch
@@ -44,7 +44,6 @@ public class SalesCommissionBatch implements Database.Batchable<sObject>, Schedu
             brokerIdSet.add(installmentLine.SalesOrder__r.Opportunity__r.BrokerAgencyAccount__c);
             projectIdSet.add(installmentLine.SalesOrder__r.Unit__r.Project__c);
         }
-
         Set<Id> fixedCommissionBrokerAccountIdSet = new Set<Id>();
         for(CommissionSchedule__c cs : CommissionScheduleService.getInstance().getCommissionSchedule()){
             fixedCommissionBrokerAccountIdSet.add(cs.BrokerAccount__c);
@@ -63,6 +62,7 @@ public class SalesCommissionBatch implements Database.Batchable<sObject>, Schedu
                 }   
             } 
         }
+
         // List of Installment Lines to update
         List<InstallmentLines__c> installmentLinesToUpdate = new List<InstallmentLines__c>();
         for(InstallmentLines__c installmentLine : installmentLineList){
@@ -72,7 +72,6 @@ public class SalesCommissionBatch implements Database.Batchable<sObject>, Schedu
                 if(salesOrder == null || salesOrder.ADM_DLD_Pre_Registered_Date__c == null){
                     continue;
                 }
-                Id brokerCommissionSalesOrderId = salesOrder.PreviousSalesOrder__c == null ? salesOrder.Id : salesOrder.PreviousSalesOrder__c;
                 Decimal taxableAmount = salesOrder.TaxableAmount__c != null && salesOrder.TaxableAmount__c > 0 ? salesOrder.TaxableAmount__c : 0; 
                 Decimal commissionEligibleAmount = salesOrder.ADM_Fee_Included__c ? salesOrder.Sales_Price_Excluding_ADM__c : (salesOrder.NetAmount__c != null ? (salesOrder.NetAmount__c - taxableAmount) : 0);
                 Decimal admFeePaidAmount = salesOrder.ADM_Fee_Included__c &&  installmentLine.InstallmentNumber__c == 1 && salesOrder.SalesOrdersOtherCharges__r != null && salesOrder.SalesOrdersOtherCharges__r.size() > 0  && salesOrder.SalesOrdersOtherCharges__r[0].InvoicedAmount__c != null ? salesOrder.SalesOrdersOtherCharges__r[0].InvoicedAmount__c : 0;
@@ -102,24 +101,24 @@ public class SalesCommissionBatch implements Database.Batchable<sObject>, Schedu
                 Decimal vatPercentage = salesOrder.Opportunity__r.BrokerAgencyAccount__r.Is_VAT_Registered__c == 'Yes' ? salesOrder.Unit__r.Project__r.VATPercentage__c : null;
                 if(eligibileForFixedCommission){
 
-                    commissionList.add(createBrokerCommissionObj(commissionSchedule.Id, commissionPercentage, commissionAmount, startDate, salesOrder.Unit__r.Project__c, installmentLine.Id, brokerCommissionSalesOrderId, salesOrder.Opportunity__r.BrokerAgencyAccount__c, salesOrder.Opportunity__r.BrokerAgentContact__c, COMMISSION_FOR_BROKER, vatPercentage, APPROVAL_STATUS_NOTAPPROVED, commissionEligibleAmount));
+                    commissionList.add(createBrokerCommissionObj(commissionSchedule.Id, commissionPercentage, commissionAmount, startDate, salesOrder.Unit__r.Project__c, installmentLine.Id, salesOrder.Id, salesOrder.Opportunity__r.BrokerAgencyAccount__c, salesOrder.Opportunity__r.BrokerAgentContact__c, COMMISSION_FOR_BROKER, vatPercentage, APPROVAL_STATUS_NOTAPPROVED, commissionEligibleAmount));
                     
                     installmentLine.BrokerCommissionCreated__c = true;
                     installmentLinesToUpdate.add(installmentLine);
                     break;
                 }
-                else if(!hasFixedCommission && isAmountCleared && isSoldDateInCommiScheduleDateRange && isUnitTypeMatching && isUnitModelMatching && isProjectMatching  && isTotalAmountInRange && runningDate <= Date.today()){   
+                else if(!hasFixedCommission && isAmountCleared && isSoldDateInCommiScheduleDateRange && isUnitTypeMatching && isUnitModelMatching && isProjectMatching && isTotalAmountInRange && runningDate <= Date.today()){   
                     // if commission % is more then 4, creating 2 invoices for 2nd installment
                     if(commissionSchedule.Percentage__c > 4 && installmentLine.InstallmentNumber__c == 2 && salesOrder.Unit__r.Project__r.ApplyADRECBrokerCommissionPolicy__c){
                         Decimal secCommissionPercentage = 4 - commissionSchedule.Percentage__c/2;
                         Decimal secCommissionAmount = commissionEligibleAmount * secCommissionPercentage/100;
                         Decimal thirdCommissionPercentage = commissionSchedule.Percentage__c - (commissionSchedule.Percentage__c/2 + secCommissionPercentage);
                         Decimal thirdCommissionAmount = commissionEligibleAmount * thirdCommissionPercentage/100;
-                        commissionList.add(createBrokerCommissionObj(commissionSchedule.Id, secCommissionPercentage, secCommissionAmount, startDate, commissionSchedule.Project__c, installmentLine.Id, brokerCommissionSalesOrderId, salesOrder.Opportunity__r.BrokerAgencyAccount__c, salesOrder.Opportunity__r.BrokerAgentContact__c, COMMISSION_FOR_BROKER, vatPercentage, APPROVAL_STATUS_NOTAPPROVED, commissionEligibleAmount));
-                        commissionList.add(createBrokerCommissionObj(commissionSchedule.Id, thirdCommissionPercentage, thirdCommissionAmount, startDate, commissionSchedule.Project__c, installmentLine.Id, brokerCommissionSalesOrderId, salesOrder.Opportunity__r.BrokerAgencyAccount__c, salesOrder.Opportunity__r.BrokerAgentContact__c, COMMISSION_FOR_BROKER, vatPercentage, APPROVAL_STATUS_NOTAPPROVED, commissionEligibleAmount));
+                        commissionList.add(createBrokerCommissionObj(commissionSchedule.Id, secCommissionPercentage, secCommissionAmount, startDate, commissionSchedule.Project__c, installmentLine.Id, salesOrder.Id, salesOrder.Opportunity__r.BrokerAgencyAccount__c, salesOrder.Opportunity__r.BrokerAgentContact__c, COMMISSION_FOR_BROKER, vatPercentage, APPROVAL_STATUS_NOTAPPROVED, commissionEligibleAmount));
+                        commissionList.add(createBrokerCommissionObj(commissionSchedule.Id, thirdCommissionPercentage, thirdCommissionAmount, startDate, commissionSchedule.Project__c, installmentLine.Id, salesOrder.Id, salesOrder.Opportunity__r.BrokerAgencyAccount__c, salesOrder.Opportunity__r.BrokerAgentContact__c, COMMISSION_FOR_BROKER, vatPercentage, APPROVAL_STATUS_NOTAPPROVED, commissionEligibleAmount));
                     }
                     else{
-                        commissionList.add(createBrokerCommissionObj(commissionSchedule.Id, commissionPercentage, commissionAmount, startDate, commissionSchedule.Project__c, installmentLine.Id, brokerCommissionSalesOrderId, salesOrder.Opportunity__r.BrokerAgencyAccount__c, salesOrder.Opportunity__r.BrokerAgentContact__c, COMMISSION_FOR_BROKER, vatPercentage, APPROVAL_STATUS_NOTAPPROVED, commissionEligibleAmount));
+                        commissionList.add(createBrokerCommissionObj(commissionSchedule.Id, commissionPercentage, commissionAmount, startDate, commissionSchedule.Project__c, installmentLine.Id, salesOrder.Id, salesOrder.Opportunity__r.BrokerAgencyAccount__c, salesOrder.Opportunity__r.BrokerAgentContact__c, COMMISSION_FOR_BROKER, vatPercentage, APPROVAL_STATUS_NOTAPPROVED, commissionEligibleAmount));
                     }
 
                     // prepare installment lines list to update

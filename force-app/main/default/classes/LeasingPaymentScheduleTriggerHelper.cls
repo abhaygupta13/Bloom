@@ -29,14 +29,13 @@ public class LeasingPaymentScheduleTriggerHelper {
     }
     
     public static void beforeFieldUpdates(List<PaymentPlanSchedule__c> newList , Map<id,PaymentPlanSchedule__c> oldMap){
-        System.debug('##called beforeFieldUpdates'); 
         List<Schema.FieldSetMember> sapFieldSetFields = Schema.SObjectType.PaymentPlanSchedule__c.fieldSets.getMap().get('SAP_Integration_Fields').getFields();
         Set<Id> leasingOrderIds = new Set<Id>();
         Set<Id> leasingOrderIdsAPI = new Set<Id>();
         
         for(PaymentPlanSchedule__c paymentPlan: newList){
             leasingOrderIdsAPI.add(paymentPlan.LeasingOrder__c);
-            if (oldMap != null && paymentPlan.PostingDate__c != null)// && paymentPlan.PostingDate__c  != oldMap.get(paymentPlan.Id).PostingDate__c)
+            if (oldMap != null && paymentPlan.PostingDate__c != null)
                 leasingOrderIds.add(paymentPlan.LeasingOrder__c);
         }
         
@@ -57,9 +56,8 @@ public class LeasingPaymentScheduleTriggerHelper {
         }
         for(PaymentPlanSchedule__c paymentPlan  : newList ){
             
-            if (oldMap != null && paymentPlan.PostingDate__c != null){// && paymentPlan.PostingDate__c  != oldMap.get(paymentPlan.Id).PostingDate__c) {
+            if (oldMap != null && paymentPlan.PostingDate__c != null){
                 Date postingClosureDate = loToPCDateMap.get(paymentPlan.LeasingOrder__c);
-                System.debug('##called postingClosureDate '+postingClosureDate);
                 if (postingClosureDate != null) {
                     
                     Integer closurePeriod = (postingClosureDate.year() * 12) + postingClosureDate.month();
@@ -67,7 +65,6 @@ public class LeasingPaymentScheduleTriggerHelper {
                     
                     if (postingPeriod <= closurePeriod) {
                         paymentPlan.addError('Posting date is outside the posting range.');
-                        System.debug('##called postingPeriod'+postingPeriod);
                     }
                 }
             }
@@ -109,6 +106,7 @@ paymentPlan.ClearedAmount__c == paymentPlan.TotalInstallmentAmount__c ){
 paymentPlan.PaymentStatus__c = 'Paid';
 }*/
             }
+            
         }
     }
     
@@ -120,7 +118,7 @@ paymentPlan.PaymentStatus__c = 'Paid';
             
             if(oldMap != null){
                 
-                if (!oldMap.get(paymentPlan.Id).SendToSAP__c && paymentPlan.SendToSAP__c && paymentPlan.ShowSyncButton__c) {
+                if (!oldMap.get(paymentPlan.Id).SendToSAP__c && paymentPlan.SendToSAP__c) {
                     paymentPlanIds.add(paymentPlan.Id);
                 }
                 

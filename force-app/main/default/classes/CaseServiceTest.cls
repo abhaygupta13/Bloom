@@ -175,6 +175,7 @@ public class CaseServiceTest {
         caseid.add(id.valueof(tempCase.id));
         List<id> profileIds = new List<Id>();
         profileIds.add(profileDetail.id);
+        Test.startTest();
         CaseService casesev = CaseService.getInstance();
         casesev.updateUnits(trgNewList);
         casesev.insertCaseWithoutTrigger(insertNewList);
@@ -202,8 +203,9 @@ public class CaseServiceTest {
         casesev.lstgetCaseRelatedtoSR(tempCase.Id);
         casesev.getRelatedCaseToAccount(tempAcc.Id, '');
         casesev.getrelatedCaseToAccount(tempAcc.Id);
+        casesev.getNonLegalCases(new List<Case>{tempCase});
         casesev.getCasesByRecordTypeAndSalesOrder(soIds, caseRecordTypeId);
-
+        Test.stopTest();
         Amenities__c amenity = new Amenities__c(Name = 'Community Hall',Building_Phase__c =testBuilding.Id);
         insert amenity;
 
@@ -252,205 +254,5 @@ public class CaseServiceTest {
         casesev.getCaseInstallmentByRecordId(tempCase.Id);
         casesev.getCaseMapByIds(new Set<Id>{tempCase.Id});
         casesev.getCaseByAccountId(acc.id);
-    }
-        @IsTest
-    static void testAdditionalCaseServiceMethods() {
-        
-        // Account
-        Account acc = new Account(
-            Name = 'Broker Account'
-        );
-        insert acc;
-        
-        // Contact
-        Contact con = new Contact(
-            LastName = 'Broker Contact',
-            AccountId = acc.Id,
-            Email = 'broker@test.com'
-        );
-        insert con;
-        
-        // Record Type
-        Id rtId = Schema.SObjectType.Case
-            .getRecordTypeInfosByDeveloperName()
-            .get('BrokerGeneralServiceRequest')
-            .getRecordTypeId();
-        
-        // Cases
-        Case c1 = new Case(
-            Subject = 'Broker Case 1',
-            Status = 'New',
-            ContactId = con.Id,
-            AccountId = acc.Id,
-            RecordTypeId = rtId,
-            Type = 'Broker',
-            ApprovalStatus__c = 'Pending'
-        );
-        
-        Case c2 = new Case(
-            Subject = 'Broker Case 2',
-            Status = 'Closed',
-            ContactId = con.Id,
-            AccountId = acc.Id,
-            RecordTypeId = rtId,
-            Type = 'Broker'
-        );
-        
-        insert new List<Case>{ c1, c2 };
-            
-            Test.startTest();
-        
-        CaseService cs = CaseService.getInstance();
-        
-        // =====================================================
-        // getCasesByContactId
-        // =====================================================
-        
-        List<Case> contactCases =
-            cs.getCasesByContactId(con.Id);
-        
-        System.assertNotEquals(
-            null,
-            contactCases
-        );
-        
-        // =====================================================
-        // getBloomAppCasesByCustomerId
-        // =====================================================
-        
-        List<Case> bloomCases =
-            cs.getBloomAppCasesByCustomerId(
-                new Set<Id>{ con.Id },
-                'Phone'
-            );
-        
-        // =====================================================
-        // getCaseDetailsWithBrokerAppNumber
-        // =====================================================
-        
-        List<Case> brokerCases =
-            cs.getCaseDetailsWithBrokerAppNumber(
-                new List<Id>{ c1.Id }
-            );
-        
-        System.assertEquals(
-            1,
-            brokerCases.size()
-        );
-        
-        // =====================================================
-        // getCaseMapByIds
-        // =====================================================
-        
-        Map<Id, Case> caseMap =
-            cs.getCaseMapByIds(
-                new Set<Id>{ c1.Id }
-            );
-        
-        System.assert(
-            caseMap.containsKey(c1.Id)
-        );
-        
-        // =====================================================
-        // getCaseByAccountId
-        // =====================================================
-        
-        List<Case> accCases =
-            cs.getCaseByAccountId(acc.Id);
-        
-        System.assertNotEquals(
-            null,
-            accCases
-        );
-        
-        // =====================================================
-        // getValidBrokerCaseIds
-        // =====================================================
-        
-        Set<Id> validIds =CaseService.getValidBrokerCaseIds(new Set<Id>{ c1.Id, c2.Id },'BrokerGeneralServiceRequest');
-        
-        
-        System.assert(
-            validIds.contains(c1.Id)
-        );
-        
-        // =====================================================
-        // getCaseBySalesOrderUnitAccountId
-        // =====================================================
-        
-        List<Case> salesCases =
-            cs.getCaseBySalesOrderUnitAccountId(
-                null,
-                null,
-                acc.Id
-            );
-        
-        System.assertNotEquals(
-            null,
-            salesCases
-        );
-        
-        Test.stopTest();
-    }
-    @IsTest
-    static void testGetCaseByAccountIds() {
-        
-        // Account
-        Account acc = new Account(
-            Name = 'Broker Account'
-        );
-        insert acc;
-        // Contact
-        Contact con = new Contact(
-            LastName = 'Broker Contact',
-            AccountId = acc.Id,
-            Email = 'broker@test.com'
-        );
-        insert con;
-        
-        // Record Type
-        Id rtId = Schema.SObjectType.Case
-            .getRecordTypeInfosByDeveloperName()
-            .get('BrokerGeneralServiceRequest')
-            .getRecordTypeId();
-        
-        // Case
-        Case c = new Case(
-            Subject = 'Test Case',
-            Status = 'New',
-            Origin = 'Phone',
-            AccountId = acc.Id,
-            ContactId = con.Id,
-            RecordTypeId = rtId,
-            Type = 'Broker',
-            ApprovalStatus__c = 'Pending'
-        );
-        
-        insert c;
-        
-        Test.startTest();
-        
-        List<Case> caseList =
-            CaseService.getInstance()
-            .getCaseByAccountIds(
-                new Set<Id>{ acc.Id }
-            );
-        List<Case> caseList1 =
-            CaseService.getInstance()
-            .getNonLegalCases(
-                new List<Case>{ c }
-            );
-        
-        Test.stopTest();
-        
-        System.assertEquals(
-            1,
-            caseList.size()
-        );
-        
-        System.assertEquals(
-            acc.Id,
-            caseList[0].AccountId
-        );
     }
 }

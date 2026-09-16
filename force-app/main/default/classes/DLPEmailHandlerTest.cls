@@ -36,7 +36,7 @@ public class DLPEmailHandlerTest {
         prj.Contractor__c = userRecord.Id; //cnt.Id;
         insert prj;
         
-        Unit__c unt = new Unit__c(Name = 'C-1233',Project__c = prj.Id, Location__Longitude__s = 98.345445, Location__Latitude__s = 22.22222);
+        Unit__c unt = new Unit__c(Name = 'C-1233', Is_Property_keys_given__c = true, Project__c = prj.Id, Location__Longitude__s = 98.345445, Location__Latitude__s = 22.22222);
         insert unt;
         
         WorkOrder wrk = new WorkOrder(

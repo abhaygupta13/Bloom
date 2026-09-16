@@ -56,7 +56,7 @@ public class BCAPP_MoveOutServiceHandler {
                 }
                 renewalReq.Move_Out_Date__c  =  utility_ref.parseDate(inputData.moveOutDate);
                 renewalReq.AccountId = accountId;
-                renewalReq.Email_Address__c = customer[0].Email__c!=null?customer[0].Email__c:customer[0].User_Account__r.Email__c;
+                renewalReq.Email_Address__c = customer[0].Email__c!=null?customer[0].Email__c:customer[0].User_Account__r.PersonEmail;
                 renewalReq.Representative_Email__c = customer[0].Email__c;
                 renewalReq.Unit__c = inputData.unitId;
                 List<Unit_Allocation__c> unitAllocation = uService.fetchUnitAllocationDetails(inputData.unitId,accountId);

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Metadata to maintain all the counters</description>
+    <fields>
+        <fullName>ConstantValueLong__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Constant Value Long</label>
+        <length>131072</length>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ConstantValue__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>To capture the value of the constant</inlineHelpText>
+        <label>Constant Value</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Constant</label>
+    <pluralLabel>Constants</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

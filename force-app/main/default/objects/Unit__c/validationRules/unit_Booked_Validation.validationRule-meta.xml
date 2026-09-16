@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>unit_Booked_Validation</fullName>
-    <active>false</active>
-    <errorConditionFormula>NOT(ISBLANK(Active_Sales_Order__c))&amp;&amp; ISCHANGED(Status__c) &amp;&amp; (ISPICKVAL(Active_Sales_Order__r.Status__c, &apos;Booked&apos;) || ISPICKVAL(Active_Sales_Order__r.Status__c, &apos;Approve Pending&apos;)) &amp;&amp;  NOT(ISPICKVAL( Status__c , &apos;Booked&apos;) )</errorConditionFormula>
-    <errorMessage>Unit status cannot be changed when the Unit is Booked.</errorMessage>
-</ValidationRule>

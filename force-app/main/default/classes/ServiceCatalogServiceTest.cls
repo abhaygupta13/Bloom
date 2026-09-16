@@ -29,6 +29,36 @@ public class ServiceCatalogServiceTest {
     static void testgetServiceCatalogAndrelatedDocuments() {
         Account acc = new Account(Name='Test Acc');
         insert acc;
+         Account account = TestDataFactory.createPersonalAccount('Lastname', '01010101', '1234567890', 'test@gmail.com');
+        account.CustomerType__c = 'Resident';
+        INSERT account;
+        
+        Project__c project = TestDataFactory.createProject('ProjectTest', Date.today() - 1);
+        insert project;
+        
+        HandoverPhase__c handoverPhase = new HandoverPhase__c(
+            Name = 'Test Phase',
+            Project__c = project.Id
+        );
+        insert handoverPhase;
+        
+        BuildingSection__c testBuilding = new BuildingSection__c(
+            Name='Test Building',
+            BuildingSectionCode__c='BL-CAS',
+            Project__c= project.Id
+        );
+        insert testBuilding;
+        
+        Unit__c u = TestDataFactory.createUnit(project.Id, 'A1-G01', 'Unassigned');
+        u.Project__c = project.Id;
+        u.RegistrationDate__c = Date.today();
+        insert u;
+        
+        SalesOrder__c salesOrder = TestDataFactory.createSalesOrder(account.Id, null, null, null, u.Id, 100.00);
+        salesOrder.UnitRegistrationDate__c = Date.today();
+        salesOrder.Status__c = 'Sold';
+        insert salesOrder;
+       
         
         // Create test ServiceCatalog record
         ServiceCatalog__c testServiceCatalog = new ServiceCatalog__c(
@@ -66,6 +96,22 @@ public class ServiceCatalogServiceTest {
         );
         insert testServiceAction2;
         
+         ServiceCatalog__c  servicecatalog = new ServiceCatalog__c();
+        servicecatalog.ProcessFlowType__c= 'Handover';
+        servicecatalog.ProcessType__c = 'Sales';
+        servicecatalog.Active__c= true;
+        servicecatalog.RecordTypeDevName__c = 'Non PHPP';
+        insert servicecatalog;
+        
+        Handover__c hoRec = new Handover__c();
+        hoRec.Sales_Order__c = salesOrder.Id;
+        hoRec.Unit__c = u.Id;
+        hoRec.ServiceCatalog__c = servicecatalog.Id;
+        hoRec.Project__c = project.Id;
+        hoRec.Handover_Phase__c = handoverPhase.Id;
+        insert hoRec;
+       
+        
         List<Integer> intList = new List<Integer>();
         intList.add(1);
         intList.add(2);
@@ -89,13 +135,16 @@ public class ServiceCatalogServiceTest {
         servCatalogRec.getServActionsByCatalogIdAndOrder(serviceCatalogIdList,intList);
         servCatalogRec.getServiceCatalogType();
         servCatalogRec.getServiceCatalog('Service Request','Financial - Payment Service','Postpone/Defer Payment');
+        servCatalogRec.getServiceCatalogForBloomApp('Service Request','Financial - Payment Service','Postpone/Defer Payment');
         servCatalogRec.getServiceCatalogByName('Service-Request-Default-Unit');
-        servCatalogRec.getServiceCatalogCategories('Service Request');
-        servCatalogRec.getServiceCatalogSubCategories('Service Request','Financial - Payment Service');
+        servCatalogRec.getServiceCatalogCategories('Service Request','Account');
+        servCatalogRec.getServiceCatalogSubCategories('Service Request','Financial - Payment Service','Account');
         servCatalogRec.getServiceCatalogBySubCategories('Postpone/Defer Payment');
         servCatalogRec.getServActionsByTasks(new List<String>(), new List<String>());
         servCatalogRec.getNextCaseServiceAction(csList);
         servCatalogRec.getCurrentCaseServiceAction(csList);
+        servCatalogRec.getCurrentAndNextHandoverServiceAction(new List<Handover__c>{hoRec});
+         servCatalogRec.getHOTaskServiceActions(new List<Handover__c>{hoRec});
         Test.stopTest();
         
     }
@@ -121,4 +170,31 @@ public class ServiceCatalogServiceTest {
         ServiceCatalogService servCatalogRec = ServiceCatalogService.getInstance();
         servCatalogRec.getBySubCategory('test','test');
     }
+    @isTest
+static void testGetServiceCatalogByLocation() {
+    
+    // Create test data
+    ServiceCatalog__c sc = new ServiceCatalog__c(
+        Name = 'Test Service',
+        Type__c = 'Service Request',
+        Category__c = 'Financial - Payment Service',
+        SubCategory__c = 'Postpone/Defer Payment',
+        Location__c = 'Dubai',
+        RecordTypeDevName__c = 'DefaultUnit'
+    );
+    insert sc;
+
+    Test.startTest();
+    
+    ServiceCatalogService servCatalogRec = ServiceCatalogService.getInstance();
+    
+    servCatalogRec.getServiceCatalogByLocation(
+        'Service Request',
+        'Financial - Payment Service',
+        'Postpone/Defer Payment',
+        'Dubai'
+    );
+    
+    Test.stopTest();
+}
 }

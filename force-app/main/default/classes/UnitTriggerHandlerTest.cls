@@ -44,6 +44,9 @@ private class UnitTriggerHandlerTest {
     @isTest static void TestMethod2(){
         Test.startTest();
         unit__c unit= [Select id,name from Unit__c limit 1];
+        unit.IsInactive__c = true;
+        update unit;
+        unit.IsInactive__c = false;
         unit.Send_to_GIS__c=true;
         update unit;
         unit.SaleableArea__c = 502;

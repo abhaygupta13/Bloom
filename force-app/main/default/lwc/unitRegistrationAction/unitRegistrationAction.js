@@ -298,8 +298,7 @@ export default class UnitRegistrationAction extends NavigationMixin(LightningEle
                 } else if (e.unitRegDate) {
                     let tempObj = {}
                     tempObj.Id = e.Active_Sales_Order__c;
-                    tempObj.ADM_DLD_Pre_Registered_Date__c = e.unitRegDate;
-                    tempObj.ADM_DLD_Pre_Registered__c = 'Registered';
+                    tempObj.UnitRegistrationDate__c = e.unitRegDate;
                     salesOrderRecordTobeUpdated.push(tempObj);
                     readyToProcessRecords = true;
                     //console.log('tempObj : ' + JSON.stringify(tempObj));

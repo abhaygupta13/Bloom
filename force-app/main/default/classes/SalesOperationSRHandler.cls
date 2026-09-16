@@ -87,12 +87,12 @@ public inherited sharing class SalesOperationSRHandler {
             return response;
         }
         
-        if(caseRecord.Step__c !='Final'){          
+        if(caseRecord.Step__c !='Final'){
                 response.put('status', 'error');
                 response.put('message', 'Invalid Case Step.');
                 return response;
             
-        }
+            }
         if(caseRecord.CaseClosureRemarks__c == null){
             response.put('status', 'error');
              response.put('message', 'Case Closure Remarks are mandatory.');

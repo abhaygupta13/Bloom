@@ -625,8 +625,8 @@ public class MergeAccountUsingTradeLicenseNumber {
             con.ShareHoldingPercentage__c = ba.ShareHoldingPercentage__c;
             con.PassportNumber__c = ba.PassportNumber__c;
             con.PassportExpiryDate__c = ba.PassportExpiryDate__c;
-            con.Emirates_Id__c = ba.NationalID__c;
-            con.EID_Expiry_Date__c = ba.NationalIDExpiryDate__c;
+            con.NationalIdNumber__c = ba.NationalID__c;
+            con.NationalIdExpiryDate__c = ba.NationalIDExpiryDate__c;
             con.Title = ba.Title__c;
             con.IsActive__c = true;
             con.Designation__c = ba.Designation__c;

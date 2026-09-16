@@ -130,13 +130,6 @@ public class DocumentController {
                             DocumentType__r.MultiDocuments__c,Contact__c
                             FROM Document__c WHERE AppRegistration__c = :recordId AND DocumentType__c != null];
         }
-        else if(recordId.getSObjectType() == Community__c.SobjectType){
-            documentList = [SELECT Id, Name, Community__c , Document_Name__c, DocumentType__c, ContentDocumentId__c,
-                            CreatedDate, CreatedById, CreatedBy.Name, LastModifiedDate, LastModifiedBy.Name,
-                            DocumentType__r.ShareWithCustomer__c, DocumentType__r.IsSystemUpload__c,
-                            DocumentType__r.MultiDocuments__c,Contact__c
-                            FROM Document__c WHERE Community__c  = :recordId AND DocumentType__c != null];
-        }
 
         return documentList;
     }
@@ -184,17 +177,7 @@ public class DocumentController {
         Id emailTemplateId = objDocument.DocumentType__r.EmailTemplateId__c;
         
         List<ContentDocumentLink> cdlList = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE LinkedEntityId = :recordId];
-        /*List<ContentVersion> cvList = [SELECT Id, Title, VersionData, FileType, ContentDocumentId FROM ContentVersion WHERE ContentDocumentId = :cdlList[0].ContentDocumentId AND IsLatest = True];
-        Messaging.SingleEmailMessage objMail;
-        if(objDocument.Opportunity__r.Contact__c != NULL){
-            objMail = objEmailService.getSingleEmailMessageWithTargetObjectId(emailTemplateId, null, objDocument.Opportunity__r.Contact__c, objDocument.Opportunity__c, null, null, null);
-        }else{
-            objMail = objEmailService.getSingleEmailMessageWithTargetObjectId(emailTemplateId, null, objDocument.Opportunity__r.Account.PersonContactId, objDocument.Opportunity__c, null, null, null);
-        }
-        Messaging.EmailFileAttachment objFileAttachment = objEmailService.getEmailAttachment(cvList[0].Title, cvList[0].VersionData, 'application/pdf');
-        objMail.setFileAttachments(new Messaging.EmailFileAttachment[] { objFileAttachment}); 
-        emailList.add(objMail); 
-        objEmailService.sendEmail(emailList);*/
+   
     }
     
     //Added By Ranjan
@@ -205,5 +188,4 @@ public class DocumentController {
         .getDocumentArchiveByDocumentId(documentId);
     return documentArchiveList;
     }
-    
 }

@@ -10,17 +10,44 @@ Sr.No.  version              Date                Details
 ****************************************************************************************************************/ 
 
 public class EventTriggerHelper {
-    
+     
     private static final String VALIDATION_Please_UploadLeasing_ADDC_NOC_KHO = 'Please Upload Leasing ADDC NOC before Scheduling KHO Appointment';
     private static final String VALIDATION_Please_UploadLeasing_ADDC_NOC_PHPP = 'Please Upload Leasing ADDC NOC before Scheduling KHO Appointment';
     private static final string ABSENCE_RT_DEV_NAME_Non_Availability { get { return 'Non_Availability'; } }
+    private static final string Select_Customer_Availability = 'Please select Customer Availability for CHO on the related Handover';
+    private static final string Cannot_Book_Appointment = 'You cannot book an appointment if customer is not available. Please update Customer Availability for CHO if customer is available.';
+    private static final string Delete_Existing_Appointment = 'To reschedule new orientation appointment, please set orientation appointment status as Cancelled';
+    private static final string Customer_Available = 'Customer Available';
+    private static final string Customer_Not_Available = 'Customer Not available';
+    private static final string Customer_Deligate_To_Bloom	 = 'Customer Delegate To Bloom';
+    private static final string Orientation_Appointment_Status_Cancelled = 'Cancelled';
+    private static final string Orientation_Appointment_Status_Scheduled = 'Scheduled';
+    private static final string Orientation_Appointment_Status_ReScheduled = 'ReScheduled';
+    private static final string SO_STATUS_CANCELLED = 'Cancelled';
+    private static final string HO_CHO_Snagging_Report = 'CHO Snagging Report';
+    private static final string HO_CHO_DeSnagging_Report = 'CHO Desnagging Report';
+    private static final string Orientation_Appointment = 'Home Orientation Appointment';
+    private static final string KHO_Appointment = 'KHO Appointment';
+    private static final string Signing_Document_Appointment = 'Signing Document Appointment';
+    private static final string Handover_Sub_Status_Lease_Agreement = 'Lease Agreement';
+    private static final string Leasing_ADDC_NOC = 'Leasing ADDC NOC';
+    private static final string Handover_Payment_Type_PHPP = 'PHPP';
+    private static final String STATUS_SCHEDULED_STR { get { return 'Scheduled'; } }
+    private static final String STATUS_CANCELLED_STR { get { return 'Cancelled'; } }
+    private static final String STATUS_RESCHEDULED_STR { get { return 'Rescheduled'; } }
+    private static final String STATUS_AVAILABLE_STR { get { return 'Available'; } }
+    private static final string APPOINTMENT_STR { get { return 'Appointment'; } }
+    private static final string MTD_OWE_NO_REPLY_BLOOM_EMAIL_ID { get { return 'BloomNoReplyOWEmailId'; } }
+    private static final String APPOINTMENT_SCHEDULED_EMAIL_TEMPLATE_ID = 'AppointmentScheduledEmailTemplateId';
+    private static final String APPOINTMENT_RESCHEDULED_EMAIL_TEMPLATE_ID = 'AppointmentRescheduledEmailTemplateId';
+    private static final String APPOINTMENT_CANCELLED_EMAIL_TEMPLATE_ID = 'AppointmentCancelledEmailTemplateId';
+    
     
     public static void checkValidationAndUpdateHandover(List<Event> newEventList) {
         DocumentService objDocumentService = DocumentService.getInstance();
         Set<Id> handOverIds = new Set<Id>();
         for (Event evt : newEventList) {
-            System.debug('evt.WhatId ::::: '+ evt.WhatId);
-            if (String.isNotBlank(evt.WhatId)) {
+            if (evt.Type != APPOINTMENT_STR && String.isNotBlank(evt.WhatId)) {
                 if (evt.WhatId.getSObjectType() == Handover__c.SobjectType) {
                     handOverIds.add(evt.WhatId);
                 }
@@ -55,9 +82,9 @@ public class EventTriggerHelper {
                 Integer existingEvent = (existingEvents == null) ? 0 : existingEvents.size();
                 if (handover != null) {
                     if (String.isBlank(handover.Customer_Availability_for_CHO__c)) {
-                        evt.addError(HandoverConstants.Select_Customer_Availability);
+                        evt.addError(Select_Customer_Availability);
                     }
-                    else if(handover.Customer_Availability_for_CHO__c != HandoverConstants.Customer_Available){
+                    else if(handover.Customer_Availability_for_CHO__c !=Customer_Available){
                         evt.addError(HandoverConstants.Cannot_Book_Appointment);
                     }
                     else if(evt.Type == 'Home Orientation Appointment' && (handover.Orientation_Appointment_Status__c == HandoverConstants.Orientation_Appointment_Status_Scheduled ||
@@ -68,15 +95,7 @@ public class EventTriggerHelper {
                     else if(evt.Type == 'KHO Appointment' && (!documentMap.get(evt.WhatId).contains(HandoverConstants.HO_CHO_Snagging_Report) || !documentMap.get(evt.WhatId).contains(HandoverConstants.HO_CHO_DeSnagging_Report))) {
                         evt.addError('Please upload CHO Snagging/DeSangging Reports.');
                     }
-                    /*else if(handover.Sub_Status__c == HandoverConstants.Handover_Status_Mortgage_Cheque_Clearance){
-                        Document__c doc = documentMap.get(handover.Id).get(HandoverConstants.Leasing_ADDC_NOC);
-                        if (doc == null || doc.ContentDocumentId__c == null) {
-                            evt.addError(VALIDATION_Please_UploadLeasing_ADDC_NOC_KHO);
-                        }
-                        
-                    }*/
                     else if(handover.Sub_Status__c == HandoverConstants.Handover_Sub_Status_Lease_Agreement){
-                        //Document__c doc = documentMap.get(handover.Id).get(HandoverConstants.Leasing_ADDC_NOC);
                         if (!documentMap.get(evt.WhatId).contains(HandoverConstants.Leasing_ADDC_NOC)) {
                             evt.addError(VALIDATION_Please_UploadLeasing_ADDC_NOC_PHPP);
                         }
@@ -100,12 +119,10 @@ public class EventTriggerHelper {
             Map<Id, Event> handoverIdToEventMap = new Map<Id, Event>();
             HandoverService objHandoverService = HandoverService.getInstance();
             HandoverPhaseService objHandoverPhaseService = HandoverPhaseService.getInstance();
-            /* Map<String, Object> response = new Map<String, Object>();
-            response.put('status', 'success');
-            response.put('message', 'Handover Status Updated.'); */
 
+            
             for (Event evt : newEventList) {
-                if (String.isNotBlank(evt.WhatId)) {                    
+                if (evt.Type != APPOINTMENT_STR && String.isNotBlank(evt.WhatId)) {
                     if(evt.WhatId.getSObjectType() == Handover__c.SobjectType) {
                         handoverIds.add(evt.WhatId);
                         handoverIdToEventMap.put(evt.WhatId, evt);
@@ -118,23 +135,23 @@ public class EventTriggerHelper {
             }
             Map<Id, Handover__c> handoverMap = new Map<Id, Handover__c>(objHandoverService.getHandoverByIds(handoverIds));
             Set<Id> phaseIds = new Set<Id>();
-        for (Handover__c ho : handoverMap.values()) {
-            if (ho.Handover_Phase__c != null) {
-                phaseIds.add(ho.Handover_Phase__c);
+            for (Handover__c ho : handoverMap.values()) {
+                if (ho.Handover_Phase__c != null) {
+                    phaseIds.add(ho.Handover_Phase__c);
+                }
             }
-        }
             
             // Get Handover Record Type for comparison
             Id handoverRecordTypeId = Utility.getRecordTypeIdByDevName(Handover__c.SObjectType, 'Handover');
-          Map<Id, HandoverPhase__c> phaseMap = new Map<Id, HandoverPhase__c>();
-        if (!phaseIds.isEmpty()) {
-            phaseMap = new Map<Id, HandoverPhase__c>(objHandoverPhaseService.getHandoverPhaseInfo(phaseIds));
-        }
+            Map<Id, HandoverPhase__c> phaseMap = new Map<Id, HandoverPhase__c>();
+            if (!phaseIds.isEmpty()) {
+                phaseMap = new Map<Id, HandoverPhase__c>(objHandoverPhaseService.getHandoverPhaseInfo(phaseIds));
+            }
             
             // Lists for DML operations
             List<Handover__c> handoversToUpdate = new List<Handover__c>();
             
-          //  List<SendEmailInvocable.EmailRequest> emailRequests = new List<SendEmailInvocable.EmailRequest>();
+          
             
             for (Id handoverId : handoverIds) {
                 Event evt = handoverIdToEventMap.get(handoverId);
@@ -144,9 +161,9 @@ public class EventTriggerHelper {
                     continue;
                 }
                 HandoverPhase__c handoverPhase = phaseMap.get(handover.Handover_Phase__c);
-            if (handoverPhase == null) {
-                continue;
-            }
+                if (handoverPhase == null) {
+                    continue;
+                }
                 
                 // Decision 1: If Appointment Booked with Customer
                 if (evt.Type == HandoverConstants.Orientation_Appointment && handover.Customer_Availability_for_CHO__c == HandoverConstants.Customer_Available) {
@@ -160,81 +177,51 @@ public class EventTriggerHelper {
                         handover.Orientation_Appointment_Status__c = HandoverConstants.Orientation_Appointment_Status_Scheduled;
                         handoversToUpdate.add(handover);
                         if (String.isNotBlank(handoverPhase.CHOAppointmentConfirmEmailTempId__c)) {
-                        SendEmailInvocable.sendEmail(handoverPhase.CHOAppointmentConfirmEmailTempId__c, handover.Id);
-                    }
-                        
-                        // Send Appointment Booked Email
-                      //  SendEmailInvocable.EmailRequest emailReq = new SendEmailInvocable.EmailRequest();
-                      //  emailReq.recordId = handover.Id;
-                      //  emailReq.templateName = HandoverConstants.Appointment_Booked_Template;
-                     //   emailRequests.add(emailReq);
+                            SendEmailInvocable.sendEmail(handoverPhase.CHOAppointmentConfirmEmailTempId__c, handover.Id);
+                        }
                         
                     } else if (handover.Orientation_Appointment_Status__c == HandoverConstants.Orientation_Appointment_Status_Cancelled) {
                         // Appointment Status Cancelled - Set to ReScheduled
                         handover.Orientation_Appointment_Status__c = HandoverConstants.Orientation_Appointment_Status_ReScheduled;
                         handoversToUpdate.add(handover);
                         if (String.isNotBlank(handoverPhase.CHOReschedulingappoingmentTempId__c) ) {
-                        SendEmailInvocable.sendEmail(handoverPhase.CHOReschedulingappoingmentTempId__c, handover.Id);
-                    }
+                            SendEmailInvocable.sendEmail(handoverPhase.CHOReschedulingappoingmentTempId__c, handover.Id);
+                        }
                         
-                        // Send Appointment Reschedule Email
-                      //  SendEmailInvocable.EmailRequest emailReq = new SendEmailInvocable.EmailRequest();
-                     //   emailReq.recordId = handover.Id;
-                     //   emailReq.templateName = HandoverConstants.Home_Orientation_Appointment_Rescheduling;
-                    //    emailRequests.add(emailReq);
                     }
+                    
                 } // Decision 2: If Utilities Transfer Completed
-                else if(evt.Type == HandoverConstants.KHO_Appointment && handover.RecordTypeId == handoverRecordTypeId && handover.Is_Notice_of_Completion_Sent__c) {
-                    
-                    // Update Handover Sub Status
-                    /* response = HandoverHandler.validateHandoverNextStep(handover, false);
-                    if(response.get('status') == 'error'){
-                        evt.addError(response.get('message'));
+                else if(evt.Type == Signing_Document_Appointment) { 
+                    if (String.isNotBlank(handoverPhase.AppointmentConfirmSignEmailTempId__c)) {
+                        SendEmailInvocable.sendEmail(handoverPhase.AppointmentConfirmSignEmailTempId__c, handover.Id);
                     }
-                    handover.Sub_Status__c = HandoverConstants.Handover_Sub_Status_Handover_Completed;
-                    handoversToUpdate.add(handover); */
                     
+                }
+                
+                else if(evt.Type == KHO_Appointment && handover.RecordTypeId == handoverRecordTypeId && handover.Is_Notice_of_Completion_Sent__c) { 
                     if (String.isNotBlank(handoverPhase.KHOAppointmentConfirmEmailTempId__c)) {
-                    SendEmailInvocable.sendEmail(handoverPhase.KHOAppointmentConfirmEmailTempId__c, handover.Id);
-                }
-                    
-                    // Send KHO Appointment Scheduled Email
-                   // SendEmailInvocable.EmailRequest emailReq = new SendEmailInvocable.EmailRequest();
-                  //  emailReq.recordId = handover.Id;
-                  //  emailReq.templateName = HandoverConstants.KHO_Appointment_Scheduled_Template;
-                  //  emailRequests.add(emailReq);
-                } // Decision 3: If Payment Type PHPP
-                else if(evt.Type == HandoverConstants.KHO_Appointment && handover.Sub_Status__c == HandoverConstants.Handover_Sub_Status_Lease_Agreement &&
-                        handover.Payment_Type__c == HandoverConstants.Handover_Payment_Type_PHPP && handover.Is_Notice_of_Completion_Sent__c) {
-                    
-                    // Update Handover Sub Status
-                    /* response = HandoverHandler.validateHandoverNextStep(handover, false);
-                    if(response.get('status') == 'error'){
-                        evt.addError(response.get('message'));
+                        SendEmailInvocable.sendEmail(handoverPhase.KHOAppointmentConfirmEmailTempId__c, handover.Id);
                     }
-                    handover.Sub_Status__c = HandoverConstants.Handover_Sub_Status_PHPP_Handover_Keys;
-                    handoversToUpdate.add(handover); */
-                     if (String.isNotBlank(handoverPhase.KHOAppointmentConfirmEmailTempId__c)) {
-                    SendEmailInvocable.sendEmail(handoverPhase.KHOAppointmentConfirmEmailTempId__c, handover.Id);
+                    
                 }
-                    // Send PHPP KHO Appointment Scheduled Email
-                  //  SendEmailInvocable.EmailRequest emailReq = new SendEmailInvocable.EmailRequest();
-                 //   emailReq.recordId = handover.Id;
-                 //   emailReq.templateName = HandoverConstants.KHO_Appointment_Scheduled_Template;
-                 //   emailRequests.add(emailReq);
-                }
+                
+                
+                // Decision 3: If Payment Type PHPP
+                else if(evt.Type == KHO_Appointment && handover.Sub_Status__c ==Handover_Sub_Status_Lease_Agreement &&
+                        handover.Payment_Type__c == Handover_Payment_Type_PHPP && handover.Is_Notice_of_Completion_Sent__c) {
+                           
+                            if (String.isNotBlank(handoverPhase.KHOAppointmentConfirmEmailTempId__c)) {
+                                SendEmailInvocable.sendEmail(handoverPhase.KHOAppointmentConfirmEmailTempId__c, handover.Id);
+                            }
+                            
+                        }
             }
             
-            //update handovers
-            //objHandoverService.objHandoverService(handoversToUpdate);
+            
             if(!handoversToUpdate.isEmpty()){
                 update handoversToUpdate;
             }
-            
-            // Send emails
-           // if (!emailRequests.isEmpty()) {
-          //      SendEmailInvocable.sendEmail(emailRequests);
-          //  }
+           
             
         } catch (Exception ex) {
             ErrorLogHandler.logError('EventTriggerHelper', 'handleEventNotificationToCustomer', ex, '');
@@ -382,5 +369,138 @@ public class EventTriggerHelper {
             }
         }
     }
-   
+    
+    /**
+     * @description - Common entry point for Event after-insert processing.
+     * Events are evaluated once and routed to the appropriate
+     * feature-specific handler.
+     *
+     * @param newEventList Newly inserted Event records.
+     */
+    public static void handleAfterInsert(List<Event> newEventList){
+        List<AppointmentSlot__c> slotsToUpdate = new List<AppointmentSlot__c>();
+        List<Event> appointmentEvents = new List<Event>();
+        Set<Id> usersIds = new Set<Id>();
+        
+        for(Event event : newEventList){
+
+            if(event.Type == APPOINTMENT_STR && event.AppointmentSlot__c != null && event.AppointmentStatus__c == STATUS_SCHEDULED_STR){
+                slotsToUpdate.add( new AppointmentSlot__c(Id = event.AppointmentSlot__c, Status__c = STATUS_SCHEDULED_STR));
+            }
+            
+            if(event.Type == APPOINTMENT_STR && event.AppointmentStatus__c == STATUS_SCHEDULED_STR){
+                usersIds.add(event.OwnerId);
+                appointmentEvents.add(event);
+            }
+        }
+        AppointmentSlotService.getInstance().updateAppointmentSlots(slotsToUpdate);
+        
+        if (!appointmentEvents.isEmpty())
+            sendAppointmentStatusNotificationEmail(appointmentEvents, usersIds);
+        
+        
+    }
+    
+    /**
+     * @description - Handles appointment status changes.
+     * When an appointment is cancelled or rescheduled, the related
+     *  slot is updated based on whether the appointment is in the future or has already started/passed.
+     *
+     *  Future cancelled or rescheduled appointments make the slot available. Past or current appointments are marked according to their new status.
+     *
+     * @param newEventList Updated appointments.
+     * @param oldEventMap Previous versions of the appointments, keyed by Id.
+     */
+    public static void handleAfterUpdate(List<Event> newEventList, Map<Id, Event> oldEventMap) {
+        List<AppointmentSlot__c> slotsToUpdate = new List<AppointmentSlot__c>();
+        Set<Id> userIds = new Set<Id>();
+        List<Event> appointmentEvents = new List<Event>();
+        
+        for (Event newEvent : newEventList){
+            Boolean validAppointmentStatus = newEvent.AppointmentStatus__c == STATUS_RESCHEDULED_STR || newEvent.AppointmentStatus__c == STATUS_CANCELLED_STR;
+            if (newEvent.Type == APPOINTMENT_STR && newEvent.AppointmentSlot__c != null && newEvent.AppointmentStatus__c != oldEventMap.get(newEvent.Id).AppointmentStatus__c) {
+                slotsToUpdate.add(new AppointmentSlot__c(Id = newEvent.AppointmentSlot__c, Status__c = newEvent.StartDateTime > System.now() ? STATUS_AVAILABLE_STR : newEvent.AppointmentStatus__c));
+            }
+            
+            if(newEvent.Type == APPOINTMENT_STR && newEvent.AppointmentStatus__c != oldEventMap.get(newEvent.Id).AppointmentStatus__c && validAppointmentStatus){
+                appointmentEvents.add(newEvent);
+                userIds.add(newEvent.OwnerId);
+            }
+        }
+        AppointmentSlotService.getInstance().updateAppointmentSlots(slotsToUpdate);
+        if (!appointmentEvents.isEmpty())
+            sendAppointmentStatusNotificationEmail(appointmentEvents, userIds);
+    }
+    
+    /**
+     * @description - Sends an email notification to the customer based on the appointment status. Determines whether the appointment is scheduled,
+     * cancelled, or rescheduled, retrieves the customer details from the related Contact or Lead, renders the corresponding email template,
+     * replaces appointment and customer information in the email body, and sends the notification to the customer.
+     *
+     * @param events  Updated appointment events for which notifications should be sent.
+     * @param userIds IDs of the appointment owners used to retrieve account manager details.
+     */
+    public static void sendAppointmentStatusNotificationEmail(List<Event> events, Set<Id> userIds){
+        
+        Map<String, String> templateFieldValues = new Map<String, String>();
+        Map<Id, Contact> contactMap = new Map<Id, Contact>();
+        Map<Id, Lead> leadMap = new Map<Id, Lead>();
+        Map<Id, Account> accountMap = new Map<Id, Account>();
+        Set<Id> contactIds = new Set<Id>();
+        Set<Id> leadIds = new Set<Id>();
+        
+        EmailService objEmailService = EmailService.getInstance();
+        MetadataService objMetadataService = MetadataService.getInstance();
+        Map<Id, User> userMap = UserService.getInstance().getActiveUsersByIds(userIds);
+        
+        EmailTemplate appointmentScheduledTemplate = objEmailService.getEmailTemplateById(objMetadataService.getAppSettingTextValue(APPOINTMENT_SCHEDULED_EMAIL_TEMPLATE_ID));
+        EmailTemplate appointmentCancelledTemplate = objEmailService.getEmailTemplateById(objMetadataService.getAppSettingTextValue(APPOINTMENT_CANCELLED_EMAIL_TEMPLATE_ID));
+        EmailTemplate appointmentRescheduledTemplate = objEmailService.getEmailTemplateById(objMetadataService.getAppSettingTextValue(APPOINTMENT_RESCHEDULED_EMAIL_TEMPLATE_ID));
+        Id noReplyBloomOWDId = objMetadataService.getAppSettingTextValue(MTD_OWE_NO_REPLY_BLOOM_EMAIL_ID);
+        templateFieldValues.put('NoReplyBloomEmail', noReplyBloomOWDId);
+
+        for (Event eventRec : events) {
+            if (eventRec.WhoId != null) {
+                if (eventRec.WhoId.getSObjectType() == Contact.SObjectType) {
+                    contactIds.add(eventRec.WhoId);
+                }else if (eventRec.WhoId.getSObjectType() == Lead.SObjectType) {
+                    leadIds.add(eventRec.WhoId);
+                }
+            }
+        }
+        if (!contactIds.isEmpty())
+            contactMap = ContactService.getInstance().getContactsByIds(contactIds);
+        if (!leadIds.isEmpty())
+            leadMap = LeadService.getInstance().getLeadsByIds(leadIds);
+        
+        EmailTemplate emailTemplate = null;
+        List<Messaging.SingleEmailMessage> emailList = new List<Messaging.SingleEmailMessage>();
+        
+        for(Event eventRec : events) {
+            if (eventRec.Type == APPOINTMENT_STR) {
+                if (eventRec.AppointmentStatus__c == STATUS_SCHEDULED_STR) {
+                emailTemplate = appointmentScheduledTemplate;
+            }else if(eventRec.AppointmentStatus__c == STATUS_CANCELLED_STR){
+                emailTemplate = appointmentCancelledTemplate;
+            }else if(eventRec.AppointmentStatus__c == STATUS_RESCHEDULED_STR){
+                emailTemplate = appointmentRescheduledTemplate;
+            }
+            
+            if (eventRec.WhoId.getSObjectType() == Contact.SObjectType) {
+                Contact contactRec = contactMap.get(eventRec.WhoId);
+                templateFieldValues.put('customerName', String.isBlank(contactRec.Name) ? '' : contactRec.Name);
+                templateFieldValues.put('customerNameArabic',  String.isBlank(contactRec.Account.NameinArabic__c) ? contactRec.Name : contactRec.Account.NameinArabic__c);
+            } else if (eventRec.WhoId.getSObjectType() == Lead.SObjectType) {
+                Lead leadRec = leadMap.get(eventRec.WhoId);
+                templateFieldValues.put('customerName', String.isBlank(leadRec.Name) ? '' : leadRec.Name);
+                templateFieldValues.put('customerNameArabic', String.isBlank(leadRec.NameArabic__c) ? leadRec.Name : leadRec.NameArabic__c);
+            }
+            User accountManager = userMap.get(eventRec.OwnerId);
+            templateFieldValues.put('accountManagerName', accountManager?.Name);
+            templateFieldValues.put('accountManagerPhone', accountManager?.MobilePhone);
+            emailList.add(ActivityService.getInstance().createAppointmentNotificationEmail(emailTemplate, eventRec, templateFieldValues));
+        }
+    }
+        objEmailService.sendEmail(emailList);
+    }
 }

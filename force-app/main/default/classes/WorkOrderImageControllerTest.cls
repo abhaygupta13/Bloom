@@ -33,6 +33,7 @@ public class WorkOrderImageControllerTest {
         Unit__c unt = new Unit__c();
         unt.Name = 'C-1233';
         unt.Project__c = prj.Id;
+        unt.Is_Property_keys_given__c = true;
         insert unt;
         
         Account acc = new Account();

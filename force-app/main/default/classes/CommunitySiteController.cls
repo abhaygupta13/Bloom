@@ -7,7 +7,7 @@ Created Date: 16 July 2025
 *****************************************************************************************/
 
 public without sharing class CommunitySiteController {
-    
+
     private static final String VEHICLE_PARKING_REQUEST_RT { get { return 'VehicleParkingRequest'; } }
     private static final String WEB_STR { get { return 'Web';}}
     private static final String VEHICLE_PARKING_REGISTRATION_APPROVAL { get { return 'VehicleParkingRegistration'; } }
@@ -21,32 +21,32 @@ public without sharing class CommunitySiteController {
     private static final String ACTIVE_STR { get { return 'Active'; } }
     private static final String INACTIVE_STR { get { return 'Inactive'; } }
     private static final string BLOOM_CUSTOM_NOTIFICATION_ID { get { return 'BloomCustomNotifications'; } }
-    
-    
+
+
     
     @AuraEnabled(cacheable=true)
     public static List<Unit_Allocation__c> getUnitsForCustomer(Id customerId){
         Set<String> userTypeSet = new Set<String>{'Owner','Tenant'};
-            UnitAllocationService service = new UnitAllocationService();
+        UnitAllocationService service = new UnitAllocationService();
         return service.fetchUnitAllocationByAccIds(userTypeSet, new Set<Id>{customerId}, true, true);
     }
-    
+
     @AuraEnabled(cacheable=false)
     public static Boolean hasActiveVehicleRequest(Id accountId, Id unitId){
-        
+
         CaseService caseServiceObj = CaseService.getInstance();
         List<Case> activeVehicleReqList =  caseServiceObj.getActiveVehicleParkingRequest(accountId, unitId, 'In Progress');
         return activeVehicleReqList.size() > 0 ? true : false;
     }
-    
-    
+
+
     //Create Case and related Vehicle Parking Details record
     @AuraEnabled
     public static void createVehicleDetails(String allDetails) {
         CaseService caseServiceObj = CaseService.getInstance();
         ContentService objContentService = ContentService.getInstance();
         VehicleParkingService objVehicleParkingService = VehicleParkingService.getInstance();
-        
+
         Map<String, Object> data = (Map<String, Object>) JSON.deserializeUntyped(allDetails);
         List<VehicleParkingDetails__c> vehicles = (List<VehicleParkingDetails__c>) JSON.deserialize(JSON.serialize(data.get('vehicles')),List<VehicleParkingDetails__c>.class);        
         //insert case record
@@ -62,7 +62,7 @@ public without sharing class CommunitySiteController {
             cv.FirstPublishLocationId = docs[0].Id;
             objContentService.createContentVersion(new List<ContentVersion>{cv});
         }
-        
+
         //update case id with newely created case
         for(VehicleParkingDetails__c vehicleDetail : vehicles ){
             vehicleDetail.Case__c = c.Id;
@@ -71,7 +71,7 @@ public without sharing class CommunitySiteController {
         //insert vehicle Parking details with case id
         objVehicleParkingService.createVehicleParkingDetailRecord(vehicles);
     }
-    
+
     public static List<Document__c> createDocuments(Case caseRec, String docName){
         DocumentService objDocumentService = DocumentService.getInstance();
         List<DocumentType__c> caseDocTypeList = objDocumentService.getDocTypes('Case', VEHICLE_PARKING_REQUEST_RT);
@@ -83,7 +83,7 @@ public without sharing class CommunitySiteController {
         }
         return objDocumentService.insertDocuments(documentList);   
     }
-    
+
     public static void invokeANPRApprovaProcess(List<Case> caseList){
         if (caseList == null || caseList.isEmpty()) return;
         MetadataService objMetadataService = MetadataService.getInstance();
@@ -102,7 +102,7 @@ public without sharing class CommunitySiteController {
             Approval.ProcessResult[] results = Approval.process(approvalList);
         }
     }
-    
+
     public static void inactiveVehicleParkingByUnitIds(Set<Id> unitIds){
         VehicleParkingService objVehicleParkingService = VehicleParkingService.getInstance();
         List<VehicleParking__c> vpToUpdateList = new List<VehicleParking__c>();
@@ -113,7 +113,7 @@ public without sharing class CommunitySiteController {
         }
         update vpToUpdateList;
     }
-    
+
     public static void invokeApprovedNRejectedEmail(Set<Id> approvedCaseIds, Set<Id> rejectedCaseIds){
         MetadataService objMetadataService = MetadataService.getInstance();
         EmailService objEmailService = EmailService.getInstance();
@@ -125,13 +125,13 @@ public without sharing class CommunitySiteController {
         List<Case> caseList = objCaseService.getCaseByIds(allCaseIds);
         Id noReplyBloomSalesOWDId = objMetadataService.getAppSettingTextValue(BLOOM_NO_REPLY_SALES_OW_EMAIL_ID);
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
-        
+
         Map<Id, ProcessInstanceStep> caseIdToStepMap = new Map<Id, ProcessInstanceStep>();
         
         for(ProcessInstanceStep step :[SELECT Id,Comments,StepStatus,CreatedDate,Actor.Name,ProcessInstance.TargetObjectId FROM ProcessInstanceStep WHERE ProcessInstance.TargetObjectId IN : rejectedCaseIds AND StepStatus = 'Rejected' ORDER BY CreatedDate DESC]){
             caseIdToStepMap.put(step.ProcessInstance.TargetObjectId, step);
         }
-        
+
         Set<Id> accSet = new Set<Id>();
         for(case c : caseList){
             if(!c.Account.isPersonAccount){
@@ -161,7 +161,7 @@ public without sharing class CommunitySiteController {
             emailBody = emailBody.replace('[Reason]', caseIdToStepMap.containsKey(c.Id) ? caseIdToStepMap.get(c.Id).Comments : ''); 
             emailBody = emailBody.replace('[RequesterName]', c.Account.Name);
             emailBody = emailBody.replace('[RequesterArabicName]', c.Account.NameinArabic__c != null ? c.Account.NameinArabic__c : ''); 
-            
+
             emails.add(objEmailService.getSingleEmailMessage(null, c.AccountId, (c.Account.isPersonAccount == true ?  c.Account.PersonContactId : !accMap.get(c.AccountId).Contacts.isEmpty() ? accMap.get(c.AccountId).Contacts[0].id : ''), emailSubject, emailBody, noReplyBloomSalesOWDId));
         }
         objEmailService.sendEmail(emails);
@@ -181,7 +181,7 @@ public without sharing class CommunitySiteController {
         newCase.TawtheeqContractEndDate__c = String.isNotBlank((String) data.get('tawtheeqEndDate')) ? Date.valueOf((String) data.get('tawtheeqEndDate')) : null ;
         return newCase;
     }
-    
+
     private static String fetchDocumentName(Map<String, Object> data) {
         Boolean isTenant = (data.get('isTenant') != null) && Boolean.valueOf(String.valueOf(data.get('isTenant')));
         Boolean isOwner = (data.get('isOwner') != null) && Boolean.valueOf(String.valueOf(data.get('isOwner')));
@@ -189,25 +189,10 @@ public without sharing class CommunitySiteController {
         if (isOwner) return TITLE_DEED_DOCUMENT_STR;
         return '';
     }
-    
+
     @AuraEnabled(cacheable=true)
     public static Unit__c getUnitNVehicleParkingsByUnitIds(Id unitId){
         UnitService objUnitService = new UnitService();
         return objUnitService.getUnitNVehicleParkingsByUnitIds(unitId);
-    }
-    
-    @AuraEnabled(cacheable=true)
-    public static List<String> getCountryRegionValues() {
-        List<String> countryOptions = new List<String>();
-        Schema.DescribeFieldResult fieldDescribe =  VehicleParkingDetails__c.CountryRegion__c.getDescribe();
-        
-        for (Schema.PicklistEntry entry : fieldDescribe.getPicklistValues()) {
-            if (entry.isActive()) {
-                countryOptions.add(entry.getValue());
-            }
-        }
-        System.debug('Country/Region Picklist Values: ' + countryOptions);
-        
-        return countryOptions;
     }
 }

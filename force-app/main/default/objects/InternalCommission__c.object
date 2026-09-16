@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Internal_Commission_Record_Page2</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Internal_Commission_Record_Page2</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Internal_Commission_Company_Layout</fullName>
+        <fields>Name</fields>
+        <fields>Project__c</fields>
+        <fields>InventoryLaunchCategory__c</fields>
+        <fields>IsActive__c</fields>
+        <fields>StartDate__c</fields>
+        <fields>EndDate__c</fields>
+        <fields>OfferPromotion__c</fields>
+        <label>Internal Commission Company Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to define the Internal Commission. Definition of Commission will be used during Budget Check and when the sales order is created.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>BrokerOnlineCommission__c</fullName>
+        <label>Broker Online Commission %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Building_Phase__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Building/Phase</description>
+        <label>Building/Phase</label>
+        <referenceTo>BuildingSection__c</referenceTo>
+        <relationshipLabel>Internal Commissions</relationshipLabel>
+        <relationshipName>Internal_Commissions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CustomerOnlineCommission__c</fullName>
+        <label>Customer Online Commission %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>DirectCommission__c</fullName>
+        <inlineHelpText>Percent of commission for a direct opportunity with no Broker involved.</inlineHelpText>
+        <label>Direct Commission %</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <description>Date until when the commission percentages are applicable</description>
+        <inlineHelpText>Date until when the commission percentages are applicable</inlineHelpText>
+        <label>End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>IndirectCommission__c</fullName>
+        <description>Percent of commission for a opportunity when Broker is involved.</description>
+        <inlineHelpText>Percent of commission for a opportunity when Broker is involved.</inlineHelpText>
+        <label>Indirect Commission %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>InventoryLaunchCategory__c</fullName>
+        <description>Define if a commission is applicable for &apos;Inventory/Launch&apos;.If the value is blank they the commission definition is considered for all the units.</description>
+        <inlineHelpText>Define if a commission is applicable for &apos;Inventory/Launch&apos;.If the value is blank they the commission definition is considered for all the units.</inlineHelpText>
+        <label>Inventory/Launch Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>InventoryLaunch</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>IsActive__c</fullName>
+        <description>Commission definition is active when end date is blank or end date is greater than today</description>
+        <formula>ISNULL( EndDate__c )  ||  EndDate__c  &gt;=  TODAY()</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Commission definition is active when end date is blank or end date is greater than today</inlineHelpText>
+        <label>Is Active ?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ManagementRefCommission__c</fullName>
+        <label>Management Referral Commission %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>OfferPromotion__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Offer or Promotion to which the commission percentage is applicable.</description>
+        <inlineHelpText>Offer or Promotion to which the commission percentage is applicable.</inlineHelpText>
+        <label>Offer &amp; Promotion</label>
+        <referenceTo>OffersPromotions__c</referenceTo>
+        <relationshipLabel>Internal Commissions</relationshipLabel>
+        <relationshipName>InternalCommissions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>OriginalCreationDate__c</fullName>
+        <label>Original Creation Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>PoolCommission__c</fullName>
+        <label>Pool Commission %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Project name that the commission is applicable. When left blank system considered that it is applicable to all the projects.</description>
+        <inlineHelpText>Project name that the commission is applicable. When left blank system considered that it is applicable to all the projects.</inlineHelpText>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipName>CommissionSetup</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SaleType__c</fullName>
+        <description>Sale Type for which the commision definition is applicable. If the value is blank they the commission definition is considered for all the sales type.</description>
+        <inlineHelpText>Sale Type for which the commision definition is applicable. If the value is blank they the commission definition is considered for all the sales type.</inlineHelpText>
+        <label>Sale Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>SalesType</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SaleValueTo__c</fullName>
+        <description>Commission definition for Sales Value range, Net Amount of the unit To.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Commission definition for Sales Value range, Net Amount of the unit To.</inlineHelpText>
+        <label>Sale Value To</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SalesValueFrom__c</fullName>
+        <description>Commission definition for Sales Value range, Net Amount of the unit From.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Commission definition for Sales Value range, Net Amount of the unit From.</inlineHelpText>
+        <label>Sales Value From</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StaffReferralAmount__c</fullName>
+        <description>Staff Referral Amount that needs to be paid out as commission incase the opportunity was referred by Aldar staff</description>
+        <inlineHelpText>Staff Referral Amount that needs to be paid out as commission incase the opportunity was referred by Aldar staff</inlineHelpText>
+        <label>Staff Referral Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>StaffReferral__c</fullName>
+        <description>Percentage of commission to be paid out incase the opportunity involves a Staff Referral.</description>
+        <inlineHelpText>Percentage of commission to be paid out incase the opportunity involves a Staff Referral.</inlineHelpText>
+        <label>Staff Referral %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <description>Date from which the commission percentages are applicable</description>
+        <inlineHelpText>Date from which the commission percentages are applicable</inlineHelpText>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>UserRole__c</fullName>
+        <description>Role of the user to whom the commission lines should be applicable.</description>
+        <inlineHelpText>Role of the user to whom the commission lines should be applicable.</inlineHelpText>
+        <label>User Role</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Sales Manager</fullName>
+                    <default>true</default>
+                    <label>Sales Manager</label>
+                </value>
+                <value>
+                    <fullName>Head of Sales</fullName>
+                    <default>false</default>
+                    <label>Head of Sales</label>
+                </value>
+                <value>
+                    <fullName>Senior Sales Manager</fullName>
+                    <default>false</default>
+                    <label>Senior Sales Manager</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Internal Commission</label>
+    <nameField>
+        <displayFormat>IC-{000000}</displayFormat>
+        <label>Commission Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Internal Commissions</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>NewFromDocument</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Import</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>PrintableListView</excludedStandardButtons>
+        <searchResultsAdditionalFields>Project__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>BrokerOnlineCommission__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>DirectCommission__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IndirectCommission__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ManagementRefCommission__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>StaffReferral__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PoolCommission__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>InventoryLaunchCategory__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IsActive__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Read</sharingModel>
+    <validationRules>
+        <fullName>Dates_Validation</fullName>
+        <active>true</active>
+        <description>For validating that the start date is before end date</description>
+        <errorConditionFormula>StartDate__c &gt; EndDate__c</errorConditionFormula>
+        <errorDisplayField>StartDate__c</errorDisplayField>
+        <errorMessage>Please provide start date before the end date of the commission setup.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Staff_Referral_Restriction</fullName>
+        <active>true</active>
+        <description>To validate that the both the staff percentage and amount can not be populated.</description>
+        <errorConditionFormula>NOT(ISBLANK(StaffReferralAmount__c))
+&amp;&amp;
+NOT(ISBLANK(StaffReferral__c))</errorConditionFormula>
+        <errorDisplayField>StaffReferral__c</errorDisplayField>
+        <errorMessage>Please fill either the staff referral percentage or staff referral amount.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

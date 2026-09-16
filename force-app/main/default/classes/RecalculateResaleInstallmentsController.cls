@@ -6,7 +6,7 @@ public without sharing class RecalculateResaleInstallmentsController {
         if(salesOrderId == null){
             return 'Invalid Sales Order Id';
         }
-        try{
+       
             ResaleServiceRequestHandler objResaleServiceRequestHandler = ResaleServiceRequestHandler.getInstance();
             MetadataService objMetadataService = MetadataService.getInstance();
             SalesOrderService objSalesOrderService = SalesOrderService.getInstance();
@@ -42,7 +42,7 @@ public without sharing class RecalculateResaleInstallmentsController {
                     List<InstallmentLines__c> handoverInstallments = new List<InstallmentLines__c>();
                     List<InstallmentLines__c> posthandoverInstallments = new List<InstallmentLines__c>();
                     
-                    if(!actualInstallments.isEmpty()){
+                   if(!actualInstallments.isEmpty()){
                         for(InstallmentLines__c line : actualInstallments){
                             if(line.Type__c =='Handover'){
                                 handoverInstallments.add(line);
@@ -53,7 +53,7 @@ public without sharing class RecalculateResaleInstallmentsController {
                             
                         }   
                     }
-                    if(!handoverInstallments.isEmpty()
+                    /*if(!handoverInstallments.isEmpty()
                        &&!posthandoverInstallments.isEmpty()
                        &&(caseRec.TypeOfResale__c =='Resale' 
                           ||caseRec.TypeOfResale__c =='Gifting' 
@@ -65,7 +65,41 @@ public without sharing class RecalculateResaleInstallmentsController {
                     else{
                         System.debug('in else of recalcualte');  
                         objResaleServiceRequestHandler.calculateInstallmentsAndReceipts(caseRec.Sales_Order__c,objSalesOrder,caseRec);  
-                    }
+                    }*/
+                  
+        Boolean hasBothInstallments = !handoverInstallments.isEmpty() && !posthandoverInstallments.isEmpty();
+        Boolean isUnderConstruction = caseRec.ProjectStatus__c == 'Under Construction';
+        
+        Boolean isValidResaleType =
+            caseRec.TypeOfResale__c == 'Resale' ||
+            caseRec.TypeOfResale__c == 'Gifting' ||
+            (
+                (caseRec.TypeOfResale__c == 'Addition/Deletion' ||
+                 caseRec.TypeOfResale__c == 'Add/Del of Kin') &&
+                caseRec.InitialOwnerRemoved__c == 'Yes'
+            );
+        
+        Boolean isDataMigration =
+            caseRec.Sales_Order__r.PaymentPlan__c != null &&
+            caseRec.Sales_Order__r.PaymentPlan__r.Name == 'Data Migration';
+        
+        if (hasBothInstallments) {
+            
+            Boolean shouldProcessPHPP =
+                !isUnderConstruction || (isUnderConstruction && isValidResaleType);
+            
+            if (shouldProcessPHPP) {
+                if (isDataMigration) {
+                    objResaleServiceRequestHandler.calculateInstallmentsForPHPPMigratedProjects(objSalesOrder.PreviousSalesOrder__c, objSalesOrder, caseList[0]);
+                } else {
+                    objResaleServiceRequestHandler.calculateInstallmentsAndReceiptsForPHPP(objSalesOrder.PreviousSalesOrder__c, objSalesOrder, caseList[0]);
+                }
+            }
+            
+        } else {
+            objResaleServiceRequestHandler.calculateInstallmentsAndReceipts(objSalesOrder.PreviousSalesOrder__c, objSalesOrder, caseList[0]);
+        }
+       
                     //objResaleServiceRequestHandler.calculateInstallmentsAndReceipts(objSalesOrder.PreviousSalesOrder__c, objSalesOrder, caseList[0]);
                 }
                 /*List<InstallmentLines__c> installmentLineList = objInstallmentLineService.getFirstInstallmentLineBySalesOrder(salesOrderId);
@@ -75,9 +109,6 @@ objInstallmentLineService.updateInstallmentLines(installmentLineList);
 }*/
             }
             return 'Installments and Receipts created successfully.';
-        }catch (Exception ex) {
-            System.debug('Error: ' + ex.getMessage());
-            throw new AuraHandledException('Error while creating installments and receipts: ' + ex.getMessage());
-        }
+       
     }
 }

@@ -468,4 +468,13 @@ private class ProjectControllerTest {
         }
         Test.stopTest();
     }
+    
+    @IsTest
+    static void testUpdateUnitProject() {
+        Project__c project = [SELECT Id FROM Project__c LIMIT 1];
+        List<Unit__c> lstUnit = [SELECT Id FROM Unit__c LIMIT 1];
+        ProjectController.updateProjectRegistration(project,false);
+        ProjectController.updateUnitRegistration(lstUnit,project);
+        //ProjectController.getAllInstallmentLine(project.Id,Date.today());
+    }
 }

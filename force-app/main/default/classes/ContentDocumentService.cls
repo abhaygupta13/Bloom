@@ -8,7 +8,7 @@
 * 1.0           EaglesDev   9th Nov 2024    Initial draft 
 *****************************************************************************************************/
 
-public inherited sharing class ContentDocumentService {
+public class ContentDocumentService {
     
     public List<ContentVersion> fetchContentVersion( List<ContentVersion> contentVersions){ 
         return [SELECT ContentDocumentId,Title FROM ContentVersion WHERE Id In :contentVersions];
@@ -18,16 +18,16 @@ public inherited sharing class ContentDocumentService {
     }
     
     public List<ContentDocument> getContentDocuments(Set<Id> documentIds){
-        
+
         return [SELECT Id, Title, LatestPublishedVersionId
-                FROM ContentDocument
-                WHERE Id IN :documentIds ];
+                    FROM ContentDocument
+                    WHERE Id IN :documentIds ];
     }
     public List<ContentVersion>  fetchContentVersionByContentIds(Set<Id> contentDocumentIds){
         return [SELECT ContentDocumentId, Title, FileExtension, VersionData
-                FROM ContentVersion
-                WHERE ContentDocumentId IN :contentDocumentIds
-               ];
+                    FROM ContentVersion
+                    WHERE ContentDocumentId IN :contentDocumentIds
+                ];
     }
     public List<ContentDocumentLink>  fetchContentDocLinksByLinkEntityIds(List<Id> recordIds){
         return [
@@ -36,5 +36,5 @@ public inherited sharing class ContentDocumentService {
             WHERE LinkedEntityId IN :recordIds order by SystemModstamp desc
         ];
     }
-    
+
 }

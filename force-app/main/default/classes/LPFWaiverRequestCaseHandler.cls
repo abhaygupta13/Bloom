@@ -143,8 +143,8 @@ public inherited sharing class LPFWaiverRequestCaseHandler {
         String paymentReceiptCVId;
         Map<Id, ContentVersion> contentVersionMap;
         if(salesOrderId != NULL) {
-            SOACVId = DocumentGenerationPDFHandler.generateAndAttachPdf(salesOrderId, 'generateStatement');
-            paymentReceiptCVId = DocumentGenerationPDFHandler.generateAndAttachPdf(salesOrderId, 'generateReceipt');
+            SOACVId = SalesSOAPDFController.generateAndAttachPdf(salesOrderId);
+            paymentReceiptCVId = SalesReceiptController.generateAndAttachPdf(salesOrderId);
             System.debug('SOACVId ::::: '+ SOACVId);
             List<Id> contentVersionIdList = new List<Id>();
             if((SOACVId != NULL && SOACVId != '') || (paymentReceiptCVId != NULL && paymentReceiptCVId != '')){
@@ -249,7 +249,7 @@ public inherited sharing class LPFWaiverRequestCaseHandler {
 
     
 
-    public void sendNewServiceRequestAssignmnmentEmailNotification(List<Case> caseList){
+    /*public void sendNewServiceRequestAssignmnmentEmailNotification(List<Case> caseList){
         if(!caseList[0].StopEmailsToCustomer__c){
             MetadataService objMetadataService = MetadataService.getInstance();
             EmailService objEmailService = EmailService.getInstance();
@@ -262,7 +262,7 @@ public inherited sharing class LPFWaiverRequestCaseHandler {
                 objEmailService.sendEmail(emailList);  
             } 
         }
-    }
+    }*/
 
     public static Map<String, Object> validateDocs(Case caseRecord, Set<String> documents){
         Map<String, Object> response = new Map<String, Object>();

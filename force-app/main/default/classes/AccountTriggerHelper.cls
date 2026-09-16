@@ -10,7 +10,7 @@
 * 1.2           Kalpana   	22May2025        Added handleAfterUpdateFieldUpdates
 * 1.3           Swapnil   	15April2026      Move the BAPP after-insert logic to the before-insert context
 *****************************************************************************************************/
-public without sharing class AccountTriggerHelper {
+public class AccountTriggerHelper {
     
     private static final Set<String> royalSalutations = new Set<String>{'Her Royal Highness','His Royal Highness','Her Excellency','His Highness','His Excellency','Sheikh/Sheikah'};
         private static final string CUSTOMER_CATEGORY_DIAMOND { get { return 'Diamond'; } }
@@ -19,7 +19,7 @@ public without sharing class AccountTriggerHelper {
     private static final string ACCOUNT_RT_DEV_NAME_BROKER_AGENCY_ACCOUNT { get { return 'Broker_Agency'; } }
     private static final String LINE_MANAGER_USER_ID { get { return 'LineManagerUserId'; } } //BAPP
     private static final String EXEC_SALES_DIR_USER_ID { get { return 'ExecutiveSalesDirectorUserId'; } }//BAPP
-    public static final String SUQUR_AL_WATAN = 'Suqur Al Watan';
+    public static final String SUQUR_AL_WATAN = 'Suqur Al-Watan';
     
     public static void createDocuments(List<Account> newList){
         
@@ -29,24 +29,21 @@ public without sharing class AccountTriggerHelper {
         
         DocumentService objDocumentService = DocumentService.getInstance();
         List<DocumentType__c> accountDocTypeList = objDocumentService.getDocTypes('Account');
-        
-        
-        
         List<Document__c> documentList = new List<Document__c>();
         for(Account acc :newList){
             //fetch Suqur Al Watan doc types
-            List<DocumentType__c> suqurDocTypeList = objDocumentService.getSuqurAlWatanDocumentTypes(acc.id);
+           List<DocumentType__c> suqurDocTypeList = objDocumentService.getSuqurAlWatanDocumentTypes(acc.id);
             
             for(DocumentType__c objDocumentType :accountDocTypeList){
                 if(objDocumentType.RecordTypeDevName__c == ACCOUNT_RT_DEV_NAME_BROKER_AGENCY_ACCOUNT && acc.RecordTypeId == brokerAgencyAccountRecordTypeId){
-                   // if (objDocumentType.TypeofEstablishment__c != null && acc.TypeofEstablishment__c != null) {
-                      //  String docTypeEst = ';' + objDocumentType.TypeofEstablishment__c + ';';
-                       // String accEst = ';' + acc.TypeofEstablishment__c + ';';
+                    if (objDocumentType.TypeofEstablishment__c != null && acc.TypeofEstablishment__c != null) {
+                        String docTypeEst = ';' + objDocumentType.TypeofEstablishment__c + ';';
+                        String accEst = ';' + acc.TypeofEstablishment__c + ';';
                         
-                       // if (docTypeEst.contains(accEst)) {
+                        if (docTypeEst.contains(accEst)) {
                             documentList.add(new Document__c(Account__c = acc.Id,DocumentType__c = objDocumentType.Id,Document_Name__c = objDocumentType.Type__c));
-                       // }
-                   // }
+                        }
+                    }
                     //documentList.add(new Document__c(Account__c = acc.Id, DocumentType__c = objDocumentType.Id, Document_Name__c = objDocumentType.Type__c));
                 }else if(objDocumentType.RecordTypeDevName__c == ACCOUNT_RT_DEV_NAME_PERSON_ACCOUNT && acc.RecordTypeId == personAccountRecordTypeId){
                     documentList.add(new Document__c(Account__c = acc.Id, DocumentType__c = objDocumentType.Id, Document_Name__c = objDocumentType.Type__c));
@@ -56,61 +53,61 @@ public without sharing class AccountTriggerHelper {
             }
             // New Suqur Al Watan block(Added By ranjan)
             if(acc.CustomerSubType__c == SUQUR_AL_WATAN && !suqurDocTypeList.isEmpty()){
-                for(DocumentType__c suqurDocType : suqurDocTypeList){
-                    documentList.add(new Document__c(
-                        Account__c       = acc.Id,
-                        DocumentType__c  = suqurDocType.Id,
-                        Document_Name__c = suqurDocType.Type__c
-                    ));
-                }
+            for(DocumentType__c suqurDocType : suqurDocTypeList){
+                documentList.add(new Document__c(
+                    Account__c       = acc.Id,
+                    DocumentType__c  = suqurDocType.Id,
+                    Document_Name__c = suqurDocType.Type__c
+                ));
             }
+          }
         }
         objDocumentService.insertDocuments(documentList);   
     }
     
     public static void handleSuqurAlWatanDocumentOnUpdate(List<Account> newList, Map<Id, Account> oldMap) {
-        DocumentService objDocumentService = DocumentService.getInstance();
-        List<Document__c> documentList = new List<Document__c>();
-        
-        for (Account acc : newList) {
-            Account oldAcc = oldMap.get(acc.Id);
-            
-            // Only proceed if CustomerSubType__c changed TO 'Suqur Al Watan'
-            if (acc.CustomerSubType__c == SUQUR_AL_WATAN 
-                && oldAcc.CustomerSubType__c != SUQUR_AL_WATAN) {
-                    
-                    List<DocumentType__c> suqurDocTypeList = 
-                        objDocumentService.getSuqurAlWatanDocumentTypes(acc.Id);
-                    
-                    if (!suqurDocTypeList.isEmpty()) {
-                        // Get existing documents to avoid duplicates
-                        List<Document__c> existingDocs = 
-                            objDocumentService.getDocumentByAccountIds(new Set<Id>{ acc.Id });
-                        
-                        Set<Id> existingDocTypeIds = new Set<Id>();
-                        for (Document__c doc : existingDocs) {
-                            if (doc.DocumentType__c != null) {
-                                existingDocTypeIds.add(doc.DocumentType__c);
-                            }
-                        }
-                        
-                        for (DocumentType__c suqurDocType : suqurDocTypeList) {
-                            if (!existingDocTypeIds.contains(suqurDocType.Id)) {
-                                documentList.add(new Document__c(
-                                    Account__c       = acc.Id,
-                                    DocumentType__c  = suqurDocType.Id,
-                                    Document_Name__c = suqurDocType.Type__c
-                                ));
-                            }
-                        }
+    DocumentService objDocumentService = DocumentService.getInstance();
+    List<Document__c> documentList = new List<Document__c>();
+
+    for (Account acc : newList) {
+        Account oldAcc = oldMap.get(acc.Id);
+
+        // Only proceed if CustomerSubType__c changed TO 'Suqur Al Watan'
+        if (acc.CustomerSubType__c == SUQUR_AL_WATAN 
+            && oldAcc.CustomerSubType__c != SUQUR_AL_WATAN) {
+
+            List<DocumentType__c> suqurDocTypeList = 
+                objDocumentService.getSuqurAlWatanDocumentTypes(acc.Id);
+
+            if (!suqurDocTypeList.isEmpty()) {
+                // Get existing documents to avoid duplicates
+                List<Document__c> existingDocs = 
+                    objDocumentService.getDocumentByAccountIds(new Set<Id>{ acc.Id });
+
+                Set<Id> existingDocTypeIds = new Set<Id>();
+                for (Document__c doc : existingDocs) {
+                    if (doc.DocumentType__c != null) {
+                        existingDocTypeIds.add(doc.DocumentType__c);
                     }
                 }
-        }
-        
-        if (!documentList.isEmpty()) {
-            objDocumentService.insertDocuments(documentList);
+
+                for (DocumentType__c suqurDocType : suqurDocTypeList) {
+                    if (!existingDocTypeIds.contains(suqurDocType.Id)) {
+                        documentList.add(new Document__c(
+                            Account__c       = acc.Id,
+                            DocumentType__c  = suqurDocType.Id,
+                            Document_Name__c = suqurDocType.Type__c
+                        ));
+                    }
+                }
+            }
         }
     }
+
+    if (!documentList.isEmpty()) {
+        objDocumentService.insertDocuments(documentList);
+    }
+}
     
     public static void handleBeforeInsertFieldUpdates(List<Account> newList) {
         MetadataService objMetadataService = MetadataService.getInstance();
@@ -180,10 +177,10 @@ public without sharing class AccountTriggerHelper {
         MetadataService objMetadataService = MetadataService.getInstance();
         List<Schema.FieldSetMember> sapFieldSetFields = Schema.SObjectType.Account.fieldSets.getMap().get('SAP_Integration_Fields').getFields();
         for(Account objAccount :newList){
-            if( objAccount.Salutation != oldMap.get(objAccount.Id).Salutation && royalSalutations.contains(objAccount.Salutation) ){
-                objAccount.Segment__c = CUSTOMER_CATEGORY_DIAMOND ;
-            }
-            
+            if( objAccount.Salutation != oldMap.get(objAccount.Id).Salutation && 
+               royalSalutations.contains(objAccount.Salutation) ){
+                   objAccount.Segment__c = CUSTOMER_CATEGORY_DIAMOND ;
+               }
             if(objAccount.IsPersonAccount && objAccount.Emirates_Id__pc != oldMap.get(objAccount.Id).Emirates_Id__pc){
                 objAccount.Emirates_Id__pc = Utility.formatEmiratesId(objAccount.Emirates_Id__pc);
             }
@@ -276,10 +273,8 @@ public without sharing class AccountTriggerHelper {
                         for (Contact con : conSuspendList) {
                             Contact conUpdate = new Contact(
                                 Id = con.Id,
-                                //IsActive__c = false,
+                                IsActive__c = false,
                                 IsSuspended__c = true,
-                                SuspensionStartDate__c = acc.SuspensionStartDate__c,
-                                SuspensionEndDate__c = acc.SuspensionEndDate__c,
                                 Suspension_Reason__c = acc.SuspensionReason__c
                             );
                             contactsToUpdate.add(conUpdate);
@@ -291,7 +286,7 @@ public without sharing class AccountTriggerHelper {
                 //  Approved by Executive Sales Director + Terminate
                 else if (acc.ApprovalStatus__c == 'Approved By Executive Sales Director' && acc.Scenarios__c == 'Terminate') {
                     
-                    Account accUpdate = new Account(Id = acc.Id, IsActive__c = false, Blacklisted__c = true, TerminationDate__c = System.today());
+                    Account accUpdate = new Account(Id = acc.Id, IsActive__c = false, Blacklisted__c = true);
                     accountsToUpdate.add(accUpdate);
                     
                     List<Contact> conTerminateList = ContactService.getInstance().getContactByAccountId(acc.Id);
@@ -299,11 +294,8 @@ public without sharing class AccountTriggerHelper {
                     for (Contact con : conTerminateList) {
                         Contact conUpdate = new Contact(
                             Id = con.Id,
-                            //IsActive__c = false,
-                            //Blacklisted__c = true,
-                            Broker_Restriction_Type__c = 'Terminate',
-                            TerminationApprovalStatus__c = 'Approved',
-                            ApprovalStatus__c = 'Approved By Executive Sales Director',
+                            IsActive__c = false,
+                            Blacklisted__c = true,
                             BlacklistReason__c = acc.Blacklist_Reason__c
                         );
                         contactsToUpdate.add(conUpdate);
@@ -330,12 +322,10 @@ public without sharing class AccountTriggerHelper {
         accService.updateAccountsWithoutTrigger(accountsToUpdate);
         
         ContactService conService = ContactService.getInstance();
-        //conService.updateContactsWithoutTrigger(contactsToUpdate);
-        ContactService.updateExistingContacts(contactsToUpdate);
+        conService.updateContactsWithoutTrigger(contactsToUpdate);
         
         // Call Email Handler for Suspension/Termination (ESD Approved)
         if (!accountIdsForEmail.isEmpty()) {
-            system.debug('accountIdsForEmail-->'+accountIdsForEmail);
             BAPPSuspentionTerminationEmailHandler.sendWarningEmails(accountIdsForEmail);
         }
     }
@@ -343,105 +333,49 @@ public without sharing class AccountTriggerHelper {
     public static void sendNotificationEmail(Account acc, String templateName) {
         try {
             //  Get Email Template by DeveloperName (using the variable, not string literal)
-            EmailTemplate emailTemplate = EmailTemplateService.getEmailTemplateByName(templateName);
+        EmailTemplate emailTemplate = EmailTemplateService.getEmailTemplateByName(templateName);
             
             if (emailTemplate == null) {
                 System.debug(' No email template found with DeveloperName: ' + templateName);
                 return;
-            }
-            
-            //  Get Users (Line Manager + Executive Sales Director) assigned on Account
+        }
+        
+        //  Get Users (Line Manager + Executive Sales Director) assigned on Account
             Id lineManagerId = acc.LineManager__c;
             Id executiveSalesDirectorId = acc.ExecutiveSalesDirector__c;
-            
-            List<Id> toUserIds = new List<Id>();
-            if (lineManagerId != null) toUserIds.add(lineManagerId);
-            if (executiveSalesDirectorId != null) toUserIds.add(executiveSalesDirectorId);
-            
-            if (toUserIds.isEmpty()) {
+        
+        List<Id> toUserIds = new List<Id>();
+        if (lineManagerId != null) toUserIds.add(lineManagerId);
+        if (executiveSalesDirectorId != null) toUserIds.add(executiveSalesDirectorId);
+        
+        if (toUserIds.isEmpty()) {
                 System.debug(' No recipients found for Account: ' + acc.Id);
-                return;
-            }
-            
+            return;
+        }
+        
             //  Query user emails
             Map<Id, User> userMap = new Map<Id, User>([SELECT Id, Email FROM User WHERE Id IN :toUserIds]);
-            
+        
             //  Prepare list of emails to send
-            List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
+        List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
             
             for (User u : userMap.values()) {
-                Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-                mail.setTemplateId(emailTemplate.Id);
+            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+            mail.setTemplateId(emailTemplate.Id);
                 mail.setTargetObjectId(u.Id);
-                mail.setWhatId(acc.Id);
-                mail.setSaveAsActivity(false);
-                
-                mails.add(mail);
-            }             
+            mail.setWhatId(acc.Id);
+            mail.setSaveAsActivity(false);
             
-            //  Send all emails in one call
+            mails.add(mail);
+        }             
+            
+        //  Send all emails in one call
             if (!mails.isEmpty()) {
                 Messaging.sendEmail(mails);
                 System.debug('Email sent using template: ' + templateName + ' for Account: ' + acc.Id);
             }
         } catch (Exception e) {
             System.debug('Error sending email for Account ' + acc.Id + ': ' + e.getMessage());
-        }
-    }
-    
-    public static void handleAgencyReactivationOnTradeLicenseUpdate( List<Account> newAccounts,Map<Id, Account> oldMap){
-        
-        List<Account> accountsToUpdate = new List<Account>();
-        Set<Id> accountIds = new Set<Id>();
-        
-        Date todayDate = System.today();
-        
-        for(Account newAcc : newAccounts){
-            
-            Account oldAcc = oldMap.get(newAcc.Id);
-            
-            // Trade License Date Changed
-            Boolean isTradeLicenseUpdated = newAcc.Trade_License_Expiry_Date__c != oldAcc.Trade_License_Expiry_Date__c;
-            
-            // New expiry date is future date
-            Boolean isValidFutureDate = newAcc.Trade_License_Expiry_Date__c != null && newAcc.Trade_License_Expiry_Date__c > todayDate;
-            
-            
-            if(isTradeLicenseUpdated && isValidFutureDate){
-                
-                Account accToUpdate = new Account(
-                    Id = newAcc.Id,
-                    IsSuspended__c = false
-                );
-                
-                accountsToUpdate.add(accToUpdate);
-                accountIds.add(newAcc.Id);
-            }
-            system.debug('accountIds-->'+accountIds);
-        }
-        
-        // Reactivate Accounts
-        if(!accountsToUpdate.isEmpty()){
-            AccountService accService = AccountService.getInstance();
-            accService.updateAccountsWithoutTrigger(accountsToUpdate);
-        }
-        
-        // Reactivate Contacts
-        if(!accountIds.isEmpty()){
-            List<Contact> contactsToUpdate = ContactService.getInstance().getContactByAccountIds(accountIds);
-            
-            for(Contact con : contactsToUpdate){
-                con.IsActive__c = true;
-                con.IsSuspended__c = false;
-                con.SuspensionStartDate__c = null;
-                con.SuspensionEndDate__c = null;
-                con.Suspension_Reason__c = '';
-            }
-            
-            if(!contactsToUpdate.isEmpty()){
-                ContactService conService = ContactService.getInstance();
-                conService.updateContactsWithoutTrigger(contactsToUpdate);
-            }
         }
     }
 }

@@ -27,7 +27,7 @@ public class Constants{/************************************** START - HANDOVER 
     public static String Handover_Sub_Status_Pre_Checklist_Completed = 'Pre-Checklist Completed';  
     public static String Handover_Sub_Status_Pending_for_CHO_Snagging = 'Pending for CHO Snagging';
     public static String Handover_Sub_Status_CHO_SNAGGING_COMPLETED = 'CHO Snagging Completed';
-    public static String Handover_Sub_Status_CHO_DE_SNAGGING_COMPLETED = 'CHO De-Snagging';
+    public static String Handover_Sub_Status_CHO_DE_SNAGGING_COMPLETED = 'CHO De-Snagging Completed';
     public static String Handover_Sub_Status_Payment_Settled = 'Payment Settled';
     public static String Handover_Sub_Status_Finance_Verified = 'Finance Verified';
     public static String Handover_Sub_Status_Title_Deed_Registration_Completed = 'Title Deed Registration Completed';

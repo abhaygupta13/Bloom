@@ -1,224 +1,97 @@
 @isTest
 public class ServiceAppointmentServiceTest {
     @TestSetup
-    public static void setup() {        
-        // Create a User
-        Profile salesManagerProfile = [SELECT Id FROM Profile WHERE Name = 'Sales Manager' LIMIT 1];
-        Profile systemadministrator = [SELECT Id FROM Profile WHERE Name = 'System Administrator' LIMIT 1];
-        
-        Profile p = [SELECT Id FROM Profile WHERE Name = 'Contractor' LIMIT 1];
-        User u = new User(Alias = 'standt', Email='standarduser@test.com', 
-                          EmailEncodingKey='UTF-8', LastName='TestingSA', LanguageLocaleKey='en_US', 
-                          LocaleSidKey='en_US', ProfileId = p.Id, 
-                          TimeZoneSidKey='America/Los_Angeles', UserName='SAstandarduser@test.com');
-        insert u;
-        
-        User u2 = new User(Alias = 'standt', Email='standarduser@test.com', 
-                           EmailEncodingKey='UTF-8', LastName='TestingSA2', LanguageLocaleKey='en_US', 
-                           LocaleSidKey='en_US', ProfileId = systemadministrator.Id, 
-                           TimeZoneSidKey='America/Los_Angeles', UserName='SAstandarduser2@test.com');
-        insert u2;
-        
-        // Generate a unique username
-        String orgId = UserInfo.getOrganizationId();
-        String dateString = String.valueOf(Datetime.now()).replace(' ','').replace(':','').replace('-','');
-        Integer randomInt = Integer.valueOf(Math.rint(Math.random() * 1000000));
-        String uniqueName = orgId + dateString + randomInt;
-        
-        // Create another User with Sales Manager profile
-        String salesManagerUniqueName = orgId + dateString + randomInt + 'sm';
-        User salesManagerUser = new User();
-        salesManagerUser.Username = salesManagerUniqueName + '@mail.com';
-        salesManagerUser.LastName = 'John Doe';
-        salesManagerUser.Email = 'johndoe@gmail.com';
-        salesManagerUser.Alias = 'JohnD';
-        salesManagerUser.TimeZoneSidKey = 'Asia/Dubai';
-        salesManagerUser.LocaleSidKey = 'en_US';
-        salesManagerUser.EmailEncodingKey = 'UTF-8';
-        salesManagerUser.ProfileId = salesManagerProfile.Id;  
-        salesManagerUser.LanguageLocaleKey = 'en_US';
-        insert salesManagerUser;
-        
-        Project__c prj = new Project__c();
-        prj.Name = 'Test Project';    
-        prj.Contractor__c = u.Id; //cnt.Id;
-        insert prj;       
-        
-        Unit__c unt = new Unit__c();
-        unt.Name = 'C-1233';
-        unt.Project__c = prj.Id;
+    static void setup() {
+        Map<String, Id> profileMap = new Map<String, Id>();
+        for (Profile p : [SELECT Id, Name FROM Profile WHERE Name IN ('Sales Manager', 'System Administrator', 'Contractor')]) {
+            profileMap.put(p.Name, p.Id);
+        }
+        String uStr = UserInfo.getOrganizationId() + DateTime.now().getTime();
+        List<User> users = new List<User>{
+            new User(Alias='standt', Email='sa1@test.com', EmailEncodingKey='UTF-8', LastName='TestingSA', LanguageLocaleKey='en_US', LocaleSidKey='en_US', ProfileId=profileMap.get('Contractor'), TimeZoneSidKey='America/Los_Angeles', UserName='sa1' + uStr + '@test.com'),
+            new User(Alias='standt2', Email='sa2@test.com', EmailEncodingKey='UTF-8', LastName='TestingSA2', LanguageLocaleKey='en_US', LocaleSidKey='en_US', ProfileId=profileMap.get('System Administrator'), TimeZoneSidKey='America/Los_Angeles', UserName='sa2' + uStr + '@test.com'),
+            new User(Alias='JohnD', Email='johndoe@gmail.com', EmailEncodingKey='UTF-8', LastName='John Doe', LanguageLocaleKey='en_US', LocaleSidKey='en_US', ProfileId=profileMap.get('Sales Manager'), TimeZoneSidKey='Asia/Dubai', UserName='sm' + uStr + '@mail.com')
+        };
+        insert users;
+        Project__c prj = new Project__c(Name='Test Project', Contractor__c=users[0].Id);
+        insert prj;
+        Unit__c unt = new Unit__c(Name='C-1233', Project__c=prj.Id, Is_Property_keys_given__c = true);
         insert unt;
-        
-        
-        // Create an Account
         Account acc = new Account(Name='Test Account');
         insert acc;
-        
-        OperatingHours oh  = new OperatingHours(
-            Name = 'test Holiday'
-        );
+        OperatingHours oh = new OperatingHours(Name='test Holiday');
         insert oh;
-        // Create a Service Territory
-        ServiceTerritory st = new ServiceTerritory(
-            Name = 'Test Territory',
-            OperatingHoursId = [SELECT Id FROM OperatingHours LIMIT 1].Id,
-            IsActive = true
-        );
+        ServiceTerritory st = new ServiceTerritory(Name='Test Territory', OperatingHoursId=oh.Id, IsActive=true);
         insert st;
-        
-        
-        // Create a Service Resource linked to the User
-        ServiceResource sr = new ServiceResource(
-            Name = 'Test Resource',
-            RelatedRecordId = salesManagerUser.Id,
-            Is_Contractor__c = false,
-            IsActive = true
-        );
-        insert sr;
-        
-        ServiceResource sr2 = new ServiceResource(
-            Name = 'Test Resource 2',
-            RelatedRecordId = u2.Id,
-            Is_Contractor__c = true,
-            IsActive = true
-        );
-        insert sr2;
-        
-        // Create a Service Territory Member linking the Service Resource to the Service Territory
-        ServiceTerritoryMember stm = new ServiceTerritoryMember(
-            ServiceResourceId = sr.Id,
-            ServiceTerritoryId = st.Id,
-            EffectiveStartDate = Date.today().addDays(-1),
-            EffectiveEndDate = Date.today().addYears(1)
-        );
-        insert stm;
-        
-        ServiceTerritoryMember stm2 = new ServiceTerritoryMember(
-            ServiceResourceId = sr2.Id,
-            ServiceTerritoryId = st.Id,
-            EffectiveStartDate = Date.today().addDays(-1),
-            EffectiveEndDate = Date.today().addYears(1)
-        );
-        insert stm2;
-        
-        
-        Round_Robins__c roundrobin = new Round_Robins__c();
-        roundrobin.Name = 'Service/Case Request';
-        roundrobin.Assigned_To__c = '2';
-        roundrobin.Project__c = prj.id;
-        roundrobin.OwnerId = u.Id;
-        roundrobin.Sobject__c = 'Case';
-        insert roundrobin;
-        
-        Round_Robin_User__c roundrobinuser = new Round_Robin_User__c();
-        roundrobinuser.Name = 'CRM 2';
-        roundrobinuser.Total_Open_Count__c = 3;
-        // roundrobinuser.IsActive__c=true;
-        
-        
-        roundrobinuser.Round_Robin__c = roundrobin.id;
-        roundrobinuser.Round_Robin_ID__c = 1;
-        roundrobinuser.RR_User_Name__c = 'Almeria Project - CRM 2';
-        roundrobinuser.User__c = salesManagerUser.id; // Ensure User__c is set correctly
-        insert roundrobinuser;
-        system.debug('roundrobinuser==>'+ roundrobinuser);
-        system.debug('roundrobinuser==1111>'+ roundrobinuser.IsActive__c);
-        
-        
-        //another record 
-        Round_Robins__c roundrobin1 = new Round_Robins__c();
-        roundrobin1.Name = 'Service/Resale Case Request';
-        roundrobin1.Assigned_To__c = '2';
-        roundrobin1.Project__c = prj.id;
-        roundrobin1.OwnerId = u.Id;
-        roundrobin1.Sobject__c = 'Case';
-        insert roundrobin1;
-        
-        Round_Robin_User__c roundrobinuser1 = new Round_Robin_User__c();
-        roundrobinuser1.Name = 'CRM 2';
-        roundrobinuser1.Total_Open_Count__c = 3;
-        // roundrobinuser.IsActive__c=true;
-        
-        
-        roundrobinuser1.Round_Robin__c = roundrobin1.id;
-        roundrobinuser1.Round_Robin_ID__c = 1;
-        roundrobinuser1.RR_User_Name__c = 'Almeria Project - CRM 2';
-        roundrobinuser1.User__c = salesManagerUser.id; // Ensure User__c is set correctly
-        insert roundrobinuser1;
-        system.debug('roundrobinuser==>'+ roundrobinuser1);
-        system.debug('roundrobinuser==1111>'+ roundrobinuser1.IsActive__c);
-        
-        
-        
-        // Create a Work Order linked to the Account
-        WorkOrder wo = new WorkOrder(
-            Subject = 'Test Work Order',
-            AccountId = acc.Id,
-            Unit__c = unt.Id,
-            Status = 'In Progress',
-            Scope__c='Under Scope'
-        );
+        List<ServiceResource> srs = new List<ServiceResource>{
+            new ServiceResource(Name='Test Resource', RelatedRecordId=users[2].Id, Is_Contractor__c=false, IsActive=true),
+            new ServiceResource(Name='Test Resource 2', RelatedRecordId=users[1].Id, Is_Contractor__c=true, IsActive=true)
+        };
+        insert srs;
+        List<ServiceTerritoryMember> stms = new List<ServiceTerritoryMember>{
+            new ServiceTerritoryMember(ServiceResourceId=srs[0].Id, ServiceTerritoryId=st.Id, EffectiveStartDate=Date.today().addDays(-1), EffectiveEndDate=Date.today().addYears(1)),
+            new ServiceTerritoryMember(ServiceResourceId=srs[1].Id, ServiceTerritoryId=st.Id, EffectiveStartDate=Date.today().addDays(-1), EffectiveEndDate=Date.today().addYears(1))
+        };
+        insert stms;
+        List<Round_Robins__c> rrs = new List<Round_Robins__c>{
+            new Round_Robins__c(Name='Service/Case Request', Assigned_To__c='2', Project__c=prj.Id, OwnerId=users[0].Id, Sobject__c='Case'),
+            new Round_Robins__c(Name='Service/Resale Case Request', Assigned_To__c='2', Project__c=prj.Id, OwnerId=users[0].Id, Sobject__c='Case')
+        };
+        insert rrs;
+        List<Round_Robin_User__c> rrUsers = new List<Round_Robin_User__c>{
+            new Round_Robin_User__c(Name='CRM 2', Total_Open_Count__c=3, Round_Robin__c=rrs[0].Id, Round_Robin_ID__c=1, RR_User_Name__c='Almeria Project - CRM 2', User__c=users[2].Id),
+            new Round_Robin_User__c(Name='CRM 2', Total_Open_Count__c=3, Round_Robin__c=rrs[1].Id, Round_Robin_ID__c=1, RR_User_Name__c='Almeria Project - CRM 2', User__c=users[2].Id)
+        };
+        insert rrUsers;
+        WorkOrder wo = new WorkOrder(Subject='Test Work Order', AccountId=acc.Id, Unit__c=unt.Id, Status='In Progress', Scope__c='Under Scope');
         insert wo;
-        
-        DateTime startDateTime = DateTime.now().addDays(1);
-        DateTime endDateTime = DateTime.now().addDays(1).addHours(2);
-        
-        // Create a Service Appointment linked to the Work Order
-        ServiceAppointment sa = new ServiceAppointment();
-        sa.Status = 'None';
-        sa.ParentRecordId = wo.Id;
-        sa.EarliestStartTime = startDateTime;
-        sa.SchedStartTime = startDateTime;
-        sa.SchedEndTime = endDateTime;
-        sa.DueDate = endDateTime;
+        DateTime startDt = DateTime.now().addDays(1);
+        DateTime endDt = startDt.addHours(2);
+        ServiceAppointment sa = new ServiceAppointment(Status='None', ParentRecordId=wo.Id, EarliestStartTime=startDt, SchedStartTime=startDt, SchedEndTime=endDt, DueDate=endDt);
         insert sa;
-        system.debug('ServiceAppointmentnew->'+sa);
-        
-        
-        
-        WorkType newWrkType = new WorkType();
-        newWrkType.Name = 'DLP';
-        newWrkType.EstimatedDuration = 2;
-        newWrkType.DurationType = 'Hours';
-        insert newWrkType;
-        
-        
-        // Assign the Service Resource to the Service Appointment
-        AssignedResource assRes = new AssignedResource();
-        assRes.ServiceResourceId = sr.Id;
-        assRes.ServiceAppointmentId = sa.Id;
-        insert assRes;
-        system.debug('ServiceResourceId--->'+sr.id);
-        
-        AssignedResource assRes2 = new AssignedResource();
-        assRes2.ServiceResourceId = sr2.Id;
-        assRes2.ServiceAppointmentId = sa.Id;
-        insert assRes2;
-        system.debug('ServiceResourceId2--->'+sr2.id);
-    } 
-    
+        insert new WorkType(Name='DLP', EstimatedDuration=2, DurationType='Hours');
+        List<AssignedResource> ars = new List<AssignedResource>{
+            new AssignedResource(ServiceResourceId=srs[0].Id, ServiceAppointmentId=sa.Id),
+            new AssignedResource(ServiceResourceId=srs[1].Id, ServiceAppointmentId=sa.Id)
+        };
+        insert ars;
+    }
     @IsTest
     static void testCreateServiceAppointmentSelf() {
-        // Get Work Order Id
-        Id workOrderId = [SELECT Id FROM WorkOrder ORDER BY CreatedDate DESC LIMIT 1].Id;
-        WorkOrder workOrderObj = [SELECT Id FROM WorkOrder ORDER BY CreatedDate DESC LIMIT 1];
-        //ServiceAppointment sa = [SELECT Id, Status, ParentRecordId, SchedStartTime, SchedEndTime FROM ServiceAppointment];
-        
-        ServiceAppointment sa = new ServiceAppointment();
-        sa.Status = Constants.IN_PROGRESS;
-        sa.ParentRecordId = [select id from workorder limit 1].id;
-        sa.EarliestStartTime = DateTime.now().addHours(-2);
-        sa.SchedStartTime = DateTime.now().addHours(-3);
-        sa.Is_First_Appointment__c = false;
-        sa.SchedEndTime = DateTime.now().addHours(1);
-        sa.DueDate = DateTime.now().addHours(-1);
+        WorkOrder wo = [SELECT Id FROM WorkOrder LIMIT 1];
+        ServiceAppointment sa = new ServiceAppointment(Status=Constants.IN_PROGRESS, ParentRecordId=wo.Id, EarliestStartTime=DateTime.now().addHours(-2), SchedStartTime=DateTime.now().addHours(-3), Is_First_Appointment__c=false, SchedEndTime=DateTime.now().addHours(1), DueDate=DateTime.now().addHours(-1));
         ServiceAppointmentService ss = ServiceAppointmentService.getInstance();
-        Test.startTest();        
-        List<ServiceAppointment> insertedSAs = ss.insertServiceAppointmentsWithoutTrigger(new List<ServiceAppointment>{sa});
+        Test.startTest();
+        ss.insertServiceAppointmentsWithoutTrigger(new List<ServiceAppointment>{sa});
         sa.Status = 'Completed';
-        List<ServiceAppointment> updatedSAs = ss.updateUnits(new List<ServiceAppointment>{sa});        
-        List<ServiceAppointment> getedSAs = ss.getServiceAppointmentsByParentRecordSetIds(new Set<Id>{workOrderId});
-        List<ServiceAppointment> getedWrk = ss.getServiceAppointmentsByParentRecordIds(new List<WorkOrder>{workOrderObj});
+        ss.getServiceAppointmentsByParentRecordSetIds(new Set<Id>{wo.Id});
         Test.stopTest();
-    }  
+    }
+    @IsTest
+    static void testServiceAppointmentServiceMethods() {
+        WorkOrder wo = [SELECT Id FROM WorkOrder LIMIT 1];
+        ServiceAppointmentService service = ServiceAppointmentService.getInstance();
+        DateTime startTime = DateTime.now().addDays(2);
+        DateTime endTime = startTime.addHours(2);
+        ServiceAppointment sa1 = new ServiceAppointment(Status='None', ParentRecordId=wo.Id, EarliestStartTime=startTime, SchedStartTime=startTime, SchedEndTime=endTime, DueDate=endTime);
+        Test.startTest();
+        List<ServiceAppointment> insertedSAs = service.insertServiceAppointments(new List<ServiceAppointment>{sa1});
+        System.assertEquals(1, insertedSAs.size());
+        System.assertNotEquals(null, insertedSAs[0].Id);
+        sa1.Job_Status__c = 'Check-In';
+        List<ServiceAppointment> updatedSAs = service.updateServiceAppointments(new List<ServiceAppointment>{sa1});
+        System.assertEquals(1, updatedSAs.size());
+        sa1.Job_Status__c = 'Check-Out';
+        List<ServiceAppointment> updatedWithoutTrigger = service.updateServiceAppointmentsWithoutTrigger(new List<ServiceAppointment>{sa1});
+        System.assertEquals(1, updatedWithoutTrigger.size());
+        List<ServiceAppointment> byIds = service.getServiceAppointmentsByIds(new Set<Id>{sa1.Id});
+        List<ServiceAppointment> byParent = service.getServiceAppointmentsByParentRecordSetIds(new Set<Id>{wo.Id});
+        List<ServiceAppointment> byParentDesc = service.getSAByParentRecordIdsOrderByCreatedDateDesc(new Set<Id>{wo.Id});
+        List<AggregateResult> countByParent = service.getSACountByParentRecordIds(new Set<Id>{wo.Id});
+        Test.stopTest();
+        System.assertEquals(1, byIds.size());
+        System.assert(byParent.size() > 0);
+        System.assert(byParentDesc.size() > 0);
+        System.assertEquals(1, countByParent.size());
+    }
 }

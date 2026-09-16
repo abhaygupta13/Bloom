@@ -287,7 +287,7 @@ public with sharing class BAPPGetSalesOrdersHandler {
         Contact queryingContact = ContactService.getInstance().getContactById(contactId);
         //List<String> whereClause = new List<String>();
 		// Privileged roles
-		Set<String> privilegedRoles = new Set<String>{ 'Admin', 'Super Admin', 'CEO', 'Owner', 'Partner', 'AuthorizedSignatoryOfficer', 'Sponsor' };
+		Set<String> privilegedRoles = new Set<String>{ 'Admin', 'Super Admin', 'CEO', 'Owner', 'Partner', 'AuthorizedSignatoryOfficer' };
         // Split the Contact’s roles
         Set<String> contactRoles = new Set<String>();
         if (String.isNotBlank(queryingContact.BrokerContactRole__c)) {

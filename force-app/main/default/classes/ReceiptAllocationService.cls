@@ -23,20 +23,18 @@ public inherited sharing class ReceiptAllocationService {
         }
         return instance;
     }
-    
-    public List<ReceiptAllocation__c> insertReceiptAllocations(List<ReceiptAllocation__c> receiptAllocationList){
+        public List<ReceiptAllocation__c> insertReceiptAllocations(List<ReceiptAllocation__c> receiptAllocationList){
         if(receiptAllocationList != NULL && !receiptAllocationList.isEmpty()){
             insert receiptAllocationList;
         }
         return receiptAllocationList; 
     }
-    
+
     public  List<ReceiptAllocation__c> getReceiptAllocationBySO(Id orderId){
         return [SELECT Id,ReceiptAcknowledgement__c,TypeOfInvoice__c,AmountApplied__c
                 FROM   ReceiptAllocation__c WHERE SalesOrder__c = : orderId and  ReceiptAcknowledgement__r.PaymentType__c = 'Transfer of rights - Resale'];
     }
-    
-    public  List<ReceiptAllocation__c> getAllReceiptAllocationBySO(Id orderId){
+      public  List<ReceiptAllocation__c> getAllReceiptAllocationBySO(Id orderId){
         return [SELECT Id,DateOfApplication__c
                 FROM   ReceiptAllocation__c WHERE SalesOrder__c = : orderId 
                 and DateOfApplication__c  <= :System.today()];
@@ -69,24 +67,22 @@ public inherited sharing class ReceiptAllocationService {
         ReceiptAllocationTriggerHandler.isTriggerDisabled = false;
         return receiptAllocationList; 
     }
-    
-    public List<ReceiptAllocation__c> updateReceiptAllocationsWithoutTrigger(List<ReceiptAllocation__c> receiptAllocationList){
+       public List<ReceiptAllocation__c> updateReceiptAllocationsWithoutTrigger(List<ReceiptAllocation__c> receiptAllocationList){
         ReceiptAllocationTriggerHandler.isTriggerDisabled = true;
         if(receiptAllocationList != NULL && !receiptAllocationList.isEmpty()){
             update receiptAllocationList;
         }
         return receiptAllocationList; 
     }
-    
-    public List<ReceiptAllocation__c> deleteReceiptAllocationsWithoutTrigger(List<ReceiptAllocation__c> receiptAllocationList){
+     public List<ReceiptAllocation__c> deleteReceiptAllocationsWithoutTrigger(List<ReceiptAllocation__c> receiptAllocationList){
         ReceiptAllocationTriggerHandler.isTriggerDisabled = true;
-        ReceiptAllocationTriggerForDeleteHandler.isTriggerDisabled = true;
+      
         if(receiptAllocationList != NULL && !receiptAllocationList.isEmpty()){
             delete receiptAllocationList;
         }
         return receiptAllocationList; 
     }
-    
+
     public ReceiptAllocation__c createReceiptAllocationObj(Decimal amount, Id installmentId, Id otherChargesId, Id salesOrderId, Id accId){
         ReceiptAllocation__c receiptAllocation = new ReceiptAllocation__c();
         receiptAllocation.AmountApplied__c = amount;
@@ -96,4 +92,5 @@ public inherited sharing class ReceiptAllocationService {
         receiptAllocation.Account__c = accId;
         return receiptAllocation;
     }
+    
 }

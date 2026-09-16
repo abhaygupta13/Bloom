@@ -42,7 +42,7 @@ public class HandoverOnsiteAPITest {
         ServiceCatalog__c servicecatalog = new ServiceCatalog__c(
             ProcessFlowType__c = 'Handover',
             Active__c = true,
-            RecordTypeDevName__c = 'Handover'
+            RecordTypeDevName__c = 'Non PHPP'
         );
         insert servicecatalog;
         

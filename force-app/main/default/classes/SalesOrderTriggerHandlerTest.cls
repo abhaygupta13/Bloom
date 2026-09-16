@@ -24,15 +24,27 @@ public class SalesOrderTriggerHandlerTest {
         insert salesOrd1;
         delete [select id, Name from SalesOrder__c  where name='Test SalesOrder T'];
         
+        ServiceCatalog__c  servicecatalog = new ServiceCatalog__c();
+        servicecatalog.ProcessFlowType__c= 'Handover';
+        servicecatalog.ProcessType__c = 'Sales';
+        servicecatalog.Active__c= true;
+        servicecatalog.RecordTypeDevName__c = 'Non PHPP';
+        insert servicecatalog;
+        
         List<Handover__c> handovers = new List<Handover__c>();
         Handover__c hand = new Handover__c(
             Name = 'test handover',
             Sales_Order__c = salesOrd.Id,
             Unit__c = unt.Id,  
             Sub_Status__c = 'Cancelled',
-            Is_Manual__c = 'Yes'
+            Is_Manual__c = 'Yes',
+            ServiceCatalog__c = servicecatalog.Id
         );
         insert hand;
+        
+       // PushNotificationTemplate__c pnt = new PushNotificationTemplate__c(Name = 'Booking Confirmation', Title__c = '<p>Hello <b>John</b>,</p><br/><p>Your case has been <i>approved</i>.</p>', 
+                                                                     //     NotificationType__c = 'Test', Body__c = '<b>John</b>', SenderBloomPartnersID__c = 'Test');
+      //  insert pnt;
     }
     
     @isTest

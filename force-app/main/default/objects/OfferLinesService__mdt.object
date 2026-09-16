@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Metadata to populate values for offer line creation</description>
+    <fields>
+        <fullName>BudgetTaskName__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Budget Task Name</label>
+        <required>true</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Discounts</fullName>
+                    <default>true</default>
+                    <label>Discounts</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Subsidy</fullName>
+                    <default>false</default>
+                    <label>Mortgage Subsidy</label>
+                </value>
+                <value>
+                    <fullName>ADM Fee</fullName>
+                    <default>false</default>
+                    <label>ADM Fee</label>
+                </value>
+                <value>
+                    <fullName>Darna Loyalty</fullName>
+                    <default>false</default>
+                    <label>Darna Loyalty</label>
+                </value>
+                <value>
+                    <fullName>Home Maintenance</fullName>
+                    <default>false</default>
+                    <label>Home Maintenance</label>
+                </value>
+                <value>
+                    <fullName>Other Sales Support</fullName>
+                    <default>false</default>
+                    <label>Other Sales Support</label>
+                </value>
+                <value>
+                    <fullName>SC Waiver</fullName>
+                    <default>false</default>
+                    <label>SC Waiver</label>
+                </value>
+                <value>
+                    <fullName>Sales Comm.-External</fullName>
+                    <default>false</default>
+                    <label>Sales Comm.-External</label>
+                </value>
+                <value>
+                    <fullName>Sales Comm.-Internal</fullName>
+                    <default>false</default>
+                    <label>Sales Comm.-Internal</label>
+                </value>
+                <value>
+                    <fullName>Rebates</fullName>
+                    <default>false</default>
+                    <label>Rebates</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>DiscountType__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Discount Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Bulk Discount</fullName>
+                    <default>true</default>
+                    <label>Bulk Discount</label>
+                </value>
+                <value>
+                    <fullName>Wealth Discount</fullName>
+                    <default>false</default>
+                    <label>Wealth Discount</label>
+                </value>
+                <value>
+                    <fullName>Corporate Discount</fullName>
+                    <default>false</default>
+                    <label>Corporate Discount</label>
+                </value>
+                <value>
+                    <fullName>Additional Discount</fullName>
+                    <default>false</default>
+                    <label>Additional Discount</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>FieldAPI__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Field API</label>
+        <length>255</length>
+        <required>true</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OfferOn__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Offer On</label>
+        <required>true</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Selling Price</fullName>
+                    <default>true</default>
+                    <label>Selling Price</label>
+                </value>
+                <value>
+                    <fullName>Service Charges</fullName>
+                    <default>false</default>
+                    <label>Service Charges</label>
+                </value>
+                <value>
+                    <fullName>Home Maintenance Fees</fullName>
+                    <default>false</default>
+                    <label>Home Maintenance Fees</label>
+                </value>
+                <value>
+                    <fullName>Property Management Fees</fullName>
+                    <default>false</default>
+                    <label>Property Management Fees</label>
+                </value>
+                <value>
+                    <fullName>ADM Fees</fullName>
+                    <default>false</default>
+                    <label>ADM Fees</label>
+                </value>
+                <value>
+                    <fullName>Installment</fullName>
+                    <default>false</default>
+                    <label>Installment</label>
+                </value>
+                <value>
+                    <fullName>Net Amount</fullName>
+                    <default>false</default>
+                    <label>Net Amount</label>
+                </value>
+                <value>
+                    <fullName>Hotel Stay</fullName>
+                    <default>false</default>
+                    <label>Hotel Stay</label>
+                </value>
+                <value>
+                    <fullName>Travel</fullName>
+                    <default>false</default>
+                    <label>Travel</label>
+                </value>
+                <value>
+                    <fullName>Visa</fullName>
+                    <default>false</default>
+                    <label>Visa</label>
+                </value>
+                <value>
+                    <fullName>Membership</fullName>
+                    <default>false</default>
+                    <label>Membership</label>
+                </value>
+                <value>
+                    <fullName>Tickets</fullName>
+                    <default>false</default>
+                    <label>Tickets</label>
+                </value>
+                <value>
+                    <fullName>Transfer Charges</fullName>
+                    <default>false</default>
+                    <label>Transfer Charges</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Charges</fullName>
+                    <default>false</default>
+                    <label>Mortgage Charges</label>
+                </value>
+                <value>
+                    <fullName>Points</fullName>
+                    <default>false</default>
+                    <label>Points</label>
+                </value>
+                <value>
+                    <fullName>Car Park</fullName>
+                    <default>false</default>
+                    <label>Car Park</label>
+                </value>
+                <value>
+                    <fullName>Area</fullName>
+                    <default>false</default>
+                    <label>Area</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>OfferType__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Offer Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Additional Discount</fullName>
+                    <default>true</default>
+                    <label>Additional Discount</label>
+                </value>
+                <value>
+                    <fullName>Waiver</fullName>
+                    <default>false</default>
+                    <label>Waiver</label>
+                </value>
+                <value>
+                    <fullName>Rebate</fullName>
+                    <default>false</default>
+                    <label>Rebate</label>
+                </value>
+                <value>
+                    <fullName>Voucher</fullName>
+                    <default>false</default>
+                    <label>Voucher</label>
+                </value>
+                <value>
+                    <fullName>Points</fullName>
+                    <default>false</default>
+                    <label>Points</label>
+                </value>
+                <value>
+                    <fullName>Premium</fullName>
+                    <default>false</default>
+                    <label>Premium</label>
+                </value>
+                <value>
+                    <fullName>Commission</fullName>
+                    <default>false</default>
+                    <label>Commission</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>OfferValueType__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Offer Value Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>%</fullName>
+                    <default>false</default>
+                    <label>%</label>
+                </value>
+                <value>
+                    <fullName>Years</fullName>
+                    <default>false</default>
+                    <label>Years</label>
+                </value>
+                <value>
+                    <fullName>AED</fullName>
+                    <default>false</default>
+                    <label>AED</label>
+                </value>
+                <value>
+                    <fullName>Points</fullName>
+                    <default>false</default>
+                    <label>Points</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Offer Lines Service</label>
+    <pluralLabel>OfferLinesServices</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

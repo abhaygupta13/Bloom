@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>BFM_Contract_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>ContractEndDate__c</fullName>
+        <label>Contract End Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ContractSpecification__c</fullName>
+        <label>Contract Specification</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Silver</fullName>
+                    <default>false</default>
+                    <label>Silver</label>
+                </value>
+                <value>
+                    <fullName>Gold</fullName>
+                    <default>false</default>
+                    <label>Gold</label>
+                </value>
+                <value>
+                    <fullName>Platinum</fullName>
+                    <default>false</default>
+                    <label>Platinum</label>
+                </value>
+                <value>
+                    <fullName>Customized</fullName>
+                    <default>false</default>
+                    <label>Customized</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ContractStartDate__c</fullName>
+        <label>Contract Start Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ContractStatus__c</fullName>
+        <label>Contract Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>false</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>Existing</fullName>
+                    <default>false</default>
+                    <label>Existing</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Customer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Customer</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>BFM Contracts</relationshipLabel>
+        <relationshipName>BFMContracts</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>NumberofServices__c</fullName>
+        <label>Number of Services</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>3</fullName>
+                    <default>false</default>
+                    <label>3</label>
+                </value>
+                <value>
+                    <fullName>4</fullName>
+                    <default>false</default>
+                    <label>4</label>
+                </value>
+                <value>
+                    <fullName>Studio</fullName>
+                    <default>false</default>
+                    <label>Studio</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ScopeofWork__c</fullName>
+        <label>Scope of Work</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>2 PPM</fullName>
+                    <default>false</default>
+                    <label>2 PPM</label>
+                </value>
+                <value>
+                    <fullName>3 PPM + 2 WT</fullName>
+                    <default>false</default>
+                    <label>3 PPM + 2 WT</label>
+                </value>
+                <value>
+                    <fullName>3 PPM +2 WT</fullName>
+                    <default>false</default>
+                    <label>3 PPM +2 WT</label>
+                </value>
+                <value>
+                    <fullName>4 PPM + 2 WT + 2 PC + 2 FE</fullName>
+                    <default>false</default>
+                    <label>4 PPM + 2 WT + 2 PC + 2 FE</label>
+                </value>
+                <value>
+                    <fullName>2 PPM + 1 WT</fullName>
+                    <default>false</default>
+                    <label>2 PPM + 1 WT</label>
+                </value>
+                <value>
+                    <fullName>4 PPM</fullName>
+                    <default>false</default>
+                    <label>4 PPM</label>
+                </value>
+                <value>
+                    <fullName>3 PPM- 2 PC-2 WT-1 F ECT</fullName>
+                    <default>false</default>
+                    <label>3 PPM- 2 PC-2 WT-1 F ECT</label>
+                </value>
+                <value>
+                    <fullName>2PPM</fullName>
+                    <default>false</default>
+                    <label>2PPM</label>
+                </value>
+                <value>
+                    <fullName>3PPM + 1 WT + 1PC + 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>3PPM + 1 WT + 1PC + 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3 PPM + 1 WT+ 1PC+ 1fire Ext</fullName>
+                    <default>false</default>
+                    <label>3 PPM + 1 WT+ 1PC+ 1fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3 PPM- 1PC-1 WT- 1fire Ext</fullName>
+                    <default>false</default>
+                    <label>3 PPM- 1PC-1 WT- 1fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3 PPM + 1 WT + 1 PC + 1 F Ext</fullName>
+                    <default>false</default>
+                    <label>3 PPM + 1 WT + 1 PC + 1 F Ext</label>
+                </value>
+                <value>
+                    <fullName>4PPM + 2 WT + 2 F EXT + 2 PC</fullName>
+                    <default>false</default>
+                    <label>4PPM + 2 WT + 2 F EXT + 2 PC</label>
+                </value>
+                <value>
+                    <fullName>2 PPM+1 PC+1 WC</fullName>
+                    <default>false</default>
+                    <label>2 PPM+1 PC+1 WC</label>
+                </value>
+                <value>
+                    <fullName>1 PPM</fullName>
+                    <default>false</default>
+                    <label>1 PPM</label>
+                </value>
+                <value>
+                    <fullName>2PPM + 1 WT</fullName>
+                    <default>false</default>
+                    <label>2PPM + 1 WT</label>
+                </value>
+                <value>
+                    <fullName>4PPM+ 2 PC +2 WT + 2 F EXT</fullName>
+                    <default>false</default>
+                    <label>4PPM+ 2 PC +2 WT + 2 F EXT</label>
+                </value>
+                <value>
+                    <fullName>4 PPM + 2 Water Tank + 2 PC + 2 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>4 PPM + 2 Water Tank + 2 PC + 2 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3 PPM + 1 PC + 1 WT + 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>3 PPM + 1 PC + 1 WT + 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3 PPM-1 PC-1WT-1 FIRE EXT</fullName>
+                    <default>false</default>
+                    <label>3 PPM-1 PC-1WT-1 FIRE EXT</label>
+                </value>
+                <value>
+                    <fullName>2 PPM + 1 Water Tank + 1 PC + 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>2 PPM + 1 Water Tank + 1 PC + 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3 PPM+1WT+1PC+1FE</fullName>
+                    <default>false</default>
+                    <label>3 PPM+1WT+1PC+1FE</label>
+                </value>
+                <value>
+                    <fullName>3PPM+ 1PC+1 F EXT+ 1 WTC</fullName>
+                    <default>false</default>
+                    <label>3PPM+ 1PC+1 F EXT+ 1 WTC</label>
+                </value>
+                <value>
+                    <fullName>3 PPM+ 1 PC+1 WT+1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>3 PPM+ 1 PC+1 WT+1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3 PPM + 1 Water Tank + 1 PC + 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>3 PPM + 1 Water Tank + 1 PC + 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>4 PPM+2PC+2WT</fullName>
+                    <default>false</default>
+                    <label>4 PPM+2PC+2WT</label>
+                </value>
+                <value>
+                    <fullName>3PPM+ 1 PC +1 WT + 1 F EXT</fullName>
+                    <default>false</default>
+                    <label>3PPM+ 1 PC +1 WT + 1 F EXT</label>
+                </value>
+                <value>
+                    <fullName>4PPM + 2 PC + 2 F EXT</fullName>
+                    <default>false</default>
+                    <label>4PPM + 2 PC + 2 F EXT</label>
+                </value>
+                <value>
+                    <fullName>3 PPM</fullName>
+                    <default>false</default>
+                    <label>3 PPM</label>
+                </value>
+                <value>
+                    <fullName>3 PPM+2 WT+2 PC</fullName>
+                    <default>false</default>
+                    <label>3 PPM+2 WT+2 PC</label>
+                </value>
+                <value>
+                    <fullName>3PPM+1PC+1WT</fullName>
+                    <default>false</default>
+                    <label>3PPM+1PC+1WT</label>
+                </value>
+                <value>
+                    <fullName>4 PPM AC only</fullName>
+                    <default>false</default>
+                    <label>4 PPM AC only</label>
+                </value>
+                <value>
+                    <fullName>2 PPM + 1 PC + 1 WT</fullName>
+                    <default>false</default>
+                    <label>2 PPM + 1 PC + 1 WT</label>
+                </value>
+                <value>
+                    <fullName>2 PPM + 1 PC + 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>2 PPM + 1 PC + 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>4 PPM-2 PC-2 WT- 2 FIRE EXT</fullName>
+                    <default>false</default>
+                    <label>4 PPM-2 PC-2 WT- 2 FIRE EXT</label>
+                </value>
+                <value>
+                    <fullName>4PPM-2 PC-2 WT- 2 Fire ext</fullName>
+                    <default>false</default>
+                    <label>4PPM-2 PC-2 WT- 2 Fire ext</label>
+                </value>
+                <value>
+                    <fullName>3PPM-1 PC- 1 Fire Ext- PPM schedulled 16 Jan 2023</fullName>
+                    <default>false</default>
+                    <label>3PPM-1 PC- 1 Fire Ext- PPM schedulled 16 Jan 2023</label>
+                </value>
+                <value>
+                    <fullName>3PPM + 1 Fire Ext + 1PC</fullName>
+                    <default>false</default>
+                    <label>3PPM + 1 Fire Ext + 1PC</label>
+                </value>
+                <value>
+                    <fullName>3 PPM+1 PC+1 FF</fullName>
+                    <default>false</default>
+                    <label>3 PPM+1 PC+1 FF</label>
+                </value>
+                <value>
+                    <fullName>3 PPM + 1PC+ 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>3 PPM + 1PC+ 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>4 PPM + 2 PC + 2 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>4 PPM + 2 PC + 2 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3 PPM + 1 PC + 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>3 PPM + 1 PC + 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>2 PPM + 1 PC</fullName>
+                    <default>false</default>
+                    <label>2 PPM + 1 PC</label>
+                </value>
+                <value>
+                    <fullName>3 PPM + 1 FE + 1 PC</fullName>
+                    <default>false</default>
+                    <label>3 PPM + 1 FE + 1 PC</label>
+                </value>
+                <value>
+                    <fullName>2 PPM +1 PC</fullName>
+                    <default>false</default>
+                    <label>2 PPM +1 PC</label>
+                </value>
+                <value>
+                    <fullName>3 PPM-2 PC</fullName>
+                    <default>false</default>
+                    <label>3 PPM-2 PC</label>
+                </value>
+                <value>
+                    <fullName>2 PPM + 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>2 PPM + 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>4 PPM + 4 Elevator + 2 TPI</fullName>
+                    <default>false</default>
+                    <label>4 PPM + 4 Elevator + 2 TPI</label>
+                </value>
+                <value>
+                    <fullName>2 PPM + 1 Water Tank + 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>2 PPM + 1 Water Tank + 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>4 PPM+2 PC+ 2 F EX</fullName>
+                    <default>false</default>
+                    <label>4 PPM+2 PC+ 2 F EX</label>
+                </value>
+                <value>
+                    <fullName>3PPM-1 PC-- 1 Fire ext</fullName>
+                    <default>false</default>
+                    <label>3PPM-1 PC-- 1 Fire ext</label>
+                </value>
+                <value>
+                    <fullName>3PPM-1 PC- 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>3PPM-1 PC- 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3 PPM+2 PC</fullName>
+                    <default>false</default>
+                    <label>3 PPM+2 PC</label>
+                </value>
+                <value>
+                    <fullName>2 PPM + 1PC</fullName>
+                    <default>false</default>
+                    <label>2 PPM + 1PC</label>
+                </value>
+                <value>
+                    <fullName>2 PPM- 1 PC</fullName>
+                    <default>false</default>
+                    <label>2 PPM- 1 PC</label>
+                </value>
+                <value>
+                    <fullName>3 PPM + 1 PC+1 F F</fullName>
+                    <default>false</default>
+                    <label>3 PPM + 1 PC+1 F F</label>
+                </value>
+                <value>
+                    <fullName>2 PPM + 1 Water Tank + 1 Fire Ext+1 PC</fullName>
+                    <default>false</default>
+                    <label>2 PPM + 1 Water Tank + 1 Fire Ext+1 PC</label>
+                </value>
+                <value>
+                    <fullName>3 PPM+2 PC+2 WC</fullName>
+                    <default>false</default>
+                    <label>3 PPM+2 PC+2 WC</label>
+                </value>
+                <value>
+                    <fullName>2AC+1E+1P</fullName>
+                    <default>false</default>
+                    <label>2AC+1E+1P</label>
+                </value>
+                <value>
+                    <fullName>1AC+1E+1P</fullName>
+                    <default>false</default>
+                    <label>1AC+1E+1P</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+1P + 2 WT</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+1P + 2 WT</label>
+                </value>
+                <value>
+                    <fullName>2AC+1E+1P+1WT</fullName>
+                    <default>false</default>
+                    <label>2AC+1E+1P+1WT</label>
+                </value>
+                <value>
+                    <fullName>2 AC+2E+2P + 1 PC</fullName>
+                    <default>false</default>
+                    <label>2 AC+2E+2P + 1 PC</label>
+                </value>
+                <value>
+                    <fullName>2 AC+2E+2P+ 1 PC + 1 WT</fullName>
+                    <default>false</default>
+                    <label>2 AC+2E+2P+ 1 PC + 1 WT</label>
+                </value>
+                <value>
+                    <fullName>2 AC+2E+2P- 2 PC- 1 Fire Ext- 1 WT</fullName>
+                    <default>false</default>
+                    <label>2 AC+2E+2P- 2 PC- 1 Fire Ext- 1 WT</label>
+                </value>
+                <value>
+                    <fullName>2 AC+2E+2P+1 PC+1 WC</fullName>
+                    <default>false</default>
+                    <label>2 AC+2E+2P+1 PC+1 WC</label>
+                </value>
+                <value>
+                    <fullName>2 AC+2E+2P+1PC+WTC</fullName>
+                    <default>false</default>
+                    <label>2 AC+2E+2P+1PC+WTC</label>
+                </value>
+                <value>
+                    <fullName>2 AC+2E+2P+1WT+1PC</fullName>
+                    <default>false</default>
+                    <label>2 AC+2E+2P+1WT+1PC</label>
+                </value>
+                <value>
+                    <fullName>2 AC+2E+2P</fullName>
+                    <default>false</default>
+                    <label>2 AC+2E+2P</label>
+                </value>
+                <value>
+                    <fullName>2 AC+2E+2P+ 1 PC +1 WT</fullName>
+                    <default>false</default>
+                    <label>2 AC+2E+2P+ 1 PC +1 WT</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+2P + 1 PC + 1 WT</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+2P + 1 PC + 1 WT</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+2P + 1 PC + 1 WT + 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+2P + 1 PC + 1 WT + 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+2P + 1 Water Tank + 1 PC + 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+2P + 1 Water Tank + 1 PC + 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+2P + 1 WT + 1 PC + 1 F Ext</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+2P + 1 WT + 1 PC + 1 F Ext</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+2P + 1 WT+ 1PC+ 1fire Ext</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+2P + 1 WT+ 1PC+ 1fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+2P+ 1 PC+1 WT+1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+2P+ 1 PC+1 WT+1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+2P + 1 WT + 1PC + 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+2P + 1 WT + 1PC + 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>4 AC + 2E + 1P + 2 WT + 2 PC</fullName>
+                    <default>false</default>
+                    <label>4 AC + 2E + 1P + 2 WT + 2 PC</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+2P- 2 PC-2 WT-1 F ECT</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+2P- 2 PC-2 WT-1 F ECT</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+2P+2 WT+2 PC</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+2P+2 WT+2 PC</label>
+                </value>
+                <value>
+                    <fullName>4 AC+2E+2P + 2 Water Tank + 2 PC + 2 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>4 AC+2E+2P + 2 Water Tank + 2 PC + 2 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>4 AC+2E+2P-2 PC-2 WT- 2 FIRE EXT</fullName>
+                    <default>false</default>
+                    <label>4 AC+2E+2P-2 PC-2 WT- 2 FIRE EXT</label>
+                </value>
+                <value>
+                    <fullName>4 AC+2E+2P + 2 PC + 2 F EXT</fullName>
+                    <default>false</default>
+                    <label>4 AC+2E+2P + 2 PC + 2 F EXT</label>
+                </value>
+                <value>
+                    <fullName>4 AC+2E+2P + 2 WT + 2 F EXT + 2 PC</fullName>
+                    <default>false</default>
+                    <label>4 AC+2E+2P + 2 WT + 2 F EXT + 2 PC</label>
+                </value>
+                <value>
+                    <fullName>2 AC+2E+2P + 1 Water Tank + 1 PC + 1 Fire Ext</fullName>
+                    <default>false</default>
+                    <label>2 AC+2E+2P + 1 Water Tank + 1 PC + 1 Fire Ext</label>
+                </value>
+                <value>
+                    <fullName>2 AC+2E+2P + 1 WT</fullName>
+                    <default>false</default>
+                    <label>2 AC+2E+2P + 1 WT</label>
+                </value>
+                <value>
+                    <fullName>2AC+2E+2P-1 PC</fullName>
+                    <default>false</default>
+                    <label>2AC+2E+2P-1 PC</label>
+                </value>
+                <value>
+                    <fullName>2AC+2P+2E +1PC</fullName>
+                    <default>false</default>
+                    <label>2AC+2P+2E +1PC</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+2P + 1PC</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+2P + 1PC</label>
+                </value>
+                <value>
+                    <fullName>4 AC+2E+2P + 2 PC</fullName>
+                    <default>false</default>
+                    <label>4 AC+2E+2P + 2 PC</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+2P + 2PC</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+2P + 2PC</label>
+                </value>
+                <value>
+                    <fullName>3 AC+2E+2P+ 1 PC</fullName>
+                    <default>false</default>
+                    <label>3 AC+2E+2P+ 1 PC</label>
+                </value>
+                <value>
+                    <fullName>4AC+2E+2P +2 PC</fullName>
+                    <default>false</default>
+                    <label>4AC+2E+2P +2 PC</label>
+                </value>
+                <value>
+                    <fullName>3AC+2E+2P+2 PC</fullName>
+                    <default>false</default>
+                    <label>3AC+2E+2P+2 PC</label>
+                </value>
+                <value>
+                    <fullName>2 AC+1E+1P</fullName>
+                    <default>false</default>
+                    <label>2 AC+1E+1P</label>
+                </value>
+                <value>
+                    <fullName>2 PPM+1PC</fullName>
+                    <default>false</default>
+                    <label>2 PPM+1PC</label>
+                </value>
+                <value>
+                    <fullName>3 PPM + 1 PC + 1 WT</fullName>
+                    <default>false</default>
+                    <label>3 PPM + 1 PC + 1 WT</label>
+                </value>
+                <value>
+                    <fullName>3 PPM +1 PC</fullName>
+                    <default>false</default>
+                    <label>3 PPM +1 PC</label>
+                </value>
+                <value>
+                    <fullName>2PPM+1WC</fullName>
+                    <default>false</default>
+                    <label>2PPM+1WC</label>
+                </value>
+                <value>
+                    <fullName>4PPM+1PC+1WT</fullName>
+                    <default>false</default>
+                    <label>4PPM+1PC+1WT</label>
+                </value>
+                <value>
+                    <fullName>2 PPM + 1 WT + 1 PC + 1 Fogging Treatment</fullName>
+                    <default>false</default>
+                    <label>2 PPM + 1 WT + 1 PC + 1 Fogging Treatment</label>
+                </value>
+                <value>
+                    <fullName>2</fullName>
+                    <default>false</default>
+                    <label>2</label>
+                </value>
+                <value>
+                    <fullName>1</fullName>
+                    <default>false</default>
+                    <label>1</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Active</fullName>
+                    <default>false</default>
+                    <label>Active</label>
+                </value>
+                <value>
+                    <fullName>Inactive</fullName>
+                    <default>false</default>
+                    <label>Inactive</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Threshold__c</fullName>
+        <externalId>false</externalId>
+        <label>Threshold</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UnitNumber__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Unit Number</label>
+        <referenceTo>Unit__c</referenceTo>
+        <relationshipLabel>BFM Contracts</relationshipLabel>
+        <relationshipName>BFMContracts</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>BFM Contract</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Customer__c</columns>
+        <columns>UnitNumber__c</columns>
+        <columns>ContractStartDate__c</columns>
+        <columns>ContractEndDate__c</columns>
+        <columns>ScopeofWork__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>BFMC-{00000000}</displayFormat>
+        <label>BFM Contract Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>BFM Contracts</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

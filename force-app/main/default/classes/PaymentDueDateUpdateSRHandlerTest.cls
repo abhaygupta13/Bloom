@@ -142,19 +142,19 @@ public class PaymentDueDateUpdateSRHandlerTest {
 
     @isTest
     static void validatyTest(){
-        SalesOrder__c so = [Select id from Salesorder__c limit 1];
-        ServiceRequestController.validateEligibility(so.id,'Payment Due Date Update',false);
+        SalesOrder__c so = [Select id,Status__c,IsDefaulted__c from Salesorder__c limit 1];
+        PaymentDueDateUpdateSRHandler.getInstance().validateEligibility(so);
     }
     @isTest
     static void createCaseTest(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
-        ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email');
+        ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email',false);
     }
     @isTest
     static void validateCaseTest(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         PaymentDueDateUpdateSRHandler i = PaymentDueDateUpdateSRHandler.getInstance();
@@ -164,22 +164,43 @@ public class PaymentDueDateUpdateSRHandlerTest {
     static void validateCaseTest1(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email');
-        Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email',false);
+        Case cs = [Select id, Step__c, Payment_Booked__c, Finance_Document_Verified__c, 
+                   FinanceDocumentsUploadedManually__c, ServiceCatalog__c, Status,
+                   CaseType__c, SubType__c, RecordTypeId, AccountId, StopEmailsToCustomer__c,
+                   Sales_Order__c, TPFType__c, DocumentsVerifiedUploaded__c, POPUploaded__c,
+                   Payment_Due_Date__c
+                   from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
+        cs.Payment_Booked__c = 'Yes';
         update cs;
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
+        PaymentDueDateUpdateSRHandler i = PaymentDueDateUpdateSRHandler.getInstance();
+        i.validateCaseForNextReview(cs);
+        cs.Step__c = '3';
+        cs.TPFType__c = 'Individual';
+        cs.Finance_Document_Verified__c = 'Yes';
+        update cs;
+        i.validateCaseForNextReview(cs);
+        //cs.FinanceDocumentsUploadedManually__c = 'Yes';
+        cs.Step__c = 'Final';
+        cs.POPUploaded__c = 'Yes';
+        cs.FinanceDocumentsUploadedManually__c = 'Yes';
+        update cs;
+        i.validateCaseForNextReview(cs);
     }
 
     @isTest
     static void validateCaseTest2(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
-        cs.step__c = '1';
+        cs.step__c = 'Final';
         cs.Payment_Due_Date__c = Date.valueof(System.today()+1);
+        cs.Finance_Document_Verified__c = 'Yes';
+		cs.FinanceDocumentsUploadedManually__c = 'Yes';
         update cs;
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
@@ -189,11 +210,16 @@ public class PaymentDueDateUpdateSRHandlerTest {
     static void validateCaseTest3(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email');
-        Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
-        cs.step__c = '1';
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email',false);
+        Case cs = [Select id, Step__c, Payment_Booked__c, Finance_Document_Verified__c, 
+                   FinanceDocumentsUploadedManually__c, ServiceCatalog__c, Status,
+                   CaseType__c, SubType__c, RecordTypeId, AccountId, StopEmailsToCustomer__c,
+                   Sales_Order__c, TPFType__c, DocumentsVerifiedUploaded__c, POPUploaded__c
+                   from case where id =: caseData.get('caseId')];
+        cs.step__c = 'Final';
         cs.Payment_Due_Date__c = Date.valueof(System.today()+1);
         cs.Finance_Document_Verified__c  = 'Yes';
+        cs.FinanceDocumentsUploadedManually__c = 'Yes';
         update cs;
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
@@ -203,11 +229,12 @@ public class PaymentDueDateUpdateSRHandlerTest {
     static void validateCaseTest4(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = 'Final';
         cs.Payment_Due_Date__c = Date.valueof(System.today()+1);
-        cs.Finance_Document_Verified__c  = 'No';
+        cs.Finance_Document_Verified__c = 'No';
+        cs.FinanceDocumentsUploadedManually__c = 'Yes';
         update cs;
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
@@ -217,13 +244,38 @@ public class PaymentDueDateUpdateSRHandlerTest {
     static void validateCaseTest5(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.Payment_Due_Date__c = Date.valueof(System.today()+1);
-        cs.Finance_Document_Verified__c  = 'No';
+        cs.Finance_Document_Verified__c = 'Yes';
+		cs.FinanceDocumentsUploadedManually__c = 'No';
         update cs;
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
+    }
+    
+     @isTest
+    static void SendEmailTest() {
+        // Arrange
+        SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment Due Date Update',so.Account__c,so.Unit__c,'test','Email',false);
+        Case caseRec = [Select Id, Step__c, Payment_Due_Date__c, AccountId from case where id =: caseData.get('caseId')];
+        
+        caseRec.Step__c = 'Final';
+        //caseRec.PDCSentToCustomer__c = 'Yes';
+        //caseRec.FinanceDocumentsUploadedManually__c= 'Yes';
+        caseRec.Payment_Due_Date__c = System.today();
+        update caseRec;
+        PaymentDueDateUpdateSRHandler handler = PaymentDueDateUpdateSRHandler.getInstance();
+        MetadataService objMetadataService = MetadataService.getInstance();
+        Id emailTempId = objMetadataService.getAppSettingTextValue('NewServiceRequestClosureID');
+        Id noReplyOWDId = objMetadataService.getAppSettingTextValue('BloomNoReplySalesOWEmailId');
+        AccountService accService = AccountService.getInstance();
+        String customerEmail = accService.getRelatedContactEmail(caseRec.AccountId);
+        List<String> toAddress = new List<String>{customerEmail};
+        Messaging.SingleEmailMessage email =  handler.sendClosureEmail(noReplyOWDId, caseRec.Id, toAddress, null, null,null);
+        // Assert
+        //System.assertEquals('success', response.get('status'), 'Status should be success');
     }
 }

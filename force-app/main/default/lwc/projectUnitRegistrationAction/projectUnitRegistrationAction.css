@@ -124,3 +124,19 @@ td lightning-icon {
 .hidden-file-input {
     display: none;
 }
+
+:host .slds-table tbody tr.slds-is-selected {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+:host .slds-table tbody tr.slds-is-selected > td,
+:host .slds-table tbody tr.slds-is-selected > th {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+:host .slds-table tbody tr.slds-is-selected:hover > td,
+:host .slds-table tbody tr.slds-is-selected:hover > th {
+    background: transparent !important;
+}

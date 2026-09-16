@@ -71,6 +71,7 @@ public class SalesOrderServiceTest {
         List<SalesOrder__c> soListTHREE = service.getSalesOrderByUnitIds(new Set<Id>{soList[0].Unit__c});
         List<SalesOrder__c> soListOpp = service.getSalesOrdersByOppIds(new Set<Id>{oppList[0].Id});
         SalesOrder__c so = service.getSalesOrderById(soList[0].Id);
+        SalesOrder__c saleso = service.getSalesOrderByCaseId(soList[0].Id);
         List<SalesOrder__c> activeSOList = service.getActiveSalesOrdersByAccountId(acc[0].Id);
         Test.stopTest();
         
@@ -245,5 +246,56 @@ System.assertEquals(1, soLists.size(), 'Size should match');
         service.getSalesOrdersWithOpportunityAndAgency(salesOrderIdSet);
         Test.stopTest();  
     }
-    
+    @isTest
+static void testGetSalesOrdersByAccountIdsAndJointOwnerEmails() {
+
+    SalesOrderService service = SalesOrderService.getInstance();
+
+    // Fetch existing test data created in @TestSetup
+    Account acc = [SELECT Id FROM Account LIMIT 1];
+    SalesOrder__c so = [SELECT Id, Account__c FROM SalesOrder__c LIMIT 1];
+
+    // Create Joint Owner records
+    JointOwner__c jo1 = new JointOwner__c(
+       
+        SalesOrder__c = so.Id,
+        Email__c = 'jointowner1@test.com'
+    );
+
+    JointOwner__c jo2 = new JointOwner__c(
+        
+        SalesOrder__c = so.Id,
+        Email__c = 'jointowner2@test.com'
+    );
+
+    // Record without email to cover filter condition
+    JointOwner__c jo3 = new JointOwner__c(
+        
+        SalesOrder__c = so.Id
+    );
+
+    insert new List<JointOwner__c>{ jo1, jo2, jo3 };
+
+    Test.startTest();
+
+    // Method 1
+    List<SalesOrder__c> salesOrders =
+        service.getSalesOrdersByAccountIds(acc.Id);
+
+    // Method 2
+    List<String> emailList =
+        service.getJointOwnerEmails(so.Id);
+
+    Test.stopTest();
+
+    // Assertions
+    System.assert(!salesOrders.isEmpty(),
+        'Sales Orders should be returned');
+
+    System.assertEquals(2, emailList.size(),
+        'Only records with non-null emails should be returned');
+
+    System.assert(emailList.contains('jointowner1@test.com'));
+    System.assert(emailList.contains('jointowner2@test.com'));
+}
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Case</entityName>
+    <fieldName>Status</fieldName>
+    <masterLabel>ComplaintRequest</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>SubStatus__c</fieldNames>
+        <fieldNames>PendingWith__c</fieldNames>
+        <fieldNames>SR_Complaint_Related_To__c</fieldNames>
+        <picklistValueName>In Progress</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>ComplaintRequest</recordTypeName>
+</PathAssistant>

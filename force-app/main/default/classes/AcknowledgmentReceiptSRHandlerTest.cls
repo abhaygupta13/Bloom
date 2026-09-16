@@ -113,14 +113,14 @@ public class AcknowledgmentReceiptSRHandlerTest {
     @isTest
     static void createCaseTest(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
-        ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Receipt Booking Query',so.Account__c,so.Unit__c,'test','Email');
+        ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Receipt Booking Query',so.Account__c,so.Unit__c,'test','Email',false);
     }
 
     @isTest
     static void validateCaseTest(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Receipt Booking Query',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Receipt Booking Query',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         AcknowledgmentReceiptSRHandler i = AcknowledgmentReceiptSRHandler.getInstance();
@@ -131,20 +131,35 @@ public class AcknowledgmentReceiptSRHandlerTest {
     static void validateCaseTest1(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Receipt Booking Query',so.Account__c,so.Unit__c,'test','Email');
-        Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Receipt Booking Query',so.Account__c,so.Unit__c,'test','Email',false);
+        Case cs = [Select id, Step__c, Payment_Booked__c, Finance_Document_Verified__c, 
+                   FinanceDocumentsUploadedManually__c, ServiceCatalog__c, Status,
+                   CaseType__c, SubType__c, RecordTypeId, AccountId, StopEmailsToCustomer__c,
+                   Sales_Order__c
+                   from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
+        //cs.Payment_Booked__c = 'Yes';
+        //cs.Finance_Document_Verified__c = 'Yes';
         update cs;
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
+        AcknowledgmentReceiptSRHandler i = AcknowledgmentReceiptSRHandler.getInstance();
+        i.validateCaseForNextReview(cs);
+        cs.Payment_Booked__c = 'Yes';
+        cs.Finance_Document_Verified__c = 'Yes';
+        update cs;
+        i.validateCaseForNextReview(cs);
+        cs.FinanceDocumentsUploadedManually__c = 'Yes';
+        update cs;
+        i.validateCaseForNextReview(cs);
     }
 
     @isTest
     static void validateCaseTest2(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Receipt Booking Query',so.Account__c,so.Unit__c,'test','Email');
-        Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Receipt Booking Query',so.Account__c,so.Unit__c,'test','Email',false);
+        Case cs = [Select id, Step__c, Payment_Booked__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.Payment_Booked__c = 'No';
         update cs;
@@ -156,7 +171,7 @@ public class AcknowledgmentReceiptSRHandlerTest {
     static void validateCaseTest3(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Receipt Booking Query',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Receipt Booking Query',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.Payment_Booked__c = 'Yes';
@@ -170,7 +185,7 @@ public class AcknowledgmentReceiptSRHandlerTest {
     static void validateCaseTest4(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Receipt Booking Query',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Receipt Booking Query',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.Payment_Booked__c = 'Yes';

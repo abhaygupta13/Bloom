@@ -175,7 +175,7 @@ public without sharing class BCAPP_InvoiceHandler {
 
         } catch (Exception ex) {
             Map<String, Object> response = new Map<String, Object>{
-                'errorMessage' => 'Error in submitPayment: ' + ex.getMessage() + ' | Line: ' + ex.getLineNumber() + ' | Stack: ' + ex.getStackTraceString()
+                'errorMessage' => 'Error in submitPayment: ' + ex.getMessage()
             };
             BCAPP_WebServiceHelper.makeServerErrorResponse(response);
         }
@@ -247,7 +247,7 @@ public without sharing class BCAPP_InvoiceHandler {
 
         } catch (Exception ex) {
             Map<String, Object> response = new Map<String, Object>{
-                'errorMessage' => 'Error in updatePaymentStatus: ' + ex.getMessage() + ' | Line: ' + ex.getLineNumber() + ' | Stack: ' + ex.getStackTraceString()
+                'errorMessage' => 'Error in updatePaymentStatus: ' + ex.getMessage()+'--'+ex.getLineNumber()
             };
             BCAPP_WebServiceHelper.makeServerErrorResponse(response);
         }

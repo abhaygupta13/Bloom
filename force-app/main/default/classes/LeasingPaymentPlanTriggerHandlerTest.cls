@@ -20,6 +20,7 @@ private class LeasingPaymentPlanTriggerHandlerTest {
         for(Integer i = 0; i < 3; i++){
             schedules.add(new PaymentPlanSchedule__c(
                 Name = 'Schedule ' + i,
+                PostingDate__c = System.Today().addDays(i),
                 LeasingOrder__c = contract.Id,
                  PaymentStartDate__c = Date.today()
             ));

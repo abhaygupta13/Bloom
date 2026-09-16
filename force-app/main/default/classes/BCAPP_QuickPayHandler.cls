@@ -131,7 +131,7 @@ public class BCAPP_QuickPayHandler {
         } catch (Exception ex) {
             System.debug(ex.getMessage());
             Map<String, Object> response = new Map<String, Object>{
-                'errorMessage' => 'Quick Pay submission failed: ' + ex.getMessage() + ' | Line: ' + ex.getLineNumber() + ' | Stack: ' + ex.getStackTraceString()
+                'errorMessage' => 'Quick Pay submission failed: ' + ex.getMessage()
             };
             BCAPP_WebServiceHelper.makeServerErrorResponse(response);
         }
@@ -190,7 +190,7 @@ public class BCAPP_QuickPayHandler {
 
         } catch (Exception ex) {
             Map<String, Object> response = new Map<String, Object>{
-                'errorMessage' => 'Quick Pay update failed: ' + ex.getMessage() + ' | Line: ' + ex.getLineNumber() + ' | Stack: ' + ex.getStackTraceString()
+                'errorMessage' => 'Quick Pay update failed: ' + ex.getMessage()
             };
             BCAPP_WebServiceHelper.makeServerErrorResponse(response);
         }

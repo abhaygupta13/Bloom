@@ -105,7 +105,12 @@ public class TawtheeqEnrollmentSRHandlerTest {
                                         Type__c = 'Statement of Account',
                                         Active__c = true);
         docList.add(doc2);
-                insert docList;
+        insert docList;
+        
+        String RecordTypeCaseId = Schema.SObjectType.Case.getRecordTypeInfosByName().get('Tawtheeq Enrollment').getRecordTypeId();
+        Case cs = new Case(Status = 'New', Origin = 'Phone', AccountId = tempAcc.Id, RecordTypeId= RecordTypeCaseId, 
+                           ServiceCatalog__c = testServiceCatalog.Id, Sales_Order__c = testOrder.Id, Unit__c= testunit.Id);
+        insert cs;
     }
     
     @isTest
@@ -117,14 +122,14 @@ public class TawtheeqEnrollmentSRHandlerTest {
     @isTest
     static void createCaseTest(){
         SalesOrder__c so = [SELECT Id, Account__c, Unit__c FROM Salesorder__c LIMIT 1];
-        ServiceRequestController.createCaseRecord(so.id,'Service Request','CRM Services','Tawtheeq Enrollment',so.Account__c,so.Unit__c,'test','Email',null, null, null, false);
+        ServiceRequestController.createCaseRecord(so.id,'Service Request','CRM Services','Tawtheeq Enrollment',so.Account__c,so.Unit__c,'test','Email', false);
     }
     
     @isTest
     static void validateCaseTest(){
         SalesOrder__c so = [SELECT Id, Account__c, Unit__c FROM Salesorder__c LIMIT 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','CRM Services','Tawtheeq Enrollment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','CRM Services','Tawtheeq Enrollment',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         TawtheeqEnrollmentSRHandler objTawtheeqEnrollmentSRHandler = TawtheeqEnrollmentSRHandler.getInstance();
@@ -135,11 +140,14 @@ public class TawtheeqEnrollmentSRHandlerTest {
     static void validateCaseTest1(){
         SalesOrder__c so = [SELECT Id, Account__c, Unit__c FROM Salesorder__c LIMIT 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','CRM Services','Tawtheeq Enrollment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','CRM Services','Tawtheeq Enrollment',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         caseservice service = caseservice.getInstance();
-        Case cs = service.getCasebyId(caseData.get('caseId'));
+        Case cs = [SELECT Id, AccountId, ContactId, Unit__c, Step__c, Unit__r.Project__r.Name, Unit__r.Name, Unit__r.Project__r.ProjectNameArabic__c,
+                   Account.Name, Account.NameinArabic__c, Project__c, Account.IsPersonAccount, Account.PersonContactId, ServiceCatalog__c, Status, CaseType__c,
+                   Sales_Order__c, RecordTypeId, StopEmailsToCustomer__c
+                   FROM Case LIMIT 1];
         cs.step__c = '1';
         update cs;
         TawtheeqEnrollmentSRHandler objTawtheeqEnrollmentSRHandler = TawtheeqEnrollmentSRHandler.getInstance();
@@ -150,11 +158,14 @@ public class TawtheeqEnrollmentSRHandlerTest {
     static void validateEligibilityTest() {
         SalesOrder__c so = [SELECT Id, Account__c, Unit__c FROM Salesorder__c LIMIT 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','CRM Services','Tawtheeq Enrollment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','CRM Services','Tawtheeq Enrollment',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         caseservice service = caseservice.getInstance();
-        Case cs = service.getCasebyId(caseData.get('caseId'));
+        Case cs = [SELECT Id, AccountId, ContactId, Unit__c, Step__c, Unit__r.Project__r.Name, Unit__r.Name, Unit__r.Project__r.ProjectNameArabic__c,
+                   Account.Name, Account.NameinArabic__c, Project__c, Account.IsPersonAccount, Account.PersonContactId, ServiceCatalog__c, Status, CaseType__c,
+                   Sales_Order__c, RecordTypeId, StopEmailsToCustomer__c, Handover__c
+                   FROM Case LIMIT 1];
         cs.step__c = 'Final';
         update cs;
         Document__c tawtheeqRegConfDoc = new Document__c(Case__c = cs.Id, Document_Name__c = 'Tawtheeq Registration Confirmation', ContentDocumentId__c = '069000000000001AAA', Content_Version_Id__c = '068000000000001AAA');

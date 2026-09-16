@@ -12,11 +12,6 @@ import getOfferLineDiscountSum from '@salesforce/apex/LeasingOrderController.get
 import saveEscalationSplits from '@salesforce/apex/LeasingOrderController.insertEscalationSchedules';
 import hasEditPermission from '@salesforce/apex/LeasingOrderController.hasEditPermission';
 import getActiveLeasingContract from '@salesforce/apex/LeasingOrderController.getActiveLeasingContract';
-import LEASING_ORDER_OBJECT from '@salesforce/schema/LeasingOrder__c';
-import CATEGORY_FIELD from '@salesforce/schema/LeasingOrder__c.Category__c';
-import SUBCATEGORY_FIELD from '@salesforce/schema/LeasingOrder__c.SubCategory__c';
-
-import { getObjectInfo, getPicklistValues } from 'lightning/uiObjectInfoApi';
 //import getUserProfileName from '@salesforce/apex/LeasingOrderController.getUserProfileName';
 
 
@@ -41,12 +36,6 @@ export default class LeasingOrderComponent extends NavigationMixin(LightningElem
     @track selectedUnit = null;
     @track leasingContractName = '';
     @track isFamily = false;
-    @track categoryOptions = [];
-@track subCategoryOptions = [];
-    @track category;
-@track subCategory;
-@track fitOutDays;
-@track unitHandOverDate;
 
     @track leasingEndDate = '';
     @track discountPercentage = 0;
@@ -91,7 +80,6 @@ export default class LeasingOrderComponent extends NavigationMixin(LightningElem
     @track guaranteeCheque = 0;
     @track fitOutSecurityDeposit = 0;
     @track remarks;
-    @track permittedUse;
     accountName;
     @track currentCondition;
     @track handOverCondition
@@ -139,39 +127,6 @@ export default class LeasingOrderComponent extends NavigationMixin(LightningElem
         { label: '12 Installments', value: '12 Installments' }
     ];
 
-    @wire(getObjectInfo, { objectApiName: LEASING_ORDER_OBJECT })
-objectInfo;
-
-@wire(getPicklistValues, {
-    recordTypeId: '$objectInfo.data.defaultRecordTypeId',
-    fieldApiName: CATEGORY_FIELD
-})
-wiredCategory({ data, error }) {
-    if (data) {
-        this.categoryOptions = data.values.map(item => ({
-            label: item.label,
-            value: item.value
-        }));
-    } else if (error) {
-        console.error('Category Picklist Error', error);
-    }
-}
-
-@wire(getPicklistValues, {
-    recordTypeId: '$objectInfo.data.defaultRecordTypeId',
-    fieldApiName: SUBCATEGORY_FIELD
-})
-wiredSubCategory({ data, error }) {
-    if (data) {
-        this.subCategoryOptions = data.values.map(item => ({
-            label: item.label,
-            value: item.value
-        }));
-    } else if (error) {
-        console.error('Sub Category Picklist Error', error);
-    }
-}
-
     //pranav
     get options() {
         let nums = [];
@@ -181,12 +136,6 @@ wiredSubCategory({ data, error }) {
         }
         return nums;
     }
-
-    get showCommercialFields() {
-    return this.selectedUnit &&
-        (this.selectedUnit.PropertyUsage__c === 'Commercial' ||
-         this.selectedUnit.PropertyUsage__c === 'Retail');
-}
 
     familyStatusOptions = [
         { label: 'Individual', value: 'Individual' },
@@ -798,28 +747,8 @@ const finalRent = appliedRent;
                 case 'relatedPartyBloomHolding':
     this.relatedPartyBloomHolding = event.target.checked;
     break;
-
-    case 'category':
-    this.category = rawValue;
-    break;
-
-case 'subCategory':
-    this.subCategory = rawValue;
-    break;
-
-case 'fitOutDays':
-    this.fitOutDays = rawValue;
-    break;
-    case 'PermittedUse':
-    this.permittedUse = rawValue;
-    break;
-
-case 'unitHandOverDate':
-    this.unitHandOverDate = rawValue;
-    break;
             case 'childCount':
                 this.childCount = rawValue;
-                
 
             default:
                 // any other fields you wired up
@@ -866,7 +795,6 @@ case 'unitHandOverDate':
             extraChequeFee: this.extraChequeFee,
             fitOutSecurityDeposit: this.fitOutSecurityDeposit,
             remarks: this.remarks,
-            permittedUse: this.permittedUse,
             // gracePeriod: this.gracePeriod,
             gracePeriod: this.gracePeriod_,
             offerValidityDays: this.offerValidityDays,
@@ -878,11 +806,7 @@ case 'unitHandOverDate':
             adultCount : this.adultCount,
             childCount : this.childCount,
             isBloomStaff : this.isBloomEmployeeChecked,
-            isBloomPartnerStaff : this.isBloomSisterEmployeeChecked,
-            category: this.category,
-    subCategory: this.subCategory,
-    fitOutDays: this.fitOutDays,
-    unitHandOverDate: this.unitHandOverDate
+            isBloomPartnerStaff : this.isBloomSisterEmployeeChecked
         };
         console.log('leasingData Idnetation  => ' + JSON.stringify(leasingData, null, 2));
 

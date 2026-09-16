@@ -132,30 +132,4 @@ public inherited sharing class BrokerCommissionService {
         ];
         return results.isEmpty() ? null : results[0];
     }
-    // BAPP Get Pending BrokerCommission by Account Id and Contact Id
-    public Map<Id,List<BrokerCommission__c>> getPendingBrokerCommissionByAccountAndContact(Set<Id> accountIds, Set<Id> contactIds) {
-        Map<Id,List<BrokerCommission__c>> pendingCommissionMap = new Map<Id,List<BrokerCommission__c>>();
-        
-        if (accountIds == null || accountIds.isEmpty() || contactIds == null || contactIds.isEmpty()) {
-            return pendingCommissionMap;
-        }
-        
-        for(BrokerCommission__c bc : [
-            SELECT Id,Status__c,SalesOrder__r.Opportunity__r.BrokerAgencyAccount__c,SalesOrder__r.Opportunity__r.BrokerAgentContact__c
-            FROM BrokerCommission__c
-            WHERE SalesOrder__r.Opportunity__r.BrokerAgencyAccount__c IN :accountIds
-            AND SalesOrder__r.Opportunity__r.BrokerAgentContact__c IN :contactIds
-            AND Status__c NOT IN ('Paid','Cancelled')
-        ]){
-            Id contactId = bc.SalesOrder__r.Opportunity__r.BrokerAgentContact__c;
-            
-            if(!pendingCommissionMap.containsKey(contactId)){
-                pendingCommissionMap.put(contactId,new List<BrokerCommission__c>());
-            }
-            
-            pendingCommissionMap.get(contactId).add(bc);
-        }
-        
-        return pendingCommissionMap;
-    }
 }

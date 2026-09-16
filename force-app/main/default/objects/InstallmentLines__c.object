@@ -1,0 +1,1285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Installment_Line_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Installment_Line_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Installment_Line</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Installment_Line</fullName>
+        <fields>Name</fields>
+        <fields>SalesOrder__c</fields>
+        <fields>InstallmentNumber__c</fields>
+        <fields>InstallmentPercentage__c</fields>
+        <fields>Description__c</fields>
+        <fields>InstallmentAmount__c</fields>
+        <fields>AmountReceived__c</fields>
+        <label>Installment Line</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to manage all the installment lines for a Sales Order.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>ADM_Fee_Included__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>ADM Fee Included</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Account_Formatted_Mobile_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Account__r.Formatted_Mobile_Number__c</formula>
+        <label>Account Formatted Mobile Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.AccountName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Account Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Person_Email__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Account__r.PersonContact.Email</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Account Person Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Person_Mobile__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Account__r.PersonMobilePhone</formula>
+        <label>Account Person Mobile</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Add_Receipts__c</fullName>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;/lightning/cmp/c__OpenReceiptAcknowledgement?c__recordId=&quot;+Id, &quot;Enter Receipts&quot;, &quot;_self&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Add Receipts</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AmountReceived__c</fullName>
+        <description>Total amount received for this installment from the customer.</description>
+        <inlineHelpText>Total amount received for this installment from the customer.</inlineHelpText>
+        <label>Amount Received</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ArabicDescription__c</fullName>
+        <externalId>false</externalId>
+        <label>Arabic Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ArabicInstallmentDescription__c</fullName>
+        <description>Installment Description in Arabic</description>
+        <externalId>false</externalId>
+        <formula>PaymentInstallments__r.DescriptionArabic__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Arabic Installment Description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BrokerCommissionCreated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Broker Commission Created</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BrokerPayoutPercentage__c</fullName>
+        <description>Captures the broker payout percentage when the installment is paid by the customer</description>
+        <inlineHelpText>Captures the broker payout percentage when the installment is paid by the customer</inlineHelpText>
+        <label>Broker Payout %</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ClearedAmount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Total Amount that is cleared for this installment.</description>
+        <inlineHelpText>Total Amount that is cleared for this installment.</inlineHelpText>
+        <label>Cleared Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Customer_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(SalesOrder__r.CustomerType__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CutOffDate__c</fullName>
+        <label>Cut Off Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>Captures the installment description that needs to be printed on the customer documents</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures the installment description that needs to be printed on the customer documents</inlineHelpText>
+        <label>Description</label>
+        <length>255</length>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Due_Date_Arabic__c</fullName>
+        <externalId>false</externalId>
+        <formula>PaymentInstallments__r.Installment_Date_Arabic__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Due Date Arabic</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Due_Date__c</fullName>
+        <formula>IF(  ISNULL(RevisedDate__c),  InstallmentDate__c ,  RevisedDate__c  )</formula>
+        <label>Due Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ERP_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>ERP ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Finance_Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Finance  Comments</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>First_Reminder_to_Customer_Date__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>First Reminder to Customer Date</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GracePeriod__c</fullName>
+        <externalId>false</externalId>
+        <label>Grace Period</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Inst_Amount_incl_tax__c</fullName>
+        <formula>InstallmentAmount__c + (InstallmentPercentage__c * SalesOrder__r.TaxableAmount__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Inst Amount incl tax</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Inst_inc_tax_in_words__c</fullName>
+        <externalId>false</externalId>
+        <label>Inst inc tax in words</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InstallmentAmount__c</fullName>
+        <description>Captures the Installment Amount for the Opportunity Unit based on the payment plan chosen</description>
+        <inlineHelpText>Captures the Installment Amount for the Opportunity Unit based on the payment plan chosen</inlineHelpText>
+        <label>Installment Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>InstallmentAmountintheWords__c</fullName>
+        <description>For capturing the Installment Amount in the Words</description>
+        <externalId>false</externalId>
+        <label>Installment Amount in the Words</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InstallmentDate__c</fullName>
+        <description>Captures the expected installment date</description>
+        <inlineHelpText>Captures the expected installment date</inlineHelpText>
+        <label>Installment Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>InstallmentDateinArabic__c</fullName>
+        <description>For capturing the arabic installment date</description>
+        <externalId>false</externalId>
+        <formula>IF( InstallmentNumber__c = 1,
+&quot;تاريخ السريان&quot;,
+CASE(
+MONTH(InstallmentDate__c ),
+1,TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;يناير&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)) ,
+2, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;فبراير&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+3, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;مارس&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+4, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;أبريل&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+5, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;مايو&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+6, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;يونيو&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+7, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;يوليو&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+8, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;أغسطس&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+9, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;سبتمبر&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)), 
+10, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;أكتوبر&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+11, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;نوفمبر&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+12, TEXT(DAY(InstallmentDate__c)) &amp; &quot; &quot; &amp; &quot;ديسمبر&quot; &amp; &quot; &quot; &amp; TEXT(YEAR(InstallmentDate__c)),
+&quot;None&quot;
+)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Installment Date in Arabic</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InstallmentNumber__c</fullName>
+        <description>Captures the installment number</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Captures the installment number</inlineHelpText>
+        <label>Installment #</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InstallmentPercentage__c</fullName>
+        <description>Captures the installment percentage</description>
+        <inlineHelpText>Captures the installment percentage</inlineHelpText>
+        <label>Installment %</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>InstallmentSPADesc__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(InstallmentNumber__c ,
+1, &apos;Effective Date&apos;, TEXT(DAY(InstallmentDate__c))  &amp; &quot;-&quot; &amp; CASE(MONTH(InstallmentDate__c),
+1, &quot;Jan&quot;,
+2, &quot;Feb&quot;,
+3, &quot;Mar&quot;, 
+4, &quot;Apr&quot;, 
+5, &quot;May&quot;, 
+6, &quot;Jun&quot;,
+7, &quot;Jul&quot;,
+8, &quot;Aug&quot;,
+9, &quot;Sep&quot;,
+10, &quot;Oct&quot;,
+11, &quot;Nov&quot;,
+12, &quot;Dec&quot;,
+&quot;None&quot;)  &amp; &quot;-&quot; &amp; TEXT(YEAR(InstallmentDate__c)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Installment SPADate</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Installment_Amount_Excluding_ADM__c</fullName>
+        <externalId>false</externalId>
+        <label>Installment Amount Excluding ADM</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Installment_Amount_Invoiced__c</fullName>
+        <externalId>false</externalId>
+        <label>Installment Amount Invoiced</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Installment_Date_Text__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(DAY( InstallmentDate__c )) &amp; &quot;-&quot; &amp; CASE(MONTH(InstallmentDate__c),
+1, &quot;Jan&quot;,
+2, &quot;Feb&quot;,
+3, &quot;Mar&quot;, 
+4, &quot;Apr&quot;, 
+5, &quot;May&quot;, 
+6, &quot;Jun&quot;,
+7, &quot;Jul&quot;,
+8, &quot;Aug&quot;,
+9, &quot;Sep&quot;,
+10, &quot;Oct&quot;,
+11, &quot;Nov&quot;,
+12, &quot;Dec&quot;,
+&quot;None&quot;)  &amp; &quot;-&quot; &amp;  TEXT(Year(InstallmentDate__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Installment Date Text</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Installment_Due_Flag__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF (IF(ISNULL(RevisedDate__c ), InstallmentDate__c, RevisedDate__c) &lt; TODAY(), &quot;YES&quot;, &quot;NO&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Installment Due Flag</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Installment_Percent_Excluding_ADM__c</fullName>
+        <formula>( Installment_Amount_Excluding_ADM__c  /   SalesOrder__r.Sales_Price_Excluding_ADM__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Installment Percentage Excluding ADM</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Installment_Type__c</fullName>
+        <label>Installment Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Installment</fullName>
+                    <default>true</default>
+                    <label>Installment</label>
+                </value>
+                <value>
+                    <fullName>Tax</fullName>
+                    <default>false</default>
+                    <label>Tax</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>IntegrationMessage__c</fullName>
+        <label>Integration Message</label>
+        <length>32768</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IntegrationStatus__c</fullName>
+        <label>Integration Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Integrated</fullName>
+                    <default>false</default>
+                    <label>Not Integrated</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Success</fullName>
+                    <default>false</default>
+                    <label>Success</label>
+                </value>
+                <value>
+                    <fullName>Failed</fullName>
+                    <default>false</default>
+                    <label>Failed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Integration_Installment_Description__c</fullName>
+        <externalId>false</externalId>
+        <formula>LEFT(&apos;INS &apos; &amp; TEXT(InstallmentNumber__c) &amp; &apos; &apos; &amp; Description__c, 49)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Integration Installment Description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LPCAmountGen__c</fullName>
+        <label>LPC Amount Created</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LPCAmount__c</fullName>
+        <label>LPC Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LPCAmounttoGen__c</fullName>
+        <label>LPC Pending to Create</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LPCCutOffAmt__c</fullName>
+        <defaultValue>50</defaultValue>
+        <label>LPCCutOffAmt</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>LPCRate__c</fullName>
+        <defaultValue>12</defaultValue>
+        <externalId>false</externalId>
+        <label>LPC Rate</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LPFCalculationStoppedBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>LPF Calculation Stopped By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Installment_Lines</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LPFCalculationStoppedDate__c</fullName>
+        <label>LPF Calculation Stopped Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>LPFCalculationStoppedRemarks__c</fullName>
+        <label>LPF Calculation Stopped Remarks</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>LPFCalculationStopped__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>LPF Calculation Stopped</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LastLPFCreatedDate__c</fullName>
+        <label>Last LPF Created Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Milestone_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Milestone__r.Type__c)</formula>
+        <label>Milestone Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Milestone__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Milestone</label>
+        <referenceTo>Milestone__c</referenceTo>
+        <relationshipLabel>Installment Lines</relationshipLabel>
+        <relationshipName>Installment_Lines</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>MinInvAmtrem__c</fullName>
+        <defaultValue>100</defaultValue>
+        <label>LPC Min Amt Due</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OriginalPPAmount__c</fullName>
+        <formula>SalesOrder__r.Sales_Price_Excluding_ADMs__c  *  InstallmentPercentage__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Original PP Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OutstandingAmount__c</fullName>
+        <description>Total Outstanding amount that needs to be paid by the customer</description>
+        <formula>InstallmentAmount__c - ClearedAmount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Amount not Cleared</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PaymentInstallments__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>Captures the original payment plan installment reference</description>
+        <inlineHelpText>Capture the original payment plan installment reference</inlineHelpText>
+        <label>Payment Installments</label>
+        <referenceTo>PaymentInstallments__c</referenceTo>
+        <relationshipLabel>Installment Lines</relationshipLabel>
+        <relationshipName>Installment_Lines</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PaymentPlan__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>Captures the payment plan name for which the installment is applicable</description>
+        <inlineHelpText>Capture the payment plan name for which the installment is applicable</inlineHelpText>
+        <label>Payment Plan</label>
+        <referenceTo>PaymentPlan__c</referenceTo>
+        <relationshipLabel>Installment Lines</relationshipLabel>
+        <relationshipName>Installment_Lines</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PaymentStatus__c</fullName>
+        <label>Payment Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Fully Paid</fullName>
+                    <default>false</default>
+                    <label>Fully Paid</label>
+                </value>
+                <value>
+                    <fullName>Partially Paid</fullName>
+                    <default>false</default>
+                    <label>Partially Paid</label>
+                </value>
+                <value>
+                    <fullName>Unpaid</fullName>
+                    <default>false</default>
+                    <label>Unpaid</label>
+                </value>
+                <value>
+                    <fullName>Deferred</fullName>
+                    <default>false</default>
+                    <label>Deferred</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Payment_Reminder_1_Batch__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Payment Reminder 1 Batch</description>
+        <label>Payment Reminder 1 Batch</label>
+        <referenceTo>Payment_reminder_batches__c</referenceTo>
+        <relationshipLabel>Installment Lines (Payment Reminder 1 Batch)</relationshipLabel>
+        <relationshipName>Installment_Lines1</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Payment_reminder_batches__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Payment reminder batches</label>
+        <referenceTo>Payment_reminder_batches__c</referenceTo>
+        <relationshipLabel>Installment Lines</relationshipLabel>
+        <relationshipName>Installment_Lines</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>PendingAmount__c</fullName>
+        <description>Amount Pending to be received for the installment line.</description>
+        <formula>IF(
+    ADM_Fee_Included__c &amp;&amp; InstallmentNumber__c = 1,
+
+    IF(
+        ISBLANK(AmountReceived__c) || AmountReceived__c = 0,
+        Installment_Amount_Excluding_ADM__c - BLANKVALUE(TotalRebateAmount__c, 0),
+
+        IF(
+            AmountReceived__c &gt; 0 &amp;&amp;
+            AmountReceived__c &lt; Installment_Amount_Excluding_ADM__c,
+
+            Installment_Amount_Excluding_ADM__c
+            - AmountReceived__c
+            - BLANKVALUE(TotalRebateAmount__c, 0),
+
+            0
+        )
+    ),
+
+    IF(
+        ISBLANK(AmountReceived__c) || AmountReceived__c = 0,
+
+        InstallmentAmount__c
+        - BLANKVALUE(TotalRebateAmount__c, 0),
+
+        IF(
+            AmountReceived__c &gt; 0 &amp;&amp;
+            AmountReceived__c &lt; InstallmentAmount__c,
+
+            InstallmentAmount__c
+            - AmountReceived__c
+            - BLANKVALUE(TotalRebateAmount__c, 0),
+
+            0
+        )
+    )
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Amount Pending to be received for the installment line.</inlineHelpText>
+        <label>Pending Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PrevLPCAmount__c</fullName>
+        <label>Prev LPC Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Project_Name_Arabic__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Unit__r.Project__r.ProjectNameArabic__c</formula>
+        <label>Project Name Arabic</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project_Name_English__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Unit__r.Project__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project Name English</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RevisedDate__c</fullName>
+        <description>Revised date of the installment.</description>
+        <inlineHelpText>Revised date of the installment.</inlineHelpText>
+        <label>Revised Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>SAP_Condition_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Condition Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Contract_No__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Contract No</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Document_No__c</fullName>
+        <externalId>true</externalId>
+        <label>SAP Document No.</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Posted_Date__c</fullName>
+        <label>SAP Posted Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>SAP_Posted_Flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>SAP Posted Flag</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SalesOrder__c</fullName>
+        <description>Captures the Sales Order for which the installment line is created</description>
+        <inlineHelpText>Capture the Sales Order for which the installment line is created</inlineHelpText>
+        <label>Sales Order</label>
+        <referenceTo>SalesOrder__c</referenceTo>
+        <relationshipLabel>Installment Lines</relationshipLabel>
+        <relationshipName>InstallmentLines</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Second_Reminder_to_Customer_Date__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Second Reminder  to Customer Date</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Send_to_SAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Send to SAP</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( InstallmentAmount__c =  ClearedAmount__c ,&quot;Fully Paid&quot;,
+IF(ClearedAmount__c = 0,&quot;Not Paid&quot;,&quot;Partially Paid&quot;)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tax_Amount__c</fullName>
+        <formula>InstallmentPercentage__c * SalesOrder__r.TaxableAmount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Tax Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>TotalRebateAmount__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Rebate Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <label>Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Down Payment</fullName>
+                    <default>false</default>
+                    <label>Down Payment</label>
+                </value>
+                <value>
+                    <fullName>Installment</fullName>
+                    <default>false</default>
+                    <label>Installment</label>
+                </value>
+                <value>
+                    <fullName>Handover</fullName>
+                    <default>false</default>
+                    <label>Handover</label>
+                </value>
+                <value>
+                    <fullName>Post Handover Installment</fullName>
+                    <default>false</default>
+                    <label>Post Handover Installment</label>
+                </value>
+                <value>
+                    <fullName>Tax</fullName>
+                    <default>false</default>
+                    <label>Tax</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Type_of_Installment__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(PaymentInstallments__r.Date_Type__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Type of Installment</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unit_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Unit__r.Building_Phase_Name__c  &amp;&apos; &apos; &amp;  SalesOrder__r.Unit__r.UnitNumber__c</formula>
+        <label>Unit Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>X1st_Reminder_Sent_Date__c</fullName>
+        <formula>Payment_reminder_batches__r.X1st_Reminder_Date__c</formula>
+        <label>1st Reminder Sent Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>X2nd_Reminder_Sent_Date__c</fullName>
+        <formula>Payment_reminder_batches__r.X2nd_Reminder_Date__c</formula>
+        <label>2nd Reminder Sent Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>Installment Line</label>
+    <nameField>
+        <displayFormat>IL-{0000000}</displayFormat>
+        <label>Installment Lines #</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Installment Lines</pluralLabel>
+    <profileSearchLayouts>
+        <fields>InstallmentNumber__c</fields>
+        <fields>NAME</fields>
+        <profileName>Finance Team</profileName>
+    </profileSearchLayouts>
+    <profileSearchLayouts>
+        <fields>InstallmentNumber__c</fields>
+        <fields>NAME</fields>
+        <profileName>Support Administrator</profileName>
+    </profileSearchLayouts>
+    <profileSearchLayouts>
+        <fields>InstallmentNumber__c</fields>
+        <fields>NAME</fields>
+        <profileName>Finance - Tax Team</profileName>
+    </profileSearchLayouts>
+    <profileSearchLayouts>
+        <fields>InstallmentNumber__c</fields>
+        <fields>NAME</fields>
+        <profileName>Finance Executive Director</profileName>
+    </profileSearchLayouts>
+    <profileSearchLayouts>
+        <fields>InstallmentNumber__c</fields>
+        <fields>NAME</fields>
+        <profileName>Finance &amp; Collection Team</profileName>
+    </profileSearchLayouts>
+    <profileSearchLayouts>
+        <fields>InstallmentNumber__c</fields>
+        <fields>NAME</fields>
+        <profileName>System Administrator</profileName>
+    </profileSearchLayouts>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <visibility>Public</visibility>
+</CustomObject>

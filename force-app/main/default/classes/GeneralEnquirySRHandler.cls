@@ -16,7 +16,6 @@ public inherited sharing class GeneralEnquirySRHandler {
                 List<String> requiredDocTypesTD = new List<String>{'Title Deed'};
                     List<String> requiredDocTypesRDR = new List<String>{'Title Deed','IBAN Letter','Buyer Emirates ID','Passport','Debit Advice'};
                         List<String> requiredDocTypesRR = new List<String>{'Title Deed','IBAN Letter','Debit Advice'};
-                                List<String> requiredDocTypesKYC = new List<String>{'Signed KYC'};
                                      List<String> requiredDocTypesSuqur = new List<String>{'Suqur Al Watan Employee Document'};
                             
                             public GeneralEnquirySRHandler() {
@@ -57,6 +56,10 @@ public inherited sharing class GeneralEnquirySRHandler {
         
         Map<String, String> subTypeToSubject = new Map<String, String>{
             'General Payment Enquiry' => 'General Payment Enquiry',
+                 'Handover' => 'Handover',
+                'Upgrade' => 'Upgrade',
+                'Downgrade' => 'Downgrade',
+                'Other' => 'Special Services-Other',
                 'Floor Plan Copy' => 'Floor Plan Copy',
                 'Contact Details' => 'Contact Details',
                 'SPA Pre-Registration' => 'SPA Pre-Registration',
@@ -196,7 +199,6 @@ public inherited sharing class GeneralEnquirySRHandler {
                 'Rent Security Deposit Refund' => requiredDocTypesRDR,
                 'Rent Refund' => requiredDocTypesRR,
                 'Contact Details' => requiredDocTypesCD,
-                'KYC Update Request' => requiredDocTypesKYC,
                 'Customer Type Update' => requiredDocTypesSuqur
                 };
                     

@@ -1,5 +1,5 @@
 <apex:page renderAs="pdf" applyBodyTag="false" showHeader="false"
-               standardController="LeasingOrder__c" extensions="LeasingOfferLetterGenerateController" applyHtmlTag="False">
+           standardController="LeasingOrder__c" extensions="LeasingOfferLetterGenerateController" applyHtmlTag="False">
     <html lang="en">
         <head>
             <title><apex:outputText value="{!offerLetterTitle}"/></title>

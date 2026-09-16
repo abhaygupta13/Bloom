@@ -59,7 +59,6 @@ public class LeadReshuffleBatchTest {
             leadList.add(objLead1);
             insert leadList;
         }
-      
     }
     
     @istest
@@ -73,6 +72,5 @@ public class LeadReshuffleBatchTest {
             System.schedule('LeadReshuffleBatch',sch,batchJob);
             Test.stopTest();
         }
-    } 
-    
- }
+    }
+}

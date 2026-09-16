@@ -121,7 +121,7 @@ private class UnitServiceTest {
         usc.getUnitModelsByProjectId(testProject.id);
         usc.getUnitsByProjectId(testProject.id);
         usc.getUnitsByProjectAndUnitModel(testProject.id,'1BHK');
-        usc.getAvailableUnitsByProjectId(testProject.id);
+        usc.getAvailableUnitsByProjectId(testProject.id,'Direct');
         usc.getAvailableUnitsByProjectAndUnitModel(testProject.id,'1BHK');
         usc.getSoldUnitsOfProject(testProject.id,'Sold');
         usc.getUnits();

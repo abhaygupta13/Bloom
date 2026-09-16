@@ -101,6 +101,7 @@ private class LeasingOfficerComTriggerHandlerTest {
             PaymentTerm__c='4 Installments',
             SecurityDeposit__c = 100,
             ExtraChequeFee__c  = 200,
+            LeasingSAPContractId__c = '123456',
             AdminFee__c = 100,
             FitOutSecurityDeposit__c  = 300,
             EjariTawtheeqFee__c = 200

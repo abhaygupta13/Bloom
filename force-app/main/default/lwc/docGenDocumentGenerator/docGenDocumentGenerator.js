@@ -74,7 +74,7 @@ export default class DocGenDocumentGenerator extends NavigationMixin(LightningEl
                     this.resaleSalesOrder = result?.Resale__c;
                     this.previousSalesOrder = result?.PreviousSalesOrder__c;
                     this.newSalesOrder = result?.NewSalesOrder__c;
-
+                    console.log('this.directIndirectValue ::::: '+ this.directIndirectValue);
                     // Handle the result here
                     if( this.directIndirectValue){
                         this.getDocgenSetDocumentRec(); 

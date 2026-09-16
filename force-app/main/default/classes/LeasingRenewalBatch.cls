@@ -13,15 +13,14 @@ public class LeasingRenewalBatch implements Database.Batchable<SObject>, Databas
     private static final String BATCH_SIZE_METADATA {get {return 'LeasingRenewalBatch';}}
     private static final string LEASING_RENEWAL_EMAIL { get { return 'LeasingRenewalEmailTemplate'; } }
     private static final string BLOOM_NO_REPLY_LEASING_OW_EMAIL_ID { get { return 'BloomNoReplyLeasingOWEmailId'; } }
-    private static final String SEND_TO_CUSTOMER_SETTING { get { return 'SendtoCustomer'; }}
     
     public Database.QueryLocator start(Database.BatchableContext bc){
         Date cutoffDate = Date.today().addDays(-30);
         
         return Database.getQueryLocator([
-            SELECT Id, LeasingEndDate__c, Account__c, Owner.Email
+            SELECT Id, LeasingEndDate__c, Account__c
             FROM LeasingOrder__c
-            WHERE LeasingEndDate__c <= :cutoffDate AND Id = 'a4nFV0000FbreK4YQI'
+            WHERE LeasingEndDate__c <= :cutoffDate
         ]);
     }
     
@@ -34,10 +33,20 @@ public class LeasingRenewalBatch implements Database.Batchable<SObject>, Databas
         for (LeasingOrder__c contract : (list<LeasingOrder__c>)scope) {
             
             changedOrderIds.add(contract.Id);
+            
             if (contract.Account__c != null) {
                 accountIds.add(contract.Account__c);
             }
-            
+        }
+        
+        if (accountIds.isEmpty()) {
+            return;
+        }
+        
+        Map<Id, Account> accountMap = new Map<Id, Account>();
+        List<Account> accounts = AccountService.getInstance().getAccountsByIds(new Set<Id>(accountIds));
+        for (Account acc : accounts) {
+            accountMap.put(acc.Id, acc);
         }
         
         MetadataService objMetadataService = MetadataService.getInstance();
@@ -47,20 +56,6 @@ public class LeasingRenewalBatch implements Database.Batchable<SObject>, Databas
         Id noReplyBloomLeasingOWDId =
             objMetadataService.getAppSettingTextValue(BLOOM_NO_REPLY_LEASING_OW_EMAIL_ID);
         
-        Boolean sendToCustomer =
-            objMetadataService.getAppSettingBooleanValue(SEND_TO_CUSTOMER_SETTING);
-        
-        Map<Id, Account> accountMap = new Map<Id, Account>();
-        
-        if (sendToCustomer && !accountIds.isEmpty()) {
-            
-            List<Account> accounts =
-                AccountService.getInstance().getAccountsByIds(accountIds);
-            
-            for (Account acc : accounts) {
-                accountMap.put(acc.Id, acc);
-            }
-        }
         
         
         Map<Id, Document__c> orderToDocMap = new Map<Id, Document__c>();
@@ -95,32 +90,12 @@ public class LeasingRenewalBatch implements Database.Batchable<SObject>, Databas
                 continue;
             }
             
-            List<String> toAddress = new List<String>();
-            
-            
-            // Send Email to Customer(Person Email)
-            if (sendToCustomer) {
-                
-                Account acc = accountMap.get(contract.Account__c);
-                
-                if (acc == null ||
-                    !acc.IsPersonAccount ||
-                    String.isBlank(acc.PersonEmail)) {
-                        continue;
-                    }
-                
-                toAddress.add(acc.PersonEmail);
-            }
-            
-            // Send Email to Leasing Order Owner
-            else {
-                
-                if (String.isBlank(contract.Owner.Email)) {
+            Account acc = accountMap.get(contract.Account__c);
+            if (acc == null ||
+                !acc.IsPersonAccount ||
+                String.isBlank(acc.PersonEmail)) {
                     continue;
                 }
-                
-                toAddress.add(contract.Owner.Email);
-            }
             
             Document__c doc = orderToDocMap.get(contract.Id);
             if (doc == null) {
@@ -132,7 +107,9 @@ public class LeasingRenewalBatch implements Database.Batchable<SObject>, Databas
                 continue;
             }
             
-            Messaging.SingleEmailMessage objMail =
+            List<String> toAddress = new List<String>{ acc.PersonEmail };
+                
+                Messaging.SingleEmailMessage objMail =
                 objEmailService.getSingleEmailMessageWithoutTargetObjectId(
                     leaseTerminationEmailTemplateId,
                     noReplyBloomLeasingOWDId,

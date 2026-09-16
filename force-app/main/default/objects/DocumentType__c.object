@@ -1,0 +1,2471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Document_Type_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Document_Type_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Active</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BrokerContactRole__c</fullName>
+        <label>Broker Contact Role</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Owner</fullName>
+                    <default>false</default>
+                    <label>Owner</label>
+                </value>
+                <value>
+                    <fullName>CEO</fullName>
+                    <default>false</default>
+                    <label>CEO</label>
+                </value>
+                <value>
+                    <fullName>Partner</fullName>
+                    <default>false</default>
+                    <label>Partner</label>
+                </value>
+                <value>
+                    <fullName>AuthorizedSignatoryOfficer</fullName>
+                    <default>false</default>
+                    <label>Authorized Signatory Officer</label>
+                </value>
+                <value>
+                    <fullName>SuperAdmin</fullName>
+                    <default>false</default>
+                    <label>Super Admin</label>
+                </value>
+                <value>
+                    <fullName>FinancialAdmin</fullName>
+                    <default>false</default>
+                    <label>Financial Admin</label>
+                </value>
+                <value>
+                    <fullName>Agent</fullName>
+                    <default>false</default>
+                    <label>Agent</label>
+                </value>
+                <value>
+                    <fullName>Admin</fullName>
+                    <default>false</default>
+                    <label>Admin</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CurrentUserProfile__c</fullName>
+        <externalId>false</externalId>
+        <label>Current User Profile</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Type__c</fullName>
+        <label>Customer Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>PersonAccount</fullName>
+                    <default>false</default>
+                    <label>PersonAccount</label>
+                </value>
+                <value>
+                    <fullName>OrganizationAccount</fullName>
+                    <default>false</default>
+                    <label>OrganizationAccount</label>
+                </value>
+                <value>
+                    <fullName>All</fullName>
+                    <default>true</default>
+                    <label>All</label>
+                </value>
+                <value>
+                    <fullName>Individual</fullName>
+                    <default>false</default>
+                    <label>Individual</label>
+                </value>
+                <value>
+                    <fullName>Organization</fullName>
+                    <default>false</default>
+                    <label>Organization</label>
+                </value>
+                <value>
+                    <fullName>Common</fullName>
+                    <default>false</default>
+                    <label>Common</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>DeliveryOption__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Delivery Option</label>
+        <referenceTo>Loop__DDP_Integration_Option__c</referenceTo>
+        <relationshipLabel>Document Types</relationshipLabel>
+        <relationshipName>Document_Types</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>DigitalSignature__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Digital Signature</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DocGenPackage__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>DocGen Package</label>
+        <referenceTo>Loop__DDP__c</referenceTo>
+        <relationshipLabel>Document Types</relationshipLabel>
+        <relationshipName>Document_Types</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Document_Digital_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Document Digital Name</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Document_Output_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Document Output Name</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Docusign_Envelope_Docusign_Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>Docusign_Envelope_Template__r.dfsle__DocuSignId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Docusign Envelope Docusign Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Docusign_Envelope_Template__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Docusign Envelope Template</label>
+        <referenceTo>dfsle__EnvelopeConfiguration__c</referenceTo>
+        <relationshipLabel>Document Types</relationshipLabel>
+        <relationshipName>Document_Types</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Docusign_Envelope__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Docusign Envelope</label>
+        <referenceTo>dfsle__Envelope__c</referenceTo>
+        <relationshipLabel>Document Types</relationshipLabel>
+        <relationshipName>Document_Types</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>EmailTemplateId__c</fullName>
+        <externalId>false</externalId>
+        <label>Email Template Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HandoverStatus__c</fullName>
+        <label>Handover Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Created</fullName>
+                    <default>false</default>
+                    <label>Created</label>
+                </value>
+                <value>
+                    <fullName>QA Snagging Completed</fullName>
+                    <default>false</default>
+                    <label>QA Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>QA De-Snagging Completed</fullName>
+                    <default>false</default>
+                    <label>QA De-Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>Home Orientation Sent</fullName>
+                    <default>false</default>
+                    <label>Home Orientation Sent</label>
+                </value>
+                <value>
+                    <fullName>Appointment Booked with Customer</fullName>
+                    <default>false</default>
+                    <label>Appointment Booked with Customer</label>
+                </value>
+                <value>
+                    <fullName>Pre CHO Check Completed</fullName>
+                    <default>false</default>
+                    <label>Pre CHO Check Completed</label>
+                </value>
+                <value>
+                    <fullName>CHO Snagging Completed</fullName>
+                    <default>false</default>
+                    <label>CHO Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>CHO De-Snagging Completed</fullName>
+                    <default>false</default>
+                    <label>CHO De-Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>Notice of Completion sent</fullName>
+                    <default>false</default>
+                    <label>Notice of Completion sent</label>
+                </value>
+                <value>
+                    <fullName>Settlement Follow up</fullName>
+                    <default>false</default>
+                    <label>Settlement Follow up</label>
+                </value>
+                <value>
+                    <fullName>Finance Verified</fullName>
+                    <default>false</default>
+                    <label>Finance Verified</label>
+                </value>
+                <value>
+                    <fullName>Property Registration Completed</fullName>
+                    <default>false</default>
+                    <label>Property Registration Completed</label>
+                </value>
+                <value>
+                    <fullName>Lease Agreement</fullName>
+                    <default>false</default>
+                    <label>Lease Agreement</label>
+                </value>
+                <value>
+                    <fullName>PHPP - KHO Appointment Scheduled</fullName>
+                    <default>false</default>
+                    <label>PHPP - KHO Appointment Scheduled</label>
+                </value>
+                <value>
+                    <fullName>Key Handed Over PHPP</fullName>
+                    <default>false</default>
+                    <label>Key Handed Over PHPP</label>
+                </value>
+                <value>
+                    <fullName>PHPP Completion Pending</fullName>
+                    <default>false</default>
+                    <label>PHPP Completion Pending</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Release Initiated</fullName>
+                    <default>false</default>
+                    <label>Mortgage Release Initiated</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Release Document Uploaded</fullName>
+                    <default>false</default>
+                    <label>Mortgage Release Document Uploaded</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Release Completed</fullName>
+                    <default>false</default>
+                    <label>Mortgage Release Completed</label>
+                </value>
+                <value>
+                    <fullName>Escrow Letter Generated</fullName>
+                    <default>false</default>
+                    <label>Escrow Letter Generated</label>
+                </value>
+                <value>
+                    <fullName>Title Deed Registration Completed</fullName>
+                    <default>false</default>
+                    <label>Title Deed Registration Completed</label>
+                </value>
+                <value>
+                    <fullName>Utilities Transfer Completed</fullName>
+                    <default>false</default>
+                    <label>Utilities Transfer Completed</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Cheque Clearance</fullName>
+                    <default>false</default>
+                    <label>Mortgage Cheque Clearance</label>
+                </value>
+                <value>
+                    <fullName>KHO Appointment Scheduled</fullName>
+                    <default>false</default>
+                    <label>KHO Appointment Scheduled</label>
+                </value>
+                <value>
+                    <fullName>Handover Completed</fullName>
+                    <default>false</default>
+                    <label>Handover Completed</label>
+                </value>
+                <value>
+                    <fullName>Potential Defaulter</fullName>
+                    <default>false</default>
+                    <label>Potential Defaulter</label>
+                </value>
+                <value>
+                    <fullName>Default -Under Discussion</fullName>
+                    <default>false</default>
+                    <label>Default -Under Discussion</label>
+                </value>
+                <value>
+                    <fullName>Cancelled</fullName>
+                    <default>false</default>
+                    <label>Cancelled</label>
+                </value>
+                <value>
+                    <fullName>Initiate Cancellation</fullName>
+                    <default>false</default>
+                    <label>Initiate Cancellation</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>HasExpiryDate__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Has Expiry Date</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HasIssueDate__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Has Issue Date</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsAvailableForApp__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Available for App</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsDocgen__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>IsDocgen</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsSystemUpload__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>System Upload</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MultiDocuments__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Multi Documents ?</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ObjectType__c</fullName>
+        <label>Object Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Account</fullName>
+                    <default>false</default>
+                    <label>Account</label>
+                </value>
+                <value>
+                    <fullName>Contact</fullName>
+                    <default>false</default>
+                    <label>Contact</label>
+                </value>
+                <value>
+                    <fullName>Case</fullName>
+                    <default>false</default>
+                    <label>Case</label>
+                </value>
+                <value>
+                    <fullName>Project</fullName>
+                    <default>false</default>
+                    <label>Project</label>
+                </value>
+                <value>
+                    <fullName>Sales Order</fullName>
+                    <default>false</default>
+                    <label>Sales Order</label>
+                </value>
+                <value>
+                    <fullName>Commission Invoice</fullName>
+                    <default>false</default>
+                    <label>Commission Invoice</label>
+                </value>
+                <value>
+                    <fullName>Broker Commission</fullName>
+                    <default>false</default>
+                    <label>Broker Commission</label>
+                </value>
+                <value>
+                    <fullName>Unit</fullName>
+                    <default>false</default>
+                    <label>Unit</label>
+                </value>
+                <value>
+                    <fullName>Handover</fullName>
+                    <default>false</default>
+                    <label>Handover</label>
+                </value>
+                <value>
+                    <fullName>Broker Application</fullName>
+                    <default>false</default>
+                    <label>Broker Application</label>
+                </value>
+                <value>
+                    <fullName>Broker Applicant</fullName>
+                    <default>false</default>
+                    <label>Broker Applicant</label>
+                </value>
+                <value>
+                    <fullName>LeasingOrder__c</fullName>
+                    <default>false</default>
+                    <label>LeasingOrder__c</label>
+                </value>
+                <value>
+                    <fullName>Opportunity</fullName>
+                    <default>false</default>
+                    <label>Opportunity</label>
+                </value>
+                <value>
+                    <fullName>LeasingReceiptAcknowledgment__c</fullName>
+                    <default>false</default>
+                    <label>LeasingReceiptAcknowledgment__c</label>
+                </value>
+                <value>
+                    <fullName>Handover Phase</fullName>
+                    <default>false</default>
+                    <label>Handover Phase</label>
+                </value>
+                <value>
+                    <fullName>LeasingOrdersOtherCharges__c</fullName>
+                    <default>false</default>
+                    <label>LeasingOrdersOtherCharges__c</label>
+                </value>
+                <value>
+                    <fullName>PaymentPlanSchedule__c</fullName>
+                    <default>false</default>
+                    <label>PaymentPlanSchedule__c</label>
+                </value>
+                <value>
+                    <fullName>App Registration</fullName>
+                    <default>false</default>
+                    <label>App Registration</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ProcessType__c</fullName>
+        <label>Process Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Sales</fullName>
+                    <default>false</default>
+                    <label>Sales</label>
+                </value>
+                <value>
+                    <fullName>Lease</fullName>
+                    <default>false</default>
+                    <label>Lease</label>
+                </value>
+                <value>
+                    <fullName>Community</fullName>
+                    <default>false</default>
+                    <label>Community</label>
+                </value>
+                <value>
+                    <fullName>Handover</fullName>
+                    <default>false</default>
+                    <label>Handover</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ProjectCity__c</fullName>
+        <label>Project City</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Abu Dhabi</fullName>
+                    <default>false</default>
+                    <label>Abu Dhabi</label>
+                </value>
+                <value>
+                    <fullName>Dubai</fullName>
+                    <default>false</default>
+                    <label>Dubai</label>
+                </value>
+                <value>
+                    <fullName>Sharjah</fullName>
+                    <default>false</default>
+                    <label>Sharjah</label>
+                </value>
+                <value>
+                    <fullName>Ajman</fullName>
+                    <default>false</default>
+                    <label>Ajman</label>
+                </value>
+                <value>
+                    <fullName>Umm Al Quwain</fullName>
+                    <default>false</default>
+                    <label>Umm Al Quwain</label>
+                </value>
+                <value>
+                    <fullName>Ras Al Khaimah</fullName>
+                    <default>false</default>
+                    <label>Ras Al Khaimah</label>
+                </value>
+                <value>
+                    <fullName>Fujairah</fullName>
+                    <default>false</default>
+                    <label>Fujairah</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ProjectStatus__c</fullName>
+        <label>Project Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Under Construction</fullName>
+                    <default>false</default>
+                    <label>Under Construction</label>
+                </value>
+                <value>
+                    <fullName>Completed</fullName>
+                    <default>false</default>
+                    <label>Completed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>Document Types</relationshipLabel>
+        <relationshipName>Document_Types</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RecordTypeDevName__c</fullName>
+        <externalId>false</externalId>
+        <label>Record Type Dev Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RecordTypeDeveloperName__c</fullName>
+        <label>RecordType Developer Name</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>PersonAccount</fullName>
+                    <default>false</default>
+                    <label>PersonAccount</label>
+                </value>
+                <value>
+                    <fullName>OrganizationAccount</fullName>
+                    <default>false</default>
+                    <label>OrganizationAccount</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>RegistrationStatus__c</fullName>
+        <label>Registration Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Registered</fullName>
+                    <default>false</default>
+                    <label>Registered</label>
+                </value>
+                <value>
+                    <fullName>Not Registered</fullName>
+                    <default>false</default>
+                    <label>Not Registered</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Resale__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Resale</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ShareWithCustomer__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Share With Customer</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>TypeOfResale__c</fullName>
+        <label>Type of Resale</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>SPA Registered</fullName>
+                    <default>false</default>
+                    <label>SPA Registered</label>
+                </value>
+                <value>
+                    <fullName>SPA not Registered</fullName>
+                    <default>false</default>
+                    <label>SPA not Registered</label>
+                </value>
+                <value>
+                    <fullName>Gifting</fullName>
+                    <default>false</default>
+                    <label>Gifting</label>
+                </value>
+                <value>
+                    <fullName>Addition/Deletion</fullName>
+                    <default>false</default>
+                    <label>Addition/Deletion</label>
+                </value>
+                <value>
+                    <fullName>Resale</fullName>
+                    <default>false</default>
+                    <label>Resale</label>
+                </value>
+                <value>
+                    <fullName>Add/Del of Kin</fullName>
+                    <default>false</default>
+                    <label>Add/Del of Kin</label>
+                </value>
+                <value>
+                    <fullName>Add/Del</fullName>
+                    <default>false</default>
+                    <label>Add/Del</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <label>Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>ADDC NOC</fullName>
+                    <default>false</default>
+                    <label>ADDC NOC</label>
+                </value>
+                <value>
+                    <fullName>ADM Registration Document</fullName>
+                    <default>false</default>
+                    <label>ADM Registration Document</label>
+                </value>
+                <value>
+                    <fullName>Bank NOC</fullName>
+                    <default>false</default>
+                    <label>Bank NOC</label>
+                </value>
+                <value>
+                    <fullName>Bloom Title Deed</fullName>
+                    <default>false</default>
+                    <label>Bloom Title Deed</label>
+                </value>
+                <value>
+                    <fullName>Book, CIS, Disclosure, MCD and SPA Arabic</fullName>
+                    <default>false</default>
+                    <label>Book, CIS, Disclosure, MCD and SPA Arabic</label>
+                </value>
+                <value>
+                    <fullName>Book, CIS, Disclosure, MCD and SPA English</fullName>
+                    <default>false</default>
+                    <label>Book, CIS, Disclosure, MCD and SPA English</label>
+                </value>
+                <value>
+                    <fullName>Book, CIS, Disclosure and MCD Arabic</fullName>
+                    <default>false</default>
+                    <label>Book, CIS, Disclosure and MCD Arabic</label>
+                </value>
+                <value>
+                    <fullName>Book, CIS, Disclosure and MCD English</fullName>
+                    <default>false</default>
+                    <label>Book, CIS, Disclosure and MCD English</label>
+                </value>
+                <value>
+                    <fullName>Booking Form</fullName>
+                    <default>false</default>
+                    <label>Booking Form</label>
+                </value>
+                <value>
+                    <fullName>Booking Form - Signed</fullName>
+                    <default>false</default>
+                    <label>Booking Form - Signed</label>
+                </value>
+                <value>
+                    <fullName>Broker Acknowledgement</fullName>
+                    <default>false</default>
+                    <label>Broker Acknowledgement</label>
+                </value>
+                <value>
+                    <fullName>Broker Acknowledgement Form</fullName>
+                    <default>false</default>
+                    <label>Broker Acknowledgement Form</label>
+                </value>
+                <value>
+                    <fullName>Broker Agreement</fullName>
+                    <default>false</default>
+                    <label>Broker Agreement</label>
+                </value>
+                <value>
+                    <fullName>Broker Document</fullName>
+                    <default>false</default>
+                    <label>Broker Document</label>
+                </value>
+                <value>
+                    <fullName>Broker Form</fullName>
+                    <default>false</default>
+                    <label>Broker Form</label>
+                </value>
+                <value>
+                    <fullName>Broker Invoice Combined Document</fullName>
+                    <default>false</default>
+                    <label>Broker Invoice Combined Document</label>
+                </value>
+                <value>
+                    <fullName>Broker Shared Invoice</fullName>
+                    <default>false</default>
+                    <label>Broker Shared Invoice</label>
+                </value>
+                <value>
+                    <fullName>Cancellation &amp; Termination Agreement</fullName>
+                    <default>false</default>
+                    <label>Cancellation &amp; Termination Agreement</label>
+                </value>
+                <value>
+                    <fullName>CHO Desnagging Report</fullName>
+                    <default>false</default>
+                    <label>CHO Desnagging Report</label>
+                </value>
+                <value>
+                    <fullName>CHO Snagging Report</fullName>
+                    <default>false</default>
+                    <label>CHO Snagging Report</label>
+                </value>
+                <value>
+                    <fullName>CIS</fullName>
+                    <default>false</default>
+                    <label>CIS</label>
+                </value>
+                <value>
+                    <fullName>Client Information Sheet (KYC)</fullName>
+                    <default>false</default>
+                    <label>Client Information Sheet (KYC)</label>
+                </value>
+                <value>
+                    <fullName>Community Management Statement</fullName>
+                    <default>false</default>
+                    <label>Community Management Statement</label>
+                </value>
+                <value>
+                    <fullName>Completed Project Undertaking letter</fullName>
+                    <default>false</default>
+                    <label>Completed Project Undertaking letter</label>
+                </value>
+                <value>
+                    <fullName>Developer NOC</fullName>
+                    <default>false</default>
+                    <label>Developer NOC</label>
+                </value>
+                <value>
+                    <fullName>Digital Signature Attachment</fullName>
+                    <default>false</default>
+                    <label>Digital Signature Attachment</label>
+                </value>
+                <value>
+                    <fullName>Disclosure Statement</fullName>
+                    <default>false</default>
+                    <label>Disclosure Statement</label>
+                </value>
+                <value>
+                    <fullName>Emirates Id</fullName>
+                    <default>false</default>
+                    <label>Emirates Id</label>
+                </value>
+                <value>
+                    <fullName>Escrow Letter</fullName>
+                    <default>false</default>
+                    <label>Escrow Letter</label>
+                </value>
+                <value>
+                    <fullName>Generated Invoice</fullName>
+                    <default>false</default>
+                    <label>Generated Invoice</label>
+                </value>
+                <value>
+                    <fullName>Handover Payment Attachment</fullName>
+                    <default>false</default>
+                    <label>Handover Payment Attachment</label>
+                </value>
+                <value>
+                    <fullName>KHO</fullName>
+                    <default>false</default>
+                    <label>KHO</label>
+                </value>
+                <value>
+                    <fullName>Layout</fullName>
+                    <default>false</default>
+                    <label>Layout</label>
+                </value>
+                <value>
+                    <fullName>Lease Agreement 1</fullName>
+                    <default>false</default>
+                    <label>Lease Agreement 1</label>
+                </value>
+                <value>
+                    <fullName>Leasing ADDC NOC</fullName>
+                    <default>false</default>
+                    <label>Leasing ADDC NOC</label>
+                </value>
+                <value>
+                    <fullName>Milestone Update</fullName>
+                    <default>false</default>
+                    <label>Milestone Update</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Cheque Copy</fullName>
+                    <default>false</default>
+                    <label>Mortgage Cheque Copy</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Contract</fullName>
+                    <default>false</default>
+                    <label>Mortgage Contract</label>
+                </value>
+                <value>
+                    <fullName>NOC</fullName>
+                    <default>false</default>
+                    <label>NOC</label>
+                </value>
+                <value>
+                    <fullName>Offer/Promo Letter</fullName>
+                    <default>false</default>
+                    <label>Offer/Promo Letter</label>
+                </value>
+                <value>
+                    <fullName>Offer Letter</fullName>
+                    <default>false</default>
+                    <label>Offer Letter</label>
+                </value>
+                <value>
+                    <fullName>Order Receipt Acknowledgement</fullName>
+                    <default>false</default>
+                    <label>Order Receipt Acknowledgement</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>Passport</fullName>
+                    <default>false</default>
+                    <label>Passport</label>
+                </value>
+                <value>
+                    <fullName>POA Document</fullName>
+                    <default>false</default>
+                    <label>POA Document</label>
+                </value>
+                <value>
+                    <fullName>Project-Unit Registration Document</fullName>
+                    <default>false</default>
+                    <label>Project-Unit Registration Document</label>
+                </value>
+                <value>
+                    <fullName>QA Desnagging Report</fullName>
+                    <default>false</default>
+                    <label>QA Desnagging Report</label>
+                </value>
+                <value>
+                    <fullName>QA Snagging Report</fullName>
+                    <default>false</default>
+                    <label>QA Snagging Report</label>
+                </value>
+                <value>
+                    <fullName>Referral Letter</fullName>
+                    <default>false</default>
+                    <label>Referral Letter</label>
+                </value>
+                <value>
+                    <fullName>Registration NOC</fullName>
+                    <default>false</default>
+                    <label>Registration NOC</label>
+                </value>
+                <value>
+                    <fullName>Rera Certificate</fullName>
+                    <default>false</default>
+                    <label>Rera Certificate</label>
+                </value>
+                <value>
+                    <fullName>Sales Purchase Agreement</fullName>
+                    <default>false</default>
+                    <label>Sales &amp; Purchase Agreement</label>
+                </value>
+                <value>
+                    <fullName>Sales Offer</fullName>
+                    <default>false</default>
+                    <label>Sales Offer</label>
+                </value>
+                <value>
+                    <fullName>Send Email to Customer (cc to you)</fullName>
+                    <default>false</default>
+                    <label>Send Email to Customer (cc to you)</label>
+                </value>
+                <value>
+                    <fullName>Send Email to Me</fullName>
+                    <default>false</default>
+                    <label>Send Email to Me</label>
+                </value>
+                <value>
+                    <fullName>Send for Customer Signature (last generated)</fullName>
+                    <default>false</default>
+                    <label>Send for Customer Signature (last generated)</label>
+                </value>
+                <value>
+                    <fullName>Service Charge Clearance Letter</fullName>
+                    <default>false</default>
+                    <label>Service Charge Clearance Letter</label>
+                </value>
+                <value>
+                    <fullName>Signature Broker Acknowledgement Form</fullName>
+                    <default>false</default>
+                    <label>Signature Broker Acknowledgement Form</label>
+                </value>
+                <value>
+                    <fullName>SOA</fullName>
+                    <default>false</default>
+                    <label>SOA</label>
+                </value>
+                <value>
+                    <fullName>SPA</fullName>
+                    <default>false</default>
+                    <label>SPA</label>
+                </value>
+                <value>
+                    <fullName>SPA - Signed</fullName>
+                    <default>false</default>
+                    <label>SPA - Signed</label>
+                </value>
+                <value>
+                    <fullName>Statement of Account</fullName>
+                    <default>false</default>
+                    <label>Statement of Account</label>
+                </value>
+                <value>
+                    <fullName>Tawtheeq Registration Confirmation</fullName>
+                    <default>false</default>
+                    <label>Tawtheeq Registration Confirmation</label>
+                </value>
+                <value>
+                    <fullName>Title Deed</fullName>
+                    <default>false</default>
+                    <label>Title Deed</label>
+                </value>
+                <value>
+                    <fullName>Trade License</fullName>
+                    <default>false</default>
+                    <label>Trade License</label>
+                </value>
+                <value>
+                    <fullName>Unit Registration</fullName>
+                    <default>false</default>
+                    <label>Unit Registration</label>
+                </value>
+                <value>
+                    <fullName>Visa</fullName>
+                    <default>false</default>
+                    <label>Visa</label>
+                </value>
+                <value>
+                    <fullName>Project Logo</fullName>
+                    <default>false</default>
+                    <label>Project Logo</label>
+                </value>
+                <value>
+                    <fullName>Proof of Payment</fullName>
+                    <default>false</default>
+                    <label>Proof of Payment</label>
+                </value>
+                <value>
+                    <fullName>TPF Document</fullName>
+                    <default>false</default>
+                    <label>TPF Document</label>
+                </value>
+                <value>
+                    <fullName>Unit Finishes</fullName>
+                    <default>false</default>
+                    <label>Unit Finishes</label>
+                </value>
+                <value>
+                    <fullName>Undertaking Letter</fullName>
+                    <default>false</default>
+                    <label>Undertaking Letter</label>
+                </value>
+                <value>
+                    <fullName>Master Plan</fullName>
+                    <default>false</default>
+                    <label>Master Plan</label>
+                </value>
+                <value>
+                    <fullName>Resale Cancellation</fullName>
+                    <default>false</default>
+                    <label>Resale Cancellation</label>
+                </value>
+                <value>
+                    <fullName>National ID Front</fullName>
+                    <default>false</default>
+                    <label>National ID Front</label>
+                </value>
+                <value>
+                    <fullName>Passport Front</fullName>
+                    <default>false</default>
+                    <label>Passport Front</label>
+                </value>
+                <value>
+                    <fullName>Default Notice</fullName>
+                    <default>false</default>
+                    <label>Default Notice</label>
+                </value>
+                <value>
+                    <fullName>Registration Agreement</fullName>
+                    <default>false</default>
+                    <label>Registration Agreement</label>
+                </value>
+                <value>
+                    <fullName>National ID Back</fullName>
+                    <default>false</default>
+                    <label>National ID Back</label>
+                </value>
+                <value>
+                    <fullName>Authorization Letter</fullName>
+                    <default>false</default>
+                    <label>Authorization Letter</label>
+                </value>
+                <value>
+                    <fullName>Non-VAT declaration document if not registered for VAT</fullName>
+                    <default>false</default>
+                    <label>Non-VAT declaration document if not registered for VAT</label>
+                </value>
+                <value>
+                    <fullName>Bank confirmation letter</fullName>
+                    <default>false</default>
+                    <label>Bank confirmation letter</label>
+                </value>
+                <value>
+                    <fullName>Tax Registration Number</fullName>
+                    <default>false</default>
+                    <label>Tax Registration Number</label>
+                </value>
+                <value>
+                    <fullName>Memorandum and articles of confirmation</fullName>
+                    <default>false</default>
+                    <label>Memorandum and articles of confirmation</label>
+                </value>
+                <value>
+                    <fullName>Company logo</fullName>
+                    <default>false</default>
+                    <label>Company logo</label>
+                </value>
+                <value>
+                    <fullName>Memorandum of Association Power of Attorney</fullName>
+                    <default>false</default>
+                    <label>Memorandum of Association Power of Attorney</label>
+                </value>
+                <value>
+                    <fullName>BRN/RERA card</fullName>
+                    <default>false</default>
+                    <label>BRN/RERA card</label>
+                </value>
+                <value>
+                    <fullName>Leasing Offer</fullName>
+                    <default>false</default>
+                    <label>Leasing Offer</label>
+                </value>
+                <value>
+                    <fullName>Leasing Offer - Signed</fullName>
+                    <default>false</default>
+                    <label>Leasing Offer - Signed</label>
+                </value>
+                <value>
+                    <fullName>Salary Certificate</fullName>
+                    <default>false</default>
+                    <label>Salary Certificate</label>
+                </value>
+                <value>
+                    <fullName>Credit Report</fullName>
+                    <default>false</default>
+                    <label>Credit Report</label>
+                </value>
+                <value>
+                    <fullName>POA EID</fullName>
+                    <default>false</default>
+                    <label>POA EID</label>
+                </value>
+                <value>
+                    <fullName>POA Passport</fullName>
+                    <default>false</default>
+                    <label>POA Passport</label>
+                </value>
+                <value>
+                    <fullName>POA Visa</fullName>
+                    <default>false</default>
+                    <label>POA Visa</label>
+                </value>
+                <value>
+                    <fullName>Payment Receipt</fullName>
+                    <default>false</default>
+                    <label>Payment Receipt</label>
+                </value>
+                <value>
+                    <fullName>Tawtheeq /Ejari Document</fullName>
+                    <default>false</default>
+                    <label>Tawtheeq /Ejari Document</label>
+                </value>
+                <value>
+                    <fullName>Title Deed Document</fullName>
+                    <default>false</default>
+                    <label>Title Deed Document</label>
+                </value>
+                <value>
+                    <fullName>Registration SPA</fullName>
+                    <default>false</default>
+                    <label>Registration SPA</label>
+                </value>
+                <value>
+                    <fullName>Proof of first-degree kinship</fullName>
+                    <default>false</default>
+                    <label>Proof of first-degree kinship</label>
+                </value>
+                <value>
+                    <fullName>Proof of Signatory</fullName>
+                    <default>false</default>
+                    <label>Proof of Signatory</label>
+                </value>
+                <value>
+                    <fullName>MOU</fullName>
+                    <default>false</default>
+                    <label>MOU</label>
+                </value>
+                <value>
+                    <fullName>Removal of Name - Acknowledgement Letter</fullName>
+                    <default>false</default>
+                    <label>Removal of Name - Acknowledgement Letter</label>
+                </value>
+                <value>
+                    <fullName>Lost SPA Undertaking</fullName>
+                    <default>false</default>
+                    <label>Lost SPA Undertaking</label>
+                </value>
+                <value>
+                    <fullName>CIF</fullName>
+                    <default>false</default>
+                    <label>CIF</label>
+                </value>
+                <value>
+                    <fullName>TAQA NOC</fullName>
+                    <default>false</default>
+                    <label>TAQA NOC</label>
+                </value>
+                <value>
+                    <fullName>TAQA Owner NOC</fullName>
+                    <default>false</default>
+                    <label>TAQA Owner NOC</label>
+                </value>
+                <value>
+                    <fullName>TAQA SOA Request</fullName>
+                    <default>false</default>
+                    <label>TAQA SOA Request</label>
+                </value>
+                <value>
+                    <fullName>TAQA Joint Owner NOC</fullName>
+                    <default>false</default>
+                    <label>TAQA Joint Owner NOC</label>
+                </value>
+                <value>
+                    <fullName>TAQA Non-Resident Owner NOC</fullName>
+                    <default>false</default>
+                    <label>TAQA Non-Resident Owner NOC</label>
+                </value>
+                <value>
+                    <fullName>TAQA Transfer Confirmation Email</fullName>
+                    <default>false</default>
+                    <label>TAQA Transfer Confirmation Email</label>
+                </value>
+                <value>
+                    <fullName>Gifting NOC</fullName>
+                    <default>false</default>
+                    <label>Gifting NOC</label>
+                </value>
+                <value>
+                    <fullName>Gifting - Buyers Undertaking</fullName>
+                    <default>false</default>
+                    <label>Gifting - Buyers Undertaking</label>
+                </value>
+                <value>
+                    <fullName>Buyers Undertaking</fullName>
+                    <default>false</default>
+                    <label>Buyers Undertaking</label>
+                </value>
+                <value>
+                    <fullName>Buyer Visa</fullName>
+                    <default>false</default>
+                    <label>Buyer Visa</label>
+                </value>
+                <value>
+                    <fullName>Seller Visa</fullName>
+                    <default>false</default>
+                    <label>Seller Visa</label>
+                </value>
+                <value>
+                    <fullName>Buyer Passport</fullName>
+                    <default>false</default>
+                    <label>Buyer Passport</label>
+                </value>
+                <value>
+                    <fullName>Seller Passport</fullName>
+                    <default>false</default>
+                    <label>Seller Passport</label>
+                </value>
+                <value>
+                    <fullName>Buyer Emirates ID</fullName>
+                    <default>false</default>
+                    <label>Buyer Emirates ID</label>
+                </value>
+                <value>
+                    <fullName>Seller Emirates ID</fullName>
+                    <default>false</default>
+                    <label>Seller Emirates ID</label>
+                </value>
+                <value>
+                    <fullName>Returned Memo</fullName>
+                    <default>false</default>
+                    <label>Returned Memo</label>
+                </value>
+                <value>
+                    <fullName>Copy of Judgement Document</fullName>
+                    <default>false</default>
+                    <label>Copy of Judgement Document</label>
+                </value>
+                <value>
+                    <fullName>Quote Extension Document</fullName>
+                    <default>false</default>
+                    <label>Quote Extension Document</label>
+                </value>
+                <value>
+                    <fullName>Payment Advice Document</fullName>
+                    <default>false</default>
+                    <label>Payment Advice Document</label>
+                </value>
+                <value>
+                    <fullName>Third Party Form</fullName>
+                    <default>false</default>
+                    <label>Third Party Form</label>
+                </value>
+                <value>
+                    <fullName>Third Party EID</fullName>
+                    <default>false</default>
+                    <label>Third Party EID</label>
+                </value>
+                <value>
+                    <fullName>Memo</fullName>
+                    <default>false</default>
+                    <label>Memo</label>
+                </value>
+                <value>
+                    <fullName>Offer Letter Unit Layout</fullName>
+                    <default>false</default>
+                    <label>Offer Letter Unit Layout</label>
+                </value>
+                <value>
+                    <fullName>JOPD</fullName>
+                    <default>false</default>
+                    <label>JOPD</label>
+                </value>
+                <value>
+                    <fullName>Welcome letter from bank</fullName>
+                    <default>false</default>
+                    <label>Welcome letter from bank</label>
+                </value>
+                <value>
+                    <fullName>Commercial License</fullName>
+                    <default>false</default>
+                    <label>Commercial License</label>
+                </value>
+                <value>
+                    <fullName>Passport Back</fullName>
+                    <default>false</default>
+                    <label>Passport Back</label>
+                </value>
+                <value>
+                    <fullName>Supporting Document 1</fullName>
+                    <default>false</default>
+                    <label>Supporting Document 1</label>
+                </value>
+                <value>
+                    <fullName>Supporting Document 2</fullName>
+                    <default>false</default>
+                    <label>Supporting Document 2</label>
+                </value>
+                <value>
+                    <fullName>SPA, Disclosure and CMS English</fullName>
+                    <default>false</default>
+                    <label>SPA, Disclosure and CMS English</label>
+                </value>
+                <value>
+                    <fullName>SPA, Disclosure and CMS Arabic</fullName>
+                    <default>false</default>
+                    <label>SPA, Disclosure and CMS Arabic</label>
+                </value>
+                <value>
+                    <fullName>Emirates ID Front</fullName>
+                    <default>false</default>
+                    <label>Emirates ID Front</label>
+                </value>
+                <value>
+                    <fullName>Emirates ID Back</fullName>
+                    <default>false</default>
+                    <label>Emirates ID Back</label>
+                </value>
+                <value>
+                    <fullName>Power of Attorney</fullName>
+                    <default>false</default>
+                    <label>Power of Attorney</label>
+                </value>
+                <value>
+                    <fullName>Payment Third Party Form</fullName>
+                    <default>false</default>
+                    <label>Payment Third Party Form</label>
+                </value>
+                <value>
+                    <fullName>Leasing Contract</fullName>
+                    <default>false</default>
+                    <label>Leasing Contract</label>
+                </value>
+                <value>
+                    <fullName>Leasing Contract - Signed</fullName>
+                    <default>false</default>
+                    <label>Leasing Contract - Signed</label>
+                </value>
+                <value>
+                    <fullName>PDCs</fullName>
+                    <default>false</default>
+                    <label>PDCs</label>
+                </value>
+                <value>
+                    <fullName>Move Out Request Form</fullName>
+                    <default>false</default>
+                    <label>Move Out Request Form</label>
+                </value>
+                <value>
+                    <fullName>Leasing Receipt document</fullName>
+                    <default>false</default>
+                    <label>Leasing Receipt document</label>
+                </value>
+                <value>
+                    <fullName>Floor Plan</fullName>
+                    <default>false</default>
+                    <label>Floor Plan</label>
+                </value>
+                <value>
+                    <fullName>Signed KYC</fullName>
+                    <default>false</default>
+                    <label>Signed KYC</label>
+                </value>
+                <value>
+                    <fullName>Guideline 1</fullName>
+                    <default>false</default>
+                    <label>Guideline 1</label>
+                </value>
+                <value>
+                    <fullName>Guideline 2</fullName>
+                    <default>false</default>
+                    <label>Guideline 2</label>
+                </value>
+                <value>
+                    <fullName>Guideline 3</fullName>
+                    <default>false</default>
+                    <label>Guideline 3</label>
+                </value>
+                <value>
+                    <fullName>Guideline 1 Arabic</fullName>
+                    <default>false</default>
+                    <label>Guideline 1 Arabic</label>
+                </value>
+                <value>
+                    <fullName>Guideline 2 Arabic</fullName>
+                    <default>false</default>
+                    <label>Guideline 2 Arabic</label>
+                </value>
+                <value>
+                    <fullName>Guideline 3 Arabic</fullName>
+                    <default>false</default>
+                    <label>Guideline 3 Arabic</label>
+                </value>
+                <value>
+                    <fullName>BCC Announcement</fullName>
+                    <default>false</default>
+                    <label>BCC Announcement</label>
+                </value>
+                <value>
+                    <fullName>Broker Agreement International</fullName>
+                    <default>false</default>
+                    <label>Broker Agreement International</label>
+                </value>
+                <value>
+                    <fullName>Statement of Account - Invoice</fullName>
+                    <default>false</default>
+                    <label>Statement of Account - Invoice</label>
+                </value>
+                <value>
+                    <fullName>Move In Request Form</fullName>
+                    <default>false</default>
+                    <label>Move In Request Form</label>
+                </value>
+                <value>
+                    <fullName>Permit to Move</fullName>
+                    <default>false</default>
+                    <label>Permit to Move</label>
+                </value>
+                <value>
+                    <fullName>Statement of Account - Full</fullName>
+                    <default>false</default>
+                    <label>Statement of Account - Full</label>
+                </value>
+                <value>
+                    <fullName>Tax invoice</fullName>
+                    <default>false</default>
+                    <label>Tax invoice</label>
+                </value>
+                <value>
+                    <fullName>Dubai rera index</fullName>
+                    <default>false</default>
+                    <label>Dubai rera index</label>
+                </value>
+                <value>
+                    <fullName>Waive of 2 months penalty</fullName>
+                    <default>false</default>
+                    <label>Waive of 2 months penalty</label>
+                </value>
+                <value>
+                    <fullName>Leasing Renewal Notice</fullName>
+                    <default>false</default>
+                    <label>Leasing Renewal Notice</label>
+                </value>
+                <value>
+                    <fullName>Refund form</fullName>
+                    <default>false</default>
+                    <label>Refund form</label>
+                </value>
+                <value>
+                    <fullName>Credit invoice</fullName>
+                    <default>false</default>
+                    <label>Credit invoice</label>
+                </value>
+                <value>
+                    <fullName>SPA Addendum</fullName>
+                    <default>false</default>
+                    <label>SPA Addendum</label>
+                </value>
+                <value>
+                    <fullName>SPA Pre Registration</fullName>
+                    <default>false</default>
+                    <label>SPA Pre Registration</label>
+                </value>
+                <value>
+                    <fullName>IBAN Letter</fullName>
+                    <default>false</default>
+                    <label>IBAN Letter</label>
+                </value>
+                <value>
+                    <fullName>Debit Advice</fullName>
+                    <default>false</default>
+                    <label>Debit Advice</label>
+                </value>
+                <value>
+                    <fullName>Suqur Al Watan Employee Document</fullName>
+                    <default>false</default>
+                    <label>Suqur Al Watan Employee Document</label>
+                </value>
+                <value>
+                    <fullName>Payment Deferral Fees Receipt</fullName>
+                    <default>false</default>
+                    <label>Payment Deferral Fees Receipt</label>
+                </value>
+                <value>
+                    <fullName>LAF</fullName>
+                    <default>false</default>
+                    <label>LAF</label>
+                </value>
+                <value>
+                    <fullName>MOA/POA</fullName>
+                    <default>false</default>
+                    <label>MOA/POA</label>
+                </value>
+                <value>
+                    <fullName>Letter</fullName>
+                    <default>false</default>
+                    <label>Letter</label>
+                </value>
+                <value>
+                    <fullName>Email</fullName>
+                    <default>false</default>
+                    <label>Email</label>
+                </value>
+                <value>
+                    <fullName>AMC</fullName>
+                    <default>false</default>
+                    <label>AMC</label>
+                </value>
+                <value>
+                    <fullName>Insurance</fullName>
+                    <default>false</default>
+                    <label>Insurance</label>
+                </value>
+                <value>
+                    <fullName>Variation Agreement or DOV</fullName>
+                    <default>false</default>
+                    <label>Variation Agreement or DOV</label>
+                </value>
+                <value>
+                    <fullName>Surrender Agreement or DOS</fullName>
+                    <default>false</default>
+                    <label>Surrender Agreement or DOS</label>
+                </value>
+                <value>
+                    <fullName>Novation Agreement or DOA</fullName>
+                    <default>false</default>
+                    <label>Novation Agreement or DOA</label>
+                </value>
+                <value>
+                    <fullName>Deposit slips</fullName>
+                    <default>false</default>
+                    <label>Deposit slips</label>
+                </value>
+                <value>
+                    <fullName>HO Undertaking Letter</fullName>
+                    <default>false</default>
+                    <label>HO Undertaking Letter</label>
+                </value>
+                <value>
+                    <fullName>Checkout Form</fullName>
+                    <default>false</default>
+                    <label>Checkout Form</label>
+                </value>
+                <value>
+                    <fullName>KYC Declaration Form</fullName>
+                    <default>false</default>
+                    <label>KYC Declaration Form</label>
+                </value>
+                <value>
+                    <fullName>Deletion Undertaking Letter</fullName>
+                    <default>false</default>
+                    <label>Deletion Undertaking Letter</label>
+                </value>
+                <value>
+                    <fullName>Offer Undertaking Letter</fullName>
+                    <default>false</default>
+                    <label>Offer Undertaking Letter</label>
+                </value>
+                <value>
+                    <fullName>Tenant Letter for Break Lease</fullName>
+                    <default>false</default>
+                    <label>Tenant Letter for Break Lease</label>
+                </value>
+                <value>
+                    <fullName>Break Lease Forms Signed by Tenant</fullName>
+                    <default>false</default>
+                    <label>Break Lease Forms Signed by Tenant</label>
+                </value>
+                <value>
+                    <fullName>Maintenance Checkout Report</fullName>
+                    <default>false</default>
+                    <label>Maintenance Checkout Report</label>
+                </value>
+                <value>
+                    <fullName>Water &amp; Electricity Clearance Certificate</fullName>
+                    <default>false</default>
+                    <label>Water &amp; Electricity Clearance Certificate</label>
+                </value>
+                <value>
+                    <fullName>Last tenancy contract</fullName>
+                    <default>false</default>
+                    <label>Last tenancy contract</label>
+                </value>
+                <value>
+                    <fullName>Welcome Letter</fullName>
+                    <default>false</default>
+                    <label>Welcome Letter</label>
+                </value>
+                <value>
+                    <fullName>Leasing Exit Letter</fullName>
+                    <default>false</default>
+                    <label>Leasing Exit Letter</label>
+                </value>
+                <value>
+                    <fullName>Renewal Offer Letter</fullName>
+                    <default>false</default>
+                    <label>Renewal Offer Letter</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TypeofEstablishment__c</fullName>
+        <label>Type of Establishment</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Domestic</fullName>
+                    <default>false</default>
+                    <label>Domestic</label>
+                </value>
+                <value>
+                    <fullName>International</fullName>
+                    <default>false</default>
+                    <label>International</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>UnitType__c</fullName>
+        <label>Unit Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>UnitType</valueSetName>
+        </valueSet>
+    </fields>
+    <label>Document Type</label>
+    <listViews>
+        <fullName>Active_Document_Types</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Project__c</columns>
+        <columns>Active__c</columns>
+        <columns>IsSystemUpload__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>Customer_Type__c</columns>
+        <columns>RecordTypeDevName__c</columns>
+        <columns>Resale__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Active Document Types</label>
+    </listViews>
+    <listViews>
+        <fullName>Alhambra_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Project__c</columns>
+        <columns>Active__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>DigitalSignature__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>DeliveryOption__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Alhambra</value>
+        </filters>
+        <label>Alhambra Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Project__c</columns>
+        <columns>Active__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>equals</operation>
+            <value>Case</value>
+        </filters>
+        <filters>
+            <field>Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Almeira_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Project__c</columns>
+        <columns>Active__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>DeliveryOption__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Almeria</value>
+        </filters>
+        <label>Almeria Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Broker_Account_DocumentTypes</fullName>
+        <columns>NAME</columns>
+        <columns>TypeofEstablishment__c</columns>
+        <columns>Type__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>RecordTypeDevName__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>equals</operation>
+            <value>Account</value>
+        </filters>
+        <filters>
+            <field>RecordTypeDevName__c</field>
+            <operation>equals</operation>
+            <value>Broker_Agency</value>
+        </filters>
+        <label>Broker Account</label>
+    </listViews>
+    <listViews>
+        <fullName>Broker_Account_Document_Types</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>equals</operation>
+            <value>Account</value>
+        </filters>
+        <filters>
+            <field>RecordTypeDevName__c</field>
+            <operation>equals</operation>
+            <value>Broker_Agency</value>
+        </filters>
+        <label>Broker Account Document Types</label>
+    </listViews>
+    <listViews>
+        <fullName>Broker_Applicant_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>TypeofEstablishment__c</columns>
+        <columns>BrokerContactRole__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>equals</operation>
+            <value>Broker Applicant</value>
+        </filters>
+        <label>Broker Applicant Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Broker_Application_DocumentTypes</fullName>
+        <columns>NAME</columns>
+        <columns>TypeofEstablishment__c</columns>
+        <columns>Type__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>RecordTypeDevName__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>equals</operation>
+            <value>Broker Application</value>
+        </filters>
+        <label>Broker Application DocumentTypes</label>
+    </listViews>
+    <listViews>
+        <fullName>Broker_Commission_Documents</fullName>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>equals</operation>
+            <value>Broker Commission</value>
+        </filters>
+        <label>Broker Commission Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Business_Account_Document_Types</fullName>
+        <columns>NAME</columns>
+        <columns>Active__c</columns>
+        <columns>Customer_Type__c</columns>
+        <columns>Project__c</columns>
+        <columns>ProcessType__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>equals</operation>
+            <value>Account</value>
+        </filters>
+        <filters>
+            <field>RecordTypeDevName__c</field>
+            <operation>equals</operation>
+            <value>OrganizationAccount</value>
+        </filters>
+        <label>Business Account Document Types</label>
+    </listViews>
+    <listViews>
+        <fullName>Carmona_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Project__c</columns>
+        <columns>Active__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>DeliveryOption__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Carmona</value>
+        </filters>
+        <label>Carmona  Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Casares_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Project__c</columns>
+        <columns>Type__c</columns>
+        <columns>Active__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>DigitalSignature__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Casares</value>
+        </filters>
+        <label>Casares Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Case_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>Active__c</columns>
+        <columns>RecordTypeDevName__c</columns>
+        <columns>Project__c</columns>
+        <columns>Customer_Type__c</columns>
+        <columns>DigitalSignature__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>equals</operation>
+            <value>Case</value>
+        </filters>
+        <label>Case Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Cordoba_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Project__c</columns>
+        <columns>Type__c</columns>
+        <columns>Active__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>DigitalSignature__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Cordoba</value>
+        </filters>
+        <filters>
+            <field>Resale__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>SALE Cordoba Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Granada_2_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Project__c</columns>
+        <columns>Active__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>DigitalSignature__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>DeliveryOption__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Granada 2</value>
+        </filters>
+        <label>Granada 2 Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Granada_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Project__c</columns>
+        <columns>Active__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>DeliveryOption__c</columns>
+        <columns>Customer_Type__c</columns>
+        <columns>Docusign_Envelope_Template__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Granada</value>
+        </filters>
+        <label>Granada 1 Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>Active__c</columns>
+        <columns>Project__c</columns>
+        <columns>Customer_Type__c</columns>
+        <columns>DigitalSignature__c</columns>
+        <columns>DeliveryOption__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>equals</operation>
+            <value>Handover</value>
+        </filters>
+        <label>Handover Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Leasing_Team_Queue_DocumentType</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Handover Leasing Team Queue</label>
+        <queue>Handover_Leasing_Team_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Leasing_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>Customer_Type__c</columns>
+        <columns>DeliveryOption__c</columns>
+        <columns>Docusign_Envelope_Template__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>contains</operation>
+            <value>LeasingOrder__c</value>
+        </filters>
+        <label>Leasing Order Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Leasing_Payment_Plan_Schedule_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>contains</operation>
+            <value>PaymentPlanSchedule__c</value>
+        </filters>
+        <label>Leasing Payment Plan Schedule Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Leasing_Receipt_Ack_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>ObjectType__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>contains</operation>
+            <value>LeasingReceiptAcknowledgment__c</value>
+        </filters>
+        <label>Leasing Receipt Ack Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Leasing_other_charges_documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>contains</operation>
+            <value>LeasingOrdersOtherCharges__c</value>
+        </filters>
+        <label>Leasing other charges documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Malaga_Documents_2</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Project__c</columns>
+        <columns>Active__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>DigitalSignature__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>Customer_Type__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Malaga</value>
+        </filters>
+        <label>Malaga Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Park_View_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Project__c</columns>
+        <columns>Active__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>DeliveryOption__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Park View</value>
+        </filters>
+        <label>Park View Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Person_Account_Document_Types</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Active__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>equals</operation>
+            <value>Account</value>
+        </filters>
+        <filters>
+            <field>RecordTypeDevName__c</field>
+            <operation>equals</operation>
+            <value>PersonAccount</value>
+        </filters>
+        <label>Person Account Document Types</label>
+    </listViews>
+    <listViews>
+        <fullName>Project_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Project__c</columns>
+        <columns>Active__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>DeliveryOption__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>equals</operation>
+            <value>Project</value>
+        </filters>
+        <label>Project Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Project_related_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>Active__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ObjectType__c</field>
+            <operation>equals</operation>
+            <value>Project</value>
+        </filters>
+        <label>Project related Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Seville_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Type__c</columns>
+        <columns>Project__c</columns>
+        <columns>Active__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>ObjectType__c</columns>
+        <columns>DeliveryOption__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Seville</value>
+        </filters>
+        <label>Seville Documents</label>
+    </listViews>
+    <listViews>
+        <fullName>Toledo_Documents</fullName>
+        <columns>NAME</columns>
+        <columns>Project__c</columns>
+        <columns>Type__c</columns>
+        <columns>Active__c</columns>
+        <columns>DocGenPackage__c</columns>
+        <columns>IsDocgen__c</columns>
+        <columns>DigitalSignature__c</columns>
+        <columns>Customer_Type__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Toledo</value>
+        </filters>
+        <label>Toledo Documents</label>
+    </listViews>
+    <nameField>
+        <displayFormat>DT{00000}</displayFormat>
+        <label>Document Type #</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Document Types</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

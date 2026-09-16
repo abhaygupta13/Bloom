@@ -75,7 +75,7 @@ public inherited sharing class AcknowledgmentReceiptSRHandler{
         return newCase; 
     } 
 
-    public void sendNewServiceRequestAssignmnmentEmailNotification(Case newCase){
+    /*public void sendNewServiceRequestAssignmnmentEmailNotification(Case newCase){
         if(!newcase.StopEmailsToCustomer__c){
             MetadataService objMetadataService = MetadataService.getInstance();
             EmailService objEmailService = EmailService.getInstance();
@@ -88,7 +88,7 @@ public inherited sharing class AcknowledgmentReceiptSRHandler{
                 objEmailService.sendEmail(emailList);  
             } 
         }
-    }
+    }*/
 
     public  Map<String, Object> validateCaseForNextReview(Case caseRecord) {
         Map<String, Object> response = new Map<String, Object>();

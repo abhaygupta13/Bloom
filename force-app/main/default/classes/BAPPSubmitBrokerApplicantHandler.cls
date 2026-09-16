@@ -63,10 +63,6 @@ public class BAPPSubmitBrokerApplicantHandler {
             System.debug('Exception in handleBrokerApplicant: ' + e.getMessage());
             System.debug('Stack trace: ' + e.getStackTraceString());
 
-           /*makeServerErrorResponse(new Map<String, Object>{
-                'status' => 'error',
-                    'message' => e.getMessage()
-                    });*/
             Map<String, Object> errorMap = new Map<String, Object>();
             makeServerErrorResponse(e);
         }
@@ -413,13 +409,6 @@ public class BAPPSubmitBrokerApplicantHandler {
         RestContext.response.statusCode = 400;
     }
     // Server Error Response
-    /*public static void makeServerErrorResponse(Map<String, Object> error) {
-        error.put('status', 'error');
-        error.put('message', 'Server Error');
-        RestContext.response.addHeader('Content-Type', 'application/json;charset=UTF-8');
-        RestContext.response.responseBody = Blob.valueOf(JSON.serialize(error));
-        RestContext.response.statusCode = 500;
-    }*/
     public static void makeServerErrorResponse(Exception ex) {
         Map<String, Object> error = new Map<String, Object>();
         String message = 'Unexpected server error';

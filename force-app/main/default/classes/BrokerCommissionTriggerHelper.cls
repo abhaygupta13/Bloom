@@ -127,12 +127,12 @@ public without sharing class BrokerCommissionTriggerHelper {
                 }
             }
             List<Contact> conList = objContactService.getBrokerAgentByRoles(accIdSet);
-			Id noReplyBloomSalesOWDId = objMetadataService.getAppSettingTextValue(BLOOM_NO_REPLY_OW_EMAIL_ID);
+            Id noReplyBloomSalesOWDId = objMetadataService.getAppSettingTextValue(BLOOM_NO_REPLY_OW_EMAIL_ID);
             Id invoicePaidEmailTemplateId = objMetadataService.getAppSettingTextValue(BAPP_COMMISSION_RELEASED_TO_BROKER_AGENCY_TEMP_ID);
             List<String> ccEmailAddressList = objMetadataService.getAppSettingTextValue(INVOICE_PAID_CC_EMAIL) != null ? (objMetadataService.getAppSettingTextValue(INVOICE_PAID_CC_EMAIL)).split(',') : null;
             List<String> bccEmailAddressList = objMetadataService.getAppSettingTextValue(INVOICE_PAID_BCC_EMAIL) != null ? (objMetadataService.getAppSettingTextValue(INVOICE_PAID_BCC_EMAIL)).split(',') : null;
             // List of email to send
-            List<Messaging.SingleEmailMessage> msgList =new List<Messaging.SingleEmailMessage>();            
+            List<Messaging.SingleEmailMessage> msgList =new List<Messaging.SingleEmailMessage>();    
             if(!conList.isEmpty()){
                 Map<Id, List<Contact>> AccIdToContactsMap = new Map<Id, List<Contact>>();
                 for (Contact con : conList) {
@@ -152,23 +152,13 @@ public without sharing class BrokerCommissionTriggerHelper {
                 }
             }
             else{
-                System.debug(ccEmailAddressList);
-                System.debug(bccEmailAddressList);
                 for(BrokerCommission__c bc :paidBrokerCommissionsList){
-                    msgList.add(objEmailService.getSingleEmailMessageWithoutTargetObjectId(invoicePaidEmailTemplateId, null, bc.Id, ccEmailAddressList, bccEmailAddressList, null));
+                    msgList.add(objEmailService.getSingleEmailMessageWithoutTargetObjectId(invoicePaidEmailTemplateId, noReplyBloomSalesOWDId, bc.Id, ccEmailAddressList, bccEmailAddressList, null));
                 }
             }
+            
             // Sending email
             Messaging.SendEmailResult[] results = objEmailService.sendEmail(msgList);
-            System.debug('results'+results);
-            for (Messaging.SendEmailResult res : results) {
-                System.debug('SUCCESS: ' + res.isSuccess());
-                if (!res.isSuccess()) {
-                    for (Messaging.SendEmailError err : res.getErrors()) {
-                        System.debug('ERROR: ' + err.getMessage());
-                    }
-                }
-            }
         } catch (Exception ex) {
             ErrorLogHandler.logError('BrokerCommissionTriggerHelper', 'sendEmailToRelatedContacts', ex,'');
         }     

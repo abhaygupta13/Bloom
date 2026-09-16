@@ -7,18 +7,16 @@ import { notifyRecordUpdateAvailable } from 'lightning/uiRecordApi';
 export default class EventResyncAction extends LightningElement {
     @api recordId;
     showLoading = false;
-    handleConfirm() {
+    handleConfirm(){
         this.showLoading = true;
-        reTriggerPlatformEvent({ recordId: this.recordId })
-            .then(result => {
+        reTriggerPlatformEvent({recordId: this.recordId})
+        .then(result=>{
                 this.showLoading = false;
                 notifyRecordUpdateAvailable([{ recordId: this.recordId }]);
                 this.dispatchEvent(new CloseActionScreenEvent());
             })
-            .catch(error => {
+        .catch(error=>{
                 this.showLoading = false;
-                console.log('Error:', JSON.stringify(error));
-
                 this.dispatchEvent(new CloseActionScreenEvent());
 
                 let errorMessage = 'Something went wrong.';
@@ -34,7 +32,7 @@ export default class EventResyncAction extends LightningElement {
                 this.showErrorMessage(errorMessage);
             })
     }
-    handleCancel() {
+    handleCancel(){
         this.dispatchEvent(new CloseActionScreenEvent());
     }
 

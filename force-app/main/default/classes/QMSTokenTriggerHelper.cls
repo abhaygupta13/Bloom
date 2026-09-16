@@ -20,8 +20,6 @@ public without sharing class QMSTokenTriggerHelper {
         Set<String> templateNames = new Set<String>{CREATE_SMS_NOTIFICATION, CLOSURE_SMS_NOTIFICATION};
         Map<String, SMSTemplate__c> smsTemplateMap = objNotificationService.getSMSTemplates(templateNames);
 
-        
-
         for(QMSToken__c token : newList){
             if(String.isNotBlank(token.MobileNumber__c)){
                 List<String> values = new List<String>{token.TokenNumber__c};

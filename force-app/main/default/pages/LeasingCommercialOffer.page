@@ -7,11 +7,6 @@
                 @page {
                 margin: 10mm;
                 border: 1px solid black;
-                @bottom-left {
-                content:  "{!pageBottomNumberMessage}";
-                font-size: 10px;
-                font-family: Arial, sans-serif;
-                }
                 @bottom-center {
                 content: "Page " counter(page) " of " counter(pages);
                 font-size: 10px;

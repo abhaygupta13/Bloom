@@ -54,4 +54,5 @@ public inherited sharing class DocumentTypeService {
                 WHERE Id IN :documentTypeIds
                ];
     }
+    
 }

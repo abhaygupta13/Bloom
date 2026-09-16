@@ -10,15 +10,18 @@ public without sharing class BrokerCommissionController {
     private static final string INVOICE_ATTACHMENT_EMAIL_TEMPLATE_ID { get { return 'CommissionInvoiceAttachmentTempId'; } }
     private static final string BLOOM_NO_REPLY_SALES_OW_EMAIL_ID { get { return 'BloomNoReplySalesOWEmailId'; } }
     private static final string MTD_BROKER_COMMISSION_DOC_MERGE_ORDER { get { return 'BrokerCommissionDocsMergeOrder'; } }
-    
+    private static final string MTD_BC_BROKER_CONTACT_ROLE_VALUE { get { return 'BrokerCommissionBrokerContactRoleValue'; } }
     
     @AuraEnabled(cacheable=true)
     public static List<Contact> getRelatedContacts(Id recordId){
         try {
             ContactService objContactService = ContactService.getInstance();
             BrokerCommissionService objBrokerCommissionServ = BrokerCommissionService.getInstance();
+            MetadataService objMetadataService = MetadataService.getInstance();
             BrokerCommission__c broker = objBrokerCommissionServ.getBrokerCommissionById(recordId);
-            List<Contact> conList = objContactService.getContactByAccountId(broker.Agency__c);
+            String brokerContactRole = objMetadataService.getAppSettingTextValue(MTD_BC_BROKER_CONTACT_ROLE_VALUE);
+            List<String> brokerContactRoleValueList = brokerContactRole.split(',');
+            List<Contact> conList = objContactService.getActiveBrokerContactByAccountId(broker.Agency__c,brokerContactRoleValueList);
             return conList;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

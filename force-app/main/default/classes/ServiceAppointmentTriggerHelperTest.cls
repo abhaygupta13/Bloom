@@ -87,6 +87,7 @@ public class ServiceAppointmentTriggerHelperTest {
         Unit__c unt = new Unit__c();
         unt.Name = 'C-1233';
         unt.Project__c = prj.Id;
+        unt.Is_Property_keys_given__c = true;
         insert unt;
         
         Round_Robins__c roundrobin = new Round_Robins__c();
@@ -315,5 +316,14 @@ static void addContractor_Test() {
         ServiceAppointmentTriggerHelper.statusUpdate(new List<ServiceAppointment>(), new Map<Id, ServiceAppointment>());
         Test.stopTest();
         
+    }
+
+    @isTest
+    static void testCanceledFlag() {
+        List<ServiceAppointment> appointments = [SELECT Id, Status, Closure_Reason__c, ParentRecordId FROM ServiceAppointment LIMIT 1];
+        appointments[0].Status = 'Canceled';
+        Test.startTest();
+        update appointments[0];
+        Test.stopTest();
     }
 }

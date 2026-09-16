@@ -20,9 +20,8 @@ public without sharing class SendEmailInvocable{
     private static final string Title_Deed = 'Title Deed';
     
     
-    private static final String PAYMENT_RECEIPT = 'Payment Receipt';
+    private static final String PAYMENT_RECEIPT = 'Handover Payment Attachment';
     private static final string Full_Guideline_Document = 'Full Guideline Document';
-  //  private static final Home_Orientation_Journey = 'Home Orientation Journey';
     private static final string Guideline_1_Arabic = 'Guideline 1 Arabic';
     private static final string Guideline_2_Arabic = 'Guideline 2 Arabic';
     private static final string Guideline_3_Arabic = 'Guideline 3 Arabic';
@@ -54,9 +53,9 @@ public without sharing class SendEmailInvocable{
             if (templateId == phaseRec.HOTitleDeedEmailTempID__c) {
                 docList.add(Title_Deed); 
             }
-            //   else if (templateId == phaseRec.Payment_Confirmation_Template_Id__c) {
-            //      docList.add(HandoverConstants.PAYMENT_RECEIPT); 
-            //  } 
+              else if (templateId == phaseRec.HOOutstandingConfirmationTempId__c) {
+                 docList.add(PAYMENT_RECEIPT); 
+              } 
             else if (templateId == phaseRec.CHOAttendedbyCustomerEmailTempId__c || 
                      templateId == phaseRec.HomeOrientationByBloomEmailTempId__c ||
                      templateId == phaseRec.ChoCustomerNotattendedEmailTempId__c) {
@@ -90,60 +89,3 @@ public without sharing class SendEmailInvocable{
         }
     }
 }
-
-
-/* public class EmailRequest {
-@InvocableVariable(required=true)
-public String templateName;
-
-@InvocableVariable(required=true)
-public String recordId;
-}
-
-@InvocableMethod   
-public static void sendEmail(List<EmailRequest> requests){
-system.debug('requests--->'+requests);
-try{
-List<string> docList = new List<string>();
-if(requests.size()>0){
-
-if(requests[0].templateName == HandoverConstants.Title_Deed_Registration){
-docList.add(HandoverConstants.Title_Deed); 
-}
-if(requests[0].templateName == HandoverConstants.PAYMENT_Confirmation_Template){
-docList.add(HandoverConstants.PAYMENT_RECEIPT); 
-}
-if(requests[0].templateName == HandoverConstants.Handover_Completion_Customer_Attended || 
-requests[0].templateName == HandoverConstants.Home_Orientation_By_Bloom ||
-requests[0].templateName == HandoverConstants.Handover_Completion_Customer_Not_Attended){
-docList.Add(HandoverConstants.Guideline_2);
-docList.Add(HandoverConstants.Guideline_2_Arabic);
-// docList.Add(Constants.HO_SOA);
-docList.Add(Constants.HO_CHO_Snagging_Report);
-}
-if(requests[0].templateName == HandoverConstants.CHO_Desnagging_Communication_Email_Template){  
-docList.Add(Constants.HO_CHO_DeSnagging_Report);
-}
-if(requests[0].templateName == HandoverConstants.Handover_Congratulation_Email_Template){
-docList.Add(HandoverConstants.Guideline_3);
-docList.Add(HandoverConstants.Guideline_3_Arabic);
-docList.Add(HandoverConstants.HO_SOA);
-docList.Add(HandoverConstants.Application_Modification_Fitout_Works_Eng);
-docList.Add(HandoverConstants.Application_Modification_Fitout_Works_Arb);
-docList.Add(HandoverConstants.Community_Entry_Permit_English_Eng);
-docList.Add(HandoverConstants.Community_Entry_Permit_English_Arb);
-}
-if(requests[0].templateName == HandoverConstants.KHO_Appointment_Scheduled_Template){
-docList.Add(HandoverConstants.Guideline_1);
-docList.Add(HandoverConstants.Guideline_1_Arabic);
-
-}
-String result = HandoverEmailHelper.sendEmailProcess(requests[0].templateName, requests[0].recordId,new List<String>(),new List<String>(),docList);
-}else{
-ErrorLogHandler.logErrorWithoutException('SendEmailInvocable','sendEmail','requests not found in sendEmail');
-}
-}catch(Exception ex){
-ErrorLogHandler.logError('SendEmailInvocable','sendEmail',ex,'');
-}
-
-}*/

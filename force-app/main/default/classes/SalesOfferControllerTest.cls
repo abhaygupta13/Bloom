@@ -146,7 +146,7 @@ public class SalesOfferControllerTest {
         SalesOfferController.getOfferTypes(testProject.id,'CORPORATE','Direct');
         SalesOfferController.getPaymentPlans(testProject.id,'CORPORATE');
         SalesOfferController.getUnitModelsByProjectId(testProject.id);
-        SalesOfferController.getUnits(testProject.id, '1BHK');
+        SalesOfferController.getUnits(testProject.id, '1BHK', 'Direct');
         SalesOfferController.getProjects();
         SalesOfferController.generateSalesOffer(
             testProject.Id,

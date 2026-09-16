@@ -32,18 +32,28 @@
                 </lightning-layout-item>
 
                 <!-- Row 2: Reason -->
-                <lightning-layout-item size="12" class="slds-p-horizontal_small">
-                    <lightning-combobox 
-                        name="reason"
-                        label="Reason"
-                        value={selectedReason}
-                        placeholder="Select a reason"
-                        options={reasonOptions}
-                        onchange={handlePicklistChange}
-                        required>
-                    </lightning-combobox>
-                </lightning-layout-item>
+                <!-- Row 2: Reason & Escalation -->
+<lightning-layout-item size="8" class="slds-p-horizontal_small">
+    <lightning-combobox
+        name="reason"
+        label="Reason"
+        value={selectedReason}
+        placeholder="Select a reason"
+        options={reasonOptions}
+        onchange={handlePicklistChange}
+        required>
+    </lightning-combobox>
+</lightning-layout-item>
 
+<lightning-layout-item size="4" class="slds-p-horizontal_small">
+    <lightning-input
+        type="checkbox"
+        label="Escalation"
+        variant="label-stacked"
+        checked={isEscalation}
+        onchange={handleEscalationChange}>
+    </lightning-input>
+</lightning-layout-item>
                 <!-- Row 3: Description -->
                 <lightning-layout-item size="12" class="slds-p-horizontal_small">
                     <lightning-textarea 

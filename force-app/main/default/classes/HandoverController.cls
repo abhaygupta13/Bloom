@@ -212,8 +212,7 @@ public without sharing class HandoverController {
             EmailMessageService objEmailMessageService = EmailMessageService.getInstance();
             
             Id orgWideEmailAddressId = handoverMetadataService.getAppSettingTextValue(MDT_HANDOVER_ORG_WIDE_EMAIL_ADDRESS_ID);
-            //  EmailTemplate mailTemplate = objEmailService.getEmailTemplateByName(NOC_CHO_EMAIL_TEMPLATE_NAME);
-            
+                       
             List<Handover__c> handoverUpdateList = new List<Handover__c>();
             List<Attachment> attachmentListOnActivity = new List<Attachment>();
             List<Messaging.SendEmailResult> emailResultList = new List<Messaging.SendEmailResult>();
@@ -248,7 +247,7 @@ public without sharing class HandoverController {
                 projectDocList = objDocumentService.getDocumentsByParentIdsAndType(new Set<Id>{ProjectId}, DOCUMENT_TYPE_GUIDELINES_ARABIC, Project__c.SobjectType);
                 projectDocList.addAll(objDocumentService.getDocumentsByParentIdsAndType(new Set<Id>{ProjectId}, DOCUMENT_TYPE_GUIDELINES_ENGLISH, Project__c.SobjectType));
             }
-            System.debug('projectDocList'+projectDocList);
+           
             // 3. Fetch and Map Handover-Specific Documents (SOA)
             List<Document__c> handoverDocList = objDocumentService.getDocumentsByParentIdsAndType(handoverMap.keySet(), DOCUMENT_TYPE_HO_SOA, Handover__c.SobjectType);
             Map<Id, List<Document__c>> handoverToDocsMap = new Map<Id, List<Document__c>>();
@@ -290,6 +289,7 @@ public without sharing class HandoverController {
                         Id handoverId = mailList[i].whatId;
                         
                         Handover__c currentHandover = handoverMap.get(handoverId);
+                        String hoNextStatusAfterNotice = (currentHandover.Handover_Phase__r != null)  ? currentHandover.Handover_Phase__r.AfterHONoticeSubstatus__c: null;
                         successfulHandovers.add(currentHandover);
                         
                         if(objEmailMessageMap.containsKey(handoverId)){
@@ -332,7 +332,7 @@ public without sharing class HandoverController {
                             Is_Orientation_Letter_Sent__c = true,
                             Home_Orientation_Invitation_Date__c = Date.today(),
                             HomeOrientationInvitationDate__c = Date.today().addDays(14),
-                            Sub_Status__c = HandoverConstants.Handover_Sub_Status_Book_Appointment_with_Customer,            
+                            Sub_Status__c = hoNextStatusAfterNotice,            
                             Notice_of_Completion_Date__c = Date.today(),
                             Unit_is_Ready__c = true,
                             NOC_Date__c = Date.today().addDays(30)
@@ -377,6 +377,7 @@ public without sharing class HandoverController {
     public static String getDynamicBody(String body, Handover__c handover,Decimal pendingAmount){
         
         body = body.replace('{{{Handover__c.Name}}}', String.isNotBlank(handover.Name)?handover.Name : 'N/A');//Done
+        body = body.replace('{{{Handover__c.Englishformatteddate__c}}}', handover.Englishformatteddate__c != null ?handover.Englishformatteddate__c : 'N/A');
         body = body.replace('{{{Handover__c.Customer_Name__c}}}',String.isNotBlank(handover.Customer_Name__c) ? handover.Customer_Name__c : 'N/A');// Done
         body = body.replace('{{{Handover__c.customerNameWOTitle}}}',String.isNotBlank(handover.Account__r.Name) ? handover.Account__r.Name : 'N/A');// Done
         body = body.replace('{!Handover__c.Sub_Status__c}', String.isNotBlank(handover.Sub_Status__c) ? handover.Sub_Status__c : 'N/A');// done
@@ -718,25 +719,25 @@ public without sharing class HandoverController {
         
         for (Handover__c ho : handovers) {
             if (ho.Handover_Phase__r.DoorNumberClarificationrequired__c == true) {
-            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-            
-            String customSubject = getDynamicSubject(mailTemplate.Subject, ho);
-            String customBody = getDynamicBody(mailTemplate.HtmlValue, ho, null);
-            
-            mail.setSubject(customSubject);
-            mail.setHtmlBody(customBody);
-            mail.setToAddresses(new List<String>{ ho.CustomerEmail__c });
-            mail.setOrgWideEmailAddressId(orgWideEmailAddressId);
-            mail.setWhatId(ho.Id);
-            mail.setSaveAsActivity(true);
-            
-            mailList.add(mail);
-            
-            // Stage the update for this record
-            if (updateHandover.containsKey(ho.Id)) {
-                updateHandover.get(ho.Id).HasDoorNumberEmailSent__c = true;
+                Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+                
+                String customSubject = getDynamicSubject(mailTemplate.Subject, ho);
+                String customBody = getDynamicBody(mailTemplate.HtmlValue, ho, null);
+                
+                mail.setSubject(customSubject);
+                mail.setHtmlBody(customBody);
+                mail.setToAddresses(new List<String>{ ho.CustomerEmail__c });
+                mail.setOrgWideEmailAddressId(orgWideEmailAddressId);
+                mail.setWhatId(ho.Id);
+                mail.setSaveAsActivity(true);
+                
+                mailList.add(mail);
+                
+                // Stage the update for this record
+                if (updateHandover.containsKey(ho.Id)) {
+                    updateHandover.get(ho.Id).HasDoorNumberEmailSent__c = true;
+                }
             }
-        }
         }
         
         if (!mailList.isEmpty()) {

@@ -28,7 +28,7 @@ public class BAPPGetTeamMembersHandlerTest {
             Type = 'Question',
             Status = 'New',
             Case_Sub_Status__c = 'In Progress',
-            RecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'BrokerAgentRegistrationAndUpdate')
+            RecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'Broker_Registration')
         );
         insert cs;
 

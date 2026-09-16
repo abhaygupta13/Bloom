@@ -70,6 +70,7 @@ public class BAWebServiceHelper {
                                                                 DocumentService objDocumentService = DocumentService.getInstance();
                                                                 
                                                                 Map<String, Object> data = new Map<String, Object>();
+
                                                                 if(String.isBlank(customerId) || !isOtpVerified(customerId, otpEmailTxnId, otpSMSTxnId, email, phoneCountryCode + mobileNumber) || !isValidCustomer(customerId)){
                                                                     return data;
                                                                 }
@@ -202,8 +203,6 @@ public class BAWebServiceHelper {
             objContactList = objContactService.getContactByEmiratesId(idValue);
         }else if (idType == 'AB2CID'){
             objContactList = objContactService.getContactByActiveDirectoryId(idValue);
-        }else if (idType == 'UAEPASS'){
-            objContactList = objContactService.getContactByEmiratesId(idValue);
         }
         
         if(!objContactList.isEmpty()){
@@ -276,7 +275,6 @@ public class BAWebServiceHelper {
                 soData.put('documents', docDataList);
                 salesOrderDataList.add(soData);
             }
-
             data.put('customer_id', objContact.Id);
             data.put('customer_number', objContact.UniqueIdentifierNumber__c);
             if(objAppRegistrationList != NULL && !objAppRegistrationList.isEmpty()){
@@ -330,7 +328,7 @@ public class BAWebServiceHelper {
 
         List<InstallmentLines__c> objInstallmentLines = InstallmentLineService.getInstance().getInstallmentLinesBySalesOrderId(salesOrderId);
         Map<Id,InstallmentLines__c> objInstallmentLinesWithAllocationsMap = new Map<Id,InstallmentLines__c>(InstallmentLineService.getInstance().getInstallmentLinesNAllocationBySalesOrderId(salesOrderId));
-        List<SalesOrderOtherCharges__c> objSalesOrderOtherCharges = SalesOrderOtherChargesService.getInstance().getSalesOrderChargesBySalesOrderId(salesOrderId);
+        List<SalesOrderOtherCharges__c> objSalesOrderOtherCharges = SalesOrderOtherChargesService.getInstance().getActiveSalesOrderChargesBySalesOrderId(salesOrderId);
         for(InstallmentLines__c objInstallmentLine :objInstallmentLines){
             Map<String, Object> soData = new Map<String, Object>();
             soData.put('id',objInstallmentLine.Id);

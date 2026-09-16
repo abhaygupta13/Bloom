@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Is_Active__c</fullName>
+        <defaultValue>true</defaultValue>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Is Active</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ValidationType__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>ValidationType</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Individual</fullName>
+                    <default>true</default>
+                    <label>Individual</label>
+                </value>
+                <value>
+                    <fullName>Joint Owner (S)</fullName>
+                    <default>false</default>
+                    <label>Joint Owner (S)</label>
+                </value>
+                <value>
+                    <fullName>Company</fullName>
+                    <default>false</default>
+                    <label>Company</label>
+                </value>
+                <value>
+                    <fullName>Payments</fullName>
+                    <default>false</default>
+                    <label>Payments</label>
+                </value>
+                <value>
+                    <fullName>POA</fullName>
+                    <default>false</default>
+                    <label>POA</label>
+                </value>
+                <value>
+                    <fullName>Broker</fullName>
+                    <default>false</default>
+                    <label>Broker</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>required__c</fullName>
+        <defaultValue>false</defaultValue>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>required</label>
+        <type>Checkbox</type>
+    </fields>
+    <label>Sales Validation Types Config</label>
+    <listViews>
+        <fullName>All_c</fullName>
+        <columns>MasterLabel</columns>
+        <columns>DeveloperName</columns>
+        <columns>Is_Active__c</columns>
+        <columns>required__c</columns>
+        <columns>ValidationType__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All_c</label>
+    </listViews>
+    <pluralLabel>Sales Validation Types Config</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

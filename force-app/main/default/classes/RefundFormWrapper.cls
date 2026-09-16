@@ -64,6 +64,8 @@ public class RefundFormWrapper {
     
     public Date maintenanceCheckoutDate {get;set;}
     
+    public Decimal dueAmountAfterPOCAdj {get;set;}
+    
     public List<AttachmentRow> attachments {get;set;}
     
     public List<PDCRow> pdcRows {get;set;}
@@ -99,6 +101,8 @@ public class RefundFormWrapper {
         rentDifference = '';
         
         rvNumber = '';
+        
+        dueAmountAfterPOCAdj = 0;
         
     }
     

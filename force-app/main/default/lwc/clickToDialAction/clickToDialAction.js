@@ -1,10 +1,8 @@
 import { LightningElement, api } from 'lwc';
-import getPhoneDetails from '@salesforce/apex/NICEIntegrationController.getPhoneDetails';
-import createIntegrationRecord from '@salesforce/apex/NICEIntegrationController.createIntegrationRecord';
-import getSkillOptions from '@salesforce/apex/NICEIntegrationController.getSkillOptions';
+import getPhoneDetails from '@salesforce/apex/CTIController.getPhoneDetails';
+import createIntegrationRecord from '@salesforce/apex/CTIController.createIntegrationRecord';
+import getSkillOptions from '@salesforce/apex/CTIController.getSkillOptions';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-//import { CloseActionScreenEvent } from 'lightning/actions';
-import { notifyRecordUpdateAvailable } from 'lightning/uiRecordApi';
 
 export default class ClickToDialAction extends LightningElement {
 
@@ -46,12 +44,16 @@ export default class ClickToDialAction extends LightningElement {
     }
 
     loadPhoneDetails() {
-
+        
         this.isLoading = true;
 
         getPhoneDetails({recordId: this.recordId})
         .then(result => {
-            this.phoneList = result;
+           this.phoneList = Object.keys(result).map(label => ({
+                label: label,
+                value: result[label]
+            }));
+
             this.loadSkillOptions();
         })
         .catch(() => {
@@ -69,25 +71,33 @@ export default class ClickToDialAction extends LightningElement {
     loadSkillOptions() {
         getSkillOptions()
             .then(result => {
-                this.skillOptions = result;
-            })
-            .catch(() => {
-                this.showToast( 'Error', 'Failed to load Skill options.', 'error' );
+            this.skillOptions = result.map(skill => {
+                const data = skill.trim();
+                return { label: data, value: data };
             });
+        })
+        .catch(() => {
+            this.showToast('Error', 'Failed to load Skill options.', 'error');
+        });
     }
 
     // Opens Skill popup
     handleCall(event) {
 
         if (!this.skillOptions || this.skillOptions.length === 0) {
-            this.showToast( 'Error', 'Skill options are not available.', 'error' );
+            this.showToast('Error', 'Skill options are not available.', 'error');
             return;
         }
 
-        this.selectedPhoneNumber = event.currentTarget.dataset.phone;
-        this.selectedMaskedValue = event.currentTarget.dataset.value;
-        this.selectedSkill = '';
-        this.showSkillModal = true;
+        this.selectedLabel = event.currentTarget.dataset.label;
+        if (this.skillOptions.length === 1) {
+            this.showSkillModal = false;
+            this.selectedSkill = this.skillOptions[0].value;
+            this.handleSubmitSkill();
+        } else {
+            this.selectedSkill = '';
+            this.showSkillModal = true;
+        }
     }
 
     handleSkillChange(event) {
@@ -112,9 +122,8 @@ export default class ClickToDialAction extends LightningElement {
         this.isLoading = true;
 
         createIntegrationRecord({
-            recordId: this.recordId,
-            phoneNumber: this.selectedPhoneNumber,
-            maskedValue: this.selectedMaskedValue,
+             recordId: this.recordId,
+            label: this.selectedLabel,
             skill: this.selectedSkill
         })
         .then(() => {

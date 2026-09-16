@@ -1,8 +1,8 @@
 /*****************************************************************************************
 Class       : SalesOrderRebateTriggerHandler
-Author      : Dhanraj Poojary
+Author      : Dhanraj
 Description : SalesOrderRebateTriggerHandler
-Test Class  : SalesOrderRebateTriggerHandlerTest
+Test Class  : 
 Created Date: 10 JUL 2026 
 *****************************************************************************************/
 

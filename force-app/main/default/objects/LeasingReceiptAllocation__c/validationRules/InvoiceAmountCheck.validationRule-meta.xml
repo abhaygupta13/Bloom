@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>InvoiceAmountCheck</fullName>
-    <active>true</active>
-    <errorConditionFormula>(PaymentPlanSchedule__c != Null &amp;&amp; PaymentPlanSchedule__r.TotalInstallmentAmount__c &lt; AmountApplied__c )||
-(LeasingOrderOtherCharges__c != Null &amp;&amp; LeasingOrderOtherCharges__r.TotalAmount__c &lt; AmountApplied__c)</errorConditionFormula>
-    <errorMessage>Applied amount cannot be greater than Invoice Amount</errorMessage>
-</ValidationRule>

@@ -1,0 +1,1555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Leasing_Order_Other_Charges_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Leasing_Order_Other_Charges_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>Leasing_Order_Other_Charge_Layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Leasing_Order_Other_Charge_Layout</fullName>
+        <fields>Name</fields>
+        <fields>RefDocno__c</fields>
+        <label>Leasing Order Other Charge Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fieldSets>
+        <fullName>SAP_Integration_Fields</fullName>
+        <description>List of fields to monitor for initiating SAP integration upon any value changes.</description>
+        <displayedFields>
+            <field>ReversedRemarks__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ReceiptAcknowledgement__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ReversedDate__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>ReversalCategory__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>SubCategory__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>DueDate__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>isVATApplied__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>IsReversed__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>TotalAmount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>VATAmount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>SAP Integration Fields</label>
+    </fieldSets>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Leasing Orders Other Charges</relationshipLabel>
+        <relationshipName>Leasing_Orders_Other_Charges</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CalculationFromDate__c</fullName>
+        <description>it is same meaning of payment start date</description>
+        <label>Calculation From Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>CalculationToDate__c</fullName>
+        <description>End date</description>
+        <label>Calculation To Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ChargeAmount__c</fullName>
+        <label>Charge Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ClearedAmount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Cleared Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ConditionType__c</fullName>
+        <label>Condition Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>R003</fullName>
+                    <default>false</default>
+                    <label>R003</label>
+                </value>
+                <value>
+                    <fullName>R006</fullName>
+                    <default>false</default>
+                    <label>R006</label>
+                </value>
+                <value>
+                    <fullName>R008</fullName>
+                    <default>false</default>
+                    <label>R008</label>
+                </value>
+                <value>
+                    <fullName>R010</fullName>
+                    <default>false</default>
+                    <label>R010</label>
+                </value>
+                <value>
+                    <fullName>R013</fullName>
+                    <default>false</default>
+                    <label>R013</label>
+                </value>
+                <value>
+                    <fullName>R017</fullName>
+                    <default>false</default>
+                    <label>R017</label>
+                </value>
+                <value>
+                    <fullName>R018</fullName>
+                    <default>false</default>
+                    <label>R018</label>
+                </value>
+                <value>
+                    <fullName>R019</fullName>
+                    <default>false</default>
+                    <label>R019</label>
+                </value>
+                <value>
+                    <fullName>R020</fullName>
+                    <default>false</default>
+                    <label>R020</label>
+                </value>
+                <value>
+                    <fullName>R022</fullName>
+                    <default>false</default>
+                    <label>R022</label>
+                </value>
+                <value>
+                    <fullName>R037</fullName>
+                    <default>false</default>
+                    <label>R037</label>
+                </value>
+                <value>
+                    <fullName>R043</fullName>
+                    <default>false</default>
+                    <label>R043</label>
+                </value>
+                <value>
+                    <fullName>R053</fullName>
+                    <default>false</default>
+                    <label>R053</label>
+                </value>
+                <value>
+                    <fullName>R054</fullName>
+                    <default>false</default>
+                    <label>R054</label>
+                </value>
+                <value>
+                    <fullName>R055</fullName>
+                    <default>false</default>
+                    <label>R055</label>
+                </value>
+                <value>
+                    <fullName>R056</fullName>
+                    <default>false</default>
+                    <label>R056</label>
+                </value>
+                <value>
+                    <fullName>R100</fullName>
+                    <default>false</default>
+                    <label>R100</label>
+                </value>
+                <value>
+                    <fullName>R007</fullName>
+                    <default>false</default>
+                    <label>R007</label>
+                </value>
+                <value>
+                    <fullName>R002</fullName>
+                    <default>false</default>
+                    <label>R002</label>
+                </value>
+                <value>
+                    <fullName>R016</fullName>
+                    <default>false</default>
+                    <label>R016</label>
+                </value>
+                <value>
+                    <fullName>R014</fullName>
+                    <default>false</default>
+                    <label>R014</label>
+                </value>
+                <value>
+                    <fullName>R063</fullName>
+                    <default>false</default>
+                    <label>R063</label>
+                </value>
+                <value>
+                    <fullName>R058</fullName>
+                    <default>false</default>
+                    <label>R058</label>
+                </value>
+                <value>
+                    <fullName>R001</fullName>
+                    <default>false</default>
+                    <label>R001</label>
+                </value>
+                <value>
+                    <fullName>R004</fullName>
+                    <default>false</default>
+                    <label>R004</label>
+                </value>
+                <value>
+                    <fullName>R005</fullName>
+                    <default>false</default>
+                    <label>R005</label>
+                </value>
+                <value>
+                    <fullName>R009</fullName>
+                    <default>false</default>
+                    <label>R009</label>
+                </value>
+                <value>
+                    <fullName>R011</fullName>
+                    <default>false</default>
+                    <label>R011</label>
+                </value>
+                <value>
+                    <fullName>R012</fullName>
+                    <default>false</default>
+                    <label>R012</label>
+                </value>
+                <value>
+                    <fullName>R015</fullName>
+                    <default>false</default>
+                    <label>R015</label>
+                </value>
+                <value>
+                    <fullName>R021</fullName>
+                    <default>false</default>
+                    <label>R021</label>
+                </value>
+                <value>
+                    <fullName>R023</fullName>
+                    <default>false</default>
+                    <label>R023</label>
+                </value>
+                <value>
+                    <fullName>R024</fullName>
+                    <default>false</default>
+                    <label>R024</label>
+                </value>
+                <value>
+                    <fullName>R025</fullName>
+                    <default>false</default>
+                    <label>R025</label>
+                </value>
+                <value>
+                    <fullName>R028</fullName>
+                    <default>false</default>
+                    <label>R028</label>
+                </value>
+                <value>
+                    <fullName>R029</fullName>
+                    <default>false</default>
+                    <label>R029</label>
+                </value>
+                <value>
+                    <fullName>R032</fullName>
+                    <default>false</default>
+                    <label>R032</label>
+                </value>
+                <value>
+                    <fullName>R033</fullName>
+                    <default>false</default>
+                    <label>R033</label>
+                </value>
+                <value>
+                    <fullName>R034</fullName>
+                    <default>false</default>
+                    <label>R034</label>
+                </value>
+                <value>
+                    <fullName>R035</fullName>
+                    <default>false</default>
+                    <label>R035</label>
+                </value>
+                <value>
+                    <fullName>R036</fullName>
+                    <default>false</default>
+                    <label>R036</label>
+                </value>
+                <value>
+                    <fullName>R038</fullName>
+                    <default>false</default>
+                    <label>R038</label>
+                </value>
+                <value>
+                    <fullName>R039</fullName>
+                    <default>false</default>
+                    <label>R039</label>
+                </value>
+                <value>
+                    <fullName>R040</fullName>
+                    <default>false</default>
+                    <label>R040</label>
+                </value>
+                <value>
+                    <fullName>R051</fullName>
+                    <default>false</default>
+                    <label>R051</label>
+                </value>
+                <value>
+                    <fullName>R052</fullName>
+                    <default>false</default>
+                    <label>R052</label>
+                </value>
+                <value>
+                    <fullName>R057</fullName>
+                    <default>false</default>
+                    <label>R057</label>
+                </value>
+                <value>
+                    <fullName>R064</fullName>
+                    <default>false</default>
+                    <label>R064</label>
+                </value>
+                <value>
+                    <fullName>R065</fullName>
+                    <default>false</default>
+                    <label>R065</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>DocumentDate__c</fullName>
+        <label>Document Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DueAmount__c</fullName>
+        <externalId>false</externalId>
+        <formula>TotalAmount__c  -  ClearedAmount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Due Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DueDate__c</fullName>
+        <formula>/*IF(
+NOT(ISBLANK(ReversedDate__c)),
+ReversedDate__c,
+LeasingOrder__r.LeasingStartDate__c
+)*/
+IF(
+    NOT(ISBLANK(PostingDate__c)),
+    PostingDate__c,
+    IF(
+        NOT(ISBLANK(CalculationFromDate__c)),
+        CalculationFromDate__c,
+        LeasingOrder__r.LeasingStartDate__c
+    )
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Due Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>IntegrationMessage__c</fullName>
+        <label>Integration Message</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IntegrationStatus__c</fullName>
+        <label>Integration Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Integrated</fullName>
+                    <default>false</default>
+                    <label>Not Integrated</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Success</fullName>
+                    <default>false</default>
+                    <label>Success</label>
+                </value>
+                <value>
+                    <fullName>Failed</fullName>
+                    <default>false</default>
+                    <label>Failed</label>
+                </value>
+                <value>
+                    <fullName>Data Migration</fullName>
+                    <default>false</default>
+                    <label>Data Migration</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>IntegrationTriggeredDate__c</fullName>
+        <label>Integration Triggered Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>IsPosting__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Posting</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsReversed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Reversed?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LeasingOrder__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Order</label>
+        <referenceTo>LeasingOrder__c</referenceTo>
+        <relationshipLabel>Leasing Orders Other Charges</relationshipLabel>
+        <relationshipName>Leasing_Orders_Other_Charges</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LeasingOtherChargesUniqueId__c</fullName>
+        <externalId>true</externalId>
+        <label>Leasing Other Charges Unique Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Note__c</fullName>
+        <label>Note</label>
+        <length>1000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Overdue_days__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+ISPICKVAL(PaymentStatus__c, &quot;Paid&quot;),
+&quot;Paid&quot;,
+IF(
+(TODAY() - DueDate__c) &gt; 0,
+TEXT(TODAY() - DueDate__c) &amp; &quot; Days Overdue&quot;,
+IF(
+(TODAY() - DueDate__c) &lt; 0,
+TEXT(ABS(TODAY() - DueDate__c)) &amp; &quot; Days Pending&quot;,
+&quot;Due Today&quot;
+)
+)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Overdue days</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PaymentStatusFormula__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+ISPICKVAL(PaymentStatus__c, &quot;Paid&quot;),
+IMAGE(&quot;/resource/1693905638000/GreenCircle&quot;, &quot;Green&quot;, 15, 15) &amp; &quot; Paid&quot;,
+
+IF(
+ISPICKVAL(PaymentStatus__c, &quot;Un Paid&quot;),
+IMAGE(&quot;/resource/1693905638000/RedCircle&quot;, &quot;Red&quot;, 15, 15) &amp; &quot; Unpaid&quot;,
+
+IF(
+ISPICKVAL(PaymentStatus__c, &quot;Not Invoiced&quot;),
+IMAGE(&quot;/resource/1693905638000/OrangeCircle&quot;, &quot;Orange&quot;, 15, 15) &amp; &quot; Not Invoiced&quot;,
+
+IF(
+ISPICKVAL(PaymentStatus__c, &quot;Reversed&quot;),
+IMAGE(&quot;/resource/1693905638000/OrangeCircle&quot;, &quot;Orange&quot;, 15, 15) &amp; &quot; Reversed&quot;,
+&quot;&quot;
+)
+)
+)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Payment Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PaymentStatus__c</fullName>
+        <label>Payment Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Paid</fullName>
+                    <default>false</default>
+                    <label>Paid</label>
+                </value>
+                <value>
+                    <fullName>Un Paid</fullName>
+                    <default>false</default>
+                    <label>Un Paid</label>
+                </value>
+                <value>
+                    <fullName>Not Invoiced</fullName>
+                    <default>true</default>
+                    <label>Not Invoiced</label>
+                </value>
+                <value>
+                    <fullName>Reversed</fullName>
+                    <default>false</default>
+                    <label>Reversed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Paymentdoc__c</fullName>
+        <externalId>false</externalId>
+        <label>Reversal ref doc no</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Paymentdocumentnumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment document number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PostedToSAP__c</fullName>
+        <formula>IF( ISPICKVAL(IntegrationStatus__c, &apos;Success&apos;)  &amp;&amp; NOT(ISNull( RefDocno__c )),true,false)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Posted To SAP</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PostingDate__c</fullName>
+        <label>Posting Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ReceiptAcknowledgement__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Receipt Acknowledgement</label>
+        <referenceTo>ReceiptAcknowledgement__c</referenceTo>
+        <relationshipLabel>Leasing Orders Other Charges</relationshipLabel>
+        <relationshipName>Leasing_Orders_Other_Charges</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RefDocno__c</fullName>
+        <externalId>true</externalId>
+        <label>Ref Doc no</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RelatedPartyBloomHolding__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Related Party (Bloom Holding)</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ReversalCategory__c</fullName>
+        <label>Reversal Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Reversal of Bounce cheque fees paid</fullName>
+                    <default>false</default>
+                    <label>Reversal of Bounce cheque fees paid</label>
+                </value>
+                <value>
+                    <fullName>Reversal of LPF paid</fullName>
+                    <default>false</default>
+                    <label>Reversal of LPF paid</label>
+                </value>
+                <value>
+                    <fullName>Reversal of BCF billing</fullName>
+                    <default>false</default>
+                    <label>Reversal of BCF billing</label>
+                </value>
+                <value>
+                    <fullName>Reversal of LPF billing</fullName>
+                    <default>false</default>
+                    <label>Reversal of LPF billing</label>
+                </value>
+                <value>
+                    <fullName>Waiver of BCF</fullName>
+                    <default>false</default>
+                    <label>Waiver of BCF</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ReversedBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Reversed By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>LeasingOrdersOtherCharges</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ReversedDate__c</fullName>
+        <label>Reversed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ReversedReason__c</fullName>
+        <label>Reversed Reason</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Client got approval</fullName>
+                    <default>false</default>
+                    <label>Client got approval</label>
+                </value>
+                <value>
+                    <fullName>Wrong allocation of payment</fullName>
+                    <default>false</default>
+                    <label>Wrong allocation of payment</label>
+                </value>
+                <value>
+                    <fullName>Wrong calculation of charges</fullName>
+                    <default>false</default>
+                    <label>Wrong calculation of charges</label>
+                </value>
+                <value>
+                    <fullName>Wrong calculation of fees because of wrong input</fullName>
+                    <default>false</default>
+                    <label>Wrong calculation of fees because of wrong input</label>
+                </value>
+                <value>
+                    <fullName>Wrong client charged</fullName>
+                    <default>false</default>
+                    <label>Wrong client charged</label>
+                </value>
+                <value>
+                    <fullName>Charged because of delay in booking receipts</fullName>
+                    <default>false</default>
+                    <label>Charged because of delay in booking receipts</label>
+                </value>
+                <value>
+                    <fullName>Clearing/ Allocation issues</fullName>
+                    <default>false</default>
+                    <label>Clearing/ Allocation issues</label>
+                </value>
+                <value>
+                    <fullName>As per approval from management</fullName>
+                    <default>false</default>
+                    <label>As per approval from management</label>
+                </value>
+                <value>
+                    <fullName>Closed/ ended contract</fullName>
+                    <default>false</default>
+                    <label>Closed/ ended contract</label>
+                </value>
+                <value>
+                    <fullName>Cancellation/ Termination of unit</fullName>
+                    <default>false</default>
+                    <label>Cancellation/ Termination of unit</label>
+                </value>
+                <value>
+                    <fullName>Miscellaneous amount reversal</fullName>
+                    <default>false</default>
+                    <label>Miscellaneous amount reversal</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ReversedRemarks__c</fullName>
+        <label>Reversed Remarks</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>SAPDueDate__c</fullName>
+        <label>SAP Due Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>SendtoSAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Send to SAP</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SubCategory__c</fullName>
+        <label>Sub Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>General</fullName>
+                    <default>false</default>
+                    <label>General</label>
+                </value>
+                <value>
+                    <fullName>Service</fullName>
+                    <default>false</default>
+                    <label>Service</label>
+                </value>
+                <value>
+                    <fullName>Utility</fullName>
+                    <default>false</default>
+                    <label>Utility</label>
+                </value>
+                <value>
+                    <fullName>Other charges</fullName>
+                    <default>false</default>
+                    <label>Other charges</label>
+                </value>
+                <value>
+                    <fullName>Security Desposit</fullName>
+                    <default>false</default>
+                    <label>Security Desposit</label>
+                </value>
+                <value>
+                    <fullName>Cheque Bounce charges</fullName>
+                    <default>false</default>
+                    <label>Cheque Bounce charges</label>
+                </value>
+                <value>
+                    <fullName>other fee</fullName>
+                    <default>false</default>
+                    <label>other fee</label>
+                </value>
+                <value>
+                    <fullName>Late feeLegal case</fullName>
+                    <default>false</default>
+                    <label>Late feeLegal case</label>
+                </value>
+                <value>
+                    <fullName>Utilities</fullName>
+                    <default>false</default>
+                    <label>Utilities</label>
+                </value>
+                <value>
+                    <fullName>Ejari/Tawteeq fee</fullName>
+                    <default>false</default>
+                    <label>Ejari/Tawteeq fee</label>
+                </value>
+                <value>
+                    <fullName>Tawtheeq</fullName>
+                    <default>false</default>
+                    <label>Tawtheeq</label>
+                </value>
+                <value>
+                    <fullName>Panalities</fullName>
+                    <default>false</default>
+                    <label>Panalities</label>
+                </value>
+                <value>
+                    <fullName>EIPS-Admin Fee</fullName>
+                    <default>false</default>
+                    <label>EIPS-Admin Fee</label>
+                </value>
+                <value>
+                    <fullName>Fit Out Deposit</fullName>
+                    <default>false</default>
+                    <label>Fit Out Deposit</label>
+                </value>
+                <value>
+                    <fullName>Recovery of Utility</fullName>
+                    <default>false</default>
+                    <label>Recovery of Utility</label>
+                </value>
+                <value>
+                    <fullName>Break Lease penalty</fullName>
+                    <default>false</default>
+                    <label>Break Lease penalty</label>
+                </value>
+                <value>
+                    <fullName>Overstay - Commercial</fullName>
+                    <default>false</default>
+                    <label>Overstay - Commercial</label>
+                </value>
+                <value>
+                    <fullName>Overstay - Residential</fullName>
+                    <default>false</default>
+                    <label>Overstay - Residential</label>
+                </value>
+                <value>
+                    <fullName>Notice penalty - Commercial</fullName>
+                    <default>false</default>
+                    <label>Notice penalty - Commercial</label>
+                </value>
+                <value>
+                    <fullName>Notice penalty - Residential</fullName>
+                    <default>false</default>
+                    <label>Notice penalty - Residential</label>
+                </value>
+                <value>
+                    <fullName>Brk Lease pnlt (2M C</fullName>
+                    <default>false</default>
+                    <label>Brk Lease pnlt (2M C</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TotalAmount__c</fullName>
+        <formula>ChargeAmount__c  +  VATAmount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <label>Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Abu Dh Tawteeq renwl</fullName>
+                    <default>false</default>
+                    <label>Abu Dh Tawteeq renwl</label>
+                </value>
+                <value>
+                    <fullName>Additional Security Deposit Amount</fullName>
+                    <default>false</default>
+                    <label>Additional Security Deposit Amount</label>
+                </value>
+                <value>
+                    <fullName>Admin Fee</fullName>
+                    <default>false</default>
+                    <label>Admin Fee</label>
+                </value>
+                <value>
+                    <fullName>AD Tawteeq renewal</fullName>
+                    <default>false</default>
+                    <label>AD Tawteeq renewal</label>
+                </value>
+                <value>
+                    <fullName>Base Advertising Fee</fullName>
+                    <default>false</default>
+                    <label>Base Advertising Fee</label>
+                </value>
+                <value>
+                    <fullName>Base Rent</fullName>
+                    <default>false</default>
+                    <label>Base Rent</label>
+                </value>
+                <value>
+                    <fullName>Base Rent Commercial</fullName>
+                    <default>false</default>
+                    <label>Base Rent Commercial</label>
+                </value>
+                <value>
+                    <fullName>Base Rent Residentia</fullName>
+                    <default>false</default>
+                    <label>Base Rent Residentia</label>
+                </value>
+                <value>
+                    <fullName>Base Rent Residential</fullName>
+                    <default>false</default>
+                    <label>Base Rent Residential</label>
+                </value>
+                <value>
+                    <fullName>Break Lease fees</fullName>
+                    <default>false</default>
+                    <label>Break Lease fees</label>
+                </value>
+                <value>
+                    <fullName>Brk Lease pnlt (2M C</fullName>
+                    <default>false</default>
+                    <label>Brk Lease pnlt (2M C</label>
+                </value>
+                <value>
+                    <fullName>Brk Leas ptly (2M Rs</fullName>
+                    <default>false</default>
+                    <label>Brk Leas ptly (2M Rs</label>
+                </value>
+                <value>
+                    <fullName>Broker Commission</fullName>
+                    <default>false</default>
+                    <label>Broker Commission</label>
+                </value>
+                <value>
+                    <fullName>Changing occupant</fullName>
+                    <default>false</default>
+                    <label>Changing occupant</label>
+                </value>
+                <value>
+                    <fullName>CheckoutDamage Recovery Charge</fullName>
+                    <default>false</default>
+                    <label>CheckoutDamage Recovery Charge</label>
+                </value>
+                <value>
+                    <fullName>Cheque Bounce Fees</fullName>
+                    <default>false</default>
+                    <label>Cheque Bounce Fees</label>
+                </value>
+                <value>
+                    <fullName>cheque replace fee</fullName>
+                    <default>false</default>
+                    <label>cheque replace fee</label>
+                </value>
+                <value>
+                    <fullName>Chilled Water Charge</fullName>
+                    <default>false</default>
+                    <label>Chilled Water Charge</label>
+                </value>
+                <value>
+                    <fullName>Chilled water Depst</fullName>
+                    <default>false</default>
+                    <label>Chilled water Depst</label>
+                </value>
+                <value>
+                    <fullName>Collector</fullName>
+                    <default>false</default>
+                    <label>Collector</label>
+                </value>
+                <value>
+                    <fullName>colling fee</fullName>
+                    <default>false</default>
+                    <label>colling fee</label>
+                </value>
+                <value>
+                    <fullName>Cooling fee</fullName>
+                    <default>false</default>
+                    <label>Cooling fee</label>
+                </value>
+                <value>
+                    <fullName>Delay Payement Fee</fullName>
+                    <default>false</default>
+                    <label>Delay Payement Fee</label>
+                </value>
+                <value>
+                    <fullName>Delay Payment Fee</fullName>
+                    <default>false</default>
+                    <label>Delay Payment Fee</label>
+                </value>
+                <value>
+                    <fullName>Design &amp; Review Fee</fullName>
+                    <default>false</default>
+                    <label>Design &amp; Review Fee</label>
+                </value>
+                <value>
+                    <fullName>Discount - Comm.</fullName>
+                    <default>false</default>
+                    <label>Discount - Comm.</label>
+                </value>
+                <value>
+                    <fullName>Discount - Resi.</fullName>
+                    <default>false</default>
+                    <label>Discount - Resi.</label>
+                </value>
+                <value>
+                    <fullName>EIPS-Admin Fee</fullName>
+                    <default>false</default>
+                    <label>EIPS-Admin Fee</label>
+                </value>
+                <value>
+                    <fullName>EIPS-NewRentCommisio</fullName>
+                    <default>false</default>
+                    <label>EIPS-NewRentCommisio</label>
+                </value>
+                <value>
+                    <fullName>EIPS-Rec Rent Commis</fullName>
+                    <default>false</default>
+                    <label>EIPS-Rec Rent Commis</label>
+                </value>
+                <value>
+                    <fullName>Ejari/Tawtheeq Fee</fullName>
+                    <default>false</default>
+                    <label>Ejari/Tawtheeq Fee</label>
+                </value>
+                <value>
+                    <fullName>Extra Cheque Fee</fullName>
+                    <default>false</default>
+                    <label>Extra Cheque Fee</label>
+                </value>
+                <value>
+                    <fullName>Fit Out Deposit</fullName>
+                    <default>false</default>
+                    <label>Fit Out Deposit</label>
+                </value>
+                <value>
+                    <fullName>Fit Out Security Deposit</fullName>
+                    <default>false</default>
+                    <label>Fit Out Security Deposit</label>
+                </value>
+                <value>
+                    <fullName>Installment Increase</fullName>
+                    <default>false</default>
+                    <label>Installment Increase</label>
+                </value>
+                <value>
+                    <fullName>Leasing Director Com</fullName>
+                    <default>false</default>
+                    <label>Leasing Director Com</label>
+                </value>
+                <value>
+                    <fullName>Leasing Manager Comm</fullName>
+                    <default>false</default>
+                    <label>Leasing Manager Comm</label>
+                </value>
+                <value>
+                    <fullName>Leasng Prop. Sup Com</fullName>
+                    <default>false</default>
+                    <label>Leasng Prop. Sup Com</label>
+                </value>
+                <value>
+                    <fullName>Legal Fee</fullName>
+                    <default>false</default>
+                    <label>Legal Fee</label>
+                </value>
+                <value>
+                    <fullName>Maintenance Charge</fullName>
+                    <default>false</default>
+                    <label>Maintenance Charge</label>
+                </value>
+                <value>
+                    <fullName>Notice penalty - Com</fullName>
+                    <default>false</default>
+                    <label>Notice penalty - Com</label>
+                </value>
+                <value>
+                    <fullName>Notice penalty - Re</fullName>
+                    <default>false</default>
+                    <label>Notice penalty - Re</label>
+                </value>
+                <value>
+                    <fullName>Notice penalty - Res</fullName>
+                    <default>false</default>
+                    <label>Notice penalty - Res</label>
+                </value>
+                <value>
+                    <fullName>Operatn Manager Comm</fullName>
+                    <default>false</default>
+                    <label>Operatn Manager Comm</label>
+                </value>
+                <value>
+                    <fullName>Other Charge</fullName>
+                    <default>false</default>
+                    <label>Other Charge</label>
+                </value>
+                <value>
+                    <fullName>Overstay - Commercia</fullName>
+                    <default>false</default>
+                    <label>Overstay - Commercia</label>
+                </value>
+                <value>
+                    <fullName>Overstay - Residenti</fullName>
+                    <default>false</default>
+                    <label>Overstay - Residenti</label>
+                </value>
+                <value>
+                    <fullName>Parking Card Access</fullName>
+                    <default>false</default>
+                    <label>Parking Card Access</label>
+                </value>
+                <value>
+                    <fullName>Parking Comm/ Retail</fullName>
+                    <default>false</default>
+                    <label>Parking Comm/ Retail</label>
+                </value>
+                <value>
+                    <fullName>Parking Fee</fullName>
+                    <default>false</default>
+                    <label>Parking Fee</label>
+                </value>
+                <value>
+                    <fullName>Penalties</fullName>
+                    <default>false</default>
+                    <label>Penalties</label>
+                </value>
+                <value>
+                    <fullName>Penalty Charge</fullName>
+                    <default>false</default>
+                    <label>Penalty Charge</label>
+                </value>
+                <value>
+                    <fullName>Recovery of Utility</fullName>
+                    <default>false</default>
+                    <label>Recovery of Utility</label>
+                </value>
+                <value>
+                    <fullName>Renewal Fees</fullName>
+                    <default>false</default>
+                    <label>Renewal Fees</label>
+                </value>
+                <value>
+                    <fullName>Security Deposit</fullName>
+                    <default>false</default>
+                    <label>Security Deposit</label>
+                </value>
+                <value>
+                    <fullName>Security Deposit Amount</fullName>
+                    <default>false</default>
+                    <label>Security Deposit Amount</label>
+                </value>
+                <value>
+                    <fullName>Securty Deposit</fullName>
+                    <default>false</default>
+                    <label>Securty Deposit</label>
+                </value>
+                <value>
+                    <fullName>Service Charge</fullName>
+                    <default>false</default>
+                    <label>Service Charge</label>
+                </value>
+                <value>
+                    <fullName>Service Charge Fee</fullName>
+                    <default>false</default>
+                    <label>Service Charge Fee</label>
+                </value>
+                <value>
+                    <fullName>Short Term Renewal F</fullName>
+                    <default>false</default>
+                    <label>Short Term Renewal F</label>
+                </value>
+                <value>
+                    <fullName>Sr. Leasing Admin</fullName>
+                    <default>false</default>
+                    <label>Sr. Leasing Admin</label>
+                </value>
+                <value>
+                    <fullName>Staff Commission</fullName>
+                    <default>false</default>
+                    <label>Staff Commission</label>
+                </value>
+                <value>
+                    <fullName>Staff Comm -Renewals</fullName>
+                    <default>false</default>
+                    <label>Staff Comm -Renewals</label>
+                </value>
+                <value>
+                    <fullName>Tawteeq Renewal fees</fullName>
+                    <default>false</default>
+                    <label>Tawteeq Renewal fees</label>
+                </value>
+                <value>
+                    <fullName>Tenancy Registration</fullName>
+                    <default>false</default>
+                    <label>Tenancy Registration</label>
+                </value>
+                <value>
+                    <fullName>Utilities</fullName>
+                    <default>false</default>
+                    <label>Utilities</label>
+                </value>
+                <value>
+                    <fullName>Marketing fund</fullName>
+                    <default>false</default>
+                    <label>Marketing fund</label>
+                </value>
+                <value>
+                    <fullName>CheckoutDamage Recov</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>CheckoutDamage Recov</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>VATAmount__c</fullName>
+        <label>VAT Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>isVATApplied__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>VAT Applied</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Leasing Order Other Charges</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>LOC-{0000000}</displayFormat>
+        <label>Leasing Orders Other Charges Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Leasing Orders Other Charges</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>RefDocno__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>OtherChargeDateInBetwnLeaseStartEndDate</fullName>
+        <active>true</active>
+        <description>Other charge calculation start date should be in between leasing period.</description>
+        <errorConditionFormula>(CalculationFromDate__c  &lt;  LeasingOrder__r.LeasingStartDate__c)  || (CalculationFromDate__c  &gt;   LeasingOrder__r.LeasingEndDate__c )</errorConditionFormula>
+        <errorMessage>Start date should be in between lease start date and lease end date.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>RestrictChargesBeyondLeaseEndDate</fullName>
+        <active>true</active>
+        <description>Restricts users from creating or updating Other Charges where the calculation date or due date is greater than the Lease Termination Date or Lease End Date.</description>
+        <errorConditionFormula>AND(
+    $Profile.Name &lt;&gt; &quot;System Administrator&quot;,
+    $Profile.Name &lt;&gt; &quot;Support Administrator&quot;,
+    $Profile.Name &lt;&gt; &quot;System Integration&quot;,
+    OR(
+        AND(
+            NOT(ISBLANK(LeasingOrder__r.TerminationDate__c)),
+            OR(
+                CalculationFromDate__c &gt; LeasingOrder__r.TerminationDate__c,
+                CalculationToDate__c &gt; LeasingOrder__r.TerminationDate__c,
+                DueDate__c &gt; LeasingOrder__r.TerminationDate__c
+            )
+        ),
+        AND(
+            NOT(ISBLANK(LeasingOrder__r.LeasingEndDate__c)),
+            OR(
+                CalculationFromDate__c &gt; LeasingOrder__r.LeasingEndDate__c,
+                CalculationToDate__c &gt; LeasingOrder__r.LeasingEndDate__c,
+                DueDate__c &gt; LeasingOrder__r.LeasingEndDate__c
+            )
+        )
+    )
+)</errorConditionFormula>
+        <errorMessage>Other Charge calculation date cannot be greater than the Lease End Date or Termination Date.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

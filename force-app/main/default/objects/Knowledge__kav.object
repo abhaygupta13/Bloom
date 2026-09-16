@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <articleTypeChannelDisplay>
+        <articleTypeTemplates>
+            <channel>App</channel>
+            <template>Tab</template>
+        </articleTypeTemplates>
+        <articleTypeTemplates>
+            <channel>Prm</channel>
+            <template>Tab</template>
+        </articleTypeTemplates>
+        <articleTypeTemplates>
+            <channel>Csp</channel>
+            <template>Tab</template>
+        </articleTypeTemplates>
+        <articleTypeTemplates>
+            <channel>Pkb</channel>
+            <template>Toc</template>
+        </articleTypeTemplates>
+    </articleTypeChannelDisplay>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>Category__c</fullName>
+        <label>Category</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Sales Related</fullName>
+                    <default>false</default>
+                    <label>Sales Related</label>
+                </value>
+                <value>
+                    <fullName>Leasing Related</fullName>
+                    <default>false</default>
+                    <label>Leasing Related</label>
+                </value>
+                <value>
+                    <fullName>DLP (Defects Liability Period) Related</fullName>
+                    <default>false</default>
+                    <label>DLP (Defects Liability Period) Related</label>
+                </value>
+                <value>
+                    <fullName>BFM (Facilities Management) Related</fullName>
+                    <default>false</default>
+                    <label>BFM (Facilities Management) Related</label>
+                </value>
+                <value>
+                    <fullName>CRM Related</fullName>
+                    <default>false</default>
+                    <label>CRM Related</label>
+                </value>
+                <value>
+                    <fullName>Community Management Related</fullName>
+                    <default>false</default>
+                    <label>Community Management Related</label>
+                </value>
+                <value>
+                    <fullName>Business article</fullName>
+                    <default>false</default>
+                    <label>Business article</label>
+                </value>
+                <value>
+                    <fullName>test</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>test</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Details__c</fullName>
+        <label>Details</label>
+        <length>131072</length>
+        <type>Html</type>
+        <visibleLines>50</visibleLines>
+    </fields>
+    <fields>
+        <fullName>SubCategory__c</fullName>
+        <label>Sub Category</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Category__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Duplicate Process</fullName>
+                    <default>false</default>
+                    <label>Duplicate Process</label>
+                </value>
+                <value>
+                    <fullName>Out of SLA</fullName>
+                    <default>false</default>
+                    <label>Out of SLA</label>
+                </value>
+                <value>
+                    <fullName>Broker registration</fullName>
+                    <default>false</default>
+                    <label>Broker registration</label>
+                </value>
+                <value>
+                    <fullName>User manual</fullName>
+                    <default>false</default>
+                    <label>User manual</label>
+                </value>
+                <value>
+                    <fullName>Lead process (Day1/2/3)</fullName>
+                    <default>false</default>
+                    <label>Lead process (Day1/2/3)</label>
+                </value>
+                <value>
+                    <fullName>Outbound process</fullName>
+                    <default>false</default>
+                    <label>Outbound process</label>
+                </value>
+                <value>
+                    <fullName>Projects</fullName>
+                    <default>false</default>
+                    <label>Projects</label>
+                </value>
+                <value>
+                    <fullName>Simulation Video</fullName>
+                    <default>false</default>
+                    <label>Simulation Video</label>
+                </value>
+                <value>
+                    <fullName>Leasing projects</fullName>
+                    <default>false</default>
+                    <label>Leasing projects</label>
+                </value>
+                <value>
+                    <fullName>DLP Protocol</fullName>
+                    <default>false</default>
+                    <label>DLP Protocol</label>
+                </value>
+                <value>
+                    <fullName>DLP Service Catalog</fullName>
+                    <default>false</default>
+                    <label>DLP Service Catalog</label>
+                </value>
+                <value>
+                    <fullName>DLP Emergency Cases</fullName>
+                    <default>false</default>
+                    <label>DLP Emergency Cases</label>
+                </value>
+                <value>
+                    <fullName>Out of DLP Scope</fullName>
+                    <default>false</default>
+                    <label>Out of DLP Scope</label>
+                </value>
+                <value>
+                    <fullName>Complaint Against DLP</fullName>
+                    <default>false</default>
+                    <label>Complaint Against DLP</label>
+                </value>
+                <value>
+                    <fullName>BFM Protocol</fullName>
+                    <default>false</default>
+                    <label>BFM Protocol</label>
+                </value>
+                <value>
+                    <fullName>BFM Service Catalog</fullName>
+                    <default>false</default>
+                    <label>BFM Service Catalog</label>
+                </value>
+                <value>
+                    <fullName>BFM Escalation Matrix</fullName>
+                    <default>false</default>
+                    <label>BFM Escalation Matrix</label>
+                </value>
+                <value>
+                    <fullName>BFM Out of Scope</fullName>
+                    <default>false</default>
+                    <label>BFM Out of Scope</label>
+                </value>
+                <value>
+                    <fullName>AMC vs Non-AMC</fullName>
+                    <default>false</default>
+                    <label>AMC vs Non-AMC</label>
+                </value>
+                <value>
+                    <fullName>BFM Emergency Cases</fullName>
+                    <default>false</default>
+                    <label>BFM Emergency Cases</label>
+                </value>
+                <value>
+                    <fullName>Service Request protocol</fullName>
+                    <default>false</default>
+                    <label>Service Request protocol</label>
+                </value>
+                <value>
+                    <fullName>Complaint protocol</fullName>
+                    <default>false</default>
+                    <label>Complaint protocol</label>
+                </value>
+                <value>
+                    <fullName>BH &amp; BT Community</fullName>
+                    <default>false</default>
+                    <label>BH &amp; BT Community</label>
+                </value>
+                <value>
+                    <fullName>Communities (Internal Handling)</fullName>
+                    <default>false</default>
+                    <label>Communities (Internal Handling)</label>
+                </value>
+                <value>
+                    <fullName>Communities (External Handling)</fullName>
+                    <default>false</default>
+                    <label>Communities (External Handling)</label>
+                </value>
+                <value>
+                    <fullName>Quality parameters</fullName>
+                    <default>false</default>
+                    <label>Quality parameters</label>
+                </value>
+                <value>
+                    <fullName>Shifts and breaks and AUX</fullName>
+                    <default>false</default>
+                    <label>Shifts and breaks and AUX</label>
+                </value>
+                <value>
+                    <fullName>WhatsApp template</fullName>
+                    <default>false</default>
+                    <label>WhatsApp template</label>
+                </value>
+                <value>
+                    <fullName>E-mails Templates</fullName>
+                    <default>false</default>
+                    <label>E-mails Templates</label>
+                </value>
+                <value>
+                    <fullName>Operator assistant line protocol</fullName>
+                    <default>false</default>
+                    <label>Operator assistant line protocol</label>
+                </value>
+                <value>
+                    <fullName>ADHA project</fullName>
+                    <default>false</default>
+                    <label>ADHA project</label>
+                </value>
+                <value>
+                    <fullName>test</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>test</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Sales Related</controllingFieldValue>
+                <controllingFieldValue>Leasing Related</controllingFieldValue>
+                <valueName>Duplicate Process</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Related</controllingFieldValue>
+                <controllingFieldValue>Leasing Related</controllingFieldValue>
+                <valueName>Out of SLA</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Related</controllingFieldValue>
+                <controllingFieldValue>Leasing Related</controllingFieldValue>
+                <valueName>Broker registration</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Related</controllingFieldValue>
+                <valueName>User manual</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Related</controllingFieldValue>
+                <controllingFieldValue>Leasing Related</controllingFieldValue>
+                <valueName>Lead process (Day1/2/3)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Related</controllingFieldValue>
+                <valueName>Outbound process</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Related</controllingFieldValue>
+                <valueName>Projects</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Sales Related</controllingFieldValue>
+                <controllingFieldValue>Leasing Related</controllingFieldValue>
+                <controllingFieldValue>DLP (Defects Liability Period) Related</controllingFieldValue>
+                <controllingFieldValue>BFM (Facilities Management) Related</controllingFieldValue>
+                <valueName>Simulation Video</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Leasing Related</controllingFieldValue>
+                <valueName>Leasing projects</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>DLP (Defects Liability Period) Related</controllingFieldValue>
+                <valueName>DLP Protocol</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>DLP (Defects Liability Period) Related</controllingFieldValue>
+                <valueName>DLP Service Catalog</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>DLP (Defects Liability Period) Related</controllingFieldValue>
+                <valueName>DLP Emergency Cases</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>DLP (Defects Liability Period) Related</controllingFieldValue>
+                <valueName>Out of DLP Scope</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>DLP (Defects Liability Period) Related</controllingFieldValue>
+                <valueName>Complaint Against DLP</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>BFM (Facilities Management) Related</controllingFieldValue>
+                <valueName>BFM Protocol</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>BFM (Facilities Management) Related</controllingFieldValue>
+                <valueName>BFM Service Catalog</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>BFM (Facilities Management) Related</controllingFieldValue>
+                <valueName>BFM Escalation Matrix</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>BFM (Facilities Management) Related</controllingFieldValue>
+                <valueName>BFM Out of Scope</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>BFM (Facilities Management) Related</controllingFieldValue>
+                <valueName>AMC vs Non-AMC</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>BFM (Facilities Management) Related</controllingFieldValue>
+                <valueName>BFM Emergency Cases</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>CRM Related</controllingFieldValue>
+                <valueName>Service Request protocol</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>CRM Related</controllingFieldValue>
+                <valueName>Complaint protocol</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Community Management Related</controllingFieldValue>
+                <valueName>BH &amp; BT Community</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Community Management Related</controllingFieldValue>
+                <valueName>Communities (Internal Handling)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Community Management Related</controllingFieldValue>
+                <valueName>Communities (External Handling)</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Business article</controllingFieldValue>
+                <valueName>Quality parameters</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Business article</controllingFieldValue>
+                <valueName>Shifts and breaks and AUX</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Business article</controllingFieldValue>
+                <valueName>WhatsApp template</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Business article</controllingFieldValue>
+                <valueName>E-mails Templates</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Business article</controllingFieldValue>
+                <valueName>Operator assistant line protocol</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Business article</controllingFieldValue>
+                <valueName>ADHA project</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <label>Knowledge</label>
+    <listViews>
+        <fullName>archived_articles</fullName>
+        <columns>TITLE</columns>
+        <columns>ABSTRACT</columns>
+        <columns>ARTICLE_NUMBER</columns>
+        <columns>LANGUAGE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>PUBLISH_STATUS</field>
+            <operation>equals</operation>
+            <value>3</value>
+        </filters>
+        <filters>
+            <field>LANGUAGE</field>
+            <operation>equals</operation>
+            <value>en_US</value>
+        </filters>
+        <label>Archived Articles</label>
+    </listViews>
+    <listViews>
+        <fullName>draft_articles</fullName>
+        <columns>TITLE</columns>
+        <columns>ABSTRACT</columns>
+        <columns>ARTICLE_NUMBER</columns>
+        <columns>LANGUAGE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>PUBLISH_STATUS</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>LANGUAGE</field>
+            <operation>equals</operation>
+            <value>en_US</value>
+        </filters>
+        <label>Draft Articles</label>
+    </listViews>
+    <listViews>
+        <fullName>published_articles</fullName>
+        <columns>ARTICLE_NUMBER</columns>
+        <columns>TITLE</columns>
+        <columns>LANGUAGE</columns>
+        <columns>LAST_PUBLISHED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>PUBLISH_STATUS</field>
+            <operation>equals</operation>
+            <value>2</value>
+        </filters>
+        <filters>
+            <field>LANGUAGE</field>
+            <operation>equals</operation>
+            <value>en_US</value>
+        </filters>
+        <label>Published Articles</label>
+    </listViews>
+    <pluralLabel>Knowledge</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>NewFromDocument</excludedStandardButtons>
+        <excludedStandardButtons>MassAssignKnowledgeArticleVersion</excludedStandardButtons>
+        <excludedStandardButtons>MassDeleteArchiveKnowledgeArticleVersion</excludedStandardButtons>
+        <excludedStandardButtons>MassDeleteDraftKnowledgeArticleVersion</excludedStandardButtons>
+        <excludedStandardButtons>MassRestoreKnowledgeArticleVersion</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwnerKnowledgeArticleVersion</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

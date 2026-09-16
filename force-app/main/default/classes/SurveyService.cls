@@ -19,26 +19,17 @@ public with sharing class SurveyService {
 
     public List<Survey__c> getSurveysByRelatedRecordId(Id recordId) {
         List<Survey__c> surveyList = new List<Survey__c>();
+        
         if(recordId.getSObjectType() == Handover__c.SObjectType){
             surveyList = [SELECT Id, Link__c FROM Survey__c WHERE Handover__c = :recordId LIMIT 1];
         }
+        else if(recordId.getSObjectType() == SalesOrder__c.SObjectType){
+            surveyList = [SELECT Id, Link__c FROM Survey__c WHERE SalesOrder__c = :recordId LIMIT 1];
+        }
+        else if(recordId.getSObjectType() == Case.SObjectType){
+            surveyList = [SELECT Id, Link__c FROM Survey__c WHERE Case__c = :recordId LIMIT 1];
+        }
         return surveyList;
-    }
-    
-    
-    public List<Survey__c>getServeysByParentIdandSurveyType(Id recordId, String surveyType) { 
-        List<Survey__c> surveyList = new List<Survey__c>();
-        if(recordId.getSObjectType() == Handover__c.SobjectType){
-            surveyList = [SELECT Id,SurveyType__c,Handover__c,Link__c FROM Survey__c where  Handover__c=:recordId AND SurveyType__c='Handover Survey' ];
-                          }
-               return null;
-    }
-    public Survey__c getSingleSurveyByParentIdAndSurveyType(Id recordId, String surveyType) {
-       if(recordId.getSObjectType() == Handover__c.SobjectType){
-        Survey__c survey = [SELECT Id,SurveyType__c,Handover__c,Link__c FROM Survey__c where  Handover__c=:recordId AND SurveyType__c='Handover Survey' limit 1];
-        return  survey;
-       }
-        return null;
     }
     
     public void insertSurveys(List<Survey__c> surveyList){

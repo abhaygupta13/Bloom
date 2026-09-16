@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fieldSets>
+        <fullName>SAP_Integration_Fields</fullName>
+        <description>List of fields to monitor for initiating SAP integration upon any value changes.</description>
+        <displayedFields>
+            <field>LeasingOrder__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>isVATApplied__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>DueDate__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Commission_Amount__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>SAP Integration Fields</label>
+    </fieldSets>
+    <fields>
+        <fullName>Commission_Amount__c</fullName>
+        <label>Commission Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>DueDate__c</fullName>
+        <formula>LeasingOrder__r.LeasingStartDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Due Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>IntegrationMessage__c</fullName>
+        <label>Integration Message</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IntegrationStatus__c</fullName>
+        <label>Integration Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Integrated</fullName>
+                    <default>false</default>
+                    <label>Not Integrated</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Success</fullName>
+                    <default>false</default>
+                    <label>Success</label>
+                </value>
+                <value>
+                    <fullName>Failed</fullName>
+                    <default>false</default>
+                    <label>Failed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>IsReversed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Reversed?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LeasingOfficer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Officer</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>LeasingOfficerCommissions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LeasingOrder__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Order</label>
+        <referenceTo>LeasingOrder__c</referenceTo>
+        <relationshipLabel>Leasing Officer Commissions</relationshipLabel>
+        <relationshipName>Leasing_Officer_Commissions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Paymentdoc__c</fullName>
+        <externalId>true</externalId>
+        <label>Payment doc</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Paymentdocumentnumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment document number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RefDocno__c</fullName>
+        <externalId>true</externalId>
+        <label>Ref Doc no</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RelatedPartyBloomHolding__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Related Party (Bloom Holding)</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ReversalCategory__c</fullName>
+        <label>Reversal Category</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Reversal of Bounce cheque fees paid</fullName>
+                    <default>false</default>
+                    <label>Reversal of Bounce cheque fees paid</label>
+                </value>
+                <value>
+                    <fullName>Reversal of LPF paid</fullName>
+                    <default>false</default>
+                    <label>Reversal of LPF paid</label>
+                </value>
+                <value>
+                    <fullName>Reversal of BCF billing</fullName>
+                    <default>false</default>
+                    <label>Reversal of BCF billing</label>
+                </value>
+                <value>
+                    <fullName>Reversal of LPF billing</fullName>
+                    <default>false</default>
+                    <label>Reversal of LPF billing</label>
+                </value>
+                <value>
+                    <fullName>Waiver of BCF</fullName>
+                    <default>false</default>
+                    <label>Waiver of BCF</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ReversedDate__c</fullName>
+        <label>Reversed Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ReversedReason__c</fullName>
+        <label>Reversed Reason</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Client got approval</fullName>
+                    <default>false</default>
+                    <label>Client got approval</label>
+                </value>
+                <value>
+                    <fullName>Wrong allocation of payment</fullName>
+                    <default>false</default>
+                    <label>Wrong allocation of payment</label>
+                </value>
+                <value>
+                    <fullName>Wrong calculation of charges</fullName>
+                    <default>false</default>
+                    <label>Wrong calculation of charges</label>
+                </value>
+                <value>
+                    <fullName>Wrong calculation of fees because of wrong input</fullName>
+                    <default>false</default>
+                    <label>Wrong calculation of fees because of wrong input</label>
+                </value>
+                <value>
+                    <fullName>Wrong client charged</fullName>
+                    <default>false</default>
+                    <label>Wrong client charged</label>
+                </value>
+                <value>
+                    <fullName>Charged because of delay in booking receipts</fullName>
+                    <default>false</default>
+                    <label>Charged because of delay in booking receipts</label>
+                </value>
+                <value>
+                    <fullName>Clearing/ Allocation issues</fullName>
+                    <default>false</default>
+                    <label>Clearing/ Allocation issues</label>
+                </value>
+                <value>
+                    <fullName>As per approval from management</fullName>
+                    <default>false</default>
+                    <label>As per approval from management</label>
+                </value>
+                <value>
+                    <fullName>Closed/ ended contract</fullName>
+                    <default>false</default>
+                    <label>Closed/ ended contract</label>
+                </value>
+                <value>
+                    <fullName>Cancellation/ Termination of unit</fullName>
+                    <default>false</default>
+                    <label>Cancellation/ Termination of unit</label>
+                </value>
+                <value>
+                    <fullName>Miscellaneous amount reversal</fullName>
+                    <default>false</default>
+                    <label>Miscellaneous amount reversal</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ReversedRemarks__c</fullName>
+        <label>Reversed Remarks</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>SAPConditionTypeCode__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Condition Type Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPDocumentNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Document Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SendtoSAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Send to SAP</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isVATApplied__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>VAT Applied</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Leasing Officer Commission</label>
+    <nameField>
+        <label>Leasing Officer Commission Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Leasing Officer Commissions</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

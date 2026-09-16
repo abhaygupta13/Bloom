@@ -66,7 +66,18 @@ public inherited sharing class PaymentDueDateUpdateSRHandler{
         newCase.Description = description;
         newCase.ServiceCatalog__c = sc.Id;
         newCase.CaseType__c = selectedType;
-        newCase.Payment_Due_Date__c = [Select Due_Date__c from InstallmentLines__c where SalesOrder__c =:salesOrderObj.Id and Due_Date__c > Today order by Due_Date__c ASC limit 1].Due_Date__c;
+        try {
+    newCase.Payment_Due_Date__c = [
+        SELECT Due_Date__c
+        FROM InstallmentLines__c
+        WHERE SalesOrder__c = :salesOrderObj.Id
+        AND Due_Date__c > TODAY
+        ORDER BY Due_Date__c ASC
+        LIMIT 1
+    ].Due_Date__c;
+} catch (QueryException e) {
+    newCase.Payment_Due_Date__c = null;
+}
         newCase.StopEmailsToCustomer__c = stopEmailsToCustomer;
         CaseService caseServiceObj = CaseService.getInstance();
         newCase = caseServiceObj.insertCase(newCase);
@@ -75,7 +86,7 @@ public inherited sharing class PaymentDueDateUpdateSRHandler{
         return newCase; 
     }
 
-    public void sendNewServiceRequestAssignmnmentEmailNotification(case newcase){
+    /*public void sendNewServiceRequestAssignmnmentEmailNotification(case newcase){
         if(!newcase.StopEmailsToCustomer__c){
             MetadataService objMetadataService = MetadataService.getInstance();
             EmailService objEmailService = EmailService.getInstance();
@@ -88,7 +99,7 @@ public inherited sharing class PaymentDueDateUpdateSRHandler{
                 objEmailService.sendEmail(emailList);  
             } 
         }
-    }
+    }*/
 
     public  void createFirstTask(List<Case> listOfCases) {
         ServiceRequestTaskHandler obj = ServiceRequestTaskHandler.getInstance();
@@ -133,19 +144,9 @@ public inherited sharing class PaymentDueDateUpdateSRHandler{
                  return response;
             }
             if(caseRecord.Payment_Due_Date__c != Null && caseRecord.Finance_Document_Verified__c == 'Yes'){
-               /* ServiceRequestTaskHandler obj = ServiceRequestTaskHandler.getInstance();
-                CaseService servObj = CaseService.getInstance();
-                ServiceCatalogService servCatObj = ServiceCatalogService.getInstance();
-                List<Case> crmCaseClosureList = servObj.getCaseByIds(new Set<Id>{caseRecord.id});
-                Map<Id,ServiceAction__c> caseCurrentAction = servCatObj.getCurrentCaseServiceAction(crmCaseClosureList);*/
-               
-             // obj.processCasesAndHandleNextActions(crmCaseClosureList,new Map<Id, ServiceAction__c>(),caseCurrentAction);
                 response.put('message', 'Case closed successfully.'); 
-               // handleCaseClosure = false;
-                
             }
         
-            //if(caseRecord.Payment_Due_Date__c == Null){
             if(String.isEmpty(caseRecord.FinanceDocumentsUploadedManually__c)){
                 response.put('status', 'error');
                 response.put('message', 'Kindly confirm if finance documents uploaded manually');
@@ -157,7 +158,6 @@ public inherited sharing class PaymentDueDateUpdateSRHandler{
                 response.put('message', 'Finance documents must be verified.');
                 return response;
             }
-
             
             response.put('message', 'Case closed successfully.');   
         

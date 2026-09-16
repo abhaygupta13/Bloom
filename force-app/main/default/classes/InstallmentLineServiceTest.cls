@@ -93,8 +93,11 @@ private class InstallmentLineServiceTest {
         Date today = Date.today();
         Date endDate = today.addDays(30);
         Set<Id> projectIds = new Set<Id>{[SELECT Id FROM Project__c LIMIT 1].Id};
+        Id projectId = [SELECT Id FROM Project__c LIMIT 1].Id;
         List<InstallmentLines__c> result = InstallmentLineService.getInstance()
             .getInstallmentLinesByProjectIds(projectIds, excludedStatuses, today, endDate);
+        InstallmentLineService.getInstance()
+            .getInstallmentLinesByProjectAndDueDate(projectId, today);
         System.assert(result.size() > 0);
     }
 
@@ -125,6 +128,7 @@ private class InstallmentLineServiceTest {
         InstallmentLines__c installment = [SELECT Id, PendingAmount__c FROM InstallmentLines__c LIMIT 1];
         //installment.PendingAmount__c = 0;
         List<InstallmentLines__c> updated = InstallmentLineService.getInstance().updateInstallmentLines(new List<InstallmentLines__c>{installment});
+        InstallmentLineService.getInstance().getInstallmentLinesWithSalesOrderDetails(installment.Id);
         //System.assertEquals(0, updated[0].PendingAmount__c);
     }
 

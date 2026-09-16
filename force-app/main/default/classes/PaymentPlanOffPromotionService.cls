@@ -64,7 +64,7 @@ public with sharing class PaymentPlanOffPromotionService {
         System.debug('paymentPlanIds'+paymentPlanIds);
         //Maaz Changed on 30 MAy. Put hardcoded 'Yes' for  :CONSTANT_ACTIVE_Y something something
         Map<Id,PaymentPlan__c> paymentPlanMap ;
-        paymentPlanMap = new map<id,PaymentPlan__c>([select id,name,Offers_Based_On_Payment_Plan__c,Maximum_No_Of_Units__c,Minimum_No_Of_Units__c,CustomerSubType__c,PaymentPlanType__c ,Premium__c,RebatePercentage__c,PaymentPlanDiscount__c,Unit__c,BookingMemo__r.OwnerId,BookingMemo__r.RelatedOpportunity__c,StandardFlag__c,BrokerPortalFlag__c,(select id,Name,BrokerPayoutPercentage__c,PaymentPlan__c,InstallmentNumber__c,Description__c,InstallmentPercentage__c,InstallmentDate__c,InstallmentType__c,Date_Type__c from PaymentInstallments__r ORDER BY InstallmentNumber__c asc) from PaymentPlan__c where id in :paymentPlanIds and  IsActive__c = 'Yes']);
+        paymentPlanMap = new map<id,PaymentPlan__c>([select id,name,Offers_Based_On_Payment_Plan__c,Maximum_No_Of_Units__c,Minimum_No_Of_Units__c,CustomerSubType__c,PaymentPlanType__c ,Premium__c,RebatePercentage__c,PaymentPlanDiscount__c,Unit__c,BookingMemo__r.OwnerId,BookingMemo__r.RelatedOpportunity__c,StandardFlag__c,BrokerPortalFlag__c,(select id,Name,BrokerPayoutPercentage__c,PaymentPlan__c,InstallmentNumber__c,Description__c,InstallmentPercentage__c,InstallmentDate__c,InstallmentType__c,Condition_Type__c,Date_Type__c from PaymentInstallments__r ORDER BY InstallmentNumber__c asc) from PaymentPlan__c where id in :paymentPlanIds and  IsActive__c = 'Yes']);
         System.debug('paymentPlanMap'+paymentPlanMap);
         return paymentPlanMap ;
     }

@@ -15,7 +15,7 @@ export default class AssignBackServiceRequest extends NavigationMixin(LightningE
     @track showPicklistError = false;
     @track reasonOptions = [];
     @track isLoading = false;
-
+   @track isEscalation = false;
     @track userOptions = [];
     @track selectedUserId;
 @track teamOptions = [];
@@ -109,7 +109,8 @@ handleTeamChange(event) {
         commentBody: this.description,
         reason: this.selectedReason,
         userId: this.selectedUserId,
-        team: this.selectedTeam   
+        team: this.selectedTeam,
+        isEscalation: this.isEscalation   
     })
     .then(() => {
         this.isLoading = false;
@@ -150,5 +151,8 @@ setTimeout(() => {
     closeModal() {
         this.dispatchEvent(new CloseActionScreenEvent());
     }
-
+    
+    handleEscalationChange(event) {
+    this.isEscalation = event.target.checked;
+}
 }

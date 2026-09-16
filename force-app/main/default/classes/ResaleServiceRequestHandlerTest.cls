@@ -2723,6 +2723,7 @@ static void testValidatePHPPForNextReview_Step5() {
         test.startTest();
         ResaleServiceRequestHandler.getInstance().cancelDraftSalesOrders(caseIds);
         ResaleServiceRequestHandler.getInstance().cancelAndReassignSalesOrdersForResale(caseObj);
+        ResaleServiceRequestHandler.getInstance().updateBrokerDetails(caseObj);
         test.stopTest();
         
     }

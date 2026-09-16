@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Sales_Validation_Records_Check</fullName>
-    <active>false</active>
-    <errorConditionFormula>ISPICKVAL( SubStatus__c ,&quot;Approved SPA Validation&quot;) &amp;&amp;  Show_Validation__c = FALSE</errorConditionFormula>
-    <errorMessage>Please Validate SPA Validations</errorMessage>
-</ValidationRule>

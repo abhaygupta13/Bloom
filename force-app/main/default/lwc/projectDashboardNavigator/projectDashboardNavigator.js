@@ -7,7 +7,9 @@ export default class ProjectDashboardNavigator extends NavigationMixin(Lightning
     @track projectOptions = [
         { label: 'Cordoba', value: 'Cordoba Handover Management' },
       
-        { label: 'Toledo', value: 'Toledo Handover Management' }
+        { label: 'Toledo', value: 'Toledo Handover Management' },
+          { label: 'Casares', value: 'Casares Handover Management Dashboard' },
+        { label: 'Bloom Arjaan', value: 'Bloom Arjaan Handover Management Dashboard' }
     ];
 
     handleProjectChange(event) {

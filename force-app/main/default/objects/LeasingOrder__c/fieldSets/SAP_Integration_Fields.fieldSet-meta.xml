@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<FieldSet xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>SAP_Integration_Fields</fullName>
-    <description>List of fields to monitor for initiating SAP integration upon any value changes.</description>
-    <label>SAP Integration Fields</label>
-</FieldSet>

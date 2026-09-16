@@ -234,4 +234,63 @@ public class ContentDocumentLinkTriggerHelperTest {
         
        
     }
+    @IsTest
+static void testMoveSignedKYCFilesToDocument() {
+
+    // Account
+    Account acc = BCAPP_TestDataFactory.createAccount('Test Account');
+    insert acc;
+
+    // Case
+    Case cs = BCAPP_TestDataFactory.createCase();
+    cs.AccountId = acc.Id;
+    cs.Case_Sub_Status__c = null;
+    insert cs;
+
+    // Document Type
+    DocumentType__c docType = TestDataFactory.createDocumentType('Case', 'Signed KYC');
+    insert docType;
+
+    // Placeholder Document
+    Document__c doc = TestDataFactory.createDocument(null, docType.Id, 'Test');
+    doc.Case__c = cs.Id;
+    insert doc;
+
+    // Create File (Title must start with "CIS -")
+    ContentVersion cv = new ContentVersion(
+        Title = 'CIS - Client Information Sheet',
+        PathOnClient = 'SignedKYC.pdf',
+        VersionData = Blob.valueOf('Dummy Data'),
+        IsMajorVersion = true
+    );
+    insert cv;
+
+    cv = [
+        SELECT Id, ContentDocumentId
+        FROM ContentVersion
+        WHERE Id = :cv.Id
+    ];
+
+    Test.startTest();
+
+    // Fires ContentDocumentLink trigger
+    insert new ContentDocumentLink(
+        ContentDocumentId = cv.ContentDocumentId,
+        LinkedEntityId = cs.Id,
+        ShareType = 'V',
+        Visibility = 'AllUsers'
+    );
+
+    Test.stopTest();
+
+    // Verify link created for Document__c
+    List<ContentDocumentLink> docLinks = [
+        SELECT Id
+        FROM ContentDocumentLink
+        WHERE LinkedEntityId = :doc.Id
+        AND ContentDocumentId = :cv.ContentDocumentId
+    ];
+
+    System.assertEquals(1, docLinks.size());
+}
 }

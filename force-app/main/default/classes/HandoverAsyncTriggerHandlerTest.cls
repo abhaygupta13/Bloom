@@ -46,14 +46,14 @@ public class HandoverAsyncTriggerHandlerTest {
         serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogPHPP.Id, 'Pre CHO Check', 'Handover Team Task 2.1', 'Pre CHO Check', 'Handover Team', 4));
         serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogPHPP.Id, 'Register Title Deed', 'Government Relation Team Task 1', 'Register Title Deed', 'Government Relation', 1));
         serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogPHPP.Id, 'Transfer Utilities', 'CRM Team Task 4', 'Transfer Utilities', 'CRM', 2));
-        serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogPHPP.Id, 'NOC Internal Follow Up', 'CRM Team Task 3', 'NOC Internal Follow Up', 'CRM', 3));
+        serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogPHPP.Id, 'Generate Bank NOC', 'CRM Team Task 3', 'Generate Bank NOC', 'CRM', 3));
         
         serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogNonPHPP.Id, 'QA Snagging', 'Handover Team Task 1', 'QA Snagging', 'Handover Team', 1));
         serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogNonPHPP.Id, 'QA De-Snagging', 'Handover Team Task 2', 'QA De-Snagging', 'Handover Team', 2));
         serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogNonPHPP.Id, 'Settlement Follow up', 'CRM Team Task 1', 'Settlement Follow up', 'CRM', 2));
         serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogNonPHPP.Id, 'Settlement Confirmation', 'Finance Team Task 1', 'Settlement Confirmation', 'Finance', 3));
         serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogNonPHPP.Id, 'Pre CHO Check', 'Handover Team Task 2.1', 'Pre CHO Check', 'Handover Team', 4));
-        serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogNonPHPP.Id, 'NOC Internal Follow Up', 'CRM Team Task 3', 'NOC Internal Follow Up', 'CRM', 3));
+        serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogNonPHPP.Id, 'Generate Bank NOC', 'CRM Team Task 3', 'Generate Bank NOC', 'CRM', 3));
         serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogNonPHPP.Id, 'Register Title Deed', 'Government Relation Team Task 1', 'Register Title Deed', 'Government Relation', 1));
         serviceActions.add(TestDataFactory.createServiceActionForHandover(serviceCatalogNonPHPP.Id, 'Transfer Utilities', 'CRM Team Task 4', 'Transfer Utilities', 'CRM', 2));
 
@@ -199,7 +199,7 @@ public class HandoverAsyncTriggerHandlerTest {
         Test.getEventBus().deliver();
         //Update the record
         Test.enableChangeDataCapture();
-        hand.Sub_Status__c = 'Handover Completed';
+        hand.Is_Property_keys_given__c = true;
        	UPDATE hand;
         Test.getEventBus().deliver();
         

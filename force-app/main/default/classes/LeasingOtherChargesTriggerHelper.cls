@@ -60,7 +60,7 @@ public class LeasingOtherChargesTriggerHelper {
         
         for (LeasingOrdersOtherCharges__c leasingOtherCharge : newList) {
             leasingOrderIdsAPI.add(leasingOtherCharge.LeasingOrder__c);
-            if (oldMap != null && leasingOtherCharge.PostingDate__c != null)// && leasingOtherCharge.PostingDate__c != oldMap.get(leasingOtherCharge.Id).PostingDate__c)
+            if (oldMap != null && leasingOtherCharge.PostingDate__c != null)
                 leasingOrderIds.add(leasingOtherCharge.LeasingOrder__c);
         }
         
@@ -83,7 +83,7 @@ public class LeasingOtherChargesTriggerHelper {
         
         for(LeasingOrdersOtherCharges__c leasingOtherCharge  : newList ){
             if(oldMap != null){
-                if (leasingOtherCharge.PostingDate__c != null){// && leasingOtherCharge.PostingDate__c != oldMap.get(leasingOtherCharge.Id).PostingDate__c) {
+                if (leasingOtherCharge.PostingDate__c != null){
                         
                         Date postingClosureDate = loToPCDateMap.get(leasingOtherCharge.LeasingOrder__c);
                         if (postingClosureDate != null) {
@@ -132,7 +132,6 @@ public class LeasingOtherChargesTriggerHelper {
     
     public static void afterFieldUpdates(List<LeasingOrdersOtherCharges__c> newList , Map<id,LeasingOrdersOtherCharges__c> oldMap){        
         Set<Id> leasingOrderOtherChargeIds = new Set<Id>();
-        Set<Id> integratedOCIds = new Set<Id>();
         
         for(LeasingOrdersOtherCharges__c leasingOrderOtherCharge : newList){
             
@@ -143,9 +142,6 @@ public class LeasingOtherChargesTriggerHelper {
                 }
             }
             
-            if(oldMap != null && oldMap.get(leasingOrderOtherCharge.Id).IntegrationStatus__c != leasingOrderOtherCharge.IntegrationStatus__c && leasingOrderOtherCharge.IntegrationStatus__c == 'Success' && !leasingOrderOtherCharge.SendToSAP__c && String.isBlank(oldMap.get(leasingOrderOtherCharge.Id).RefDocno__c ) && String.isNotBlank(leasingOrderOtherCharge.RefDocno__c)){
-                integratedOCIds.add(leasingOrderOtherCharge.Id);
-            }
         }
         
         if (!leasingOrderOtherChargeIds.isEmpty()) {
@@ -158,16 +154,6 @@ public class LeasingOtherChargesTriggerHelper {
             // IntegrationRecordService integService = IntegrationRecordService.getInstance();
             // integService.insertIntegrationRecords(integrationRecordsToInsert);
             integrateRecords(leasingOrderOtherChargeIds);
-        }
-        
-        if(!integratedOCIds.isEmpty()){
-            List<LeasingReceiptAcknowledgment__c> leasingReceipts = LeasingReceiptAcknowledgementService.getChildLeasingReceiptForIntegration(integratedOCIds);
-            
-            for (LeasingReceiptAcknowledgment__c lra : leasingReceipts) {
-                lra.SendToSAP__c = true;
-            }
-            
-            List<LeasingReceiptAcknowledgment__c> updatedLRA = LeasingReceiptAcknowledgementService.getInstance().updateLeasingReceiptAcknowledgement(leasingReceipts);
         }
         
     }

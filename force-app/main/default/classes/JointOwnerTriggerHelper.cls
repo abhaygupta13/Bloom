@@ -68,7 +68,7 @@ public class JointOwnerTriggerHelper {
             objJointOwnerService.updateJointOwnersWithoutTrigger(jointOwnerList);
         }
     }
-    
+
     public static void handleBeforeInsertFieldUpdates(List<JointOwner__c> newList) {
         MetadataService objMetadataService = MetadataService.getInstance();
         for(JointOwner__c joRec : newList){
@@ -77,7 +77,7 @@ public class JointOwnerTriggerHelper {
             }
         }
     }
-    
+
     public static void handleBeforeUpdateFieldUpdates(List<JointOwner__c> newList, Map<Id, JointOwner__c> oldMap) {
         MetadataService objMetadataService = MetadataService.getInstance();
         for(JointOwner__c joRec : newList){
@@ -85,5 +85,6 @@ public class JointOwnerTriggerHelper {
                 joRec.NationalityInArabic__c = objMetadataService.getNationalityInArabic(joRec.Nationality__c);
             }
         }
+        
     }
 }

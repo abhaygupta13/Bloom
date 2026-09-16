@@ -189,9 +189,9 @@ public without sharing  class EmirateIdReaderHandler {
              if(acc.Religion__pc!=null){
                 account.Religion__pc = acc.Religion__pc;
             }
-           /* if(acc.AnnualIncome__pc!=null){
-                //account.AnnualIncome__pc = acc.AnnualIncome__pc;
-            }*/
+             if(acc.AnnualIncome__pc!=null){
+                account.AnnualIncome__pc = acc.AnnualIncome__pc;
+            }
             if(acc.CreateOpportunity__c!=null){
                 account.CreateOpportunity__c = acc.CreateOpportunity__c;
             }

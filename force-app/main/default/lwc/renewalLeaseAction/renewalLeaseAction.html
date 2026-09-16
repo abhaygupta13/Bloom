@@ -274,7 +274,7 @@
                                         </lightning-layout-item>
                                         <lightning-layout-item size="6" padding="horizontal-small">
                                                     <lightning-input name="SAPAnnualRenewal" type="currency"
-                                                        label="SAP Annual Renewal" value={SAPAnnualRenewal} required={isShortTerm} onchange={handleFieldChange} class="validate">
+                                                        label="Tawtheeq Annual Rent" value={SAPAnnualRenewal} required={isShortTerm} onchange={handleFieldChange} class="validate">
                                                     </lightning-input>
                                         </lightning-layout-item>
                                     </lightning-layout>
@@ -306,20 +306,18 @@
                                         </lightning-layout-item>
                                     </lightning-layout>
                                 </div>
-                                 <div class="slds-m-bottom_medium">
-    <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
-
-        <lightning-layout-item size="6" padding="horizontal-small">
-            <lightning-input
-                type="checkbox"
-                label="Related Party Bloom Holding"
-                name="relatedPartyBloomHolding"
-                checked={relatedPartyBloomHolding}
-                onchange={handleFieldChange}>
-            </lightning-input>
-        </lightning-layout-item>
-
-    </lightning-layout>
+                                <div class="slds-m-bottom_medium">
+  <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+    <lightning-layout-item size="6" padding="horizontal-small">
+      <lightning-input
+        type="checkbox"
+        label="Related Party Bloom Holding"
+        name="relatedPartyBloomHolding"
+        checked={relatedPartyBloomHolding}
+        onchange={handleFieldChange}>
+      </lightning-input>
+    </lightning-layout-item>
+  </lightning-layout>
 </div>
                             </lightning-accordion-section>
                         </lightning-accordion>

@@ -27,7 +27,7 @@ public class SendAgreementReminderBatch implements Database.Batchable<SObject>,S
             FROM BrokerApplication__c
             WHERE
             AgencyEmail__c != null
-            AND ApprovalStatus__c = 'Under Agreement'
+            AND ApprovalStatus__c = 'Under Agreement' AND isSuspended__c = false
             AND BrokerSigned__c = false
         ]);
         

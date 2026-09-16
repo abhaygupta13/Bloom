@@ -58,7 +58,6 @@ public class CommissionPDFController {
             Decimal vatAmount = lineTotal != null && bc.VATPercentage__c != null && bc.VATPercentage__c != 0 ? (lineTotal * bc.VATPercentage__c/100) : 0.00;
             Decimal totalWithVat = (lineTotal + vatAmount);
             Decimal sellingPrice;
-
             if((bc.SalesOrder__r.Unit__r.UnitType__c == 'Retail' || bc.SalesOrder__r.Unit__r.UnitType__c == 'Show Room')){
                 sellingPrice = bc.SalesOrder__r.SellingPrice__c;
             }

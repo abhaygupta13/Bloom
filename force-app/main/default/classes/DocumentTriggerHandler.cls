@@ -22,26 +22,25 @@ public class DocumentTriggerHandler implements ITriggerHandler{
     }
     
     public void afterInsert(List<sObject> newList , Map<Id, sObject> newMap) {
-        system.debug('newList-->'+newList);
+
     }
     
     public void beforeUpdate(List<sObject> newList, Map<Id, sObject> newMap, List<sObject> oldList, Map<Id, sObject> oldMap) {
-        system.debug('before Update-->'+newList);
+        
     }
     
     public void afterUpdate(List<sObject> newList, Map<Id, sObject> newMap,  List<sObject> oldList, Map<Id, sObject> oldMap) {
         DocumentTriggerHelper.updateDocumentUploadDate((List<Document__c>) newList, (Map<Id, Document__c>) oldMap);
-        //DocumentTriggerHelper.changeHandoverOwnerOnSpaUpdate((List<Document__c>) newList, (Map<Id, Document__c>) oldMap);
-        //DocumentTriggerHelper.updateLeasingOrderData((List<Document__c>) newList, (Map<Id, Document__c>) oldMap);
+        
         DocumentTriggerHelper.sendEmailAlertToFinanceOwner((List<Document__c>) newList, (Map<Id, Document__c>) oldMap);
-        system.debug('after update newList-->'+newList);
-
+        
         //Added By Ranjan
         // NEW — Archive document when ContentDocumentId__c is replaced
         DocumentTriggerHelper.archiveDocument(
             (List<Document__c>) newList, 
             (Map<Id, Document__c>) oldMap
         );
+        
     }
     
     public void beforeDelete(List<sObject> oldList , Map<Id, sObject> oldMap) {

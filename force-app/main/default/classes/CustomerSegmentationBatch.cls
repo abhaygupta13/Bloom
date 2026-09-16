@@ -67,7 +67,7 @@ public without sharing class CustomerSegmentationBatch implements Database.Batch
             String newSegment = calculateCategory(accountTotals.get(accountId));
             accountsToUpdate.add(new Account(Id = accountId,Segment__c = newSegment));
         }
-        AccountService.getInstance().updateAccountsWithoutTriggerDB(accountsToUpdate);
+        AccountService.getInstance().updateAccountsWithoutTrigger(accountsToUpdate);
     }
     
     public void finish(Database.BatchableContext bc) {

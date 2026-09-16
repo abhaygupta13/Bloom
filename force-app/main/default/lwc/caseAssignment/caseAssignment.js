@@ -20,9 +20,7 @@ export default class CaseAssignment extends LightningElement {
     connectedCallback() {
         //this.updateOwner();
     }
-handleCancel() {
-    this.dispatchEvent(new CloseActionScreenEvent());
-}
+
     updateOwner() {
         this.isLoading = true;
         updateCaseOwner({ caseId: this.recordId })

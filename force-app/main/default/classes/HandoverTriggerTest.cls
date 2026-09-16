@@ -226,7 +226,7 @@ public class HandoverTriggerTest {
         servicecatalog.ProcessFlowType__c= 'Handover';
         servicecatalog.ProcessType__c = 'Sales';
         servicecatalog.Active__c= true;
-        servicecatalog.RecordTypeDevName__c = 'Handover';
+        servicecatalog.RecordTypeDevName__c = 'Non PHPP';
         insert servicecatalog;
 
         // Insert setup objects in a separate transaction
@@ -372,62 +372,181 @@ public class HandoverTriggerTest {
     }
     
     @isTest
-    public static void bookAppointmentsForAllUnitCategories() {
-        List<String> unitCategories = new List<String>{
-            'Registered Unit',
-            'Resale Unit',
-            'Resale with Mortgage',
-            'New Sale',
-            'New Sale with Mortgage',
-            'Registered Unit with Mortgage'
-        };
+public static void testAutopopulateFeesForAllUnitCategories() {
+    User adminUser = [SELECT Id FROM User WHERE IsActive = true AND Profile.Name = 'System Administrator' LIMIT 1];
+    
+    // 1. Setup Project with all required fee fields
+    Project__c project = [SELECT Id FROM Project__c LIMIT 1];
+    project.ResaleUnitADMFeeVilla__c = 2;
+    project.ResaleUnitADMFeeApt__c = 2;
+    project.ResaleUnitAdminFeeVilla__c = 500;
+    project.ResaleUnitAdminFeeApt__c = 300;
+    project.ResaleUnitEvaluationFeeVilla__c = 200;
+    project.ResaleUnitEvaluationFeeApt__c = 100;
+    
+    project.ResaleWithMortgageADMFeeVilla__c = 2;
+    project.ResaleWithMortgageADMFeeApt__c = 2;
+    project.ResaleWithMortgageAdminFeeVilla__c = 600;
+    project.ResaleWithMortgageAdminFeeApt__c = 400;
+    project.ResaleWithMortgageEvaluationFeeVilla__c = 250;
+    project.ResaleWithMortgageEvaluationFeeApt__c = 150;
+    
+    project.NewSaleADMFeeVilla__c = 2;
+    project.NewSaleADMFeeApt__c = 2;
+    project.NewSaleAdminFeeVilla__c = 700;
+    project.NewSaleAdminFeeApt__c = 500;
+    project.NewSaleEvaluationFeeVilla__c = 300;
+    project.NewSaleEvaluationFeeApt__c = 200;
+    
+    project.NewSaleWithMortgageADMFeeVilla__c = 2;
+    project.NewSaleWithMortgageADMFeeApt__c = 2;
+    project.NewSaleWithMortgageAdminFeeVilla__c = 800;
+    project.NewSaleWithMortgageAdminFeeApt__c = 600;
+    project.NewSaleWithMortgageEvaluationFeeVilla__c = 350;
+    project.NewSaleWithMortgageEvaluationFeeApt__c = 250;
+    
+    project.RegisteredUnitTitleDeedFeeVilla__c = 1000;
+    project.RegisteredUnitTitleDeedFeeApt__c = 800;
+    project.MortgageUnitAdminFeeVilla__c = 400;
+    project.MortgageUnitAdminFeeApt__c = 300;
+    project.MortgageUnitTitleDeedFeeVilla__c = 1200;
+    update project;
 
-        User operationTeam = [SELECT Id, Email FROM User WHERE Email = 'operationUser@bloom.com' LIMIT 1];
-        User hoAgent = [SELECT Id, Email FROM User WHERE Email = 'hoagent@bloom.com' LIMIT 1];
-        User crmUser = [SELECT Id, Email FROM User WHERE Email = 'crmUser@bloom.com' LIMIT 1];
+    Handover__c ho = [SELECT Id, UnitCategory__c, Project__c FROM Handover__c WHERE Customer_Email__c = 'test@gmail.com' LIMIT 1];
+    ho.Project__c = project.Id;
+    ho.UnitCategory__c = null;
+    update ho;
 
-        Handover__c handover = [Select ID,Name,Customer_Email__c,UnitCategory__c,Project__c,Is_Manual__c,Sub_Status__c,Sales_Order__c,unit__c,OwnerId from Handover__c WHERE Customer_Email__c ='test@gmail.com' LIMIT 1];
-         Project__c pr = new Project__c();
-        pr.Name = 'testProject'; 
-        pr.ResaleUnitADMFeeVilla__c = 2;
-        pr.ResaleUnitADMFeeApt__c = 2;
-        pr.ResaleWithMortgageADMFeeVilla__c = 2;
-        pr.ResaleWithMortgageADMFeeApt__c = 2;
-        pr.NewSaleADMFeeVilla__c = 2;
-        pr.NewSaleADMFeeApt__c = 2;
-        pr.NewSaleWithMortgageADMFeeVilla__c = 2;
-        pr.NewSaleWithMortgageADMFeeApt__c = 2;
-        insert pr;
-        handover.UnitCategory__c = 'Resale Unit';
-        handover.Project__c = pr.id;
-        update handover;
+    List<String> categories = new List<String>{
+        'Registered Unit',
+        'Registered Unit with Mortgage',
+        'Resale Unit',
+        'Resale with Mortgage',
+        'New Sale',
+        'New Sale with Mortgage'
+    };
 
-        List<Document__c> QADeSnagDocList = [
-            SELECT Id, Document_Name__c
-            FROM Document__c
-            WHERE Document_Name__c = 'QA Desnagging Report' AND Handover__c = :handover.Id
-            LIMIT 1
-        ];
-
-        if (!QADeSnagDocList.isEmpty()) {
-            CustomDocManageController.addFilesonRecordCreate('base64Pdf', 'hello.pdf', QADeSnagDocList[0]);
-        }
+    System.runAs(adminUser) {
         Test.startTest();
-        List<Handover__c> allHandovers = new List<Handover__c>();
-        
-        for (String category : unitCategories) {
-            Handover__c ho = handover;
-            ho.Sub_Status__c = HandoverConstants.Handover_Sub_Status_QA_DeSnagging;
-            ho.OwnerId = operationTeam.Id;
+        for (String category : categories) {
             ho.UnitCategory__c = category;
-            ho.Unit_is_Ready__c = true;
-            ho.Is_Orientation_Letter_Sent__c = true;
-            ho.Notice_of_Completion_Date__c = Date.today();
             update ho;
         }
-        
         Test.stopTest();
     }
+
+    Handover__c updatedHo = [SELECT Id, UnitCategory__c, ADM_Registrations_Fee__c, Admin_fees__c, EvaluationFees__c, Title_Deed_Fee__c FROM Handover__c WHERE Id = :ho.Id];
+    System.assertNotEquals(null, updatedHo.ADM_Registrations_Fee__c, 'ADM Registration Fee should be calculated');
+}
+    @isTest
+public static void testNotifyCustomersCoverage() {
+    User adminUser = [SELECT Id FROM User WHERE IsActive = true AND Profile.Name = 'System Administrator' LIMIT 1];
+
+    // 1. Create HandoverPhase__c with populated Email Template fields
+    HandoverPhase__c hoPhase = new HandoverPhase__c();
+    hoPhase.Name = 'Phase 1';
+    hoPhase.HOTitleDeedEmailTempID__c = '00X000000000001AAA';
+    hoPhase.KeyHandoverInvitationEmailTempId__c = '00X000000000002AAA';
+    hoPhase.HOOutstandingConfirmationTempId__c = '00X000000000003AAA';
+    hoPhase.SignHoDOCInvitationTempId__c = '00X000000000004AAA';
+    hoPhase.HOCongratulationEmailTempId__c = '00X000000000005AAA';
+    hoPhase.CHOAttendedbyCustomerEmailTempId__c = '00X000000000006AAA';
+    hoPhase.ChoCustomerNotattendedEmailTempId__c = '00X000000000007AAA';
+    hoPhase.HomeOrientationByBloomEmailTempId__c = '00X000000000008AAA';
+    insert hoPhase;
+
+    Handover__c ho = [SELECT Id, Sub_Status__c, Handover_Phase__c FROM Handover__c WHERE Customer_Email__c = 'test@gmail.com' LIMIT 1];
+    ho.Handover_Phase__c = hoPhase.Id;
+   
+    update ho;
+
+    System.runAs(adminUser) {
+        Test.startTest();
+
+        // Branch 1: Title Deed Registration Completed
+        ho.Sub_Status__c = 'Transfer Utilities';
+        ho.Is_Title_Deed_Registration__c = false;
+        update ho;
+
+        // Branch 2: Utilities Transfer Completed
+        ho.Sub_Status__c = 'Mortgage Cheque Clearance';
+        ho.KeyHandoverInvitationSent__c = false;
+        update ho;
+
+        // Branch 3: Register Title Deed
+        ho.Sub_Status__c = 'Register Title Deed';
+        ho.IsOustandingPaymentconfirmedsent__c = false;
+        update ho;
+
+        // Branch 4: Handover Signing Document
+        ho.Sub_Status__c = 'Handover Signing Document';
+        ho.IsHandoverSigningInvitationSent__c = false;
+        update ho;
+
+        // Branch 5: Handover Completed
+        ho.Sub_Status__c = 'Handover Completed';
+        ho.CongratulationOnHandoverEmailsent__c = false;
+        update ho;
+
+      
+
+        // Branch 6B: CHO De-Snagging - Customer Delegate to BLoom
+       
+        ho.Customer_Availability_for_CHO__c = 'Customer Delegate to BLoom';
+        ho.PropertyHomeOrientationByBloom__c = false;
+        update ho;
+
+        // Branch 6C: CHO De-Snagging - Customer Not available
+     
+        ho.Customer_Availability_for_CHO__c = 'Customer Not available';
+        ho.PropertyHomeOrientationWOCustomer__c = false;
+        update ho;
+
+        Test.stopTest();
+    }
+    
+
+}
+ @isTest
+public static void testDeleteCancellationEventCoverage() {
+    User adminUser = [SELECT Id FROM User WHERE IsActive = true AND Profile.Name = 'System Administrator' LIMIT 1];
+
+    // 1. Create Phase record with Cancellation Email Template Id
+    HandoverPhase__c hoPhase = new HandoverPhase__c();
+    hoPhase.Name = 'Cancellation Test Phase';
+    hoPhase.ChoAppointmentCanceledEmailTempId__c = '00X000000000009AAA';
+    insert hoPhase;
+
+    // 2. Fetch Handover, populate Customer Availability for CHO validation field and link Phase
+    Handover__c ho = [SELECT Id, Orientation_Appointment_Status__c, Handover_Phase__c, Customer_Availability_for_CHO__c FROM Handover__c WHERE Customer_Email__c = 'test@gmail.com' LIMIT 1];
+    ho.Handover_Phase__c = hoPhase.Id;
+    ho.Orientation_Appointment_Status__c = 'Scheduled';
+    ho.Customer_Availability_for_CHO__c = 'Customer Available'; // Satisfies the custom validation rule
+    update ho;
+
+    // 3. Create related Home Orientation Appointment Event
+    Event testEvt = new Event(
+        WhatId = ho.Id,
+        Subject = 'Home Orientation Appointment',
+        Type = 'Home Orientation Appointment',
+        StartDateTime = DateTime.now().addDays(2),
+        EndDateTime = DateTime.now().addDays(2).addHours(1),
+        DurationInMinutes = 60
+    );
+    insert testEvt;
+
+    // 4. Update status to 'Cancelled' inside test execution context
+    System.runAs(adminUser) {
+        Test.startTest();
+        ho.Orientation_Appointment_Status__c = 'Cancelled';
+        update ho;
+        Test.stopTest();
+    }
+
+    // Assert that the related event was deleted
+    List<Event> remainingEvents = [SELECT Id FROM Event WHERE Id = :testEvt.Id];
+    System.assertEquals(0, remainingEvents.size(), 'Home Orientation Appointment event should be deleted upon cancellation');
+}
     
   /*  @isTest
     public static void bookAnAppoin(){

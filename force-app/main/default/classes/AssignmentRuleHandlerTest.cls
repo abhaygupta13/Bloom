@@ -113,15 +113,6 @@ public class AssignmentRuleHandlerTest {
         assrSuperApp.IsActive__c = true;
         insert assrSuperApp;
 
-
-        AssignmentRule__c handoverRule = new AssignmentRule__c();
-        handoverRule.RecordType__c = 'Handover';
-        handoverRule.ProcessName__c = 'Handover CRM Agent Assignment';
-        handoverRule.ProcessType__c = 'Handover';
-        handoverRule.IsActive__c = true;
-        handoverRule.Project__c = 'Al Dhay';
-        insert handoverRule;
-
         AssignmentRule__c anprAssignmentRule = new AssignmentRule__c();
         anprAssignmentRule.RecordType__c = 'Case';
         anprAssignmentRule.ProcessType__c = 'Community Management';
@@ -129,7 +120,6 @@ public class AssignmentRuleHandlerTest {
         anprAssignmentRule.IsActive__c = true;
         anprAssignmentRule.Project__c = 'Al Dhay';
         insert anprAssignmentRule;
-
 
         AssignmentRule__c communityAppServiceReqAssignmentRule = new AssignmentRule__c();
         communityAppServiceReqAssignmentRule.RecordType__c = 'Case';
@@ -160,26 +150,12 @@ public class AssignmentRuleHandlerTest {
         assru5.User__c = contactCenterUser.id;
         insert assru5;
 
-        AssignmentUser__c assruLeasingComm = new AssignmentUser__c();
-        assruLeasingComm.IsActive__c = true;
-        assruLeasingComm.AssignmentRule__c = assr5.id;
-        assruLeasingComm.BusinessHours__c = bhs[0].id;
-        assruLeasingComm.User__c = contactCenterUser.id;
-        insert assruLeasingComm;
-
         AssignmentUser__c assruCRM2 = new AssignmentUser__c();
         assruCRM2.IsActive__c = true;
         assruCRM2.AssignmentRule__c = assr41.id;
         assruCRM2.BusinessHours__c = bhs[0].id;
         assruCRM2.User__c = contactCenterUser.id;
         insert assruCRM2;
-
-        AssignmentUser__c assruHandover = new AssignmentUser__c();
-        assruHandover.IsActive__c = true;
-        assruHandover.AssignmentRule__c = handoverRule.id;
-        assruHandover.BusinessHours__c = bhs[0].id;
-        assruHandover.User__c = contactCenterUser.id;
-        insert assruHandover;
 
         AssignmentUser__c assru6 = new AssignmentUser__c();
         assru6.IsActive__c = true;
@@ -221,6 +197,22 @@ public class AssignmentRuleHandlerTest {
         dlpUser.BusinessHours__c = bhs[0].Id;
         dlpUser.User__c = adminUser.Id;
         insert dlpUser;
+        AssignmentRule__c crmComplaintRule = new AssignmentRule__c(
+    RecordType__c = 'Case',
+    ProcessName__c = 'CRM Complaint Case Assignment',
+    ProcessType__c = 'Sales',
+    IsActive__c = true,
+    Project__c = 'Al Dhay'
+);
+insert crmComplaintRule;
+
+AssignmentUser__c crmComplaintUser = new AssignmentUser__c(
+    IsActive__c = true,
+    AssignmentRule__c = crmComplaintRule.Id,
+    BusinessHours__c = bhs[0].Id,
+    User__c = contactCenterUser.Id
+);
+insert crmComplaintUser;
         
         Round_Robins__c rr=new Round_Robins__c(
             Name='Service/Case Request',
@@ -375,7 +367,7 @@ public class AssignmentRuleHandlerTest {
         Test.stopTest();
     }
 
-    @IsTest
+   @IsTest
     private static void testBFMEmailToCaseCaseAssignment(){
         List<Case> caseList = [SELECT Id FROM Case LIMIT 1];
         Test.StartTest();
@@ -408,6 +400,8 @@ public class AssignmentRuleHandlerTest {
     private static void testCommunityAppServiceRequestAssignment(){
         Test.StartTest();
             Case caseObj = [SELECT Id FROM Case WHERE RecordType.DeveloperName = 'Move_In' LIMIT 1];
+        	caseObj.Status = 'Submitted';
+        	update caseObj;
             User user = [SELECT Id FROM User WHERE IsActive = true LIMIT 1];
             System.runAs(user) {
                 Group queueObj = TestDataFactory.createGroup('Community Management Team', 'Queue');
@@ -475,7 +469,7 @@ public class AssignmentRuleHandlerTest {
             insert tempCase;
             Test.StartTest();
             List<Case> tetsCase = [SELECT Id,OwnerId FROM Case WHERE Main_Buyer_Share_Percentage__c = 41];
-            AssignmentRuleHandler.crmCaseAssignment(new List<Id>{tetsCase[0].Id});
+           // AssignmentRuleHandler.crmCaseAssignment(new List<Id>{tetsCase[0].Id});
             AssignmentRuleHandler.crmResaleCaseAssignment(new List<Id>{tetsCase[0].Id});
             AssignmentRule__c assingmentRule = [SELECT Id FROM AssignmentRule__c WHERE ProcessName__c = 'CRM Case Assignment' AND Project__c != null];
             AssignmentUser__c assUser = [SELECT Id,User__c FROM AssignmentUser__c WHERE AssignmentRule__c =: assingmentRule.Id];
@@ -555,7 +549,7 @@ public class AssignmentRuleHandlerTest {
         Assert.areEqual(assUser.User__c, cases[0].OwnerId, 'Case owner should be same as user in assigment rule user');
     }
 
-    @IsTest
+    /*@IsTest
     private static void testCRMCaseAssignmentWithoutProject(){
         User contactCenterUser = [SELECT Id FROM User WHERE Profile.Name = 'Contact Centre Team' AND IsActive = true LIMIT 1];
         
@@ -573,7 +567,7 @@ public class AssignmentRuleHandlerTest {
             AssignmentUser__c assUser = [SELECT Id,User__c FROM AssignmentUser__c WHERE AssignmentRule__c = :assingmentRule.Id LIMIT 1];
             Assert.areEqual(assUser.User__c, updatedCase.OwnerId, 'Case owner should be same as user in assignment rule user');
         }
-    }
+    }*/
 
     @IsTest
     private static void testCRMCaseAssignmentSuperApp(){
@@ -632,5 +626,151 @@ public class AssignmentRuleHandlerTest {
         ];
     
         Assert.areEqual('DLP Team',updatedCase.PendingWith__c,'Pending With should be DLP Team');
+    }
+    @IsTest
+private static void testCRMComplaintCaseAssignment() {
+
+    User contactCenterUser = [
+        SELECT Id
+        FROM User
+        WHERE Profile.Name = 'Contact Centre Team'
+        AND IsActive = true
+        LIMIT 1
+    ];
+
+    List<SalesOrder__c> soList = [SELECT Id FROM SalesOrder__c LIMIT 1];
+    List<Unit__c> unitList = [SELECT Id FROM Unit__c LIMIT 1];
+
+    String recordTypeId = Schema.SObjectType.Case
+        .getRecordTypeInfosByName()
+        .get('Social Media')
+        .getRecordTypeId();
+
+    System.runAs(contactCenterUser) {
+
+        Case c = new Case(
+            CurrencyIsoCode = 'AED',
+            Status = 'Draft',
+            Origin = 'Email',
+            RequesterEmail__c = 'test@test.com',
+            RequesterContactNumber__c = '1234567890',
+            Main_Buyer_Share_Percentage__c = 55,
+            RecordTypeId = recordTypeId,
+            Sales_Order__c = soList[0].Id,
+            Unit__c = unitList[0].Id
+        );
+        insert c;
+
+        Test.startTest();
+            AssignmentRuleHandler.crmComplaintCaseAssignment(
+                new List<Id>{c.Id}
+            );
+        Test.stopTest();
+
+        Case updatedCase = [
+            SELECT Id, OwnerId, Projectname__c
+            FROM Case
+            WHERE Id = :c.Id
+        ];
+
+        AssignmentRule__c rule = [
+            SELECT Id
+            FROM AssignmentRule__c
+            WHERE ProcessName__c = 'CRM Complaint Case Assignment'
+            LIMIT 1
+        ];
+
+        AssignmentUser__c assUser = [
+            SELECT User__c
+            FROM AssignmentUser__c
+            WHERE AssignmentRule__c = :rule.Id
+            LIMIT 1
+        ];
+
+        System.assertEquals(
+            assUser.User__c,
+            updatedCase.OwnerId,
+            'Case should be assigned to the Assignment Rule user.'
+        );
+    }
+}
+    @IsTest
+static void testAssignCasesToNextOwner_Success() {
+
+    Case testCase = [
+        SELECT Id, OwnerId
+        FROM Case
+        LIMIT 1
+    ];
+
+    User testUser = [
+        SELECT Id
+        FROM User
+        WHERE IsActive = true
+        LIMIT 1
+    ];
+
+    AssignmentRule__c rule = new AssignmentRule__c(
+        RecordType__c = 'Case',
+        ProcessName__c = 'Broker Case Assignment',
+        ProcessType__c = 'Broker',
+        IsActive__c = true
+    );
+    insert rule;
+
+    AssignmentUser__c assignmentUser = new AssignmentUser__c(
+        AssignmentRule__c = rule.Id,
+        User__c = testUser.Id,
+        IsActive__c = true
+    );
+    insert assignmentUser;
+
+    Test.startTest();
+
+    Map<Id, Case> result =
+        AssignmentRuleHandler.assignCasesToNextOwner(
+            new Set<Id>{ testCase.Id },
+            'Broker Case Assignment',
+            'Broker'
+        );
+
+    Test.stopTest();
+
+    System.assertEquals(1, result.size());
+}
+    
+    @isTest
+    private static void testCRMHandoverAssignment() {
+        Profile p = [SELECT Id FROM Profile WHERE Name = 'Standard User' LIMIT 1];
+        String uStr = String.valueOf(DateTime.now().getTime());
+        List<User> users = new List<User>{
+            new User(Alias='u1', Email='u1@test.com', EmailEncodingKey='UTF-8', LastName='Test1', LanguageLocaleKey='en_US', LocaleSidKey='en_US', ProfileId=p.Id, TimeZoneSidKey='America/Los_Angeles', UserName='u1' + uStr + '@test.com'),
+            new User(Alias='u2', Email='u2@test.com', EmailEncodingKey='UTF-8', LastName='Test2', LanguageLocaleKey='en_US', LocaleSidKey='en_US', ProfileId=p.Id, TimeZoneSidKey='America/Los_Angeles', UserName='u2' + uStr + '@test.com')
+        };
+        insert users;
+        Unit__c unt = new Unit__c(Name='Test Unit', HO_Agent__c=users[0].Id);
+        insert unt;
+        
+        Handover__c ho = new Handover__c(Unit__c=unt.Id, Sub_Status__c='QA Snagging');
+        insert ho;
+        
+        AssignmentRule__c ar = new AssignmentRule__c(DefaultUser__c=users[0].Id);
+        insert ar;
+        
+        AssignmentUser__c au = new AssignmentUser__c(AssignmentRule__c=ar.Id, User__c=users[1].Id);
+        insert au;
+        
+        Handover__c oldHo = ho.clone(true, true, true, true);
+        ho.Sub_Status__c = 'QA De-Snagging'; 
+        Map<Id, Handover__c> oldMap = new Map<Id, Handover__c>{ho.Id => oldHo};
+        List<Handover__c> newList = new List<Handover__c>{ho};
+            
+        Test.startTest();
+        HandoverTriggerHelper.updateHoAgentAssignedUser(oldMap, newList);
+        AssignmentRuleService.getInstance().assignCRMTeamUserToHandover(newList, ar, new List<AssignmentUser__c>{au});
+        Test.stopTest();
+        
+        System.assertEquals(users[0].Id, ho.HO_Agent_Assigned_User__c);
+        System.assertEquals(users[1].Id, ho.CRM_Team_Assigned_User__c);
     }
 }

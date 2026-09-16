@@ -201,6 +201,12 @@ public with sharing class RefundFormService {
                 wrapper.securityDeposit
             );
         
+        wrapper.dueAmountAfterPOCAdj =
+            RefundCalculationService.calculateDueAmountAfterPOCAdj(
+                wrapper.dueAmount,
+                wrapper.totalPDCReturn
+            );
+        
     }
     
     private static Decimal calculateSecurityDeposit(
@@ -281,55 +287,55 @@ public with sharing class RefundFormService {
     }
     
     private static void populateAttachments(
-    RefundFormWrapper wrapper,
-    Id leasingOrderId
-) {
-
-    List<Document__c> documents = [
-        SELECT Document_Name__c, ContentDocumentId__c
-        FROM Document__c
-        WHERE LeasingOrder__c = :leasingOrderId
-        AND Document_Name__c != null
-    ];
-
-    Set<String> uploadedDocuments = new Set<String>();
-
-    for (Document__c doc : documents) {
-        if (String.isNotBlank(doc.ContentDocumentId__c)) {
-            uploadedDocuments.add(doc.Document_Name__c.trim().toLowerCase());
+        RefundFormWrapper wrapper,
+        Id leasingOrderId
+    ) {
+        
+        List<Document__c> documents = [
+            SELECT Document_Name__c, ContentDocumentId__c
+            FROM Document__c
+            WHERE LeasingOrder__c = :leasingOrderId
+            AND Document_Name__c != null
+        ];
+        
+        Set<String> uploadedDocuments = new Set<String>();
+        
+        for (Document__c doc : documents) {
+            if (String.isNotBlank(doc.ContentDocumentId__c)) {
+                uploadedDocuments.add(doc.Document_Name__c.trim().toLowerCase());
+            }
         }
+        
+        wrapper.attachments.add(buildAttachment(
+            'Last tenancy contract',
+            uploadedDocuments.contains('last tenancy contract'),
+            null
+        ));
+        
+        wrapper.attachments.add(buildAttachment(
+            'Water & Electricity Clearance Certificate',
+            uploadedDocuments.contains('water & electricity clearance certificate'),
+            wrapper.waterElectricityDate
+        ));
+        
+        wrapper.attachments.add(buildAttachment(
+            'Maintenance Checkout Report',
+            uploadedDocuments.contains('maintenance checkout report'),
+            wrapper.maintenanceCheckoutDate
+        ));
+        
+        wrapper.attachments.add(buildAttachment(
+            'Tenant Letter for Break Lease',
+            uploadedDocuments.contains('tenant letter for break lease'),
+            null
+        ));
+        
+        wrapper.attachments.add(buildAttachment(
+            'Break Lease Forms Signed by Tenant',
+            uploadedDocuments.contains('break lease forms signed by tenant'),
+            null
+        ));
     }
-
-    wrapper.attachments.add(buildAttachment(
-        'Last tenancy contract',
-        uploadedDocuments.contains('last tenancy contract'),
-        null
-    ));
-
-    wrapper.attachments.add(buildAttachment(
-        'Water & Electricity Clearance Certificate',
-        uploadedDocuments.contains('water & electricity clearance certificate'),
-        wrapper.waterElectricityDate
-    ));
-
-    wrapper.attachments.add(buildAttachment(
-        'Maintenance Checkout Report',
-        uploadedDocuments.contains('maintenance checkout report'),
-        wrapper.maintenanceCheckoutDate
-    ));
-
-    wrapper.attachments.add(buildAttachment(
-        'Tenant Letter for Break Lease',
-        uploadedDocuments.contains('tenant letter for break lease'),
-        null
-    ));
-
-    wrapper.attachments.add(buildAttachment(
-        'Break Lease Forms Signed by Tenant',
-        uploadedDocuments.contains('break lease forms signed by tenant'),
-        null
-    ));
-}
     
     private static RefundFormWrapper.AttachmentRow buildAttachment(
         String documentName,

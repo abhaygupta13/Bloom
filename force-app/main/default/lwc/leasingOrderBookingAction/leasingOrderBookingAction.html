@@ -147,7 +147,7 @@
                             <div class="slds-m-bottom_medium">
                                 <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
                                     <lightning-layout-item size="6" padding="horizontal-small">
-                                        <label class="slds-form-element__label">Payment Term</label>
+                                        <label class="slds-form-element__label">Annual Payment Term</label>
                                         <lightning-combobox id="paymentPlan" name="paymentPlan" label-hidden
                                             variant="label-hidden" placeholder="Select a Payment Plan"
                                             options={paymentPlanOptions} value={selectedPaymentPlanId}
@@ -300,19 +300,17 @@
                                 </lightning-layout>
                             </div>
                             <div class="slds-m-bottom_medium">
-    <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
-
-        <lightning-layout-item size="6" padding="horizontal-small">
-            <lightning-input
-                type="checkbox"
-                label="Related Party Bloom Holding"
-                name="relatedPartyBloomHolding"
-                checked={relatedPartyBloomHolding}
-                onchange={handleFieldChange}>
-            </lightning-input>
-        </lightning-layout-item>
-
-    </lightning-layout>
+  <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
+    <lightning-layout-item size="6" padding="horizontal-small">
+      <lightning-input
+        type="checkbox"
+        label="Related Party Bloom Holding"
+        name="relatedPartyBloomHolding"
+        checked={relatedPartyBloomHolding}
+        onchange={handleFieldChange}>
+      </lightning-input>
+    </lightning-layout-item>
+  </lightning-layout>
 </div>
                             <div class="slds-m-bottom_medium">
                                 <template if:true={showCountDetails}>
@@ -376,56 +374,6 @@
                                     </lightning-layout>
                                 </div>
                             </template>
-                            <template if:true={showCommercialFields}>
-    <div class="slds-m-bottom_medium">
-        <lightning-layout class="slds-grid slds-gutters">
-
-    <lightning-layout-item size="6" padding="horizontal-small">
-        <lightning-combobox
-            name="category"
-            label="Category"
-            value={category}
-            options={categoryOptions}
-            onchange={handleFieldChange}>
-        </lightning-combobox>
-    </lightning-layout-item>
-
-    <lightning-layout-item size="6" padding="horizontal-small">
-        <lightning-combobox
-            name="subCategory"
-            label="Sub Category"
-            value={subCategory}
-            options={subCategoryOptions}
-            onchange={handleFieldChange}>
-        </lightning-combobox>
-    </lightning-layout-item>
-        </lightning-layout>
-    </div>
-<div class="slds-m-bottom_medium">
-                                    <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
-            <lightning-layout-item size="6" padding="horizontal-small">
-                <lightning-input
-                    type="number"
-                    label="Fit Out Days"
-                    name="fitOutDays"
-                    value={fitOutDays}
-                    onchange={handleFieldChange}>
-                </lightning-input>
-            </lightning-layout-item>
-
-            <lightning-layout-item size="6" padding="horizontal-small">
-                <lightning-input
-                    type="date"
-                    label="Unit Hand Over Date"
-                    name="unitHandOverDate"
-                    value={unitHandOverDate}
-                    onchange={handleFieldChange}>
-                </lightning-input>
-            </lightning-layout-item>
-
-        </lightning-layout>
-    </div>
-</template>
                         </lightning-accordion-section>
                     </lightning-accordion>
 
@@ -539,20 +487,6 @@
                                 </lightning-layout-item>
                             </lightning-layout>
                         </div>
-
-                        <template if:true={showCommercialFields}>
-
-                         <div class="slds-m-bottom_medium">
-                            <lightning-layout class="slds-grid slds-gutters slds-grid_vertical-align-end">
-                                <lightning-layout-item size="12" padding="horizontal-small">
-                                    <!-- <label class="slds-form-element__label">Remarks</label> -->
-                                    <lightning-textarea label="Permitted Use" name="PermittedUse" value={permittedUse}
-                                        onchange={handleFieldChange}>
-                                    </lightning-textarea>
-                                </lightning-layout-item>
-                            </lightning-layout>
-                        </div>
-                        </template>
                     </lightning-accordion-section>
                 </lightning-accordion>
                 <div class="slds-grid slds-grid_align-end slds-p-around_medium">

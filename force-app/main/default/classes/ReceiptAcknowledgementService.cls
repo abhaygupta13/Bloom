@@ -55,13 +55,11 @@ public inherited sharing class ReceiptAcknowledgementService {
     }
     
     public List<ReceiptAcknowledgement__c> updateReceiptAcknowledgements(List<ReceiptAcknowledgement__c> receiptAcknowledgementList){
-        
         if(receiptAcknowledgementList != NULL && !receiptAcknowledgementList.isEmpty()){
             update receiptAcknowledgementList;
         }
         return receiptAcknowledgementList;
     }
-    
     public List<ReceiptAcknowledgement__c> insertReceiptAcknowledgements(List<ReceiptAcknowledgement__c> receiptAcknowledgementList){
         if(receiptAcknowledgementList != NULL && !receiptAcknowledgementList.isEmpty()){
             insert receiptAcknowledgementList;
@@ -144,7 +142,7 @@ public inherited sharing class ReceiptAcknowledgementService {
                 SalesOrder__r.Unit__r.BuildingSectionName__r.BounceChequeAccount__r.BeneficiaryNameCorporate__c,
                 SalesOrder__r.Unit__r.BuildingSectionName__r.BounceChequeAccount__r.AccountNumberCorporate__c,
                 SalesOrder__r.Unit__r.BuildingSectionName__r.BounceChequeAccount__r.IBANNoCorporate__c,
-                SalesOrder__r.Unit__r.BuildingSectionName__r.BounceChequeAccount__r.SwiftCodeCorporate__c, SalesOrder__r.SalesManager__r.Email, 
+                SalesOrder__r.Unit__r.BuildingSectionName__r.BounceChequeAccount__r.SwiftCodeCorporate__c, SalesOrder__r.SalesManager__r.Email,Contact__c,
                 (SELECT Id,ReceiptAcknowledgement__c,TypeOfInvoice__c,AmountApplied__c
                  FROM Receipt_Allocations__r WHERE InstallmentLine__r.Type__c = 'Down Payment')
                 FROM ReceiptAcknowledgement__c WHERE Id IN : receiptAcknowledgementIdSet];
@@ -160,7 +158,7 @@ public inherited sharing class ReceiptAcknowledgementService {
     }
     
     public List<ReceiptAcknowledgement__c> getAllReceiptAcknowledgementBySalesOrders(Set<Id> salesOrderIdSet){
-        return [SELECT Id, MaturityDate__c,VerifyDate__c,SAP_Document_No__c,Due_Date__c
+        return [SELECT Id, MaturityDate__c,VerifyDate__c,SAP_Document_No__c,Due_Date__c,PaymentType__c,Status__c,SAP_Condition_Type__c
                 FROM ReceiptAcknowledgement__c
                 WHERE SalesOrder__c IN :salesOrderIdSet AND  
                 MaturityDate__c <= :System.today()];
@@ -195,11 +193,11 @@ public inherited sharing class ReceiptAcknowledgementService {
                 FROM ReceiptAcknowledgement__c 
                 WHERE SalesOrder__c = : salesOrderId AND Status__c != 'Reversed'];     
     }
-    
+
     public List<ReceiptAcknowledgement__c> deleteReceiptAcknowledgementWithoutTrigger(List<ReceiptAcknowledgement__c> raList){
         if(raList != NULL && !raList.isEmpty()){
             ReceiptAcknowledgementTriggerHandler.isTriggerDisabled = true;
-            ReceiptAcknowledgeDeleteHandler.isTriggerDisabled = true;
+            
             delete raList;
             ReceiptAcknowledgementTriggerHandler.isTriggerDisabled = false; 
         }
@@ -231,7 +229,7 @@ public inherited sharing class ReceiptAcknowledgementService {
         paramMap.put('Param2', receiptAck.SAP_Contract_Number__c);
         paramMap.put('Param3', String.valueOf(receiptAck.Name));
         paramMap.put('Param4', receiptAck.New_Maturity_Date__c != null ? String.valueOf(receiptAck.New_Maturity_Date__c) : String.valueOf(receiptAck.MaturityDate__c));
-        
+    
         paramMap.put('Param5', String.valueOf(receiptAck.VerifyDate__c));
         paramMap.put('Param6', receiptAck.Unit__r != null ? receiptAck.Unit__r.SAP_Unit_Number__c : '');
         paramMap.put('Param7', String.valueOf(receiptAck.Amount__c));

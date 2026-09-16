@@ -7,7 +7,7 @@ Description : Batch class to send payment reminder emails and log attachments to
 Sr.No.  version         Date                Details                         Author
 1.      V1.0            25/06/2024          Initial Version                 Rajat Rastogi
 2.      V2.0            29/07/2026          Refactored Version              Jhilik Gandhi
-3.      V3.0            13/08/2026          Enforce RequiredSOAAttachment__c Antariksh Jain
+3.      V3.0            13/08/2026          Enforce RequiredSOAAttachment__c Antriksh Jain
 ****************************************************************************************************************/ 
 
 public class HandoverPaymentReminderBatch implements Database.Batchable<SObject>, Schedulable {    
@@ -20,7 +20,7 @@ public class HandoverPaymentReminderBatch implements Database.Batchable<SObject>
   
     public Database.QueryLocator start(Database.BatchableContext BC) {
         return Database.getQueryLocator([
-            SELECT Id, Handover_Phase__r.RequiredSOAAttachment__c, Handover_Phase__r.FirstHOPaymentReminderEmailTempId__c, 
+            SELECT Id,NOCDateFormatted__c, Handover_Phase__r.RequiredSOAAttachment__c, Handover_Phase__r.FirstHOPaymentReminderEmailTempId__c, 
                    Handover_Phase__r.SecondHOPaymentReminderEmailTempId__c, Handover_Phase__r.ThirdHOPaymentReminderEmailTempId__c, 
                    StopAllEmailCommunication__c, Name, Project__r.BloomPhoneArabic__c, Handover_Phase__r.PaymentReminderStop__c,
                    FirstPaymentReminderEmailDate__c, SecondPaymentReminderEmailDate__c, ThirdPaymentReminderEmail_Date__c, NOC_Date__c, 
@@ -34,7 +34,7 @@ public class HandoverPaymentReminderBatch implements Database.Batchable<SObject>
             WHERE Payment_Settled__c = false 
             AND Handover_Phase__r.PaymentReminderStop__c = false 
             AND StopAllEmailCommunication__c = false 
-            AND CustomerEmail__c != NULL
+            AND CustomerEmail__c != NULL 
             AND (Notice_of_Completion_Date__c != NULL OR Promise_to_Pay_Date__c != NULL)
         ]);
     }
@@ -209,7 +209,8 @@ public class HandoverPaymentReminderBatch implements Database.Batchable<SObject>
             .replace('{{{Handover__c.Project_Name_Arabic__c}}}', String.isNotBlank(handoverRec.Project_Name_Arabic__c) ? handoverRec.Project_Name_Arabic__c : '')
             .replace('{{{Handover__c.Unit_Code__c}}}', String.isNotBlank(handoverRec.Unit_Code__c) ? handoverRec.Unit_Code__c : '')
             .replace('{{{Handover__c.Unit__r.DoorNumber__c}}}', handoverRec.Unit__r?.DoorNumber__c != null ? String.valueOf(handoverRec.Unit__r.DoorNumber__c) : '')
-            .replace('{{{Handover__c.NOC_Date__c}}}', handoverRec.Notice_of_Completion_Date__c != null ? String.valueOf(handoverRec.Notice_of_Completion_Date__c) : '')
+            .replace('{{{Handover__c.NOC_Date__c}}}', handoverRec.NOC_Date__c != null ? String.valueOf(handoverRec.NOC_Date__c) : '')
+            .replace('{{{Handover__c.NOCDateFormatted__c}}}', handoverRec.NOCDateFormatted__c != null ? String.valueOf(handoverRec.NOCDateFormatted__c) : '')
             .replace('{{{Handover__c.Account_Manager_Name__c}}}', String.isNotBlank(handoverRec.Account_Manager_Name__c) ? handoverRec.Account_Manager_Name__c : '')
             .replace('{{{Handover__c.Account_Manager_Name_Arabic__c}}}', String.isNotBlank(handoverRec.Account_Manager_Name_Arabic__c) ? handoverRec.Account_Manager_Name_Arabic__c : '')
             .replace('{{{Handover__c.Account_Manager_Phone__c}}}', String.isNotBlank(handoverRec.Account_Manager_Phone__c) ? handoverRec.Account_Manager_Phone__c : '')

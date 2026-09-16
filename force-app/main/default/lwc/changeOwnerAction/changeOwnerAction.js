@@ -11,10 +11,8 @@ export default class ChangeOwnerAction extends LightningElement {
     }
 
     handleUserChange(event) {
-        //const selected = event.detail.recordId;
         const selected = event.detail.recordId;
         this.selectedUserId = selected;
-       
     }
 
     handleSubmit() {

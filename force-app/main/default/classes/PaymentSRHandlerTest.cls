@@ -151,21 +151,21 @@ public class PaymentSRHandlerTest{
     
      @isTest
     static void validatyTest(){
-        SalesOrder__c so = [Select id from Salesorder__c limit 1];
-        ServiceRequestController.validateEligibility(so.id,'Payment',false);
+        SalesOrder__c so = [Select Id,Account__c,Unit__c from Salesorder__c limit 1];
+        ServiceRequestController.validateEligibility(so.id,'Payment',so.Account__c,so.Unit__c,false);
     }
     
     @isTest
     static void createCaseTest(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
-        ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
     }
     
     @isTest
     static void validateCaseTest(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         test.stopTest();
         ReviewStepValidatorController.validateForNextReview(caseData.get('caseId'));
         PaymentSRHandler i = PaymentSRHandler.getInstance();
@@ -176,7 +176,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest1(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         update cs;
@@ -188,7 +188,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest2(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.POPUploaded__c = 'Yes';
@@ -201,7 +201,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest3(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.POPUploaded__c = 'Yes';
@@ -232,7 +232,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest4(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '1';
         cs.POPUploaded__c = 'No';
@@ -245,7 +245,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest5(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '2';
         cs.POPUploaded__c = 'Yes';
@@ -258,7 +258,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest6(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '2';
         cs.POPUploaded__c = 'Yes';
@@ -289,7 +289,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest7(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '2';
         cs.POPUploaded__c = 'No';
@@ -302,7 +302,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest8(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '4';
         update cs;
@@ -314,7 +314,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest9(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = '4';
         update cs;
@@ -345,7 +345,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest10(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = 'Final';
         cs.POPUploaded__c = 'Yes';
@@ -374,7 +374,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest11(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = 'Final';
         cs.IsThirdPartyNeeded__c = 'No';
@@ -404,7 +404,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest12(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = 'Final';
         cs.IsThirdPartyNeeded__c = 'No';
@@ -436,7 +436,7 @@ public class PaymentSRHandlerTest{
     static void validateCaseTest13(){
         SalesOrder__c so = [Select id,Account__c,Unit__c from Salesorder__c limit 1];
         test.StartTest();
-        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email');
+        Map<String,String> caseData = ServiceRequestController.createCaseRecord(so.id,'Service Request','Financial - Payment Service','Payment',so.Account__c,so.Unit__c,'test','Email',false);
         Case cs = [Select id, Step__c from case where id =: caseData.get('caseId')];
         cs.step__c = 'Final';
         cs.IsThirdPartyNeeded__c = 'Yes';

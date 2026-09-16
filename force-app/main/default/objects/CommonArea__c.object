@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Common_Area_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>Building__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Building</label>
+        <referenceTo>Building__c</referenceTo>
+        <relationshipLabel>Common Areas</relationshipLabel>
+        <relationshipName>Common_Areas</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CommonAreaName__c</fullName>
+        <label>Common Area Name</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Community__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Community</label>
+        <referenceTo>Community__c</referenceTo>
+        <relationshipLabel>Common Areas</relationshipLabel>
+        <relationshipName>Common_Areas</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <label>Description</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>FloorNumber__c</fullName>
+        <label>Floor Number</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Basement</fullName>
+                    <default>false</default>
+                    <label>Basement</label>
+                </value>
+                <value>
+                    <fullName>Basement 1</fullName>
+                    <default>false</default>
+                    <label>Basement 1</label>
+                </value>
+                <value>
+                    <fullName>Basement 2</fullName>
+                    <default>false</default>
+                    <label>Basement 2</label>
+                </value>
+                <value>
+                    <fullName>Basement 3</fullName>
+                    <default>false</default>
+                    <label>Basement 3</label>
+                </value>
+                <value>
+                    <fullName>BM</fullName>
+                    <default>false</default>
+                    <label>BM</label>
+                </value>
+                <value>
+                    <fullName>Common area</fullName>
+                    <default>false</default>
+                    <label>Common area</label>
+                </value>
+                <value>
+                    <fullName>Drive Way</fullName>
+                    <default>false</default>
+                    <label>Drive Way</label>
+                </value>
+                <value>
+                    <fullName>GA</fullName>
+                    <default>false</default>
+                    <label>GA</label>
+                </value>
+                <value>
+                    <fullName>Ground Floor</fullName>
+                    <default>false</default>
+                    <label>Ground Floor</label>
+                </value>
+                <value>
+                    <fullName>Lobby 1</fullName>
+                    <default>false</default>
+                    <label>Lobby 1</label>
+                </value>
+                <value>
+                    <fullName>Lobby 2</fullName>
+                    <default>false</default>
+                    <label>Lobby 2</label>
+                </value>
+                <value>
+                    <fullName>Lobby 3</fullName>
+                    <default>false</default>
+                    <label>Lobby 3</label>
+                </value>
+                <value>
+                    <fullName>Lobby 4</fullName>
+                    <default>false</default>
+                    <label>Lobby 4</label>
+                </value>
+                <value>
+                    <fullName>Lobby 5</fullName>
+                    <default>false</default>
+                    <label>Lobby 5</label>
+                </value>
+                <value>
+                    <fullName>Mezzanine Floor</fullName>
+                    <default>false</default>
+                    <label>Mezzanine Floor</label>
+                </value>
+                <value>
+                    <fullName>Mezzanine Floor-01</fullName>
+                    <default>false</default>
+                    <label>Mezzanine Floor-01</label>
+                </value>
+                <value>
+                    <fullName>Mezzanine Floor-02</fullName>
+                    <default>false</default>
+                    <label>Mezzanine Floor-02</label>
+                </value>
+                <value>
+                    <fullName>Office Floor</fullName>
+                    <default>false</default>
+                    <label>Office Floor</label>
+                </value>
+                <value>
+                    <fullName>Podium-1</fullName>
+                    <default>false</default>
+                    <label>Podium-1</label>
+                </value>
+                <value>
+                    <fullName>Podium-2</fullName>
+                    <default>false</default>
+                    <label>Podium-2</label>
+                </value>
+                <value>
+                    <fullName>Podium-3</fullName>
+                    <default>false</default>
+                    <label>Podium-3</label>
+                </value>
+                <value>
+                    <fullName>Podium-4</fullName>
+                    <default>false</default>
+                    <label>Podium-4</label>
+                </value>
+                <value>
+                    <fullName>Podium-4H</fullName>
+                    <default>false</default>
+                    <label>Podium-4H</label>
+                </value>
+                <value>
+                    <fullName>Podium 4HL</fullName>
+                    <default>false</default>
+                    <label>Podium 4HL</label>
+                </value>
+                <value>
+                    <fullName>Pump Room</fullName>
+                    <default>false</default>
+                    <label>Pump Room</label>
+                </value>
+                <value>
+                    <fullName>Roof Floor</fullName>
+                    <default>false</default>
+                    <label>Roof Floor</label>
+                </value>
+                <value>
+                    <fullName>UG-Floor</fullName>
+                    <default>false</default>
+                    <label>UG-Floor</label>
+                </value>
+                <value>
+                    <fullName>1st Floor</fullName>
+                    <default>false</default>
+                    <label>1st Floor</label>
+                </value>
+                <value>
+                    <fullName>2nd Floor</fullName>
+                    <default>false</default>
+                    <label>2nd Floor</label>
+                </value>
+                <value>
+                    <fullName>3rd Floor</fullName>
+                    <default>false</default>
+                    <label>3rd Floor</label>
+                </value>
+                <value>
+                    <fullName>4th Floor</fullName>
+                    <default>false</default>
+                    <label>4th Floor</label>
+                </value>
+                <value>
+                    <fullName>5th Floor</fullName>
+                    <default>false</default>
+                    <label>5th Floor</label>
+                </value>
+                <value>
+                    <fullName>6th Floor</fullName>
+                    <default>false</default>
+                    <label>6th Floor</label>
+                </value>
+                <value>
+                    <fullName>7th Floor</fullName>
+                    <default>false</default>
+                    <label>7th Floor</label>
+                </value>
+                <value>
+                    <fullName>8th Floor</fullName>
+                    <default>false</default>
+                    <label>8th Floor</label>
+                </value>
+                <value>
+                    <fullName>9th Floor</fullName>
+                    <default>false</default>
+                    <label>9th Floor</label>
+                </value>
+                <value>
+                    <fullName>10th Floor</fullName>
+                    <default>false</default>
+                    <label>10th Floor</label>
+                </value>
+                <value>
+                    <fullName>11th Floor</fullName>
+                    <default>false</default>
+                    <label>11th Floor</label>
+                </value>
+                <value>
+                    <fullName>12th Floor</fullName>
+                    <default>false</default>
+                    <label>12th Floor</label>
+                </value>
+                <value>
+                    <fullName>13th Floor</fullName>
+                    <default>false</default>
+                    <label>13th Floor</label>
+                </value>
+                <value>
+                    <fullName>14th Floor</fullName>
+                    <default>false</default>
+                    <label>14th Floor</label>
+                </value>
+                <value>
+                    <fullName>15th Floor</fullName>
+                    <default>false</default>
+                    <label>15th Floor</label>
+                </value>
+                <value>
+                    <fullName>16th Floor</fullName>
+                    <default>false</default>
+                    <label>16th Floor</label>
+                </value>
+                <value>
+                    <fullName>17th Floor</fullName>
+                    <default>false</default>
+                    <label>17th Floor</label>
+                </value>
+                <value>
+                    <fullName>18th Floor</fullName>
+                    <default>false</default>
+                    <label>18th Floor</label>
+                </value>
+                <value>
+                    <fullName>19th-25th Floor Apartments</fullName>
+                    <default>false</default>
+                    <label>19th-25th Floor Apartments</label>
+                </value>
+                <value>
+                    <fullName>19th Floor</fullName>
+                    <default>false</default>
+                    <label>19th Floor</label>
+                </value>
+                <value>
+                    <fullName>20th Floor</fullName>
+                    <default>false</default>
+                    <label>20th Floor</label>
+                </value>
+                <value>
+                    <fullName>21st Floor</fullName>
+                    <default>false</default>
+                    <label>21st Floor</label>
+                </value>
+                <value>
+                    <fullName>22nd Floor</fullName>
+                    <default>false</default>
+                    <label>22nd Floor</label>
+                </value>
+                <value>
+                    <fullName>23rd Floor</fullName>
+                    <default>false</default>
+                    <label>23rd Floor</label>
+                </value>
+                <value>
+                    <fullName>24th Floor</fullName>
+                    <default>false</default>
+                    <label>24th Floor</label>
+                </value>
+                <value>
+                    <fullName>25th Floor</fullName>
+                    <default>false</default>
+                    <label>25th Floor</label>
+                </value>
+                <value>
+                    <fullName>26th Floor</fullName>
+                    <default>false</default>
+                    <label>26th Floor</label>
+                </value>
+                <value>
+                    <fullName>27th Floor</fullName>
+                    <default>false</default>
+                    <label>27th Floor</label>
+                </value>
+                <value>
+                    <fullName>28th Floor</fullName>
+                    <default>false</default>
+                    <label>28th Floor</label>
+                </value>
+                <value>
+                    <fullName>29th Floor</fullName>
+                    <default>false</default>
+                    <label>29th Floor</label>
+                </value>
+                <value>
+                    <fullName>30th Floor</fullName>
+                    <default>false</default>
+                    <label>30th Floor</label>
+                </value>
+                <value>
+                    <fullName>31st Floor</fullName>
+                    <default>false</default>
+                    <label>31st Floor</label>
+                </value>
+                <value>
+                    <fullName>32nd Floor</fullName>
+                    <default>false</default>
+                    <label>32nd Floor</label>
+                </value>
+                <value>
+                    <fullName>33rd Floor</fullName>
+                    <default>false</default>
+                    <label>33rd Floor</label>
+                </value>
+                <value>
+                    <fullName>34th Floor</fullName>
+                    <default>false</default>
+                    <label>34th Floor</label>
+                </value>
+                <value>
+                    <fullName>35th Floor</fullName>
+                    <default>false</default>
+                    <label>35th Floor</label>
+                </value>
+                <value>
+                    <fullName>36th Floor</fullName>
+                    <default>false</default>
+                    <label>36th Floor</label>
+                </value>
+                <value>
+                    <fullName>37th Floor</fullName>
+                    <default>false</default>
+                    <label>37th Floor</label>
+                </value>
+                <value>
+                    <fullName>38th Floor</fullName>
+                    <default>false</default>
+                    <label>38th Floor</label>
+                </value>
+                <value>
+                    <fullName>39th Floor</fullName>
+                    <default>false</default>
+                    <label>39th Floor</label>
+                </value>
+                <value>
+                    <fullName>40th Floor</fullName>
+                    <default>false</default>
+                    <label>40th Floor</label>
+                </value>
+                <value>
+                    <fullName>41st Floor</fullName>
+                    <default>false</default>
+                    <label>41st Floor</label>
+                </value>
+                <value>
+                    <fullName>42nd Floor</fullName>
+                    <default>false</default>
+                    <label>42nd Floor</label>
+                </value>
+                <value>
+                    <fullName>43rd Floor</fullName>
+                    <default>false</default>
+                    <label>43rd Floor</label>
+                </value>
+                <value>
+                    <fullName>44th Floor</fullName>
+                    <default>false</default>
+                    <label>44th Floor</label>
+                </value>
+                <value>
+                    <fullName>45th Floor</fullName>
+                    <default>false</default>
+                    <label>45th Floor</label>
+                </value>
+                <value>
+                    <fullName>46th Floor</fullName>
+                    <default>false</default>
+                    <label>46th Floor</label>
+                </value>
+                <value>
+                    <fullName>47th Floor</fullName>
+                    <default>false</default>
+                    <label>47th Floor</label>
+                </value>
+                <value>
+                    <fullName>48th Floor</fullName>
+                    <default>false</default>
+                    <label>48th Floor</label>
+                </value>
+                <value>
+                    <fullName>49th Floor</fullName>
+                    <default>false</default>
+                    <label>49th Floor</label>
+                </value>
+                <value>
+                    <fullName>50th Floor</fullName>
+                    <default>false</default>
+                    <label>50th Floor</label>
+                </value>
+                <value>
+                    <fullName>51st Floor</fullName>
+                    <default>false</default>
+                    <label>51st Floor</label>
+                </value>
+                <value>
+                    <fullName>52nd Floor</fullName>
+                    <default>false</default>
+                    <label>52nd Floor</label>
+                </value>
+                <value>
+                    <fullName>53rd Floor</fullName>
+                    <default>false</default>
+                    <label>53rd Floor</label>
+                </value>
+                <value>
+                    <fullName>54th Floor</fullName>
+                    <default>false</default>
+                    <label>54th Floor</label>
+                </value>
+                <value>
+                    <fullName>55th Floor</fullName>
+                    <default>false</default>
+                    <label>55th Floor</label>
+                </value>
+                <value>
+                    <fullName>56th Floor</fullName>
+                    <default>false</default>
+                    <label>56th Floor</label>
+                </value>
+                <value>
+                    <fullName>57th Floor</fullName>
+                    <default>false</default>
+                    <label>57th Floor</label>
+                </value>
+                <value>
+                    <fullName>58th Floor</fullName>
+                    <default>false</default>
+                    <label>58th Floor</label>
+                </value>
+                <value>
+                    <fullName>59th Floor</fullName>
+                    <default>false</default>
+                    <label>59th Floor</label>
+                </value>
+                <value>
+                    <fullName>60th Floor</fullName>
+                    <default>false</default>
+                    <label>60th Floor</label>
+                </value>
+                <value>
+                    <fullName>61st Floor</fullName>
+                    <default>false</default>
+                    <label>61st Floor</label>
+                </value>
+                <value>
+                    <fullName>62nd Floor</fullName>
+                    <default>false</default>
+                    <label>62nd Floor</label>
+                </value>
+                <value>
+                    <fullName>63rd Floor</fullName>
+                    <default>false</default>
+                    <label>63rd Floor</label>
+                </value>
+                <value>
+                    <fullName>64th Floor</fullName>
+                    <default>false</default>
+                    <label>64th Floor</label>
+                </value>
+                <value>
+                    <fullName>65th Floor</fullName>
+                    <default>false</default>
+                    <label>65th Floor</label>
+                </value>
+                <value>
+                    <fullName>66th Floor</fullName>
+                    <default>false</default>
+                    <label>66th Floor</label>
+                </value>
+                <value>
+                    <fullName>67th Floor</fullName>
+                    <default>false</default>
+                    <label>67th Floor</label>
+                </value>
+                <value>
+                    <fullName>68th Floor</fullName>
+                    <default>false</default>
+                    <label>68th Floor</label>
+                </value>
+                <value>
+                    <fullName>69th Floor</fullName>
+                    <default>false</default>
+                    <label>69th Floor</label>
+                </value>
+                <value>
+                    <fullName>70th Floor</fullName>
+                    <default>false</default>
+                    <label>70th Floor</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>Common Areas</relationshipLabel>
+        <relationshipName>Common_Areas</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Common Area</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>FloorNumber__c</columns>
+        <columns>CommonAreaName__c</columns>
+        <columns>Community__c</columns>
+        <columns>Project__c</columns>
+        <columns>Building__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Common Area Code</label>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Common Areas</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>CommonAreaName__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

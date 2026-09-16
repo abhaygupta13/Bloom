@@ -115,6 +115,44 @@ public class PHPPHandoverHandlerTest {
 
         // Bulk insert all documents in one DML call
         insert docsToInsert;
+        
+        // Create test ServiceCatalog record
+        ServiceCatalog__c testServiceCatalog = new ServiceCatalog__c(
+            Name = 'Test Service Catalog',
+            Type__c = 'Service Request',
+            Category__c = 'CRM Services',
+            SubCategory__c = 'Tawtheeq Enrollment',
+            RecordTypeDevName__c = 'TawtheeqEnrollment',
+            AvailableForOwner__c = true
+        );
+        insert testServiceCatalog;
+        system.debug('testServiceCatalog----->'+testServiceCatalog);
+        
+        List<ServiceAction__c> stepList = new list<ServiceAction__c>();
+        // Create test ServiceAction record
+        ServiceAction__c testServiceAction1 = new ServiceAction__c(
+            ServiceCatalog__c = testServiceCatalog.Id,
+            TaskType__c = 'Tawtheeq Enrollment',
+            TaskSubType__c = 'Finance Team Task 1',
+            TaskSubject__c = 'Finance Team Task',
+            Due_in_days__c = 2,
+            Order__c = 1
+        ); 
+        stepList.add(testServiceAction1);
+        ServiceAction__c testServiceAction2 = new ServiceAction__c(
+            ServiceCatalog__c = testServiceCatalog.Id,
+            TaskType__c = 'Tawtheeq Enrollment',
+            TaskSubType__c = 'Government Relation Team Task 1',
+            TaskSubject__c = 'Government Relation Team Task 1',
+            Due_in_days__c = 2,
+            Order__c = 2,
+            FinalTask__c = true
+        );
+        stepList.add(testServiceAction2);
+              
+        
+
+        insert stepList;
     }
     
     @isTest
@@ -199,8 +237,9 @@ public class PHPPHandoverHandlerTest {
              Project__r.NewSaleWithMortgageAdminFeeApt__c, Project__r.NewSaleWithMortgageAdminFeeVilla__c, Project__r.NewSaleWithMortgageEvaluationFeeApt__c,
              Sales_Order__r.NetAmount__c,Unit__r.UnitType__c,UnitCategory__c,Mortgage_Value__c,Current_USer_Profile__c,Next_Step__c,ServiceCatalog__c,
              Account__c, Account__r.PersonEmail, Account__r.FirstName, Account__r.LastName, Unit__c, Unit__r.UnitNumber__c,Unit__r.HO_Agent__c,Previous_HO_Status__c,
-             Sub_Status__c, Orientation_Appointment_Status__c, Is_Notice_of_Completion_Sent__c, Payment_Type__c, RecordTypeId, Is_Appointment_Booked__c
-                         FROM Handover__c LIMIT 1];
+             Sub_Status__c, Orientation_Appointment_Status__c, Is_Notice_of_Completion_Sent__c, Payment_Type__c, RecordTypeId, Is_Appointment_Booked__c,
+             Property_Enrollment_Under_Tawtheeq__c
+             FROM Handover__c LIMIT 1];
         ho.Payment_Type__c = 'Mortgage';
         ho.Is_Notice_of_Completion_Sent__c = true;
         ho.Sub_Status__c = 'Settlement Follow up';
@@ -535,7 +574,8 @@ static void testValidateHOTeamTasks_StepCoverage() {
              Project__r.NewSaleWithMortgageAdminFeeApt__c, Project__r.NewSaleWithMortgageAdminFeeVilla__c, Project__r.NewSaleWithMortgageEvaluationFeeApt__c,
              Sales_Order__r.NetAmount__c,Unit__r.UnitType__c,UnitCategory__c,Mortgage_Value__c,Current_USer_Profile__c,Next_Step__c,ServiceCatalog__c,Lease_Type__c,Lease_Amount__c,Lease_End_Date__c,
              Account__c, Account__r.PersonEmail, Account__r.FirstName, Account__r.LastName, Unit__c, Unit__r.UnitNumber__c,Unit__r.HO_Agent__c,Previous_HO_Status__c,
-             Sub_Status__c, Orientation_Appointment_Status__c, Is_Notice_of_Completion_Sent__c, Payment_Type__c, RecordTypeId, Is_Appointment_Booked__c
+             Sub_Status__c, Orientation_Appointment_Status__c, Is_Notice_of_Completion_Sent__c, Payment_Type__c, RecordTypeId, Is_Appointment_Booked__c,
+                          Property_Enrollment_Under_Tawtheeq__c,Property_Enrollment_Under_Tawtheeq_Accou__c
                          FROM Handover__c LIMIT 1];
         ho.Payment_Type__c = 'PHPP';
         ho.Sub_Status__c = 'Tawtheeq Enrollment';
@@ -547,8 +587,9 @@ static void testValidateHOTeamTasks_StepCoverage() {
         Map<String, Object> response = handler.validatePHPPHandoverForNextReview(ho, false);
         Test.stopTest();
         
-        // Verify handover was updated
-        Handover__c updatedHo = [SELECT Payment_Settled__c, Lease_Start_Date__c FROM Handover__c WHERE Id = :ho.Id];
+        // Verify handover was updated 
+        //Handover__c updatedHo = [SELECT Payment_Settled__c, Lease_Start_Date__c FROM Handover__c WHERE Id = :ho.Id];
+        handler.createTawtheeqEnrollmentCase(ho);
         //System.assertEquals(true, updatedHo.Payment_Settled__c, 'Payment should be marked as settled');
         //System.assertEquals(Date.today(), updatedHo.Lease_Start_Date__c, 'Lease start date should be set');
     }
@@ -726,11 +767,11 @@ static void testValidateHOTeamTasks_StepCoverage() {
         System.assertNotEquals(null, response, 'Response should not be null');
     }
     @isTest
-static void testCoverageBooster() {
-    PHPPHandoverHandler handler = PHPPHandoverHandler.getInstance();
-    Test.startTest();
-    handler.coverageBooster();
-    Test.stopTest();
-    // No assert needed for booster
-}
+    static void testCoverageBooster() {
+        PHPPHandoverHandler handler = PHPPHandoverHandler.getInstance();
+        Test.startTest();
+        handler.coverageBooster();
+        Test.stopTest();
+        // No assert needed for booster
+    }
 }

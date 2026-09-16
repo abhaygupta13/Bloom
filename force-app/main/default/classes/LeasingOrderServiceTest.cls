@@ -202,7 +202,7 @@ public class LeasingOrderServiceTest {
     @isTest
     static void testIntegrationRecord_Termination() {
         LeasingOrder__c lo = createFullLeasingOrder('Commercial', 'Termination');
-        lo.TerminationType__c = 'Normal';
+        lo.TerminationType__c = 'Early';
         lo.LeaseTerminationRefundType__c = 'Refund-F';
         lo.TerminationDate__c = Date.today();
         lo.TerminationNoticeDate__c = Date.today().addDays(-30);

@@ -55,6 +55,9 @@ public inherited sharing class LeasingReceiptAcknowledgementService {
         List<LeasingReceiptAcknowledgment__c> receiptAckList = getLeasingReceiptAcknowledgementByIds(ReceiptAckUpdateActionIds);
         List<IntegrationRecord__c> objIntegrationRecordList = new List<IntegrationRecord__c>();
         for(LeasingReceiptAcknowledgment__c receiptAck :receiptAckList){
+            if (receiptAck.MarkDeleteReverse__c && String.isBlank(receiptAck.SAPDocumentNumber__c)) {
+                continue;
+            }
             if((bypassIntegration && receiptAck.SAPDocumentNumber__c != Null) || (receiptAck.VerifyDate__c > Date.Today() && !receiptAck.MarkDeleteReverse__c))
             continue;
             objIntegrationRecordList.add(createReceiptAckIntegrationRecObj(action, receiptAck, Type));
@@ -258,6 +261,7 @@ public inherited sharing class LeasingReceiptAcknowledgementService {
                                 'FROM LeasingReceiptAcknowledgment__c ' +
                                 'WHERE BankName__c = :bankName ' +
                                 'AND LeasingOrder__c = \''+receipt.LeasingOrder__c+'\' '+
+                				'AND SAPReversalDocumentNumber__c = null '+
                                 'AND (' + String.join(conditions, ' OR ') + ') ' +
                                 'LIMIT 1';
             return Database.query(queryString);

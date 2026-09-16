@@ -1,0 +1,95 @@
+<template>
+
+    <div class="slds-modal__header slds-p-around_medium">
+        <h2 class="slds-text-heading_medium slds-align-middle">New Appointment</h2>
+    </div>
+
+    <div class="slds-modal__content slds-p-horizontal_medium slds-p-vertical_small">
+
+        <lightning-layout class="slds-m-top_x-small">
+            <lightning-layout-item size="12" padding="horizontal-small">
+                <lightning-input label="Subject" value={subject} onchange={handleSubjectChange} required>
+                </lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows="true" class="slds-m-top_x-small">
+            <lightning-layout-item size="6" padding="horizontal-small">
+                <lightning-record-picker label="Assigned To" placeholder="Search People..." object-api-name="User"
+                    value={assignedToId} onchange={handleAssignedToChange} required>
+                </lightning-record-picker>
+            </lightning-layout-item>
+            <lightning-layout-item size="6" padding="horizontal-small">
+                <lightning-input type="date" label="Appointment Date" value={appointmentDate}
+                    onchange={handleAppointmentDateChange} min={minDate} required>
+                </lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout multiple-rows="true" class="slds-m-top_x-small">
+            <lightning-layout-item size="6" padding="horizontal-small">
+                <lightning-combobox label="Appointment Type" value={appointmentType} options={appointmentTypeOptions}
+                    onchange={handleAppointmentTypeChange}></lightning-combobox>
+            </lightning-layout-item>
+            <lightning-layout-item size="6" padding="horizontal-small">
+                <lightning-combobox label="Appointment Available Slot" value={selectedSlotId} options={timeOptions} placeholder={slotPlaceholder}
+                    disabled={isSlotDisabled} onchange={handleSlotChange} required={isSlotRequired}>
+                </lightning-combobox>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <!-- Loading Spinner -->
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading..." size="small"></lightning-spinner>
+        </template>
+
+        <template if:true={showManualFields}>
+            <lightning-layout multiple-rows="true" class="slds-m-top_x-small">
+                <lightning-layout-item size="3" padding="horizontal-small">
+                    <lightning-input type="date" label="Start Date" value={startDate} onchange={handleStartDateChange}
+                        min={minDate} required></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" padding="horizontal-small">
+                    <lightning-input type="time" label="Start Time" value={startTime} onchange={handleStartTimeChange}
+                        required></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" padding="horizontal-small">
+                    <lightning-input type="date" label="End Date" value={endDate} onchange={handleEndDateChange}
+                        min={minDate} required></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" padding="horizontal-small">
+                    <lightning-input type="time" label="End Time" value={endTime} onchange={handleEndTimeChange}
+                        required></lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+
+        <lightning-layout multiple-rows="true" class="slds-m-top_x-small">
+            <lightning-layout-item size="6" padding="horizontal-small">
+                <lightning-combobox label="Appointment Mode" value={appointmentMode} options={appointmentModeOptions}
+                    onchange={handleAppointmentModeChange} required>
+                </lightning-combobox>
+            </lightning-layout-item>
+            <lightning-layout-item size="6" padding="horizontal-small">
+                <lightning-combobox label="Location" value={location} options={locationOptions}
+                    onchange={handleLocationChange} required={isLocationRequired}></lightning-combobox>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout class="slds-m-top_x-small">
+            <lightning-layout-item size="12" padding="horizontal-small">
+                <lightning-textarea label="Description" value={description}
+                    onchange={handleDescriptionChange} required></lightning-textarea>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <template lwc:if={errorMessage}>
+            <div class="slds-text-color_error slds-m-top_small">{errorMessage}</div>
+        </template>
+
+    </div>
+
+    <div class="slds-modal__footer">
+        <lightning-button label="Cancel" onclick={handleCancel} class="slds-m-right_small"></lightning-button>
+        <lightning-button variant="brand" label="Save" onclick={handleSave} disabled={isLoading}></lightning-button>
+    </div>
+</template>

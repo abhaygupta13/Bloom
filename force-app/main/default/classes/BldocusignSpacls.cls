@@ -197,7 +197,7 @@ public class BldocusignSpacls {
             }
             system.debug(allrecipients);
         }
-       
+        
         if(!documentoutputname.Contains('Broker') && !documentoutputname.Contains('Referral')){
             system.debug('get jos');
             List<Contact> JOContactlst = [SELECT id, Name, MobileCountryCode__c, MobilePhone, Email From Contact Where Accountid IN (SELECT Account__c from JointOwner__c where SalesOrder__c = :recordId)];
@@ -762,45 +762,6 @@ public class BldocusignSpacls {
             }*/
         }
 
-        if (documentoutputname.Contains('Sales Purchase Agreement') || documentoutputname.Contains('Booking Form')){
-            system.debug('contains Sales Purchase Agreement yes');
-            
-            dfsle.Tab myBloomSignHereTab1 = new dfsle.SignHereTab()
-                .withScale(1) // 1.5 scale
-                .withRequired(true) // Signing mandatory
-                .withAnchor(new dfsle.Tab.Anchor(
-                    'BloomSigner1:', // Anchor string
-                    false, // Do not allow white space in anchor string
-                    false, // Anchor string is not case sensitive
-                    'right', // Horizontal alignment in relation to the anchor text
-                    true, // Ignore if the anchor text is not present in the document
-                    true, // Must match the value of the anchor string in its entirety
-                    'pixels', // Unit of the x and y offset properties
-                    0, // X offset
-                    0)).withPosition(new dfsle.Tab.Position(
-                        1, 
-                        null,
-                        null,
-                        null,
-                        null,
-                        null)); // Y offset
-            system.debug('signed 1 tab added');
-            
-            system.debug('add bloom signer 1tab');
-            system.debug(i+2);
-            dfsle.Recipient myBloomSignrecipient1 = dfsle.Recipient.fromSource(
-                System.Label.DocusignBloomSigner1Name,
-                System.Label.DocusignBloomSigner1Email,
-                null, 
-                'BloomSigner1:',
-                null).withTabs(new List<dfsle.Tab> {
-                    myBloomSignHereTab1
-                        }).withRoutingOrder(13);
-            
-            system.debug(myBloomSignrecipient1);
-            allrecipients.add (myBloomSignrecipient1);
-        }
-
         if(documentoutputname.Contains ('Offer')){
             dfsle.Tab myBloomSignHereTab1 = new dfsle.SignHereTab()
                 .withScale(1) // 1.5 scale
@@ -1030,8 +991,8 @@ public class BldocusignSpacls {
             BlsendSPAEnvelope(docusignenvid, descrip, salesorderid, docoutputname,emailSubject) ;
         }
     }*/
-
-    public static List<dfsle.Recipient> getRecipientsForBloomSignerOne(Id recordId, String documentOutputName) {
+    
+       public static List<dfsle.Recipient> getRecipientsForBloomSignerOne(Id recordId, String documentOutputName) {
         // Signature tab
         dfsle.Tab signHereTab = new dfsle.SignHereTab()
             .withRequired(true)
@@ -1065,7 +1026,7 @@ public class BldocusignSpacls {
 
         return new List<dfsle.Recipient>{ bloomSigner };
     }
-        
+    
     @future(callout=true)
     public static void BlsendSPAEnvelope(String template, String description, Id recordId, Id salesorderid, String documentoutputname,String emailSubject) 
     {
@@ -1129,12 +1090,15 @@ public class BldocusignSpacls {
         ///
             
             
-        List<dfsle.Recipient> allrecipients = new List<dfsle.Recipient>();
+            
+            
+          List<dfsle.Recipient> allrecipients = new List<dfsle.Recipient>();
         if(documentoutputname.Contains('KYC Declaration Form')){
             allrecipients = getRecipientsForBloomSignerOne(salesorderid, documentoutputname);
         } else {
             allrecipients = getRecipients(salesorderid, documentoutputname); 
         }
+        
         
         system.debug('recipients received');
         system.debug(allrecipients.size());

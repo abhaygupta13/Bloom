@@ -40,10 +40,10 @@ public class BFMServiceRequestHandlerTest {
         }
         insert caseList;
         
-        ServiceCatalog__c sc = new ServiceCatalog__c(RecordTypeDevName__c = 'BFMServiceRequest', Category__c = 'BFM Service', SubCategory__c = 'BFM Community Service Request', ProcessType__c = 'Sales', Type__c = 'Service Request');
+        ServiceCatalog__c sc = new ServiceCatalog__c(RecordTypeDevName__c = 'BFMServiceRequest', Category__c = 'BFM Service', SubCategory__c = 'BFM Service Request', ProcessType__c = 'Sales', Type__c = 'Service Request');
         insert sc;
         
-        ServiceCatalog__c sc2 = new ServiceCatalog__c(RecordTypeDevName__c = 'Common_Area_Request', Category__c = 'BFM Service', SubCategory__c = 'BFM Common Area Service Request', ProcessType__c = 'Sales', Type__c = 'Service Request');
+        ServiceCatalog__c sc2 = new ServiceCatalog__c(RecordTypeDevName__c = 'Common_Area_Request', Category__c = 'Community Service Request', SubCategory__c = 'Common Area Service Request', ProcessType__c = 'Sales', Type__c = 'Service Request');
         insert sc2;
         
         SMSTemplate__c smsTemp = new SMSTemplate__c(Name = 'BFM SR Create Notification',SenderNumber__c = '1234567890',Body__c = 'Hello {0}');
@@ -83,7 +83,7 @@ public class BFMServiceRequestHandlerTest {
         List<Case> caseList = [SELECT Id,AccountId FROM Case LIMIT 1];
         Test.startTest();
             BFMServiceRequestHandler handler = BFMServiceRequestHandler.getInstance();
-            Case caseObj = handler.createCaseRecord(soList[0], scList[0], caseList[0].AccountId, null,null,null,'Email',null);
+            Case caseObj = handler.createCaseRecord(soList[0], scList[0], caseList[0].AccountId, null,null,null,'Email',null,false);
         Test.stopTest();
     }
 
@@ -102,7 +102,7 @@ public class BFMServiceRequestHandlerTest {
         List<Case> caseList = [SELECT Id,AccountId FROM Case LIMIT 1];
         Test.startTest();
             BFMServiceRequestHandler handler = BFMServiceRequestHandler.getInstance();
-            Case caseObj = handler.createCaseRecord(null, scList[0], caseList[0].AccountId, null,'Service Request','Test Description','Email',commonArea.Id);
+            Case caseObj = handler.createCaseRecord(null, scList[0], caseList[0].AccountId, null,'Service Request','Test Description','Email',commonArea.Id, false);
             handler.sendBFMCaseCreationORClosureEmail(new List<Id>{caseObj.Id});
             handler.sendBFMCaseCreationORClosureNotification(new List<Id>{caseObj.Id});
         Test.stopTest();

@@ -1,9 +1,8 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement } from 'lwc';
 import { CloseActionScreenEvent } from 'lightning/actions';
 
 export default class NewRequestComplaintAction extends LightningElement {
-    @api recordId;
-
+    
     isShowModal = false;
     requestFrom = '';
     handleOpenModal(){

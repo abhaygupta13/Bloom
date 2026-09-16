@@ -27,11 +27,10 @@ public class GroupService {
             WHERE GroupId IN :groupIds
         ];
     }
-    
-     public List<GroupMember>getMemberInfoFromGroup(Id userId, Id queueId) {
+    //method using in handovercontroller.
+      public List<GroupMember>getMemberInfoFromGroup(Id userId, Id queueId) {
        
         return [SELECT Id FROM GroupMember WHERE GroupId = :queueId AND UserOrGroupId = :userId LIMIT 1];
     }
-   
 
 }

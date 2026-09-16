@@ -27,7 +27,11 @@ public class LeasingEjariReminderBatch implements Database.Batchable<SObject>, S
                 FROM LeasingOrder__c
                 WHERE RERANumber__c = NULL
                     AND Owner.Email != NULL
-                    AND Status__c NOT IN ('Cancelled','Terminated','Leased'))
+                    AND Status__c NOT IN ('Cancelled','Terminated','Leased')
+                    AND LeasingSAPContractId__c != NULL
+                    AND IntegrationStatus__c = 'Success'
+                    AND PropertyUsage__c = 'Residential'
+                    AND LeasingStartDate__c <= TODAY)
         ]);
     }
 
@@ -42,13 +46,13 @@ public class LeasingEjariReminderBatch implements Database.Batchable<SObject>, S
         String baseUrl = URL.getOrgDomainURL().toExternalForm();
         List<Messaging.SingleEmailMessage> emailsToSend = new List<Messaging.SingleEmailMessage>();
         String orderListHtml = '';
-        orderListHtml += '<table style="border-collapse:collapse;width:100%;font-size:13px;border:1px solid #ccc;">';
+        orderListHtml += '<table align="center" style="border-collapse:collapse;width:100%;font-size:13px;border:1px solid #ccc;margin:0 auto;">';
         orderListHtml += '<thead style="background-color:#f4f4f4;text-align:left;">';
         orderListHtml += '<tr>';
-        orderListHtml += '<th style="border:1px solid #ccc;padding:6px;width:40px;">#</th>';
+        orderListHtml += '<th style="border:1px solid #ccc;padding:6px;width:40px;text-align:center;">#</th>';
         orderListHtml += '<th style="border:1px solid #ccc;padding:6px;">Name</th>';
-        orderListHtml += '<th style="border:1px solid #ccc;padding:6px;">Unit</th>';
-        orderListHtml += '<th style="border:1px solid #ccc;padding:6px;">Owner</th>';
+        orderListHtml += '<th style="border:1px solid #ccc;padding:6px;text-align:center;">Unit</th>';
+        orderListHtml += '<th style="border:1px solid #ccc;padding:6px;text-align:center;">Owner</th>';
         orderListHtml += '</tr>';
         orderListHtml += '</thead><tbody>';
         Integer count = 1;
@@ -56,15 +60,15 @@ public class LeasingEjariReminderBatch implements Database.Batchable<SObject>, S
         String toName;
         LeasingOrderService service = LeasingOrderService.getInstance();
         List<User> u = (List<User>) scope;
-        for (LeasingOrder__c lo : service.getLeasingOrdersByOwners(New Set<Id>{u[0].Id})) {
+        for (LeasingOrder__c lo : service.getPendingEjariOrdersByOwners(New Set<Id>{u[0].Id})) {
             String link = baseUrl + '/lightning/r/LeasingOrder__c/' + lo.Id + '/view';
             orderListHtml += '<tr>';
             orderListHtml += '<td style="border:1px solid #ccc;padding:6px;text-align:center;">' + count + '</td>';
             orderListHtml += '<td style="border:1px solid #ccc;padding:6px;"> <a href="' + link + '" target="_blank" style="color:#0070d2;text-decoration:none;">'+ lo.Name + '</a></td>';
-            orderListHtml += '<td style="border:1px solid #ccc;padding:6px;">'
+            orderListHtml += '<td style="border:1px solid #ccc;padding:6px;text-align:center;">'
                         + (lo.Unit__c != null ? (lo.Unit__r.UnitNumber__c) : '')
                         + '</td>';
-            orderListHtml += '<td style="border:1px solid #ccc;padding:6px;">'
+            orderListHtml += '<td style="border:1px solid #ccc;padding:6px;text-align:center;">'
                         + (lo.Owner != null ? (lo.Owner.Name) : '')
                         + '</td>';
             orderListHtml += '</tr>';

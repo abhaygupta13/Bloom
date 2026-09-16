@@ -81,8 +81,6 @@ public without sharing class DocuSignQueueable implements Queueable, Database.Al
             when 'Case' {
                 if(documentoutputname.Contains('Client Information Sheet (KYC)')) {
                     allrecipients = DocuSignService.CaseGetRecipientsforCIS(recordId, documentoutputname);
-                }else{
-                    allrecipients = DocuSignService.CaseGetRecipients(recordId);
                 }
             }
             when 'Broker Application' {
@@ -99,8 +97,6 @@ public without sharing class DocuSignQueueable implements Queueable, Database.Al
                 myEnvelope,
                 true
             );
-        } else {
-            System.debug('Skipping DocuSign send in test context');
         } 
     }
 }

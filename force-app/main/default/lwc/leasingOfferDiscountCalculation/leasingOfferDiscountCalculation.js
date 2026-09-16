@@ -69,15 +69,13 @@ export default class LeasingOfferDiscountCalculation extends LightningElement {
 
       //Pranav : 091025
       // Store current year's result
-
       this.schedule.push({
-    year: i,
-    annualRent,
-    escalation: 0,
-    totalRent,
-    afterDiscount,
-    isFirstYear: i === 1
-});
+        year: i,
+        annualRent,
+        escalation,
+        totalRent,
+        afterDiscount
+      });
 
       // Prepare for next iteration
       previousAnnualRent = (i === 1) ? afterDiscount : totalRent;
@@ -87,10 +85,6 @@ export default class LeasingOfferDiscountCalculation extends LightningElement {
 
   handleDiscountChange(event) {
     const index = Number(event.target.dataset.index);
-
-    if (index === 0) {
-        return;
-    }
     const newEscalation = Number(event.target.value);
     this.schedule[index].escalation = newEscalation;
 

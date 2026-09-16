@@ -7,7 +7,7 @@ public class LeasingOtherChargeTaxInvoicePDFHdlrTest {
         Account acc = new Account(Name = 'Test Account', UAEVATRegisterNumber__c = 'VAT-OC-123');
         insert acc;
 
-         Company__c lc = new Company__c(Name = 'Test Leasing Company', LeasingVAT__c = 5);
+        Company__c lc = new Company__c(Name = 'Test Leasing Company', LeasingVAT__c = 5);
         insert lc;
 
         Project__c proj = new Project__c(Name = 'Test Project', Leasing_Company__c = lc.Id);

@@ -133,8 +133,7 @@ public class SalesSOAPDFControllerTest {
             AmountApplied__c = 12000,
             SalesOrder__c = order.Id,
             InstallmentLine__c = inst1.Id,
-            SalesOrderOtherCharges__c = other.Id,
-            TypeOfInvoice__c = 'ADM'
+            SalesOrderOtherCharges__c = other.Id
         );
         
         insert new ReceiptAllocation__c(
@@ -311,6 +310,217 @@ public class SalesSOAPDFControllerTest {
         String contentId = SalesOrderController.generateSOAAndAttachPdf(order.Id, 'generateReceipt');
         System.assertNotEquals(null, contentId);
         
+        Test.stopTest();
+    }
+    @IsTest
+    static void testGenerateAndAttachPdf() {
+        
+        // -------------------------------------------------
+        // 1. Create Project
+        // -------------------------------------------------
+        Project__c project = new Project__c(
+            Name = 'Test Project SOA'
+        );
+        insert project;
+        
+        
+        // -------------------------------------------------
+        // 2. Create Building
+        // -------------------------------------------------
+        BuildingSection__c building =
+            new BuildingSection__c(
+                Name = 'Test Building SOA',
+                BuildingSectionCode__c = 'BL-SOA',
+                Project__c = project.Id
+            );
+        insert building;
+        
+        
+        // -------------------------------------------------
+        // 3. Create Unit
+        // -------------------------------------------------
+        Unit__c unit = new Unit__c(
+            Name = 'Test Unit SOA',
+            Status__c = 'Booked',
+            UnitType__c = 'Townhouse',
+            BuildingSectionName__c = building.Id,
+            Project__c = project.Id,
+            PropertyUsage__c = 'Residential',
+            UnitView__c = 'Beach Side',
+            FloorNumber__c = '01',
+            NumberOfBedrooms__c = '3',
+            UnitModel__c = '1BHK',
+            SellingPrice__c = 700000,
+            StartDate__c = Date.today().addDays(-10),
+            EndDate__c = Date.today().addDays(10),
+            LockExpiryTime__c =
+            DateTime.now().addDays(10),
+            LockedBy__c = UserInfo.getUserId()
+        );
+        insert unit;
+        
+        
+        // -------------------------------------------------
+        // 4. Create Payment Plan
+        // -------------------------------------------------
+        PaymentPlan__c plan =
+            new PaymentPlan__c(
+                Name = 'SOA Test Plan',
+                Unit__c = unit.Id,
+                Description__c = 'SOA Test',
+                BrokerPortalFlag__c = true,
+                CustomerSubType__c = 'CORPORATE',
+                Classification__c =
+                Constants.PAYMENT_PLAN_TYPE_STANDARD
+            );
+        insert plan;
+        
+        insert new BuildingSectionMapping__c(BuildingSectionName__c = building.Id,PaymentPlan__c = plan.Id);
+        
+        Id personRT = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('PersonAccount').getRecordTypeId();
+        
+        Account person = new Account(RecordTypeId = personRT,LastName = 'Test SOA',PersonEmail = 'soa@test.com',CustomerSubType__c = 'CORPORATE');
+        insert person;
+        
+        Opportunity opp =
+            new Opportunity(
+                Name = 'SOA Test Opportunity',
+                StageName = 'New',
+                CloseDate = Date.today(),
+                LeadChannel__c = 'Walk in',
+                AccountId = person.Id,
+                WinReason__c = 'Loyalty'
+            );
+        insert opp;
+        
+        PaymentInstallments__c installmentDef =
+            new PaymentInstallments__c(
+                BrokerPayoutPercentage__c = 100,
+                Description__c = 'SOA Test Installment',
+                InstallmentNumber__c = 1,
+                InstallmentPercentage__c = 100,
+                PaymentPlan__c = plan.Id,
+                Condition_Type__c = 'P012'
+            );
+        insert installmentDef;
+        
+        OffersPromotions__c offer =
+            new OffersPromotions__c(
+                Name = 'SOA Test Offer',
+                OfferName__c = 'SOA Test Offer',
+                Project__c = project.Id,
+                StartDate__c = Date.today(),
+                EndDate__c = Date.today().addDays(2),
+                ADM_Fee_Included__c = false
+            );
+        insert offer;
+        
+        SalesOrder__c order =
+            new SalesOrder__c(
+                Name = 'SOA Test Order',
+                Status__c = 'Booked',
+                Unit__c = unit.Id,
+                Account__c = person.Id,
+                Opportunity__c = opp.Id,
+                Bloom_Signed_SPA_Date__c = Date.today(),
+                Offer__c = offer.Id
+            );
+        insert order;
+        
+        InstallmentLines__c inst =
+            new InstallmentLines__c(
+                SalesOrder__c = order.Id,
+                PaymentPlan__c = plan.Id,
+                PaymentInstallments__c =
+                installmentDef.Id,
+                InstallmentAmount__c = 70000,
+                InstallmentDate__c =
+                Date.today().addDays(-12),
+                InstallmentPercentage__c = 25,
+                LPCAmount__c = 500,
+                Description__c = 'SOA Test',
+                InstallmentNumber__c = 1
+            );
+        insert inst;
+        
+        Test.setCurrentPage(Page.SalesSOAPDF);
+        ApexPages.currentPage().getParameters().put('id', order.Id);
+        
+        Test.startTest();
+        String contentVersionId = SalesSOAPDFController.generateAndAttachPdf(order.Id);
+        Test.stopTest();
+        ContentVersion cv = [SELECT Id,Title,PathOnClient,ContentDocumentId,VersionData FROM ContentVersion WHERE Id = :contentVersionId LIMIT 1];
+        
+        ContentDocumentLink cdl = [
+            SELECT Id,
+            ContentDocumentId,
+            LinkedEntityId,
+            ShareType,
+            Visibility
+            FROM ContentDocumentLink
+            WHERE ContentDocumentId =
+            :cv.ContentDocumentId
+            AND LinkedEntityId = :order.Id
+            LIMIT 1
+        ];
+    }
+    
+    @IsTest
+    static void testRefundsAndRebates() {
+        Project__c project = new Project__c(Name = 'Test Project RR');
+        insert project;
+        
+        BuildingSection__c building = new BuildingSection__c(Name = 'Test Building RR', BuildingSectionCode__c = 'BL-RR', Project__c = project.Id);
+        insert building;
+        
+        Unit__c unit = new Unit__c(
+            Name = 'Test Unit RR', Status__c = 'Booked', UnitType__c = 'Townhouse',
+            BuildingSectionName__c = building.Id, Project__c = project.Id,
+            PropertyUsage__c = 'Residential', UnitView__c = 'Beach Side', FloorNumber__c = '01',
+            NumberOfBedrooms__c = '3', UnitModel__c = '1BHK', SellingPrice__c = 700000,
+            StartDate__c = Date.today().addDays(-10), EndDate__c = Date.today().addDays(10),
+            LockExpiryTime__c = DateTime.now().addDays(10), LockedBy__c = UserInfo.getUserId());
+        insert unit;
+        
+        PaymentPlan__c plan = new PaymentPlan__c(Name = 'RR Plan', Unit__c = unit.Id, Description__c = 'Test', BrokerPortalFlag__c = true,
+            CustomerSubType__c = 'CORPORATE', Classification__c = Constants.PAYMENT_PLAN_TYPE_STANDARD);
+        insert plan;
+        
+        insert new BuildingSectionMapping__c(BuildingSectionName__c = building.Id, PaymentPlan__c = plan.Id);
+        
+        Id personRT = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('PersonAccount').getRecordTypeId();
+        Account person = new Account(RecordTypeId = personRT, LastName = 'Test RR', PersonEmail = 'rr@test.com', CustomerSubType__c = 'CORPORATE');
+        insert person;
+        
+        Opportunity opp = new Opportunity(Name = 'RR Opp', StageName = 'New', CloseDate = Date.today(),LeadChannel__c = 'Walk in', AccountId = person.Id, WinReason__c = 'Loyalty');
+        insert opp;
+        
+        PaymentInstallments__c installmentDef = new PaymentInstallments__c(BrokerPayoutPercentage__c = 100, Description__c = 'Test Installment', InstallmentNumber__c = 1,
+            InstallmentPercentage__c = 100, PaymentPlan__c = plan.Id, Condition_Type__c = 'P012');
+        insert installmentDef;
+        
+        OffersPromotions__c offer = new OffersPromotions__c(Name = 'RR Offer', OfferName__c = 'RR Offer', Project__c = project.Id,
+            StartDate__c = Date.today(), EndDate__c = Date.today().addDays(2), ADM_Fee_Included__c = false);
+        insert offer;
+        
+        SalesOrder__c order = new SalesOrder__c(Name = 'RR Order', Status__c = 'Booked', Unit__c = unit.Id, Account__c = person.Id,
+            Opportunity__c = opp.Id, Bloom_Signed_SPA_Date__c = Date.today(), Offer__c = offer.Id);
+        insert order;
+        
+        InstallmentLines__c inst1 = new InstallmentLines__c(SalesOrder__c = order.Id, PaymentPlan__c = plan.Id, PaymentInstallments__c = installmentDef.Id,
+            InstallmentAmount__c = 100000, InstallmentDate__c = Date.today().addDays(-12),
+            InstallmentPercentage__c = 100, LPCAmount__c = 500, Description__c = 'Test', InstallmentNumber__c = 1);
+        insert inst1;
+        Test.startTest();
+        
+        ReceiptAcknowledgement__c receipt = new ReceiptAcknowledgement__c(PaymentType__c = 'Online', Opportunity__c = opp.Id, Amount__c = 100000,MaturityDate__c = Date.today(), SalesOrder__c = order.Id, Status__c = 'Cleared');
+        insert receipt;
+        insert new ReceiptAllocation__c(ReceiptAcknowledgement__c = receipt.Id, Account__c = person.Id, SalesOrder__c = order.Id,AmountApplied__c = 50000, InstallmentLine__c = inst1.Id);    
+        insert new SalesOrderRefund__c(SalesOrder__c = order.Id, Receipt__c = receipt.Id, Amount__c = 50000,Status__c = 'Processed', Remarks__c = 'Test refund');
+        insert new SalesOrderRebate__c(SalesOrder__c = order.Id, InstallmentLine__c = inst1.Id, Date__c = Date.today(),Percentage__c = 5, Amount__c = 5000);
+        Test.setCurrentPage(Page.SalesSOAPDF);
+        ApexPages.currentPage().getParameters().put('id', order.Id);
+        SalesSOAPDFController handler = new SalesSOAPDFController();
         Test.stopTest();
     }
 }

@@ -91,7 +91,7 @@ private class AzureUserTriggerHelperTest {
 
     @isTest
     static void testHandleAfterUpdate() {
-        User__c existingUser = [SELECT Id, Email__c,LastPasswordChangedDate__c, Temporary_Password__c, Account__c, Contact__c,User_Type__c, Azure_UserId__c,IsSendToAB2C__c,isActive__c,Username__c, Name FROM User__c LIMIT 1];
+        User__c existingUser = [SELECT Id, Email__c,User_Account__c,LastPasswordChangedDate__c, Temporary_Password__c, Account__c, Contact__c,User_Type__c, Azure_UserId__c,IsSendToAB2C__c,isActive__c,Username__c, Name FROM User__c LIMIT 1];
         User__c updatedUser = existingUser.clone(false, false, false, false);
         updatedUser.Id = existingUser.Id;
         updatedUser.IsSendToAB2C__c = true; // simulate update that triggers logic

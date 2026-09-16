@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <doesSendEmailToMembers>true</doesSendEmailToMembers>
+    <name>Bloom Legal (BL)</name>
+    <queueMembers>
+        <users>
+            <user>ashaker@bloomholding.com</user>
+            <user>mtekeisham@bloomholding.com</user>
+            <user>mqawasmeh@bloomholding.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>BrokerApplication__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

@@ -116,7 +116,7 @@ public class ServiceChargeDraftInvoiceHandler {
                     soc.TypeOfCharge__c = 'Service Charge';
                     soc.Description__c = currentYear +' & '+ scc.Year__c+ ' & '+ (i+1)+ ' & '+ integer.valueof(scc.No_Of_Invoices_Per_Year__c);
                     soc.Service_Charge_Configuration__c = scc.id;
-                    Scllist.add(soc); 
+               //     Scllist.add(soc); 
                 }
             }
         } 
@@ -125,7 +125,7 @@ public class ServiceChargeDraftInvoiceHandler {
             
             list<saveResultWrapper> saveResult = new list<saveResultWrapper>(); 
             List<Database.SaveResult> updateResults = Database.update(ulisttoupdate, False);
-            List<Database.SaveResult> insertResults = Database.insert(Scllist, False);
+        //    List<Database.SaveResult> insertResults = Database.insert(Scllist, False);
              if( ulisttoupdate.size()>0){
             scctoupdate.Status__c = 'Finalized';
             Scclisttoupdate.add(scctoupdate);

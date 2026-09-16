@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ValidateHoldDateEntry</fullName>
-    <active>true</active>
-    <errorConditionFormula>HoldDate__c != Null &amp;&amp; ChequeDate__c != null &amp;&amp; (HoldDate__c &lt; ChequeDate__c )</errorConditionFormula>
-    <errorMessage>Hold date should be greater than Cheque date.</errorMessage>
-</ValidationRule>

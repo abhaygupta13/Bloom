@@ -8,7 +8,8 @@ public class LeasingReceiptAutoClearanceBatchTest {
         Account acc = new Account(
             RecordTypeId = personAccountRecordTypeId,
             LastName = 'Test Person Account',
-            PersonEmail = 'test@test.com'
+            PersonEmail = 'test@test.com',
+            AnnualIncome__pc = '1234'
         );
         insert acc;
         

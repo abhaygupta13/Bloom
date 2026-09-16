@@ -1,0 +1,1218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Sales_Order_Other_Charges_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Sales_Order_Other_Charges_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>Sales_Order_Other_Charges_Layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Sales_Order_Other_Charges_Layout</fullName>
+        <fields>Name</fields>
+        <fields>Account__c</fields>
+        <fields>SalesOrder__c</fields>
+        <fields>TypeOfCharge__c</fields>
+        <fields>Amount__c</fields>
+        <fields>Due_Date__c</fields>
+        <fields>Status__c</fields>
+        <label>Sales Order Other Charges Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to manage all the charges applicable for a Sales Order.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>Customer who has to pay for the charges</description>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Sales Orders Other Charges</relationshipLabel>
+        <relationshipName>Sales_Orders_Other_ChargesAccount</relationshipName>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AmountReceived__c</fullName>
+        <description>Total amount received for this charges from the customer.</description>
+        <inlineHelpText>Total amount received for this charges from the customer.</inlineHelpText>
+        <label>Amount Received</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount__c</fullName>
+        <description>Amount that the customer has pay for the charges</description>
+        <label>Amount</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>BouncedChequeReceiptAcknowledgement__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Bounced Cheque Receipt Acknowledgement</label>
+        <referenceTo>ReceiptAcknowledgement__c</referenceTo>
+        <relationshipLabel>Sales Orders Other Charges</relationshipLabel>
+        <relationshipName>SalesOrdersOtherCharges</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CanEnterReceipt__c</fullName>
+        <formula>if(  PendingAmount__c  &gt; 0, TRUE, FALSE)</formula>
+        <label>Can Enter Receipt</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Case__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Case</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Sales Orders Other Charges</relationshipLabel>
+        <relationshipName>Sales_Orders_Other_Charges</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Due_Date__c</fullName>
+        <defaultValue>TODAY()</defaultValue>
+        <label>Due Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>EndDate__c</fullName>
+        <label>End Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Installment_Line__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Installment Line</label>
+        <referenceTo>InstallmentLines__c</referenceTo>
+        <relationshipLabel>Sales Orders Other Charges</relationshipLabel>
+        <relationshipName>Sales_Orders_Other_Charges</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Installment_No__c</fullName>
+        <externalId>false</externalId>
+        <formula>Installment_Line__r.InstallmentNumber__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Installment No</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Installment_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Service Charge Installment Number</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IntegrationMessage__c</fullName>
+        <label>Integration Message</label>
+        <length>32768</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IntegrationStatus__c</fullName>
+        <label>Integration Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Integrated</fullName>
+                    <default>false</default>
+                    <label>Not Integrated</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Success</fullName>
+                    <default>false</default>
+                    <label>Success</label>
+                </value>
+                <value>
+                    <fullName>Failed</fullName>
+                    <default>false</default>
+                    <label>Failed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>InvoiceId__c</fullName>
+        <description>Invoice Id that is returned from ERP.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Invoice Id that is returned from ERP.</inlineHelpText>
+        <label>Invoice Id</label>
+        <length>25</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InvoiceNumber__c</fullName>
+        <description>Invoice Number that is returned from ERP.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Invoice Number that is returned from ERP.</inlineHelpText>
+        <label>Invoice Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InvoicedAmount__c</fullName>
+        <description>Represent total paid amount by customer</description>
+        <label>Cleared Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>IsReversed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Reversed</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsVATApplicable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>VAT Applicable</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>To be auto populated based on the Sales Order</description>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Sales Orders Other Charges</relationshipLabel>
+        <relationshipName>Sales_Orders_Other_ChargesOpportunity</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Order_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(SalesOrder__r.Status__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Order Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OutstandingAmountNumber__c</fullName>
+        <externalId>false</externalId>
+        <formula>OutstandingAmount__c/3.67</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Outstanding Amount in USD</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OutstandingAmount__c</fullName>
+        <formula>IF( Amount__c &gt; InvoicedAmount__c , Amount__c - InvoicedAmount__c , 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Amount not Cleared</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>OutstandingAmountinwords__c</fullName>
+        <label>Outstanding Amount in words</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>2</visibleLines>
+    </fields>
+    <fields>
+        <fullName>PendingAmount__c</fullName>
+        <description>Amount Pending to be received for the charges.</description>
+        <formula>IF((ISNULL(AmountReceived__c) || AmountReceived__c =0),  Amount__c , IF(NOT(ISNULL(AmountReceived__c)) &amp;&amp; AmountReceived__c &gt; 0 &amp;&amp; AmountReceived__c &lt; Amount__c, Amount__c - AmountReceived__c, 0) )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Amount Pending to be received for the charges.</inlineHelpText>
+        <label>Pending Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Reason__c</fullName>
+        <label>Reason</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>ReversalCategory__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Client got approval</fullName>
+                    <default>false</default>
+                    <label>Client got approval</label>
+                </value>
+                <value>
+                    <fullName>Wrong allocation of payment</fullName>
+                    <default>false</default>
+                    <label>Wrong allocation of payment</label>
+                </value>
+                <value>
+                    <fullName>Wrong calculation of charges</fullName>
+                    <default>false</default>
+                    <label>Wrong calculation of charges</label>
+                </value>
+                <value>
+                    <fullName>Wrong calculation of fees because of wrong input</fullName>
+                    <default>false</default>
+                    <label>Wrong calculation of fees because of wrong input</label>
+                </value>
+                <value>
+                    <fullName>Wrong client charged</fullName>
+                    <default>false</default>
+                    <label>Wrong client charged</label>
+                </value>
+                <value>
+                    <fullName>Charged because of delay in booking receipts</fullName>
+                    <default>false</default>
+                    <label>Charged because of delay in booking receipts</label>
+                </value>
+                <value>
+                    <fullName>Clearing/ Allocation issues</fullName>
+                    <default>false</default>
+                    <label>Clearing/ Allocation issues</label>
+                </value>
+                <value>
+                    <fullName>As per approval from management</fullName>
+                    <default>false</default>
+                    <label>As per approval from management</label>
+                </value>
+                <value>
+                    <fullName>Closed/ ended contract</fullName>
+                    <default>false</default>
+                    <label>Closed/ ended contract</label>
+                </value>
+                <value>
+                    <fullName>Cancellation/ Termination of unit</fullName>
+                    <default>false</default>
+                    <label>Cancellation/ Termination of unit</label>
+                </value>
+                <value>
+                    <fullName>Miscellaneous amount reversal</fullName>
+                    <default>false</default>
+                    <label>Miscellaneous amount reversal</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Reversal of Bounce cheque fees paid</controllingFieldValue>
+                <controllingFieldValue>Reversal of LPF paid</controllingFieldValue>
+                <valueName>Client got approval</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversal of Bounce cheque fees paid</controllingFieldValue>
+                <controllingFieldValue>Reversal of LPF paid</controllingFieldValue>
+                <valueName>Wrong allocation of payment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversal of Bounce cheque fees paid</controllingFieldValue>
+                <controllingFieldValue>Reversal of LPF paid</controllingFieldValue>
+                <valueName>Wrong calculation of charges</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversal of BCF billing</controllingFieldValue>
+                <controllingFieldValue>Reversal of LPF billing</controllingFieldValue>
+                <valueName>Wrong calculation of fees because of wrong input</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversal of BCF billing</controllingFieldValue>
+                <controllingFieldValue>Reversal of LPF billing</controllingFieldValue>
+                <valueName>Wrong client charged</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversal of BCF billing</controllingFieldValue>
+                <controllingFieldValue>Reversal of LPF billing</controllingFieldValue>
+                <valueName>Charged because of delay in booking receipts</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversal of LPF billing</controllingFieldValue>
+                <valueName>Clearing/ Allocation issues</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Waiver of BCF</controllingFieldValue>
+                <valueName>As per approval from management</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Waiver of BCF</controllingFieldValue>
+                <valueName>Closed/ ended contract</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Waiver of BCF</controllingFieldValue>
+                <valueName>Cancellation/ Termination of unit</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Waiver of BCF</controllingFieldValue>
+                <valueName>Miscellaneous amount reversal</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ReceiptAcknowledgement__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(TEXT(SalesOrder__r.Status__c) = &apos;Cancelled&apos;, TEXT(SalesOrder__r.Status__c) = &apos;Cancelled by User&apos;), &quot;Sales Order is Cancelled&quot;, IF( PendingAmount__c &gt;0, HYPERLINK(&quot;/lightning/cmp/c__OpenReceiptAcknowledgement?c__recordId=&quot;+Id, &quot;Enter Receipt&quot;, &quot;_self&quot;), &quot;Receipts Entered&quot;))</formula>
+        <label>Add Receipts</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Remarks__c</fullName>
+        <label>Remarks</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ReversalApprovalDate__c</fullName>
+        <label>Reversal Approval Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ReversalApprovalRemarks__c</fullName>
+        <label>Reversal Approval Remarks</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ReversalApprovalStatus__c</fullName>
+        <label>Reversal Approval Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>false</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ReversalApprovedBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Reversal Approved By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>SalesOrdersOtherCharges</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ReversalCategory__c</fullName>
+        <label>Reversal Category</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>TypeOfCharge__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Reversal of Bounce cheque fees paid</fullName>
+                    <default>false</default>
+                    <label>Reversal of Bounce cheque fees paid</label>
+                </value>
+                <value>
+                    <fullName>Reversal of LPF paid</fullName>
+                    <default>false</default>
+                    <label>Reversal of LPF paid</label>
+                </value>
+                <value>
+                    <fullName>Reversal of BCF billing</fullName>
+                    <default>false</default>
+                    <label>Reversal of BCF billing</label>
+                </value>
+                <value>
+                    <fullName>Reversal of LPF billing</fullName>
+                    <default>false</default>
+                    <label>Reversal of LPF billing</label>
+                </value>
+                <value>
+                    <fullName>Waiver of BCF</fullName>
+                    <default>false</default>
+                    <label>Waiver of BCF</label>
+                </value>
+                <value>
+                    <fullName>Waiver of LPF</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Waiver of LPF</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Late Payment Charges</controllingFieldValue>
+                <valueName>Reversal of LPF paid</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Late Payment Charges</controllingFieldValue>
+                <valueName>Reversal of LPF billing</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cheque Bounce Fee</controllingFieldValue>
+                <valueName>Reversal of Bounce cheque fees paid</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cheque Bounce Fee</controllingFieldValue>
+                <valueName>Reversal of BCF billing</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Cheque Bounce Fee</controllingFieldValue>
+                <valueName>Waiver of BCF</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ReversedBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Reversed By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>SalesOrdersOtherCharges1</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ReversedDate__c</fullName>
+        <label>Reversed Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>SAPReversalDocumentNo__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Reversal Document No</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Condition_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Condition Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Document_No__c</fullName>
+        <externalId>true</externalId>
+        <label>SAP Document No.</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Posted_Date__c</fullName>
+        <label>SAP Posted Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>SAP_Posted_Flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>SAP Posted Flag</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SalesOrder__c</fullName>
+        <description>Sales Order for which the charges are charged for</description>
+        <label>Sales Order</label>
+        <referenceTo>SalesOrder__c</referenceTo>
+        <relationshipLabel>Sales Orders Other Charges</relationshipLabel>
+        <relationshipName>SalesOrdersOtherCharges</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Sales_Order_ADM_Fee_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.ADMFeeAmount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Order ADM Fee Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Order_Offer__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Offer__r.OfferName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Order Offer</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Order_Payment_Plan__c</fullName>
+        <externalId>false</externalId>
+        <formula>text(SalesOrder__r.PaymentPlan__r.Classification__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Order Payment Plan</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ScPercentage__c</fullName>
+        <label>Sc %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Sc_Amount_General_Fund__c</fullName>
+        <label>Sc Amount General Fund</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Sc_Amount_Reserve_Fund__c</fullName>
+        <label>Sc Amount Reserve Fund</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>SendtoSAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Send to SAP</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Service_Charge_Configuration__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Service Charge Configuration</label>
+        <referenceTo>Service_Charge_Configuration__c</referenceTo>
+        <relationshipLabel>Sales Orders Other Charges</relationshipLabel>
+        <relationshipName>Sales_Orders_Other_Charges</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>StartDate__c</fullName>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(IsReversed__c, &apos;Reversed&apos;,
+    IF(Amount__c = InvoicedAmount__c, &apos;Fully Paid&apos;,
+        IF(InvoicedAmount__c = 0, &apos;Not Paid&apos;, &apos;Partially Paid&apos;)
+    )
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tax_Amount__c</fullName>
+        <formula>IF( SalesOrder__r.Tax_Percentage__c != null , SalesOrder__r.Tax_Percentage__c* Amount__c , 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Tax Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Tax_Group__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Tax Group</label>
+        <referenceTo>Tax_Group__c</referenceTo>
+        <relationshipLabel>Sales Orders Other Charges</relationshipLabel>
+        <relationshipName>Sales_Orders_Other_Charges</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>TotalLatePaymentFee__c</fullName>
+        <label>Total Late Payment Fee</label>
+        <precision>9</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Total_Amount_With_VAT__c</fullName>
+        <formula>Amount__c  +  VAT_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Amount With VAT</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>TypeOfCharge__c</fullName>
+        <description>Type of charge that the customer has to make</description>
+        <label>Type Of Charge</label>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>ADDC</fullName>
+                    <default>false</default>
+                    <label>ADDC</label>
+                </value>
+                <value>
+                    <fullName>Additional ADM Fee</fullName>
+                    <default>false</default>
+                    <label>Additional ADM Fee</label>
+                </value>
+                <value>
+                    <fullName>ADM Admin Fee</fullName>
+                    <default>false</default>
+                    <label>ADM Admin Fee</label>
+                </value>
+                <value>
+                    <fullName>ADM Fee</fullName>
+                    <default>false</default>
+                    <label>ADM Fee</label>
+                </value>
+                <value>
+                    <fullName>Admin Charges</fullName>
+                    <default>false</default>
+                    <label>Admin Charges</label>
+                </value>
+                <value>
+                    <fullName>Cheque Bounce Fee</fullName>
+                    <default>false</default>
+                    <label>Cheque Bounce Fee</label>
+                </value>
+                <value>
+                    <fullName>Cheque Postponement Fee</fullName>
+                    <default>false</default>
+                    <label>Cheque Postponement Fee</label>
+                </value>
+                <value>
+                    <fullName>Cheque Withdrawal Fee</fullName>
+                    <default>false</default>
+                    <label>Cheque Withdrawal Fee</label>
+                </value>
+                <value>
+                    <fullName>Dari Title Deed Fee</fullName>
+                    <default>false</default>
+                    <label>Dari Title Deed Fee</label>
+                </value>
+                <value>
+                    <fullName>Evaluation Fees</fullName>
+                    <default>false</default>
+                    <label>Evaluation Fees</label>
+                </value>
+                <value>
+                    <fullName>Hassantuk Fee</fullName>
+                    <default>false</default>
+                    <label>Hassantuk Fee</label>
+                </value>
+                <value>
+                    <fullName>Late Payment Charges</fullName>
+                    <default>false</default>
+                    <label>Late Payment Charges</label>
+                </value>
+                <value>
+                    <fullName>Merged Paid Installment</fullName>
+                    <default>false</default>
+                    <label>Merged Paid Installment</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Fees</fullName>
+                    <default>false</default>
+                    <label>Mortgage Fees</label>
+                </value>
+                <value>
+                    <fullName>Pending Fee</fullName>
+                    <default>false</default>
+                    <label>Pending Fee</label>
+                </value>
+                <value>
+                    <fullName>Property Enrollment Under Tawtheeq</fullName>
+                    <default>false</default>
+                    <label>Property Enrollment Under Tawtheeq</label>
+                </value>
+                <value>
+                    <fullName>Rebate</fullName>
+                    <default>false</default>
+                    <label>Rebate</label>
+                </value>
+                <value>
+                    <fullName>Recovery Fee</fullName>
+                    <default>false</default>
+                    <label>Recovery Fee</label>
+                </value>
+                <value>
+                    <fullName>Resale Admin fee</fullName>
+                    <default>false</default>
+                    <label>Resale Admin fee</label>
+                </value>
+                <value>
+                    <fullName>Service Charge</fullName>
+                    <default>false</default>
+                    <label>Service Charge</label>
+                </value>
+                <value>
+                    <fullName>Technology Fee</fullName>
+                    <default>false</default>
+                    <label>Technology Fee</label>
+                </value>
+                <value>
+                    <fullName>Transfer Fee</fullName>
+                    <default>false</default>
+                    <label>Transfer Fee</label>
+                </value>
+                <value>
+                    <fullName>UAE Pass Fee</fullName>
+                    <default>false</default>
+                    <label>UAE Pass Fee</label>
+                </value>
+                <value>
+                    <fullName>Unit Cancellation Fees</fullName>
+                    <default>false</default>
+                    <label>Unit Cancellation Fees</label>
+                </value>
+                <value>
+                    <fullName>Modification Advance Fee</fullName>
+                    <default>false</default>
+                    <label>Modification Advance Fee</label>
+                </value>
+                <value>
+                    <fullName>Tamm Fee</fullName>
+                    <default>false</default>
+                    <label>Tamm Fee</label>
+                </value>
+                <value>
+                    <fullName>Resale Renewal Fees</fullName>
+                    <default>false</default>
+                    <label>Resale Renewal Fees</label>
+                </value>
+                <value>
+                    <fullName>Cheque Replacement Fee</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Cheque Replacement Fee</label>
+                </value>
+                <value>
+                    <fullName>Cheque with Withdrawal Fee</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Cheque with Withdrawal Fee</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>VATApplicable__c</fullName>
+        <formula>AND(
+    ISPICKVAL(TypeOfCharge__c, &quot;Cheque Bounce Fee&quot;),
+    Installment_Line__r.SalesOrder__r.Unit__r.Project__r.BounceChequeFeeVATApplicable__c
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>VAT Applicable</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>VAT_Amount__c</fullName>
+        <label>VAT Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WaivedAmount__c</fullName>
+        <label>Waived Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>WaivedBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Waived By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Sales_Orders_Other_Charges</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>WaivedDate__c</fullName>
+        <label>Waived Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>WaivedRemarks__c</fullName>
+        <label>Waived Remarks</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <label>Sales Order Other Charges</label>
+    <nameField>
+        <displayFormat>OC-{0000000}</displayFormat>
+        <label>Charge Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Sales Orders Other Charges</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>NewFromDocument</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Restrict_LPF_Billing_Reversal</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND(NOT( ISBLANK(SAP_Document_No__c)),   ISPICKVAL(ReversalCategory__c, &apos;Reversal of LPF billing&apos;))</errorConditionFormula>
+        <errorMessage>Cannot proceed with Reversal of LPF billing if Receipt is posted to SAP</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

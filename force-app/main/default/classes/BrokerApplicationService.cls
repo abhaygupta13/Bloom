@@ -24,7 +24,7 @@ public class BrokerApplicationService {
 	// To Fetch Application By Id
     public BrokerApplication__c getApplicationById(Id applicationId) { 
         return [
-            SELECT Id, ApplicationNumber__c, ApprovalStatus__c, InApproval__c, ApprovalComments__c,ADMORNExpiryDate__c,
+            SELECT Id, ApplicationNumber__c, ApprovalStatus__c, InApproval__c, ApprovalComments__c,
                    IsAgreementExpired__c, IsTradeLicenseExpired__c, RejectionComments__c, IsRFIUpdated__c,
                    IsSuspended__c, SuspensionReason__c, SuspensionTenure__c, IsTerminated__c, TerminationReason__c,CurrentScreen__c,
                    RfiRaisedBy__c, RfiComments__c, RfiCount__c,Drawloop_Next__c,Drawloop_Next_1__c,isRequestForReAgreement__c,
@@ -49,7 +49,7 @@ public class BrokerApplicationService {
     // To Fetch Application details by ApplicationNumber
     public BrokerApplication__c getBrokerApplicationByNumber(String appNumber) {
             List<BrokerApplication__c> apps =
-            [SELECT Id, ApplicationNumber__c, ApprovalStatus__c, InApproval__c, ApprovalComments__c,ADMORNExpiryDate__c,
+            [SELECT Id, ApplicationNumber__c, ApprovalStatus__c, InApproval__c, ApprovalComments__c,
                    IsAgreementExpired__c, IsTradeLicenseExpired__c, RejectionComments__c, IsRFIUpdated__c,
                    IsSuspended__c, SuspensionReason__c, SuspensionTenure__c, IsTerminated__c, TerminationReason__c,CurrentScreen__c,
                    RfiRaisedBy__c, RfiComments__c, RfiCount__c,isRequestForReAgreement__c,

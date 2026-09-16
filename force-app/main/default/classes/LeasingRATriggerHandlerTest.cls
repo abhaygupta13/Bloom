@@ -171,4 +171,15 @@ private class LeasingRATriggerHandlerTest {
         receipt.SAPDocumentNumber__c = '1234';
         update receipt;
     }
+    @isTest
+    static void insertPaymentAllocationTest2(){
+        LeasingOrder__c order = [Select Id from LeasingOrder__c limit 1];
+        LeasingReceiptAcknowledgment__c receipt = [Select id from LeasingReceiptAcknowledgment__c where LeasingOrder__c =: order.Id Limit 1 ];
+        PaymentPlanSchedule__c pps = [Select Id from PaymentPlanSchedule__c limit 1];
+        LeasingReceiptAllocation__c allocation = new LeasingReceiptAllocation__c(LeasingOrder__c = order.id, PaymentPlanSchedule__c = pps.id, LeasingReceiptAcknowledgment__c = receipt.Id, AmountApplied__c = 1000);
+        insert allocation;
+        
+        receipt.SAPReversalDocumentNumber__c = '1234';
+        update receipt;
+    }
 }

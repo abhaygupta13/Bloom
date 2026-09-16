@@ -11,7 +11,7 @@ Sr.No.  version              Date                Details
 ****************************************************************************************************************/ 
 
 public without sharing class HandoverEmailController {
- /*   public static final String Please_send_the_BCC_Announcement = 'Please send the BCC Announcement first before the NOC send to customer';
+    public static final String Please_send_the_BCC_Announcement = 'Please send the BCC Announcement first before the NOC send to customer';
     public static final String Please_Upload_SOA_Report  = 'Please Upload SOA Report';
     public static final String Please_Upload_Desnagging_Report  = 'Please Upload Desnagging Report';
      public static final String Please_Upload_QA_Desnagging_Report  = 'Please Upload QA-Desnagging Report';
@@ -99,6 +99,53 @@ public without sharing class HandoverEmailController {
             return 'An error occurred: ' + e.getMessage();
         }
         return '';
-    }*/
+    }
     
+   /* @AuraEnabled
+    public static String assigntoTreasuryTeam(Id recordId) {
+        try {
+           HandoverService HandoverService = HandoverService.getInstance();
+           MetadataService handoverMetadataService = MetadataService.getInstance();
+            if(recordId!=null){
+                Set<Id> contentDocumentIds = new Set<Id>();
+                List<Document__c> documentList = [SELECT Id, Document_Name__c, ContentDocumentId__c 
+                                                  FROM Document__c 
+                                                  WHERE (Document_Name__c =:HandoverConstants.bloomTitleDeed AND Handover__c = :recordId)];
+                
+                Document__c BankNOCDoc = null;
+                Document__c bloomTitleDeed = null;
+                
+                for (Document__c doc : documentList) {
+                     if (doc.Document_Name__c == HandoverConstants.BloomTitleDeed) {
+                        bloomTitleDeed = doc;
+                    }
+                }
+                
+                if (bloomTitleDeed.ContentDocumentId__c == null) {
+                    return Please_Upload_Bloom_Title_Deed_Doc;
+                } else {
+                    contentDocumentIds.add(bloomTitleDeed.ContentDocumentId__c);
+                }
+            
+                system.debug('contentDocumentIds'+contentDocumentIds);
+                
+                if(contentDocumentIds!=null){
+                    Id treasuryQueueId = handoverMetadataService.getAppSettingTextValue(HandoverConstants.Handover_Treasury_Queue);
+                    Id operationQueueId = handoverMetadataService.getAppSettingTextValue(HandoverConstants.HO_OPERATION_QUEUE);
+                    //Group queue = [SELECT Id FROM Group WHERE Type = 'Queue' AND Name =:HandoverConstants.Handover_Treasury_Queue LIMIT 1];
+                    Handover__c HOObj = new Handover__c();
+                    HOObj.Id = recordId;
+                    HOObj.OwnerId = treasuryQueueId;
+                    //update HOObj;
+                    HandoverService.updateHandovers(new List<Handover__c>{HOObj});
+                    return 'Success';
+                }
+            } 
+        } catch (Exception e) {
+            ErrorLogHandler.logError('HandoverEmailController','assigntoTreasuryTeam',e,'');
+            return 'An error occurred: ' + e.getMessage();
+        }
+        return '';
+        
+    }*/
 }

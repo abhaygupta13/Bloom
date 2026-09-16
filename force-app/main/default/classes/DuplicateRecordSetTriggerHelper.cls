@@ -55,13 +55,13 @@ public class DuplicateRecordSetTriggerHelper {
                     List<Id> duplicateLeadIds = new List<Id>(duplicateLeadIdMap.get(duplicateSetId));
                     if(duplicateLeadIds != NULL && !duplicateLeadIds.isEmpty()){
                         Lead objLead = leadMap.get(duplicateLeadIds[0]);
-                        String htmlBody = ('<table style="border-collapse: collapse" Border="1" ><thead><tr><th>Name</th><th>Lead Number</th><th>Mobile</th><th>Email</th><th>Emirates ID</th><th>Passport Number</th><th>Nationality</th><th>Owner</th><th>Status</th><th>Created By</th><th>Created Date</th></tr></thead><tbody>');
+                        String htmlBody = ('<table style="border-collapse: collapse" Border="1" ><thead><tr><th>Name</th><th>Lead Number</th> <th>Mobile</th><th>Email</th><th>Emirates ID</th><th>Passport Number</th><th>Nationality</th><th>Owner</th><th>Status</th><th>Created By</th><th>Created Date</th></tr></thead><tbody>');
                         htmlBody += getDuplicateLeadEmailContent(objLead);
                         htmlBody += ('</tbody></table>');
                         emailBody = emailBody.replace('{{NEWLEADTABLE}}', htmlBody);
                     }
                     if(duplicateLeadIds != NULL && duplicateLeadIds.size() > 1){
-                        String htmlBody = '<table  style="border-collapse: collapse" Border="1"  ><thead><tr><th>Lead Name</th><th>Lead Number</th><th>Mobile</th><th>Email</th><th>Emirates ID</th><th>Passport Number</th><th>Nationality</th><th>Owner</th><th>Status</th><th>Created By</th><th>Created Date</th></tr></thead><tbody>';
+                        String htmlBody = '<table  style="border-collapse: collapse" Border="1"  ><thead><tr><th>Lead Name</th><th>Lead Number</th> <th>Mobile</th><th>Email</th><th>Emirates ID</th><th>Passport Number</th><th>Nationality</th><th>Owner</th><th>Status</th><th>Created By</th><th>Created Date</th></tr></thead><tbody>';
                         String firstLeadTeam = leadMap.get(duplicateLeadIds[0]).LeadTeam__c;
 						Boolean isMixedTeam = false;
                         for(Integer i = 1; i < duplicateLeadIds.size(); i++){

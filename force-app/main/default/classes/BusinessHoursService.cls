@@ -4,7 +4,7 @@ Author      : Dhanraj Poojary
 Description : BusinessHours service class
 Created Date: 26 MAR 2025
 *****************************************************************************************/
-public inherited sharing class BusinessHoursService {
+public class BusinessHoursService {
     private static BusinessHoursService instance;
     private static final Long DEFAULT_BUSINESS_DAY_MS = 9 * 60 * 60 * 1000L; // 9 hours in ms
     
@@ -61,34 +61,11 @@ public inherited sharing class BusinessHoursService {
         
         return withinBusinessHours && elapsedMilliseconds >= thresholdMilliseconds;
     }
-    
-    //* Method        : hasExceededNoOfHour
-   // * Author        : Prashant Sahu      14/07/2026
-    public Boolean hasExceededNoOfHour(Id businessHoursId, Datetime targetDateTime, Integer numberOfHours) {
-        
-        if (businessHoursId == null || targetDateTime == null || numberOfHours <= 0) {
-            return false;
-        }
-        
-        Long thresholdMilliseconds = numberOfHours * 60L * 60L * 1000L;
-        
-        Long businessMilliseconds = BusinessHours.diff(businessHoursId, targetDateTime, Datetime.now());
-        
-        System.debug('Business Hours Id: ' + businessHoursId);
-        System.debug('Target DateTime: ' + targetDateTime);
-        System.debug('Current DateTime: ' + Datetime.now());
-        System.debug('Business Milliseconds: ' + businessMilliseconds);
-        System.debug('Threshold Milliseconds: ' + thresholdMilliseconds);
-        
-        return businessMilliseconds >= thresholdMilliseconds;
-    }
-    //
-    
     /**
-* Get the list of specific Business hours from Org
-* @param name The name of the BusinessHours configuration applicable.
-* @return List of matching businesshours records.
-*/
+     * Get the list of specific Business hours from Org
+     * @param name The name of the BusinessHours configuration applicable.
+     * @return List of matching businesshours records.
+     */
     public List<BusinessHours> getBusinessHoursByName(String developerName) {
         Id businessHoursId = MetadataService.getInstance().getAppSettingTextValue(developerName);
         System.debug('businessHoursId >>'+businessHoursId);
@@ -100,43 +77,7 @@ public inherited sharing class BusinessHoursService {
         return businessHoursList;
         
     }
-    public Map<Id, Datetime> getEndOfDayByBusinessHoursIds(Set<Id> busHourIds) {
-        Map<Id, Datetime> busHoursIdToEndOfDayMap = new Map<Id, Datetime>();
-        if(BusHourIds.isEmpty()){
-            return busHoursIdToEndOfDayMap;
-        }
-        // Step 1: Get Business Hours records
-        List<BusinessHours> BusHoursList = 
-            [SELECT Id,
-             MondayEndTime, TuesdayEndTime, WednesdayEndTime,
-             ThursdayEndTime, FridayEndTime, SaturdayEndTime, SundayEndTime
-             FROM BusinessHours
-             WHERE Id IN :busHourIds];
-        if(BusHoursList.isEmpty()){
-            return busHoursIdToEndOfDayMap;
-        }
-        
-        Integer day = Date.today().toStartOfWeek().daysBetween(Date.today()) + 1;
-        for(BusinessHours busHour : BusHoursList){
-            Time endTime;
-            switch on day {
-                when 1 { endTime = busHour.SundayEndTime; }
-                when 2 { endTime = busHour.MondayEndTime; }
-                when 3 { endTime = busHour.TuesdayEndTime; }
-                when 4 { endTime = busHour.WednesdayEndTime; }
-                when 5 { endTime = busHour.ThursdayEndTime; }
-                when 6 { endTime = busHour.FridayEndTime; }
-                when 7 { endTime = busHour.SaturdayEndTime; }
-            }
-            
-            if(endTime != null){
-                busHoursIdToEndOfDayMap.put(busHour.Id, Datetime.newInstance(Date.today(), endTime));
-            }
-        }
-        
-        return busHoursIdToEndOfDayMap;
-    }
-    public List<BusinessHours> getBusinessHoursByIds(Set<Id> businessHourIds) {
+    public List<BusinessHours> getBusinessHoursByIds(Set<id> businessHourIds) {
         if(businessHourIds == null || businessHourIds.isEmpty()) {
             return  new List<BusinessHours>(); 
         }
@@ -162,27 +103,6 @@ public inherited sharing class BusinessHoursService {
         Decimal businessDays = businessHours / workingHoursInDay;
         
         return Integer.valueOf(businessDays.setScale(0));
-    }
-    
-    /*****************************************************************************************
-* Method        : getBusinessReminderTime
-* Author        : Prashant Sahu      16/07/2026
-* @param businessHoursId       Business Hours Id applicable for the Lead/Task.
-* @param slaDateTime           Calculated SLA Breach DateTime.
-* @param reminderBeforeHours   Number of working hours before SLA breach when
-*                              the reminder should be triggered.
-* @return Datetime             Reminder DateTime calculated using Business Hours.
-*****************************************************************************************/
-    
-    public Datetime getBusinessReminderTime(Id businessHoursId,Datetime slaDateTime, Decimal reminderHours) {
-        
-        if (businessHoursId == null || slaDateTime == null || reminderHours == null) {
-            return null;
-        }
-       // Long reminderMillis = Long.valueOf(String.valueOf(reminderHours)) * 60L * 60L * 1000L;
-        Long reminderMillis = (Long)(reminderHours * 60 * 60 * 1000);
-        
-        return BusinessHours.add(businessHoursId,slaDateTime, reminderMillis);
     }
     
 }

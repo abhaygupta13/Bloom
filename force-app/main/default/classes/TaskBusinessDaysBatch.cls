@@ -7,7 +7,7 @@ global class TaskBusinessDaysBatch implements Database.Batchable<SObject>, Sched
     
     private static final String MTD_BUSINESS_HOURS_PER_WORKING_DAY = 'BusinessHoursPerWorkingDay';
     
-    global Database.QueryLocator start(Database.BatchableContext bc) {
+    global Database.QueryLocator start(Database.BatchableContext bc) { 
         
          return Database.getQueryLocator([SELECT Id, Status, BusinessHours__c, SLAHours__c, WorkingDaysSpent__c, AssignedDateTime__c FROM Task 
 			WHERE Status != 'Completed' AND BusinessHours__c != NULL AND SLAHours__c != NULL AND AssignedDateTime__c != NULL  AND (WhoId != NULL OR WhatId != NULL)]);

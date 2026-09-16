@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Case_Record_Type__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Case Record Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>General Service Request</fullName>
+                    <default>true</default>
+                    <label>General Service Request</label>
+                </value>
+                <value>
+                    <fullName>Resale</fullName>
+                    <default>false</default>
+                    <label>Resale</label>
+                </value>
+                <value>
+                    <fullName>Financial Services</fullName>
+                    <default>false</default>
+                    <label>Financial Services</label>
+                </value>
+                <value>
+                    <fullName>Special Services</fullName>
+                    <default>false</default>
+                    <label>Special Services</label>
+                </value>
+                <value>
+                    <fullName>Broker Registration</fullName>
+                    <default>false</default>
+                    <label>Broker Registration</label>
+                </value>
+                <value>
+                    <fullName>Community living</fullName>
+                    <default>false</default>
+                    <label>Community living</label>
+                </value>
+                <value>
+                    <fullName>Customer Service Complaint</fullName>
+                    <default>false</default>
+                    <label>Customer Service Complaint</label>
+                </value>
+                <value>
+                    <fullName>Defect liability Complaint</fullName>
+                    <default>false</default>
+                    <label>Defect liability Complaint</label>
+                </value>
+                <value>
+                    <fullName>Leasing Complaint</fullName>
+                    <default>false</default>
+                    <label>Leasing Complaint</label>
+                </value>
+                <value>
+                    <fullName>Property Handover Complaint</fullName>
+                    <default>false</default>
+                    <label>Property Handover Complaint</label>
+                </value>
+                <value>
+                    <fullName>Property Transfer/Resale</fullName>
+                    <default>false</default>
+                    <label>Property Transfer/Resale</label>
+                </value>
+                <value>
+                    <fullName>Sales Complaint</fullName>
+                    <default>false</default>
+                    <label>Sales Complaint</label>
+                </value>
+                <value>
+                    <fullName>Handover Service Request</fullName>
+                    <default>false</default>
+                    <label>Handover Service Request</label>
+                </value>
+                <value>
+                    <fullName>Maintenance Complaint</fullName>
+                    <default>false</default>
+                    <label>Maintenance Complaint</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Case_Status__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Case Status</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>true</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>Assigned</fullName>
+                    <default>false</default>
+                    <label>Assigned</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Escalated</fullName>
+                    <default>false</default>
+                    <label>Escalated</label>
+                </value>
+                <value>
+                    <fullName>Closed</fullName>
+                    <default>false</default>
+                    <label>Closed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Case Status Display Config</label>
+    <listViews>
+        <fullName>View_All</fullName>
+        <columns>MasterLabel</columns>
+        <columns>DeveloperName</columns>
+        <columns>Case_Record_Type__c</columns>
+        <columns>Case_Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>View All</label>
+    </listViews>
+    <pluralLabel>Case Status Display Configs</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

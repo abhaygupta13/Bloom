@@ -128,7 +128,6 @@ public with sharing class BAPPUpdateAgentInfoHandler {
                 
                     targetContact.PrimaryMobilePhone__c = req.mobileNumber;
                     targetContact.MobileCountryCode__c = req.countryCode;
-                	targetContact.PrimaryMobileCountryCode__c = req.countryCode;
                     didMobileUpdate = true;
                 
             }
@@ -161,7 +160,7 @@ public with sharing class BAPPUpdateAgentInfoHandler {
                 ContactService.getInstance().updateContacts(new List<Contact>{ targetContact });
             }
         // --- Normalize SubType (remove spaces) ---
-          String normalizedSubType = 'BrokerAgentRegistrationAndUpdate';
+        String normalizedSubType = String.isNotBlank(req.subCategory) ? req.subCategory.replaceAll('\\s+', '') : null;
         
         // --- Fetch matching Service Catalog record ---
         ServiceCatalog__c sc;
@@ -194,21 +193,16 @@ public with sharing class BAPPUpdateAgentInfoHandler {
             Boolean didCaseCreate = false;
             if(canCreateCaseForTarget){
                 if(String.isBlank(req.caseId) && shouldCreateCase ){
-                    Id recordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'BrokerAgentRegistrationAndUpdate');
+                    Id recordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'BrokerAgentDetailsUpdate');
                     c = new Case(
                         AccountId = req.accountId,
                         ContactId = req.contactId,
                         TypeofEstablishment__c = targetContact.Account.TypeOfEstablishment__c,
                         Description = req.caseDescription,
                         BrokerContactRole__c = String.isNotBlank(req.roleToUpdate) ? req.roleToUpdate : targetContact.BrokerContactRole__c,
-                        ApprovalStatus__c = 'Not Approved',
-                        Status = 'New',
-                		Draft__c = true,
+                        ApprovalStatus__c = 'Draft',
                         RecordTypeId = recordTypeId,
-                        Subject = 'Broker Agent Details Update',
-                        Origin = 'Portal',
-                        SubType__c = req.subCategory,
-                        Type = req.category,
+                        Type = req.serviceRequestType,
                         Broker_Agent__c = String.isNotBlank(req.contactIdToUpdate) ? req.contactIdToUpdate : null,
                         ServiceCatalog__c = sc != null ? sc.Id : null,
                         NationalIDExpiryDate__c = parseDate(req.nationalIdExpiryDate),
@@ -229,7 +223,7 @@ public with sharing class BAPPUpdateAgentInfoHandler {
                         }
                     
                         // --- Prevent updates if Case not in Draft
-                        if (c.Draft__c == false) {
+                        if (c.ApprovalStatus__c != 'Draft') {
                             sendError(Label.BAPP_OnlyDraftUpdate);
                             return;
                         }
@@ -243,20 +237,13 @@ public with sharing class BAPPUpdateAgentInfoHandler {
                         if (String.isNotBlank(req.roleToUpdate))
                             c.BrokerContactRole__c = req.roleToUpdate;
                      
-                    	Boolean isSubmitted = false;
-
-                        if (String.isNotBlank(req.caseStatus) && req.caseStatus == 'Submitted') {
-                            //c.Status = 'New';
-                            c.Draft__c = false;
-                            c.ApprovalStatus__c = 'Pending';
-                            isSubmitted = true;
-                        }
-                        
-                        if (bbmQueueId != null && isSubmitted) {
+                    	if (String.isNotBlank(req.caseStatus) && req.caseStatus == 'Submitted')
+                            c.ApprovalStatus__c = req.caseStatus;
+                    	if (bbmQueueId != null && req.caseStatus == 'Submitted') {
                             c.OwnerId = bbmQueueId;
                         }
-                    if (String.isNotBlank(req.category))
-                        c.Type = req.category;
+                        if (String.isNotBlank(req.serviceRequestType))
+                            c.Type = req.serviceRequestType;
                     
                         if (sc != null)
                             c.ServiceCatalog__c = sc.Id;
@@ -304,13 +291,13 @@ public with sharing class BAPPUpdateAgentInfoHandler {
                 writeStringOrNull(gen, 'approvalStatus', c.ApprovalStatus__c);
                 writeStringOrNull(gen, 'approvalComments', c.ApprovalComments__c);
                 writeStringOrNull(gen, 'rejectionComments', c.RejectionComments__c);
-                writeStringOrNull(gen, 'category', c.Type);
+                writeStringOrNull(gen, 'serviceRequestType', c.Type);
             } else {
                 writeStringOrNull(gen, 'caseStatus', null);
                 writeStringOrNull(gen, 'approvalStatus', null);
                 writeStringOrNull(gen, 'approvalComments', null);
                 writeStringOrNull(gen, 'rejectionComments', null);
-                writeStringOrNull(gen, 'category', null);
+                writeStringOrNull(gen, 'serviceRequestType', null);
             }
             
 

@@ -46,7 +46,7 @@ public Without Sharing class SalesOfferController {
         if(String.isNotBlank(unitModel) && unitModel != 'All' && String.isNotBlank(directType)){
             return objUnitService.getAvailableUnitsByProjectAndUnitModel(projectId, unitModel, directType);
         }else{
-            return objUnitService.getAvailableUnitsByProjectId(projectId);
+            return objUnitService.getAvailableUnitsByProjectId(projectId, directType);
         }
     }
     

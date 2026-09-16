@@ -93,12 +93,6 @@
                                 </lightning-icon>
                                 &nbsp;&nbsp;
                             </template>
-                            <template if:false={item.ContentDocumentId__c}>
-                                <lightning-icon title="No Archive" icon-name="utility:archive"
-                                    variant="error" size="small">
-                                </lightning-icon>
-                                &nbsp;&nbsp;
-                            </template>
 
                         </td>
                     </tr>
@@ -201,7 +195,8 @@
         <div class="slds-backdrop slds-backdrop_open"></div>
     </template>
 
-    <!-- Archive Modal(Added By Ranjan) -->
+
+     <!-- Archive Modal(Added By Ranjan) -->
     <template if:true={showArchiveModal}>
         <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
             aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
@@ -272,5 +267,5 @@
         </section>
         <div class="slds-backdrop slds-backdrop_open"></div>
     </template>
-
+    
 </template>

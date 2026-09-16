@@ -23,21 +23,30 @@ private class PostSalePaymentDeferalCaseHandlerTest {
             UserName = uniqueName + '@test.com'
         );
         insert testUser;
-        
+        test.startTest();
         Id caseRecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Post_Sale_Payment_Deferral').getRecordTypeId();
         //Id emailToCaseRecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('Customer_Service_Email_To_Case').getRecordTypeId(); 
         
         Account testAccount = new Account(
             RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('PersonAccount').getRecordTypeId(),
             LastName = 'Test Account',
-            PersonEmail = 'testaccount@test.com'
+            PersonEmail = 'testaccount@test.com',
+            NameinArabic__c = 'عميل تجريبي'
         );
         insert testAccount; 
-        test.startTest();
+        
+              // Account
+        Account acc = new Account(
+            Name = 'Test Customer',
+            NameinArabic__c = 'عميل تجريبي'
+        );
+        insert acc;
+
         // Create Contact with Email
         Contact testContact = new Contact(
             LastName = 'Test Contact',
-            Email = 'sonali.sengar@infobeans.com'
+            Email = 'sonali.sengar@infobeans.com',
+            AccountId = acc.id
         );
         insert testContact;
         
@@ -167,11 +176,11 @@ private class PostSalePaymentDeferalCaseHandlerTest {
             SubCategory__c = 'Postpone/Defer payment',
             RecordTypeDevName__c = 'Post_Sale_Payment_Deferral'
         );
-        insert testServiceCatalog; 
-        List<Case> caseListToInsert = new List<Case>();
+        insert testServiceCatalog;        
         Case testCase = new Case(
             CurrencyIsoCode = 'AED',
             Origin = 'Walk-In',
+            Subject = 'test',
             OwnerId = testUser.Id,
             RecordTypeId = caseRecordTypeId,
             Sales_Order__c = testSalesOrder1.Id,
@@ -180,12 +189,13 @@ private class PostSalePaymentDeferalCaseHandlerTest {
             Case_Contact_Name__c = testContact.Id,
             ContactId = testContact.Id
       );
-        caseListToInsert.add(testCase);
+       
         
         Case testCase1 = new Case(
             CurrencyIsoCode = 'AED',
             Origin = 'Walk-In',
             OwnerId = testUser.Id,
+            Subject = 'test',
             RecordTypeId = caseRecordTypeId,
             Sales_Order__c = testSalesOrder1.Id,
             CaseType__c = 'Service Request',
@@ -196,12 +206,13 @@ private class PostSalePaymentDeferalCaseHandlerTest {
             Deferral_Fee_Paid__c = 'Yes',
             PaymentDeferralReason__c = 'Changing date with replacing the cheque'
         );
-        caseListToInsert.add(testCase1);
+        
         
         Case testCase2 = new Case(
             CurrencyIsoCode = 'AED',
             Origin = 'Walk-In',
             OwnerId = testUser.Id,
+            Subject = 'test',
             RecordTypeId = caseRecordTypeId,
             Sales_Order__c = testSalesOrder1.Id,
             ContactId = testContact.Id,
@@ -212,12 +223,13 @@ private class PostSalePaymentDeferalCaseHandlerTest {
             ChequeScanned__c =  'Yes' ,
             Deferral_Fee_Paid__c = 'Yes'
         );
-        caseListToInsert.add(testCase2);
+        
         
         Case testCase3 = new Case(
             CurrencyIsoCode = 'AED',
             Origin = 'Walk-In',
             OwnerId = testUser.Id,
+            Subject = 'test',
             RecordTypeId = caseRecordTypeId,
             CaseType__c = 'Service Request',
             AccountId = testAccount.id,
@@ -230,22 +242,21 @@ private class PostSalePaymentDeferalCaseHandlerTest {
             DeferralApprovalStatus__c = 'Approved',
             ContactId = testContact.Id
         );
-        caseListToInsert.add(testCase3);
+       
         
    
           Case testCase4 = new Case(
             CurrencyIsoCode = 'AED',
             Origin = 'Email',
+            Subject = 'test',
             OwnerId = testUser.Id,
             RecordTypeId = caseRecordTypeId,
             ContactId = testContact.Id,
             AccountId = testAccount.id
-            //ContactEmail = testSalesOrder1.
-        );
-        caseListToInsert.add(testCase4);
-     
-        insert caseListToInsert;
         
+        );
+        
+     insert new List<Case>{ testCase, testCase1, testCase2, testCase3, testCase4 };
         // Create test ServiceAction record
         ServiceAction__c testServiceAction = new ServiceAction__c(
             ServiceCatalog__c = testServiceCatalog.Id,
@@ -259,7 +270,7 @@ private class PostSalePaymentDeferalCaseHandlerTest {
         // Create test ServiceAction record
         ServiceAction__c testServiceAction2 = new ServiceAction__c(
             ServiceCatalog__c = testServiceCatalog.Id,
-            TaskType__c = 'Post Sale Payment Deferral',
+            TaskType__c = 'Post Sale Payment Deferral', 
             TaskSubType__c = 'Finance Team Task',
             TaskSubject__c = 'Test Task Subject',
             Department__c ='Finance',
@@ -267,47 +278,61 @@ private class PostSalePaymentDeferalCaseHandlerTest {
             Order__c = 2
         );
         insert testServiceAction2;
-        
-        List<Task> taskListToInsert = new List<Task>();
-        Task crmTask = new Task(
+            Task crmTask = new Task(
             Status = 'Completed', 
             Type__c = 'Post Sale Payment Deferral',
             SubType__c = 'CRM Team Task',
             WhatId = testCase1.id
         );
-        taskListToInsert.add(crmTask);
+        insert crmTask;
         Task financeTask = new Task( 
             Status = 'Open', 
             Type__c = 'Post Sale Payment Deferral',
             SubType__c = 'Finance Team Task',
             WhatId = testCase2.id
         );
-        taskListToInsert.add(financeTask);
+        insert financeTask;
         
-        insert taskListToInsert;
+      
         
-        List<CaseInstallment__c> caseInstallmentListToInsert = new List<CaseInstallment__c>();
         CaseInstallment__c caseInstallment = new CaseInstallment__c(/*Name = installmentLines1.Name,*/
             Case__c = testCase3.Id,
             OwnerId = testUser.Id,
             Installment__c = installmentLines.id,
             NewInstallmentDate__c = system.today().addDays(5));
         
-        caseInstallmentListToInsert.add(caseInstallment);
+        insert caseInstallment;
         CaseInstallment__c caseInstallment1 = new CaseInstallment__c(/*Name = installmentLines1.Name,*/
             Case__c = testCase1.Id,
             OwnerId = testUser.Id,
             Installment__c = installmentLines.id,
             NewInstallmentDate__c = system.today().addDays(5));
         
-        caseInstallmentListToInsert.add(caseInstallment1);
+        insert caseInstallment1;
          CaseInstallment__c caseInstallment2 = new CaseInstallment__c(
             Case__c = testCase4.Id,
             OwnerId = testUser.Id,
             Installment__c = installmentLines.id);
           
-        caseInstallmentListToInsert.add(caseInstallment2);
-        insert caseInstallmentListToInsert;
+        
+        insert caseInstallment2;
+       // Create setup objects separately
+        User u = [SELECT Id FROM User WHERE Id = :UserInfo.getUserId()];
+   System.runAs(u) {
+
+    EmailTemplate et = new EmailTemplate(
+        Name = 'TP Form Template',
+        DeveloperName = 'TP_Form_Template',
+        FolderId = UserInfo.getUserId(),
+        TemplateType = 'custom',
+        Subject = 'Test Subject',
+        Body = 'Test Body'
+    );
+
+    insert et;
+}
+    
+      
         test.stoptest();
         
     }
@@ -375,7 +400,8 @@ private class PostSalePaymentDeferalCaseHandlerTest {
     static void testGetDefaultValues(){ 
         SalesOrder__c testSalesOrder = [SELECT Id, Offer__c, Offer__r.Name,First_Installment_Received_Amount__c,
                                         First_Installment_Amount__c, Account__c,Account__r.Name, Unit__c, Unit__r.Name FROM SalesOrder__c WHERE Name = 'Test Sales Order1' LIMIT 1];
-        Account testAccount = [SELECT Id FROM Account];
+        Id recordTypeId  = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('PersonAccount').getRecordTypeId();
+        Account testAccount = [SELECT Id FROM Account where  RecordTypeId = :recordTypeId];
         ServiceCatalog__c testServiceCatalogue = [SELECT Id,RecordTypeDevName__c,SubCategory__c FROM ServiceCatalog__c];
         Unit__c testUnit = [SELECT Id FROM Unit__c];
         Test.startTest();
@@ -393,11 +419,16 @@ private class PostSalePaymentDeferalCaseHandlerTest {
     @isTest
     static void testCreateCaseInstallments() {
        
-        Case testCase = [SELECT Id,Sales_Order__c,ServiceCatalog__c FROM Case WHERE DeferralApprovalStatus__c = 'Approved' LIMIT 1];
+        Case testCase = [SELECT Id,Sales_Order__c,Step__c,AccountId,CaseType__c,RecordTypeId,Status,ServiceCatalog__c FROM Case WHERE DeferralApprovalStatus__c = 'Approved' LIMIT 1];
         SalesOrder__c order = [Select id from SalesOrder__c where name ='Test Sales Order1'];
         InstallmentLines__c ins = [Select id from InstallmentLines__c where SalesOrder__c = :order.id];
         Test.startTest();
         PostSalePaymentDeferalCaseHandler.getInstance().createCaseInstallments(new List<Case>{testCase});
+        //PostSalePaymentDeferalCaseHandler.getInstance().handleNextSteps(testCase);
+        testCase.PaymentDeferralReason__c='';
+        testCase.Step__c ='1';
+        update testCase;
+        PostSalePaymentDeferalCaseHandler.getInstance().checkRequiredFields(testCase);
         Test.stopTest();
         
        
@@ -428,20 +459,6 @@ private class PostSalePaymentDeferalCaseHandlerTest {
         Test.stopTest();
     }
     
-    
-    @isTest
-    static void testSendEmailForUpdatedPaymentInstallment(){
-        Case testCase3 = [SELECT Id, Step__c,ServiceCatalog__c, Status,
-                          Deferral_Fee_Paid__c,ChequeScanned__c, Deferral_Within_1_Month__c, DeferralApprovalStatus__c,Sales_Order__r.Project__c
-                          FROM Case WHERE Deferral_Within_1_Month__c = 'No' LIMIT 1];
-     
-        
-        Test.startTest();
-        
-        PostSalePaymentDeferalCaseHandler.getInstance().sendEmailForUpdatedPaymentInstallment(testCase3);
-        
-        Test.stopTest();
-    }
     
     @isTest
     static void testValidateCaseEligibility(){
@@ -575,6 +592,47 @@ private class PostSalePaymentDeferalCaseHandlerTest {
         System.assertEquals(1, result.size(), 'Should return one ContentDocumentLink');
         System.assertEquals(testDoc.Id, result[0].LinkedEntityId, 'LinkedEntityId should match test document ID');
     }
+    @isTest
+    static void testValidatePaymentDeferralFeeReceipt() {
+     Case testCase = [SELECT Id, Step__c
+                          FROM Case WHERE DeferralApprovalStatus__c = 'Approved' LIMIT 1];
+
+        // Create and insert the custom Document__c record
+        Document__c testDoc = new Document__c(
+            Document_Name__c = 'Payment Deferral Fees Receipt',
+            Case__c = testCase.Id 
+        );
+        insert testDoc;
+
+        // Create test ContentVersion (this automatically creates a ContentDocument)
+        ContentVersion contentVersion = new ContentVersion(
+            Title = 'Test File',
+            PathOnClient = 'testfile.pdf',
+            VersionData = Blob.valueOf('Test content')
+        );
+        insert contentVersion;
+
+        // Query the auto-created ContentDocument
+        ContentDocument contentDoc = [SELECT Id FROM ContentDocument WHERE LatestPublishedVersionId = :contentVersion.Id LIMIT 1];
+
+        // Link the ContentDocument to the Document__c record
+        ContentDocumentLink docLink = new ContentDocumentLink(
+            ContentDocumentId = contentDoc.Id,
+            LinkedEntityId = testDoc.Id,
+            ShareType = 'V',
+            Visibility = 'AllUsers'
+        );
+        insert docLink;
+
+        // Call the method under test
+        Test.startTest();
+        List<ContentDocumentLink> result = PostSalePaymentDeferalCaseHandler.validatePaymentDeferralFeeReceipt(testCase); // Replace with your actual class name
+        Test.stopTest();
+
+        // Assert results
+        System.assertEquals(1, result.size(), 'Should return one ContentDocumentLink');
+        System.assertEquals(testDoc.Id, result[0].LinkedEntityId, 'LinkedEntityId should match test document ID');
+    }
       @isTest
     static void testGetCaseInstallments() {
      Case testCase3 = [SELECT Id, Step__c,ServiceCatalog__c, Status,
@@ -634,12 +692,38 @@ private class PostSalePaymentDeferalCaseHandlerTest {
         );
     }
      @isTest
-    static void testValidateEligibility_CaseMissingFields() {
+    static void testValidateEligibility_CaseMissingFields() { 
         SalesOrder__c salesOrder = null;
-        Case testCase = [SELECT Id,AccountId,Unit__c from Case where Step__c='2' Limit 1]; 
+        Case testCase = [SELECT Id,Sales_Order__c,PaymentDeferralReason__c,Deferral_Fee_Paid__c,CaseType__c,RecordTypeId,ServiceCatalog__c,status,AccountId,Unit__c,Step__c,StopEmailsToCustomer__c from Case where Step__c='2' Limit 1]; 
         PostSalePaymentDeferalCaseHandler obj = PostSalePaymentDeferalCaseHandler.getInstance(); 
         String result = obj.validateEligibility(salesOrder, testCase);
-    
+        
+        obj.handleNextSteps(testCase);
+        testCase.Step__c = '1';
+        testCase.PaymentDeferralReason__c ='Changing date';
+        testCase.Deferral_Fee_Paid__c = 'Yes';
+        testCase.DeferralApprovalStatus__c = 'Approved';
+        List<Case> caseList = new  List<Case>();
+        caseList.add(testCase);
+        CaseService.getInstance().updateCasesWithoutTrigger(caseList);
+        obj.checkRequiredFields(testCase);
+        PostSalePaymentDeferalCaseHandler.handleDeferralApproval(testCase);
+        testCase.DeferralApprovalStatus__c = 'Rejected';
+        CaseService.getInstance().updateCasesWithoutTrigger(caseList);
+        PostSalePaymentDeferalCaseHandler.handleDeferralApproval(testCase);
+        testCase.DeferralApprovalStatus__c = '';
+        CaseService.getInstance().updateCasesWithoutTrigger(caseList);
+                PostSalePaymentDeferalCaseHandler.handleDeferralApproval(testCase);
+       
+    }
+     @IsTest
+    static void testSendTPFormCustomerEmail() {
+
+        Case cs = [SELECT Id FROM Case LIMIT 1];
+
+        Test.startTest();
+        PostSalePaymentDeferalCaseHandler.getInstance().sendTPFormCustomerEmail(cs.Id);
+        Test.stopTest();
     }
 
 

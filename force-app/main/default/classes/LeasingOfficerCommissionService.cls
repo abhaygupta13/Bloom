@@ -50,7 +50,7 @@ public inherited sharing class LeasingOfficerCommissionService {
         
         return [ SELECT Id, LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c ,LeasingOrder__r.LeasingStartDate__c,
                 LeasingOrder__r.LeasingSAPContractId__c, LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPContractTypeCode__c,
-                isVATApplied__c, DueDate__c, Commission_Amount__c , Refdocno__c, Paymentdoc__c, LeasingOrder__r.Id,
+                isVATApplied__c, DueDate__c, Commission_Amount__c , Refdocno__c, Paymentdoc__c, LeasingOrder__r.Id,LeasingOrder__r.LeasingEndDate__c,
                 LeasingOrder__r.Unit__r.PropertyUsage__c, LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPCommercialContractTypeCode__c,
                 LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPResContractTypeCode__c, SAPConditionTypeCode__c,
                 IsReversed__c, ReversalCategory__c, ReversedDate__c, ReversedReason__c, ReversedRemarks__c, RelatedPartyBloomHolding__c
@@ -59,27 +59,11 @@ public inherited sharing class LeasingOfficerCommissionService {
     
     public List<LeasingOfficerCommission__c> getLOCByLeasingOrderIds(Set<Id> leasingOrderIds){
         return [
-                SELECT Id, LeasingOrder__c 
-                FROM LeasingOfficerCommission__c 
-                WHERE LeasingOrder__c IN :leasingOrderIds
-            ];
+            SELECT Id, LeasingOrder__c 
+            FROM LeasingOfficerCommission__c 
+            WHERE LeasingOrder__c IN :leasingOrderIds
+        ];
     }
-    
-    public List<LeasingOfficerCommission__c> getLOCByLeasingOrderId(Id leasingOrderId){
-        return [
-                SELECT Id, LeasingOrder__c 
-                FROM LeasingOfficerCommission__c 
-                WHERE LeasingOrder__c = :leasingOrderId
-            ];
-    }
-    
-    public void deleteLeasingStaff(List<LeasingOfficerCommission__c> leasingStaffList){
-        if(leasingStaffList != NULL && !leasingStaffList.isEmpty()){
-            delete leasingStaffList;
-        }
-    }
-    
-    
     
     public  IntegrationRecord__c getLeasingOfficerCommissionRecords(LeasingOfficerCommission__c  leasingOfficerCommission){
         IntegrationRecordService objIntegrationRecordService = IntegrationRecordService.getInstance();
@@ -118,6 +102,7 @@ public inherited sharing class LeasingOfficerCommissionService {
         paramMap.put('Param13',  String.valueOf(leasingOfficerCommission.ReversalCategory__c ));
         paramMap.put('Param14',  String.valueOf(leasingOfficerCommission.Refdocno__c ));
         paramMap.put('Param15',  String.valueOf(leasingOfficerCommission.Paymentdoc__c ));
+        paramMap.put('Param16',  String.valueOf(leasingOfficerCommission.LeasingOrder__r.LeasingEndDate__c));
         paramMap.put('Param17',  String.valueOf(leasingOfficerCommission.DueDate__c ));
         paramMap.put('Param18',UserInfo.getUserEmail());
         if (leasingOfficerCommission.RelatedPartyBloomHolding__c) {

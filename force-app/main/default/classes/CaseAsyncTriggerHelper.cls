@@ -10,8 +10,9 @@ Sr.No.     version              Date                Details
 1.          V1.0                                Initial Version 
 ****************************************************************************************************************/
 public without sharing class CaseAsyncTriggerHelper {
-     private static final String MTD_OWE_NO_REPLY_BLOOM_SALES_ID { get { return 'BloomNoReplySalesOWEmailId'; } } 
-    public static void processApprovedCustomerTypeUpdateCases(Set<Id> caseIds) {       
+    
+    public static void processApprovedCustomerTypeUpdateCases(Set<Id> caseIds) {
+        
         List<Case> caseList = CaseService.getInstance().getCaseByIds(caseIds);
         List<Case> caseToUpdateList = new List<Case>();
         List<Account> accountsToUpdate = new List<Account>();
@@ -48,5 +49,4 @@ public without sharing class CaseAsyncTriggerHelper {
             GeneralEnquirySRHandler.getInstance().syncCaseDocumentsToAccount(customerTypeUpdateCases);
         }
     }
-
 }

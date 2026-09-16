@@ -1,8 +1,8 @@
 /**
  * AccessCardService
  * SOQL/selectors for AccessCard__c, singleton pattern.
- * No business logic here.----
- *///testing for Webhook 
+ * No business logic here.
+ */
 public without sharing class AccessCardService {
     private static AccessCardService inst;
     public static AccessCardService getInstance() {

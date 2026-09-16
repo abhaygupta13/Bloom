@@ -14,7 +14,7 @@ public without sharing class AssignBackServiceRequestController {
     }
     
     @AuraEnabled
-    public static void handleAssignBack(Id caseId, String commentBody,String reason,Id userId,String team) {
+    public static void handleAssignBack(Id caseId, String commentBody,String reason,Id userId,String team,Boolean isEscalation) {
         Case caseRec = CaseService.getInstance().getCaseById(caseId);
         Id complaintRT = Utility.getRecordTypeIdByDevName(Case.SObjectType,'ComplaintRequest');
         if(caseRec.RecordTypeId == complaintRT){
@@ -34,7 +34,7 @@ public without sharing class AssignBackServiceRequestController {
                 CaseService.getInstance().updateCases(new List<Case>{caseToUpdate});
             }
             else{
-                createComplaintTask(caseRec, team, userId, commentBody);
+                createComplaintTask(caseRec, team, userId, commentBody,isEscalation);
             }
         }
         else{
@@ -73,10 +73,14 @@ public without sharing class AssignBackServiceRequestController {
         
         if (caseRec.RecordTypeId == complaintRT) {
             
-            Map<String, String> departmentMap =
-                Utility.getPicklistValues(ServiceAction__c.SObjectType,'Department__c');
+            Set<String> allowedDepartments = new Set<String>{
+        'Leasing','CRM','Finance','Operations',
+        'BFM',
+        'Community Management',
+            'Renovation'
+    };
             
-            requiredDepts.addAll(departmentMap.keySet());
+            requiredDepts.addAll(allowedDepartments);
             
         } else {
             
@@ -116,9 +120,9 @@ public without sharing class AssignBackServiceRequestController {
         
         return result;
     }
-    private static void createComplaintTask(Case caseRec,String team,Id userId,String comments){
+    private static void createComplaintTask(Case caseRec,String team,Id userId,String comments,Boolean isEscalation){
         //  ServiceAction__c selectedAction = ServiceCatalogService.getInstance().getServiceActionByCatalogAndDepartment(caseRec.ServiceCatalog__c,team);
-        
+           List<CaseAssignmentHistory__c> caseAssignHistoryToLog = new  List<CaseAssignmentHistory__c>();
         ActivityService activityService = ActivityService.getInstance();
         
         List<Task> prevTask = activityService.fetchOpenTaskForCase(caseRec);
@@ -127,14 +131,18 @@ public without sharing class AssignBackServiceRequestController {
         
         //Task task = activityService.createTaskFromServiceAction(selectedAction);
         Task task = new Task(); 
-        task.Subject = team + ' Team Task 1';
+       if (isEscalation == true) {
+    task.Subject = 'Escalation Task';
+    } else {
+    task.Subject = team + ' Team Task 1';
+    }
         task.Type__c = caseRec.SubType__c;
         
         task.WhatId = caseRec.Id;
         task.Type = 'Other';
         task.Department__c = team;
         task.OwnerId = userId;  
-        //  task.ActivityDate = System.today().addDays(Integer.valueOf(selectedAction.Due_in_days__c));
+        task.ActivityDate = System.today().addDays(2);
         
         activityService.insertTasks(new List<Task>{task});
         CRMComplaintRequestHandler.getInstance().sendComplaintAssignmentEmails(new List<Task>{task});

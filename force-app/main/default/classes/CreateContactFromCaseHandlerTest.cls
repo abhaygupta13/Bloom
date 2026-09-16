@@ -81,7 +81,7 @@ private class CreateContactFromCaseHandlerTest {
         // Step 5: Validate contact details
         Contact createdContact = [
             SELECT Id, FirstName, LastName, Email, AccountId, CaseId__c, IsActive__c,
-                   BrokerContactRole__c, PassportNumber__c, Emirates_Id__c
+                   BrokerContactRole__c, PassportNumber__c, NationalIdNumber__c
             FROM Contact
             WHERE Id = :contactId
             LIMIT 1

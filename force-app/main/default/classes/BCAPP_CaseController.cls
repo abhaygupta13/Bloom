@@ -22,15 +22,9 @@ public without sharing class BCAPP_CaseController {
     private static final string SOA_REQUEST_RT { get { return 'SOARequest'; } }
     private static final string POP_SHARE_SR_RT { get { return 'ProofofPaymentShared'; } }//Pranav
     private static final string BANK_ACC_DTAIL_SR_RT { get { return 'BankAccountDetailsInquiry'; } }//Pranav
-    private static final string COMMUNITY_SR_APPROVED_NOTIFICATION { get { return 'CommunityAppSRRejectedEmailTempId'; } }
-    private static final string COMMUNITY_SR_REJECTION_NOTIFICATION { get { return 'CommunityAppSRRejectedEmailTempId'; } }
-    private static final String MTD_OWE_NO_REPLY_BLOOM_SALES_ID { get { return 'BloomNoReplySalesOWEmailId'; } }
     private static final string KYC_UPDATE_REQUEST_RT { get { return 'KYCUpdateRequest'; } }
-    private static final string BROKER_COMMISSION_ISSUE_RT { get { return 'BrokerCommissionIssue'; } }
-    private static final string BROKER_GENERAL_SERVICE_REQUEST_RT { get { return 'BrokerGeneralServiceRequest'; } }
-    private static final string BROKER_AGENCY_DETAILS_UPDATE_RT { get { return 'BrokerAgencyDetailsUpdate'; } }
-    private static final string BROKER_AGENT_REGISTRATION_UPDATE_RT { get { return 'BrokerAgentRegistrationAndUpdate'; } }
     private static final string TAWTHEEQ_ENROLLMENT_RT { get { return 'TawtheeqEnrollment'; } }
+    private static final String BROKER_GENERAL_SERVICES_RT {get { return 'Broker_General_Services'; }}
 
     @AuraEnabled
     public static Boolean updateCaseOwner(Id caseId) {
@@ -48,13 +42,12 @@ public without sharing class BCAPP_CaseController {
             Id SOARequestRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType,SOA_REQUEST_RT);
             Id popShareSrRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,POP_SHARE_SR_RT);//Pranav
             Id bnkAccDtlRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,BANK_ACC_DTAIL_SR_RT);//Pranav
-            Id caseBrokerCommissionIssueRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, BROKER_COMMISSION_ISSUE_RT ); // BAPP Broker
-            Id caseOtherServiceRequestRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, BROKER_GENERAL_SERVICE_REQUEST_RT ); // BAPP Broker
-            Id caseBrokerAgencyDetailsRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType,BROKER_AGENCY_DETAILS_UPDATE_RT ); // BAPP Broker
-            Id caseBrokerAgentUpdateRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, BROKER_AGENT_REGISTRATION_UPDATE_RT ); // BAPP Broker
+            Id caseDelayedCommissionPaymentRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'DelayedCommissionPayment' ); // BAPP Broker
+            Id caseIncorrectCommissionAmountRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'IncorrectCommissionAmount' ); // BAPP Broker
+            Id caseOtherServiceRequestRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'OtherServiceRequest' ); // BAPP Broker
             Id KYCUpdateRequestRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, KYC_UPDATE_REQUEST_RT);
             Id tawtheeqEnrollmentRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType, TAWTHEEQ_ENROLLMENT_RT);
-            
+            Id brokerGeneralServicesRT = Utility.getRecordTypeIdByDevName(Case.SObjectType,BROKER_GENERAL_SERVICES_RT);
             // Initialize services and retrieve case
             CaseService caseService = CaseService.getInstance();
             ActivityService activityService = ActivityService.getInstance();
@@ -71,7 +64,8 @@ public without sharing class BCAPP_CaseController {
                     caseObj.RecordTypeId == LPFRequestRecordTypeId ||
                     caseObj.RecordTypeId == popShareSrRTID ||
                     caseObj.RecordTypeId == bnkAccDtlRTID ||
-                    caseObj.RecordTypeId == KYCUpdateRequestRTId 
+                    caseObj.RecordTypeId == KYCUpdateRequestRTId ||
+                    caseObj.RecordTypeId == brokerGeneralServicesRT
                     ) {
                         step = 2;
                 } else if (caseObj.RecordTypeId == resaleUnderConstructionRT) {
@@ -82,42 +76,10 @@ public without sharing class BCAPP_CaseController {
                     step = (caseObj.City__c == 'Abu Dhabi') ? 7 : (caseObj.City__c == 'Dubai') ? 4 : null;
                 }
                 //Pranav
-                // else if (caseObj.RecordTypeId == acknowledgementRcptRTID) {
-                //     step = 2;
-                // }
-                //Pranav
-                // else if (caseObj.RecordTypeId == pymntDuDtUpdtRTID) {
-                //     step = 2;
-                // }
-                //Pranav
-                // else if(caseObj.RecordTypeId == thrdPrtyFrmRTID){
-                //     step = 2;
-                // }
-                //Pranav
                 else if(caseObj.RecordTypeId == pymntRTID || caseObj.RecordTypeId == tawtheeqEnrollmentRTID){
                     step = 3;
                 }
-                // else if(caseObj.RecordTypeId == SOARequestRecordTypeId){
-                //     step = 2;
-                // }
-                // else if(caseObj.RecordTypeId == LPFRequestRecordTypeId){
-                //     step = 2;
-                // }
-                //Pranav
-                // else if(caseObj.RecordTypeId == popShareSrRTID){
-                //     step = 2;
-                // }
-                //Pranav
-                // else if(caseObj.RecordTypeId == bnkAccDtlRTID){
-                //     step = 2;
-                // }
-                //BAPP
-                else if(caseObj.RecordTypeId == caseBrokerCommissionIssueRecordTypeId || 
-                        caseObj.RecordTypeId == caseOtherServiceRequestRecordTypeId || 
-                        caseObj.RecordTypeId == caseBrokerAgencyDetailsRecordTypeId ||
-                        (caseObj.RecordTypeId == caseBrokerAgentUpdateRecordTypeId && caseObj.SubType__c == 'Broker Agent Details Update')){
-                    step = 1;
-                }
+                
             } else {
                 step = Integer.valueOf(caseObj.Step__c);
             }
@@ -127,7 +89,7 @@ public without sharing class BCAPP_CaseController {
             // Update case owner
             // BAPP Broker: If the Case record type is 'DelayedCommissionPayment', 'IncorrectCommissionAmount', or 'OtherServiceRequest'
             // and the current status is 'New', then update the status to 'In Progress'.
-            Case updatedCase = new Case(Id = caseId, OwnerId = UserInfo.getUserId(), Status = (caseObj.Status == 'New' && (caseObj.RecordTypeId == caseBrokerCommissionIssueRecordTypeId || caseObj.RecordTypeId == caseOtherServiceRequestRecordTypeId)) ? 'In Progress' : caseObj.Status);
+            Case updatedCase = new Case(Id = caseId, OwnerId = UserInfo.getUserId(), Status = (caseObj.Status == 'New' && (caseObj.RecordTypeId == caseDelayedCommissionPaymentRecordTypeId || caseObj.RecordTypeId == caseIncorrectCommissionAmountRecordTypeId || caseObj.RecordTypeId == caseOtherServiceRequestRecordTypeId)) ? 'In Progress' : caseObj.Status);
             caseService.updateCase(updatedCase);
             
             // Update task owner and log assignment history if tasks found
@@ -150,6 +112,12 @@ public without sharing class BCAPP_CaseController {
             
             return true;
         } catch (Exception e) {
+               System.debug('===== UPDATE CASE OWNER ERROR =====');
+    System.debug('Message: ' + e.getMessage());
+    System.debug('Type: ' + e.getTypeName());
+    System.debug('Line: ' + e.getLineNumber());
+    System.debug('Stack: ' + e.getStackTraceString());
+
             throw new AuraHandledException('Failed to update case owner: ' + e.getMessage());
         }
     }
@@ -333,15 +301,6 @@ public without sharing class BCAPP_CaseController {
                 acRecord.Emergency_contact_02__c = caseRecord.Emergency_contact_02__c;
                 acRecord.Operator_Office_Number__c = caseRecord.Operator_Office_Number__c;
                 
-                // Contact eachContact = new Contact();
-                // // eachContact.firstName  = ;
-                // eachContact.lastname = caseRecord.Representative_Name__c;
-                // eachContact.Email = caseRecord.Representative_Email__c;
-                // eachContact.Phone = caseRecord.Representative_Contact_Number__c;
-                // eachContact.accountId = acRecord.Id;
-                // ContactService contactInst = ContactService.getInstance();
-                // contactInst.insertContact(eachContact);
-                
                 Service_Contract__c contract = new Service_Contract__c();
                 contract.Customer_Name__c = acRecord.Id;
                 contract.EJARI_Tawteeq_end_date__c = caseRecord.EJARI_Tawteeq_end_date__c;
@@ -516,7 +475,6 @@ public without sharing class BCAPP_CaseController {
             System.enqueueJob(new BCAPP_PushNotificationAPI(notifyParams));
             
         } else {
-            system.debug('---->>>move in else--->>>');
             Unit_Allocation__c unitAllocation = new Unit_Allocation__c();
             unitAllocation.Unit__c = caseRecord.Unit__c;
             unitAllocation.Start_Date__c = system.today();
@@ -545,40 +503,6 @@ public without sharing class BCAPP_CaseController {
                 
                 cService.updateCase(caseRecord);
             }
-        }
-    }
-    
-    
-    private static void sendCaseApprovedORRejectEmail(Id caseId){
-        CaseService objCaseService = CaseService.getInstance();
-        EmailService objEmailService = EmailService.getInstance();
-        MetadataService objMetadataService = MetadataService.getInstance();
-        List<Messaging.SingleEmailMessage> emailList = new List<Messaging.SingleEmailMessage>();
-        Id noReplyOWDId = objMetadataService.getAppSettingTextValue(MTD_OWE_NO_REPLY_BLOOM_SALES_ID);
-        Id caseApprovedEmailTemplateId = objMetadataService.getAppSettingTextValue(COMMUNITY_SR_APPROVED_NOTIFICATION);
-        Id caseRejectionEmailTemplateId = objMetadataService.getAppSettingTextValue(COMMUNITY_SR_REJECTION_NOTIFICATION);
-        Id emailTemplateId;
-        List<Case> caseList = objCaseService.getCaseByIds(new Set<Id>{caseId});
-        if(!caseList.isEmpty()){
-            Case caseObj = caseList[0];
-            if(!caseObj.StopEmailsToCustomer__c){
-                if(caseObj.Status == 'Approved'){
-                    emailTemplateId = caseApprovedEmailTemplateId;
-                }else{
-                    emailTemplateId = caseRejectionEmailTemplateId;
-                }
-                EmailTemplate emailTemplate = objEmailService.getEmailTemplateById(emailTemplateId);
-                String emailBody = emailTemplate.HtmlValue;
-                emailBody = emailBody.replace('[Case_Number]', caseObj.CaseNumber);
-                emailBody = emailBody.replace('[Return_Comments]', caseObj.Return_Comments__c);
-
-                Messaging.SingleEmailMessage objMail = objEmailService.getSingleEmailMessage(new List<String>{caseObj.Email_Address__c}, caseObj.Id, emailTemplate.Subject, emailBody, noReplyOWDId);
-                emailList.add(objMail);
-            }
-        }
-
-        if(!emailList.isEmpty()){
-            Messaging.sendEmail(emailList);
         }
     } 
     

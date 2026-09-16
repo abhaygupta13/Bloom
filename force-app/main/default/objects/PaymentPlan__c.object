@@ -1,0 +1,1011 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Payment_Plan_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Payment_Plan_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Payment_Plan_Compact_Layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Payment_Plan_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>PaymentPlanType__c</fields>
+        <fields>Classification__c</fields>
+        <fields>IsActive__c</fields>
+        <fields>PHPPFlag__c</fields>
+        <fields>BrokerPortalFlag__c</fields>
+        <fields>ApprovalStatus__c</fields>
+        <label>Payment Plan Compact Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to define the payment plans that can chosen during booking.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>ApprovalStatus__c</fullName>
+        <label>Approval Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Approved</fullName>
+                    <default>false</default>
+                    <label>Not Approved</label>
+                </value>
+                <value>
+                    <fullName>Pending for Approval</fullName>
+                    <default>false</default>
+                    <label>Pending for Approval</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>BookingMemo__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Booking Memo</label>
+        <referenceTo>BookingMemo__c</referenceTo>
+        <relationshipLabel>Payment Plans</relationshipLabel>
+        <relationshipName>Payment_PlansBookingMemo</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>BrokerPayout__c</fullName>
+        <description>Total broker payout percentage.</description>
+        <inlineHelpText>Total broker payout percentage.</inlineHelpText>
+        <label>Broker Payout %</label>
+        <summarizedField>PaymentInstallments__c.BrokerPayoutPercentage__c</summarizedField>
+        <summaryForeignKey>PaymentInstallments__c.PaymentPlan__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>BrokerPortalFlag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To be checked if the payment plan is on broker portal</description>
+        <inlineHelpText>To be checked if the payment plan is on broker portal</inlineHelpText>
+        <label>Broker Portal Flag</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Classification__c</fullName>
+        <description>Captures the installment percentage classification</description>
+        <inlineHelpText>Capture the installment percentage classification</inlineHelpText>
+        <label>Classification</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>10-90</fullName>
+                    <default>false</default>
+                    <label>10-90</label>
+                </value>
+                <value>
+                    <fullName>40-60</fullName>
+                    <default>false</default>
+                    <label>40-60</label>
+                </value>
+                <value>
+                    <fullName>60-40</fullName>
+                    <default>false</default>
+                    <label>60-40</label>
+                </value>
+                <value>
+                    <fullName>35-65</fullName>
+                    <default>false</default>
+                    <label>35-65</label>
+                </value>
+                <value>
+                    <fullName>15-85</fullName>
+                    <default>false</default>
+                    <label>15-85</label>
+                </value>
+                <value>
+                    <fullName>70-30</fullName>
+                    <default>false</default>
+                    <label>70-30</label>
+                </value>
+                <value>
+                    <fullName>30-70</fullName>
+                    <default>false</default>
+                    <label>30-70</label>
+                </value>
+                <value>
+                    <fullName>25-75</fullName>
+                    <default>false</default>
+                    <label>25-75</label>
+                </value>
+                <value>
+                    <fullName>50-50</fullName>
+                    <default>false</default>
+                    <label>50-50</label>
+                </value>
+                <value>
+                    <fullName>20-80</fullName>
+                    <default>false</default>
+                    <label>20-80</label>
+                </value>
+                <value>
+                    <fullName>100</fullName>
+                    <default>false</default>
+                    <label>100</label>
+                </value>
+                <value>
+                    <fullName>POLICY</fullName>
+                    <default>false</default>
+                    <label>POLICY</label>
+                </value>
+                <value>
+                    <fullName>STANDARD</fullName>
+                    <default>false</default>
+                    <label>STANDARD</label>
+                </value>
+                <value>
+                    <fullName>MEMO</fullName>
+                    <default>false</default>
+                    <label>MEMO</label>
+                </value>
+                <value>
+                    <fullName>50-30-20</fullName>
+                    <default>false</default>
+                    <label>50-30-20</label>
+                </value>
+                <value>
+                    <fullName>60-30-10</fullName>
+                    <default>false</default>
+                    <label>60-30-10</label>
+                </value>
+                <value>
+                    <fullName>40-40-20</fullName>
+                    <default>false</default>
+                    <label>40-40-20</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>CustomerSubType__c</fullName>
+        <label>Customer Sub Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>CustomerSubType</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>Captures the details of the payment plan</description>
+        <inlineHelpText>Capture the details of the payment plan</inlineHelpText>
+        <label>Description</label>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>IsActive__c</fullName>
+        <description>Captures if the payment plan is Active or not</description>
+        <inlineHelpText>Capture if the payment plan is Active or not</inlineHelpText>
+        <label>Is Active ?</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>LaunchType__c</fullName>
+        <label>Launch Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pre Launch</fullName>
+                    <default>false</default>
+                    <label>Pre Launch</label>
+                </value>
+                <value>
+                    <fullName>Launch</fullName>
+                    <default>false</default>
+                    <label>Launch</label>
+                </value>
+                <value>
+                    <fullName>Post Launch</fullName>
+                    <default>false</default>
+                    <label>Post Launch</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Maximum_No_Of_Units__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Maximum No. Of Units</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Minimum_No_Of_Units__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Minimum No, Of Units</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Offers_Based_On_Payment_Plan__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Offers Based On Payment Plan</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>OnlineFlag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To be checked if the payment plan is applicable online for customers on portal</description>
+        <inlineHelpText>To be checked if the payment plan is applicable online for customers on portal</inlineHelpText>
+        <label>Online Flag</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PHPPFlag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To be checked if the payment plan is applicable for post handover</description>
+        <inlineHelpText>To be checked if the payment plan is applicable for post handover</inlineHelpText>
+        <label>PHPP Flag</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PHPP_Years__c</fullName>
+        <externalId>false</externalId>
+        <label>PHPP Years</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PaymentPlanDiscount__c</fullName>
+        <description>Captures the discount percentage that needs to be applied when the payment plan is applied</description>
+        <inlineHelpText>Capture the discount percentage that needs to be applied when the payment plan is applied</inlineHelpText>
+        <label>Payment Plan Discount %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>PaymentPlanType__c</fullName>
+        <description>Captures the payment plan type</description>
+        <inlineHelpText>Capture the payment plan type</inlineHelpText>
+        <label>Payment Plan Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Standard</fullName>
+                    <default>true</default>
+                    <label>Standard Uponhandover</label>
+                </value>
+                <value>
+                    <fullName>Special</fullName>
+                    <default>false</default>
+                    <label>Special</label>
+                </value>
+                <value>
+                    <fullName>Prelaunch</fullName>
+                    <default>false</default>
+                    <label>Prelaunch</label>
+                </value>
+                <value>
+                    <fullName>Direct</fullName>
+                    <default>false</default>
+                    <label>Direct</label>
+                </value>
+                <value>
+                    <fullName>PHPP</fullName>
+                    <default>false</default>
+                    <label>PHPP</label>
+                </value>
+                <value>
+                    <fullName>Handover - Immediate</fullName>
+                    <default>false</default>
+                    <label>Handover- Immediate</label>
+                </value>
+                <value>
+                    <fullName>Handover - PHPP</fullName>
+                    <default>false</default>
+                    <label>Handover - PHPP</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Payment_Plan_Number__c</fullName>
+        <displayFormat>{0000}</displayFormat>
+        <externalId>false</externalId>
+        <label>Payment Plan Number</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Premium__c</fullName>
+        <description>Captures the premium amount applied when this payment plan is chosen</description>
+        <inlineHelpText>Capture the premium amount applied when this payment plan is chosen</inlineHelpText>
+        <label>Premium</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>Payment Plans</relationshipLabel>
+        <relationshipName>Payment_Plans</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>RebatePercentage__c</fullName>
+        <description>Captures the rebate percentage that needs to be applied when the payment plan is selected</description>
+        <inlineHelpText>Capture the rebate percentage that needs to be applied when the payment plan is selected</inlineHelpText>
+        <label>Rebate %</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Rebate_Clause__c</fullName>
+        <label>Rebate Clause</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Rebate_No_Deferred_Default__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Rebate No Deferred Default</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Rebate_PHPP_Early_Settlement__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Rebate PHPP Early Settlement</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ResalePercentage__c</fullName>
+        <label>Resale Percentage</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>RevisionNo__c</fullName>
+        <description>Captures the number of revisions that happened on the payment plan</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Capture the revision number that occured on the payment plan</inlineHelpText>
+        <label>Revision No.</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>StandardFlag__c</fullName>
+        <description>Captures if the payment plan is default or not</description>
+        <inlineHelpText>Check this checkbox if the payment plan has the applied by default</inlineHelpText>
+        <label>Standard Flag</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TotalInstallment__c</fullName>
+        <description>Total sum of all the installment percentages.</description>
+        <inlineHelpText>Total sum of all the installment percentages.</inlineHelpText>
+        <label>Total Installment %</label>
+        <summarizedField>PaymentInstallments__c.InstallmentPercentage__c</summarizedField>
+        <summaryForeignKey>PaymentInstallments__c.PaymentPlan__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Unit__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Unit</label>
+        <referenceTo>Unit__c</referenceTo>
+        <relationshipLabel>Payment Plans</relationshipLabel>
+        <relationshipName>Payment_PlansUnit</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Payment Plan</label>
+    <listViews>
+        <fullName>Alhambra_Payment_Plans</fullName>
+        <columns>Project__c</columns>
+        <columns>LaunchType__c</columns>
+        <columns>Description__c</columns>
+        <columns>NAME</columns>
+        <columns>BrokerPayout__c</columns>
+        <columns>Classification__c</columns>
+        <columns>CustomerSubType__c</columns>
+        <columns>IsActive__c</columns>
+        <columns>PaymentPlanDiscount__c</columns>
+        <columns>PaymentPlanType__c</columns>
+        <columns>PHPPFlag__c</columns>
+        <columns>RebatePercentage__c</columns>
+        <columns>TotalInstallment__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Alhambra</value>
+        </filters>
+        <label>Alhambra Payment Plans</label>
+    </listViews>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>Project__c</columns>
+        <columns>Description__c</columns>
+        <columns>NAME</columns>
+        <columns>BrokerPayout__c</columns>
+        <columns>Classification__c</columns>
+        <columns>CustomerSubType__c</columns>
+        <columns>IsActive__c</columns>
+        <columns>PaymentPlanDiscount__c</columns>
+        <columns>PaymentPlanType__c</columns>
+        <columns>PHPPFlag__c</columns>
+        <columns>RebatePercentage__c</columns>
+        <columns>TotalInstallment__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Arjaan_Payment_Plans</fullName>
+        <columns>Project__c</columns>
+        <columns>Description__c</columns>
+        <columns>NAME</columns>
+        <columns>BrokerPayout__c</columns>
+        <columns>Classification__c</columns>
+        <columns>CustomerSubType__c</columns>
+        <columns>IsActive__c</columns>
+        <columns>PaymentPlanDiscount__c</columns>
+        <columns>PaymentPlanType__c</columns>
+        <columns>PHPPFlag__c</columns>
+        <columns>RebatePercentage__c</columns>
+        <columns>TotalInstallment__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Bloom Arjaan</value>
+        </filters>
+        <label>Arjaan Payment Plans</label>
+        <sharedTo>
+            <group>Inventory_Management</group>
+            <group>System_Administrator</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Granada_2_Payment_Plans</fullName>
+        <columns>Project__c</columns>
+        <columns>Description__c</columns>
+        <columns>NAME</columns>
+        <columns>BrokerPayout__c</columns>
+        <columns>Classification__c</columns>
+        <columns>CustomerSubType__c</columns>
+        <columns>IsActive__c</columns>
+        <columns>PaymentPlanDiscount__c</columns>
+        <columns>PaymentPlanType__c</columns>
+        <columns>PHPPFlag__c</columns>
+        <columns>RebatePercentage__c</columns>
+        <columns>TotalInstallment__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Granada 2</value>
+        </filters>
+        <label>Granada 2 -Payment Plans</label>
+    </listViews>
+    <listViews>
+        <fullName>Granada_Payment_Plans</fullName>
+        <columns>Project__c</columns>
+        <columns>Description__c</columns>
+        <columns>NAME</columns>
+        <columns>BrokerPayout__c</columns>
+        <columns>Classification__c</columns>
+        <columns>CustomerSubType__c</columns>
+        <columns>IsActive__c</columns>
+        <columns>PaymentPlanDiscount__c</columns>
+        <columns>PaymentPlanType__c</columns>
+        <columns>PHPPFlag__c</columns>
+        <columns>RebatePercentage__c</columns>
+        <columns>TotalInstallment__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Granada</value>
+        </filters>
+        <label>Granada Payment Plans</label>
+        <sharedTo>
+            <group>Inventory_Management</group>
+            <group>Senior_Operation_Team</group>
+            <group>System_Administrator</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Malaga_Payment_Plans</fullName>
+        <columns>Project__c</columns>
+        <columns>Description__c</columns>
+        <columns>NAME</columns>
+        <columns>BrokerPayout__c</columns>
+        <columns>Classification__c</columns>
+        <columns>CustomerSubType__c</columns>
+        <columns>IsActive__c</columns>
+        <columns>PaymentPlanDiscount__c</columns>
+        <columns>PaymentPlanType__c</columns>
+        <columns>PHPPFlag__c</columns>
+        <columns>RebatePercentage__c</columns>
+        <columns>TotalInstallment__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Malaga</value>
+        </filters>
+        <label>Malaga Payment Plans</label>
+        <sharedTo>
+            <group>Inventory_Management</group>
+            <group>Inventory_Management_Group</group>
+            <group>System_Administrator</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>More_than_1_Project_Payment_Plans</fullName>
+        <columns>Project__c</columns>
+        <columns>Description__c</columns>
+        <columns>NAME</columns>
+        <columns>BrokerPayout__c</columns>
+        <columns>Classification__c</columns>
+        <columns>CustomerSubType__c</columns>
+        <columns>IsActive__c</columns>
+        <columns>PaymentPlanDiscount__c</columns>
+        <columns>PaymentPlanType__c</columns>
+        <columns>PHPPFlag__c</columns>
+        <columns>RebatePercentage__c</columns>
+        <columns>TotalInstallment__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+        </filters>
+        <label>More than 1 Project Payment Plans</label>
+        <sharedTo>
+            <group>Inventory_Management</group>
+            <group>System_Administrator</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Olvera_Payments_Plans</fullName>
+        <columns>Project__c</columns>
+        <columns>Description__c</columns>
+        <columns>NAME</columns>
+        <columns>BrokerPayout__c</columns>
+        <columns>Classification__c</columns>
+        <columns>CustomerSubType__c</columns>
+        <columns>IsActive__c</columns>
+        <columns>PaymentPlanDiscount__c</columns>
+        <columns>PaymentPlanType__c</columns>
+        <columns>PHPPFlag__c</columns>
+        <columns>RebatePercentage__c</columns>
+        <columns>TotalInstallment__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Olvera</value>
+        </filters>
+        <label>Olvera-Payment Plans</label>
+    </listViews>
+    <listViews>
+        <fullName>Seville_Payment_Plans</fullName>
+        <columns>Project__c</columns>
+        <columns>Description__c</columns>
+        <columns>NAME</columns>
+        <columns>BrokerPayout__c</columns>
+        <columns>Classification__c</columns>
+        <columns>CustomerSubType__c</columns>
+        <columns>IsActive__c</columns>
+        <columns>PaymentPlanDiscount__c</columns>
+        <columns>PaymentPlanType__c</columns>
+        <columns>PHPPFlag__c</columns>
+        <columns>RebatePercentage__c</columns>
+        <columns>TotalInstallment__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Seville</value>
+        </filters>
+        <label>Seville Payment Plans</label>
+        <sharedTo>
+            <group>Inventory_Management</group>
+            <group>System_Administrator</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Today_payment_Plans</fullName>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <label>Today payment Plans</label>
+    </listViews>
+    <listViews>
+        <fullName>Toledo_Payment_Plan</fullName>
+        <columns>NAME</columns>
+        <columns>Description__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Toledo</value>
+        </filters>
+        <label>Toledo Payment Plan</label>
+    </listViews>
+    <nameField>
+        <label>Payment Plan Name</label>
+        <trackHistory>true</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Payment Plans</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>NewFromDocument</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>PrintableListView</excludedStandardButtons>
+        <excludedStandardButtons>Import</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <searchResultsAdditionalFields>PaymentPlanType__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Classification__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IsActive__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PHPPFlag__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PaymentPlanDiscount__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Premium__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RebatePercentage__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>Read</sharingModel>
+    <validationRules>
+        <fullName>Broker_Payout_Validation</fullName>
+        <active>true</active>
+        <description>Sum of Broker Payout should be 100% to activate the payment plan.</description>
+        <errorConditionFormula>AND(
+ISPICKVAL(IsActive__c,&apos;Yes&apos;),
+OR( BrokerPayout__c &lt; 1.0 ,
+BrokerPayout__c &gt; 1.0
+) ,
+NOT(ISPICKVAL(Classification__c ,&apos;MEMO&apos;))
+)</errorConditionFormula>
+        <errorDisplayField>IsActive__c</errorDisplayField>
+        <errorMessage>Sum of Broker Payout should be 100% to activate the payment plan.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Restrict_The_User_To_Update_Is_Active</fullName>
+        <active>true</active>
+        <description>Sum of Payment Installments should be 100% to activate the payment plan.</description>
+        <errorConditionFormula>AND(
+ISPICKVAL(IsActive__c,&apos;Yes&apos;),
+OR( TotalInstallment__c  &lt; 1.0 ,
+TotalInstallment__c &gt; 1.0
+) ,
+NOT(ISPICKVAL(Classification__c ,&apos;MEMO&apos;))
+)</errorConditionFormula>
+        <errorDisplayField>IsActive__c</errorDisplayField>
+        <errorMessage>Sum of Payment Installments should be 100% to activate the payment plan.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>Clone_with_Child_Objects</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Clone with Child Objects</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>/flow/Payment_Plan_Deep_Copy?paymentplanid={!PaymentPlan__c.Id}</url>
+    </webLinks>
+</CustomObject>

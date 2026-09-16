@@ -58,9 +58,6 @@ public class BAPPSearchHandler {
         public Datetime createdDate;
         public Datetime lastModifiedDate;
         public String leadType;
-        public String unitNumberId; // Added by Ashish Rana
-        public String unitNumber; // Added by Ashish Rana
-
     }
 
     // ----------Handler Method----------
@@ -243,9 +240,7 @@ public class BAPPSearchHandler {
         rec.createdDate = l.CreatedDate;
         rec.lastModifiedDate = l.LastModifiedDate;
         rec.leadType = (l.RecordType != null) ? l.RecordType.DeveloperName : null;
-        rec.unitNumberId = l.Unit__c;  // Added by Ashish Rana
-        rec.unitNumber = l.Unit__r.Name;  // Added by Ashish Rana
-
+        
         return rec;
     }
 
@@ -297,9 +292,6 @@ public class BAPPSearchHandler {
             if (l.createdDate != null) gen.writeStringField('createdDate', String.valueOf(l.createdDate)); else gen.writeNullField('createdDate');
             if (l.lastModifiedDate != null) gen.writeStringField('lastModifiedDate', String.valueOf(l.lastModifiedDate)); else gen.writeNullField('lastModifiedDate');
             writeStringOrNull(gen, 'leadType', l.leadType);
-            writeStringOrNull(gen, 'unitNumberId', l.unitNumberId); // Added by Ashish Rana
-            writeStringOrNull(gen, 'unitNumber', l.unitNumber); // Added by Ashish Rana
-
             gen.writeEndObject();
         }
         gen.writeEndArray();

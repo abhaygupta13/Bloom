@@ -1,0 +1,4881 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Handover_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Handover_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>Handover_Compact_Layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Handover_Compact_Layout</fullName>
+        <fields>Account__c</fields>
+        <fields>Sales_Order__c</fields>
+        <fields>Sub_Status__c</fields>
+        <fields>OwnerId</fields>
+        <label>Handover Compact Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>ADDC__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>ADDC</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ADM_Plot_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>Unit__r.ADMPlotNumber__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>ADM Plot Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ADM_Registrations_Fee__c</fullName>
+        <defaultValue>952.50</defaultValue>
+        <label>ADM Registrations Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AccountManagerEmail__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>AccountManagerEmail</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Manager_Email__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <formula>CRM_Team_Assigned_User__r.Email</formula>
+        <label>Account Manager Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Manager_Name_Arabic__c</fullName>
+        <externalId>false</externalId>
+        <formula>CRM_Team_Assigned_User__r.Name_In_Arabic__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Account Manager Name Arabic</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Manager_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>CRM_Team_Assigned_User__r.FirstName + &apos; &apos; +  CRM_Team_Assigned_User__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Account Manager Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account_Manager_Phone__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <formula>CRM_Team_Assigned_User__r.MobilePhone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Account Manager Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Handovers</relationshipLabel>
+        <relationshipName>Handovers</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>Sales_Order__r.Account__r.PersonMailingCity + &apos; &apos; + Sales_Order__r.Account__r.PersonMailingState + &apos; &apos; + Sales_Order__r.Account__r.PersonMailingCountry</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Admin_fees__c</fullName>
+        <label>Admin fees</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>BankName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Project__r.Bank_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Bank Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bank_Account_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>Project__r.Bank_Account_Number__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Bank Account Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bank_IBAN__c</fullName>
+        <externalId>false</externalId>
+        <formula>Project__r.Bank_IBAN__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Bank IBAN</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bank_Name__c</fullName>
+        <label>Bank Name</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>ADIB</fullName>
+                    <default>false</default>
+                    <label>ADIB</label>
+                </value>
+                <value>
+                    <fullName>ADCB</fullName>
+                    <default>false</default>
+                    <label>ADCB</label>
+                </value>
+                <value>
+                    <fullName>DIB</fullName>
+                    <default>false</default>
+                    <label>DIB</label>
+                </value>
+                <value>
+                    <fullName>Arab Bank</fullName>
+                    <default>false</default>
+                    <label>Arab Bank</label>
+                </value>
+                <value>
+                    <fullName>FAB</fullName>
+                    <default>false</default>
+                    <label>FAB</label>
+                </value>
+                <value>
+                    <fullName>Al Hilal Bank</fullName>
+                    <default>false</default>
+                    <label>Al Hilal Bank</label>
+                </value>
+                <value>
+                    <fullName>Abu Dhabi Finance</fullName>
+                    <default>false</default>
+                    <label>Abu Dhabi Finance</label>
+                </value>
+                <value>
+                    <fullName>Noor Bank</fullName>
+                    <default>false</default>
+                    <label>Noor Bank</label>
+                </value>
+                <value>
+                    <fullName>EDB</fullName>
+                    <default>false</default>
+                    <label>EDB</label>
+                </value>
+                <value>
+                    <fullName>Emirates Islamic Bank</fullName>
+                    <default>false</default>
+                    <label>Emirates Islamic Bank</label>
+                </value>
+                <value>
+                    <fullName>Standard Chartered</fullName>
+                    <default>false</default>
+                    <label>Standard Chartered</label>
+                </value>
+                <value>
+                    <fullName>Emirates NBD</fullName>
+                    <default>false</default>
+                    <label>Emirates NBD</label>
+                </value>
+                <value>
+                    <fullName>Commercial Bank of Dubai</fullName>
+                    <default>false</default>
+                    <label>Commercial Bank of Dubai</label>
+                </value>
+                <value>
+                    <fullName>Mashreq Bank</fullName>
+                    <default>false</default>
+                    <label>Mashreq Bank</label>
+                </value>
+                <value>
+                    <fullName>CBI</fullName>
+                    <default>false</default>
+                    <label>CBI</label>
+                </value>
+                <value>
+                    <fullName>RAK Bank</fullName>
+                    <default>false</default>
+                    <label>RAK Bank</label>
+                </value>
+                <value>
+                    <fullName>Sharjah Islamic Bank</fullName>
+                    <default>false</default>
+                    <label>Sharjah Islamic Bank</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Bank_Rep_Email__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Bank Rep. Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bank_Rep_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Bank Rep. Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bank_Rep_Phone__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <label>Bank Rep. Phone</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Beneficiary_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Project__r.Beneficiary_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Beneficiary Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BloomEmail__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <formula>Unit__r.Project__r.BloomEmail__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Bloom Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BloomPhone__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <formula>Unit__r.Project__r.BloomPhone__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Bloom Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bloom_Email__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Bloom Email</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bloom_Phone__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Bloom Phone</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bounced_chqs_fees__c</fullName>
+        <label>Bounced chqs fees</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>BuildingPhase__c</fullName>
+        <externalId>false</externalId>
+        <formula>Unit__r.BuildingSectionName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Building/Phase</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Building_Phase__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Building/Phase</label>
+        <referenceTo>BuildingSection__c</referenceTo>
+        <relationshipLabel>Handovers</relationshipLabel>
+        <relationshipName>Handovers</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CRM_Team_Assigned_User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>CRM Team Assigned User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Handovers1</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Clearing_of_Handover_Payments__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Clearing of Handover Payments</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>CollectionOnHandoverAmount__c</fullName>
+        <label>Collection on Handover Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Collection_Percentage__c</fullName>
+        <formula>UnitCollectionTillClearanceDate__c/Collection_on_H_O_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Collection Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Collection_Till_Handover_Amount__c</fullName>
+        <label>Collection Till Handover Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Collection_Till_Handover__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Collection Till Handover</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Collection_of_PDC_s_Amount__c</fullName>
+        <label>Collection of PDC&apos;s Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Collection_of_PDC_s__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Collection of PDC&apos;s</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Collection_on_H_O_Amount__c</fullName>
+        <label>Unit Final Sale Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Collection_on_H_O__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Collection on H.O</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <label>Comments</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>CongratulationOnHandoverEmailsent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Congratulation On Handover Email sent</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Handovers</relationshipLabel>
+        <relationshipName>Handovers</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Current_USer_Profile__c</fullName>
+        <externalId>false</externalId>
+        <formula>$Profile.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Current USer Profile</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CustomerEmail__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <formula>IF(
+Sales_Order__r.Account__r.IsPersonAccount,
+Sales_Order__r.Account__r.PersonEmail,
+Sales_Order__r.Account__r.CompanyEmail__c
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Availability_for_CHO__c</fullName>
+        <label>Customer Availability for CHO</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Customer Delegate to BLoom</fullName>
+                    <default>false</default>
+                    <label>Customer Delegate to BLoom</label>
+                </value>
+                <value>
+                    <fullName>Customer Available</fullName>
+                    <default>false</default>
+                    <label>Customer Available</label>
+                </value>
+                <value>
+                    <fullName>Customer Not available</fullName>
+                    <default>false</default>
+                    <label>Customer Not available</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Customer_Email__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Customer Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Name_Arabic__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account__r.Title_Arabic__c + &apos; &apos; + Account__r.NameinArabic__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Name Arabic</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Account__r.IsPersonAccount,
+TEXT(Account__r.Salutation) + &apos; &apos; + Account__r.FirstName + &apos; &apos; +  Account__r.LastName,
+ Account__r.Name )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Number__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <formula>Sales_Order__r.Account__r.PersonMobilePhone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Mobile Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DARI_Fee__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>DARI Fee</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DARI_Fees__c</fullName>
+        <defaultValue>953</defaultValue>
+        <label>DARI Fees</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>DLPExpiryEmail__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <defaultValue>false</defaultValue>
+        <label>DLP Expiry Email</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DLP_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>Unit__r.DLP_Status__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>DLP Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Date__c</fullName>
+        <formula>TODAY()</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Date_of_Customer_Contacted__c</fullName>
+        <label>Date of Customer Contacted</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DefaulterRemarks__c</fullName>
+        <label>Defaulter Remarks</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Doc__c</fullName>
+        <label>DARI Title Deed Fee Paid By</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Customer</fullName>
+                    <default>false</default>
+                    <label>Customer</label>
+                </value>
+                <value>
+                    <fullName>Developer</fullName>
+                    <default>false</default>
+                    <label>Developer</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Drawloop_Next_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Drawloop_Next_1</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Early_Settlement__c</fullName>
+        <label>Early Settlement</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Resale</fullName>
+                    <default>false</default>
+                    <label>Resale</label>
+                </value>
+                <value>
+                    <fullName>Settlement</fullName>
+                    <default>false</default>
+                    <label>Settlement</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Englishformatteddate__c</fullName>
+        <externalId>false</externalId>
+        <formula>LPAD(TEXT(DAY(TODAY())), 2, &quot;0&quot;) &amp; &quot;-&quot; &amp;
+LPAD(TEXT(MONTH(TODAY())), 2, &quot;0&quot;) &amp; &quot;-&quot; &amp;
+TEXT(YEAR(TODAY()))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>English formatted date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Escrow_Letter__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Escrow Letter</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>EvaluationFees__c</fullName>
+        <label>Evaluation Fees</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Expected_Receive_Date_Mortgage__c</fullName>
+        <label>Expected Receive Date Mortgage</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>FinanceTeamAssingedUser__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Finance Team Assinged User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Handovers2</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Finance_Verify_to_Title_Deed__c</fullName>
+        <externalId>false</externalId>
+        <label>Finance Verify to Title Deed</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FirstPaymentReminderEmailDate__c</fullName>
+        <label>First Payment Reminder Email Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>HO_Agent_Assigned_User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>HO Agent</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Handovers3</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>HO_DD_MM_YYYY__c</fullName>
+        <formula>TODAY() + 1</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>HO-DD-MM-YYYY</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>HO_Owner_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.FirstName + &apos; &apos; +  Owner:User.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>HO Owner Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HO_Pre_Check_to_Snag__c</fullName>
+        <externalId>false</externalId>
+        <label>HO Pre Check to Snag</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HO_installment_collection__c</fullName>
+        <externalId>false</externalId>
+        <label>HO installment collection</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HandoverInstallmentRevisedDateBuffer__c</fullName>
+        <externalId>false</externalId>
+        <label>Handover Installment Revised Date Buffer</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HandoverType__c</fullName>
+        <label>Handover Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>PHPP</fullName>
+                    <default>false</default>
+                    <label>PHPP</label>
+                </value>
+                <value>
+                    <fullName>Non PHPP</fullName>
+                    <default>false</default>
+                    <label>Non PHPP</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Handover_Guidelines_Brief__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Handover Guidelines Brief</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Handover_Phase__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Handover Phase</label>
+        <referenceTo>HandoverPhase__c</referenceTo>
+        <relationshipLabel>Handovers</relationshipLabel>
+        <relationshipName>Handovers</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>HasCHODesnaggingemailsent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Has CHO Desnagging email sent</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HasDLPExpiryEmailSent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Has DLP Expiry Email Sent</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HasDoorNumberEmailSent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Has Door Number Email Sent</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Hassantuk_Fees__c</fullName>
+        <defaultValue>1000</defaultValue>
+        <label>Hassantuk Fees</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>HomeOrientationInvitationDate__c</fullName>
+        <label>HomeOrientationInvitationDate</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Home_Orientation_Invitation_Date__c</fullName>
+        <label>Home Orientation Invitation Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>IsAdminFeeCollected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Admin Fee Collected</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsBounceChequeFeeCollected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Bounce Cheque Fee Collected</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsCurrentUserOwner__c</fullName>
+        <formula>$User.Id == OwnerId</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Current User Owner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsHandoverSigningInvitationSent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Handover Signing Invitation Sent</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsHassantukFeesCollected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Hassantuk Fees Collected</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsLatePaymentFeeCollected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Late Payment Fee Collected</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsMortgageFeeCollected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Mortgage Fee Collected</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsOustandingPaymentconfirmedsent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Oustanding Payment confirmed sent</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsTitleDeedFeeCollected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>DARI Title Deed Fee Collected</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Access_Cards_given__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Access Cards given?</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Appointment_Booked__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Appointment Booked</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_BCC_Announcement_Sent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>BCC Announcement Sent</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_KHO_Completed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is KHO Completed</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Manual__c</fullName>
+        <label>Is Manual Created</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>true</default>
+                    <label>Yes</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>No</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Is_Notice_of_Completion_Sent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Notice of Completion Sent</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Orientation_Letter_Sent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Orientation Letter Sent</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Orientation_Mail_Sent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Orientation Mail Sent</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Pre_checklist_Completed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To check the pre checklist completed at the time of CHO snagging selection</description>
+        <label>Is Pre-checklist Completed</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Property_keys_given__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Property keys given?</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Re_Snag_Needed__c</fullName>
+        <label>CHO Snagging Required</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                    <label>YES</label>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                    <label>NO</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Is_Statement_of_Account_given__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Statement of Account given?</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Title_Deed_Issued__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Title Deed Issued?</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_Title_Deed_Registration__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Title Deed Registration</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>KHO_Meeting_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>KHO Meeting Date</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>KHO_Meeting_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>KHO Meeting Time</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>KeyHandoverInvitationSent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Key Handover Invitation Sent</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Key_Handed_Over_Date__c</fullName>
+        <label>Key Handover Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Late_payment_fees__c</fullName>
+        <label>Late payment fees</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Lease_Amount__c</fullName>
+        <label>Lease Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Lease_End_Date__c</fullName>
+        <label>Lease End Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Lease_Start_Date__c</fullName>
+        <label>Lease Start Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Lease_Type__c</fullName>
+        <label>Lease Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Owner Occupied</fullName>
+                    <default>false</default>
+                    <label>Owner Occupied</label>
+                </value>
+                <value>
+                    <fullName>3rd Party Property Management Agreement</fullName>
+                    <default>false</default>
+                    <label>3rd Party Property Management Agreement</label>
+                </value>
+                <value>
+                    <fullName>No Yet Decided</fullName>
+                    <default>false</default>
+                    <label>No Yet Decided</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Leasing_Agent__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Agent</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Handovers4</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LocationName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Unit__r.Project__r.Location_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Location Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Location_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Location Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Location__c</fullName>
+        <externalId>false</externalId>
+        <formula>Project__r.Office_Location__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Location</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MortgageFee__c</fullName>
+        <formula>IF(
+    ISBLANK(TEXT(UnitCategory__c)),
+    IF(Mortgage_Value__c &gt; 0, ((0.09 / 100) * Mortgage_Value__c) + 945, 0),
+    IF(Mortgage_Value__c &gt; 0, ((0.09 / 100) * Mortgage_Value__c), 0)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Mortgage Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Mortgage_Bank_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Mortgage Bank Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Mortgage_Fee_Rate_Paid_by__c</fullName>
+        <label>Mortgage Fee Paid by</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Customer</fullName>
+                    <default>false</default>
+                    <label>Customer</label>
+                </value>
+                <value>
+                    <fullName>Developer</fullName>
+                    <default>false</default>
+                    <label>Developer</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Mortgage_Fee_Rate__c</fullName>
+        <defaultValue>009</defaultValue>
+        <externalId>false</externalId>
+        <label>Mortgage Fee Rate</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Mortgage_Fee__c</fullName>
+        <label>Mortgage Fee Not Using</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Mortgage_Release_Amount__c</fullName>
+        <label>Mortgage Release Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Mortgage_Status__c</fullName>
+        <label>Mortgage Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Checking Mortgage Offers</fullName>
+                    <default>false</default>
+                    <label>Checking Mortgage Offers</label>
+                </value>
+                <value>
+                    <fullName>Pre-approval Received</fullName>
+                    <default>false</default>
+                    <label>Pre-approval Received</label>
+                </value>
+                <value>
+                    <fullName>Pending Evaluation</fullName>
+                    <default>false</default>
+                    <label>Pending Evaluation</label>
+                </value>
+                <value>
+                    <fullName>Pending Mortgage Contract &amp; Cheque Copy</fullName>
+                    <default>false</default>
+                    <label>Pending Mortgage Contract &amp; Cheque Copy</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Contract &amp; Cheque Copy Received (Attach documents)</fullName>
+                    <default>false</default>
+                    <label>Mortgage Contract &amp; Cheque Copy Received (Attach documents)</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Mortgage_Value__c</fullName>
+        <defaultValue>1</defaultValue>
+        <externalId>false</externalId>
+        <label>Mortgage Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NOCDateFormatted__c</fullName>
+        <externalId>false</externalId>
+        <formula>LPAD(TEXT(DAY(NOC_Date__c)), 2, &quot;0&quot;) &amp; &quot;-&quot; &amp;
+LPAD(TEXT(MONTH(NOC_Date__c)), 2, &quot;0&quot;) &amp; &quot;-&quot; &amp;
+TEXT(YEAR(NOC_Date__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>NOC Date Formatted</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NOC_Date__c</fullName>
+        <label>NOC Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>NOC_Expiry_Date__c</fullName>
+        <formula>DATEVALUE(Unit__r.NOCExpiryDate__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>NOC Expiry Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Next_Step__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(OR(ISNULL(Sales_Order__c),ISBLANK(Sales_Order__c)), 
+	CASE(
+       Sub_Status__c,
+       &quot;New&quot;, &quot;QA Snagging&quot;,
+       &quot;QA Snagging&quot;, &quot;QA De-Snagging&quot;,
+       &quot;QA De-Snagging&quot;, &quot;Handover Keys to BAM&quot;,
+           &quot;Handover Keys to BAM&quot;, &quot;Handover Completed&quot;,  /* End of status flow */
+       &quot;&quot; /* Default for unexpected statuses */
+   ),
+   IF(ISPICKVAL(Payment_Type__c, &quot;PHPP&quot;),
+	   CASE(
+		   Sub_Status__c,
+           &quot;New&quot;, &quot;QA Snagging&quot;,
+		   &quot;QA Snagging&quot;, &quot;QA De-Snagging&quot;,
+		   &quot;QA De-Snagging&quot;, &quot;Upload SOA&quot;,
+		   &quot;Upload SOA&quot;, &quot;Upload SPA&quot;,
+		   &quot;Upload SPA&quot;, &quot;Send Handover Notice&quot;,
+		   &quot;Send Handover Notice&quot;, &quot;Book Appointment with Customer&quot;,
+                   &quot;Book Appointment with Customer&quot;, &quot;Settlement Follow up&quot;,
+		   &quot;Settlement Follow up&quot;, &quot;Settlement Confirmation&quot;,
+		   &quot;Settlement Confirmation&quot;, &quot;HO Undertaking Letter&quot;,
+                   &quot;HO Undertaking Letter&quot;, &quot;PHPP Handover Keys&quot;,
+		   &quot;PHPP Handover Keys&quot;, &quot;Handover Completed&quot;,  /* End of status flow */
+		   &quot;&quot; /* Default for unexpected statuses */
+	   ),
+	   CASE(
+		   Sub_Status__c,
+                   &quot;New&quot;, &quot;QA Snagging&quot;,
+		   &quot;QA Snagging&quot;, &quot;QA De-Snagging&quot;,
+		   &quot;QA De-Snagging&quot;, &quot;Upload SOA&quot;,
+		   &quot;Upload SOA&quot;, &quot;Upload SPA&quot;,
+		   &quot;Upload SPA&quot;, &quot;Send Handover Notice&quot;,
+		   &quot;Send Handover Notice&quot;, &quot;Book Appointment with Customer&quot;,
+                   &quot;Book Appointment with Customer&quot;, &quot;Settlement Follow up&quot;,
+		   &quot;Settlement Follow up&quot;, &quot;Settlement Confirmation&quot;,
+		   &quot;Settlement Confirmation&quot;, &quot;Generate Bank NOC&quot;,
+                   &quot;Generate Bank NOC&quot;, &quot;Upload Mortgage Release Documents&quot;,
+		   &quot;Upload Mortgage Release Documents&quot;, &quot;ADREC Approval and Mortgage Release&quot;,
+		   &quot;ADREC Approval and Mortgage Release&quot;, &quot;Generate Developer NOC&quot;,
+                   &quot;Generate Developer NOC&quot;, &quot;Developer NOC Internal Follow Up&quot;,
+                   &quot;Developer NOC Internal Follow Up&quot;, &quot;Register Title Deed&quot;,
+		   &quot;Register Title Deed&quot;, &quot;Transfer Utilities&quot;,
+		   &quot;Transfer Utilities&quot;, &quot;Mortgage Cheque Clearance&quot;,
+		   &quot;Mortgage Cheque Clearance&quot;, &quot;Schedule KHO Appointment&quot;,
+		   &quot;Schedule KHO Appointment&quot;, &quot;Handover Completed&quot;, /* End of status flow */
+		   &quot;&quot; /* Default for unexpected statuses */
+	   )
+	)
+)</formula>
+        <label>Next Step</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Notice_of_Compl_to_Payment_Settlement__c</fullName>
+        <externalId>false</externalId>
+        <label>Notice of Compl to Payment Settlement</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Notice_of_Completion_Date__c</fullName>
+        <label>Notice of Completion Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Operation_Team_Assigned_User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Operation Team Assigned User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Handovers</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Orient_Letter_to_Orient_Appointment__c</fullName>
+        <externalId>false</externalId>
+        <label>Orient. Letter to Orient. Appointment</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Orientation_Appointment_Status__c</fullName>
+        <label>Orientation Appointment Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Scheduled</fullName>
+                    <default>false</default>
+                    <label>Scheduled</label>
+                </value>
+                <value>
+                    <fullName>Cancelled</fullName>
+                    <default>false</default>
+                    <label>Cancelled</label>
+                </value>
+                <value>
+                    <fullName>ReScheduled</fullName>
+                    <default>false</default>
+                    <label>Rescheduled</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Orientation_Letter_Sent_Date__c</fullName>
+        <label>Orientation Letter Sent Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Orientation_Meeting_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Orientation Meeting Date</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Orientation_Meeting_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Orientation Meeting Time</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Charges_Amount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <label>Other Charges Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Other_Charges_Checkbox__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Other Charges Checkbox</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Other_Charges_Description__c</fullName>
+        <label>Other Charges Description</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Owner_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.FirstName + &apos; &apos; +  Owner:User.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Owner Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Owner_Profile__c</fullName>
+        <externalId>false</externalId>
+        <formula>Owner:User.Profile.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Owner Profile</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Owner_Rep_Email__c</fullName>
+        <complianceGroup>GDPR</complianceGroup>
+        <externalId>false</externalId>
+        <label>Owner Rep.Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Owner_Rep_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Owner Rep. Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Owner_Rep_Number__c</fullName>
+        <label>Owner Rep.Number</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>PHPPAmount__c</fullName>
+        <formula>Collection_on_H_O_Amount__c -  UnitCollectionTillClearanceDate__c</formula>
+        <label>PHPP Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>POP_of_Tawtheeq_Unit_Registration__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>POP of Tawtheeq Unit Registration</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Cleared__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Payment Cleared</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Date__c</fullName>
+        <label>Payment Settlement Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Settled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Payment Settled</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Settlement_to_Finance_Verified__c</fullName>
+        <externalId>false</externalId>
+        <label>Payment Settlement to Finance Verified</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Payment_Type__c</fullName>
+        <label>Payment Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cash</fullName>
+                    <default>false</default>
+                    <label>Cash</label>
+                </value>
+                <value>
+                    <fullName>Mortgage</fullName>
+                    <default>false</default>
+                    <label>Mortgage</label>
+                </value>
+                <value>
+                    <fullName>PHPP</fullName>
+                    <default>false</default>
+                    <label>PHPP</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>PendingWithDepartment__c</fullName>
+        <label>Pending With Department</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>CRM</fullName>
+                    <default>false</default>
+                    <label>CRM</label>
+                </value>
+                <value>
+                    <fullName>Finance</fullName>
+                    <default>false</default>
+                    <label>Finance</label>
+                </value>
+                <value>
+                    <fullName>Contact Centre</fullName>
+                    <default>false</default>
+                    <label>Contact Centre</label>
+                </value>
+                <value>
+                    <fullName>Collection</fullName>
+                    <default>false</default>
+                    <label>Collection</label>
+                </value>
+                <value>
+                    <fullName>Operations</fullName>
+                    <default>false</default>
+                    <label>Operations</label>
+                </value>
+                <value>
+                    <fullName>Legal</fullName>
+                    <default>false</default>
+                    <label>Legal</label>
+                </value>
+                <value>
+                    <fullName>Government Relation</fullName>
+                    <default>false</default>
+                    <label>Government Relation</label>
+                </value>
+                <value>
+                    <fullName>Handover Team</fullName>
+                    <default>false</default>
+                    <label>Handover Team</label>
+                </value>
+                <value>
+                    <fullName>Treasury Team</fullName>
+                    <default>false</default>
+                    <label>Treasury Team</label>
+                </value>
+                <value>
+                    <fullName>Leasing</fullName>
+                    <default>false</default>
+                    <label>Leasing</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Plot_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Plot Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Post_HO_PDCs_Collection__c</fullName>
+        <externalId>false</externalId>
+        <label>Post HO PDCs. Collection</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Previous_HO_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Previous HO Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectNameArabic__c</fullName>
+        <externalId>false</externalId>
+        <formula>Unit__r.BuildingSectionName__r.Project__r.ProjectNameArabic__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project Name Arabic</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProjectName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Unit__r.BuildingSectionName__r.Project__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project_Name_Arabic__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Name Arabic</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Project Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Project</label>
+        <referenceTo>Project__c</referenceTo>
+        <relationshipLabel>Handovers</relationshipLabel>
+        <relationshipName>Handovers</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProjectbyFormula__c</fullName>
+        <externalId>false</externalId>
+        <formula>Unit__r.Project__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Promise_to_Pay_Date__c</fullName>
+        <label>Promise to Pay Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>PropertyHomeOrientationByBloom__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Property Home Orientation By Bloom</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PropertyHomeOrientationReport_Sent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Property Home Orientation Report Sent</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PropertyHomeOrientationWOCustomer__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Property Home Orientation W/O Customer</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Property_Enrollment_Under_Tawtheeq_Accou__c</fullName>
+        <defaultValue>908</defaultValue>
+        <label>Property Enrollment Under Tawtheeq Acc</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Property_Enrollment_Under_Tawtheeq__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Property Enrollment Under Tawtheeq</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Property_Registration_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Property Registration Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Purchase_Price__c</fullName>
+        <formula>Sales_Order__r.NetAmount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Purchase Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>QA_Snagging_to_QA_DeSnagging__c</fullName>
+        <description>To count days between QA Snagging to QA Desnagging</description>
+        <externalId>false</externalId>
+        <label>QA Snagging to QA DeSnagging</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Order__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Sales Order</label>
+        <referenceTo>SalesOrder__c</referenceTo>
+        <relationshipLabel>Handovers</relationshipLabel>
+        <relationshipName>Handovers</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SecondPaymentReminderEmailDate__c</fullName>
+        <label>Second Payment Reminder Email Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Sector__c</fullName>
+        <externalId>false</externalId>
+        <formula>Unit__r.ADMSectorName__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sector</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ServiceCatalog__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Service Catalog</label>
+        <referenceTo>ServiceCatalog__c</referenceTo>
+        <relationshipLabel>Handovers</relationshipLabel>
+        <relationshipName>Handovers</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Service_Charge_Collection_Amount__c</fullName>
+        <label>Service Charge Collection Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Service_Charge_Collection__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Service Charge Collection</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Service_Charges_Confirmed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Service Charges Confirmed</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Service_charge_clearance__c</fullName>
+        <label>Service Charge Clearance Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>SettlementFollowUpDate__c</fullName>
+        <formula>TODAY()+30</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SettlementFollowUpDate</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Settlement_Follow_Up_Date__c</fullName>
+        <label>Settlement Follow Up Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Snag_to_Notice_of_Completion__c</fullName>
+        <externalId>false</externalId>
+        <label>Snag to Notice of Completion</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <label>Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>true</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Completed</fullName>
+                    <default>false</default>
+                    <label>Completed</label>
+                </value>
+                <value>
+                    <fullName>Default</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Default</label>
+                </value>
+                <value>
+                    <fullName>On Hold</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>On Hold</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>StopAllEmailCommunication__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Stop All Email Communication</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sub_Status__c</fullName>
+        <label>Sub Status</label>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>false</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>QA Snagging</fullName>
+                    <default>false</default>
+                    <label>QA Snagging</label>
+                </value>
+                <value>
+                    <fullName>QA De-Snagging</fullName>
+                    <default>false</default>
+                    <label>QA De-Snagging</label>
+                </value>
+                <value>
+                    <fullName>Upload SOA</fullName>
+                    <default>false</default>
+                    <label>Upload SOA</label>
+                </value>
+                <value>
+                    <fullName>Upload SPA</fullName>
+                    <default>false</default>
+                    <label>Upload SPA</label>
+                </value>
+                <value>
+                    <fullName>Handover Keys to BAM</fullName>
+                    <default>false</default>
+                    <label>Handover Keys to BAM</label>
+                </value>
+                <value>
+                    <fullName>Send Handover Notice</fullName>
+                    <default>false</default>
+                    <label>Send Handover Notice</label>
+                </value>
+                <value>
+                    <fullName>Book Appointment with Customer</fullName>
+                    <default>false</default>
+                    <label>Book Appointment with Customer</label>
+                </value>
+                <value>
+                    <fullName>Settlement Follow up</fullName>
+                    <default>false</default>
+                    <label>Settlement Follow up</label>
+                </value>
+                <value>
+                    <fullName>Settlement Confirmation</fullName>
+                    <default>false</default>
+                    <label>Settlement Confirmation</label>
+                </value>
+                <value>
+                    <fullName>Generate Bank NOC</fullName>
+                    <default>false</default>
+                    <label>Generate Bank NOC</label>
+                </value>
+                <value>
+                    <fullName>Tawtheeq Enrollment</fullName>
+                    <default>false</default>
+                    <label>Tawtheeq Enrollment</label>
+                </value>
+                <value>
+                    <fullName>Lease Agreement</fullName>
+                    <default>false</default>
+                    <label>Lease Agreement</label>
+                </value>
+                <value>
+                    <fullName>Upload Mortgage Release Documents</fullName>
+                    <default>false</default>
+                    <label>Upload Mortgage Release Documents</label>
+                </value>
+                <value>
+                    <fullName>ADREC Approval and Mortgage Release</fullName>
+                    <default>false</default>
+                    <label>ADREC Approval and Mortgage Release</label>
+                </value>
+                <value>
+                    <fullName>Generate Developer NOC</fullName>
+                    <default>false</default>
+                    <label>Generate Developer NOC</label>
+                </value>
+                <value>
+                    <fullName>Developer NOC Internal Follow Up</fullName>
+                    <default>false</default>
+                    <label>Developer NOC Internal Follow Up</label>
+                </value>
+                <value>
+                    <fullName>Register Title Deed</fullName>
+                    <default>false</default>
+                    <label>Register Title Deed</label>
+                </value>
+                <value>
+                    <fullName>PHPP Handover Keys</fullName>
+                    <default>false</default>
+                    <label>PHPP Handover Keys</label>
+                </value>
+                <value>
+                    <fullName>Transfer Utilities</fullName>
+                    <default>false</default>
+                    <label>Transfer Utilities</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Cheque Clearance</fullName>
+                    <default>false</default>
+                    <label>Mortgage Cheque Clearance</label>
+                </value>
+                <value>
+                    <fullName>Handover Signing Document (KHO) Appointment</fullName>
+                    <default>false</default>
+                    <label>Handover Signing Document (KHO) Appointment</label>
+                </value>
+                <value>
+                    <fullName>Handover Signing Document</fullName>
+                    <default>false</default>
+                    <label>Handover Signing Document</label>
+                </value>
+                <value>
+                    <fullName>Handover Completed</fullName>
+                    <default>false</default>
+                    <label>Handover Completed</label>
+                </value>
+                <value>
+                    <fullName>Potential Defaulter</fullName>
+                    <default>false</default>
+                    <label>Potential Defaulter</label>
+                </value>
+                <value>
+                    <fullName>Default -Under Discussion</fullName>
+                    <default>false</default>
+                    <label>Default -Under Discussion</label>
+                </value>
+                <value>
+                    <fullName>Cancelled</fullName>
+                    <default>false</default>
+                    <label>Cancelled</label>
+                </value>
+                <value>
+                    <fullName>Under Resale</fullName>
+                    <default>false</default>
+                    <label>Under Resale</label>
+                </value>
+                <value>
+                    <fullName>Initiate Cancellation</fullName>
+                    <default>false</default>
+                    <label>Initiate Cancellation</label>
+                </value>
+                <value>
+                    <fullName>Keys Handedover to BAM</fullName>
+                    <default>false</default>
+                    <label>Keys Handedover to BAM</label>
+                </value>
+                <value>
+                    <fullName>Await PHPP Completion</fullName>
+                    <default>false</default>
+                    <label>Await PHPP Completion</label>
+                </value>
+                <value>
+                    <fullName>Clear PHPP Finances</fullName>
+                    <default>false</default>
+                    <label>Clear PHPP Finances</label>
+                </value>
+                <value>
+                    <fullName>Initiate Mortgage Release</fullName>
+                    <default>false</default>
+                    <label>Initiate Mortgage Release</label>
+                </value>
+                <value>
+                    <fullName>Generate Escrow Letter</fullName>
+                    <default>false</default>
+                    <label>Generate Escrow Letter</label>
+                </value>
+                <value>
+                    <fullName>HO Undertaking Letter</fullName>
+                    <default>false</default>
+                    <label>HO Undertaking Letter</label>
+                </value>
+                <value>
+                    <fullName>Appointment Booked with Customer</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Appointment Booked with Customer</label>
+                </value>
+                <value>
+                    <fullName>Bcc Sent To Customer</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Bcc Sent To Customer</label>
+                </value>
+                <value>
+                    <fullName>CHO De-Snagging</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>CHO De-Snagging</label>
+                </value>
+                <value>
+                    <fullName>CHO De-Snagging Completed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>CHO De-Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>CHO Snagging</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>CHO Snagging</label>
+                </value>
+                <value>
+                    <fullName>CHO Snagging Completed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>CHO Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>Escrow Letter Generated</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Escrow Letter Generated</label>
+                </value>
+                <value>
+                    <fullName>Finance Verified</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Finance Verified</label>
+                </value>
+                <value>
+                    <fullName>First De-Snagging Completed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>First De-Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>First Snagging Completed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>First Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>Home Orientation Sent</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Home Orientation Sent</label>
+                </value>
+                <value>
+                    <fullName>KHO Appointment Scheduled</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>KHO Appointment Scheduled</label>
+                </value>
+                <value>
+                    <fullName>Key Handed Over PHPP</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Key Handed Over PHPP</label>
+                </value>
+                <value>
+                    <fullName>Key Handover To BAM</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Key Handover To BAM</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Release</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Mortgage Release</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Release Completed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Mortgage Release Completed</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Release Document Uploaded</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Mortgage Release Document Uploaded</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Release Initiated</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Mortgage Release Initiated</label>
+                </value>
+                <value>
+                    <fullName>Notice of Completion sent</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Notice of Completion sent</label>
+                </value>
+                <value>
+                    <fullName>PHPP - KHO Appointment Scheduled</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>PHPP - KHO Appointment Scheduled</label>
+                </value>
+                <value>
+                    <fullName>PHPP Completion Pending</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>PHPP Completion Pending</label>
+                </value>
+                <value>
+                    <fullName>PHPP Finance Clearance</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>PHPP Finance Clearance</label>
+                </value>
+                <value>
+                    <fullName>Pending for CHO Snagging</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Pending for CHO Snagging</label>
+                </value>
+                <value>
+                    <fullName>Pending for Re-Snagging</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Pending for Re-Snagging</label>
+                </value>
+                <value>
+                    <fullName>Pre CHO Check</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Pre CHO Check</label>
+                </value>
+                <value>
+                    <fullName>Pre-Checklist Completed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Pre CHO Check Completed</label>
+                </value>
+                <value>
+                    <fullName>Property Registration Completed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Property Registration Completed</label>
+                </value>
+                <value>
+                    <fullName>QA De-Snagging Completed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>QA De-Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>QA Snagging Completed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>QA Snagging Completed</label>
+                </value>
+                <value>
+                    <fullName>Payment Settled</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Settlement Follow up</label>
+                </value>
+                <value>
+                    <fullName>Title Deed Registration Completed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Title Deed Registration Completed</label>
+                </value>
+                <value>
+                    <fullName>Utilities Transfer Completed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Utilities Transfer Completed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SurveyLink__c</fullName>
+        <label>Survey Link</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Swift_Code__c</fullName>
+        <externalId>false</externalId>
+        <formula>Project__r.Swift_Code__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Swift Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ThirdPaymentReminderEmail_Date__c</fullName>
+        <label>Third Payment Reminder Email Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Title_Deed_Fee__c</fullName>
+        <label>DARI Title Deed Fee</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Title_Deed_to_KHO_Appointment__c</fullName>
+        <externalId>false</externalId>
+        <label>Title Deed to KHO Appointment</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_collection_before_HO__c</fullName>
+        <label>Total collection before HO</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UnitCategory__c</fullName>
+        <label>Unit Category</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Registered Unit</fullName>
+                    <default>false</default>
+                    <label>Registered Unit</label>
+                </value>
+                <value>
+                    <fullName>Registered Unit with Mortgage</fullName>
+                    <default>false</default>
+                    <label>Registered Unit with Mortgage</label>
+                </value>
+                <value>
+                    <fullName>Resale Unit</fullName>
+                    <default>false</default>
+                    <label>Resale Unit</label>
+                </value>
+                <value>
+                    <fullName>Resale with Mortgage</fullName>
+                    <default>false</default>
+                    <label>Resale with Mortgage</label>
+                </value>
+                <value>
+                    <fullName>New Sale</fullName>
+                    <default>false</default>
+                    <label>New Sale</label>
+                </value>
+                <value>
+                    <fullName>New Sale with Mortgage</fullName>
+                    <default>false</default>
+                    <label>New Sale with Mortgage</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>UnitCollectionTillClearanceDate__c</fullName>
+        <label>Total Collection Incl Handover Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Unit_Code__c</fullName>
+        <externalId>false</externalId>
+        <formula>Unit__r.SAP_Unit_Number__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unit Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unit_Plot_Area__c</fullName>
+        <externalId>false</externalId>
+        <formula>Unit__r.PlotArea__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unit Plot Area</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unit_Plot_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>Unit__r.ADMPlotNumber__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unit Plot Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unit_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Unit__r.UnitType__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unit Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unit__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Unit</label>
+        <referenceTo>Unit__c</referenceTo>
+        <relationshipLabel>Handovers</relationshipLabel>
+        <relationshipName>Handovers</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Unit_is_Ready__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Unit is Ready?</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>UtilitiesSecurityChequeCollected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Utilities Security Cheque Collected</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isCurrentUserHOAgent__c</fullName>
+        <formula>$User.Id == HO_Agent_Assigned_User__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>is Current User HO Agent</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Handover</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Unit__c</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>Is_BCC_Announcement_Sent__c</columns>
+        <columns>Unit_is_Ready__c</columns>
+        <columns>Is_Notice_of_Completion_Sent__c</columns>
+        <columns>Owner_Name__c</columns>
+        <columns>HO_Agent_Assigned_User__c</columns>
+        <columns>CRM_Team_Assigned_User__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Assigned_to_Me</fullName>
+        <columns>NAME</columns>
+        <columns>Unit__c</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>Unit_is_Ready__c</columns>
+        <columns>Unit_Plot_Number__c</columns>
+        <columns>HO_Agent_Assigned_User__c</columns>
+        <columns>Is_Appointment_Booked__c</columns>
+        <columns>CRM_Team_Assigned_User__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>Sub_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Handover Completed</value>
+        </filters>
+        <label>Assigned to Me</label>
+    </listViews>
+    <listViews>
+        <fullName>Bloom_Arjaan_Handovers</fullName>
+        <columns>NAME</columns>
+        <columns>Unit__c</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>Is_BCC_Announcement_Sent__c</columns>
+        <columns>Unit_is_Ready__c</columns>
+        <columns>Notice_of_Completion_Date__c</columns>
+        <columns>Owner_Name__c</columns>
+        <columns>HO_Agent_Assigned_User__c</columns>
+        <columns>CRM_Team_Assigned_User__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Bloom Arjaan</value>
+        </filters>
+        <label>Bloom Arjaan Handovers</label>
+    </listViews>
+    <listViews>
+        <fullName>CRM_Queue_Handover</fullName>
+        <filterScope>Queue</filterScope>
+        <label>CRM Queue</label>
+        <queue>CRM_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Cordoba_Handovers</fullName>
+        <columns>NAME</columns>
+        <columns>Unit__c</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>Is_BCC_Announcement_Sent__c</columns>
+        <columns>Unit_is_Ready__c</columns>
+        <columns>Notice_of_Completion_Date__c</columns>
+        <columns>Owner_Name__c</columns>
+        <columns>HO_Agent_Assigned_User__c</columns>
+        <columns>CRM_Team_Assigned_User__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Cordoba</value>
+        </filters>
+        <label>Cordoba Handovers</label>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Collection_Team_Queue_Handover</fullName>
+        <columns>NAME</columns>
+        <columns>Unit__c</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>Sales_Order__c</columns>
+        <columns>Unit_is_Ready__c</columns>
+        <filterScope>Queue</filterScope>
+        <label>Handover Collection Team Queue</label>
+        <queue>Handover_Collection_Team_Queue</queue>
+        <sharedTo>
+            <group>Collection_Team</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Finance_Queue_Handover</fullName>
+        <columns>NAME</columns>
+        <columns>Unit__c</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>Sales_Order__c</columns>
+        <filterScope>Queue</filterScope>
+        <label>Handover Finance Queue</label>
+        <queue>Handover_Finance_Queue</queue>
+        <sharedTo>
+            <group>Finance_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Government_Relations_Queue_Handover</fullName>
+        <columns>NAME</columns>
+        <columns>Account__c</columns>
+        <columns>Unit__c</columns>
+        <columns>Unit_Plot_Number__c</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Queue</filterScope>
+        <label>Handover Government Relations Queue</label>
+        <queue>Handover_Government_Relations_Queue</queue>
+        <sharedTo>
+            <group>Government_Relations</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Leasing_Team_Queue_Handover</fullName>
+        <columns>NAME</columns>
+        <columns>Account__c</columns>
+        <columns>Unit__c</columns>
+        <columns>Lease_Start_Date__c</columns>
+        <columns>Lease_End_Date__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Queue</filterScope>
+        <label>Handover Leasing Team Queue</label>
+        <queue>Handover_Leasing_Team_Queue</queue>
+        <sharedTo>
+            <group>Leasing_Team</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Operation_Team_Queue_Handover</fullName>
+        <columns>NAME</columns>
+        <columns>Unit__c</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>Sales_Order__c</columns>
+        <columns>Unit_is_Ready__c</columns>
+        <filterScope>Queue</filterScope>
+        <label>Handover Operation Team Queue</label>
+        <queue>Handover_Operation_Team_Queue</queue>
+        <sharedTo>
+            <group>Operations_Team</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Treasury_Queue_Handover</fullName>
+        <columns>NAME</columns>
+        <columns>Unit__c</columns>
+        <columns>Unit_Plot_Number__c</columns>
+        <columns>Unit_Plot_Area__c</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>Customer_Name__c</columns>
+        <columns>Sales_Order__c</columns>
+        <columns>Payment_Type__c</columns>
+        <columns>Mortgage_Release_Amount__c</columns>
+        <filterScope>Queue</filterScope>
+        <label>Handover Treasury Queue</label>
+        <queue>Handover_Treasury_Queue</queue>
+        <sharedTo>
+            <group>Treasury_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Handovers</fullName>
+        <columns>NAME</columns>
+        <columns>Unit__c</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>Unit_is_Ready__c</columns>
+        <columns>Owner_Name__c</columns>
+        <columns>HO_Agent_Assigned_User__c</columns>
+        <columns>CRM_Team_Assigned_User__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Sub_Status__c</field>
+            <operation>equals</operation>
+            <value>Home Orientation Sent</value>
+        </filters>
+        <label>Handovers</label>
+        <sharedTo>
+            <role>Senior_Manager_Handover_DLP</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Toledo_Handovers</fullName>
+        <columns>NAME</columns>
+        <columns>Unit__c</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>Is_BCC_Announcement_Sent__c</columns>
+        <columns>Unit_is_Ready__c</columns>
+        <columns>Notice_of_Completion_Date__c</columns>
+        <columns>Owner_Name__c</columns>
+        <columns>HO_Agent_Assigned_User__c</columns>
+        <columns>CRM_Team_Assigned_User__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Toledo</value>
+        </filters>
+        <label>Toledo Handovers</label>
+    </listViews>
+    <nameField>
+        <label>Handover Name</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Handovers</pluralLabel>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Handover</fullName>
+        <active>true</active>
+        <label>Handover</label>
+        <picklistValues>
+            <picklist>Bank_Name__c</picklist>
+            <values>
+                <fullName>ADCB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ADIB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Abu Dhabi Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Al Hilal Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Arab Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CBI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commercial Bank of Dubai</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DIB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EDB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emirates Islamic Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emirates NBD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FAB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mashreq Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Noor Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RAK Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sharjah Islamic Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Standard Chartered</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Customer_Availability_for_CHO__c</picklist>
+            <values>
+                <fullName>Customer Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Customer Delegate to BLoom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Customer Not available</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Doc__c</picklist>
+            <values>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Early_Settlement__c</picklist>
+            <values>
+                <fullName>Resale</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Settlement</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HandoverType__c</picklist>
+            <values>
+                <fullName>Non PHPP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PHPP</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Is_Manual__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Is_Re_Snag_Needed__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Lease_Type__c</picklist>
+            <values>
+                <fullName>3rd Party Property Management Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Yet Decided</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Owner Occupied</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Mortgage_Fee_Rate_Paid_by__c</picklist>
+            <values>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Mortgage_Status__c</picklist>
+            <values>
+                <fullName>Checking Mortgage Offers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mortgage Contract %26 Cheque Copy Received %28Attach documents%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Evaluation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Mortgage Contract %26 Cheque Copy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pre-approval Received</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Orientation_Appointment_Status__c</picklist>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ReScheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Payment_Type__c</picklist>
+            <values>
+                <fullName>Cash</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mortgage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PHPP</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PendingWithDepartment__c</picklist>
+            <values>
+                <fullName>CRM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Collection</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Contact Centre</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Government Relation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Handover Team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Leasing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Operations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Treasury Team</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_Status__c</picklist>
+            <values>
+                <fullName>ADREC Approval and Mortgage Release</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Await PHPP Completion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Book Appointment with Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Clear PHPP Finances</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Default -Under Discussion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developer NOC Internal Follow Up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Generate Bank NOC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Generate Developer NOC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Generate Escrow Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HO Undertaking Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Handover Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Handover Keys to BAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Handover Signing Document</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Handover Signing Document %28KHO%29 Appointment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initiate Cancellation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initiate Mortgage Release</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keys Handedover to BAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lease Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mortgage Cheque Clearance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PHPP Handover Keys</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Potential Defaulter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>QA De-Snagging</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>QA Snagging</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Register Title Deed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Handover Notice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Settlement Confirmation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Settlement Follow up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tawtheeq Enrollment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transfer Utilities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Resale</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upload Mortgage Release Documents</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upload SOA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upload SPA</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>UnitCategory__c</picklist>
+            <values>
+                <fullName>New Sale</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Sale with Mortgage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Registered Unit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Registered Unit with Mortgage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resale Unit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resale with Mortgage</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Handover_PHPP</fullName>
+        <active>true</active>
+        <label>Handover-PHPP</label>
+        <picklistValues>
+            <picklist>Bank_Name__c</picklist>
+            <values>
+                <fullName>ADCB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ADIB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Abu Dhabi Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Al Hilal Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Arab Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CBI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Commercial Bank of Dubai</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DIB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EDB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emirates Islamic Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Emirates NBD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>FAB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mashreq Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Noor Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>RAK Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sharjah Islamic Bank</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Standard Chartered</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Customer_Availability_for_CHO__c</picklist>
+            <values>
+                <fullName>Customer Available</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Customer Delegate to BLoom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Customer Not available</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Doc__c</picklist>
+            <values>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Early_Settlement__c</picklist>
+            <values>
+                <fullName>Resale</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Settlement</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>HandoverType__c</picklist>
+            <values>
+                <fullName>Non PHPP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PHPP</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Is_Manual__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Is_Re_Snag_Needed__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Lease_Type__c</picklist>
+            <values>
+                <fullName>3rd Party Property Management Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Yet Decided</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Owner Occupied</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Mortgage_Fee_Rate_Paid_by__c</picklist>
+            <values>
+                <fullName>Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Developer</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Mortgage_Status__c</picklist>
+            <values>
+                <fullName>Checking Mortgage Offers</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mortgage Contract %26 Cheque Copy Received %28Attach documents%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Evaluation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Mortgage Contract %26 Cheque Copy</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pre-approval Received</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Orientation_Appointment_Status__c</picklist>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ReScheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Payment_Type__c</picklist>
+            <values>
+                <fullName>Cash</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mortgage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PHPP</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PendingWithDepartment__c</picklist>
+            <values>
+                <fullName>CRM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Collection</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Contact Centre</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Government Relation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Handover Team</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Leasing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Operations</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Treasury Team</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_Status__c</picklist>
+            <values>
+                <fullName>ADREC Approval and Mortgage Release</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Await PHPP Completion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Book Appointment with Customer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Clear PHPP Finances</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Default -Under Discussion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Generate Bank NOC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Generate Escrow Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HO Undertaking Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Handover Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Handover Keys to BAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Handover Signing Document %28KHO%29 Appointment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initiate Cancellation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initiate Mortgage Release</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Keys Handedover to BAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lease Agreement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mortgage Cheque Clearance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PHPP Handover Keys</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Potential Defaulter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>QA De-Snagging</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>QA Snagging</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Register Title Deed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Handover Notice</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Settlement Confirmation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Settlement Follow up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tawtheeq Enrollment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transfer Utilities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Under Resale</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upload Mortgage Release Documents</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upload SOA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Upload SPA</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>UnitCategory__c</picklist>
+            <values>
+                <fullName>New Sale</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New Sale with Mortgage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Registered Unit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Registered Unit with Mortgage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resale Unit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resale with Mortgage</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <excludedStandardButtons>New</excludedStandardButtons>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>NewFromDocument</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Import</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>PrintableListView</excludedStandardButtons>
+        <excludedStandardButtons>MassAssignRecordLabel</excludedStandardButtons>
+        <massQuickActions>Mark_Complete</massQuickActions>
+    </searchLayouts>
+    <sharingModel>Read</sharingModel>
+    <validationRules>
+        <fullName>Escrow_Letter_available_confirmation</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND(
+NOT(Project__r.IsByPassHOStatus__c),
+ISPICKVAL(Payment_Type__c, &quot;Mortgage&quot;),
+OR(
+ISPICKVAL(Sub_Status__c, &quot;Escrow Letter Generated&quot;)
+),
+NOT(Escrow_Letter__c)
+)</errorConditionFormula>
+        <errorMessage>Please confirm the Escrow letter before moving to forward status</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Mortgage_Fee_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND( ISPICKVAL( Payment_Type__c , &apos;Mortgage&apos;) ,OR(ISPICKVAL(  Sub_Status__c  , &apos;Upload Mortgage Release Documents&apos;),ISPICKVAL(  Sub_Status__c  , &apos;Tawtheeq Enrollment&apos;)), ISBLANK(  Mortgage_Value__c ) )</errorConditionFormula>
+        <errorDisplayField>Mortgage_Value__c</errorDisplayField>
+        <errorMessage>Mortgage Value is required when Payment Type is Mortgage.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>NON_PHPP_Before_Handovercompleted</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    ISPICKVAL(Sub_Status__c, &apos;Handover Completed&apos;),
+    OR(
+        ISPICKVAL(Payment_Type__c, &apos;Cash&apos;),
+        ISPICKVAL(Payment_Type__c, &apos;Mortgage&apos;)
+    ),
+    OR(
+        NOT(Is_BCC_Announcement_Sent__c),
+        NOT(Is_Notice_of_Completion_Sent__c),
+        NOT(Is_Orientation_Letter_Sent__c),
+        NOT(Is_Access_Cards_given__c),
+        NOT(Is_Property_keys_given__c),
+        NOT(ADDC__c),
+        NOT(Is_Title_Deed_Registration__c),
+        NOT(Is_Statement_of_Account_given__c),
+        NOT(Handover_Guidelines_Brief__c)
+    ),
+    $Profile.Name &lt;&gt; &quot;System Administrator&quot;,
+    $Profile.Name &lt;&gt; &quot;Handover Manager&quot;
+)</errorConditionFormula>
+        <errorMessage>All  KHO checklist should be checked before Handover Completed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Need_to_update_BAM_handover_fields</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+ISCHANGED(Sub_Status__c),
+ISPICKVAL(Sub_Status__c, &quot;Handover Keys to BAM&quot;),
+ISBLANK(Sales_Order__c),
+OR(
+
+NOT(Is_Access_Cards_given__c),
+NOT(Is_Property_keys_given__c),
+NOT(Handover_Guidelines_Brief__c),
+ISBLANK(Key_Handed_Over_Date__c)
+)
+
+)</errorConditionFormula>
+        <errorMessage>Please Update Key Handover Checklist fields Before Updating Key Handover To BAM</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Non_PHPP_Finance_Status_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    ISPICKVAL(Sub_Status__c, &apos;Generate Bank NOC&apos;),
+    ISCHANGED(Sub_Status__c),
+    OR(
+        NOT(Collection_Till_Handover__c),
+        ISBLANK(Collection_Till_Handover_Amount__c),
+        NOT(Collection_on_H_O__c),
+        ISBLANK(CollectionOnHandoverAmount__c),
+        NOT(Collection_of_PDC_s__c),
+        ISBLANK(Collection_of_PDC_s_Amount__c),
+        ISBLANK(Hassantuk_Fees__c),
+        ISBLANK(Title_Deed_Fee__c),
+        ISBLANK(Service_Charge_Collection_Amount__c),
+        NOT(Service_Charge_Collection__c),
+        ISPICKVAL(Payment_Type__c, &apos;&apos;),
+        ISBLANK(Bounced_chqs_fees__c),
+        ISBLANK(Late_payment_fees__c),
+        ISBLANK(Admin_fees__c),
+        ISBLANK(Post_HO_PDCs_Collection__c),
+        ISBLANK(Service_charge_clearance__c),
+        IF(
+           ISPICKVAL(Payment_Type__c, &apos;Mortgage&apos;),
+            FALSE,ISBLANK(Payment_Date__c))
+        
+
+    )
+)</errorConditionFormula>
+        <errorDisplayField>Account__c</errorDisplayField>
+        <errorMessage>Payment Collection fields are mandatory before moving to NOC Internal Followup status</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>PHPP_Before_Handovercompleted</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    ISPICKVAL(Sub_Status__c, &apos;Handover Completed&apos;),
+    ISPICKVAL(Payment_Type__c, &apos;PHPP&apos;),
+    OR(
+        NOT(Is_BCC_Announcement_Sent__c),
+        NOT(Is_Notice_of_Completion_Sent__c),
+        NOT(Is_Orientation_Letter_Sent__c),
+        NOT(Is_Access_Cards_given__c),
+        NOT(Is_Property_keys_given__c),
+        NOT(Is_Statement_of_Account_given__c),
+        NOT(Handover_Guidelines_Brief__c)
+    ),
+    $Profile.Name &lt;&gt; &quot;System Administrator&quot;,
+    $Profile.Name &lt;&gt; &quot;Handover Manager&quot;
+)</errorConditionFormula>
+        <errorMessage>All  KHO checklist should be checked before Handover Completed</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>PHPP_Finance_Clearance_Status_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+ISPICKVAL(Sub_Status__c, &apos;HO Undertaking Letter&apos;),
+ISPICKVAL(Payment_Type__c, &apos;PHPP&apos;),
+ISCHANGED(Sub_Status__c),
+OR(
+ISBLANK(Collection_on_H_O_Amount__c),
+ISBLANK(UnitCollectionTillClearanceDate__c),
+ISBLANK(Hassantuk_Fees__c),
+NOT(IsHassantukFeesCollected__c),
+NOT(UtilitiesSecurityChequeCollected__c),
+ISBLANK(Service_Charge_Collection_Amount__c),
+NOT(Service_Charge_Collection__c),
+NOT(Payment_Settled__c),
+ISBLANK(Payment_Date__c)
+)
+)</errorConditionFormula>
+        <errorMessage>PHPP Finance Clearance fields are mandatory before moving to PHPP Finance Clearance status</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>PHPP_Finance_Status_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    ISPICKVAL(Sub_Status__c, &apos;HO Undertaking Letter&apos;),
+    ISCHANGED(Sub_Status__c),
+    OR(
+        NOT(Collection_Till_Handover__c),
+        ISBLANK(Collection_Till_Handover_Amount__c),
+        NOT(UtilitiesSecurityChequeCollected__c),
+        NOT(Collection_on_H_O__c),
+        ISBLANK(CollectionOnHandoverAmount__c),
+        NOT(Collection_of_PDC_s__c),
+        ISBLANK(Collection_of_PDC_s_Amount__c),
+        ISBLANK(Hassantuk_Fees__c),
+        ISBLANK(Title_Deed_Fee__c),
+        ISBLANK(Service_Charge_Collection_Amount__c),
+        NOT(Service_Charge_Collection__c),
+        ISPICKVAL(Payment_Type__c, &apos;&apos;),
+        ISBLANK(Bounced_chqs_fees__c),
+        ISBLANK(Late_payment_fees__c),
+        ISBLANK(Admin_fees__c),
+        ISBLANK(Post_HO_PDCs_Collection__c),
+        ISBLANK(Service_charge_clearance__c),
+        IF(
+           ISPICKVAL(Payment_Type__c, &apos;Mortgage&apos;),
+            FALSE,ISBLANK(Payment_Date__c))
+        
+
+    )
+)</errorConditionFormula>
+        <errorDisplayField>Account__c</errorDisplayField>
+        <errorMessage>Payment Collection fields are mandatory before moving to HO Undertaking Letter status</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Payment_settlement_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    ISPICKVAL(Sub_Status__c, &quot;Schedule KHO Appointment&quot;),
+    ISCHANGED(Sub_Status__c),
+    OR(
+        ISNULL(Payment_Date__c),
+        NOT(Payment_Settled__c)  
+    )
+)</errorConditionFormula>
+        <errorMessage>Payment Collection fields are mandatory before moving to forward status.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Prevent_Skip_stage_If_No_PHPP</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND(
+OR(
+ISPICKVAL(Payment_Type__c, &quot;Mortgage&quot;)||
+ISPICKVAL(Payment_Type__c, &quot;Cash&quot;)
+),
+ISCHANGED(Sub_Status__c),
+NOT(
+OR(
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;QA De-Snagging Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;Home Orientation Sent&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Home Orientation Sent&quot;), ISPICKVAL(Sub_Status__c, &quot;Appointment Booked with Customer&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Home Orientation Sent&quot;), ISPICKVAL(Sub_Status__c, &quot;Pre-Checklist Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Appointment Booked with Customer&quot;), ISPICKVAL(Sub_Status__c, &quot;Pre-Checklist Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Pre-Checklist Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;CHO Snagging Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;CHO Snagging Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;CHO De-Snagging Completed&quot;)),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;CHO De-Snagging Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Notice of Completion sent&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Notice of Completion sent&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Payment Settled&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Payment Settled&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Finance Verified&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Finance Verified&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Mortgage Release Initiated&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Finance Verified&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Escrow Letter Generated&quot;)
+),
+
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Mortgage Release Initiated&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Mortgage Release Document Uploaded&quot;)
+),
+
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Mortgage Release Document Uploaded&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Mortgage Release Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Mortgage Release Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Escrow Letter Generated&quot;)
+),
+
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Escrow Letter Generated&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Title Deed Registration Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Title Deed Registration Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Utilities Transfer Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Utilities Transfer Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Mortgage Cheque Clearance&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Mortgage Cheque Clearance&quot;),
+ISPICKVAL(Sub_Status__c, &quot;KHO Appointment Scheduled&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;KHO Appointment Scheduled&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Handover Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Utilities Transfer Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Handover Completed&quot;)
+)
+)
+),
+NOT(
+OR(
+$Profile.Name = &quot;System Administrator&quot;,
+$Profile.Name = &quot;HO Manager&quot;,
+$Permission.BypassValidationRule,
+AND(
+OR(
+ISPICKVAL(Sub_Status__c, &quot;Notice of Completion sent&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Potential Defaulter&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Default -Under Discussion&quot;)
+),
+$Permission.Handover_Collection_Team_Access
+),
+AND(
+ISPICKVAL(Sub_Status__c, &quot;Potential Defaulter&quot;),
+$Profile.Name = &quot;CRM Operations&quot;
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Title Deed Registration Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Mortgage Cheque Clearance&quot;),
+ISPICKVAL(Payment_Type__c, &quot;Cash&quot;)
+)
+)
+)
+)</errorConditionFormula>
+        <errorDisplayField>Sub_Status__c</errorDisplayField>
+        <errorMessage>You can only move to next stage</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Prevent_Skip_stage_If_PHPP</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND(
+ISPICKVAL(Payment_Type__c, &quot;PHPP&quot;),
+ISCHANGED(Sub_Status__c),
+NOT(
+OR(
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;QA De-Snagging Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;Home Orientation Sent&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Home Orientation Sent&quot;), ISPICKVAL(Sub_Status__c, &quot;Appointment Booked with Customer&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Home Orientation Sent&quot;), ISPICKVAL(Sub_Status__c, &quot;Pre-Checklist Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Appointment Booked with Customer&quot;), ISPICKVAL(Sub_Status__c, &quot;Pre-Checklist Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Pre-Checklist Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;CHO Snagging Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;CHO Snagging Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;CHO De-Snagging Completed&quot;)),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;CHO De-Snagging Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Notice of Completion sent&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Notice of Completion sent&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Payment Settled&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Payment Settled&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Finance Verified&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Finance Verified&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Property Registration Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Property Registration Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Lease Agreement&quot;)
+),
+
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Lease Agreement&quot;),
+ISPICKVAL(Sub_Status__c, &quot;PHPP - KHO Appointment Scheduled&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;PHPP - KHO Appointment Scheduled&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Key Handed Over PHPP&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Key Handed Over PHPP&quot;),
+ISPICKVAL(Sub_Status__c, &quot;PHPP Completion Pending&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;PHPP Completion Pending&quot;),
+ISPICKVAL(Sub_Status__c, &quot;PHPP Finance Clearance&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;PHPP Finance Clearance&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Mortgage Release Initiated&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Mortgage Release Initiated&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Mortgage Release Document Uploaded&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Mortgage Release Document Uploaded&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Mortgage Release Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Mortgage Release Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Title Deed Registration Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Title Deed Registration Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Utilities Transfer Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Utilities Transfer Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Handover Completed&quot;)
+),
+AND(
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;KHO Appointment Scheduled&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Handover Completed&quot;)
+)
+)
+),
+NOT(
+OR(
+$Profile.Name = &quot;System Administrator&quot;,
+$Profile.Name = &quot;HO Manager&quot;,
+$Profile.Name = &quot;Finance Team&quot;,
+$Permission.BypassValidationRule,
+AND(
+OR(
+ISPICKVAL(Sub_Status__c, &quot;Notice of Completion sent&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Potential Defaulter&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Default -Under Discussion&quot;)
+),
+$Permission.Handover_Collection_Team_Access
+),
+AND(
+ISPICKVAL(Sub_Status__c, &quot;Potential Defaulter&quot;),
+$Profile.Name = &quot;CRM Operations&quot;
+)
+
+
+)
+)
+)</errorConditionFormula>
+        <errorDisplayField>Sub_Status__c</errorDisplayField>
+        <errorMessage>You can only move to next stage</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Property_Registration_Number</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND( ISPICKVAL(Sub_Status__c , &apos;Lease Agreement&apos;) , ISBLANK( Property_Registration_Number__c) )</errorConditionFormula>
+        <errorDisplayField>Property_Registration_Number__c</errorDisplayField>
+        <errorMessage>Please add the Property Registration Number before Lease Agreement</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Restrict_Owner_Change</fullName>
+        <active>false</active>
+        <description>Restric owner change manually by team members.</description>
+        <errorConditionFormula>ISCHANGED(OwnerId) &amp;&amp;
+NOT(ISCHANGED(Sub_Status__c)) &amp;&amp;
+NOT(
+ISPICKVAL(Sub_Status__c, &quot;Escrow Letter Generated&quot;) ||
+ISPICKVAL(Sub_Status__c, &quot;QA De-Snagging Completed&quot;) ||
+ISPICKVAL(Sub_Status__c, &quot;Mortgage Release Completed&quot;)
+) &amp;&amp;
+NOT(
+OR(
+$Profile.Name = &quot;HO Manager&quot;,
+$Profile.Name = &quot;CRM Operations&quot;,
+$Profile.Name = &quot;System Administrator&quot;,
+$Permission.BypassValidationRule,
+ISPICKVAL($User.UserType, &apos;AutomatedProcess&apos;)
+)
+)</errorConditionFormula>
+        <errorMessage>You are not allowed to change the owner of this record.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Restrict_handover_SalsorderNot_Available</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND(
+ISBLANK(Sales_Order__c),
+ISCHANGED(Sub_Status__c),
+NOT(
+OR(
+ISPICKVAL(Sub_Status__c, &quot;QA Snagging&quot;),
+ISPICKVAL(Sub_Status__c, &quot;QA De-Snagging&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Handover Keys to BAM&quot;),
+ISPICKVAL(Sub_Status__c, &quot;New&quot;)
+)
+)
+)</errorConditionFormula>
+        <errorMessage>Please provide the Sales Order before updating any status.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Sending_of_Noc_Validation</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND(
+    ISPICKVAL(Sub_Status__c, &quot;Send Handover Notice&quot;),
+    ISCHANGED(Sub_Status__c),
+    OR(
+        
+        NOT(Is_Notice_of_Completion_Sent__c)  
+    )
+)</errorConditionFormula>
+        <errorMessage>Please send NOC before moving to this stage.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Status_Moving_Forward_Validation</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND(
+ISCHANGED(Sub_Status__c) || ISNEW(),
+ISBLANK(TEXT(Payment_Type__c)),
+NOT(
+OR(
+ISPICKVAL(Sub_Status__c, &quot;Created&quot;),
+ISPICKVAL(Sub_Status__c, &quot;QA Snagging Completed&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Potential Defaulter&quot;),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Created&quot;), ISPICKVAL(Sub_Status__c, &quot;QA Snagging Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;QA Snagging Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;QA De-Snagging Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;QA De-Snagging Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;Home Orientation Sent&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Created&quot;), ISPICKVAL(Sub_Status__c, &quot;Home Orientation Sent&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;QA Snagging Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;Home Orientation Sent&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Home Orientation Sent&quot;), ISPICKVAL(Sub_Status__c, &quot;Appointment Booked with Customer&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Home Orientation Sent&quot;), ISPICKVAL(Sub_Status__c, &quot;Pre-Checklist Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Appointment Booked with Customer&quot;), ISPICKVAL(Sub_Status__c, &quot;Pre-Checklist Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Pre-Checklist Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;CHO Snagging Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;CHO Snagging Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;CHO De-Snagging Completed&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;CHO De-Snagging Completed&quot;), ISPICKVAL(Sub_Status__c, &quot;Notice of Completion sent&quot;)),
+AND(ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Notice of Completion sent&quot;), ISPICKVAL(Sub_Status__c, &quot;Payment Settled&quot;))
+)
+),
+NOT(
+OR(
+$Profile.Name = &quot;System Administrator&quot;,
+$Profile.Name = &quot;HO Manager&quot;,
+$Profile.Name = &quot;CRM Operations&quot;,
+$Permission.BypassValidationRule,
+AND(
+OR(
+ISPICKVAL(Sub_Status__c, &quot;Notice of Completion sent&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Potential Defaulter&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Default -Under Discussion&quot;)
+),
+$Permission.Handover_Collection_Team_Access
+)
+)
+)
+)</errorConditionFormula>
+        <errorDisplayField>Sub_Status__c</errorDisplayField>
+        <errorMessage>You can only move to the next status in the Handover path.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Status_Moving_HandComp_PotentialDefault</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+ISCHANGED(Sub_Status__c),
+ISPICKVAL(PRIORVALUE(Sub_Status__c), &quot;Handover Completed&quot;),
+OR(
+ISPICKVAL(Sub_Status__c, &quot;Potential Defaulter&quot;),
+ISPICKVAL(Sub_Status__c, &quot;Default -Under Discussion&quot;)
+)
+)</errorConditionFormula>
+        <errorMessage>After handover is complete, you cannot move to the forward status.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Sub_Status_Handover_Completed_Validation</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND(
+        ISCHANGED(Sub_Status__c),
+        OR(
+            	ISPICKVAL( Sub_Status__c ,&apos;Handover Completed&apos;),
+                ISPICKVAL( Sub_Status__c ,&apos;PHPP Hand Over Keys&apos;)
+        ),
+	OR(
+                NOT(Is_BCC_Announcement_Sent__c),
+		NOT(Is_Notice_of_Completion_Sent__c),
+		NOT(Is_Orientation_Letter_Sent__c),
+		NOT(Is_Access_Cards_given__c),
+		NOT(Is_Property_keys_given__c),
+		NOT(Is_Statement_of_Account_given__c),
+		NOT(Handover_Guidelines_Brief__c),
+                NOT(Service_Charges_Confirmed__c),
+		NOT(ADDC__c)
+	),
+	NOT(
+		OR(
+		  $Profile.Name = &quot;System Administrator&quot;,
+		  $Profile.Name = &quot;Handover Manager&quot;
+		)
+	)
+)</errorConditionFormula>
+        <errorMessage>Please complete the KHO Process first before moving to this stage.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Unit_Category_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    NOT(
+        OR(
+            $Profile.Name = &quot;System Administrator&quot;,
+            $Permission.BypassValidationRule
+        )
+    ),
+    ISPICKVAL(PRIORVALUE(Sub_Status__c), &apos;Send Handover Notice&apos;),
+    NOT(ISPICKVAL(Sub_Status__c, &apos;Settlement Follow up&apos;)),
+    ISBLANK(TEXT(UnitCategory__c))
+)</errorConditionFormula>
+        <errorDisplayField>UnitCategory__c</errorDisplayField>
+        <errorMessage>Please select Unit Category</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>Survey_Link</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Survey Link</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>{!Handover__c.SurveyLink__c}</url>
+    </webLinks>
+</CustomObject>

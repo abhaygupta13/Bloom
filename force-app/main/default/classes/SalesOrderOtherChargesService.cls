@@ -133,10 +133,10 @@ public inherited sharing class SalesOrderOtherChargesService {
         return objIntegrationRecordService.getIntegrationRecord(action, 'SalesOrderOtherCharges__c', String.valueOf(otherCharge.Id), paramMap);
     }
     
-    public List<SalesOrderOtherCharges__c> getSalesOrderChargesBySalesOrderId(Id salesOrderId){
+    public List<SalesOrderOtherCharges__c> getActiveSalesOrderChargesBySalesOrderId(Id salesOrderId){
         return [SELECT Id,Name,SalesOrder__r.Name,SalesOrder__r.Unit__r.Project__r.Name,SalesOrder__r.Unit__r.Name,Account__r.Name,Account__r.isPersonAccount,Status__c,
                 PendingAmount__c, AmountReceived__c, TypeOfCharge__c, Account__r.PersonContactId,Account__r.PersonContact.Name,Account__r.NameinArabic__c,SalesOrder__r.Contact__c,SalesOrder__r.Contact__r.Name,Amount__c,format(Amount__c) pendingamount,Due_Date__c,
                 SalesOrder__r.Unit__r.BuildingSectionName__r.Primary_Account_ADM_Charges__r.SalesMID__c, SalesOrder__r.Unit__r.BuildingSectionName__r.BounceChequeAccount__r.SalesMID__c
-                FROM SalesOrderOtherCharges__c WHERE SalesOrder__c = :salesOrderId];
+                FROM SalesOrderOtherCharges__c WHERE SalesOrder__c = :salesOrderId AND Status__c != 'Reversed' AND TypeOfCharge__c != 'Technology Fee'];
     }
 }

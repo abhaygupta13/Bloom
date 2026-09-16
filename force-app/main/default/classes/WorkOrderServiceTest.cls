@@ -100,6 +100,7 @@ public class WorkOrderServiceTest {
         
         Unit__c unt = new Unit__c();
         unt.Name = 'C-1233';
+        unt.Is_Property_keys_given__c = true;
         unt.Project__c = prj.Id;
         insert unt;
         
@@ -146,14 +147,7 @@ public class WorkOrderServiceTest {
         roundrobinuser1.RR_User_Name__c = 'Almeria Project - CRM 2';
         roundrobinuser1.User__c = salesManagerUser.id; // Ensure User__c is set correctly
         insert roundrobinuser1;
-        system.debug('roundrobinuser==>'+ roundrobinuser1);
-        system.debug('roundrobinuser==1111>'+ roundrobinuser1.IsActive__c);
-        
-        
-      
-        
-        
-        
+
         // WorkOrder setup
         List<WorkOrder> woList = new List<WorkOrder>();
         WorkOrder wrk = new WorkOrder();
@@ -185,9 +179,6 @@ public class WorkOrderServiceTest {
         insert  wrk;
           System.debug('workid-->'+ wrk.OwnerId);
     }   
-  
-    
-    
 
     @isTest
     static void updateWorkOrder1_Test() {
@@ -220,23 +211,14 @@ public class WorkOrderServiceTest {
         wrk.ServiceReportLanguage = ' ';
         wrk.Replace__c = 'Within 2 Day';
         wrk.Requester_Email__c='alt.jm-eef16gn@yopmail.com';
-        //wrk.OwnerId=userRecord.id;
-        
-        
-        
-        
-        
-        
+
         WorkOrderService wko = WorkOrderService.getInstance();
         Test.startTest();
-        List<WorkOrder> res1 = wko.insertWorkOrdersWithoutTrigger(new List<WorkOrder> {wrk});
         
-        //w1.Status = 'Closed';
         w1.Type_of_Incident__c = '';
         w1.Scope__c = 'Out of DLP Scope';
-        List<WorkOrder> res2 = wko.updateWorkOrdersWithTrigger(new List<WorkOrder> {w1});
-        List<WorkOrder> res3 = wko.getWorkOrdersByIds(new List<WorkOrder> {wrk});        
-        RecordType res4 = wko.getRecordTypeOfCase('Resale');
+        List<WorkOrder> res2 = wko.updateWorkOrders(new List<WorkOrder> {w1});
+       	List<WorkOrder> res3 = wko.updateWorkOrdersWithoutTrigger(new List<WorkOrder> {w1});
         Test.stopTest();
     }
 }

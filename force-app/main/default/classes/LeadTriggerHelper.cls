@@ -6,7 +6,7 @@ test Class: LeadTriggerHandlerTest
 Created Date: 29 AUG 2024
 *****************************************************************************************/
 
-public without sharing class LeadTriggerHelper {
+public class LeadTriggerHelper {
     
     private static final string LEAD_SOURCE_SOCIAL_MEDIA_CAMPAIGN { get { return 'Social Media'; } }
     private static final string MARKETING_LEAD_CREATED_BY_IDS { get { return 'MarketingLeadCreatedByIds'; } }
@@ -154,10 +154,10 @@ public without sharing class LeadTriggerHelper {
             if(String.isNotEmpty(objLead.Email) || String.isNotEmpty(objLead.MobilePhone)){
                 objLead.Sync_With_Marketing__c = true;
             }
-            if(String.isEmpty(objLead.FirstName) && String.isNotEmpty(objLead.LastName)){
+             if(String.isEmpty(objLead.FirstName) && String.isNotEmpty(objLead.LastName)){
                 objLead.FirstName = objLead.LastName;
             }
-            if(String.isNotEmpty(objLead.FirstName)){
+             if(String.isNotEmpty(objLead.FirstName)){
                 objLead.FirstName = Utility.doStandardizeText(objLead.FirstName);
             }
             if(String.isNotEmpty(objLead.MiddleName)){
@@ -166,7 +166,7 @@ public without sharing class LeadTriggerHelper {
             if(String.isNotEmpty(objLead.LastName)){
                 objLead.LastName = Utility.doStandardizeText(objLead.LastName);
             }
-            
+           
             if(String.isNotBlank(objLead.MobilePhoneNumber__c)){
                 objLead.MobilePhoneNumber__c = Utility.doStandardizePhoneNumber(objLead.MobilePhoneNumber__c);
             }
@@ -233,7 +233,7 @@ public without sharing class LeadTriggerHelper {
             if(objLead.Emirates_Id__c != oldMap.get(objLead.Id).Emirates_Id__c){
                 objLead.Emirates_Id__c = Utility.formatEmiratesId(objLead.Emirates_Id__c);
             }
-            if(String.isNotEmpty(objLead.FirstName) && objLead.FirstName != oldMap.get(objLead.Id).FirstName){
+             if(String.isNotEmpty(objLead.FirstName) && objLead.FirstName != oldMap.get(objLead.Id).FirstName){
                 objLead.FirstName = Utility.doStandardizeText(objLead.FirstName);
             }
             if(String.isNotEmpty(objLead.MiddleName) && objLead.MiddleName != oldMap.get(objLead.Id).MiddleName){
@@ -437,8 +437,8 @@ public without sharing class LeadTriggerHelper {
                objLead.LeadManagerStatus__c != oldMap.get(objLead.Id).LeadManagerStatus__c && 
                objLead.LeadManagerStatus__c == LEAD_LM_STATUS_WAITINGLIST
               ){
-                  leadIds.add(objLead.Id);
-              } 
+                leadIds.add(objLead.Id);
+            } 
         }
         if(!leadIds.isEmpty() && leadIds != NULL){
             List<Lead> leadList = objLeadService.getLeadByIds(leadIds);
@@ -452,7 +452,7 @@ public without sharing class LeadTriggerHelper {
                     mail.htmlBody = mail.htmlBody.replace('{LeadOwner}',objLead.Owner.Name);
                     mail.htmlBody = mail.htmlBody.replace('{LeadName}','<a href="'+orgUrl+'/'+objLead.Id+'">'+objLead.Name+'</a>');
                     emailList.add(mail); 
-                    
+            
                 }
             }
             objEmailService.sendEmail(emailList);

@@ -4,7 +4,7 @@ public with sharing class BAPPCaseServiceRequestHandler {
     private static final String CONTENT_TYPE_JSON = 'application/json;charset=UTF-8';
     private static final String STATUS_SUCCESS = 'success';
     private static final String STATUS_ERROR = 'error';
- 	private static final String ORIGIN_PORTAL = 'Portal';
+    private static final String ORIGIN_WEB = 'Web';
     
     // ===== Request DTOs =====
     public class CaseRequest {
@@ -144,9 +144,6 @@ public with sharing class BAPPCaseServiceRequestHandler {
                 responseObj.rejectionComments = c.RejectionComments__c;
                 responseObj.category = c.ServiceCatalog__r != null ? c.ServiceCatalog__r.Category__c : null;
                 responseObj.subcategory = c.ServiceCatalog__r != null ? c.ServiceCatalog__r.SubCategory__c : null;
-                if (responseObj.subcategory == 'Other Service Request') {
-                    responseObj.subcategory = 'Other';
-                }
                 responseObj.caseNumber = c.CaseNumber;
                 responseObj.caseId = c.Id;
                 responseObj.createdOnDate = c.CreatedDate != null 
@@ -161,7 +158,7 @@ public with sharing class BAPPCaseServiceRequestHandler {
                     responseObj.agentDetails = buildAgentDetails(c, contact, relatedDocs, contactToUpdateMap);
                 } else if (subCat == 'Broker Agency Details Update') {
                     responseObj.agencyDetails = buildAgencyDetails(c, acc, relatedDocs);
-                } else if (subCat == 'Delayed Commission Payment' || subCat == 'Incorrect Commission Amount' || subCat == 'Other Service Request') {
+                } else if (subCat == 'Delayed Commission Payment' || subCat == 'Incorrect Commission Amount' || subCat == 'Other') {
                     responseObj.other = buildOtherDetails(c, relatedDocs);
                 }
                 
@@ -196,20 +193,9 @@ public with sharing class BAPPCaseServiceRequestHandler {
                 return;
             }
             
-            String requestedSubCategory = input.subCategory;
-
-            String normalizedSubType = requestedSubCategory.replaceAll('\\s+', '');
-            
-            if (requestedSubCategory.equalsIgnoreCase('Incorrect Commission Amount')) {
-                normalizedSubType = 'BrokerCommissionIssue';
-            } 
-            else if (requestedSubCategory.equalsIgnoreCase('Delayed Commission Payment')) {
-                normalizedSubType = 'BrokerCommissionIssue';
-            } 
-            else if (requestedSubCategory.equalsIgnoreCase('Other')) {
-                // internally use this label
-                requestedSubCategory = 'Other Service Request';
-                normalizedSubType = 'BrokerGeneralServiceRequest';
+            String normalizedSubType = input.subCategory.replaceAll('\\s+', '');
+            if (normalizedSubType.equalsIgnoreCase('Other')) {
+                normalizedSubType = 'OtherServiceRequest';
             }
             
             Id caseRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, normalizedSubType);
@@ -219,18 +205,12 @@ public with sharing class BAPPCaseServiceRequestHandler {
                 return;
             }
             
-            ServiceCatalog__c sc = ServiceCatalogService.getInstance().getBySubCategory(normalizedSubType, requestedSubCategory);
+            ServiceCatalog__c sc = ServiceCatalogService.getInstance().getBySubCategory(normalizedSubType, input.subCategory);
             
             if (sc == null) {
                 returnError(Label.BAPP_NoServiceCatalogFound, 400);
                 return;
             }
-            Id bbmQueueId;
-                try {
-                    bbmQueueId = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'Bloom_Broker_Management_BBM' LIMIT 1].Id;
-                } catch (Exception e) {
-                    bbmQueueId = null;
-                }
             
             Id commissionId;
             if (String.isNotBlank(input.brokerInvoiceNumber)) {
@@ -248,16 +228,12 @@ public with sharing class BAPPCaseServiceRequestHandler {
                 ContactId           = input.contactId,
                 AccountId			= input.accountId,
                 Description         = input.caseDescription,
-                Origin              = ORIGIN_PORTAL,
+                Origin              = ORIGIN_WEB,
                 Status              = input.caseStatus,
-                Type				= input.category,
+                Type				= input.subCategory,
                 RecordTypeId        = caseRecordTypeId,
                 ServiceCatalog__c   = sc.Id,
-                SubType__c			= requestedSubCategory,
-                BrokerCommission__c = commissionId,
-                Subject				= requestedSubCategory,
-                OwnerId             = bbmQueueId,
-                ApprovalStatus__c   = 'Not Approved'
+                BrokerCommission__c = commissionId
             );
             
             List<Case> inserted = CaseService.getInstance().insertCaseWithTrigger(new List<Case>{ caseRecord });
@@ -271,12 +247,7 @@ public with sharing class BAPPCaseServiceRequestHandler {
                 returnError(Label.BAPP_CaseNotRetrieved, 500);
                 return;
             }
-            Case createdCase = CaseService.getInstance().getCaseById(inserted[0].Id);
             
-            Case latestCase = CaseService.getInstance().getCaseById(created.Id);
-            latestCase.ApprovalStatus__c = 'Pending';
-            CaseService.getInstance().updateCase(latestCase);
-
             List<Document__c> relatedDocs = DocumentService.getInstance().getExistingDocuments(new Set<Id>{ created.Id });
             List<Map<String, String>> agentDocs = new List<Map<String, String>>();
             for (Document__c doc : relatedDocs) {
@@ -329,9 +300,7 @@ public with sharing class BAPPCaseServiceRequestHandler {
             'tradeLicenseExpiryDate'      => c.TradeLicenseExpiryDate__c,
                 'commercialLicenseExpiryDate' => c.CommercialLicenseExpiryDate__c,
                 'vatUndertakingIssueDate'     => c.VATUndertakingIssue_Date__c,
-                'taxRegistrationNumber'       => c.TaxRegistrationNumber__c,
-                'agencyName'     => c.AgencyName__c,
-                'agencyType'       => c.AgencyType__c
+                'taxRegistrationNumber'       => c.TaxRegistrationNumber__c
                 };
                     
                     if (c.Type == 'VAT Details Update' && c.IsVATRegistered__c != null) {

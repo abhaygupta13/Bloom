@@ -22,7 +22,6 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
     private static final string RESALE_PROPERTY_WITH_PPHP_RT { get { return 'Resale_Property_with_Post_Handover_Payment_Plan'; } }
     private static final string RESALE_PROPERTY_COMPLETED_PROJECT_RT { get { return 'Resale_Property_For_Completed_Project'; } }
     private static final string RESALE_PROPERTY_UNDER_CONSTRUCTION_RT { get { return 'Resale_Property_Under_Construction'; } }
-    
     private static final string ACKNOWLEDGEMENT_RECEIPT_RT { get { return 'Acknowledgment_Receipt'; } }//Pranav
     private static final string PAYMENT_DUE_DATE_UPDATE_RT { get { return 'Payment_Due_Date_Update'; } }//Pranav
     private static final string THIRD_PARTY_FORM_RT { get { return 'ThirdPartyForm'; } }//Pranav
@@ -41,6 +40,9 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
     private static final string POP_SHARE_SR_RT { get { return 'ProofofPaymentShared'; } }//Pranav
     private static final string BANK_ACC_DTAIL_SR_RT { get { return 'BankAccountDetailsInquiry'; } }//Pranav
     private static final string GENERAL_ENQUIRY_RT { get { return 'GeneralEnquiry'; } }
+    private static final string CASE_RT_DEV_NAME_DELAYED_COMMISSION_PAYMENT  { get { return 'DelayedCommissionPayment'; } } //BAPP Broker Generic Case
+    private static final string CASE_RT_DEV_NAME_INCORRECT_COMMISSION_AMOUNT  { get { return 'IncorrectCommissionAmount'; } } //BAPP Broker Generic Case
+    private static final string CASE_RT_DEV_NAME_OTHER_SERVICE_REQUEST  { get { return 'OtherServiceRequest'; } }  //BAPP Broker Generic Case
     private static final string KYC_UPDATE_REQUEST_RT { get { return 'KYCUpdateRequest'; } }
     private static final string GENERAL_SERVICE_REQUEST_RT { get { return 'General_Service_Request'; } }
     private static final string FINANCIAL_SERVICE_REQUEST_RT { get { return 'Financial_Services'; } }
@@ -49,16 +51,11 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
     private static final string COMPLETED_STR { get { return 'COMPLETED'; } }
     private static final string CLOSED_STR { get { return 'CLOSED'; } }
     private static final string SALES_OPERATION_RT { get { return 'SalesOperationService'; } }
-    private static final string BROKER_AGENT_REGISTRATION_UPDATE_RT { get { return 'BrokerAgentRegistrationAndUpdate'; } } //Bapp 
-    private static final string CASE_RT_DEV_NAME_BROKER_COMMISSION_ISSUE  { get { return 'BrokerCommissionIssue'; } } //BAPP Broker Generic Case
-    private static final string CASE_RT_DEV_NAME_OTHER_SERVICE_REQUEST  { get { return 'BrokerGeneralServiceRequest'; } }  //BAPP Broker Generic Case
-    private static final string BROKER_AGENCY_DETAILS_UPDATE_RT { get { return 'BrokerAgencyDetailsUpdate'; } } //Bapp
     private static final String SUPER_APP_STR = 'Super App';
-    private static final string COMPLAINT_REQUEST_RT { get { return 'ComplaintRequest'; } }
-     private static final string CANCELLATION_REQUEST_RT { get { return 'CancellationRequest'; } }
     private static final string TAWTHEEQ_ENROLLMENT_RT { get { return 'TawtheeqEnrollment'; } }
-    private static final string BROKER_AGREEMENT_RENEWAL_RT { get { return 'BrokerAgreementRenewal'; } } //US-912
-    private static final Set<String> BROKER_AGENCY_DETAILS_UPDATE_SUBTYPES = new Set<String>{'Trade License Expiry Update','Commercial License Expiry Update','VAT Details Update','Bank Details Update','Agency Address Update','Legal Documents Update','Agency Name or Type Update','Broker Agreement Renewal Complete Details Update'};
+      private static final string COMPLAINT_REQUEST_RT { get { return 'ComplaintRequest'; } }
+    private static final string BROKER_GENERAL_REQUEST_RT { get { return 'Broker_General_Services'; } }
+    
     
     //Use this variable to disable this trigger from transaction
     public static Boolean isAsyncTriggerDisabled = false;
@@ -83,6 +80,7 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
         Id acnowledgementReceiptRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,ACKNOWLEDGEMENT_RECEIPT_RT);//Pranav
         Id pymntDuDtUpdtRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,PAYMENT_DUE_DATE_UPDATE_RT);//Pranav
         Id tpFormRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,THIRD_PARTY_FORM_RT);//Pranav
+        Id pymntRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,PAYMENT_SR_RT);//Pranav
         Id chequeReplacementRequestRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType,CHEQUE_REPLACEMENT_REQUEST_RT);
         Id chequeWithdrawalRequestRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType,CHEQUE_WITHDRAWAL_REQUEST_RT);
         Id anprServiceRequestRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, ANPR_CASE_RT);
@@ -102,25 +100,24 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
         Id bnkAccDtlRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,BANK_ACC_DTAIL_SR_RT);//Pranav
         Id generalEnquiryID = Utility.getRecordTypeIdByDevName(Case.SObjectType,GENERAL_ENQUIRY_RT);
         Id KYCUpdateRequestRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, KYC_UPDATE_REQUEST_RT);
-        Id complaintRequestID = Utility.getRecordTypeIdByDevName(Case.SObjectType,COMPLAINT_REQUEST_RT);
-          Id cancellationRequestID = Utility.getRecordTypeIdByDevName(Case.SObjectType,CANCELLATION_REQUEST_RT);
+        
         Id generalServiceRequestRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, GENERAL_SERVICE_REQUEST_RT);
         Id financialServiceRequestRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, FINANCIAL_SERVICE_REQUEST_RT);
         Id handoverServiceRequestRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, HANDOVER_SERVICE_REQUEST_RT);
         Id specialServicesRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, SPECIAL_SERVICES_RT);
-        Id salesOperationID = Utility.getRecordTypeIdByDevName(Case.SObjectType,SALES_OPERATION_RT);
-        Id brokerAgentRegistrationAndUpdateRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, BROKER_AGENT_REGISTRATION_UPDATE_RT); // BAPP Agent Update
-        Id caseBrokerCommissionIssueRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, CASE_RT_DEV_NAME_BROKER_COMMISSION_ISSUE ); //BAPP Broker Commision Case
+        Id caseDelayedCommissionPaymentRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, CASE_RT_DEV_NAME_DELAYED_COMMISSION_PAYMENT ); //BAPP Broker Generic Case
+        Id caseIncorrectCommissionAmountRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, CASE_RT_DEV_NAME_INCORRECT_COMMISSION_AMOUNT ); //BAPP Broker Generic Case
         Id caseOtherServiceRequestRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, CASE_RT_DEV_NAME_OTHER_SERVICE_REQUEST ); //BAPP Broker Generic Case
-        Id brokerAgencyDetailsUpdateRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, BROKER_AGENCY_DETAILS_UPDATE_RT); // BAPP
+        Id salesOperationID = Utility.getRecordTypeIdByDevName(Case.SObjectType,SALES_OPERATION_RT);
         Id tawtheeqEnrollmentRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, TAWTHEEQ_ENROLLMENT_RT);
         String digitalCaseCreatedByIds = objMetadataService.getAppSettingTextValue(DIGITAL_CASE_CREATED_BY_IDS);
-     //   String complaintCaseRecordTypeIds =  objMetadataService.getAppSettingTextValue(CASE_RT_IDS);
-        Id brokerBrokerAgreementRenewalRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, BROKER_AGREEMENT_RENEWAL_RT); //US-912
+        String complaintCaseRecordTypeIds =  objMetadataService.getAppSettingTextValue(CASE_RT_IDS);
+         Id complaintRequestID = Utility.getRecordTypeIdByDevName(Case.SObjectType,COMPLAINT_REQUEST_RT);
+        Id brokerGeneralRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType, BROKER_GENERAL_REQUEST_RT);
         
         List<Id> digitalCaseCreatedByUserIdList = digitalCaseCreatedByIds.split(',');
         
-   //     List<Id> complaintCaseRecordTypeIdList = complaintCaseRecordTypeIds.split(',');
+        List<Id> complaintCaseRecordTypeIdList = complaintCaseRecordTypeIds.split(',');
         
         List<CaseChangeEvent> objLeadChangeEventList =  (List<CaseChangeEvent>)newList;
         
@@ -132,6 +129,7 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
         List<Id> acknowledgementRcptIds = new List<Id>();//Pranav
         List<Id> pymntDuDtUpdtIds = new List<Id>();//Pranav
         List<Id> tpFormIds = new List<Id>();//Pranav
+        List<Id> pymntIds = new List<Id>();//Pranav
         List<Id> postSalePaymentDeferralIdList = new List<Id>();
         List<Id> defaultUnitIdList = new List<Id>();
         List<Id> chequeReplacementRequestIdList = new List<Id>();
@@ -144,11 +142,6 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
         List<Id> bnkAccDtlIds = new List<Id>();//Pranav
         List<Id> generalEnquiryCaseIds = new List<Id>();
         List<Id> BAPPGenericCaseIds = new List<Id>(); //BAPP Broker Generic Case
-        List<Id> brokerRegistrationCaseIds = new List<Id>(); // BAPP Regist Update
-        List<Id> brokerAgentCaseIds = new List<Id>(); // BAPP Agent Update
-        List<Id> brokerAgencyUpdateCaseIds = new List<Id>(); //BAPP Agency
-        List<Id> brokerCommissionIssueCaseIds = new List<Id>(); //BAPP Agency
-        List<Id> brokerGeneralServiceRequestCaseIds = new List<Id>(); //BAPP Other
         List<Id> kycUpdateRequestIds = new List<Id>();
         List<Id> superAppKYCUpdateRequestIds = new List<Id>();
         List<Id> generalServiceRequestIds = new List<Id>();
@@ -162,16 +155,16 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
         List<Id> approvedCaseIds = new List<Id>();
         List<Id> bfmCommonAreaBLCCaseIds = new List<Id>();
         List<Id> bfmCommonAreaDLPCaseIds = new List<Id>();
-        List<Id> complaintRequestCaseIds = new List<Id>();
-         List<Id> cancellationRequestCaseIds = new List<Id>();
         List<Id> tawtheeqEnrollmentCaseIds = new List<Id>();
         List<Id> submittedCaseIds = new List<Id>();
-        Set<Id> draftSubmittedCaseIds = new Set<Id>();
+          List<Id> complaintRequestCaseIds = new List<Id>();
          List<Id> caseClosedIds = new List<Id>();
-        List<Id> brokerAgreementRenewalCaseIds = new List<Id>();//US-912
+        List<Id> brokerGeneralSRIds = new List<Id>();
 
         Set<Id> communityCaseRTIds = new Set<Id>{accessPermitServiceRequestRecordTypeId, moveINServiceRequestRecordTypeId, moveINHolidayHomesServiceRequestRecordTypeId,
                                                 moveINOwnerServiceRequestRecordTypeId, moveOUTServiceRequestRecordTypeId, renewalServiceRequestRecordTypeId};
+        
+
         
         for (CaseChangeEvent event : objLeadChangeEventList) {
             //Get event header fields
@@ -184,41 +177,51 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
                     else if(digitalCaseCreatedByUserIdList.contains(event.CreatedById) && event.RecordTypeId == caseBFMServiceRequestRecordTypeId){
                         bfmEmailToCaseIds.addAll(header.getRecordIds());
                     }
-                  /*  else if(complaintCaseRecordTypeIdList.contains(event.RecordTypeId)){
+                    else if(complaintCaseRecordTypeIdList.contains(event.RecordTypeId)){
                         complaintCaseIds.addAll(header.getRecordIds());
-                    }*/
+                    }
                     else if(event.RecordTypeId == postSalePaymentDeferralRecordTypeId){
                         postSalePaymentDeferralIdList.addAll(header.getRecordIds());  
                         crmCaseIdList.addAll(header.getRecordIds());
                     }
                     else if(event.RecordTypeId == resaleRecordTypeId){
                         resaleCaseIdList.addAll(header.getRecordIds()); 
+                        //crmCaseIdList.addAll(header.getRecordIds());
                     }
                     else if(event.RecordTypeId == defaultUnitRecordTypeId) {
                         defaultUnitIdList.addAll(header.getRecordIds());  
                         crmCaseIdList.addAll(header.getRecordIds());
                     }
-                    //Pranav
+                   
                     else if(event.RecordTypeId == acnowledgementReceiptRTID) {
                         acknowledgementRcptIds.addAll(header.getRecordIds());  
                         crmCaseIdList.addAll(header.getRecordIds());
                     }
-                    //Pranav
+                    
                     else if(event.RecordTypeId == pymntDuDtUpdtRTID) {
                         pymntDuDtUpdtIds.addAll(header.getRecordIds());  
                         crmCaseIdList.addAll(header.getRecordIds());
                     }
-                    //Pranav
+                    
                     else if(event.RecordTypeId == tpFormRTID) {
                         tpFormIds.addAll(header.getRecordIds());  
                         crmCaseIdList.addAll(header.getRecordIds());
                     }
-                    //Pranav
+                   
+                    else if(event.RecordTypeId == pymntRTID) {
+                        pymntIds.addAll(header.getRecordIds());  
+                        //crmCaseIdList.addAll(header.getRecordIds());
+                    }
+                    
                     else if(event.RecordTypeId == popShareRTID) {
                         popShareIds.addAll(header.getRecordIds());  
                         crmCaseIdList.addAll(header.getRecordIds());
                     }
-                    //Pranav
+                         else if(event.RecordTypeId == complaintRequestID) {                        
+                        complaintRequestCaseIds.addAll(header.getRecordIds()); 
+                      //  crmCaseIdList.addAll(header.getRecordIds());
+                    }
+                   
                     else if(event.RecordTypeId == bnkAccDtlRTID) {
                         bnkAccDtlIds.addAll(header.getRecordIds());  
                         crmCaseIdList.addAll(header.getRecordIds());
@@ -248,15 +251,16 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
                         crmCaseIdList.addAll(header.getRecordIds());
                     }
                     else if(event.RecordTypeId == generalEnquiryID) {
+                        generalEnquiryCaseIds.addAll(header.getRecordIds());  
                         crmCaseIdList.addAll(header.getRecordIds());
                     }
                     else if(event.RecordTypeId == salesOperationID) {
                         salesOperationCaseIds.addAll(header.getRecordIds());
                         crmCaseIdList.addAll(header.getRecordIds());
                     }
-                     else if(event.RecordTypeId == complaintRequestID) {                        
-                        complaintRequestCaseIds.addAll(header.getRecordIds()); 
-                        //crmCaseIdList.addAll(header.getRecordIds());
+                    //BAPP Broker Generic Case
+                    else if (event.RecordTypeId == caseDelayedCommissionPaymentRecordTypeId || event.RecordTypeId == caseIncorrectCommissionAmountRecordTypeId || event.RecordTypeId == caseOtherServiceRequestRecordTypeId) {
+                        BAPPGenericCaseIds.addAll(header.getRecordIds());
                     }
                     else if (event.RecordTypeId == KYCUpdateRequestRTId && event.Origin == SUPER_APP_STR) {
                         superAppKYCUpdateRequestIds.addAll(header.getRecordIds());  
@@ -280,51 +284,20 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
                         specialServicesIds.addAll(header.getRecordIds());  
                         crmCaseIdList.addAll(header.getRecordIds());
                     }
-                    //BAPP Broker Generic Case
-                    else if (event.RecordTypeId == caseBrokerCommissionIssueRecordTypeId && (event.SubType__c == 'Delayed Commission Payment' || event.SubType__c == 'Incorrect Commission Amount')) {
-                        brokerCommissionIssueCaseIds.addAll(header.getRecordIds());
-                        //crmCaseIdList.addAll(header.getRecordIds());
-                        BAPPGenericCaseIds.addAll(header.getRecordIds());
-                    }
-                    else if (event.RecordTypeId == caseOtherServiceRequestRecordTypeId) {
-                        brokerGeneralServiceRequestCaseIds.addAll(header.getRecordIds());
-                        //crmCaseIdList.addAll(header.getRecordIds());
-                        BAPPGenericCaseIds.addAll(header.getRecordIds());
-                    }
-                    else if (event.Draft__c == false && event.RecordTypeId == brokerAgentRegistrationAndUpdateRTId) {
-                        if (event.SubType__c == 'Broker Agent Details Update') {
-                            brokerAgentCaseIds.addAll(header.getRecordIds());
-                        } else if (event.SubType__c == 'Broker New Agent Registration') {
-                            brokerRegistrationCaseIds.addAll(header.getRecordIds());
-                        }
-                    }
-                    else if (event.Draft__c == false && event.RecordTypeId == brokerAgencyDetailsUpdateRTId) {
-                        brokerAgencyUpdateCaseIds.addAll(header.getRecordIds());
-                    }
                     else if (event.RecordTypeId == tawtheeqEnrollmentRTId) {
                         tawtheeqEnrollmentCaseIds.addAll(header.getRecordIds());
                         crmCaseIdList.addAll(header.getRecordIds());
                     }
-                    else if (event.RecordTypeId == brokerBrokerAgreementRenewalRTId) {//US-912
-                        brokerAgreementRenewalCaseIds.addAll(header.getRecordIds());
-                        System.debug('brokerAgreementRenewalCaseIds =======>'+brokerAgreementRenewalCaseIds);
-                    }
+                       else if (event.RecordTypeId == brokerGeneralRTId) {
+                        brokerGeneralSRIds.addAll(header.getRecordIds());
+                     }
                 }
                 when 'UPDATE'{
-                    if (header.changedFields.contains('Draft__c') && event.Draft__c == false)
-                    {
-                        for(String recordId : header.getRecordIds()){
-                            draftSubmittedCaseIds.add((Id) recordId);
-                        }
-                    }
                     Boolean isBFMCaseCreation = header.changedFields.contains('BFMServiceRequestId__c') && event.BFMServiceRequestId__c != null;
                     Boolean isBFMCaseClosure = header.changedFields.contains('BFMRequestStatus__c') && event.BFMRequestStatus__c != null && (event.BFMRequestStatus__c == COMPLETED_STR || event.BFMRequestStatus__c == CLOSED_STR);
                     Boolean isCaseCancelled = header.changedFields.contains('Status') && event.Status == 'Cancelled';
-                    Boolean isCaseClosed = header.changedFields.contains('Status') && event.Status == 'Closed';
-                    System.debug('isCaseCancelled'+isCaseCancelled);
-                    
                     Boolean isApprovalApproved = header.changedFields.contains('ApprovalStatus__c') && (event.ApprovalStatus__c == 'Approved' || event.ApprovalStatus__c == 'Rejected');
-                    
+                    Boolean isCaseClosed = header.changedFields.contains('Status') && event.Status == 'Closed';
                     if(isBFMCaseCreation || isBFMCaseClosure){
                         bfmCaseSentEmailIdList.addAll(header.getRecordIds());
                     }
@@ -340,7 +313,7 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
                     if(isApprovalApproved){
                         approvedCaseIds.addAll(header.getRecordIds());
                     }
-                      if(isCaseClosed){
+                    if(isCaseClosed){
                           caseClosedIds.addAll(header.getRecordIds());}
                     //common area
                     if (header.changedFields.contains('AssignTeam__c')) {
@@ -358,7 +331,6 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
                     if(header.changedFields.contains('Status') && event.Status == 'Submitted'){
                         submittedCaseIds.addAll(header.getRecordIds());
                     }
-                    
                 }
                 when 'DELETE'{
                     
@@ -368,24 +340,6 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
                 }
             }
         }
-        
-        if (!draftSubmittedCaseIds.isEmpty()) {
-            Map<Id, Case> caseMap = CaseService.getInstance().getCaseMapByIds(draftSubmittedCaseIds);
-            for (Case c : caseMap.values()) {
-                System.debug('BROKER_AGENT_REGISTRATION_UPDATE_RT =======>' + c.RecordType.DeveloperName + 'CSubject >>' + c.Subject);
-                if (c.RecordType.DeveloperName == BROKER_AGENT_REGISTRATION_UPDATE_RT && c.SubType__c == 'Broker Agent Details Update') {
-                    brokerAgentCaseIds.add(c.Id);
-                }
-                else if (c.RecordType.DeveloperName == BROKER_AGENCY_DETAILS_UPDATE_RT && BROKER_AGENCY_DETAILS_UPDATE_SUBTYPES.contains(c.SubType__c)) {
-                    brokerAgencyUpdateCaseIds.add(c.Id);
-                }
-                else if (c.RecordType.DeveloperName == BROKER_AGENT_REGISTRATION_UPDATE_RT && c.SubType__c == 'Broker New Agent Registration') {
-                    System.debug('BROKER_AGENT_REGISTRATION_UPDATE_RT Inside else if =======>');
-                    brokerRegistrationCaseIds.add(c.Id);
-                }
-            }
-        }
-
         if(!submittedCaseIds.isEmpty()){
             Map<Id, Case> caseMap = CaseService.getInstance().getCaseMapByIds(new Set<Id>(submittedCaseIds));
             for (Case c : caseMap.values()) {
@@ -401,7 +355,9 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
         if(!caseCancelledIds.isEmpty()){
             ServiceRequestTaskHandler.getInstance().closeAllOpenTasksOnCancel(new Set<Id>(caseCancelledIds));
         }
-   
+          if(!caseClosedIds.isEmpty()){
+            ServiceRequestTaskHandler.getInstance().closeAllOpenTasks(new Set<Id>(caseClosedIds));
+        }
         if(!resaleCaseCancelledIds.isEmpty()){
             ResaleServiceRequestHandler.getInstance().cancelDraftSalesOrders(new Set<Id>(resaleCaseCancelledIds));    
         }
@@ -434,22 +390,11 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
         
         if(!complaintCaseIds.isEmpty()){
             AssignmentRuleHandler.salesComplaintCaseAssignment(complaintCaseIds);
-        }
-         if(!complaintRequestCaseIds.isEmpty()){
-            AssignmentRuleHandler.crmComplaintCaseAssignment(complaintRequestCaseIds);
         }      
+
         //BAPP Broker Generic Case
         if (!BAPPGenericCaseIds.isEmpty()) {
             AssignmentRuleHandler.genericCaseAssignmentBAPP(BAPPGenericCaseIds);
-        }
-        if (!brokerAgentCaseIds.isEmpty()) {
-            AssignmentRuleHandler.genericCaseAssignmentBAPP(brokerAgentCaseIds);
-        }
-        if (!brokerAgencyUpdateCaseIds.isEmpty()) {
-            AssignmentRuleHandler.genericCaseAssignmentBAPP(brokerAgencyUpdateCaseIds);
-        }
-        if (!brokerRegistrationCaseIds.isEmpty()) {
-            AssignmentRuleHandler.genericCaseAssignmentBAPP(brokerRegistrationCaseIds);
         }
         
         CaseService servObj = CaseService.getInstance();
@@ -458,6 +403,13 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
         if(!crmCaseIdList.isEmpty()){
             AssignmentRuleHandler.crmCaseAssignment(crmCaseIdList); 
         }
+        if(!complaintRequestCaseIds.isEmpty()){
+            
+              AssignmentRuleHandler.crmComplaintCaseAssignment(complaintRequestCaseIds);
+                List<Case> complaintCaseList = servObj.getCaseByIds(new Set<Id>(complaintRequestCaseIds)); 
+               //CRMComplaintRequestHandler.getInstance().createFirstTask(complaintCaseList);
+               ServiceRequestTaskHandler.getInstance().createNewAndCloseCurrentTask(complaintCaseList);  
+        }  
         
         if(!postSalePaymentDeferralIdList.isEmpty()){
             List<Case> postSalePaymentDeferralCaseList = servObj.getCaseByIds(new Set<Id>(postSalePaymentDeferralIdList));
@@ -488,6 +440,14 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
             ThirdPartyFormSRHandler.getInstance().createFirstTask(tpFormList); 
         }
         //Pranav
+        if(!pymntIds.isEmpty()){
+            List<Case> pmntSrList = servObj.getCaseByIds(new Set<Id>(pymntIds));
+            PaymentSRHandler obj = PaymentSRHandler.getInstance();
+            //obj.createFirstTask(pmntSrList); 
+            // obj.autoCreateDocument(listOfCases,listOfCases[0].Sales_Order__c); 
+        }
+        
+        //Pranav
         if(!popShareIds.isEmpty()){
             List<Case> pmntSrList = servObj.getCaseByIds(new Set<Id>(popShareIds));
             if(pmntSrList[0].step__c != '4')
@@ -499,62 +459,36 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
             if(pmntSrList[0].step__c != '4')
                 BankAccDetailInquirySRHandler.getInstance().createFirstTask(pmntSrList); 
         }
-        
         if(!chequeReplacementRequestIdList.isEmpty()){
             List<Case> chequeReplacementRequestList = servObj.getCaseByIds(new Set<Id>(chequeReplacementRequestIdList));
             ChequeReplacementRequestCaseHandler.getInstance().createFirstTask(chequeReplacementRequestList); 
         }
-        
         if(!chequeWithdrawalRequestIdList.isEmpty()){
             List<Case> chequeWithdrawalRequestList = servObj.getCaseByIds(new Set<Id>(chequeWithdrawalRequestIdList));
             ChequeWithdrawalRequestCaseHandler.getInstance().createFirstTask(chequeWithdrawalRequestList); 
         }
-        
+        if(!generalEnquiryCaseIds.isEmpty()){
+            List<Case> generalEnquiryCaseList = servObj.getCaseByIds(new Set<Id>(generalEnquiryCaseIds));
+            GeneralEnquirySRHandler obj = GeneralEnquirySRHandler.getInstance();
+            obj.createFirstTask(generalEnquiryCaseList);                
+            //obj.autoPopulateFloorPlanFromUnitFiles(generalEnquiryCaseList);
+        }
         if(!salesOperationCaseIds.isEmpty()){
             List<Case> salesOperationCaseList = servObj.getCaseByIds(new Set<Id>(salesOperationCaseIds));
             SalesOperationSRHandler.getInstance().createFirstTask(salesOperationCaseList); 
         }
-       /* if(!complaintRequestCaseIds.isEmpty()){
-            List<Case> complaintRequestCaseList = servObj.getCaseByIds(new Set<Id>(complaintRequestCaseIds));
-            ComplaintRequestHandler.getInstance().createFirstTask(complaintRequestCaseList); 
-        }*/
-        
         if(!LPFWaiverRequestIdList.isEmpty()){
             List<Case> lpfWaiverRequestList = servObj.getCaseByIds(new Set<Id>(LPFWaiverRequestIdList));
             LPFWaiverRequestCaseHandler.getInstance().createFirstTask(lpfWaiverRequestList); 
         }
-        
         if(!SOARequestIdList.isEmpty()){
             List<Case> soaRequestList = servObj.getCaseByIds(new Set<Id>(SOARequestIdList));
             SOARequestCaseHandler.getInstance().handleNextSteps(soaRequestList[0]); 
         }
-        
         if(!kycUpdateRequestIds.isEmpty()){
             AssignmentRuleHandler.crmCaseAssignment(kycUpdateRequestIds); 
             List<Case> kycUpdateRequestCaseList = servObj.getCaseByIds(new Set<Id>(kycUpdateRequestIds));
             KYCUpdateRequestSRHandler.getInstance().createFirstTask(kycUpdateRequestCaseList);
-        }
-        
-        if(!brokerCommissionIssueCaseIds.isEmpty()){
-            List<Case> brokerDelayedCommissionList = servObj.getCaseByIds(new Set<Id>(brokerCommissionIssueCaseIds));
-            BrokerCommissionSRHandler.getInstance().handleNextSteps(brokerDelayedCommissionList[0]);
-        }
-        
-        if(!brokerGeneralServiceRequestCaseIds.isEmpty()){
-            List<Case> brokerGeneralServiceRequestList = servObj.getCaseByIds(new Set<Id>(brokerGeneralServiceRequestCaseIds));
-            OtherSRHandler.getInstance().handleNextSteps(brokerGeneralServiceRequestList[0]); 
-        }
-        if(!brokerRegistrationCaseIds.isEmpty()){
-            List<Case> brokerRegistrationList = servObj.getCaseByIds(new Set<Id>(brokerRegistrationCaseIds));
-            BrokerAgentRegiAndUpdateSRHandler.getInstance().handleNextSteps(brokerRegistrationList[0]);
-        }
-        if(!brokerAgentCaseIds.isEmpty()){
-            List<Case> brokerAgentCaseList = servObj.getCaseByIds(new Set<Id>(brokerAgentCaseIds));
-            BrokerAgentRegiAndUpdateSRHandler.getInstance().createFirstTask(brokerAgentCaseList);
-        }
-        if(!brokerAgencyUpdateCaseIds.isEmpty()){
-            List<Case> brokerAgencyUpdateList = servObj.getCaseByIds(new Set<Id>(brokerAgencyUpdateCaseIds));
-            BrokerAgencyDetailsUpdateSRHandler.getInstance().createFirstTask(brokerAgencyUpdateList);
         }
         if(!superAppKYCUpdateRequestIds.isEmpty()){
             AssignmentRuleHandler.superAppCaseAssignment(superAppKYCUpdateRequestIds); 
@@ -566,10 +500,10 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
             TawtheeqEnrollmentSRHandler obj = TawtheeqEnrollmentSRHandler.getInstance();
             obj.createFirstTask(tawtheeqEnrollmentCaseList); 
         }
-        if(!brokerAgreementRenewalCaseIds.isEmpty()){
-            List<Case> brokerAgreementRenewalList = servObj.getCaseByIds(new Set<Id>(brokerAgreementRenewalCaseIds));
-            BrokerAgreementRenewalSRHandler obj = BrokerAgreementRenewalSRHandler.getInstance();
-            obj.createFirstTask(brokerAgreementRenewalList); 
-            }
-        }
+       /*  if(!brokerGeneralSRIds.isEmpty()){
+            List<Case> brokerGeneralSRList = servObj.getCaseByIds(new Set<Id>(brokerGeneralSRIds));         
+            BrokerGeneralSRHandler.getInstance().createFirstTask(brokerGeneralSRList); 
+          
+            }*/
+    }
 }

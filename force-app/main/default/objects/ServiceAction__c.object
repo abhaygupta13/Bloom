@@ -1,0 +1,1616 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Service_Action_Record_Page1</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>AssignToHOAgent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Assign To HO Agent</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AssignToOwner__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Assign To Owner</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DefaultQueueId__c</fullName>
+        <externalId>false</externalId>
+        <label>Default Queue Id</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Department__c</fullName>
+        <label>Department</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>CRM</fullName>
+                    <default>false</default>
+                    <label>CRM</label>
+                </value>
+                <value>
+                    <fullName>Finance</fullName>
+                    <default>false</default>
+                    <label>Finance</label>
+                </value>
+                <value>
+                    <fullName>Collection</fullName>
+                    <default>false</default>
+                    <label>Collection</label>
+                </value>
+                <value>
+                    <fullName>Government Relation</fullName>
+                    <default>false</default>
+                    <label>Government Relation</label>
+                </value>
+                <value>
+                    <fullName>Operations</fullName>
+                    <default>false</default>
+                    <label>Operations</label>
+                </value>
+                <value>
+                    <fullName>Legal</fullName>
+                    <default>false</default>
+                    <label>Legal</label>
+                </value>
+                <value>
+                    <fullName>Contact Centre</fullName>
+                    <default>false</default>
+                    <label>Contact Centre</label>
+                </value>
+                <value>
+                    <fullName>Leasing</fullName>
+                    <default>false</default>
+                    <label>Leasing</label>
+                </value>
+                <value>
+                    <fullName>Treasury Team</fullName>
+                    <default>false</default>
+                    <label>Treasury Team</label>
+                </value>
+                <value>
+                    <fullName>Handover Team</fullName>
+                    <default>false</default>
+                    <label>Handover Team</label>
+                </value>
+                <value>
+                    <fullName>Community Management</fullName>
+                    <default>false</default>
+                    <label>Community Management</label>
+                </value>
+                <value>
+                    <fullName>BFM</fullName>
+                    <default>false</default>
+                    <label>BFM</label>
+                </value>
+                <value>
+                    <fullName>Broker Management</fullName>
+                    <default>false</default>
+                    <label>Broker Management</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Due_in_days__c</fullName>
+        <externalId>false</externalId>
+        <label>Due in days</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FinalTask__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Final Task</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>HandoverStatus__c</fullName>
+        <label>Handover Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>false</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>QA Snagging</fullName>
+                    <default>false</default>
+                    <label>QA Snagging</label>
+                </value>
+                <value>
+                    <fullName>QA De-Snagging</fullName>
+                    <default>false</default>
+                    <label>QA De-Snagging</label>
+                </value>
+                <value>
+                    <fullName>Upload SOA</fullName>
+                    <default>false</default>
+                    <label>Upload SOA</label>
+                </value>
+                <value>
+                    <fullName>Upload SPA</fullName>
+                    <default>false</default>
+                    <label>Upload SPA</label>
+                </value>
+                <value>
+                    <fullName>Handover Keys to BAM</fullName>
+                    <default>false</default>
+                    <label>Handover Keys to BAM</label>
+                </value>
+                <value>
+                    <fullName>Keys Handedover to BAM</fullName>
+                    <default>false</default>
+                    <label>Keys Handedover to BAM</label>
+                </value>
+                <value>
+                    <fullName>Send Handover Notice</fullName>
+                    <default>false</default>
+                    <label>Send Handover Notice</label>
+                </value>
+                <value>
+                    <fullName>Book Appointment with Customer</fullName>
+                    <default>false</default>
+                    <label>Book Appointment with Customer</label>
+                </value>
+                <value>
+                    <fullName>Pre CHO Check</fullName>
+                    <default>false</default>
+                    <label>Pre CHO Check</label>
+                </value>
+                <value>
+                    <fullName>CHO Snagging</fullName>
+                    <default>false</default>
+                    <label>CHO Snagging</label>
+                </value>
+                <value>
+                    <fullName>CHO De-Snagging</fullName>
+                    <default>false</default>
+                    <label>CHO De-Snagging</label>
+                </value>
+                <value>
+                    <fullName>Notice of Completion sent</fullName>
+                    <default>false</default>
+                    <label>Notice of Completion sent</label>
+                </value>
+                <value>
+                    <fullName>Settlement Follow up</fullName>
+                    <default>false</default>
+                    <label>Settlement Follow up</label>
+                </value>
+                <value>
+                    <fullName>Generate Bank NOC</fullName>
+                    <default>false</default>
+                    <label>Generate Bank NOC</label>
+                </value>
+                <value>
+                    <fullName>Settlement Confirmation</fullName>
+                    <default>false</default>
+                    <label>Settlement Confirmation</label>
+                </value>
+                <value>
+                    <fullName>Tawtheeq Enrollment</fullName>
+                    <default>false</default>
+                    <label>Tawtheeq Enrollment</label>
+                </value>
+                <value>
+                    <fullName>Lease Agreement</fullName>
+                    <default>false</default>
+                    <label>Lease Agreement</label>
+                </value>
+                <value>
+                    <fullName>PHPP Handover Keys</fullName>
+                    <default>false</default>
+                    <label>PHPP Handover Keys</label>
+                </value>
+                <value>
+                    <fullName>Await PHPP Completion</fullName>
+                    <default>false</default>
+                    <label>Await PHPP Completion</label>
+                </value>
+                <value>
+                    <fullName>Clear PHPP Finances</fullName>
+                    <default>false</default>
+                    <label>Clear PHPP Finances</label>
+                </value>
+                <value>
+                    <fullName>Initiate Mortgage Release</fullName>
+                    <default>false</default>
+                    <label>Initiate Mortgage Release</label>
+                </value>
+                <value>
+                    <fullName>Upload Mortgage Release Documents</fullName>
+                    <default>false</default>
+                    <label>Upload Mortgage Release Documents</label>
+                </value>
+                <value>
+                    <fullName>ADREC Approval and Mortgage Release</fullName>
+                    <default>false</default>
+                    <label>ADREC Approval and Mortgage Release</label>
+                </value>
+                <value>
+                    <fullName>Generate Escrow Letter</fullName>
+                    <default>false</default>
+                    <label>Generate Escrow Letter</label>
+                </value>
+                <value>
+                    <fullName>Register Title Deed</fullName>
+                    <default>false</default>
+                    <label>Register Title Deed</label>
+                </value>
+                <value>
+                    <fullName>Transfer Utilities</fullName>
+                    <default>false</default>
+                    <label>Transfer Utilities</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Cheque Clearance</fullName>
+                    <default>false</default>
+                    <label>Mortgage Cheque Clearance</label>
+                </value>
+                <value>
+                    <fullName>Handover Signing Document (KHO) Appointment</fullName>
+                    <default>false</default>
+                    <label>Handover Signing Document (KHO) Appointment</label>
+                </value>
+                <value>
+                    <fullName>Handover Completed</fullName>
+                    <default>false</default>
+                    <label>Handover Completed</label>
+                </value>
+                <value>
+                    <fullName>Potential Defaulter</fullName>
+                    <default>false</default>
+                    <label>Potential Defaulter</label>
+                </value>
+                <value>
+                    <fullName>Default -Under Discussion</fullName>
+                    <default>false</default>
+                    <label>Default -Under Discussion</label>
+                </value>
+                <value>
+                    <fullName>Cancelled</fullName>
+                    <default>false</default>
+                    <label>Cancelled</label>
+                </value>
+                <value>
+                    <fullName>Initiate Cancellation</fullName>
+                    <default>false</default>
+                    <label>Initiate Cancellation</label>
+                </value>
+                <value>
+                    <fullName>Under Resale</fullName>
+                    <default>false</default>
+                    <label>Under Resale</label>
+                </value>
+                <value>
+                    <fullName>Generate Developer NOC</fullName>
+                    <default>false</default>
+                    <label>Generate Developer NOC</label>
+                </value>
+                <value>
+                    <fullName>Developer NOC Internal Follow Up</fullName>
+                    <default>false</default>
+                    <label>Developer NOC Internal Follow Up</label>
+                </value>
+                <value>
+                    <fullName>HO Undertaking Letter</fullName>
+                    <default>false</default>
+                    <label>HO Undertaking Letter</label>
+                </value>
+                <value>
+                    <fullName>Handover Signing Document</fullName>
+                    <default>false</default>
+                    <label>Handover Signing Document</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Order__c</fullName>
+        <externalId>false</externalId>
+        <label>Order</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SLAHours__c</fullName>
+        <externalId>false</externalId>
+        <label>SLA Hours</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ServiceCatalog__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Service Catalog</label>
+        <referenceTo>ServiceCatalog__c</referenceTo>
+        <relationshipLabel>Service Actions</relationshipLabel>
+        <relationshipName>Service_Actions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SubStatus__c</fullName>
+        <label>SubStatus</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>false</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>CRM Team</fullName>
+                    <default>false</default>
+                    <label>CRM Team</label>
+                </value>
+                <value>
+                    <fullName>Finance Team</fullName>
+                    <default>false</default>
+                    <label>Finance Team</label>
+                </value>
+                <value>
+                    <fullName>Resolved</fullName>
+                    <default>false</default>
+                    <label>Resolved</label>
+                </value>
+                <value>
+                    <fullName>Closed</fullName>
+                    <default>false</default>
+                    <label>Closed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TaskSubType__c</fullName>
+        <label>Task Sub-Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Post Sale Payment Deferral</fullName>
+                    <default>false</default>
+                    <label>Post Sale Payment Deferral</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task</label>
+                </value>
+                <value>
+                    <fullName>Finance Team Task</fullName>
+                    <default>false</default>
+                    <label>Finance Team Task</label>
+                </value>
+                <value>
+                    <fullName>Final Task</fullName>
+                    <default>false</default>
+                    <label>Final Task</label>
+                </value>
+                <value>
+                    <fullName>Finance Team Task 1</fullName>
+                    <default>false</default>
+                    <label>Finance Team Task 1</label>
+                </value>
+                <value>
+                    <fullName>Finance Team Task 2</fullName>
+                    <default>false</default>
+                    <label>Finance Team Task 2</label>
+                </value>
+                <value>
+                    <fullName>Finance Team Task 3</fullName>
+                    <default>false</default>
+                    <label>Finance Team Task 3</label>
+                </value>
+                <value>
+                    <fullName>Collection Team Task 1</fullName>
+                    <default>false</default>
+                    <label>Collection Team Task 1</label>
+                </value>
+                <value>
+                    <fullName>Collection Team Task 2</fullName>
+                    <default>false</default>
+                    <label>Collection Team Task 2</label>
+                </value>
+                <value>
+                    <fullName>Collection Team Task 3</fullName>
+                    <default>false</default>
+                    <label>Collection Team Task 3</label>
+                </value>
+                <value>
+                    <fullName>Collection Team Task 4</fullName>
+                    <default>false</default>
+                    <label>Collection Team Task 4</label>
+                </value>
+                <value>
+                    <fullName>Operation Team Task 1</fullName>
+                    <default>false</default>
+                    <label>Operation Team Task 1</label>
+                </value>
+                <value>
+                    <fullName>Operation Team Task 2</fullName>
+                    <default>false</default>
+                    <label>Operation Team Task 2</label>
+                </value>
+                <value>
+                    <fullName>Legal Team Task 1</fullName>
+                    <default>false</default>
+                    <label>Legal Team Task 1</label>
+                </value>
+                <value>
+                    <fullName>Government Relation Team Task 1</fullName>
+                    <default>false</default>
+                    <label>Government Relation Team Task 1</label>
+                </value>
+                <value>
+                    <fullName>Finance Verification Task</fullName>
+                    <default>false</default>
+                    <label>Finance Verification Task</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 2</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 2</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 3</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 3</label>
+                </value>
+                <value>
+                    <fullName>Operation Team Task 3</fullName>
+                    <default>false</default>
+                    <label>Operation Team Task 3</label>
+                </value>
+                <value>
+                    <fullName>Operation Team Task</fullName>
+                    <default>false</default>
+                    <label>Operation Team Task</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 1</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 1</label>
+                </value>
+                <value>
+                    <fullName>Collection Team Task 5</fullName>
+                    <default>false</default>
+                    <label>Collection Team Task 5</label>
+                </value>
+                <value>
+                    <fullName>Leasing Team Task 1</fullName>
+                    <default>false</default>
+                    <label>Leasing Team Task 1</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 10</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 10</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 11</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 11</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 12</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 12</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 13</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 13</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 14</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 14</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 4</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 4</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 5</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 5</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 6</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 6</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 7</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 7</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 8</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 8</label>
+                </value>
+                <value>
+                    <fullName>CRM Team Task 9</fullName>
+                    <default>false</default>
+                    <label>CRM Team Task 9</label>
+                </value>
+                <value>
+                    <fullName>Government Relation Team Task 2</fullName>
+                    <default>false</default>
+                    <label>Government Relation Team Task 2</label>
+                </value>
+                <value>
+                    <fullName>Government Relation Team Task 3</fullName>
+                    <default>false</default>
+                    <label>Government Relation Team Task 3</label>
+                </value>
+                <value>
+                    <fullName>Handover Team Task 1</fullName>
+                    <default>false</default>
+                    <label>Handover Team Task 1</label>
+                </value>
+                <value>
+                    <fullName>Handover Team Task 2</fullName>
+                    <default>false</default>
+                    <label>Handover Team Task 2</label>
+                </value>
+                <value>
+                    <fullName>Handover Team Task 2.1</fullName>
+                    <default>false</default>
+                    <label>Handover Team Task 2.1</label>
+                </value>
+                <value>
+                    <fullName>Handover Team Task 2.2</fullName>
+                    <default>false</default>
+                    <label>Handover Team Task 2.2</label>
+                </value>
+                <value>
+                    <fullName>Handover Team Task 2.3</fullName>
+                    <default>false</default>
+                    <label>Handover Team Task 2.3</label>
+                </value>
+                <value>
+                    <fullName>Handover Team Task 3</fullName>
+                    <default>false</default>
+                    <label>Handover Team Task 3</label>
+                </value>
+                <value>
+                    <fullName>Handover Team Task 4</fullName>
+                    <default>false</default>
+                    <label>Handover Team Task 4</label>
+                </value>
+                <value>
+                    <fullName>Handover Team Task 5</fullName>
+                    <default>false</default>
+                    <label>Handover Team Task 5</label>
+                </value>
+                <value>
+                    <fullName>Handover Team Task 6</fullName>
+                    <default>false</default>
+                    <label>Handover Team Task 6</label>
+                </value>
+                <value>
+                    <fullName>Operation Team Task 4</fullName>
+                    <default>false</default>
+                    <label>Operation Team Task 4</label>
+                </value>
+                <value>
+                    <fullName>Treasury Team Task 1</fullName>
+                    <default>false</default>
+                    <label>Treasury Team Task 1</label>
+                </value>
+                <value>
+                    <fullName>Operation Team Task 5</fullName>
+                    <default>false</default>
+                    <label>Operation Team Task 5</label>
+                </value>
+                <value>
+                    <fullName>CC Team Task 1</fullName>
+                    <default>false</default>
+                    <label>CC Team Task 1</label>
+                </value>
+                <value>
+                    <fullName>Broker Management Team Task</fullName>
+                    <default>false</default>
+                    <label>Broker Management Team Task</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TaskSubject__c</fullName>
+        <externalId>false</externalId>
+        <label>Task Subject</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TaskType__c</fullName>
+        <label>Task Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Post Sale Payment Deferral</fullName>
+                    <default>false</default>
+                    <label>Post Sale Payment Deferral</label>
+                </value>
+                <value>
+                    <fullName>Default Unit</fullName>
+                    <default>false</default>
+                    <label>Default Unit</label>
+                </value>
+                <value>
+                    <fullName>Resale Property Under Construction</fullName>
+                    <default>false</default>
+                    <label>Resale Property Under Construction</label>
+                </value>
+                <value>
+                    <fullName>Resale Property of a Completed Project</fullName>
+                    <default>false</default>
+                    <label>Resale Property of a Completed Project</label>
+                </value>
+                <value>
+                    <fullName>Resale Property with Post Payment Handover Plan</fullName>
+                    <default>false</default>
+                    <label>Resale Property with Post Payment Handover Plan</label>
+                </value>
+                <value>
+                    <fullName>Cheque Replacement Request</fullName>
+                    <default>false</default>
+                    <label>Cheque Replacement Request</label>
+                </value>
+                <value>
+                    <fullName>Cheque Withdrawal Request</fullName>
+                    <default>false</default>
+                    <label>Cheque Withdrawal Request</label>
+                </value>
+                <value>
+                    <fullName>SOA Request</fullName>
+                    <default>false</default>
+                    <label>SOA Request</label>
+                </value>
+                <value>
+                    <fullName>LPF Waiver Request</fullName>
+                    <default>false</default>
+                    <label>LPF Waiver Request</label>
+                </value>
+                <value>
+                    <fullName>General Enquiry</fullName>
+                    <default>false</default>
+                    <label>General Enquiry</label>
+                </value>
+                <value>
+                    <fullName>KYC Update Request</fullName>
+                    <default>false</default>
+                    <label>KYC Update Request</label>
+                </value>
+                <value>
+                    <fullName>Construction Update</fullName>
+                    <default>false</default>
+                    <label>Construction Update</label>
+                </value>
+                <value>
+                    <fullName>Handover Update</fullName>
+                    <default>false</default>
+                    <label>Handover Update</label>
+                </value>
+                <value>
+                    <fullName>Hassantuk</fullName>
+                    <default>false</default>
+                    <label>Hassantuk</label>
+                </value>
+                <value>
+                    <fullName>Property Enrollment</fullName>
+                    <default>false</default>
+                    <label>Property Enrollment</label>
+                </value>
+                <value>
+                    <fullName>SPA</fullName>
+                    <default>false</default>
+                    <label>SPA</label>
+                </value>
+                <value>
+                    <fullName>Site Visit/Property Viewing</fullName>
+                    <default>false</default>
+                    <label>Site Visit/Property Viewing</label>
+                </value>
+                <value>
+                    <fullName>Letter</fullName>
+                    <default>false</default>
+                    <label>Letter</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+                <value>
+                    <fullName>ADM Applications Registration</fullName>
+                    <default>false</default>
+                    <label>ADM Applications Registration</label>
+                </value>
+                <value>
+                    <fullName>TAQA</fullName>
+                    <default>false</default>
+                    <label>TAQA</label>
+                </value>
+                <value>
+                    <fullName>General Payment Enquiry</fullName>
+                    <default>false</default>
+                    <label>General Payment Enquiry</label>
+                </value>
+                <value>
+                    <fullName>Floor Plan Copy</fullName>
+                    <default>false</default>
+                    <label>Floor Plan Copy</label>
+                </value>
+                <value>
+                    <fullName>Contact Details</fullName>
+                    <default>false</default>
+                    <label>Contact Details</label>
+                </value>
+                <value>
+                    <fullName>SPA Pre-Registration</fullName>
+                    <default>false</default>
+                    <label>SPA Pre-Registration</label>
+                </value>
+                <value>
+                    <fullName>Title Deed/Mortgage Deed</fullName>
+                    <default>false</default>
+                    <label>Title Deed/Mortgage Deed</label>
+                </value>
+                <value>
+                    <fullName>Rent Security Deposit Refund</fullName>
+                    <default>false</default>
+                    <label>Rent Security Deposit Refund</label>
+                </value>
+                <value>
+                    <fullName>Rent Refund</fullName>
+                    <default>false</default>
+                    <label>Rent Refund</label>
+                </value>
+                <value>
+                    <fullName>Third Party Form</fullName>
+                    <default>false</default>
+                    <label>Third Party Form</label>
+                </value>
+                <value>
+                    <fullName>Document Controller</fullName>
+                    <default>false</default>
+                    <label>Document Controller</label>
+                </value>
+                <value>
+                    <fullName>Data Analystics</fullName>
+                    <default>false</default>
+                    <label>Data Analystics</label>
+                </value>
+                <value>
+                    <fullName>Office Manager</fullName>
+                    <default>false</default>
+                    <label>Office Manager</label>
+                </value>
+                <value>
+                    <fullName>Broker Management</fullName>
+                    <default>false</default>
+                    <label>Broker Management</label>
+                </value>
+                <value>
+                    <fullName>Sales Operation</fullName>
+                    <default>false</default>
+                    <label>Sales Operation</label>
+                </value>
+                <value>
+                    <fullName>Post Sales Operation</fullName>
+                    <default>false</default>
+                    <label>Post Sales Operation</label>
+                </value>
+                <value>
+                    <fullName>Customer Finance</fullName>
+                    <default>false</default>
+                    <label>Customer Finance</label>
+                </value>
+                <value>
+                    <fullName>Leads Management</fullName>
+                    <default>false</default>
+                    <label>Leads Management</label>
+                </value>
+                <value>
+                    <fullName>Communication</fullName>
+                    <default>false</default>
+                    <label>Communication</label>
+                </value>
+                <value>
+                    <fullName>Customer Type Update</fullName>
+                    <default>false</default>
+                    <label>Customer Type Update</label>
+                </value>
+                <value>
+                    <fullName>Data Cleansing</fullName>
+                    <default>false</default>
+                    <label>Data Cleansing</label>
+                </value>
+                <value>
+                    <fullName>Tawtheeq Enrollment</fullName>
+                    <default>false</default>
+                    <label>Tawtheeq Enrollment</label>
+                </value>
+                <value>
+                    <fullName>Delay in SPA Issuance</fullName>
+                    <default>false</default>
+                    <label>Delay in SPA Issuance</label>
+                </value>
+                <value>
+                    <fullName>Delay in SPA Delivery</fullName>
+                    <default>false</default>
+                    <label>Delay in SPA Delivery</label>
+                </value>
+                <value>
+                    <fullName>Delay in Tawtheeq Issuance</fullName>
+                    <default>false</default>
+                    <label>Delay in Tawtheeq Issuance</label>
+                </value>
+                <value>
+                    <fullName>Delay in Security Deposit Refund</fullName>
+                    <default>false</default>
+                    <label>Delay in Security Deposit Refund</label>
+                </value>
+                <value>
+                    <fullName>Despute on Rental Increase</fullName>
+                    <default>false</default>
+                    <label>Despute on Rental Increase</label>
+                </value>
+                <value>
+                    <fullName>Delay in PM Contract</fullName>
+                    <default>false</default>
+                    <label>Delay in PM Contract</label>
+                </value>
+                <value>
+                    <fullName>Compensation Due to Service Delay</fullName>
+                    <default>false</default>
+                    <label>Compensation Due to Service Delay</label>
+                </value>
+                <value>
+                    <fullName>Delay in Renewal</fullName>
+                    <default>false</default>
+                    <label>Delay in Renewal</label>
+                </value>
+                <value>
+                    <fullName>Delay in Issuing Lease Agreement</fullName>
+                    <default>false</default>
+                    <label>Delay in Issuing Lease Agreement</label>
+                </value>
+                <value>
+                    <fullName>Delay in Floor Plan</fullName>
+                    <default>false</default>
+                    <label>Delay in Floor Plan</label>
+                </value>
+                <value>
+                    <fullName>Delay in ROI Settlment</fullName>
+                    <default>false</default>
+                    <label>Delay in ROI Settlment</label>
+                </value>
+                <value>
+                    <fullName>SPA Registration Delay</fullName>
+                    <default>false</default>
+                    <label>SPA Registration Delay</label>
+                </value>
+                <value>
+                    <fullName>Pre/Title Deed Registration Delay</fullName>
+                    <default>false</default>
+                    <label>Pre/Title Deed Registration Delay</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Registration Delay</fullName>
+                    <default>false</default>
+                    <label>Mortgage Registration Delay</label>
+                </value>
+                <value>
+                    <fullName>Resale/NOC Issuance Delay</fullName>
+                    <default>false</default>
+                    <label>Resale/NOC Issuance Delay</label>
+                </value>
+                <value>
+                    <fullName>Delay in Receipts</fullName>
+                    <default>false</default>
+                    <label>Delay in Receipts</label>
+                </value>
+                <value>
+                    <fullName>Delay in Cheque Withdrawal</fullName>
+                    <default>false</default>
+                    <label>Delay in Cheque Withdrawal</label>
+                </value>
+                <value>
+                    <fullName>Delay in Updating SOA/Issuance</fullName>
+                    <default>false</default>
+                    <label>Delay in Updating SOA/Issuance</label>
+                </value>
+                <value>
+                    <fullName>Delay in Amendment Issuance</fullName>
+                    <default>false</default>
+                    <label>Delay in Amendment Issuance</label>
+                </value>
+                <value>
+                    <fullName>Multiple Visits Requested for Additional Documents Signature</fullName>
+                    <default>false</default>
+                    <label>Multiple Visits Requested for Additional Documents Signature</label>
+                </value>
+                <value>
+                    <fullName>Delay in Handover</fullName>
+                    <default>false</default>
+                    <label>Delay in Handover</label>
+                </value>
+                <value>
+                    <fullName>Delay in Snagging</fullName>
+                    <default>false</default>
+                    <label>Delay in Snagging</label>
+                </value>
+                <value>
+                    <fullName>Lobby / Reception</fullName>
+                    <default>false</default>
+                    <label>Lobby / Reception</label>
+                </value>
+                <value>
+                    <fullName>Corridors &amp; Hallways</fullName>
+                    <default>false</default>
+                    <label>Corridors &amp; Hallways</label>
+                </value>
+                <value>
+                    <fullName>Staircases</fullName>
+                    <default>false</default>
+                    <label>Staircases</label>
+                </value>
+                <value>
+                    <fullName>Elevators</fullName>
+                    <default>false</default>
+                    <label>Elevators</label>
+                </value>
+                <value>
+                    <fullName>Parking Area</fullName>
+                    <default>false</default>
+                    <label>Parking Area</label>
+                </value>
+                <value>
+                    <fullName>Building Entrance &amp; Exit</fullName>
+                    <default>false</default>
+                    <label>Building Entrance &amp; Exit</label>
+                </value>
+                <value>
+                    <fullName>Landscaping &amp; Gardens</fullName>
+                    <default>false</default>
+                    <label>Landscaping &amp; Gardens</label>
+                </value>
+                <value>
+                    <fullName>Walkways / Pavements</fullName>
+                    <default>false</default>
+                    <label>Walkways / Pavements</label>
+                </value>
+                <value>
+                    <fullName>Swimming Pool</fullName>
+                    <default>false</default>
+                    <label>Swimming Pool</label>
+                </value>
+                <value>
+                    <fullName>Gym</fullName>
+                    <default>false</default>
+                    <label>Gym</label>
+                </value>
+                <value>
+                    <fullName>Children&apos;s Play Area</fullName>
+                    <default>false</default>
+                    <label>Children&apos;s Play Area</label>
+                </value>
+                <value>
+                    <fullName>Community Hall / Clubhouse</fullName>
+                    <default>false</default>
+                    <label>Community Hall / Clubhouse</label>
+                </value>
+                <value>
+                    <fullName>Roof / Terrace</fullName>
+                    <default>false</default>
+                    <label>Roof / Terrace</label>
+                </value>
+                <value>
+                    <fullName>Waste Collection</fullName>
+                    <default>false</default>
+                    <label>Waste Collection</label>
+                </value>
+                <value>
+                    <fullName>Garbage chute/Room</fullName>
+                    <default>false</default>
+                    <label>Garbage chute/Room</label>
+                </value>
+                <value>
+                    <fullName>Security Gates</fullName>
+                    <default>false</default>
+                    <label>Security Gates</label>
+                </value>
+                <value>
+                    <fullName>Lighting (Common Areas)</fullName>
+                    <default>false</default>
+                    <label>Lighting (Common Areas)</label>
+                </value>
+                <value>
+                    <fullName>Signage</fullName>
+                    <default>false</default>
+                    <label>Signage</label>
+                </value>
+                <value>
+                    <fullName>HVAC (Common Areas)</fullName>
+                    <default>false</default>
+                    <label>HVAC (Common Areas)</label>
+                </value>
+                <value>
+                    <fullName>Cleaning</fullName>
+                    <default>false</default>
+                    <label>Cleaning</label>
+                </value>
+                <value>
+                    <fullName>Pest Control</fullName>
+                    <default>false</default>
+                    <label>Pest Control</label>
+                </value>
+                <value>
+                    <fullName>Fire &amp; Life Safety Systems</fullName>
+                    <default>false</default>
+                    <label>Fire &amp; Life Safety Systems</label>
+                </value>
+                <value>
+                    <fullName>Invoices</fullName>
+                    <default>false</default>
+                    <label>Invoices</label>
+                </value>
+                <value>
+                    <fullName>Statement of account</fullName>
+                    <default>false</default>
+                    <label>Statement of account</label>
+                </value>
+                <value>
+                    <fullName>Payments</fullName>
+                    <default>false</default>
+                    <label>Payments</label>
+                </value>
+                <value>
+                    <fullName>Community management</fullName>
+                    <default>false</default>
+                    <label>Community management</label>
+                </value>
+                <value>
+                    <fullName>Security</fullName>
+                    <default>false</default>
+                    <label>Security</label>
+                </value>
+                <value>
+                    <fullName>Facility Management</fullName>
+                    <default>false</default>
+                    <label>Facility Management</label>
+                </value>
+                <value>
+                    <fullName>Rectification Quality</fullName>
+                    <default>false</default>
+                    <label>Rectification Quality</label>
+                </value>
+                <value>
+                    <fullName>Complaint against Engineer/Technion</fullName>
+                    <default>false</default>
+                    <label>Complaint against Engineer/Technion</label>
+                </value>
+                <value>
+                    <fullName>Inconsistent Communication</fullName>
+                    <default>false</default>
+                    <label>Inconsistent Communication</label>
+                </value>
+                <value>
+                    <fullName>Defect rectification delay</fullName>
+                    <default>false</default>
+                    <label>Defect rectification delay</label>
+                </value>
+                <value>
+                    <fullName>Repetitive request</fullName>
+                    <default>false</default>
+                    <label>Repetitive request</label>
+                </value>
+                <value>
+                    <fullName>Design Complaint</fullName>
+                    <default>false</default>
+                    <label>Design Complaint</label>
+                </value>
+                <value>
+                    <fullName>Poor knowledge</fullName>
+                    <default>false</default>
+                    <label>Poor Knowledge</label>
+                </value>
+                <value>
+                    <fullName>Request Closed Without Resolution</fullName>
+                    <default>false</default>
+                    <label>Request Closed Without Resolution</label>
+                </value>
+                <value>
+                    <fullName>Incorrect Defect Assessment</fullName>
+                    <default>false</default>
+                    <label>Incorrect Defect Assessment</label>
+                </value>
+                <value>
+                    <fullName>Dispute Over DLP Coverage</fullName>
+                    <default>false</default>
+                    <label>Dispute Over DLP Coverage</label>
+                </value>
+                <value>
+                    <fullName>Missed Inspection Appointment</fullName>
+                    <default>false</default>
+                    <label>Missed Inspection Appointment</label>
+                </value>
+                <value>
+                    <fullName>Contractor No-Show</fullName>
+                    <default>false</default>
+                    <label>Contractor No-Show</label>
+                </value>
+                <value>
+                    <fullName>Delay in Material or Spare Parts</fullName>
+                    <default>false</default>
+                    <label>Delay in Material or Spare Parts</label>
+                </value>
+                <value>
+                    <fullName>Damage Caused During Rectification</fullName>
+                    <default>false</default>
+                    <label>Damage Caused During Rectification</label>
+                </value>
+                <value>
+                    <fullName>Cleaning Required After Rectification</fullName>
+                    <default>false</default>
+                    <label>Cleaning Required After Rectification</label>
+                </value>
+                <value>
+                    <fullName>Complaint against Technion</fullName>
+                    <default>false</default>
+                    <label>Complaint against Technion</label>
+                </value>
+                <value>
+                    <fullName>Delay in resolution from BFM</fullName>
+                    <default>false</default>
+                    <label>Delay in resolution from BFM</label>
+                </value>
+                <value>
+                    <fullName>Delay in response from BFM</fullName>
+                    <default>false</default>
+                    <label>Delay in response from BFM</label>
+                </value>
+                <value>
+                    <fullName>Delay in Response</fullName>
+                    <default>false</default>
+                    <label>Delay in response</label>
+                </value>
+                <value>
+                    <fullName>Broker Enquiry</fullName>
+                    <default>false</default>
+                    <label>Broker Enquiry</label>
+                </value>
+                <value>
+                    <fullName>Handover</fullName>
+                    <default>false</default>
+                    <label>Handover</label>
+                </value>
+                <value>
+                    <fullName>Upgrade</fullName>
+                    <default>false</default>
+                    <label>Upgrade</label>
+                </value>
+                <value>
+                    <fullName>Downgrade</fullName>
+                    <default>false</default>
+                    <label>Downgrade</label>
+                </value>
+                <value>
+                    <fullName>Cancellation</fullName>
+                    <default>false</default>
+                    <label>Cancellation</label>
+                </value>
+                <value>
+                    <fullName>Cancellation Checklist</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Cancellation Checklist</label>
+                </value>
+                <value>
+                    <fullName>Case Process</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Case Process</label>
+                </value>
+                <value>
+                    <fullName>Delay in resolution</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Delay in resolution</label>
+                </value>
+                <value>
+                    <fullName>Employee code of conduct</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Employee code of conduct</label>
+                </value>
+                <value>
+                    <fullName>SLA Breached</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>SLA Breached</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Service Action</label>
+    <listViews>
+        <fullName>Bloom_Broker_Management_BBM_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Bloom Broker Management (BBM)</label>
+        <queue>Bloom_Broker_Management_BBM</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>CRM_Queue_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>CRM Queue</label>
+        <queue>CRM_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Collection_Team_Queue_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Collection Team</label>
+        <queue>Collection_Team_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Finance_Team_Queue_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Finance Team Queue</label>
+        <queue>Finance_Team_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Government_Relation_Queue_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Government Relation Team</label>
+        <queue>Government_Relation_Team</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Collection_Team_Queue_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Handover Collection Team Queue</label>
+        <queue>Handover_Collection_Team_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Finance_Queue_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Handover Finance Queue</label>
+        <queue>Handover_Finance_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Government_Relations_Queue_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Handover Government Relations Queue</label>
+        <queue>Handover_Government_Relations_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Leasing_Team_Queue_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Handover Leasing Team Queue</label>
+        <queue>Handover_Leasing_Team_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Operation_Team_Queue_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Handover Operation Team Queue</label>
+        <queue>Handover_Operation_Team_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Handover_Treasury_Queue_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Handover Treasury Queue</label>
+        <queue>Handover_Treasury_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Leasing_Finance_queue_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Leasing Finance queue</label>
+        <queue>Leasing_Finance_queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Legal_Team_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Legal Team</label>
+        <queue>Legal_Team</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Operation_Team_Queue_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Operation Team Queue</label>
+        <queue>Operation_Team_Queue</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Operation_Team_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Operation Team</label>
+        <queue>Operation_Team</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Super_App_KYC_SR_Operation_Team_Assignme_ServiceAction</fullName>
+        <filterScope>Queue</filterScope>
+        <label>Super App KYC SR Operation Team</label>
+        <queue>Super_App_KYC_SR_Operation_Team</queue>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <label>Service Action Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Service Actions</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

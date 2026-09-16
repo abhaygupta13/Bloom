@@ -41,8 +41,6 @@ public class ContactServiceTest {
         cs.updateContactsWithoutTrigger(contactList);
         cs.updateContacts(contactList);
         cs.getContactByAccountId(acc.id);
-        cs.getContactByAccountIds(new Set<Id>{acc.id});
-        cs.getContactByEmail(new Set<String>{'coneamil0@email.com'});
         lstContacts = cs.getContactByEmails(new Set<String>{'coneamil0@email.com'});
         System.assertEquals(lstContacts[0].Email ,  'coneamil0@email.com' , 'Error in finding Contacts by Email');
         for(Contact objContact : contactList){

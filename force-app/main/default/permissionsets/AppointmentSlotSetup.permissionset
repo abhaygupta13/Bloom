@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>AppointmentController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <description>Required access for Appointment slot</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Appointment Slot Setup</label>
+</PermissionSet>

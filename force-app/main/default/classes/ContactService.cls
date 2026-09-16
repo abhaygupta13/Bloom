@@ -80,8 +80,12 @@ public inherited sharing class ContactService {
         return [ SELECT Id, FirstName, MiddleName, LastName, Email, PassportNumber__c, Emirates_Id__c, EID_Expiry_Date__c, Name,Phone FROM Contact WHERE accountID = :accountId ORDER BY CreatedDate ASC];
     }
     
+    public List<Contact> getActiveBrokerContactByAccountId(Id accountId, List<String> brokerContactRole) {
+        return [ SELECT Id, FirstName, MiddleName, LastName, Email, PassportNumber__c, Emirates_Id__c, EID_Expiry_Date__c, Name,Phone FROM Contact WHERE accountID = :accountId AND IsActive__c = true AND BrokerContactRole__c IN: brokerContactRole ORDER BY CreatedDate ASC];
+    }
+    
     public List<Contact> getActiveContactByAccountId(Set <Id> accountId) {
-        return [SELECT Id, FirstName,AccountId,MiddleName, LastName, Email, PassportNumber__c, Emirates_Id__c, EID_Expiry_Date__c, Name,Phone,IsActive__c FROM Contact WHERE accountID = :accountId AND IsActive__c = true];
+        return [SELECT Id, FirstName, AccountId, MiddleName, LastName, Email, PassportNumber__c, Emirates_Id__c, EID_Expiry_Date__c, Name,Phone,IsActive__c FROM Contact WHERE accountID = :accountId AND IsActive__c = true];
     }
     
     public List<Contact> getContactByIds(List<Id> ContactIds) {
@@ -89,7 +93,8 @@ public inherited sharing class ContactService {
     }
     
     public Contact getContactById(Id ContactId) {
-        return [SELECT id, MobilePhone, PassportExpiryDate__c, BRN_RERA_Expiry_Date__c, BrokerContactRole__c, FirstName, LastName, Name, Email, PrimaryMobilePhone__c, Account.TypeOfEstablishment__c, PassportNumber__c, Emirates_Id__c, Account.Name, EID_Expiry_Date__c, AccountId, MobileCountryCode__c FROM Contact WHERE Id = :ContactId];
+        return [SELECT id, MobilePhone, NationalIdExpiryDate__c, PassportExpiryDate__c, BRN_RERA_Expiry_Date__c, BrokerContactRole__c, FirstName, LastName, Name, Email, PrimaryMobilePhone__c, Account.TypeOfEstablishment__c,
+         PassportNumber__c, Emirates_Id__c, Account.Name, EID_Expiry_Date__c, AccountId, MobileCountryCode__c, HomePhone, OtherPhone FROM Contact WHERE Id = :ContactId];
     }
     
     public List<Contact> getContactByAccountIdNReceiveInvoiceCommunication(Set<Id> accIdSet){
@@ -113,8 +118,8 @@ public inherited sharing class ContactService {
     //BAPP : 
     public Map<Id, Contact> getContactsByIds(Set<Id> contactIds) {
         return new Map<Id, Contact>(
-            [SELECT Id, Email, Name, BrokerContactRole__c, AccountId,
-             MobilePhone, HomePhone, OtherPhone, SecondaryEmail__c, TertiaryEmail__c
+            [SELECT Id, Email, Name, BrokerContactRole__c, AccountId, Account.NameinArabic__c,
+             MobilePhone, HomePhone, OtherPhone, SecondaryEmail__c, TertiaryEmail__c,PrimaryMobilePhone__c,MobileCountryCode__c
              FROM Contact WHERE Id IN :contactIds]
         );
     }
@@ -165,7 +170,7 @@ public inherited sharing class ContactService {
     
     // BAPP Fetch Contacts By Ids - Static Method
     public static Map<Id, Contact> fetchContactsByIds(Set<Id> contactIds) {
-        return new Map<Id, Contact>([SELECT Id, RecordTypeId, BrokerContactRole__c,EID_Expiry_Date__c, PassportExpiryDate__c, CaseId__c, BRN_RERA_Expiry_Date__c, AccountId FROM Contact WHERE Id IN :contactIds]);
+        return new Map<Id, Contact>([SELECT Id, RecordTypeId, BrokerContactRole__c, NationalIdExpiryDate__c, PassportExpiryDate__c, CaseId__c, BRN_RERA_Expiry_Date__c, AccountId FROM Contact WHERE Id IN :contactIds]);
     }
     
     // BAPP Update Contact
@@ -174,23 +179,11 @@ public inherited sharing class ContactService {
             update contactList;
         }
     }
-    
     //BAPP
     public List<Contact> getContactsByNationalIds(Set<String> nationalIds, Set<Id> accountIds) {
         if (nationalIds == null || nationalIds.isEmpty()) {
             return new List<Contact>();
         }
-        return [SELECT Id,Emirates_Id__c, AccountId,PassportNumber__c FROM Contact WHERE Emirates_Id__c IN :nationalIds AND AccountId IN :accountIds];
-    }
-    public List<Contact> getContactByAccountIds(Set <Id> accountId) {
-        return [SELECT Id, AccountId,FirstName, MiddleName, LastName, Email, PassportNumber__c,IsSuspended__c, Emirates_Id__c, EID_Expiry_Date__c, Name,Phone,IsActive__c FROM Contact WHERE accountID = :accountId];
-    }
-
-    public List<Contact> getPrimaryContactsByAccountIds(Set<Id> accountIds) {
-        return [
-            SELECT Id, Email, Phone, MobilePhone, Name, AccountId
-            FROM Contact
-            WHERE AccountId in :accountIds AND PrimaryContact__c = TRUE
-        ];
+        return [SELECT Id, NationalIdNumber__c, AccountId FROM Contact WHERE NationalIdNumber__c IN :nationalIds AND AccountId IN :accountIds];
     }
 }

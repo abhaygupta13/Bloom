@@ -6,10 +6,10 @@ Test Class  : ProjectServiceTest
 Created Date: 29 AUG 2024
 *****************************************************************************************/
 public inherited sharing class ProjectService {
-    
     private static ProjectService instance;
     
     private ProjectService() {}
+    
     public static ProjectService getInstance() { 
         if(instance == null) {
             instance = new ProjectService();
@@ -18,17 +18,12 @@ public inherited sharing class ProjectService {
     }
     
     public  List<Project__c> fetchProjects(Boolean isEnableMIP){
-        
         String query = 'SELECT Name, Community_Image_Url__c FROM Project__c WHERE isEnabledMIP__c=true';
-        
         /*if (isEnableMIP != null && isEnableMIP) {
 query += ' WHERE isEnabledMIP__c=true';
 }
 */
-        
-        
         return Database.query(query);
-        
     }
     
     public  List<Project__c> getCommunityAppProjects(){
@@ -63,7 +58,6 @@ query += ' WHERE isEnabledMIP__c=true';
         return projectList;
     }
     
-    
     public List<Project__c> getProjects(){
         return [SELECT Id, Name, ProjectNameArabic__c FROM Project__c WHERE IsAvailableForSales__c = true ORDER BY Name];
     }
@@ -71,8 +65,9 @@ query += ' WHERE isEnabledMIP__c=true';
     public List<Project__c> getActiveProjects(){
         return [SELECT Id, Name FROM Project__c WHERE IsActive__c = true  WITH SECURITY_ENFORCED ORDER BY Name];
     }
+    
     public Project__c getProjectDetailsWithUnitsAndDocuments(String projectRecordId, String salesOrderStatus, String documentName){
-        return [SELECT Id, Name, ProjectRegistrationDate__c, ProjectRegistrationRemark__c, ProjectRegistrationNumber__c,
+        return [SELECT Id, Name, ProjectRegistrationDate__c, ProjectRegistrationRemark__c,ProjectRegistrationNumber__c,
                 (SELECT Id, Name, RegistrationDate__c, Active_Sales_Order__c, ADM_Fee_Included__c, Active_Sales_Order__r.Name, Active_Sales_Order__r.SoldDate__c, 
                  Status__c, Active_Sales_Order__r.UnitRegistrationDate__c, Active_Sales_Order__r.DocumentUploadedDate__c, ADMPlotNumber__c,
                  Active_Sales_Order__r.FundMovedToGRDate__c, Active_Sales_Order__r.ADM_Fee_Included__c,Active_Sales_Order__r.Status__c
@@ -91,7 +86,7 @@ WHERE ContentDocumentId__c != null AND DocumentType__c != null AND Document_Name
                  Active_Sales_Order__r.FundMovedToGRDate__c, Active_Sales_Order__r.ADM_Fee_Included__c, Active_Sales_Order__r.Status__c, Active_Sales_Order__r.ADMFeeAmount__c, Active_Sales_Order__r.FundMovedtoGR__c,
                  Active_Sales_Order__r.ADM_Fee_Cleared_Amount__c, Active_Sales_Order__r.ADMFeeWaivedAmount__c
                  FROM UnitsProject__r 
-                 WHERE Active_Sales_Order__c != null AND Active_Sales_Order__r.Status__c = :salesOrderStatus AND Active_Sales_Order__r.FundReleaseRequested__c = TRUE AND Active_Sales_Order__r.FundMovedToGRDate__c = null)
+                 WHERE Active_Sales_Order__c != null AND Active_Sales_Order__r.Status__c = :salesOrderStatus AND Active_Sales_Order__r.FundMovedtoGR__c != 'Completed' AND Active_Sales_Order__r.FundReleaseRequested__c = TRUE)
                 FROM Project__c 
                 WHERE Id = :projectRecordId];
     }
@@ -110,6 +105,7 @@ WHERE ContentDocumentId__c != null AND DocumentType__c != null AND Document_Name
     public List<Project__c> getProjectsNBankAccounts(Set<Id> projectIdList){
         return [SELECT Id, Name,(SELECT Id,Name,BankNameCorporate__c,AccountNumberCorporate__c,IBANNoCorporate__c,SwiftCodeCorporate__c,Primary_for_Installment__c,Type__c FROM Bank_Accounts1__r) FROM Project__c WHERE Id IN:projectIdList];
     }
+    
     public List<Project__c> getLeasingProjects(){
         return [SELECT id,Name,EjariTawtheeqFee__c,AdminFee__c,SecurityDeposit__c,LeasingApartmentSecurityDepositAmount__c,
                 LeasingVillaSecurityDepositAmount__c,Leasing_Company__r.LeasingSAPCompanyCode__c,
@@ -123,15 +119,20 @@ WHERE ContentDocumentId__c != null AND DocumentType__c != null AND Document_Name
             FROM Project__c
             WHERE Id IN :projectIds
         ];
-    }
+    }    
     
     public List<Project__c>getAvailableHandoverProject() {
         return [SELECT id,Name FROM Project__c where isHandoverAvailable__c=true];
-    }
+    } 
     
     //prashant
     public Project__c getADHAProjectById(String adhaProjectId){
         Project__c objProject = [ SELECT Id, Name, ADHAProjectID__c FROM Project__c WHERE ADHAProjectID__c = :adhaProjectId LIMIT 1 ];
         return objProject;
+    }
+    
+    public Project__c getProjectForUnitRegistration(String projectRecordId){
+        return [SELECT Id, Name, ProjectRegistrationDate__c, ProjectRegistrationRemark__c, ProjectRegistrationNumber__c
+                FROM Project__c WHERE Id = :projectRecordId];
     }
 }

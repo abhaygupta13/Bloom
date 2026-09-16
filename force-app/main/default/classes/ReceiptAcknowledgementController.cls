@@ -20,8 +20,6 @@ public class ReceiptAcknowledgementController {
             ReceiptAcknowledgement__c objReceiptAcknowledgement = new ReceiptAcknowledgement__c(Id = recordId, Finance_Verified__c = true, VerifyBy__c = UserInfo.getUserId(), VerifyDate__c = System.Today());
             objReceiptAcknowledgementService.updateReceiptAcknowledgement(objReceiptAcknowledgement);
         }catch(System.exception ex){
-            System.debug(ex.getStackTraceString());
-            System.debug(ex.getLineNumber());
             throw new AuraHandledException(ex.getMessage());
         }
     }

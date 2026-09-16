@@ -74,21 +74,20 @@ public with sharing class LeasingOfferLetterGenerateController {
     public Map<String, List<LeasingPaymentScheduleWrapper>> paymentsByYear { get; set; }
     
     public LeasingOfferLetterGenerateController(ApexPages.StandardController controller) {
-        System.debug('77 LeasingOfferLetterGenerateController init StandardController :- ' + controller.getId());
+        
         this.leaseContract = (LeasingOrder__c) controller.getRecord();
         if (leaseContract != null) {
             LeasingOrderService leasingOrderService = LeasingOrderService.getInstance();
             this.leaseContract =leasingOrderService.getLeasingOrderById(this.leaseContract.Id);
-            System.debug('83 LeasingOfferLetterGenerateController leaseContract :- ' + this.leaseContract.Id + ' ' + this.leaseContract.Name + ' months ' + leaseContract.LeasingContractMonths__c);
             OfferDate = System.today().format(); // Format the current date 
             isMultiyearContract = leaseContract.LeasingContractMonths__c > 12 ? true : false ;
             Decimal vatPercentage = leaseContract.Unit__r?.Project__r?.Leasing_Company__r?.LeasingVAT__c ?? 0.0 ;
-            if (vatPercentage != null && vatPercentage.scale() > 0 && vatPercentage.stripTrailingZeros().scale() > 0) {
+            if (vatPercentage.scale() > 0 && vatPercentage.stripTrailingZeros().scale() > 0) {
                 // Has decimal places
                 vatPercentageStr = vatPercentage + SYMBOL_MODULUS;
             } else {
                 // No decimal part (whole number)
-                vatPercentageStr = String.valueOf(vatPercentage?.intValue()) + SYMBOL_MODULUS;
+                vatPercentageStr = String.valueOf(vatPercentage.intValue()) + SYMBOL_MODULUS;
             }
             
             Decimal securityDepositPercentage = leaseContract.Unit__r.Project__r.SecurityDeposit__c ;
@@ -113,16 +112,13 @@ public with sharing class LeasingOfferLetterGenerateController {
                 corporateCompanyName = opp.Account.Name ;
                 corporateContactName = con.Name;
                 accountType = opp.Account.Recordtype.DeveloperName ;
-                System.debug('105 LeasingOfferLetterGenerateController opp :- ' + leaseContract.Opportunity__c + ' AccountType: ' + accountType);
                 Decimal appliedAnnualRenPersqm = leaseContract.RentalAmountAfterDiscount__c/leaseContract.Unit__r?.LeasingUnitSizesqm__c ;
                 annualRentpersqm = leaseContract.CurrencyIsoCode +' '+ formatDecimalWithCommas(appliedAnnualRenPersqm) ;
-                SecurityDeposit = leaseContract.CurrencyIsoCode +' '+ formatDecimalWithCommas(leaseContract.SecurityDeposit__c) ; 
 
-              //  SecurityDeposit = leaseContract.CurrencyIsoCode +' '+ formatDecimalWithCommas(leaseContract.SecurityDeposit__c != null ? leaseContract.SecurityDeposit__c : 0 ) ; 
+                SecurityDeposit = leaseContract.CurrencyIsoCode +' '+ formatDecimalWithCommas(leaseContract.SecurityDeposit__c) ; 
                 Decimal adminFeewithVat = leaseContract.AdminFee__c + (leaseContract.AdminFee__c*vatPercentage)/100 ;
-                System.debug('122 LeasingOfferLetterGenerateController adminFeewithVat :- ' + adminFeewithVat);
                 AdminFee = leaseContract.CurrencyIsoCode +' '+formatDecimalWithCommas(leaseContract.AdminFee__c)+' + '+
-                     leaseContract.CurrencyIsoCode +' '+formatDecimalWithCommas( (leaseContract.AdminFee__c*vatPercentage)/100)+ ' = '+leaseContract.CurrencyIsoCode +' '+formatDecimalWithCommas(adminFeewithVat) ;
+                    leaseContract.CurrencyIsoCode +' '+formatDecimalWithCommas( (leaseContract.AdminFee__c*vatPercentage)/100)+ ' = '+leaseContract.CurrencyIsoCode +' '+formatDecimalWithCommas(adminFeewithVat) ;
                 
                 annualRentWithOutVAT =leaseContract.CurrencyIsoCode +' '+ formatDecimalWithCommas(leaseContract.RentalAmountAfterDiscount__c) ; 
                 annualRentVAT =leaseContract.CurrencyIsoCode +' '+ formatDecimalWithCommas(leaseContract.AnnualRentVATAmount__c) ; 
@@ -305,27 +301,28 @@ public with sharing class LeasingOfferLetterGenerateController {
      public static String generateSRNumber(LeasingOrder__c leasingOrder) {
         if (leasingOrder == null) return null;
        
-         // --- 1️⃣ Extract needed fields ---
-        String leaseTypeChar = leasingOrder.LeaseType__c == 'Renewal' ? 'R' : 'N';
-        String sapCompanyCode = leasingOrder.Project__r?.Leasing_Company__r?.LeasingSAPCompanyCode__c != null ? String.valueOf(leasingOrder.Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c) : '';
-       // --- 2️⃣ Get last 5 digits of LeasingOrderNumber__c ---
-        String orderNumStr = String.isNotBlank(leasingOrder.LeasingOrderNumber__c) ? leasingOrder.LeasingOrderNumber__c : (leasingOrder.Name != null ? leasingOrder.Name : '');
-        String digitsOnly = orderNumStr.replaceAll('\\D', '');
-        String last5Digits = '';
-        if (String.isNotBlank(digitsOnly)) {
-            last5Digits = digitsOnly.length() >= 5 ? digitsOnly.substring(digitsOnly.length() - 5) : digitsOnly.leftPad(5, '0');
-        } else {
-            last5Digits = orderNumStr.length() >= 5 ? orderNumStr.right(5) : orderNumStr.leftPad(5, '0');
-        }
-        // --- 3️⃣ Assemble final SR Number using Lease Start Date year ---
-        Integer srYear = leasingOrder.LeasingStartDate__c != null 
-            ? leasingOrder.LeasingStartDate__c.year() 
-            : (leasingOrder.CreatedDate != null ? leasingOrder.CreatedDate.year() : Date.today().year());
+        // --- 1️⃣ Extract needed fields ---
+        String customerTypeChar = leasingOrder.Unit__r.PropertyUsage__c == 'residential' ? 'R' : 'C';
+
+        String unitNumber = String.valueOf(leasingOrder.Building__r.BuildingNumber__c)?.substring(0, 3) ?? '000' ;
+
+        // --- 2️⃣ Determine next sequence number ---
+        Integer count = [SELECT COUNT() 
+                         FROM LeasingOrder__c 
+                         WHERE Project__c = :leasingOrder.Project__c];
+
+        Integer nextNum = count + 1;
+
+        // --- 3️⃣ Format last digits with leading zeros ---
+        String paddedNum = String.valueOf(nextNum).leftPad(3, '0');
+
+        // --- 4️⃣ Assemble final SR Number ---
         String srNumber = 'SR: ' + 
-            String.valueOf(srYear) + '/' + 
-            leaseTypeChar + '/' + 
-            sapCompanyCode + '/' + 
-            last5Digits;
+            String.valueOf(Date.today().year()) + '/' +
+            customerTypeChar + '/' + 
+            unitNumber + '/' + 
+            paddedNum;
+
         return srNumber;
     }
     public class LeasingPaymentScheduleWrapper {

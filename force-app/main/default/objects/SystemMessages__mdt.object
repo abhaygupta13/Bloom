@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Metadata to maintain all the validation and error messages in the system</description>
+    <fields>
+        <fullName>LongMessage__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>LongMessage</label>
+        <length>32768</length>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>MergeFieldsToReplace__c</fullName>
+        <description>To add the merge field that&apos;s need to replace inside apex.</description>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Merge Fields To Replace</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Message__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <inlineHelpText>Message to be shown to the user</inlineHelpText>
+        <label>Message</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <label>System Messages</label>
+    <pluralLabel>System Messages</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -50,7 +50,6 @@ public class LeasingOfferHandler implements Queueable,Database.AllowsCallouts {
     
     public static void generateApprovedLeasingOffer(Set<Id> contractIds)
     {
-        System.debug('51 generateApprovedLeasingOffer :- ' + contractIds);
         LeasingOrderService leasingService = LeasingOrderService.getInstance();
         
         Map<Id, LeasingOrder__c> contractMap = new Map<Id, LeasingOrder__c>(leasingService.getLeasingOrdersByIds(contractIds));
@@ -67,23 +66,17 @@ public class LeasingOfferHandler implements Queueable,Database.AllowsCallouts {
             LeasingOrder__c contract = contractMap.get(contractId);
             Document__c doc = docMap.get(contractId);
             PageReference pdfPage ;
-            System.debug('AJ::'+contractId);
-            System.debug('AJ::'+contract.Account__r.Recordtype.DeveloperName);
-            System.debug('65 generateApprovedLeasingOffer contract :- ' + contractId + ' ' + (contract != null ? contract.Unit__r?.PropertyUsage__c : 'null') + ' ' + (doc != null ? doc.Id : 'null'));
             // if(contract.Unit__r.PropertyUsage__c == COMMERCIAL_TYPE && contract.Account__r.Recordtype.DeveloperName == ORGANIZATION_ACCOUNT ){
             if(contract.Unit__r.PropertyUsage__c == COMMERCIAL_TYPE){
               
                 pdfPage = Page.LeasingCommercialOffer;
             // }else if(contract.Unit__r.PropertyUsage__c == RESIDENTIAL_TYPE && contract.Account__r.Recordtype.DeveloperName == PERSON_ACCOUNT){
             }else if(contract.Unit__r.PropertyUsage__c == RESIDENTIAL_TYPE){
-               
                 pdfPage = Page.LeasingResidentialOffer;
             }else {
-                System.debug('80 generateApprovedLeasingOffer skipped usage :- ' + (contract != null ? contract.Unit__r?.PropertyUsage__c : 'null'));
                 return ;
             }
             pdfPage.getParameters().put('id', contractId);
-            System.debug('83 generateApprovedLeasingOffer page :- ' + pdfPage.getUrl());
             Blob pdfBlob;
             if(!Test.isRunningTest()){
                 pdfBlob = pdfPage.getContent();
@@ -96,11 +89,9 @@ public class LeasingOfferHandler implements Queueable,Database.AllowsCallouts {
             file.PathOnClient = contract.Opportunity__r.Account.Name + '_OfferLetter.pdf';
             file.VersionData = pdfBlob;
             if(!test.isRunningTest()){file.FirstPublishLocationId = doc.Id;}
-            System.debug('95 generateApprovedLeasingOffer file title :- ' + file.Title + ' size ' + (pdfBlob != null ? pdfBlob.size() : 0));
             filesToInsert.add(file);
         }
         
-        System.debug('100 generateApprovedLeasingOffer inserting files...');
         ContentService conService = ContentService.getInstance();
         conService.createContentVersion(filesToInsert);
     }

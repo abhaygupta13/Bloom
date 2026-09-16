@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <doesSendEmailToMembers>true</doesSendEmailToMembers>
+    <name>Handover Leasing Team Queue</name>
+    <queueMembers>
+        <users>
+            <user>alopez@bloomholding.com</user>
+            <user>falissa@bloomholding.com</user>
+            <user>ialjabri@bloomholding.com</user>
+            <user>nwazir123@bloomholding.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>DocumentType__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>HandoverPhase__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Handover__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>ServiceAction__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Task</sobjectType>
+    </queueSobject>
+</Queue>

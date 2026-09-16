@@ -102,45 +102,20 @@ public class BAPPGetTeamMembersHandler {
         List<Contact> contactList = [
             SELECT Id, FirstName, MiddleName, LastName, Title, BrokerContactRole__c,Phone,
                    MobilePhone, Email, PassportNumber__c, PassportExpiryDate__c,
-                   Emirates_Id__c, EID_Expiry_Date__c, ShareHoldingPercentage__c,
+                   NationalIdNumber__c, NationalIdExpiryDate__c, ShareHoldingPercentage__c,
                    Designation__c, TypeofEstablishment__c, CountryOfResidence__c,PrimaryMobilePhone__c,
                    Birthdate, IsActive__c, PrimaryMobileCountryCode__c, LastModifiedDate,
-                   IsSuspended__c, Blacklisted__c, BRN_RERA_Expiry_Date__c, BRN_RERA_Number__c,CaseId__c
-            FROM Contact WHERE AccountId = :accountId And IsHiddenFromPortal__c = false
+                   IsSuspended__c, Blacklisted__c, BRN_RERA_Expiry_Date__c, BRN_RERA_Number__c
+            FROM Contact WHERE AccountId = :accountId And IsHiddenFromPortal__c = false 
         ];
-        // Filter contacts by Case Origin
-        Set<Id> caseIdsForContacts = new Set<Id>();
-        for (Contact con : contactList) {
-            if (con.CaseId__c != null) {
-                try {
-                    caseIdsForContacts.add((Id) con.CaseId__c);
-                } catch (Exception e) {
-                    
-                }
-            }
-        }
-        
-        Set<Id> portalCaseIds = new Set<Id>();
-        if (!caseIdsForContacts.isEmpty()) {
-            for (Case c : [SELECT Id FROM Case WHERE Id IN :caseIdsForContacts AND Origin = 'Portal']) {
-                portalCaseIds.add(c.Id);
-            }
-        }
-        
-        List<Contact> conList = new List<Contact>();
-        for (Contact con : contactList) {
-            if (con.CaseId__c == null || portalCaseIds.contains((Id) con.CaseId__c)) {
-                conList.add(con);
-            }
-        }
     
         List<Case> caseList = [
             SELECT Id, Email_Address__c, PhoneNumber__c, FullName__c, Title__c, First_Name__c, MiddleName__c, Last_Name__c,
-                   NationalID__c, NationalIDExpiryDate__c, DateOfBirth__c, ShareHoldingPercentage__c,Draft__c,
+                   NationalID__c, NationalIDExpiryDate__c, DateOfBirth__c, ShareHoldingPercentage__c,
                    Designation__c, BrokerContactRole__c, Country__c, PassportNumber__c,Mobile_Country_Code__c,
                    PassportExpiryDate__c, CaseNumber, TypeofEstablishment__c,
                    LastModifiedDate, ApprovalStatus__c, BRN_RERA_Expiry_Date__c, BRN_RERA_Number__c
-            FROM Case WHERE AccountId = :accountId AND RecordType.DeveloperName = 'BrokerAgentRegistrationAndUpdate' And Origin = 'Portal' AND SubType__c = 'Broker New Agent Registration'
+            FROM Case WHERE AccountId = :accountId AND RecordType.Name = 'Broker Registration'
         ];
     
         // Collect all parent IDs
@@ -189,8 +164,8 @@ public class BAPPGetTeamMembersHandler {
             u.phoneNumber = c.PrimaryMobilePhone__c;
             u.passportNumber = c.PassportNumber__c;
             u.passportExpiryDate = c.PassportExpiryDate__c; 
-            u.nationalId = c.Emirates_Id__c;
-            u.nationalIdExpiryDate = c.EID_Expiry_Date__c;
+            u.nationalId = c.NationalIdNumber__c;
+            u.nationalIdExpiryDate = c.NationalIdExpiryDate__c;
             u.shareHoldingPercentage = (c.ShareHoldingPercentage__c != null ? Integer.valueOf(c.ShareHoldingPercentage__c) : null);
             u.designation = c.Designation__c;
             u.typeOfEstablishment = c.TypeofEstablishment__c;
@@ -237,15 +212,10 @@ public class BAPPGetTeamMembersHandler {
             u.brnOrReraNumber = cs.BRN_RERA_Number__c;
             u.brnOrReraExpiryDate = cs.BRN_RERA_Expiry_Date__c;
             u.role = cs.BrokerContactRole__c;
-            if(cs.Draft__c == true){
-                u.approvalStatus = 'Draft';
-            }else{
-                u.approvalStatus = cs.ApprovalStatus__c;
-            }
+            u.approvalStatus = cs.ApprovalStatus__c;
             u.isSuspended = null;
             u.blacklisted = null;
             u.isActive = null;
-            
     
             u.documents = docsMap.containsKey(cs.Id) ? docsMap.get(cs.Id) : new List<UserDocument>();
             resp.BrokerUsers.add(u);

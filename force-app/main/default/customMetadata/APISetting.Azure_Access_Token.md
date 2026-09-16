@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Azure Access Token</label>
+    <protected>false</protected>
+    <values>
+        <field>Authorization__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Client_Id__c</field>
+        <value xsi:type="xsd:string">297d615e-c78b-4ed0-8e54-08f869d1c5da</value>
+    </values>
+    <values>
+        <field>Client_Secret__c</field>
+        <value xsi:type="xsd:string">sfV8Q~JiMMDAljckbVAPQnT4zr9F1tnfvN.N6dgB</value>
+    </values>
+    <values>
+        <field>Endpoint__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Password__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Scope__c</field>
+        <value xsi:type="xsd:string">https://graph.microsoft.com/.default</value>
+    </values>
+    <values>
+        <field>URL__c</field>
+        <value xsi:type="xsd:string">https://login.microsoftonline.com/bloomprodb2c.onmicrosoft.com/oauth2/v2.0/token</value>
+    </values>
+    <values>
+        <field>httpMethod__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>pageRefURL__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

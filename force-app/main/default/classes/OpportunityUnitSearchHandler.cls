@@ -1045,6 +1045,7 @@ throw new AuraHandledException('Request for extension only once allowed');
                             // Antriksh -20/09/2024 for update adm fee include checkbox
                             for(SalesOfferUtilityHandler.PaymentInstallmentWrapper tempInstallmentLine : tempPaymentPlan.installmentDetails){
                                 InstallmentLines__c newInstallmentLine=  new InstallmentLines__c( 
+                                    SAP_Condition_Type__c = tempInstallmentLine.installmentRecord.Condition_Type__c,
                                     BrokerPayoutPercentage__c= tempInstallmentLine.installmentRecord.BrokerPayoutPercentage__c,
                                     Description__c= tempInstallmentLine.installmentRecord.Description__c,
                                     InstallmentNumber__c = tempInstallmentLine.installmentRecord.InstallmentNumber__c,

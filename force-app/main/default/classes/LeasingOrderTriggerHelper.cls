@@ -55,7 +55,7 @@ public class LeasingOrderTriggerHelper {
         List<Schema.FieldSetMember> sapFieldSetFields = Schema.SObjectType.LeasingOrder__c.fieldSets.getMap().get('SAP_Integration_Fields').getFields();
         ProjectService projService = ProjectService.getInstance();
         Map<Id, Project__c> projectByProjectIdMap = new Map<Id, Project__c>(ProjectService.getInstance().getLeasingProjects());
-        System.debug(sapFieldSetFields);
+        
         for(LeasingOrder__c contract  : newList ){
             if(oldMap == null){
                 contract.Status__c =  LEASING_STATUS_QUALIIED ;
@@ -78,6 +78,13 @@ public class LeasingOrderTriggerHelper {
                    && contract.IntegrationStatus__c == 'Success'){
                        contract.Status__c = LEASING_STATUS_LEASED;
                    }
+                   
+                // Added for Termination Amendment Requirement
+                if (oldMap.get(contract.Id).IntegrationStatus__c != contract.IntegrationStatus__c &&
+                    contract.IntegrationStatus__c == 'Success' &&
+                    contract.LeaseType__c == 'Termination') {
+                        contract.Status__c = 'Terminated';
+                }
             }
             contract.SAPCompanyCode__c = projectByProjectIdMap.containsKey(contract.Project__c) ?
                 projectByProjectIdMap.get(contract.Project__c).Leasing_Company__r.LeasingSAPCompanyCode__c : null ;
@@ -94,7 +101,6 @@ public class LeasingOrderTriggerHelper {
                 }
                 
                 Integer calcDays = fixedMonthEndDate.daysBetween(nextDayAfterEndDate);
-                contract.ContractPeriod__c = (calcDays > 0) ? (String.valueOf(calcMonths) + '.' + String.valueOf(calcDays)) : String.valueOf(calcMonths);
                 
                 // Set Bilingual Fields
                 String enText = '';
@@ -114,7 +120,6 @@ public class LeasingOrderTriggerHelper {
             }
         }
     }
-    
     
     public static void afterFieldUpdates(List<LeasingOrder__c> newList , Map<id,LeasingOrder__c> oldMap){
         List<Unit__c> unitListToUpdate =  new List<Unit__c>();
@@ -166,9 +171,8 @@ public class LeasingOrderTriggerHelper {
                    unitListToUpdate.add(cancelledUnit);
                    unitCountMap.put(contract.Project__c, unitCountMap.containsKey(contract.project__c) ? unitCountMap.get(contract.project__c)-1 : -1);
                }
-            if( ((oldMap?.get(contract.id).CustomerApprovalStatus__c != contract.CustomerApprovalStatus__c) ||
-                 (oldMap?.get(contract.id).BloomTeamApprovalStatus__c != contract.BloomTeamApprovalStatus__c)) &&
-               contract.CustomerApprovalStatus__c == APPROVAL_STATUS_APPROVED && contract.BloomTeamApprovalStatus__c == APPROVAL_STATUS_APPROVED
+            if( (oldMap?.get(contract.id).BloomTeamApprovalStatus__c != contract.BloomTeamApprovalStatus__c) &&
+               contract.BloomTeamApprovalStatus__c == APPROVAL_STATUS_APPROVED
               ){
                   contractsRegenOffSet.add(contract.Id);   
               }
@@ -209,19 +213,19 @@ public class LeasingOrderTriggerHelper {
             }
             
             if(oldMap != null &&
-               !oldMap.get(contract.Id).isLeasingContractSigned__c   &&
-               contract.isLeasingContractSigned__c  ){
+               !oldMap.get(contract.Id).isLeasingContractSigned__c  &&
+               contract.isLeasingContractSigned__c ){
                    
                    welcomeLetterIds.add(contract.Id);
                    
                }
         }
         
-        if (!welcomeLetterIds.isEmpty()) {
-            System.enqueueJob(
-                new WelcomeLetterQueueable(welcomeLetterIds)
-            );
-        }
+         if (!welcomeLetterIds.isEmpty()) {
+      System.enqueueJob(
+        new WelcomeLetterQueueable(welcomeLetterIds)
+      );
+    }
         
         if (!accountIdsToUpdate.isEmpty()) {
             List<Account> accountsToUpdate = new List<Account>();
@@ -304,7 +308,7 @@ AccountService.getInstance().updateAccounts(accountsToUpdate);
         if (!updatedLeasingOrderIds.isEmpty()) {
             sendLeasingOrderToSAPFromTrigger(updatedLeasingOrderIds);
         }
-        System.debug(leasingOrderIds);
+        
         if (!leasingOrderIds.isEmpty()) {
             LeasingOrderService LeasingOrderService = LeasingOrderService.getInstance();
             List<IntegrationRecord__c> integrationRecordsToInsert = new List<IntegrationRecord__c>();
@@ -524,44 +528,78 @@ AccountService.getInstance().updateAccounts(accountsToUpdate);
         }
     }
     
-    public static void createSalesEntries(List<LeasingOrder__c> leasingOrders) {
-        
-        List<SalesEntrie__c> salesEntries = new List<SalesEntrie__c>();
-        
-        for (LeasingOrder__c order : leasingOrders) {
-            
-            if (order.LeasingStartDate__c == null || order.LeasingEndDate__c == null || order.PropertyUsage__c != 'Retail') {
-                continue;
-            }
-            
-            Date currentMonth = Date.newInstance(
-                order.LeasingStartDate__c.year(),
-                order.LeasingStartDate__c.month(),
-                1
-            );
-            
-            Date endMonth = Date.newInstance(
-                order.LeasingEndDate__c.year(),
-                order.LeasingEndDate__c.month(),
-                1
-            );
-            
-            while (currentMonth <= endMonth) {
-                
-                salesEntries.add(new SalesEntrie__c(
-                    LeasingOrder__c = order.Id,
-                    Year__c = currentMonth.year(),
-                    Month__c = currentMonth.month()
-                ));
-                
-                currentMonth = currentMonth.addMonths(1);
-            }
-        }
-        
-        if (!salesEntries.isEmpty()) {
-            insert salesEntries;
+ public static void createSalesEntriesOnTORUpdate(
+    List<LeasingOrder__c> newList,
+    Map<Id, LeasingOrder__c> oldMap
+  ){
+    Set<Id> orderIds = new Set<Id>();
+    for(LeasingOrder__c order : newList){
+      
+      LeasingOrder__c oldOrder = oldMap.get(order.Id);
+      
+      if(order.TOR__c != oldOrder.TOR__c &&
+        order.TOR__c != null && order.TOR__c != 0 &&
+        order.LeasingStartDate__c != null &&
+        order.LeasingEndDate__c != null &&
+        (order.PropertyUsage__c == 'Retail' ||
+        order.PropertyUsage__c == 'Commercial')){
+          
+          orderIds.add(order.Id);
         }
     }
+    
+    if(orderIds.isEmpty()){
+      return;
+    }
+    Set<Id> existingOrderIds = new Set<Id>();
+    
+    for(SalesEntrie__c se : [
+      SELECT Id, LeasingOrder__c
+      FROM SalesEntrie__c
+      WHERE LeasingOrder__c IN :orderIds
+    ]){
+      existingOrderIds.add(se.LeasingOrder__c);
+    }
+    
+    List<SalesEntrie__c> salesEntries = new List<SalesEntrie__c>();
+    
+    for(LeasingOrder__c order : newList){
+      
+      if(!orderIds.contains(order.Id)){
+        continue;
+      }
+      if(existingOrderIds.contains(order.Id)){
+        continue;
+      }
+      
+      Date currentMonth = Date.newInstance(
+        order.LeasingStartDate__c.year(),
+        order.LeasingStartDate__c.month(),
+        1
+      );
+      
+      Date endMonth = Date.newInstance(
+        order.LeasingEndDate__c.year(),
+        order.LeasingEndDate__c.month(),
+        1
+      );
+      
+      while(currentMonth <= endMonth){
+        
+        salesEntries.add(new SalesEntrie__c(
+          LeasingOrder__c = order.Id,
+          Year__c = currentMonth.year(),
+          Month__c = currentMonth.month()
+        ));
+        
+        currentMonth = currentMonth.addMonths(1);
+      }
+    }
+    
+    if(!salesEntries.isEmpty()){
+      insert salesEntries;
+    }
+  }
     
     public static void adjustSalesEntries(
         List<LeasingOrder__c> newList,
@@ -659,7 +697,7 @@ AccountService.getInstance().updateAccounts(accountsToUpdate);
                     toInsert.add(new SalesEntrie__c(
                         LeasingOrder__c = order.Id,
                         Year__c = Integer.valueOf(parts[0]),
-                        Month__c = Decimal.valueOf(parts[1]) 
+                        Month__c = Decimal.valueOf(parts[1])
                     ));
                 }
             }

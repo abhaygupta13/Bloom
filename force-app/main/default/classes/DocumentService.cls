@@ -870,17 +870,6 @@ FROM Document__c WHERE BrokerApplication__c IN :parentIds
             WHERE LeasingOrder__c IN :leasingOrderIds
             AND Document_Name__c IN :documentList];
     }
-    
-    public List<Document__c> getCaseSignDocuments(Set<Id> caseIds, List<String> documentList){
-        return [SELECT Id, Case__c, Document_Name__c, ContentDocumentId__c, Content_Version_Id__c
-            FROM Document__c
-            WHERE Case__c IN :caseIds
-            AND Document_Name__c IN :documentList];
-    }
-    public List<Document__c> getAccountsDocuments(Set<Id> accountIds, List<String> documentList) {
-        return [SELECT Id, Name,Account__c, ContentDocumentId__c, DocumentType__r.Type__c, Content_Version_Id__c
-                FROM Document__c WHERE Account__c IN:accountIds and Document_Name__c IN :documentList];
-    }
    
     public List<DocumentType__c> getDocTypesByTypeNames(
         String objectType,
@@ -927,18 +916,6 @@ FROM Document__c WHERE BrokerApplication__c IN :parentIds
             AND Active__c = true
         ];
     }
-    
-    public Map<Id, Map<String, Document__c>>getSalesOrderDocumentsByTypes(Set<Id> salesOrderIds,List<String> documentTypes){
-        Map<Id, Map<String, Document__c>> result = new Map<Id, Map<String, Document__c>>();
-        for(Document__c doc : [SELECT Id,SalesOrder__c,ContentDocumentId__c,Content_Version_Id__c,FileName__c,DocumentType__r.Type__c
-                               FROM Document__c WHERE SalesOrder__c IN :salesOrderIds AND DocumentType__r.Type__c IN :documentTypes AND ContentDocumentId__c != null]){
-                                   if(!result.containsKey(doc.SalesOrder__c)){
-                                       result.put(doc.SalesOrder__c,new Map<String, Document__c>());
-                                   }
-                                   result.get(doc.SalesOrder__c).put(doc.DocumentType__r.Type__c, doc);
-                               }
-        return result;
-    }
 
     public Document__c getPaymentPlanDocumentByName(Id paymentPlanScheduleId,String docNames) {
         return [SELECT Id
@@ -954,5 +931,17 @@ FROM Document__c WHERE BrokerApplication__c IN :parentIds
             WHERE LeasingOrdersOtherCharges__c  = :ocId
             AND Document_Name__c = :docNames
             LIMIT 1];
+    }
+    
+    public Map<Id, Map<String, Document__c>>getSalesOrderDocumentsByTypes(Set<Id> salesOrderIds,List<String> documentTypes){
+        Map<Id, Map<String, Document__c>> result = new Map<Id, Map<String, Document__c>>();
+        for(Document__c doc : [SELECT Id,SalesOrder__c,ContentDocumentId__c,Content_Version_Id__c,FileName__c,DocumentType__r.Type__c
+                               FROM Document__c WHERE SalesOrder__c IN :salesOrderIds AND DocumentType__r.Type__c IN :documentTypes AND ContentDocumentId__c != null]){
+                                   if(!result.containsKey(doc.SalesOrder__c)){
+                                       result.put(doc.SalesOrder__c,new Map<String, Document__c>());
+                                   }
+                                   result.get(doc.SalesOrder__c).put(doc.DocumentType__r.Type__c, doc);
+                               }
+        return result;
     }
 }

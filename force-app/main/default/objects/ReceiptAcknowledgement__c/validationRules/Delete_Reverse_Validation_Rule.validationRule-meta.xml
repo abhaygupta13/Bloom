@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Delete_Reverse_Validation_Rule</fullName>
-    <active>true</active>
-    <errorConditionFormula>AND(Finance_Verified__c = true,ISCHANGED( Markfordeletion__c ))</errorConditionFormula>
-    <errorMessage>You cannot Delete/Reverse finance verified receipts.</errorMessage>
-</ValidationRule>

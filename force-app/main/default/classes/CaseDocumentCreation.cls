@@ -36,9 +36,6 @@ public class CaseDocumentCreation {
                     Document__c DC = new Document__c();
                     DC.Case__c = c.id;
                     Dc.Document_Name__c = doc.MasterLabel;
-                    if(c.type == 'Broker Service Request'){//ashish
-                    Dc.DocumentType__c = 'a3pFV0005HZbwUSYQZ';
-                    }
                     Dolist.add(DC);
                     
                 }
@@ -49,8 +46,11 @@ public class CaseDocumentCreation {
        
         if(Dolist.size()>0){
              insert Dolist;   
-             system.debug('Dolist-->'+Dolist);
-        }        
+           
+        }
+        
+        
+        
     } 
 
 }

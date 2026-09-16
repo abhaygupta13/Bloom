@@ -721,12 +721,12 @@ public class BAPPGetLeadsHandlerTest {
     // ==== Contact helper ====
     private static Contact createContact(Account acc, String role, Boolean isActive, String conName) {
         Contact con = new Contact(
-        LastName = conName,
-        AccountId = acc.Id,
-        BrokerContactRole__c = role,
-       	IsActive__c = isActive,
-        Email ='johnny.depp+' + System.currentTimeMillis() + '@example.com',
-        RecordTypeId = Utility.getRecordTypeIdByDevName(Contact.SObjectType, 'Broker'));
+            LastName = conName,
+            AccountId = acc.Id,
+            BrokerContactRole__c = role,
+            IsActive__c = isActive,
+            Email ='johnny.depp+' + System.currentTimeMillis() + '@example.com',
+            RecordTypeId = Utility.getRecordTypeIdByDevName(Contact.SObjectType, 'Broker'));
         insert con;
         return con;
     }
@@ -814,6 +814,8 @@ public class BAPPGetLeadsHandlerTest {
                 Status = (i == 2 ? 'Closed' : 'New'),
                 BrokerAgency__c = acc.Id,
                 BrokerAgent__c = agent.Id,
+                lead_channel__c = 'Broker Portal',
+                ownerId = Userinfo.getUserId(),
                 RecordTypeId = Utility.getRecordTypeIdByDevName(Lead.SObjectType, 'IndividualLead')
             ));
         }
@@ -863,4 +865,233 @@ public class BAPPGetLeadsHandlerTest {
         insert commissions;
     }
     
+    @IsTest
+    static void test_InvalidScenario_Error() {
+        Account acc = [SELECT Id FROM Account LIMIT 1];
+        Contact con = [SELECT Id FROM Contact LIMIT 1];
+        
+        Map<String, Object> body = new Map<String, Object>{
+            'accountId' => acc.Id,
+                'contactId' => con.Id,
+                'scenario' => 'INVALID'
+                };
+                    
+                    RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        req.requestUri = '/services/apexrest/brokerAppWebService/V1/getLeads';
+        req.httpMethod = 'POST';
+        req.requestBody = Blob.valueOf(JSON.serialize(body));
+        
+        RestContext.request = req;
+        RestContext.response = res;
+        
+        Test.startTest();
+        BAPPGetLeadsHandler.handleLeadFilters();
+        Test.stopTest();
+    }
+    
+    @IsTest
+    static void test_FilterScenario_EmptyCriteria_Error() {
+        Account acc = [SELECT Id FROM Account LIMIT 1];
+        Contact con = [SELECT Id FROM Contact LIMIT 1];
+        
+        Map<String, Object> body = new Map<String, Object>{
+            'accountId' => acc.Id,
+                'contactId' => con.Id,
+                'scenario' => 'FILTER',
+                'filterCriteria' => new Map<String, Object>() // EMPTY
+                };
+                    
+                    RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        req.requestUri = '/services/apexrest/brokerAppWebService/V1/getLeads';
+        req.httpMethod = 'POST';
+        req.requestBody = Blob.valueOf(JSON.serialize(body));
+        
+        RestContext.request = req;
+        RestContext.response = res;
+        
+        Test.startTest();
+        BAPPGetLeadsHandler.handleLeadFilters();
+        Test.stopTest();
+    }
+    
+    @IsTest
+    static void test_DateRange_Exceeds90Days() {
+        Account acc = [SELECT Id FROM Account LIMIT 1];
+        Contact con = [SELECT Id FROM Contact LIMIT 1];
+        
+        Map<String, Object> body = new Map<String, Object>{
+            'accountId' => acc.Id,
+                'contactId' => con.Id,
+                'scenario' => 'FILTER',
+                'filterCriteria' => new Map<String, Object>{
+                    'updatedOnFrom' => Date.today().addDays(-120),
+                        'updatedOnTo' => Date.today()
+                        }
+        };
+            
+            RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        req.requestUri = '/services/apexrest/brokerAppWebService/V1/getLeads';
+        req.httpMethod = 'POST';
+        req.requestBody = Blob.valueOf(JSON.serialize(body));
+        
+        RestContext.request = req;
+        RestContext.response = res;
+        
+        Test.startTest();
+        BAPPGetLeadsHandler.handleLeadFilters();
+        Test.stopTest();
+    }
+    
+    @IsTest
+    static void test_ConvertedLead_StatusCount() {
+        Account acc = [SELECT Id FROM Account LIMIT 1];
+        Contact con = [SELECT Id FROM Contact LIMIT 1];
+        
+        Lead l = new Lead(
+            LastName = 'Convert Me',
+            Company = 'Test Co',
+            Status = 'New'
+        );
+        insert l;
+        LeadStatus ls = [SELECT MasterLabel FROM LeadStatus WHERE IsConverted = true LIMIT 1];
+        // Convert Lead
+        /*Database.LeadConvert lc = new Database.LeadConvert();
+lc.setLeadId(l.Id);
+lc.setConvertedStatus(ls.MasterLabel);
+lc.setDoNotCreateOpportunity(false);
+Database.convertLead(lc);*/
+        
+        RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        req.requestUri = '/services/apexrest/brokerAppWebService/V1/leadStatusCount';
+        req.httpMethod = 'GET';
+        req.requestBody = Blob.valueOf(JSON.serialize(new Map<String, Object>{
+            'accountId' => acc.Id,
+                'contactId' => con.Id
+                }));
+        
+        RestContext.request = req;
+        RestContext.response = res;
+        
+        Test.startTest();
+        BAPPWebService.doGet();
+        Test.stopTest();
+    }
+    
+    @IsTest
+    static void test_HasAdminAccess_MultipleRoles() {
+        Account acc = [SELECT Id FROM Account LIMIT 1];
+        
+        Contact con = new Contact(
+            LastName = 'Multi Role',
+            AccountId = acc.Id,
+            BrokerContactRole__c = 'Agent;CEO',
+            Email = 'johnny.depp+' + System.currentTimeMillis() + '@example.com'
+        );
+        insert con;
+        
+        Map<String, Object> body = new Map<String, Object>{
+            'accountId' => acc.Id,
+                'contactId' => con.Id,
+                'scenario' => 'ALL'
+                };
+                    
+                    RestRequest req = new RestRequest();
+        RestResponse res = new RestResponse();
+        req.requestUri = '/services/apexrest/brokerAppWebService/V1/getLeads';
+        req.httpMethod = 'POST';
+        req.requestBody = Blob.valueOf(JSON.serialize(body));
+        
+        RestContext.request = req;
+        RestContext.response = res;
+        
+        Test.startTest();
+        BAPPGetLeadsHandler.handleLeadFilters();
+        Test.stopTest();
+    }
+    
+    @IsTest
+    static void test_QueueOwner_BrokerUnassignedBranch() {
+        // Create User (needed for runAs)
+        Profile p = [SELECT Id FROM Profile WHERE Name = 'System Administrator' LIMIT 1];
+        Account acc = [SELECT Id FROM Account LIMIT 1];
+        
+        Contact con = new Contact(
+            LastName = 'Multi Role',
+            AccountId = acc.Id,
+            BrokerContactRole__c = 'Agent;CEO',
+            Email = 'johnny.depp+' + System.currentTimeMillis() + '@example.com'
+        );
+        insert con;
+        User u = new User(
+            Alias = 'testu',
+            Email = 'testu+' + System.currentTimeMillis() + '@test.com',
+            EmailEncodingKey = 'UTF-8',
+            LastName = 'Test',
+            LanguageLocaleKey = 'en_US',
+            LocaleSidKey = 'en_US',
+            ProfileId = p.Id,
+            TimeZoneSidKey = 'Asia/Kolkata',
+            UserName = 'testu' + System.currentTimeMillis() + '@test.com'
+        );
+        insert u;
+        
+        System.runAs(u) {
+            // Create Queue EXACT NAME
+            Group queue = new Group(
+                Name = 'Broker Unassigned Leads',
+                Type = 'Queue'
+            );
+            insert queue;
+            
+            insert new QueueSobject(
+                QueueId = queue.Id,
+                SobjectType = 'Lead'
+            );
+            
+            // Create Lead owned by Queue
+            Lead l = new Lead(
+                LastName = 'Queue Lead',
+                Company = 'Test Co',
+                Status = 'New',
+                OwnerId = queue.Id,
+                BrokerAgency__c = acc.Id,
+                BrokerAgent__c = con.Id,
+                lead_channel__c = 'Broker Portal',
+                RecordTypeId = Utility.getRecordTypeIdByDevName(
+                    Lead.SObjectType, 'IndividualLead'
+                )
+            );
+            insert l;
+            
+            // IMPORTANT: Re-query WITH Owner fields
+            l = [
+                SELECT Id, OwnerId, Owner.Name, Owner.Email 
+                FROM Lead 
+                WHERE Id = :l.Id
+            ];
+            
+            // Call method via REST
+            Map<String, Object> body = new Map<String, Object>{
+                'accountId' => acc.Id,
+                    'contactId' => con.Id,
+                    'scenario'  => 'ALL'
+                    };
+                        
+                        RestRequest req = new RestRequest();
+            req.requestUri = '/services/apexrest/brokerAppWebService/V1/getLeads';
+            req.httpMethod = 'POST';
+            req.requestBody = Blob.valueOf(JSON.serialize(body));
+            
+            RestContext.request = req;
+            RestContext.response = new RestResponse();
+            
+            Test.startTest();
+            BAPPGetLeadsHandler.handleLeadFilters();
+            Test.stopTest();
+        }
+    } 
 }

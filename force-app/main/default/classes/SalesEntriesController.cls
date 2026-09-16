@@ -80,10 +80,6 @@ public static void saveSalesEntries(List<SalesEntrie__c> salesEntries) {
             Id = entry.Id
         );
 
-        // ==========================
-        // Actual Sales
-        // ==========================
-
         if (!existing.ActualSalesLock__c) {
 
             updateRecord.ActualSales__c = entry.ActualSales__c;
@@ -98,10 +94,6 @@ public static void saveSalesEntries(List<SalesEntrie__c> salesEntries) {
 
             updateRecord.ActualSalesLock__c = entry.ActualSalesLock__c;
         }
-
-        // ==========================
-        // Audited Sales
-        // ==========================
 
         if (!existing.AuditedSalesLock__c) {
 

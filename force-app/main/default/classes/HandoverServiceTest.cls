@@ -38,7 +38,7 @@ public class HandoverServiceTest {
         servicecatalog.ProcessFlowType__c= 'Handover';
         servicecatalog.ProcessType__c = 'Sales';
         servicecatalog.Active__c= true;
-        servicecatalog.RecordTypeDevName__c = 'Handover';
+        servicecatalog.RecordTypeDevName__c = 'Non PHPP';
         insert servicecatalog;
         
         Handover__c hoRec = new Handover__c();
@@ -205,7 +205,7 @@ public class HandoverServiceTest {
         
         
         // Test update without trigger
-        existingHandover.Sub_Status__c = 'Schedule KHO Appointment';
+        existingHandover.Sub_Status__c = 'Handover Signing Document (KHO) Appointment';
         service.updateHandoversWithoutTrigger(new List<Handover__c>{existingHandover});
         updatedHandover = [SELECT Sub_Status__c FROM Handover__c WHERE Id = :existingHandover.Id];
        // System.assertEquals('KHO Appointment Scheduled', updatedHandover.Sub_Status__c, 'Should update without trigger');

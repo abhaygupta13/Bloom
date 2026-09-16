@@ -1,7 +1,9 @@
 public class CommercialOfferWrapper {
     
     public Date todayDate { get; set; }
-    public String tenantName { get; set; }
+    public String tenantFullName { get; set; }
+    public String tenantFirstName { get; set; }
+
     public String developmentName { get; set; }
     public String unitType { get; set; }
     public String unitNumber { get; set; }
@@ -23,20 +25,42 @@ public class CommercialOfferWrapper {
     public Date torStartDate { get; set; }
     public Date torEndDate { get; set; }
     public Decimal renewalFee { get; set; }
+
+    // ===== Renewal Offer Fees & Details =====
+    public Decimal adminFee { get; set; }
+    public Decimal designReviewFee { get; set; }
+    public Decimal fitOutSecurity{get;set;}
+    public Integer fitOutPeriod { get; set; }
+    public String contractPeriod { get; set; }
+    public Date handoverDate { get; set; }
+    public Date rentCommencementDate { get; set; }
+    public Date leaseExpiry { get; set; }
+    public String permittedUse { get; set; }
+    public String termOfPayment { get; set; }
+    
     
     public CommercialOfferWrapper() {
-        baseRentRows =new List<BaseRentRow>();
-        todayDate =System.today();
-        location ='Al Bateen – Abu Dhabi';
-        serviceChargeAmount =0;
-        serviceChargePerSqm =0;
-        marketingFundAmount =0;
+        baseRentRows = new List<BaseRentRow>();
+        
+        todayDate = System.today();
+        location = 'Al Bateen – Abu Dhabi';
+        
+        serviceChargeAmount = 0;
+        serviceChargePerSqm = 0;
+        marketingFundAmount = 0;
         grossRentAmountYear1 = 0;
         securityDeposit = 0;
-        torPercentage =0;
-        renewalFee =0;
-        chilledWater ='Metered';
+        torPercentage = 0;
+        renewalFee = 0;
+        
+        adminFee = 0;
+        designReviewFee = 0;
+        fitOutPeriod = 0;
+        fitOutSecurity = 0;
+        
+        chilledWater = 'Metered';
     }
+    
     
     public class BaseRentRow {
         
@@ -46,5 +70,4 @@ public class CommercialOfferWrapper {
         public Decimal baseRentPerSqm { get; set; }
         public Decimal totalBaseRent { get; set; }
     }
-    
 }

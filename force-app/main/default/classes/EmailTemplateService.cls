@@ -22,10 +22,6 @@ public inherited sharing class EmailTemplateService {
         return [SELECT Id, HtmlValue, Body, Subject,Name FROM EmailTemplate WHERE Name =:name LIMIT 1];
     }
 
-    public static EMailTemplate getActiveEmailTemplateByName(String name){
-        return [SELECT Id, HTMLValue, Body, Subject FROM EmailTemplate WHERE Name =:name AND IsActive = true LIMIT 1];
-    }
-
     public static EMailTemplate getEmailTemplateByDeveloperName(String developerName){
         return [SELECT Id, HtmlValue, Body, Subject,DeveloperName FROM EmailTemplate WHERE DeveloperName =:developerName LIMIT 1];
     }

@@ -23,57 +23,48 @@ public class LeasingDocGenController {
     
     @AuraEnabled
     public static void generateDocument(Id deliveryOptionId, Id templateId, Id recordId, String documentName) {
-        System.debug('26 generateDocument :- ' + deliveryOptionId + ' ' + templateId + ' ' + recordId + ' ' + documentName);
+        
         try {
             // Validate input parameters
             if (deliveryOptionId == null || templateId == null || recordId == null || documentName == null) {
-                System.debug('30 generateDocument validation failed');
                 throw new IllegalArgumentException('Required parameters cannot be null.');
             }
             
             if(recordId != null && recordId.getSObjectType() == LeasingOrder__c.SObjectType){
                 LeasingOrderService leaseOrderService = LeasingOrderService.getInstance();
                 Leasingorder__c lo = leaseOrderService.getLeasingOrderById(recordId);
-                if(lo.MasterLeasingOrder__c != null){
+                if(lo.MasterLeasingOrder__c != null && documentName != 'Leasing Exit Letter'){
                     DocumentType__c doctype = [Select Id, DeliveryOption__c, DocGenPackage__c from Documenttype__c where ObjectType__c = 'LeasingOrder__c' and Type__c='Leasing Contract' and Customer_Type__c= null];
                     deliveryOptionId = doctype.DeliveryOption__c;
                     templateId = doctype.DocGenPackage__c;
                 }
                 DocumentService docService = DocumentService.getInstance();
                 List<Document__c> docList = docService.getRequiredLeasingOrderDocument(recordId,documentName);
-                System.debug('47 generateDocument docList size :- ' + (docList != null ? docList.size() : 0));
                 if(docList != NULL && docList.size() > 0){
                     leaseOrderService.updateLeasingOrderswithOutTrigger(new List<LeasingOrder__c>{new LeasingOrder__c(Id = recordId, Drawloop_Next__c = '')});
                     String drawloopNextVal =  'SFLeasingOrder__c:'+recordId+';SFDocument__c:'+docList[0].Id+';DDPId:'+templateId+';Deploy:'+deliveryOptionId;
-                    System.debug('50 generateDocument drawloopNextVal :- ' + drawloopNextVal);
                     LeasingOrder__c leaseOrder = new LeasingOrder__c(Id= recordId, Drawloop_Next__c = drawloopNextVal);
                     
                     leaseOrderService.updateLeasingOrders(new List<LeasingOrder__c>{leaseOrder});
-                    System.debug('54 generateDocument update success');
                 }
                 
             }
             if(recordId != null && recordId.getSObjectType() == LeasingReceiptAcknowledgment__c.SObjectType){
-                System.debug('59 generateDocument Receipt');
                 LeasingReceiptAcknowledgementService leaseOrderService = LeasingReceiptAcknowledgementService.getInstance();
                 DocumentService docService = DocumentService.getInstance();
                 List<Document__c> docList = docService.getRequiredLeasingReceiptAckDocument(recordId,documentName);
-                System.debug('63 generateDocument docList size :- ' + (docList != null ? docList.size() : 0));
                 if(docList != NULL && docList.size() > 0){
                     leaseOrderService.updateReceiptACknowledgementsWithoutTrigger(new List<LeasingReceiptAcknowledgment__c>{new LeasingReceiptAcknowledgment__c(Id = recordId, Drawloop_Next__c = '')});
                     String drawloopNextVal =  'SFLeasingReceiptAcknowledgment__c:'+recordId+';SFDocument__c:'+docList[0].Id+';DDPId:'+templateId+';Deploy:'+deliveryOptionId;
-                    System.debug('67 generateDocument drawloopNextVal :- ' + drawloopNextVal);
                     LeasingReceiptAcknowledgment__c leaseReceipt = new LeasingReceiptAcknowledgment__c(Id= recordId, Drawloop_Next__c = drawloopNextVal);
                     
                     leaseOrderService.updateLeasingReceiptAcknowledgement(new List<LeasingReceiptAcknowledgment__c>{leaseReceipt});
-                    System.debug('71 generateDocument update success');
                 }
                 
             }
         } catch (Exception ex) {
             // Catch-all for any other exceptions
-            System.debug('77 generateDocument Exception :- ' + ex.getMessage() + ' ' + ex.getLineNumber());
-            System.debug('78 generateDocument StackTrace :- ' + ex.getStackTraceString());
+            System.debug('Exception: ' + ex.getMessage() + '  '+ ex.getLineNumber());
             throw new AuraHandledException('An unexpected error occurred. Please contact your administrator.');
         }
     }

@@ -7,7 +7,6 @@
 * Version       Author      Date             Comment                                                                       
 * 1.0           Biswajeet   07AUG2024        Initial draft 
 * 2.0           Jayprakash  20AUG2024        Implemented GIS Integration
-* 3.0 			Dhanraj		06APR2026		 Added method for Direct/Indirect filtering of units
 *****************************************************************************************************/
 public without sharing class UnitService {
     
@@ -48,7 +47,7 @@ public without sharing class UnitService {
                 SellingPrice__c,MarketPrice__c,NumberOfBedrooms__c,UnitType__c,TotalArea__c,
                 TerraceArea__c,MeasuredInternalArea__c,LockedBy__c,LockExpiryTime__c,
                 NumberOfCarParks__c,Project__r.Amenities__c,Project__r.VirtualTour__c,
-                UnitCategory__c,Project__r.VideoLink__c,Is_Chiller_Enabled__c,LeasingUnitStatus__c from Unit__c where id in :unitIds];
+                UnitCategory__c,Project__r.VideoLink__c,Is_Chiller_Enabled__c,LeasingUnitStatus__c, Project__r.Contractor__c from Unit__c where id in :unitIds];
     }
     
     public static List<Unit__c> getUnitByBuilding(String buildingName){
@@ -248,9 +247,18 @@ public without sharing class UnitService {
     }    
     //Get units by project id
     
-    public List<Unit__c> getAvailableUnitsByProjectId(Id projectId){
+    public List<Unit__c> getAvailableUnitsByProjectId(Id projectId, String directType){
         Id currentUserId = UserInfo.getUserId();
-        return [SELECT Id, Name, UnitType__c, UnitCategory__c, NumberOfBedrooms__c, Internal_Saleable_Area__c, External_Saleable_Area__c, SellingPrice__c, Direct_Indirect__c FROM Unit__c WHERE Project__c = :projectId AND (Status__c = 'Available' OR (Status__c = 'Blocked' AND BlockedBy__c = :currentUserId))];
+        String query = 'SELECT Id, Name, UnitType__c, UnitCategory__c, NumberOfBedrooms__c, ' +
+            'Internal_Saleable_Area__c, External_Saleable_Area__c, SellingPrice__c, Direct_Indirect__c ' +
+            'FROM Unit__c WHERE Project__c = :projectId ' +
+            'AND (Status__c = \'Available\' OR (Status__c = \'Blocked\' AND BlockedBy__c = :currentUserId))';
+        
+        if (String.isNotBlank(directType)) {
+            query += ' AND Direct_Indirect__c = :directType';
+        }
+        
+        return Database.query(query);
     }
     
     //Get units by project & Unit Model
@@ -262,7 +270,18 @@ public without sharing class UnitService {
     //Get units by project Unit Model & Direct/Indirect Type
     public List<Unit__c> getAvailableUnitsByProjectAndUnitModel(Id projectId, String unitModel, String directType){
         Id currentUserId = UserInfo.getUserId();
-        return [SELECT Id, Name, UnitType__c, UnitCategory__c, NumberOfBedrooms__c, Internal_Saleable_Area__c, External_Saleable_Area__c, SellingPrice__c, Direct_Indirect__c FROM Unit__c WHERE Project__c = :projectId AND UnitModel__c = :unitModel AND (Status__c = 'Available' OR (Status__c = 'Blocked' AND BlockedBy__c = :currentUserId)) AND Direct_Indirect__c =: directType];
+        
+        String query = 'SELECT Id, Name, UnitType__c, UnitCategory__c, NumberOfBedrooms__c, ' +
+            'Internal_Saleable_Area__c, External_Saleable_Area__c, SellingPrice__c, Direct_Indirect__c ' +
+            'FROM Unit__c WHERE Project__c = :projectId ' +
+            'AND UnitModel__c = :unitModel ' +
+            'AND (Status__c = \'Available\' OR (Status__c = \'Blocked\' AND BlockedBy__c = :currentUserId))';
+        
+        if (String.isNotBlank(directType)) {
+            query += ' AND Direct_Indirect__c = :directType';
+        }
+        
+        return Database.query(query);
     }    
     
     //Get unit records by unit id
@@ -303,8 +322,8 @@ public without sharing class UnitService {
                 AND Id IN (SELECT Unit__c FROM Handover__c WHERE Unit__c != null AND Is_BCC_Announcement_Sent__c = false) LIMIT 10000];
     }
    public List<Unit__c> getBCCUnitsWithHandoverPhaseAndProjectId(String projectId, String handoverPhaseId) {
-    return [SELECT Id, Name, HandoverPhase__c, BuildingSectionName__r.Name, Status__c, 
-            Active_Sales_Order__r.Name, Owner.Name, CreatedDate, Project__c,
+    return [SELECT Id, Name,HandoverPhase__c, Location__Longitude__s, Location__Latitude__s, BuildingSectionName__c,BuildingSectionName__r.Name, Status__c,Active_Sales_Order__c, Active_Sales_Order__r.Name,
+                OwnerId,Owner.Name,CreatedDate,Project__c,Unit_Status__c,
             (SELECT Id, Name, CustomerEmail__c, 
                     Unit__r.Name, Unit__r.Status__c, 
                     Sales_Order__r.Name, Building_Phase__r.Name,
@@ -314,7 +333,7 @@ public without sharing class UnitService {
                 FROM Unit__c 
             WHERE HandoverPhase__c = :handoverPhaseId 
             AND Project__c = :projectId
-            AND Id IN (SELECT Unit__c FROM Handover__c WHERE Is_BCC_Announcement_Sent__c = false) 
+            AND Id IN (SELECT Unit__c FROM Handover__c WHERE Unit__c != null AND Is_BCC_Announcement_Sent__c = false) 
             ];
     }
     

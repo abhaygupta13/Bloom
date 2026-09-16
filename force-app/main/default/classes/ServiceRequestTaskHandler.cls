@@ -40,6 +40,7 @@ public inherited sharing class ServiceRequestTaskHandler {
     private static final string KYC_UPDATE_REQUEST_RT { get { return 'KYCUpdateRequest'; } }
     private static final string SUPER_APP_OPERATION_TEAM_CASE_ASSIGNMENT { get { return 'Super App Operation Team Case Assignment'; } }
     private static final string PROCESS_TYPE_SALES { get { return 'Sales'; } }
+     private static final string VEHICLE_PARKING_REQUEST_RT_DEV_NAME { get { return 'VehicleParkingRequest'; } }
 
     
     private static ServiceRequestTaskHandler instance; 
@@ -398,6 +399,7 @@ public inherited sharing class ServiceRequestTaskHandler {
                         }
                         else if((caseObj.RecordTypeId == Utility.getRecordTypeIdByDevName(Case.SObjectType,LPF_WAIVER_REQUEST_RT) && caseObj.LPFWaiverRequestApprovalStatus__c == 'Approved')) {
                             Id emailTempId = objMetadataService.getAppSettingTextValue(SERVICE_REQUEST_CUSTOMER_CLOSURE_EMAIL_TEMPLATE_ID);
+                             ChequeReplacementRequestCaseHandler.getInstance().createDocuments(new List<Case>{caseObj},caseObj.Sales_Order__c);
                             List<Messaging.EmailFileAttachment> attachments = objEmailService.getCaseAttachmentsByDocName(caseobj.Id, new List<String>{'Statement of Account'});
                             if(attachments != null){
                                 ChequeReplacementRequestCaseHandler objChequeReplacementRequestHandler = ChequeReplacementRequestCaseHandler.getInstance();
@@ -407,7 +409,8 @@ public inherited sharing class ServiceRequestTaskHandler {
                         } else if((caseObj.RecordTypeId == Utility.getRecordTypeIdByDevName(Case.SObjectType,SOA_REQUEST_RT)) 
                                   || (caseObj.RecordTypeId == Utility.getRecordTypeIdByDevName(Case.SObjectType,LPF_WAIVER_REQUEST_RT) && caseObj.LPFWaiverRequestApprovalStatus__c == 'Approved')) {
                             Id emailTempId = objMetadataService.getAppSettingTextValue(SERVICE_REQUEST_CUSTOMER_CLOSURE_EMAIL_TEMPLATE_ID);
-                            List<Messaging.EmailFileAttachment> attachments = objEmailService.getCaseAttachmentsByDocName(caseobj.Id, new List<String>{'Statement of Account'});
+                              SOARequestCaseHandler.getInstance().createDocuments(new List<Case>{caseObj},caseObj.Sales_Order__c);
+                             List<Messaging.EmailFileAttachment> attachments = objEmailService.getCaseAttachmentsByDocName(caseobj.Id, new List<String>{'Statement of Account'});
                             if(attachments != null){
                                 SOARequestCaseHandler objChequeReplacementRequestHandler = SOARequestCaseHandler.getInstance(); 
                                 email = objChequeReplacementRequestHandler.sendClosureEmail(emailTempId, noReplyOWDId, caseobj.Id, toAddress, jointOwnerEmail, null,attachments);
@@ -477,6 +480,12 @@ public inherited sharing class ServiceRequestTaskHandler {
         if (!tasksToClose.isEmpty()) {
             activityService.closeTasks(tasksToClose); 
         }
+    }
+    public void closeAllOpenTasks(Set<Id> caseIds) {
+        if (caseIds == null || caseIds.isEmpty()) return;
+        ActivityService activityService = ActivityService.getInstance();
+        List<Task> taskList = activityService.getOpenTasksBywhatIds(caseIds);
+        activityService.closeTasks(taskList); 
     }
     public void reassignCurrentTask(Id caseId,String commentBody,String reason,Id userId) {
         ActivityService activityService = ActivityService.getInstance();

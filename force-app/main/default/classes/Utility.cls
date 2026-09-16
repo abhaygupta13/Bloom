@@ -5,7 +5,7 @@
 */
 /*****************************************************************************************************
 * Version       Author      Date             Comment                                                                       
-* 1.0           Biswajeet   24NOV2024      	 Initial draft 
+* 1.0           Biswajeet   24NOV2024        Initial draft 
 * 1.1           Shruti      04OCTOMBER2025   Check if a record exists in org based on Id
 * 1.2			Dhanraj		20NOV2025		 Added 2 new methods for date and currency
 *****************************************************************************************************/
@@ -191,7 +191,6 @@ public class Utility {
         }
         return counting;
     }
-    
     public static String formatDateToYYYYMMDD(Date dt) {
         if (dt == null) return null;
         
@@ -205,40 +204,65 @@ public class Utility {
         return String.valueOf(year) + monthStr + dayStr;
     }
     
-    //community app related changes
+     //community app related changes
+
     public static String formatDayMonth(Date dt) {
+
         DateTime dtTime = DateTime.newInstance(dt, Time.newInstance(0, 0, 0, 0));
+
         return dtTime.format('dd MMMM');
-    }
-    
-    public static String formatTimeHHmm(Time t) {
-        Date dummyDate = Date.today(); 
-        DateTime dt = DateTime.newInstance(dummyDate, t);
-        return dt.format('h:mm a');
-    }
-    
-    public static String getMonthYearLabel(Date d) {
-        List<String> months = new List<String>{
-            'January', 'February', 'March', 'April', 'May', 'June', 
-                'July', 'August', 'September', 'October', 'November', 'December'
-                };
-                    Integer monthIndex = d.month() - 1; // 0-based index
-        return months[monthIndex] + ' ' + String.valueOf(d.year());
-    }
-    
-      public static String getRecordTypeNameById(String objectName, Id strRecordTypeId) {
-        return Schema.getGlobalDescribe().get(objectName).getDescribe().getRecordTypeInfosById().get(strRecordTypeId).getName();
+
     }
 
-    public static String formatTime(Time t) {
-        String hh = (t.hour() < 10) ? '0' + String.valueOf(t.hour()) : String.valueOf(t.hour());
-        String mm = (t.minute() < 10) ? '0' + String.valueOf(t.minute()) : String.valueOf(t.minute());
-        String ss = (t.second() < 10) ? '0' + String.valueOf(t.second()) : String.valueOf(t.second());
-        return hh + ':' + mm + ':' + ss;
+    
+
+    public static String formatTimeHHmm(Time t) {
+
+        Date dummyDate = Date.today(); 
+
+        DateTime dt = DateTime.newInstance(dummyDate, t);
+
+        return dt.format('h:mm a');
+
+    }
+
+    
+
+    public static String getMonthYearLabel(Date d) {
+
+        List<String> months = new List<String>{
+
+            'January', 'February', 'March', 'April', 'May', 'June', 
+
+                'July', 'August', 'September', 'October', 'November', 'December'
+
+                };
+
+                    Integer monthIndex = d.month() - 1; // 0-based index
+
+        return months[monthIndex] + ' ' + String.valueOf(d.year());
+
     }
     
+      public static String getRecordTypeNameById(String objectName, Id strRecordTypeId)
+
+    {
+
+        return Schema.getGlobalDescribe().get(objectName).getDescribe().getRecordTypeInfosById().get(strRecordTypeId).getName();
+        }
+    public static String formatTime(Time t) {
+
+        String hh = (t.hour() < 10) ? '0' + String.valueOf(t.hour()) : String.valueOf(t.hour());
+
+        String mm = (t.minute() < 10) ? '0' + String.valueOf(t.minute()) : String.valueOf(t.minute());
+
+        String ss = (t.second() < 10) ? '0' + String.valueOf(t.second()) : String.valueOf(t.second());
+
+        return hh + ':' + mm + ':' + ss;
+
+    }
     /**
-    * Check if a record exists in org based on Id
+	* Check if a record exists in org based on Id
     * @param recordId Id of the record
     * @return true if exists, false if not
     */

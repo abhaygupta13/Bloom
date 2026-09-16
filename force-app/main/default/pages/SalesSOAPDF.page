@@ -249,7 +249,7 @@
                                     <strong>Total Collection:</strong> 
                                     AED 
                                     <apex:outputText value="{0, number, ###,##0.00}">
-                                        <apex:param value="{!salesOrderWrapperList[0].installmentCollectedAmount}" />
+                                        <apex:param value="{!salesOrderWrapperList[0].totalCollectionAmount}" />
                                     </apex:outputText>
                                 </td>
                             </tr>
@@ -285,10 +285,10 @@
                                 </td>
                                 
                                 <td>
-                                    <strong>Total Outstanding:</strong>
+                                    <strong>Total Remaining Amount:</strong>
                                     AED 
                                     <apex:outputText value="{0, number, ###,##0.00}">
-                                        <apex:param value="{!salesOrderWrapperList[0].totalBalanceInstallment}" />
+                                        <apex:param value="{!salesOrderWrapperList[0].totalOutstandingAmount}" />
                                     </apex:outputText>
                                 </td>
                             </tr>
@@ -405,7 +405,7 @@
                                     <th>Date</th>
                                     <th>Percentage</th>
                                     <th>Amount (AED)</th>
-                                    <th>Ref No</th>
+                                    <th>Ref. No</th>
                                     <th>Rebated (AED)</th>
                                 </tr>
                             </thead>
@@ -439,7 +439,73 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>
+                            </table>
+                        </apex:outputPanel>
+                        
+                        <!-- Refund Section -->
+                        <apex:outputPanel rendered="{!salesOrderWrapperList[0].hasRefunds}">
+                            <h1>REFUND DETAILS :</h1>
+                            <table class="receiptTable">
+                                <thead>
+                                    <tr>
+                                        <th>Refund No</th>
+                                        <th>Date</th>
+                                        <th>Ref. No</th>
+                                        <th>Status</th>
+                                        <th>Amount (AED)</th>
+                                        <th>Refunded (AED)</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+                                    
+                                    <apex:repeat value="{!salesOrderWrapperList[0].consolidatedRefunds}" var="rf">
+                                        
+                                        <tr>
+                                            <td class="textCenter">{!rf.refundNo}</td>
+                                            
+                                            <td class="textCenter">
+                                                {!rf.refundDateFormatted}
+                                            </td>
+                                            
+                                            <td class="textCenter">
+                                                {!rf.receiptNo}
+                                            </td>
+                                            
+                                            <td class="textCenter">
+                                                {!rf.status}
+                                            </td>
+                                            
+                                            
+                                            <td class="textRight">
+                                                {!rf.amountFormatted}
+                                            </td>
+                                            
+                                            <td class="textRight">
+                                                {!rf.amountFormatted}
+                                            </td>
+                                            
+                                        </tr>
+                                        
+                                    </apex:repeat>
+                                    
+                                    <tr>
+                                        <td colspan="5" align="right">
+                                            <b>Total Refunded (AED)</b>
+                                        </td>
+                                        
+                                        <td align="right">
+                                            <apex:outputText value="{0,number,###,##0.00}">
+                                                <apex:param value="{!salesOrderWrapperList[0].totalRefundAmount}"/>
+                                            </apex:outputText>
+                                        </td>
+                                        
+                                    </tr>
+                                    
+                                </tbody>
+                                
+                            </table>
+                            
                         </apex:outputPanel>
                         
                         <!-- Sales Order Receipts Section -->

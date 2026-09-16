@@ -109,4 +109,8 @@ public class MetadataService {
     public List<Integration_Details__mdt> getIntegrationDetailsMetadataByDevName(String devName) { 
         return [SELECT End_Point_URL__c, Api_Key__c, MethodType__c FROM Integration_Details__mdt Where DeveloperName=:devName];
     }
+    
+    public List<DLP_Resolution_Settings__mdt> getDLPResolutionSettings() {
+        return [SELECT Resolution_Priority__c, Repair_Resolution__c,Is_Business_Hours__c,Business_Hours_Id__c,Repair_Resolution_SLA_Type__c, Replace_Resolution__c, Replace_Resolution_SLA_Type__c FROM DLP_Resolution_Settings__mdt];
+    }
 }

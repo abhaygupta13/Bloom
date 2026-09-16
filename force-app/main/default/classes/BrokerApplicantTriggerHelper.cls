@@ -71,18 +71,14 @@ public class BrokerApplicantTriggerHelper {
                     intersection.retainAll(docRoles);
                     
                     if (!intersection.isEmpty() && !existingDocTypeIds.contains(dt.Id)) {
-                        //if (!intersection.isEmpty() && dt.TypeofEstablishment__c == ba.TypeofEstablishment__c) {
-                        if (!intersection.isEmpty() && dt.TypeofEstablishment__c != null && ba.TypeofEstablishment__c != null) {
-                            String docTypeEst = ';' + dt.TypeofEstablishment__c + ';';
-                            String applicantEst = ';' + ba.TypeofEstablishment__c + ';';
-                            if (docTypeEst.contains(applicantEst)) {
+                        if (!intersection.isEmpty() &&
+                            dt.TypeofEstablishment__c == ba.TypeofEstablishment__c) {
                                 documentsToInsert.add(new Document__c(
                                     BrokerApplicant__c = ba.Id,
                                     DocumentType__c = dt.Id,
                                     Document_Name__c = dt.Type__c
                                 ));
                             }
-                        }  
                     }
                 }
             }

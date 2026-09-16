@@ -109,7 +109,7 @@ public inherited sharing class BFMServiceRequestHandler {
         List<String> missingFields = new List<String>();
         if (caseObj.Subject == null){missingFields.add('Subject');}
         if (caseObj.RequesterRemarks__c == null) {missingFields.add('Requester Remarks');}
-        if (caseObj.Type == 'BFM Community Request' && caseObj.RequesterName__c == null) {missingFields.add('Requester Name');}
+        if (caseObj.RequesterName__c == null) {missingFields.add('Requester Name');}
         if (caseObj.Origin == 'Email' && caseObj.RequesterEmail__c == null) {missingFields.add('Requester Email');}
         if (caseObj.Origin != 'Email' && caseObj.RequesterContactNumber__c == null) {missingFields.add('Requester Contact Number');}
         if (caseObj.Priority == null) {missingFields.add('Priority');}
@@ -258,10 +258,6 @@ public inherited sharing class BFMServiceRequestHandler {
         if (salesOrderObj != null || unitId != null) {
             Id unitToCheck = (salesOrderObj != null) ? salesOrderObj.Unit__c : unitId;
             inAMC = bfmContractobj.getBFMContractWithinRange(unitToCheck).size() > 0 ? 'true' : 'false';
-            if(inAMC == 'false'){
-                Unit__c objUnit = UnitService.getInstance().getUnitById(unitToCheck);
-                inAMC = objUnit.IsManagedByBloom__c ? 'true' : 'false';
-            }
         }
         
         String requesterContactNumber = '';
@@ -328,7 +324,7 @@ public inherited sharing class BFMServiceRequestHandler {
         Id bfmCaseCreationEmailTemplateId = objMetadataService.getAppSettingTextValue(MTD_BFM_CASE_CREATION_EMAIL_TEMP_ID);
         
         for(Case caseObj : caseList){
-            if(caseObj.StopEmailsToCustomer__c || ((caseObj.RecordType.DeveloperName == BFM_SERVICE_REQUEST_RT_DEV_Name  && String.isBlank(caseObj.RequesterEmail__c)) || caseObj.RecordType.DeveloperName == COMMON_AREA_REQUEST)){
+            if(caseObj.StopEmailsToCustomer__c || ((caseObj.RecordType.DeveloperName == BFM_SERVICE_REQUEST_RT_DEV_Name || caseObj.RecordType.DeveloperName == COMMON_AREA_REQUEST) && String.isBlank(caseObj.RequesterEmail__c))){
                 continue;
             }
             
@@ -353,7 +349,7 @@ public inherited sharing class BFMServiceRequestHandler {
         Id bfmRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, BFM_SERVICE_REQUEST_RT_DEV_Name);
         Id commonAreaRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, COMMON_AREA_REQUEST);
         for(Case caseObj : caseList){
-            if(caseObj.StopEmailsToCustomer__c || ((caseObj.RecordTypeId == bfmRecordTypeId && String.isBlank(caseObj.RequesterContactNumber__c))  || caseObj.RecordTypeId == commonAreaRecordTypeId)){
+            if(caseObj.StopEmailsToCustomer__c || (String.isBlank(caseObj.RequesterContactNumber__c) && (caseObj.RecordTypeId == bfmRecordTypeId || caseObj.RecordTypeId == commonAreaRecordTypeId))){
                 continue;
             }
             List<String> values = new List<String>{caseObj.RequesterName__c,caseObj.BFMServiceRequestId__c};

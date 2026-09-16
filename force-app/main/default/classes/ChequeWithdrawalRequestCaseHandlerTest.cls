@@ -157,7 +157,7 @@ public class ChequeWithdrawalRequestCaseHandlerTest {
         
         // Act
         ChequeWithdrawalRequestCaseHandler handler = ChequeWithdrawalRequestCaseHandler.getInstance();
-        Case createdCase = handler.createCaseRecord(salesOrder, serviceCatalog, salesOrder.Account__c, salesOrder.Unit__c, 'Service Request', 'Description of case', 'Phone');
+        Case createdCase = handler.createCaseRecord(salesOrder, serviceCatalog, salesOrder.Account__c, salesOrder.Unit__c, 'Service Request', 'Description of case', 'Phone', false);
 
         // Assert
         //System.assertNotEquals(null, createdCase, 'Case should be created');
@@ -176,6 +176,7 @@ public class ChequeWithdrawalRequestCaseHandlerTest {
         caseRec.NewChequesCollected__c = 'Yes';
         update caseRec;
         
+        Test.startTest();
         // Act
         ChequeWithdrawalRequestCaseHandler handler = ChequeWithdrawalRequestCaseHandler.getInstance();
         //handler.createCaseReceipts(caseRec);
@@ -231,7 +232,7 @@ public class ChequeWithdrawalRequestCaseHandlerTest {
         //System.assertEquals('success', response.get('status'), 'Status should be success');
         caseRec.PDCSentToCustomer__c = 'Yes';
         update caseRec;
-        
+        Test.stopTest();
         Map<String, Object> response9 = handler.validateCaseForNextReview(caseRec);
     }
 

@@ -173,7 +173,7 @@ private class LeasingReceiptAcknowledgementServiceTest {
     
      @isTest
      static void TestDuplicateReceipt(){
-        LeasingReceiptAcknowledgment__c receipt = [SELECT Id, ReferenceNumber__c, ChequeNumber__c, BankName__c  FROM LeasingReceiptAcknowledgment__c LIMIT 1];
+        LeasingReceiptAcknowledgment__c receipt = [SELECT Id, ReferenceNumber__c, ChequeNumber__c, BankName__c, LeasingOrder__c, SAPReversalDocumentNumber__c  FROM LeasingReceiptAcknowledgment__c LIMIT 1];
     	
         receipt.ReferenceNumber__c = '1234';
         receipt.BankName__c = 'Bank of Sharjah';

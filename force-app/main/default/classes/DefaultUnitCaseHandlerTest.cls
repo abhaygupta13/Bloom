@@ -85,7 +85,7 @@ public class DefaultUnitCaseHandlerTest {
     static void testValidate_stepOneMissingFields() {
         Case cs = [SELECT Id, DefaultNoticeSentBy__c, DefaultNoticeSentTime__c, AccountId, ContactId, Unit__c, Step__c, Unit__r.Project__r.Name, Unit__r.Name, Unit__r.Project__r.ProjectNameArabic__c,
                    Account.Name, Account.NameinArabic__c, Project__c, Account.IsPersonAccount, Account.PersonContactId, ServiceCatalog__c, Status, CaseType__c,
-                   DefaultCustomerPaymentOverdueDate__c
+                   DefaultCustomerPaymentOverdueDate__c, RecordTypeId, Sales_Order__c, StopEmailsToCustomer__c
                    FROM Case LIMIT 1];
         cs.Step__c='1';
         cs.DefaultNoticeSentBy__c = null;
@@ -101,7 +101,7 @@ public class DefaultUnitCaseHandlerTest {
         // modify case to step 7 with refund amount
         Case cs = [SELECT Id, AccountId, ContactId, Unit__c, Step__c, Unit__r.Project__r.Name, Unit__r.Name, Unit__r.Project__r.ProjectNameArabic__c,
                    Account.Name, Account.NameinArabic__c, Project__c, Account.IsPersonAccount, Account.PersonContactId, ServiceCatalog__c, Status, CaseType__c,
-                   RecordTypeId
+                   Sales_Order__c, RecordTypeId, StopEmailsToCustomer__c
                    FROM Case LIMIT 1];
         cs.Step__c = '7';
         cs.RefundAmount__c = 500;
@@ -148,7 +148,7 @@ public class DefaultUnitCaseHandlerTest {
         //DefaultUnitCaseHandler.getInstance().handleNextSteps(cs);
         //System.assert(TestPostSalePayDefTaskHandler.wasCalled(), 'handleNextSteps should invoke handler');
         
-        DefaultUnitCaseHandler.getInstance().createCaseRecord(soRec, sc, cs.accountId, cs.Unit__c, 'Service Request', 'TEST description', 'Call Center');
+        DefaultUnitCaseHandler.getInstance().createCaseRecord(soRec, sc, cs.accountId, cs.Unit__c, null, 'Service Request', 'TEST description', 'Call Center', false);
     }
 
     @isTest

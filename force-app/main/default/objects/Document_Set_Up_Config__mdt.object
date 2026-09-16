@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Case_RecordType__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>RecordType</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Financial Services</fullName>
+                    <default>true</default>
+                    <label>Financial Services</label>
+                </value>
+                <value>
+                    <fullName>General Service Request</fullName>
+                    <default>false</default>
+                    <label>General Service Request</label>
+                </value>
+                <value>
+                    <fullName>Sales Complaint</fullName>
+                    <default>false</default>
+                    <label>Sales Complaint</label>
+                </value>
+                <value>
+                    <fullName>Resale</fullName>
+                    <default>false</default>
+                    <label>Resale</label>
+                </value>
+                <value>
+                    <fullName>Special Services</fullName>
+                    <default>false</default>
+                    <label>Special Services</label>
+                </value>
+                <value>
+                    <fullName>Broker Registration</fullName>
+                    <default>false</default>
+                    <label>Broker Registration</label>
+                </value>
+                <value>
+                    <fullName>Community living</fullName>
+                    <default>false</default>
+                    <label>Community living</label>
+                </value>
+                <value>
+                    <fullName>Customer Service Complaint</fullName>
+                    <default>false</default>
+                    <label>Customer Service Complaint</label>
+                </value>
+                <value>
+                    <fullName>Defect liability Complaint</fullName>
+                    <default>false</default>
+                    <label>Defect liability Complaint</label>
+                </value>
+                <value>
+                    <fullName>Leasing Complaint</fullName>
+                    <default>false</default>
+                    <label>Leasing Complaint</label>
+                </value>
+                <value>
+                    <fullName>Maintenance (Leasing Portfolio)</fullName>
+                    <default>false</default>
+                    <label>Maintenance (Leasing Portfolio)</label>
+                </value>
+                <value>
+                    <fullName>Property Handover Complaint</fullName>
+                    <default>false</default>
+                    <label>Property Handover Complaint</label>
+                </value>
+                <value>
+                    <fullName>Property Transfer/Resale</fullName>
+                    <default>false</default>
+                    <label>Property Transfer/Resale</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ProfileAccess__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>ProfileAccess</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Record_Type_Name__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Record Type Name</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RelatedFiledRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Related Filed Required?</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Related_Field__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Related Field</label>
+        <length>32</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Show_Create_Btn__c</fullName>
+        <defaultValue>false</defaultValue>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Show Create Btn</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sobject__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Sobject</label>
+        <length>32</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sobject_lkup_Api_Name__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Sobject lkup Api Name</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sub_Type__c</fullName>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Sub Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Question</fullName>
+                    <default>true</default>
+                    <label>Question</label>
+                </value>
+                <value>
+                    <fullName>UAE Pass</fullName>
+                    <default>false</default>
+                    <label>UAE Pass</label>
+                </value>
+                <value>
+                    <fullName>Construction Update</fullName>
+                    <default>false</default>
+                    <label>Construction Update</label>
+                </value>
+                <value>
+                    <fullName>Handover Update</fullName>
+                    <default>false</default>
+                    <label>Handover Update</label>
+                </value>
+                <value>
+                    <fullName>Floor Plan Copy</fullName>
+                    <default>false</default>
+                    <label>Floor Plan Copy</label>
+                </value>
+                <value>
+                    <fullName>SPA Copy</fullName>
+                    <default>false</default>
+                    <label>SPA Copy</label>
+                </value>
+                <value>
+                    <fullName>Contact Details</fullName>
+                    <default>false</default>
+                    <label>Contact Details</label>
+                </value>
+                <value>
+                    <fullName>SPA Registration Update</fullName>
+                    <default>false</default>
+                    <label>SPA Registration Update</label>
+                </value>
+                <value>
+                    <fullName>Site Visit / Property Viewing</fullName>
+                    <default>false</default>
+                    <label>Site Visit / Property Viewing</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Registration</fullName>
+                    <default>false</default>
+                    <label>Mortgage Registration</label>
+                </value>
+                <value>
+                    <fullName>Title Deed</fullName>
+                    <default>false</default>
+                    <label>Title Deed</label>
+                </value>
+                <value>
+                    <fullName>ADDC Transfer (Legacy Cases)</fullName>
+                    <default>false</default>
+                    <label>ADDC Transfer (Legacy Cases)</label>
+                </value>
+                <value>
+                    <fullName>Tawtheeq</fullName>
+                    <default>false</default>
+                    <label>Tawtheeq</label>
+                </value>
+                <value>
+                    <fullName>Service Charges</fullName>
+                    <default>false</default>
+                    <label>Service Charges</label>
+                </value>
+                <value>
+                    <fullName>Parking</fullName>
+                    <default>false</default>
+                    <label>Parking</label>
+                </value>
+                <value>
+                    <fullName>Unit Modification</fullName>
+                    <default>false</default>
+                    <label>Unit Modification</label>
+                </value>
+                <value>
+                    <fullName>Transfer of Right</fullName>
+                    <default>false</default>
+                    <label>Transfer of Right</label>
+                </value>
+                <value>
+                    <fullName>Addition Joint Owner</fullName>
+                    <default>false</default>
+                    <label>Addition Joint Owner</label>
+                </value>
+                <value>
+                    <fullName>Deletion Joint Owner</fullName>
+                    <default>false</default>
+                    <label>Deletion Joint Owner</label>
+                </value>
+                <value>
+                    <fullName>Gifting</fullName>
+                    <default>false</default>
+                    <label>Gifting</label>
+                </value>
+                <value>
+                    <fullName>NOC/Transfer of Right</fullName>
+                    <default>false</default>
+                    <label>NOC/Transfer of Right</label>
+                </value>
+                <value>
+                    <fullName>Statement of Account</fullName>
+                    <default>false</default>
+                    <label>Statement of Account</label>
+                </value>
+                <value>
+                    <fullName>Receipts</fullName>
+                    <default>false</default>
+                    <label>Receipts</label>
+                </value>
+                <value>
+                    <fullName>Bank Account Details</fullName>
+                    <default>false</default>
+                    <label>Bank Account Details</label>
+                </value>
+                <value>
+                    <fullName>Cheque Collection/Delivery</fullName>
+                    <default>false</default>
+                    <label>Cheque Collection/Delivery</label>
+                </value>
+                <value>
+                    <fullName>ROI Payment Refund</fullName>
+                    <default>false</default>
+                    <label>ROI Payment Refund</label>
+                </value>
+                <value>
+                    <fullName>Payment Due Date Update</fullName>
+                    <default>false</default>
+                    <label>Payment Due Date Update</label>
+                </value>
+                <value>
+                    <fullName>Postpone/Defer payment</fullName>
+                    <default>false</default>
+                    <label>Postpone/Defer payment</label>
+                </value>
+                <value>
+                    <fullName>Change of payment plan</fullName>
+                    <default>false</default>
+                    <label>Change of payment plan</label>
+                </value>
+                <value>
+                    <fullName>§  With Premium</fullName>
+                    <default>false</default>
+                    <label>§  With Premium</label>
+                </value>
+                <value>
+                    <fullName>§  Without Premium</fullName>
+                    <default>false</default>
+                    <label>§  Without Premium</label>
+                </value>
+                <value>
+                    <fullName>Replace cheques</fullName>
+                    <default>false</default>
+                    <label>Replace cheques</label>
+                </value>
+                <value>
+                    <fullName>LPF Waiver</fullName>
+                    <default>false</default>
+                    <label>LPF Waiver</label>
+                </value>
+                <value>
+                    <fullName>PHPP Request</fullName>
+                    <default>false</default>
+                    <label>PHPP Request</label>
+                </value>
+                <value>
+                    <fullName>Early settlement</fullName>
+                    <default>false</default>
+                    <label>Early settlement</label>
+                </value>
+                <value>
+                    <fullName>Upgrade</fullName>
+                    <default>false</default>
+                    <label>Upgrade</label>
+                </value>
+                <value>
+                    <fullName>Downgrade</fullName>
+                    <default>false</default>
+                    <label>Downgrade</label>
+                </value>
+                <value>
+                    <fullName>Cancellation With Refund</fullName>
+                    <default>false</default>
+                    <label>Cancellation With Refund</label>
+                </value>
+                <value>
+                    <fullName>Cancellation With no Refund</fullName>
+                    <default>false</default>
+                    <label>Cancellation With no Refund</label>
+                </value>
+                <value>
+                    <fullName>Feature Request</fullName>
+                    <default>false</default>
+                    <label>Feature Request</label>
+                </value>
+                <value>
+                    <fullName>Problem</fullName>
+                    <default>false</default>
+                    <label>Problem</label>
+                </value>
+                <value>
+                    <fullName>Poor Knowledge</fullName>
+                    <default>false</default>
+                    <label>Poor Knowledge</label>
+                </value>
+                <value>
+                    <fullName>Inconsistent Communication</fullName>
+                    <default>false</default>
+                    <label>Inconsistent Communication</label>
+                </value>
+                <value>
+                    <fullName>Employee code of conduct</fullName>
+                    <default>false</default>
+                    <label>Employee code of conduct</label>
+                </value>
+                <value>
+                    <fullName>Delay in response</fullName>
+                    <default>false</default>
+                    <label>Delay in response</label>
+                </value>
+                <value>
+                    <fullName>Delay in resolution</fullName>
+                    <default>false</default>
+                    <label>Delay in resolution</label>
+                </value>
+                <value>
+                    <fullName>Delay of property Handover</fullName>
+                    <default>false</default>
+                    <label>Delay of property Handover</label>
+                </value>
+                <value>
+                    <fullName>Quality product</fullName>
+                    <default>false</default>
+                    <label>Quality product</label>
+                </value>
+                <value>
+                    <fullName>Defect Rectification Delay and quality during Handover</fullName>
+                    <default>false</default>
+                    <label>Defect Rectification Delay and quality during Handover</label>
+                </value>
+                <value>
+                    <fullName>Delay in Handover process</fullName>
+                    <default>false</default>
+                    <label>Delay in Handover process</label>
+                </value>
+                <value>
+                    <fullName>Rectification quality</fullName>
+                    <default>false</default>
+                    <label>Rectification quality</label>
+                </value>
+                <value>
+                    <fullName>Repetitive request</fullName>
+                    <default>false</default>
+                    <label>Repetitive request</label>
+                </value>
+                <value>
+                    <fullName>Defect Rectification Delay</fullName>
+                    <default>false</default>
+                    <label>Defect Rectification Delay</label>
+                </value>
+                <value>
+                    <fullName>Design issues</fullName>
+                    <default>false</default>
+                    <label>Design issues</label>
+                </value>
+                <value>
+                    <fullName>Service charge invoicing</fullName>
+                    <default>false</default>
+                    <label>Service charge invoicing</label>
+                </value>
+                <value>
+                    <fullName>Safety &amp; Security</fullName>
+                    <default>false</default>
+                    <label>Safety &amp; Security</label>
+                </value>
+                <value>
+                    <fullName>Common Area Defects</fullName>
+                    <default>false</default>
+                    <label>Common Area Defects</label>
+                </value>
+                <value>
+                    <fullName>Damaged / Dysfunctional Facilities</fullName>
+                    <default>false</default>
+                    <label>Damaged / Dysfunctional Facilities</label>
+                </value>
+                <value>
+                    <fullName>Post DLP expiry warranty management services &amp; Defects rectification</fullName>
+                    <default>false</default>
+                    <label>Post DLP expiry warranty management services &amp; Defects rectification</label>
+                </value>
+                <value>
+                    <fullName>Landscape and Cleanliness</fullName>
+                    <default>false</default>
+                    <label>Landscape and Cleanliness</label>
+                </value>
+                <value>
+                    <fullName>Neighborhood Noise / Disturbance</fullName>
+                    <default>false</default>
+                    <label>Neighborhood Noise / Disturbance</label>
+                </value>
+                <value>
+                    <fullName>Parking Allocation</fullName>
+                    <default>false</default>
+                    <label>Parking Allocation</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Document Set Up Config</label>
+    <pluralLabel>Document Set Up Configs</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

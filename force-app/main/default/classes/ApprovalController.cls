@@ -75,7 +75,7 @@ public with sharing class ApprovalController {
             else if(recordId.getSObjectType() == CommissionSchedule__c.getSObjectType()){
                 msg = invokeApprovalProcess(recordId, COMMISSION_SCHEDULE_APPROVAL_PROCESS, comment) ? RECORD_SEND_FOR_APPROVAL_SUCCESS_STRING : RECORD_SEND_FOR_APPROVAL_FAILED_STRING;
             }
-            else if(recordId.getSObjectType() == Case.SObjectType){
+           else if(recordId.getSObjectType() == Case.SObjectType){
                                      
                    Case cs = CaseService.getInstance().getCaseById(recordId);
                     if(cs.RecordTypeId == generalEnquiryRTId && cs.SubType__c == 'Customer Type Update') {
@@ -117,7 +117,7 @@ public with sharing class ApprovalController {
         Approval.ProcessResult result = Approval.process(req);
         return result.isSuccess();
     }
-   private static void validateCustomerTypeUpdate(Case cs) {
+    private static void validateCustomerTypeUpdate(Case cs) {
         List<String> missingFields = new List<String>();
     
         if(String.isBlank(cs.Customer_Type__c)){

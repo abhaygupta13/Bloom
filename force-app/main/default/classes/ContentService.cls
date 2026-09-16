@@ -161,9 +161,6 @@ return new List<ContentDocumentLink>();
     ];
 }
 
-    public ContentVersion getContentVersionById(Id cvId){
-        return [SELECT ContentDocumentId FROM ContentVersion WHERE Id = :cvId LIMIT 1];
-    }
     
     // Fetch content verison by ids
     public List<ContentVersion> getContentVersionByIds(List<ContentVersion> cvList){

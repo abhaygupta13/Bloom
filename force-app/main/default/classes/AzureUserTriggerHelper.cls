@@ -135,7 +135,7 @@ public without sharing class AzureUserTriggerHelper {
                 if(String.isBlank(objUser.Azure_UserId__c)){
                     integrationRecordsToInsert.add(objCustomUserService.getIntegrationRecord(objUser, ''));
                 }else if(String.isNotBlank(objUser.Azure_UserId__c) && oldMap.get(objUser.Id).isActive__c != objUser.isActive__c && !objUser.isActive__c && oldMap.get(objUser.Id).isActive__c){
-                    integrationRecordsToInsert.add(objCustomUserService.getIntegrationRecord(objUser, USER_INTEGRATION_SUB_ACTION_USER_DEACTIVATE));
+				 	integrationRecordsToInsert.add(objCustomUserService.getIntegrationRecord(objUser, USER_INTEGRATION_SUB_ACTION_USER_DEACTIVATE));
                 }else if(String.isNotBlank(objUser.Azure_UserId__c) && oldMap.get(objUser.Id).UserName__c != objUser.UserName__c && String.isNotBlank(objUser.UserName__c)){
                     integrationRecordsToInsert.add(objCustomUserService.getIntegrationRecord(objUser, USER_INTEGRATION_SUB_ACTION_EMAIL_UPDATE));
                 }else if(String.isNotBlank(objUser.Azure_UserId__c) && (oldMap.get(objUser.Id).Name != objUser.Name && String.isNotBlank(objUser.Name) || oldMap.get(objUser.Id).Contact__c != objUser.Contact__c || oldMap.get(objUser.Id).User_Account__c != objUser.User_Account__c)){
@@ -152,7 +152,6 @@ public without sharing class AzureUserTriggerHelper {
                 emailList.add(objMail); 
             }
         }
-
         IntegrationRecordService.getInstance().insertIntegrationRecords(integrationRecordsToInsert);
         objEmailService.sendEmail(emailList);
     }

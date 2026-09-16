@@ -177,12 +177,12 @@ private class LeasingOtherChargesServiceTest {
             ReversedRemarks__c,
             ReversalCategory__c,
             Refdocno__c,
-            Paymentdoc__c,
+            Paymentdoc__c,IsPosting__c,
             CalculationFromDate__c,
-            ConditionType__c,
+            ConditionType__c,RelatedPartyBloomHolding__c,
             LeasingOrder__r.LeasingSAPContractId__c,
-            LeasingOrder__r.LeasingStartDate__c,
-            LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c,RelatedPartyBloomHolding__c 
+            LeasingOrder__r.LeasingStartDate__c,CalculationToDate__c,
+            LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c
             FROM LeasingOrdersOtherCharges__c
             WHERE Id = :charge.Id
         ];
@@ -220,12 +220,12 @@ private class LeasingOtherChargesServiceTest {
             ReversedRemarks__c,
             ReversalCategory__c,
             Refdocno__c,
-            Paymentdoc__c,
+            Paymentdoc__c,IsPosting__c,
             CalculationFromDate__c,
-            ConditionType__c,
+            ConditionType__c,RelatedPartyBloomHolding__c,
             LeasingOrder__r.LeasingSAPContractId__c,
-            LeasingOrder__r.LeasingStartDate__c,
-            LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c,RelatedPartyBloomHolding__c 
+            LeasingOrder__r.LeasingStartDate__c,CalculationToDate__c,
+            LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c 
             FROM LeasingOrdersOtherCharges__c
             WHERE Id = :charge.Id
         ];

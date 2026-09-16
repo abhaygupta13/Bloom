@@ -142,11 +142,11 @@ public without sharing class HandoverTriggerHelper {
                     objHandover.Sales_Order__c = objUnitMap.get(objHandover.Unit__c).Active_Sales_Order__c;
                     objHandover.Project__c = objUnitMap.get(objHandover.Unit__c).Project__c;
                     objHandover.Handover_Phase__c = objUnitMap.get(objHandover.Unit__c).HandoverPhase__c;
-                    objHandover.ServiceCatalog__c = serviceCatalogList[0].Id;
+                    objHandover.ServiceCatalog__c = serviceCatalogList != null && !serviceCatalogList.isEmpty() ? serviceCatalogList[0].Id : null;
                 }
                 if(objHandover.Sales_Order__c == NULL){
                     objHandover.Sub_Status__c = 'QA Snagging';
-                    objHandover.ServiceCatalog__c = serviceCatalogList[0].Id;
+                    objHandover.ServiceCatalog__c = serviceCatalogList != null && !serviceCatalogList.isEmpty() ? serviceCatalogList[0].Id : null;
                 }
             }
         }
@@ -297,7 +297,7 @@ public without sharing class HandoverTriggerHelper {
         objDocumentService.insertDocuments(documentList);   
     }
     
-  /*  public static void deleteCancellationEvent(Map<Id, Handover__c> newHOMap, Map<Id, Handover__c> oldHOMap){
+   /* public static void deleteCancellationEvent(Map<Id, Handover__c> newHOMap, Map<Id, Handover__c> oldHOMap){
         ActivityService handoverActivityService = ActivityService.getInstance();
         Set<Id> whatId = newHOMap.keySet();
         Map<Id, Event> eventMap = new Map<Id, Event>();
@@ -323,7 +323,7 @@ public without sharing class HandoverTriggerHelper {
          
     }*/
     
-    public static void deleteCancellationEvent(Map<Id, Handover__c> newHOMap, Map<Id, Handover__c> oldHOMap) {
+       public static void deleteCancellationEvent(Map<Id, Handover__c> newHOMap, Map<Id, Handover__c> oldHOMap) {
     Set<Id> cancelledHandoverIds = new Set<Id>();
     Set<Id> phaseIds = new Set<Id>();
 
@@ -515,42 +515,42 @@ public without sharing class HandoverTriggerHelper {
         objUnitService.updateUnitsWithoutTrigger(objUnitList);
     }
     
-    public static void updateHoAgentAssignedUser(Map<Id, Handover__c> oldHOMap, List<Handover__c> newHOList) {
-        HandoverService objHandoverService = HandoverService.getInstance();
+     public static void updateHoAgentAssignedUser(Map<Id, Handover__c> oldHOMap, List<Handover__c> newHOList) {
+        HandoverService objHandoverService = HandoverService.getInstance(); 
         
-        Set<Id> handoverIds = new Set<Id>();
-        List<Handover__c> handoverUpdateList = new List<Handover__c>();
-        
+        Map<Id, Handover__c> statusChangedHandoversMap = new Map<Id, Handover__c>();
         for (Handover__c objHandover : newHOList) {
-            System.debug('newHOList ::::: '+ newHOList);
-            System.debug('oldHOMap ::::: '+ oldHOMap);
-            if (!oldHOMap.isEmpty() && oldHOMap.get(objHandover.Id).Sub_Status__c != objHandover.Sub_Status__c && objHandover.Sub_Status__c == HANDOVER_SUB_STATUS_QA_DE_SNAGGING) {
-                handoverIds.add(objHandover.Id);
-            } else if(oldHOMap.isEmpty() && (objHandover.Sub_Status__c == HANDOVER_STATUS_QA_Snagging || objHandover.Sub_Status__c == HANDOVER_SUB_STATUS_QA_DE_SNAGGING)){
-                handoverIds.add(objHandover.Id);
+            if (oldHOMap != null && !oldHOMap.isEmpty() && oldHOMap.get(objHandover.Id).Sub_Status__c != objHandover.Sub_Status__c && objHandover.Sub_Status__c == HANDOVER_SUB_STATUS_QA_DE_SNAGGING) {
+                statusChangedHandoversMap.put(objHandover.Id, objHandover);
+                
+            } else if((oldHOMap == null || oldHOMap.isEmpty()) && (objHandover.Sub_Status__c == HANDOVER_STATUS_QA_Snagging || objHandover.Sub_Status__c == HANDOVER_SUB_STATUS_QA_DE_SNAGGING)){
+                statusChangedHandoversMap.put(objHandover.Id, objHandover);
             }
         }
-        System.debug('handoverIds ::::: '+ handoverIds);
-        if (!handoverIds.isEmpty()) {
-            for (Handover__c objHandover : objHandoverService.getHandoverByIds(handoverIds)) {
+        
+        List<Handover__c> handoversToAssignCRMUserList = new List<Handover__c>();
+        if (!statusChangedHandoversMap.keySet().isEmpty()) {
+            Map<Id, Handover__c> detailedHandoverMap = new Map<Id, Handover__c>(objHandoverService.getHandoverByIds(statusChangedHandoversMap.keySet()));
+            
+            for (Handover__c objHandover : statusChangedHandoversMap.values()) {
                 if (objHandover.Unit__c != null && objHandover.HO_Agent_Assigned_User__c == null) {
-                    if(objHandover.Unit__r.HO_Agent__c!=null){
-                        objHandover.HO_Agent_Assigned_User__c = objHandover.Unit__r.HO_Agent__c;  
-                        objHandover.OwnerId = objHandover.Unit__r.HO_Agent__c;
+                    if(detailedHandoverMap.get(objHandover.Id) != null && detailedHandoverMap.get(objHandover.Id).Unit__r.HO_Agent__c != null) {
+                        objHandover.HO_Agent_Assigned_User__c = detailedHandoverMap.get(objHandover.Id).Unit__r.HO_Agent__c;  
+                        objHandover.OwnerId = detailedHandoverMap.get(objHandover.Id).Unit__r.HO_Agent__c;
                     }
-                    //handoverUpdateList.add(objHandover);
-                }
-                if (objHandover.CRM_Team_Assigned_User__c == null) {
-                   //   AssignmentRuleHandler.crmHandoverAssignment(new List<Handover__c>{objHandover});
-                    HandoverRoundRobin.handoverRRAssignmentToTeam(new List<Handover__c>{objHandover}, Constants.TEAM_CRM);                     
-                }
+                } 
                 
+                if (objHandover.CRM_Team_Assigned_User__c == null) {
+                    handoversToAssignCRMUserList.add(objHandover);
+                }
             }
             
+            if(!handoversToAssignCRMUserList.isEmpty()) {
+                AssignmentRuleHandler.crmHandoverAssignment(handoversToAssignCRMUserList);
+            }
         }
-        //objHandoverService.updateHandoversWithoutTrigger(handoverUpdateList);
     }
-    
+        
     public static void updateContactId(List<Handover__c> newList, Map<Id, Handover__c> oldMap) {
          AccountService objAccountService = AccountService.getInstance();
         Set<Id> accIds = new Set<Id>();
@@ -642,7 +642,7 @@ public without sharing class HandoverTriggerHelper {
         objEmailService.sendEmail(msgList);
     }
 
-    public static void notifyCustomers(List<Handover__c> newList, Map<Id, Handover__c> oldMap){
+   public static void notifyCustomers(List<Handover__c> newList, Map<Id, Handover__c> oldMap){
         List<Handover__c> handoverRecordsToUpdate = new List<Handover__c>();
          HandoverPhaseService objHandoverPhaseService = HandoverPhaseService.getInstance();
        
@@ -661,6 +661,7 @@ public without sharing class HandoverTriggerHelper {
             if(handoverPhase==null) continue;
             
                 Handover__c handoverRecord = new Handover__c(Id = hoRec.Id);
+            
                switch on hoRec.Sub_Status__c {
                 when 'Title Deed Registration Completed', 'Transfer Utilities' {
                     if (!hoRec.Is_Title_Deed_Registration__c && String.isNotBlank(handoverPhase.HOTitleDeedEmailTempID__c)) {
@@ -672,6 +673,16 @@ public without sharing class HandoverTriggerHelper {
                 when 'Utilities Transfer Completed', 'Mortgage Cheque Clearance', 'Handover Signing Document (KHO) Appointment' {
                     if (!hoRec.KeyHandoverInvitationSent__c && String.isNotBlank(handoverPhase.KeyHandoverInvitationEmailTempId__c)) {
                         SendEmailInvocable.sendEmail(handoverPhase.KeyHandoverInvitationEmailTempId__c, hoRec.Id);
+                    }
+                }
+                   when 'Register Title Deed' {
+                    if (!hoRec.IsOustandingPaymentconfirmedsent__c && String.isNotBlank(handoverPhase.HOOutstandingConfirmationTempId__c)) {
+                        SendEmailInvocable.sendEmail(handoverPhase.HOOutstandingConfirmationTempId__c, hoRec.Id);
+                    }
+                }
+                   when 'Handover Signing Document' {
+                    if (!hoRec.IsHandoverSigningInvitationSent__c && String.isNotBlank(handoverPhase.SignHoDOCInvitationTempId__c)) {
+                        SendEmailInvocable.sendEmail(handoverPhase.SignHoDOCInvitationTempId__c, hoRec.Id);
                     }
                 }
                 when 'Handover Completed' {
@@ -709,6 +720,7 @@ public without sharing class HandoverTriggerHelper {
         handoverServiceObj.updateHandovers(handoverRecordsToUpdate);
     
 }
+
 
     public static void generateDeveloperNOC(Map<Id,Handover__c> handoverMapToGenerateAndSendNOC){
        // Map<Id,String> hoIdToDrawloopNextValueMap = new Map<Id,String>();
@@ -759,42 +771,4 @@ public without sharing class HandoverTriggerHelper {
         }
         objSalesOrderService.updateSalesOrdersWithoutTrigger(salesOrdersToUpdate);
     }
-
-    public static void updateServiceChargeDatesOnSalesOrder(Map<Id, Handover__c> oldHOMap, List<Handover__c> newHOList){
-        Set<Id> projectIdSet = new Set<Id>();
-        Set<Id> salesOrderIdSet = new Set<Id>();
-        for(Handover__c ho : newHOList){
-            if(ho.Notice_of_Completion_Date__c != null && ho.Sales_Order__c != NULL && ((oldHOMap != NULL && (oldHOMap.get(ho.Id).Notice_of_Completion_Date__c != ho.Notice_of_Completion_Date__c || oldHOMap.get(ho.Id).Sales_Order__c != ho.Sales_Order__c)) || (oldHOMap == NULL))){
-                projectIdSet.add(ho.Project__c);
-                salesOrderIdSet.add(ho.Sales_Order__c);
-            }
-        }
-        
-        ProjectService projectServiceInstance = ProjectService.getInstance();
-        Map<Id, Project__c> projectMap = projectServiceInstance.getProjectsByIdsMap(projectIdSet);
-        SalesOrderService salesOrderServiceInstance = SalesOrderService.getInstance();
-        Map<Id, SalesOrder__c> salesOrderMap = salesOrderServiceInstance.getSalesOrdersMap(salesOrderIdSet);
-        
-        
-        for(Handover__c ho : newHOList){
-            if(salesOrderMap != NULL && salesOrderMap.containsKey(ho.Sales_Order__c)){
-                SalesOrder__c salesOrderTempRec = salesOrderMap.get(ho.Sales_Order__c);
-                if(!salesOrderTempRec.Resale__c && salesOrderTempRec.Service_Charges_Waiver_No_of_Years__c != NULL && salesOrderTempRec.Service_Charges_Waiver_No_of_Years__c > 0){
-                    if(projectMap != NULL && projectMap.containsKey(ho.Project__c) && projectMap.get(ho.Project__c).HandoverNoticeCalculationDays__c != NULL ){
-                        salesOrderMap.get(ho.Sales_Order__c).ServiceChargesWaiverStartDate__c = ho.Notice_of_Completion_Date__c.addDays((Integer) Math.round(projectMap.get(ho.Project__c).HandoverNoticeCalculationDays__c));
-                        salesOrderMap.get(ho.Sales_Order__c).ServiceChargesWaiverEndDate__c = salesOrderTempRec.ServiceChargesWaiverStartDate__c.addDays((Integer) Math.round(salesOrderTempRec.Service_Charges_Waiver_No_of_Years__c*365));
-                        salesOrderMap.get(ho.Sales_Order__c).ServiceChargeStartDate__c = salesOrderTempRec.ServiceChargesWaiverEndDate__c.addDays(1);
-                    }
-                } else {
-                    if(projectMap != NULL && projectMap.containsKey(ho.Project__c) && projectMap.get(ho.Project__c).HandoverNoticeCalculationDays__c != NULL){
-                        salesOrderMap.get(ho.Sales_Order__c).ServiceChargeStartDate__c = ho.Notice_of_Completion_Date__c.addDays((Integer) Math.round(projectMap.get(ho.Project__c).HandoverNoticeCalculationDays__c));
-                    }
-                }
-                
-            }
-        }
-        System.debug('newHOList ::::: '+ newHOList);
-        salesOrderServiceInstance.updateSalesOrdersWithoutTrigger(salesOrderMap.values());
-    }
-
 }

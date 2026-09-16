@@ -16,9 +16,7 @@ public without sharing class ContentDocumentLinkTriggerHandler implements ITrigg
         ContentDocumentLinkTriggerHelper.handleAfterFileInsert((List<ContentDocumentLink>) newList);
         ContentDocumentLinkTriggerHelper.createContentDitributionForNotification(newList);
         ContentDocumentLinkTriggerHelper.moveLeasingSignedFilesToDocument((List<ContentDocumentLink>) newList);
-        ContentDocumentLinkTriggerHelper.moveBrokerAgreementSignedFilesToDocument((List<ContentDocumentLink>) newList);
-        ContentDocumentLinkTriggerHelper.moveSignedKYCFilesToDocument((List<ContentDocumentLink>) newList);
-        
+     ContentDocumentLinkTriggerHelper.moveSignedKYCFilesToDocument((List<ContentDocumentLink>) newList);
     }
     
     public void beforeUpdate(

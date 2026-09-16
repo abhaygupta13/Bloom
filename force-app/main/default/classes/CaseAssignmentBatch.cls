@@ -64,8 +64,7 @@ public without sharing class CaseAssignmentBatch implements Database.Batchable<s
             }
             else{
                 Time currentTime = System.now().time();
-                //Time tenAM = Time.newInstance(10, 0, 0, 0);
-                Time tenAM = Time.newInstance(19, 0, 0, 0);
+                Time tenAM = Time.newInstance(10, 0, 0, 0);
                 isAfterTenAM = currentTime >= tenAM;
             }
 
@@ -117,7 +116,6 @@ public without sharing class CaseAssignmentBatch implements Database.Batchable<s
         }
         
         if(!crmCaseIds.isEmpty()){
-            System.debug('in if'+crmCaseIds);
             AssignmentRuleHandler.crmCaseAssignment(new List<Id>(crmCaseIds));  
         }
         

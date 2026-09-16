@@ -8,6 +8,7 @@ public with sharing class WelcomeLetterService {
             LeasingOrderNumber__c,
             
             Account__r.Name,
+            Account__r.FirstName,
             Account__r.IsPersonAccount,
             
             Account__r.PersonMailingStreet,
@@ -35,6 +36,7 @@ public with sharing class WelcomeLetterService {
         wrapper.todayDate = System.today();
         
         wrapper.accountName = order.Account__r.Name;
+        wrapper.accountFirstName = order.Account__r.FirstName;
         
         wrapper.companyName = order.Project__r.Leasing_Company__r.Name;
         

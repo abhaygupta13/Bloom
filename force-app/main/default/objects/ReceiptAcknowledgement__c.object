@@ -1,0 +1,2704 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Receipt_Acknowledgement_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Receipt_Acknowledgement_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Receipt_Acknowledgement_Compact_Layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Receipt_Acknowledgement_Compact_Layout</fullName>
+        <fields>Name</fields>
+        <fields>SalesOrder__c</fields>
+        <fields>Account__c</fields>
+        <fields>Amount__c</fields>
+        <fields>AmountApplied__c</fields>
+        <fields>Status__c</fields>
+        <fields>Bank_Account_Beneficiary__c</fields>
+        <fields>MaturityDate__c</fields>
+        <fields>PaymentType__c</fields>
+        <fields>Bank_Account__c</fields>
+        <label>Receipt Acknowledgement Compact Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Object to manage all the receipts created for a Sales Order and EOI.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Account_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Account Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements (Account)</relationshipLabel>
+        <relationshipName>ReceiptAcknowledgements</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ActualReversalDate__c</fullName>
+        <label>Actual Bounce / Reversal Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Allocate__c</fullName>
+        <label>Allocate To</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Installment</fullName>
+                    <default>false</default>
+                    <label>Installment</label>
+                </value>
+                <value>
+                    <fullName>Service charges</fullName>
+                    <default>false</default>
+                    <label>Service charges</label>
+                </value>
+                <value>
+                    <fullName>Admin</fullName>
+                    <default>false</default>
+                    <label>Admin</label>
+                </value>
+                <value>
+                    <fullName>Transfer fee</fullName>
+                    <default>false</default>
+                    <label>Transfer fee</label>
+                </value>
+                <value>
+                    <fullName>ADM Fee</fullName>
+                    <default>false</default>
+                    <label>ADM Fee</label>
+                </value>
+                <value>
+                    <fullName>Other Charges</fullName>
+                    <default>false</default>
+                    <label>Other Charges</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Allocation__c</fullName>
+        <label>Allocation Method</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>FIFO</fullName>
+                    <default>false</default>
+                    <label>FIFO</label>
+                </value>
+                <value>
+                    <fullName>LIFO</fullName>
+                    <default>false</default>
+                    <label>LIFO</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>AmountApplied__c</fullName>
+        <description>Total amount applied for this receipt.</description>
+        <inlineHelpText>Total amount applied for this receipt.</inlineHelpText>
+        <label>Amount Applied</label>
+        <summarizedField>ReceiptAllocation__c.AmountApplied__c</summarizedField>
+        <summaryFilterItems>
+            <field>ReceiptAllocation__c.DateOfUnapplication__c</field>
+            <operation>equals</operation>
+            <value></value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>ReceiptAllocation__c.Unapply__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </summaryFilterItems>
+        <summaryForeignKey>ReceiptAllocation__c.ReceiptAcknowledgement__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Amount__c</fullName>
+        <description>Amount paid by the customer in the payment type specified.</description>
+        <inlineHelpText>Amount paid by the customer in the payment type specified.</inlineHelpText>
+        <label>Amount</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>2</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Application_Dtls__c</fullName>
+        <externalId>false</externalId>
+        <formula>&apos;Inst &apos; &amp; IF(Installment_Line_1__c = &apos;&apos;, &apos;&apos;, TEXT(Installment_Line_1__r.InstallmentNumber__c)) &amp; IF(Installment_Line_2__c = &apos;&apos;, 
+ &apos;&apos;, &apos;,&apos; &amp; TEXT(Installment_Line_2__r.InstallmentNumber__c)) &amp; IF(Installment_Line_3__c = &apos;&apos;, &apos;&apos; , &apos;,&apos; &amp; TEXT(Installment_Line_3__r.InstallmentNumber__c)) &amp;  IF( Other_Charges_1__c = &apos;&apos;, &apos;&apos;, TEXT(Other_Charges_1__r.TypeOfCharge__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Application Dtls</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BankCharges__c</fullName>
+        <externalId>false</externalId>
+        <label>Bank Charges</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BankName__c</fullName>
+        <description>Bank Name if the customer has made payment via Cheque, Wire Transfer etc.</description>
+        <inlineHelpText>Bank Name if the customer has made payment via Cheque, Wire Transfer etc.</inlineHelpText>
+        <label>Bank Name</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>BankName</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Bank_Account_Beneficiary__c</fullName>
+        <externalId>false</externalId>
+        <formula>Bank_Account__r.BeneficiaryNameCorporate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Bank Account Beneficiary</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bank_Account_IBAN__c</fullName>
+        <externalId>false</externalId>
+        <formula>Bank_Account__r.IBANNoCorporate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Bank Account IBAN</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bank_Account_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>Bank_Account__r.AccountNumberCorporate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Bank Account Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bank_Account_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Bank_Account__r.Type__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Bank Account Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Bank_Account__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <label>Bank Account</label>
+        <referenceTo>BankAccount__c</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements</relationshipLabel>
+        <relationshipName>Receipt_Acknowledgements</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>BeneficiaryName__c</fullName>
+        <externalId>false</externalId>
+        <label>Beneficiary Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Booking_Date__c</fullName>
+        <formula>SalesOrder__r.BookingDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Booking Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ChequeBouncedDate__c</fullName>
+        <label>Cheque Bounce Notification Sent Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ChequeReceivedBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Received By User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Receipt_Acknowledgements</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ChequeReceivedDate__c</fullName>
+        <label>Received Date Finance</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ChequeReceived__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Received by Finance</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ClearRemarks__c</fullName>
+        <label>Clear Remarks</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ClearedDate__c</fullName>
+        <description>Date when the receipt is cleared.</description>
+        <inlineHelpText>Date when the receipt is cleared.</inlineHelpText>
+        <label>Cleared Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements</relationshipLabel>
+        <relationshipName>Receipt_Acknowledgements</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>CustomerBankAccount__c</fullName>
+        <description>Account Number of the customer from which the payment was made.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Account Number of the customer from which the payment was made.</inlineHelpText>
+        <label>Customer Bank Account #</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CustomerName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Customer Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Bank_Clearing_Doc__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Bank Clearing Doc</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Transfer_Reference__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Transfer Reference #</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Decision__c</fullName>
+        <description>decision from Payment GW Response</description>
+        <externalId>false</externalId>
+        <inlineHelpText>decision from Payment GW Response</inlineHelpText>
+        <label>Decision</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Due_Date__c</fullName>
+        <formula>IF( ISNULL(New_Maturity_Date__c),  MaturityDate__c  ,  New_Maturity_Date__c)</formula>
+        <label>Due Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ErrorReason__c</fullName>
+        <label>Error Reason</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Finance_Verified__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Verified by Finance</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>First_Installment_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(Installment_Line_1__r.InstallmentNumber__c)</formula>
+        <label>First Installment Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HoldDate__c</fullName>
+        <label>Hold Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Installment_Line_1__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <label>Installment Line 1</label>
+        <referenceTo>InstallmentLines__c</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements</relationshipLabel>
+        <relationshipName>Receipt_Acknowledgements</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Installment_Line_2__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <label>Installment Line 2</label>
+        <referenceTo>InstallmentLines__c</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements (Installment Line 2)</relationshipLabel>
+        <relationshipName>Receipt_Acknowledgements1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Installment_Line_3__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <label>Installment Line 3</label>
+        <referenceTo>InstallmentLines__c</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements (Installment Line 3)</relationshipLabel>
+        <relationshipName>Receipt_Acknowledgements2</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>IntegrationMessage__c</fullName>
+        <label>Integration Message</label>
+        <length>32768</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IntegrationStatus__c</fullName>
+        <label>Integration Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Integrated</fullName>
+                    <default>false</default>
+                    <label>Not Integrated</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Success</fullName>
+                    <default>false</default>
+                    <label>Success</label>
+                </value>
+                <value>
+                    <fullName>Failed</fullName>
+                    <default>false</default>
+                    <label>Failed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>IsBounceChequeFeeCreated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Bounce Cheque Fee Created</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsCreatedFromLink__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Created From Link</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Markfordeletion__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Mark Delete/Reverse</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MaturityDate__c</fullName>
+        <description>Due date of the Installment or Other Charges</description>
+        <label>Maturity / Value / Cheque Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Milestone__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Milestone</label>
+        <referenceTo>Milestone__c</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements</relationshipLabel>
+        <relationshipName>Receipt_Acknowledgements</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>MortgageCheque__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Mortgage Cheque</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>New_Maturity_Date__c</fullName>
+        <label>New Maturity Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements</relationshipLabel>
+        <relationshipName>Payments</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>true</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Order_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT( SalesOrder__r.Status__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Order Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Charges_1__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <label>Other Charges 1</label>
+        <referenceTo>SalesOrderOtherCharges__c</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements</relationshipLabel>
+        <relationshipName>Receipt_Acknowledgements</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Other_Charges_2__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <label>Other Charges 2</label>
+        <referenceTo>SalesOrderOtherCharges__c</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements (Other Charges 2)</relationshipLabel>
+        <relationshipName>Receipt_Acknowledgements1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Other_Charges_3__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <label>Other Charges 3</label>
+        <referenceTo>SalesOrderOtherCharges__c</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements (Other Charges 3)</relationshipLabel>
+        <relationshipName>Receipt_Acknowledgements2</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>OutstandingAmount__c</fullName>
+        <formula>Amount__c  -  AmountApplied__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Remaining amount that needs to be allocated/applied.</inlineHelpText>
+        <label>Outstanding Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>PaidBy__c</fullName>
+        <description>Capture the name of the person who made the payment if it is other than the customer.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Capture the name of the person who made the payment if it is other than the customer.</inlineHelpText>
+        <label>Paid By</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PaymentType__c</fullName>
+        <description>Mode of Payment to be captured in this field</description>
+        <inlineHelpText>Mode of Payment to be captured in this field</inlineHelpText>
+        <label>Type</label>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>PaymentMode</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Payment_Type__c</fullName>
+        <label>Payment Type</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Link Payment</fullName>
+                    <default>false</default>
+                    <label>Link Payment</label>
+                </value>
+                <value>
+                    <fullName>Credit Card</fullName>
+                    <default>false</default>
+                    <label>Credit Card</label>
+                </value>
+                <value>
+                    <fullName>Wire Transfer</fullName>
+                    <default>false</default>
+                    <label>Wire Transfer</label>
+                </value>
+                <value>
+                    <fullName>Cheque</fullName>
+                    <default>false</default>
+                    <label>Cheque</label>
+                </value>
+                <value>
+                    <fullName>Credit Note</fullName>
+                    <default>false</default>
+                    <label>Credit Note</label>
+                </value>
+                <value>
+                    <fullName>POS</fullName>
+                    <default>false</default>
+                    <label>POS</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Cheque</fullName>
+                    <default>false</default>
+                    <label>Mortgage Cheque</label>
+                </value>
+                <value>
+                    <fullName>Security Cheque</fullName>
+                    <default>false</default>
+                    <label>Security Cheque</label>
+                </value>
+                <value>
+                    <fullName>Cash</fullName>
+                    <default>false</default>
+                    <label>Cash</label>
+                </value>
+                <value>
+                    <fullName>Transfer of rights - Resale</fullName>
+                    <default>false</default>
+                    <label>Transfer of rights - Resale</label>
+                </value>
+                <value>
+                    <fullName>Bloom App</fullName>
+                    <default>false</default>
+                    <label>Bloom App</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Percentage__c</fullName>
+        <label>Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>ReasonCode__c</fullName>
+        <description>reason_code from Payment GW Response</description>
+        <externalId>false</externalId>
+        <inlineHelpText>reason_code from Payment GW Response</inlineHelpText>
+        <label>Reason Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reason__c</fullName>
+        <label>Reason</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>ReceiptReversalCategory__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cheque Presented by Mistake</fullName>
+                    <default>false</default>
+                    <label>Cheque Presented by Mistake</label>
+                </value>
+                <value>
+                    <fullName>Poor Quality</fullName>
+                    <default>false</default>
+                    <label>Poor Quality</label>
+                </value>
+                <value>
+                    <fullName>Irregular Signature</fullName>
+                    <default>false</default>
+                    <label>Irregular Signature</label>
+                </value>
+                <value>
+                    <fullName>Overwriting</fullName>
+                    <default>false</default>
+                    <label>Overwriting</label>
+                </value>
+                <value>
+                    <fullName>Altered</fullName>
+                    <default>false</default>
+                    <label>Altered</label>
+                </value>
+                <value>
+                    <fullName>Amount in words not matching with number</fullName>
+                    <default>false</default>
+                    <label>Amount in words not matching with number</label>
+                </value>
+                <value>
+                    <fullName>Swift Confirmation Awaited</fullName>
+                    <default>false</default>
+                    <label>Swift Confirmation Awaited</label>
+                </value>
+                <value>
+                    <fullName>Insufficient Fund</fullName>
+                    <default>false</default>
+                    <label>Insufficient Fund</label>
+                </value>
+                <value>
+                    <fullName>Closed Account</fullName>
+                    <default>false</default>
+                    <label>Closed Account</label>
+                </value>
+                <value>
+                    <fullName>Frozen Account</fullName>
+                    <default>false</default>
+                    <label>Frozen Account</label>
+                </value>
+                <value>
+                    <fullName>Signature Missing</fullName>
+                    <default>false</default>
+                    <label>Signature Missing</label>
+                </value>
+                <value>
+                    <fullName>Cheque replacement</fullName>
+                    <default>false</default>
+                    <label>Cheque replacement</label>
+                </value>
+                <value>
+                    <fullName>Unit under resale</fullName>
+                    <default>false</default>
+                    <label>Unit under resale</label>
+                </value>
+                <value>
+                    <fullName>Advance paid</fullName>
+                    <default>false</default>
+                    <label>Advance paid</label>
+                </value>
+                <value>
+                    <fullName>Postponement</fullName>
+                    <default>false</default>
+                    <label>Postponement</label>
+                </value>
+                <value>
+                    <fullName>Milestone withdrawal/ PP change with approval</fullName>
+                    <default>false</default>
+                    <label>Milestone withdrawal/ PP change with approval</label>
+                </value>
+                <value>
+                    <fullName>Others</fullName>
+                    <default>false</default>
+                    <label>Others</label>
+                </value>
+                <value>
+                    <fullName>PRS BY OTH THAN BENE BANK</fullName>
+                    <default>false</default>
+                    <label>PRS BY OTH THAN BENE BANK</label>
+                </value>
+                <value>
+                    <fullName>Payee name missing / Title Differs</fullName>
+                    <default>false</default>
+                    <label>Payee name missing / Title Differs</label>
+                </value>
+                <value>
+                    <fullName>Alterations/ Overwriting not signed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Alterations/ Overwriting not signed</label>
+                </value>
+                <value>
+                    <fullName>Closed account/ Frozen account</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Closed account/ Frozen account</label>
+                </value>
+                <value>
+                    <fullName>Insufficient funds</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Insufficient funds</label>
+                </value>
+                <value>
+                    <fullName>Poor quality of cheque</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Poor quality of cheque</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Cheque Presented by Mistake</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Poor Quality</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Irregular Signature</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Overwriting</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Altered</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Amount in words not matching with number</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Swift Confirmation Awaited</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Insufficient Fund</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Closed Account</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Frozen Account</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Signature Missing</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <valueName>PRS BY OTH THAN BENE BANK</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Bounced Cheque</controllingFieldValue>
+                <valueName>Payee name missing / Title Differs</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Withdrawal</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Cheque replacement</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Withdrawal</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Unit under resale</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Withdrawal</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Advance paid</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Withdrawal</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Postponement</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Withdrawal</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Milestone withdrawal/ PP change with approval</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Withdrawal</controllingFieldValue>
+                <controllingFieldValue>Reversal of installment receipt entry</controllingFieldValue>
+                <valueName>Others</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ReceiptDate__c</fullName>
+        <description>Date when the receipt was cleared by Finance team</description>
+        <label>Receipt Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ReceiptNumber__c</fullName>
+        <description>Internal Generated Number</description>
+        <externalId>false</externalId>
+        <label>Receipt #</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReceiptPostingDate__c</fullName>
+        <label>Receipt Posting Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ReceiptReversalCategory__c</fullName>
+        <label>Receipt Reversal Category</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Bounced Cheque</fullName>
+                    <default>false</default>
+                    <label>Bounced Cheque</label>
+                </value>
+                <value>
+                    <fullName>Withdrawal</fullName>
+                    <default>false</default>
+                    <label>Withdrawal</label>
+                </value>
+                <value>
+                    <fullName>Reversal of installment receipt entry</fullName>
+                    <default>false</default>
+                    <label>Reversal of installment receipt entry</label>
+                </value>
+                <value>
+                    <fullName>Other Reversal</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Other Reversal</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Received_From_Company_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Company Type</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Received_From_Emirates_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Emirates ID</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Received_From_Incorporated_In__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Incorporated In</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Received_From_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Name</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Received_From_Passport__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Passport #</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Received_From_Registered_Office__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Registered Office</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Received_From_Trade_License__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Trade License #</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Received_From_Type__c</fullName>
+        <label>Received From Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Individual</fullName>
+                    <default>false</default>
+                    <label>Individual</label>
+                </value>
+                <value>
+                    <fullName>Company</fullName>
+                    <default>false</default>
+                    <label>Company</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Received_from_Nationality__c</fullName>
+        <label>Received from Nationality</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Nationality_Name_Values</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>RecievedFromAccount__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>Account Name of the Cheque, Credit Card etc. that the customer used to make the payment incase its an existing customer</description>
+        <label>Recieved From Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements (Recieved From Account)</relationshipLabel>
+        <relationshipName>ReceiptAckRecievedFromAccount</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ReferenceNumber__c</fullName>
+        <description>Reference number of the payment made by the customer to be captured</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Reference number of the payment made by the customer to be captured</inlineHelpText>
+        <label>Reference Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RejectCheque__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Rejected by Finance</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Remarks__c</fullName>
+        <label>Remarks</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>RemitterName__c</fullName>
+        <externalId>false</externalId>
+        <label>Remitter Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReversalApprovalDate__c</fullName>
+        <label>Reversal Approval/Rejection Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ReversalApprovalRemarks__c</fullName>
+        <label>Reversal Approval/Rejection Remarks</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ReversalApprovalStatus__c</fullName>
+        <label>Reversal Approval/Rejection Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>false</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ReversalApprovedBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Reversal Approved/Rejected By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>ReceiptAcknowledgements2</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ReversalComments__c</fullName>
+        <label>Reversal Comments</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Reversal_Status_Reason__c</fullName>
+        <label>Reversal Status Reason</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cheque Replaced</fullName>
+                    <default>false</default>
+                    <label>Cheque Replaced</label>
+                </value>
+                <value>
+                    <fullName>Account Closed</fullName>
+                    <default>false</default>
+                    <label>Account Closed</label>
+                </value>
+                <value>
+                    <fullName>Cheque Error</fullName>
+                    <default>false</default>
+                    <label>Cheque Error</label>
+                </value>
+                <value>
+                    <fullName>Insufficient Funds</fullName>
+                    <default>false</default>
+                    <label>Insufficient Funds</label>
+                </value>
+                <value>
+                    <fullName>Irregular Signature</fullName>
+                    <default>false</default>
+                    <label>Irregular Signature</label>
+                </value>
+                <value>
+                    <fullName>Customer Requested</fullName>
+                    <default>false</default>
+                    <label>Customer Requested</label>
+                </value>
+                <value>
+                    <fullName>Cheque Expired</fullName>
+                    <default>false</default>
+                    <label>Cheque Expired</label>
+                </value>
+                <value>
+                    <fullName>Wrong Data Entry</fullName>
+                    <default>false</default>
+                    <label>Wrong Data Entry</label>
+                </value>
+                <value>
+                    <fullName>Wrong Data</fullName>
+                    <default>false</default>
+                    <label>Wrong Data</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SAPReversalDocumentNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Reversal Document Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Cheque_GL_Sub_Account__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISPICKVAL(PaymentType__c, &apos;Cheque&apos;),Bank_Account__r.SAP_Cheque_GL_Sub_Account__c,&apos;&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SAP Cheque GL Sub Account</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Company_Code__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Company_Code__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SAP Company Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Condition_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( Installment_Line_1__r.SAP_Condition_Type__c != Null, Installment_Line_1__r.SAP_Condition_Type__c , Other_Charges_1__r.SAP_Condition_Type__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SAP Condition Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Contract_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.SAP_Contract_No__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SAP Contract Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Document_No__c</fullName>
+        <externalId>true</externalId>
+        <label>Customer Clearing Document</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Main_Buyer_BP_No__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.SAP_Buyer_BP_Number__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SAP Main Buyer BP No</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Special_GL_Indicator__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Special GL Indicator</label>
+        <length>1</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAP_Wire_GL_Sub_Account__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(NOT(ISPICKVAL(PaymentType__c, &apos;Cheque&apos;)|| ISPICKVAL(PaymentType__c, &apos;Security Cheque&apos;)),
+Bank_Account__r.SAP_Wire_GL_Sub_Account__c,&apos;&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SAP Wire GL Sub Account</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SalesOrderStatus__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(SalesOrder__r.Status__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SalesOrder Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SalesOrder__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <label>Sales Order</label>
+        <referenceTo>SalesOrder__c</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements</relationshipLabel>
+        <relationshipName>Payments</relationshipName>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Sales_Manager_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Sales Manager Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Order_Broker_Agency__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Broker_Agencyy__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Order Broker Agency</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Order_Cleared_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Sales_Order_Cleared_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Order Cleared Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Order_Due_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Sales_Order_Due_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Order Due Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Order_Net_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.NetAmount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Order Net Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Order_Pending_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Sales_Order_Pending_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Order Pending Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sales_Order_Received_Amount__c</fullName>
+        <externalId>false</externalId>
+        <formula>SalesOrder__r.Sales_Order_Received_Amount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Order Received Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SendtoSAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Send to SAP</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StatusReason__c</fullName>
+        <label>Status Reason</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>Status__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Customer Requested</fullName>
+                    <default>false</default>
+                    <label>Customer Requested</label>
+                </value>
+                <value>
+                    <fullName>Cheque Replaced</fullName>
+                    <default>false</default>
+                    <label>Cheque Replaced</label>
+                </value>
+                <value>
+                    <fullName>Account Closed</fullName>
+                    <default>false</default>
+                    <label>Account Closed</label>
+                </value>
+                <value>
+                    <fullName>Amount In Words and Num Mismatch</fullName>
+                    <default>false</default>
+                    <label>Amount In Words and Num Mismatch</label>
+                </value>
+                <value>
+                    <fullName>Credit Card Chargeback Reversed or Amount Changed</fullName>
+                    <default>false</default>
+                    <label>Credit Card Chargeback Reversed or Amount Changed</label>
+                </value>
+                <value>
+                    <fullName>Credit Card Error - Payment Reversal</fullName>
+                    <default>false</default>
+                    <label>Credit Card Error - Payment Reversal</label>
+                </value>
+                <value>
+                    <fullName>Credit Card Refund Reversed or Amount Changed</fullName>
+                    <default>false</default>
+                    <label>Credit Card Refund Reversed or Amount Changed</label>
+                </value>
+                <value>
+                    <fullName>Expired Cheques</fullName>
+                    <default>false</default>
+                    <label>Expired Cheques</label>
+                </value>
+                <value>
+                    <fullName>Insufficient Funds</fullName>
+                    <default>false</default>
+                    <label>Insufficient Funds</label>
+                </value>
+                <value>
+                    <fullName>Irregular Signature</fullName>
+                    <default>false</default>
+                    <label>Irregular Signature</label>
+                </value>
+                <value>
+                    <fullName>NSF</fullName>
+                    <default>false</default>
+                    <label>NSF</label>
+                </value>
+                <value>
+                    <fullName>Payment Reversal</fullName>
+                    <default>false</default>
+                    <label>Payment Reversal</label>
+                </value>
+                <value>
+                    <fullName>Resubmit Check</fullName>
+                    <default>false</default>
+                    <label>Resubmit Check</label>
+                </value>
+                <value>
+                    <fullName>Uncollectable</fullName>
+                    <default>false</default>
+                    <label>Uncollectable</label>
+                </value>
+                <value>
+                    <fullName>Wrong Amount</fullName>
+                    <default>false</default>
+                    <label>Wrong Amount</label>
+                </value>
+                <value>
+                    <fullName>Wrong Customer</fullName>
+                    <default>false</default>
+                    <label>Wrong Customer</label>
+                </value>
+                <value>
+                    <fullName>Wrong Invoice</fullName>
+                    <default>false</default>
+                    <label>Wrong Invoice</label>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Customer Requested</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Cheque Replaced</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Account Closed</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Amount In Words and Num Mismatch</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Credit Card Chargeback Reversed or Amount Changed</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Credit Card Error - Payment Reversal</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Credit Card Refund Reversed or Amount Changed</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Expired Cheques</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Insufficient Funds</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Irregular Signature</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>NSF</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Payment Reversal</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Resubmit Check</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Uncollectable</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Wrong Amount</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Wrong Customer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Reversed</controllingFieldValue>
+                <valueName>Wrong Invoice</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Entered</fullName>
+                    <default>false</default>
+                    <label>Entered</label>
+                </value>
+                <value>
+                    <fullName>Received</fullName>
+                    <default>true</default>
+                    <label>Received</label>
+                </value>
+                <value>
+                    <fullName>Cleared</fullName>
+                    <default>false</default>
+                    <label>Cleared</label>
+                </value>
+                <value>
+                    <fullName>Reversed</fullName>
+                    <default>false</default>
+                    <label>Reversed</label>
+                </value>
+                <value>
+                    <fullName>Bounced</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Bounced</label>
+                </value>
+                <value>
+                    <fullName>On-Hold</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>On-Hold</label>
+                </value>
+                <value>
+                    <fullName>Remitted</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Remitted</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>TotalAppliedAmount__c</fullName>
+        <label>Total Applied Amount</label>
+        <summarizedField>ReceiptAllocation__c.AmountApplied__c</summarizedField>
+        <summaryForeignKey>ReceiptAllocation__c.ReceiptAcknowledgement__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TotalNumberOfReceiptAllocations__c</fullName>
+        <label>Total Number Of Receipt Allocations</label>
+        <summaryFilterItems>
+            <field>ReceiptAllocation__c.AmountApplied__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </summaryFilterItems>
+        <summaryForeignKey>ReceiptAllocation__c.ReceiptAcknowledgement__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>UnclearRemarks__c</fullName>
+        <label>Unclear Remarks</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Unit_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Unit Number</label>
+        <length>200</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unit_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(SalesOrder__r.Unit__r.UnitType__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unit Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unit__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <label>Unit</label>
+        <referenceTo>Unit__c</referenceTo>
+        <relationshipLabel>Receipt Acknowledgements</relationshipLabel>
+        <relationshipName>Receipt_Acknowledgements</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>VerifyBy__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Verify By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Receipt_Acknowledgements1</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>VerifyDate__c</fullName>
+        <label>Verify Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>Receipt Acknowledgement</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>SalesOrder__c</columns>
+        <columns>NAME</columns>
+        <columns>Account__c</columns>
+        <columns>Amount__c</columns>
+        <columns>MaturityDate__c</columns>
+        <columns>ReferenceNumber__c</columns>
+        <columns>Finance_Verified__c</columns>
+        <columns>ChequeReceivedBy__c</columns>
+        <columns>BankName__c</columns>
+        <columns>Status__c</columns>
+        <columns>RecievedFromAccount__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>greaterThan</operation>
+            <value>7/7/2022 12:00 AM</value>
+        </filters>
+        <filters>
+            <field>SalesOrder__c</field>
+            <operation>equals</operation>
+            <value>TOL-T-V-164-240826</value>
+        </filters>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Cleared_and_not_Applied_Receipts</fullName>
+        <columns>NAME</columns>
+        <columns>Unit_Number__c</columns>
+        <columns>Account_Name__c</columns>
+        <columns>ReferenceNumber__c</columns>
+        <columns>PaymentType__c</columns>
+        <columns>BankName__c</columns>
+        <columns>Amount__c</columns>
+        <columns>MaturityDate__c</columns>
+        <columns>Finance_Verified__c</columns>
+        <columns>ChequeReceivedBy__c</columns>
+        <columns>RejectCheque__c</columns>
+        <columns>PaidBy__c</columns>
+        <columns>SalesOrder__c</columns>
+        <columns>MortgageCheque__c</columns>
+        <columns>Markfordeletion__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>6.Cleared and not Applied Receipts</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+            <group>Operations_Team</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Delete_Receipts</fullName>
+        <columns>NAME</columns>
+        <columns>Amount__c</columns>
+        <columns>Markfordeletion__c</columns>
+        <columns>MaturityDate__c</columns>
+        <columns>PaymentType__c</columns>
+        <columns>OutstandingAmount__c</columns>
+        <columns>ReferenceNumber__c</columns>
+        <columns>SalesOrder__c</columns>
+        <columns>Status__c</columns>
+        <columns>Finance_Verified__c</columns>
+        <columns>VerifyBy__c</columns>
+        <columns>VerifyDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Markfordeletion__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Cleared,Bounced,Reversed</value>
+        </filters>
+        <label>8.Approve Reverse/Delete Receipts</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Mark_for_Deletion_Reversal_Approval</fullName>
+        <columns>NAME</columns>
+        <columns>Unit_Number__c</columns>
+        <columns>ReferenceNumber__c</columns>
+        <columns>PaymentType__c</columns>
+        <columns>BankName__c</columns>
+        <columns>Markfordeletion__c</columns>
+        <columns>Reversal_Status_Reason__c</columns>
+        <columns>ReversalComments__c</columns>
+        <columns>Amount__c</columns>
+        <columns>MaturityDate__c</columns>
+        <columns>ChequeReceived__c</columns>
+        <columns>RejectCheque__c</columns>
+        <columns>Finance_Verified__c</columns>
+        <columns>SalesOrder__c</columns>
+        <columns>MortgageCheque__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Cleared,Bounced,Reversed</value>
+        </filters>
+        <filters>
+            <field>Unit_Number__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>Markfordeletion__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>7.Submit for Deletion/Reversal</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+            <group>Operations_Team</group>
+            <group>Sales_Manager</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Receipts_Due_Not_Cleared</fullName>
+        <columns>NAME</columns>
+        <columns>Unit_Number__c</columns>
+        <columns>ReferenceNumber__c</columns>
+        <columns>PaymentType__c</columns>
+        <columns>BankName__c</columns>
+        <columns>Amount__c</columns>
+        <columns>MaturityDate__c</columns>
+        <columns>Finance_Verified__c</columns>
+        <columns>ChequeReceivedBy__c</columns>
+        <columns>RejectCheque__c</columns>
+        <columns>Account_Name__c</columns>
+        <columns>PaidBy__c</columns>
+        <columns>SalesOrder__c</columns>
+        <columns>MortgageCheque__c</columns>
+        <columns>Markfordeletion__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Unit_Number__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Received,On-Hold</value>
+        </filters>
+        <filters>
+            <field>ChequeReceived__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>MaturityDate__c</field>
+            <operation>lessOrEqual</operation>
+            <value>TODAY</value>
+        </filters>
+        <label>5.Not Cleared Receipts</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+            <group>Operations_Team</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Receipts_Rejected</fullName>
+        <booleanFilter>(1 OR 3) AND 2 AND 4</booleanFilter>
+        <columns>NAME</columns>
+        <columns>ReferenceNumber__c</columns>
+        <columns>PaymentType__c</columns>
+        <columns>BankName__c</columns>
+        <columns>Bank_Account_Number__c</columns>
+        <columns>Amount__c</columns>
+        <columns>MaturityDate__c</columns>
+        <columns>ReceiptPostingDate__c</columns>
+        <columns>Finance_Verified__c</columns>
+        <columns>RejectCheque__c</columns>
+        <columns>Account_Name__c</columns>
+        <columns>SalesOrder__c</columns>
+        <columns>Status__c</columns>
+        <columns>OutstandingAmount__c</columns>
+        <columns>Application_Dtls__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Finance_Verified__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>RejectCheque__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Entered</value>
+        </filters>
+        <filters>
+            <field>SalesOrder__c</field>
+            <operation>notContain</operation>
+            <value>Bloom Arjaan</value>
+        </filters>
+        <label>3.Receive and Validate Receipts</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Receive_and_Validate_Receipts_Bloom_Arj</fullName>
+        <booleanFilter>(1 OR 3) AND 2 AND 4 AND 5</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Unit_Number__c</columns>
+        <columns>ReferenceNumber__c</columns>
+        <columns>PaymentType__c</columns>
+        <columns>BankName__c</columns>
+        <columns>Bank_Account_Beneficiary__c</columns>
+        <columns>Amount__c</columns>
+        <columns>MaturityDate__c</columns>
+        <columns>Finance_Verified__c</columns>
+        <columns>RejectCheque__c</columns>
+        <columns>Account_Name__c</columns>
+        <columns>SalesOrder__c</columns>
+        <columns>Status__c</columns>
+        <columns>OutstandingAmount__c</columns>
+        <columns>Application_Dtls__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Finance_Verified__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>RejectCheque__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Entered</value>
+        </filters>
+        <filters>
+            <field>SalesOrder__c</field>
+            <operation>contains</operation>
+            <value>Bloom Arjaan</value>
+        </filters>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>LAST_N_DAYS:60</value>
+        </filters>
+        <label>13.Receive and Validate Receipts Arjan</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+            <group>System_Administrator</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Rejected_Receipts</fullName>
+        <columns>NAME</columns>
+        <columns>Unit_Number__c</columns>
+        <columns>ReferenceNumber__c</columns>
+        <columns>PaymentType__c</columns>
+        <columns>BankName__c</columns>
+        <columns>Amount__c</columns>
+        <columns>Status__c</columns>
+        <columns>MaturityDate__c</columns>
+        <columns>Finance_Verified__c</columns>
+        <columns>ChequeReceivedBy__c</columns>
+        <columns>RejectCheque__c</columns>
+        <columns>Account_Name__c</columns>
+        <columns>SalesOrder__c</columns>
+        <columns>MortgageCheque__c</columns>
+        <columns>Markfordeletion__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RejectCheque__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>4.Rejected Receipts</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+            <group>Operations_Team</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>ReversalPendingApprovalReceipts</fullName>
+        <columns>NAME</columns>
+        <columns>Unit__c</columns>
+        <columns>Amount__c</columns>
+        <columns>ReferenceNumber__c</columns>
+        <columns>ChequeBouncedDate__c</columns>
+        <columns>ReceiptReversalCategory__c</columns>
+        <columns>Reason__c</columns>
+        <columns>VerifyBy__c</columns>
+        <columns>VerifyDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ReversalApprovalStatus__c</field>
+            <operation>equals</operation>
+            <value>Pending</value>
+        </filters>
+        <label>Reverse Receipt Pending Approval List</label>
+        <sharedTo>
+            <role>Assistant_Manager_Sales_Finance</role>
+            <role>Director_Sales_Finance_Credit_Controls</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>X11_Cancelled_Units_Verified_Receipts</fullName>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Unit_Number__c</columns>
+        <columns>ReferenceNumber__c</columns>
+        <columns>PaymentType__c</columns>
+        <columns>BankName__c</columns>
+        <columns>SalesOrder__c</columns>
+        <columns>Bank_Account_Beneficiary__c</columns>
+        <columns>Amount__c</columns>
+        <columns>MaturityDate__c</columns>
+        <columns>Finance_Verified__c</columns>
+        <columns>RejectCheque__c</columns>
+        <columns>Account_Name__c</columns>
+        <columns>Status__c</columns>
+        <columns>OutstandingAmount__c</columns>
+        <columns>Application_Dtls__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Received,Cleared</value>
+        </filters>
+        <filters>
+            <field>SalesOrder__c</field>
+            <operation>notContain</operation>
+            <value>Bloom Arjaan</value>
+        </filters>
+        <filters>
+            <field>Order_Status__c</field>
+            <operation>contains</operation>
+            <value>Cancelled</value>
+        </filters>
+        <label>11.Cancelled Units - Verified Receipts</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>X12_Cancelled_Units_Unverified_Receipts</fullName>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Unit_Number__c</columns>
+        <columns>ReferenceNumber__c</columns>
+        <columns>PaymentType__c</columns>
+        <columns>BankName__c</columns>
+        <columns>SalesOrder__c</columns>
+        <columns>Bank_Account_Beneficiary__c</columns>
+        <columns>Amount__c</columns>
+        <columns>MaturityDate__c</columns>
+        <columns>Finance_Verified__c</columns>
+        <columns>RejectCheque__c</columns>
+        <columns>Account_Name__c</columns>
+        <columns>Status__c</columns>
+        <columns>OutstandingAmount__c</columns>
+        <columns>Application_Dtls__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Entered</value>
+        </filters>
+        <filters>
+            <field>SalesOrder__c</field>
+            <operation>notContain</operation>
+            <value>Bloom Arjaan</value>
+        </filters>
+        <filters>
+            <field>Order_Status__c</field>
+            <operation>contains</operation>
+            <value>Cancelled</value>
+        </filters>
+        <label>12.Cancelled Units - Unverified Receipts</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>X9_Reversed_Receipts</fullName>
+        <columns>NAME</columns>
+        <columns>Unit_Number__c</columns>
+        <columns>ReferenceNumber__c</columns>
+        <columns>PaymentType__c</columns>
+        <columns>BankName__c</columns>
+        <columns>Amount__c</columns>
+        <columns>MaturityDate__c</columns>
+        <columns>Finance_Verified__c</columns>
+        <columns>ChequeReceivedBy__c</columns>
+        <columns>RejectCheque__c</columns>
+        <columns>Account_Name__c</columns>
+        <columns>PaidBy__c</columns>
+        <columns>SalesOrder__c</columns>
+        <columns>MortgageCheque__c</columns>
+        <columns>Markfordeletion__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Unit_Number__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Bounced,Reversed</value>
+        </filters>
+        <label>9.Reversed Receipts</label>
+        <sharedTo>
+            <group>Finance_Group</group>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <displayFormat>RA-{000000}</displayFormat>
+        <label>Receipt Acknowledgement #</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Receipt Acknowledgements</pluralLabel>
+    <searchLayouts>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>NewFromDocument</excludedStandardButtons>
+        <excludedStandardButtons>Accept</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>Import</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>PrintableListView</excludedStandardButtons>
+        <excludedStandardButtons>MassAssignRecordLabel</excludedStandardButtons>
+        <massQuickActions>RejectReversalRequests</massQuickActions>
+        <massQuickActions>ApproveReversalRequests</massQuickActions>
+        <searchResultsAdditionalFields>SalesOrder__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Account__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Amount__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>MaturityDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ReferenceNumber__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ChequeReceivedBy__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ReceiptDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RecievedFromAccount__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>SAP_Document_No__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>AR_receipts_cannot_be_deleted</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISCHANGED(Markfordeletion__c) &amp;&amp;
+Markfordeletion__c &amp;&amp;
+((ISPICKVAL(Status__c,&apos;Conirmed&apos;) ||
+ISPICKVAL(Status__c,&apos;Remitted&apos;)  ||
+ISPICKVAL(Status__c,&apos;Reversed&apos;) ||
+ISPICKVAL(Status__c,&apos;Cleared&apos;)  )
+)</errorConditionFormula>
+        <errorMessage>You cannot delete receipts received by finance or with status confirmed, remitted, reversed or cleared.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Cheque_Duplication_Number</fullName>
+        <active>true</active>
+        <errorConditionFormula>OR(
+AND(
+SalesOrder__r.Sales_Order_Number__c = &quot;SO04619&quot;,
+ReferenceNumber__c = &quot;000007&quot;
+),
+AND(
+SalesOrder__r.Sales_Order_Number__c = &quot;SO07177&quot;,
+ReferenceNumber__c = &quot;935946&quot;
+)
+)</errorConditionFormula>
+        <errorMessage>This is a lost Cheque</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Cheque_Reference_Number_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(ISPICKVAL(PaymentType__c,&quot;Cheque&quot;),OR(ISCHANGED(ReferenceNumber__c),ISNEW()),LEN(ReferenceNumber__c)  &lt;&gt; 6)</errorConditionFormula>
+        <errorMessage>Cheque Reference Number Should Be 6 Digits.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Delete_Reverse_Validation_Rule</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(Finance_Verified__c = true,ISCHANGED( Markfordeletion__c ))</errorConditionFormula>
+        <errorMessage>You cannot Delete/Reverse finance verified receipts.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>MarkforDeletion_cannot_be_updated</fullName>
+        <active>true</active>
+        <errorConditionFormula>if(ISCHANGED(Markfordeletion__c), 
+
+PRIORVALUE(Markfordeletion__c) ,
+
+
+(Markfordeletion__c &amp;&amp;
+NOT(ISNEW()) 
+
+)
+
+)
+
+&amp;&amp;
+NOT(
+($Profile.Name = &apos;Integration Profile&apos; ||
+$Profile.Name = &apos;System Administrator&apos; ||
+$Profile.Name = &apos;PaymentUrl Profile&apos; ||
+$Profile.Name = &apos;Finance Team&apos; || 
+$Profile.Name = &apos;Finance &amp; Collection Team&apos;
+)
+)</errorConditionFormula>
+        <errorMessage>You cannot update receipts marked for deletion.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Posting_Date_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    NOT($Profile.Name = &quot;System Administrator&quot;),
+    ISCHANGED(ReceiptPostingDate__c),
+    ReceiptPostingDate__c &lt; TODAY(),
+    OR(
+        MONTH(ReceiptPostingDate__c) &lt;&gt; MONTH(TODAY()),
+        YEAR(ReceiptPostingDate__c) &lt;&gt; YEAR(TODAY())
+    )
+)</errorConditionFormula>
+        <errorMessage>Posting Date must be within the current month or future date</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Received_To_Entered_Status_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISPICKVAL(PRIORVALUE(Status__c),&apos;Received&apos;) &amp;&amp; ISPICKVAL( Status__c ,&apos;Entered&apos;)</errorConditionFormula>
+        <errorMessage>Status Cannot be Changed from Received to Entered</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Received_cheque_cannot_be_updated</fullName>
+        <active>true</active>
+        <errorConditionFormula>ChequeReceived__c &amp;&amp; 
+NOT(ISNEW()) &amp;&amp;
+(ISCHANGED(Amount__c) ||
+ISCHANGED(BankName__c) ||
+ISCHANGED(BeneficiaryName__c) ||
+ISCHANGED(ChequeReceived__c) ||
+ISCHANGED(ChequeReceivedBy__c) ||
+ISCHANGED(ChequeReceivedDate__c) ||
+ISCHANGED(Customer_Transfer_Reference__c) ||
+ISCHANGED(MaturityDate__c) ||
+ISCHANGED(PaidBy__c) ||
+ISCHANGED(PaymentType__c) ||
+ISCHANGED(ReceiptNumber__c) ||
+ISCHANGED(ReceiptDate__c) ||
+ISCHANGED(ReferenceNumber__c) ||
+ISCHANGED(Remarks__c) ||
+ISCHANGED(VerifyBy__c) ||
+ISCHANGED(VerifyDate__c) ||
+ISCHANGED(RecievedFromAccount__c)
+
+)
+&amp;&amp;
+( $Profile.Name = &apos;Sales Manager&apos; ||
+$Profile.Name = &apos;Sales Admin&apos; ||
+$Profile.Name = &apos;Customer Management&apos; ||
+$Profile.Name = &apos;CM Agent&apos; )</errorConditionFormula>
+        <errorMessage>Receipt cannot be update once received by finance team.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Scanned_status_validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISPICKVAL(Status__c , &apos;Scanned&apos;) &amp;&amp;
+ ISCHANGED(Status__c ) &amp;&amp; 
+
+NOT(
+($Profile.Name = &apos;System Administrator&apos; ||
+$Profile.Name = &apos;Cheque Scanner&apos; ||
+ $Profile.Name = &apos;Integration Profile&apos; 
+)
+)</errorConditionFormula>
+        <errorMessage>You cannot update status of receipt to scanned.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Status_Reason_Mandatory</fullName>
+        <active>true</active>
+        <description>Status reason to be provided when status is &apos;On Hold&apos; or &apos;Reversal&apos;</description>
+        <errorConditionFormula>AND(
+ISBLANK( TEXT(StatusReason__c )),
+ ISPICKVAL( Status__c , &apos;On Hold&apos;)
+ 
+)</errorConditionFormula>
+        <errorDisplayField>StatusReason__c</errorDisplayField>
+        <errorMessage>Please provide reason for the receipt to be &apos;On Hold&apos;</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>NotifyFinance</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <height>600</height>
+        <linkType>url</linkType>
+        <masterLabel>Notify Finance</masterLabel>
+        <openType>sidebar</openType>
+        <protected>false</protected>
+        <requireRowSelection>false</requireRowSelection>
+        <url>/flow/Send_Email_to_Finance?RecordId={!SalesOrder__c.Id}&amp;retURL={!SalesOrder__c.Id}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>PrintReceipt</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <height>600</height>
+        <linkType>url</linkType>
+        <masterLabel>Print Receipt</masterLabel>
+        <openType>sidebar</openType>
+        <protected>false</protected>
+        <url>/apex/ReceiptAcknowledgementDocument?id={!ReceiptAcknowledgement__c.Id}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>PrintReceiptPage</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <height>600</height>
+        <linkType>url</linkType>
+        <masterLabel>Print Receipt Page</masterLabel>
+        <openType>noSidebar</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>/apex/ReceiptAcknowledgementDocument?id=PrintSelected</url>
+    </webLinks>
+    <webLinks>
+        <fullName>RejectReversalReceipts</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Reject Reversal Receipts</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>/flow/ReceiptAcknowledgement_UpdateStatus_Reversed?retURL=/lightning/o/ReceiptAcknowledgement__c/list?filterName=Recent</url>
+    </webLinks>
+</CustomObject>

@@ -54,9 +54,11 @@ public class LeadConversionControllerTest {
         testLead.CustomerType__c='GCC';
         TestLead.CustomerSubType__c='CORPORATE';
         testLead.Street='street1';
+        testLead.LeadTeam__c = 'Sales';
         testLead.NameArabic__c='Arabic';
         testLead.PostalCode='PostalCode';
         testLead.LeasingDocumentsReceived__c = 'No';
+        testLead.Passport_Number__c = '123456';
         testLead.Emirates_Id__c='Emirates_Id__c'; 
         testLead.CustomerBudget__c='1M-3M';
         testLead.AreaSqmt__c = '65-110 SQM';
@@ -107,14 +109,12 @@ public class LeadConversionControllerTest {
         testLead1.Company='Vodafone';
         testLead1.FirstName='two';
         testLead1.LastName='TestLead2';
-        testLead1.Street='street12';
         testLead1.NameArabic__c='Arabic2';
-        testLead1.PostalCode='PostalCode2';
         testLead1.Emirates_Id__c='Emirates_Id__c2'; 
         testLead1.CustomerBudget__c='1M-3M';
         testLead1.AreaSqmt__c = '65-110 SQM';
         testLead1.LeasingDocumentsReceived__c = 'No';
-        testLead1.LeadTeam__c = 'Leasing';
+        testLead1.LeadTeam__c = 'Sales';
         testLead1.TradeLicenseNumber__c='trandeno1';
         testLead1.RegistrationAuthority__c ='Department of Economic Development - Sharjah (SEDD)';
         insert testLead1; 

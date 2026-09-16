@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesIncludeBosses>true</doesIncludeBosses>
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Handover Finance Queue</name>
+    <queueMembers>
+        <users>
+            <user>aattia@bloomholding.com</user>
+            <user>ajoseph@bloomholding.com</user>
+            <user>aabdulkhaliq@bloomholding.com</user>
+            <user>cshafiq@bloomholding.com</user>
+            <user>helmasri@bloomholding.com</user>
+            <user>haljneibi@bloomholding.com</user>
+            <user>myousef@bloomholding.com</user>
+            <user>malameri@bloomholding.com</user>
+            <user>msaleh@bloomholding.com</user>
+            <user>nhussain@bloomholding.com</user>
+            <user>nrida@bloomholding.com</user>
+            <user>salameri@bloomholding.com</user>
+            <user>tbarbar@bloomholding.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Handover__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>ServiceAction__c</sobjectType>
+    </queueSobject>
+    <queueSobject>
+        <sobjectType>Task</sobjectType>
+    </queueSobject>
+</Queue>

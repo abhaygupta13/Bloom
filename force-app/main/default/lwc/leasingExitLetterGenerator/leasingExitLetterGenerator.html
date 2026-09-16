@@ -1,0 +1,33 @@
+<template>
+
+    <lightning-quick-action-panel>
+
+        <div class="slds-p-around_medium slds-text-align_center">
+
+            <template if:true={isLoading}>
+                <lightning-spinner
+                    alternative-text="Generating Exit Letter...">
+                </lightning-spinner>
+            </template>
+
+            <template if:false={isLoading}>
+                <p>
+                    Generate Exit Letter for this Leasing Order?
+                </p>
+
+                <div class="slds-m-top_medium">
+
+                    <lightning-button
+                        label="Generate Exit Letter"
+                        variant="brand"
+                        onclick={handleGenerate}>
+                    </lightning-button>
+
+                </div>
+            </template>
+
+        </div>
+
+    </lightning-quick-action-panel>
+
+</template>

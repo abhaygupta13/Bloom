@@ -23,10 +23,10 @@ public class LeadAssignmentBatch implements Database.Batchable<sObject>, Schedul
         Id adhaSalesLeadQueueId =objMetadataService.getAppSettingTextValue(MTD_ADHA_SALES_LEAD_QUEUE_ID); 
         
         Set<Id> ownerIds = new Set<Id> {salesQualifiedLeadDigitalQueueId, leasingQualifiedLeadDigitalQueueId,adhaSalesLeadQueueId};  
-        Set<String> excludedStatuses = new Set<String>{'Closed', 'Converted'};
+            Set<String> excludedStatuses = new Set<String>{'Closed', 'Converted'};
             
-            String query = 'SELECT Id, Name, RoundRobinNumber__c, OwnerId, CreatedById ' +'FROM Lead ' +'WHERE OwnerId IN :ownerIds ' 
-            +'AND IsConverted = false ' +'AND Status NOT IN :excludedStatuses';
+            String query = 'SELECT Id, Name, RoundRobinNumber__c, OwnerId, CreatedById '+'FROM Lead ' 
+                +'WHERE OwnerId IN :ownerIds ' +'AND IsConverted = false ' +'AND Status NOT IN :excludedStatuses';
         
         return Database.getQueryLocator(query);
     }

@@ -41,7 +41,6 @@ public class VehicleRegistrationEmailBatch implements Database.Batchable<SObject
         for (Unit_Allocation__c alloc : scope) {
             newAccSet.add(alloc.Account__c);
         }
-        System.debug('--->>>newAccSet--->>>'+newAccSet);
         List<Account> accList = accService.getAccountsWithPrimrayContact(newAccSet);
         for (Account acc : accList) {
             String recipientId = '';
@@ -62,7 +61,7 @@ public class VehicleRegistrationEmailBatch implements Database.Batchable<SObject
             Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
             emails.add(objEmailService.getSingleEmailMessage(null, acc.Id, recipientId, vehicleRegistrationET.Subject, emailBody, noReplyBloomSalesOWDId));
         }
-		System.debug('--->>>emails isze--->>>'+emails.size());
+
         if (!emails.isEmpty()) {
             Messaging.SendEmailResult[] results = objEmailService.sendEmail(emails);
         }

@@ -112,9 +112,9 @@ public with sharing class BAPPGetProjectListingHandler {
                 : 0;
         
             // Skip projects with zero units
-            if (totalUnits == 0) {
+            /*if (totalUnits == 0) {
                 continue;
-            }
+            }*/
             Map<String, Object> projMap = new Map<String, Object>();
             projMap.put('isPublic', proj.IsPublic__c);
             projMap.put('projectName', proj.Name);

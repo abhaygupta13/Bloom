@@ -141,8 +141,8 @@ public inherited sharing class AccountService {
     }
     
     public List<Account> getAccountByIds(Set<Id> accountIds){
-        return [SELECT Id, RecordType.DeveloperName,RecordTypeId , Salutation, FirstName__pc, MiddleName__pc, LastName__pc,AgreementRenewalStatus__c, 
-                Nationality__pc, NameinArabic__c, PersonLeadSource, PersonMailingCity, PersonMailingCountry, PersonMailingCountryCode,AgreementExpiryDate__c,
+        return [SELECT Id, RecordType.DeveloperName,RecordTypeId , Salutation, FirstName__pc, MiddleName__pc, LastName__pc, 
+                Nationality__pc, NameinArabic__c, PersonLeadSource, PersonMailingCity, PersonMailingCountry, PersonMailingCountryCode,
                 PersonMailingLatitude, PersonMailingLongitude,PersonMailingPostalCode, PersonMailingState,PersonMailingStateCode,PersonMailingStreet, 
                 Gender__pc , PersonBirthdate, Registration_Authority__pc, CountryOfResidence__pc, Emirates_Id__pc, EID_Expiry_Date__pc, EID_Issue_Date__pc, 
                 EmploymentStatus__pc, LanguagePreference__pc, MobileCountryCode__pc, PassportExpiryDate__pc, PassportIssueDate__pc, PassportNumber__pc,
@@ -157,7 +157,7 @@ public inherited sharing class AccountService {
     }
     
     public List<Account> getAccountsByIds(Set<Id> accountIds){
-        return [SELECT Id, IsPersonAccount, PersonEmail,AgreementRenewalStatus__c
+        return [SELECT Id, IsPersonAccount, PersonEmail
                 FROM Account WHERE Id IN :accountIds ORDER BY CreatedDate DESC];
         
     }
@@ -171,30 +171,26 @@ public inherited sharing class AccountService {
     
     public Account getAccountById(Id accountId){
         return [SELECT Id, IsPersonAccount,PersonContactId, RecordType.DeveloperName,RecordTypeId , Salutation, FirstName__pc, MiddleName__pc, LastName__pc, 
-                Nationality__pc, NameinArabic__c, PersonLeadSource, PersonMailingCity, PersonMailingCountry, PersonMailingCountryCode,
+                Nationality__pc, NameinArabic__c, PersonLeadSource, PersonMailingCity, PersonMailingCountry, PersonMailingCountryCode,BPType__c,
                 PersonMailingLatitude, PersonMailingLongitude,PersonMailingPostalCode, PersonMailingState,PersonMailingStateCode,PersonMailingStreet, 
-                Gender__pc , PersonBirthdate, Registration_Authority__pc, CountryOfResidence__pc, Emirates_Id__pc, EID_Expiry_Date__pc, EID_Issue_Date__pc, 
+                Gender__pc ,Phone__c, PersonBirthdate, Registration_Authority__pc, CountryOfResidence__pc, Emirates_Id__pc, EID_Expiry_Date__pc, EID_Issue_Date__pc, 
                 EmploymentStatus__pc, LanguagePreference__pc, MobileCountryCode__pc, PassportExpiryDate__pc, PassportIssueDate__pc, PassportNumber__pc,
                 PlaceofIssue__pc, Position__pc, Religion__pc, ResidentStatus__pc, FirstName, MiddleName, LastName, Name, Phone, Nationality__c,
                 Registration_Authority__c, Trade_License_Expiry_Date__c, Trade_License_Issue_Date__c, Trade_License_No__c, Percentage_of_Share_Purchased__c,
                 PlaceofRegistration__c, PoaExist__c, BloomStaffEmail__c, CompanyEmail__c, CustomerClassification__c, CustomerSubType__c, CustomerType__c,
-                MobileCountryCode__c, PersonEmail,PersonMobilePhone,Rating,SourceofFunds__pc,Place_of_Issuance__c,PersonGenderIdentity,
+                MobileCountryCode__c, PersonEmail,PersonMobilePhone,Rating,SourceofFunds__pc,AnnualIncome__pc,Place_of_Issuance__c,PersonGenderIdentity,
                 IsBFMVIPCustomer__c, NumberOfPets__c,Drawloop_Next_1__c,SAP_Company_Code__c,Joint_Buyer__c,Main_Buyer__c,SAP_BP_No__c,
                 //BH Mobile APP Fields
                 MobilePhone__pc,Operator_License_Number__c,Operator_license_Exp_Dtae__c,Operator_Office_Number__c,Operator_Name__c,EJARI_Tawteeq_start_date__c,EJARI_Tawteeq_end_date__c,EJARI_Tawteeq_number__c,
                 Move_In_Date__c,Emirates_ID_number__c,Emirates_ID_expiry_date__c,Emergency_contact_01__c,Emergency_contact_02__c,
                 Total_Number_of_Adults_Occupants__c,Special_Needs_Comments__c,Total_Number_of_Child_Occupants__c,Occupant_with_special_needs__c
                 ,Representative_Contact_Number__c,Representative_Email__c,Representative_Name__c, VATUndertakingIssueDate__c, AddressLine01__c, AddressLine02__c
-                ,Owner__c,Tenant__c,BillingStreet,BillingCity,BillingCountry,BillingPostalCode,BillingState,BillingStateCode
+                ,Owner__c,Tenant__c,BillingStreet,BillingCity,BillingCountry,BillingPostalCode,BillingState,BillingStateCode,PersonHomePhone,PersonOtherPhone, TypeofEstablishment__c, PhoneCountryCode__c
                 FROM Account WHERE Id = :accountId];
     }
     
     public List<Account> getAccountWithJointOwner(Id accountId){
         return [SELECT Id,Name,(SELECT Name,First_Name__c,Last_Name__c FROM Joint_Owners__r) FROM Account WHERE Id = :accountId LIMIT 1];
-    }
-    
-    public Map<Id, Account> getAccountWithJointOwners(Set<Id> accountIds){
-        return new Map<Id, Account>([SELECT Id,Name,(SELECT Name,First_Name__c,Last_Name__c FROM Joint_Owners__r) FROM Account WHERE Id IN :accountIds]);
     }
     
     public List<Account> getAccountByEmails(Set<String> emailSet){
@@ -211,20 +207,7 @@ public inherited sharing class AccountService {
     
     //Update Account
     public Account updateAccount(Account acc){
-        try{return updateAccounts(new List<Account>{acc})[0];
-           }catch (Exception e) {
-
-        System.debug(LoggingLevel.ERROR,
-            '===== AccountService.updateAccount FAILED =====');
-
-        System.debug(LoggingLevel.ERROR,
-            'Message : ' + e.getMessage());
-
-        System.debug(LoggingLevel.ERROR,
-            'Stack   : ' + e.getStackTraceString());
-
-        throw e;
-    }
+        return updateAccounts(new List<Account>{acc})[0];
     }
     
     
@@ -236,19 +219,6 @@ public inherited sharing class AccountService {
             AccountTriggerHandler.isTriggerDisabled = false;
         }
         return accountList;
-    }
-    
-    public List<Database.SaveResult> updateAccountsWithoutTriggerDB(List<Account> accountList) {
-        List<Database.SaveResult> processResult =new List<Database.SaveResult>();
-        if(accountList != NULL && !accountList.isEmpty()){
-            try {
-                AccountTriggerHandler.isTriggerDisabled = true;
-                processResult = Database.update(accountList, false);
-            } finally {
-                AccountTriggerHandler.isTriggerDisabled = false;
-            }
-        }
-        return processResult;
     }
     
     //Update Account without trigger
@@ -273,8 +243,8 @@ public inherited sharing class AccountService {
             PassportNumber__pc, Emirates_Id__pc, PassportIssueDate__pc, PassportExpiryDate__pc, EID_Issue_Date__pc,
             EID_Expiry_Date__pc, SAP_BP_No__c, SAP_Company_Code__c, PersonMailingStreet, PersonMailingCity, PersonMailingCountry,
             PersonMailingPostalCode, PersonMailingState, PersonMailingStateCode, Trade_License_No__c, Trade_License_Issue_Date__c,
-            Trade_License_Expiry_Date__c, Main_Buyer__c, Joint_Buyer__c, Name,Phone,RecordTypeId,Owner__c,Tenant__c,
-            BillingStreet,BillingCity,BillingCountry,BillingPostalCode,BillingState,BillingStateCode,CompanyEmail__c, MobilePhone__pc,
+            Trade_License_Expiry_Date__c, Main_Buyer__c, Joint_Buyer__c, Name,Phone,RecordTypeId,Owner__c,Tenant__c,Phone__c,
+            BillingStreet,BillingCity,BillingCountry,BillingPostalCode,BillingState,BillingStateCode,CompanyEmail__c,MobilePhone__pc,
             (SELECT Id, Phone, Email, Gender__c, MobilePhone
              FROM Contacts
              WHERE PrimaryContact__c = true
@@ -338,7 +308,7 @@ public inherited sharing class AccountService {
             String phoneVal;
             String emailVal;
             if (acc.recordTypeId == brokerAgencyAccountRecordTypeId) {
-                phoneVal = (String) acc.get('MobilePhone__pc'); 
+                phoneVal = (String) acc.get('Phone__c');
                 emailVal = (String) acc.get('CompanyEmail__c');
             } else {
                 phoneVal = (con != null) ? con.MobilePhone : null;
@@ -450,13 +420,17 @@ public inherited sharing class AccountService {
         
     }
     
+    public Map<Id, Account> getAccountWithJointOwners(Set<Id> accountIds){
+        return new Map<Id, Account>([SELECT Id,Name,(SELECT Name,First_Name__c,Last_Name__c FROM Joint_Owners__r) FROM Account WHERE Id IN :accountIds]);
+    }
+    
     // BAPP Get Accounts Map By Ids
     public static Map<Id, Account> getAccountsMapByIds(Set<Id> accountIds) {
         
         if (accountIds == null || accountIds.isEmpty()) {
             return new Map<Id, Account>();
         }
-        return new Map<Id, Account>([SELECT Id,AgreementRenewalStatus__c,AgreementExpiryDate__c, Trade_License_Expiry_Date__c, VATUndertakingIssueDate__c, CommercialLicenseExpiryDate__c, TaxRegistrationNumber__c, AddressLine01__c, AddressLine02__c, BillingStreet, Phone__c, BankAccount__c, BankAccount__r.Id, BankAccount__r.AccountNumberCorporate__c, BankAccount__r.BankNameCorporate__c, BankAccount__r.BankAddress__c, BankAccount__r.IBANNoCorporate__c, BankAccount__r.SwiftCodeCorporate__c FROM Account WHERE Id IN :accountIds]);
+        return new Map<Id, Account>([SELECT Id, Trade_License_Expiry_Date__c, VATUndertakingIssueDate__c, CommercialLicenseExpiryDate__c, TaxRegistrationNumber__c, AddressLine01__c, AddressLine02__c, BillingStreet, Phone__c, BankAccount__c, BankAccount__r.Id, BankAccount__r.AccountNumberCorporate__c, BankAccount__r.BankNameCorporate__c, BankAccount__r.BankAddress__c, BankAccount__r.IBANNoCorporate__c, BankAccount__r.SwiftCodeCorporate__c FROM Account WHERE Id IN :accountIds]);
     }
     
     // BAPP Update Account

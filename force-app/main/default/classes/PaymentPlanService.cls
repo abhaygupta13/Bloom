@@ -43,7 +43,7 @@ public inherited sharing class PaymentPlanService {
     
     //Get Payment Plans by project id & classification
     public List<PaymentPlan__c> getPaymentPlansClassification(Id projectId, String classification){
-        return [SELECT Id, Name, CreatedDate FROM PaymentPlan__c WHERE Project__c = :projectId AND Classification__c = :classification];
+        return [SELECT Id, Name, CreatedDate, IsActive__c FROM PaymentPlan__c WHERE Project__c = :projectId AND Classification__c = :classification];
     }
     
     public PaymentPlan__c insertPaymentPlan(PaymentPlan__c objPaymentPlan){

@@ -36,6 +36,7 @@ public class BAPPSubmitCaseApplicantHandler {
     public static void handleCaseBrokerApplicant(String requestBody) {
         try {
             ApplicantRequest req = (ApplicantRequest)JSON.deserialize(requestBody, ApplicantRequest.class);
+			System.debug('ContactId ' + req.contactId);
              // --- Step 1: Validate required fields ---
             if (req == null || String.isBlank(req.accountId) || String.isBlank(req.contactId)) {
                 makeErrorResponse(new Map<String, Object>{
@@ -96,41 +97,28 @@ public class BAPPSubmitCaseApplicantHandler {
         List<Map<String, Object>> errorResponses = new List<Map<String, Object>>();
         List<Case> toInsert = new List<Case>();
         List<Case> toUpdate = new List<Case>();
-        
-        Id bloomQueueId;
-            try {
-                bloomQueueId = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'Bloom_Broker_Management_BBM' LIMIT 1].Id;
-            } catch (Exception e) {
-                bloomQueueId = null;
-            }
-        
+
         Map<Integer, Case> responseIndexToCase = new Map<Integer, Case>();
 
         Boolean hasErrors = false;
         String typeOfEstablishments = req.typeOfEstablishment != null ? req.typeOfEstablishment.toLowerCase() : '';
-        // Capitalize first letter for restricted picklist field (e.g. 'domestic' -> 'Domestic')
-        String typeOfEstablishmentsForField = String.isNotBlank(typeOfEstablishments)
-            ? typeOfEstablishments.substring(0, 1).toUpperCase() + typeOfEstablishments.substring(1)
-            : null;
         
         
-        List<ServiceCatalog__c> scList = [SELECT Id, Name, RecordTypeDevName__c FROM ServiceCatalog__c WHERE SubCategory__c = 'Broker New Agent Registration' LIMIT 1];
+        List<ServiceCatalog__c> scList = [SELECT Id, Name, RecordTypeDevName__c FROM ServiceCatalog__c WHERE SubCategory__c = 'Agent Onboarding' LIMIT 1];
 
         for (BrokerApplicantData applicant : req.companyPersonnel) {
-            String caseStatus;
-            Boolean caseDraft;
+            String caseApprovalStatus;
             
             // Check if CaseId is provided — then validate ApprovalStatus__c
            if (String.isNotBlank(applicant.caseId)) {
             try {
                 Case existingCase = [
-                    SELECT Id, ApprovalStatus__c,Status,Draft__c, AccountId, ContactId 
+                    SELECT Id, ApprovalStatus__c, AccountId, ContactId 
                     FROM Case 
                     WHERE Id = :applicant.caseId 
                     LIMIT 1
                 ];
-                caseStatus = existingCase.Status;
-                caseDraft = existingCase.Draft__c;
+                caseApprovalStatus = existingCase.ApprovalStatus__c;
 
                 // Check if Account and Contact match the request
                 if (existingCase.AccountId != req.accountId || existingCase.ContactId != req.contactId) {
@@ -143,7 +131,7 @@ public class BAPPSubmitCaseApplicantHandler {
                 }
 
                 // Check if Case is in Draft stage
-                if (caseDraft == false) { // Draft == false; caseStatus != 'New'
+                if (caseApprovalStatus != 'Draft') {
                     Map<String, Object> res = (Map<String, Object>)JSON.deserializeUntyped(JSON.serialize(applicant));
                     res.put('status', 'error');
                     res.put('message', 'You cannot update the Service Request once Submitted.');
@@ -172,11 +160,11 @@ public class BAPPSubmitCaseApplicantHandler {
                 (applicant.lastName != null ? applicant.lastName : '')
             );
 
-            // Role cleanup 
+            // Role cleanup
             Set<String> roleSet = new Set<String>();
             if (String.isNotBlank(applicant.role)) {
                 for (String ro : applicant.role.split(',')) {
-                    roleSet.add(ro.trim()); 
+                    roleSet.add(ro.trim().toLowerCase());
                 }
             }
             String cleanedRoles = roleSet.isEmpty() ? '' : String.join(new List<String>(roleSet), ';');
@@ -192,11 +180,10 @@ public class BAPPSubmitCaseApplicantHandler {
             }
 
             // Create Case record
-            Id brokerRegistrationRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'BrokerAgentRegistrationAndUpdate'); 
+            Id brokerRegistrationRecordTypeId = Utility.getRecordTypeIdByDevName(Case.SObjectType, 'Broker_Registration'); 
             Case record = new Case(
                 RecordTypeId = brokerRegistrationRecordTypeId,
-                Status = 'New',
-                Draft__c = true,
+                ApprovalStatus__c = req.registrationStatus,
                 Email_Address__c = applicant.email,
                 PhoneNumber__c = applicant.phoneNumber,
                 Title__c = applicant.title,
@@ -217,15 +204,11 @@ public class BAPPSubmitCaseApplicantHandler {
                 PassportExpiryDate__c = String.isNotBlank(applicant.passportExpiryDate) ? Date.valueOf(applicant.passportExpiryDate) : null,
                 BRN_RERA_Expiry_Date__c = String.isNotBlank(applicant.reraNumberExpiryDate) ? Date.valueOf(applicant.reraNumberExpiryDate) : null,
                 BRN_RERA_Number__c = applicant.reraNumber,
-                TypeofEstablishment__c = typeOfEstablishmentsForField,
-                ApprovalStatus__c = 'Not Approved',
-                Origin = 'Portal',
+                TypeofEstablishment__c = typeOfEstablishments,
+                Status = 'New',
                 FinalApprovalStage__c = 'First Approval',
-                ServiceCatalog__c = scList.isEmpty() ? null : scList[0].Id,
-                Type = 'Broker Service Request',
-                SubType__c = 'Broker New Agent Registration',
-                Subject = 'Broker New Agent Registration',
-                OwnerId = bloomQueueId
+                ServiceCatalog__c = scList[0].Id,
+                Type = 'Broker Registration'
             );
 
             if (String.isNotBlank(applicant.caseId)) {
@@ -242,35 +225,12 @@ public class BAPPSubmitCaseApplicantHandler {
         }
 
         if (!toInsert.isEmpty()) insert toInsert;
-        
         for (Integer index : responseIndexToCase.keySet()) {
             Case insertedCase = responseIndexToCase.get(index);
             successResponses[index].put('caseId', insertedCase.Id);
         }
-        Boolean isSubmitted =
-            String.isNotBlank(req.registrationStatus) &&
-            req.registrationStatus == 'Submitted';
-        
-        if (!toUpdate.isEmpty()) {
-            update toUpdate;
-        
-            if (isSubmitted) {
+        if (!toUpdate.isEmpty()) update toUpdate;
 
-                Set<Id> updatedCaseIds = new Map<Id, Case>(toUpdate).keySet();
-                
-                List<Case> requeriedCases = CaseService.getInstance().getCaseByIds(updatedCaseIds);
-            
-                List<Case> approvalUpdateList = new List<Case>();
-                for (Case c : requeriedCases) {
-                    approvalUpdateList.add(new Case(
-                        Id = c.Id,
-                        ApprovalStatus__c = 'Pending',
-                        Draft__c = false
-                    ));
-                }
-                update approvalUpdateList;
-            }
-        }
         // Collect related documents
         Set<Id> caseIds = new Set<Id>();
         caseIds.addAll(new Map<Id, Case>(toInsert).keySet());

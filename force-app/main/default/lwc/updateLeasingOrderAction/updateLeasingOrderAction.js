@@ -16,10 +16,6 @@ import generatePDF from '@salesforce/apex/LeasingOrderController.generatePDF';
 import { getRecordNotifyChange } from 'lightning/uiRecordApi';
 import hasEditPermission from '@salesforce/apex/LeasingOrderController.hasEditPermission';
 import validateFinancialRecordsEditable from '@salesforce/apex/LeasingOrderController.validateFinancialRecordsEditable';
-import { getObjectInfo, getPicklistValues } from 'lightning/uiObjectInfoApi';
-import LEASING_ORDER_OBJECT from '@salesforce/schema/LeasingOrder__c';
-import CATEGORY_FIELD from '@salesforce/schema/LeasingOrder__c.Category__c';
-import SUBCATEGORY_FIELD from '@salesforce/schema/LeasingOrder__c.SubCategory__c';
 
 export default class UpdateLeasingOrderComponent extends NavigationMixin(LightningElement) {
     @track currentStage = 'Select Unit';
@@ -45,79 +41,12 @@ export default class UpdateLeasingOrderComponent extends NavigationMixin(Lightni
     @track additionalSecurityDeposit;
     @track ejari_Tawtheeq; // fallback label
     @track originalEscalationPercent; 
-    @track isCompanyEntity = false;
-@track companyEntityName = '';
-@track category;
-@track subCategory;
-@track fitOutDays;
-@track unitHandOverDate;
- @track permittedUse;
-
-@track categoryOptions = [];
-@track subCategoryOptions = [];
 
     autoLoadUnits = true;
     esclationAlert = false;
     originalAppliedAnnualRent;
     originalExtraChequeFee;
     originalAdditionalSecurityDeposit;
-
-    handleIsCompanyEntityChange(event) {
-    this.isCompanyEntity = event.target.checked;
-}
-
-@wire(getObjectInfo, { objectApiName: LEASING_ORDER_OBJECT })
-objectInfo;
-
-@wire(getPicklistValues, {
-    recordTypeId: '$objectInfo.data.defaultRecordTypeId',
-    fieldApiName: CATEGORY_FIELD
-})
-wiredCategoryPicklist({ data, error }) {
-    if (data) {
-        this.categoryOptions = data.values.map(item => ({
-            label: item.label,
-            value: item.value
-        }));
-
-        console.log(
-            'Category Options:',
-            JSON.stringify(this.categoryOptions)
-        );
-    } else if (error) {
-        console.error(
-            'Category Picklist Error:',
-            JSON.stringify(error)
-        );
-    }
-}
-
-@wire(getPicklistValues, {
-    recordTypeId: '$objectInfo.data.defaultRecordTypeId',
-    fieldApiName: SUBCATEGORY_FIELD
-})
-wiredSubCategoryPicklist({ data, error }) {
-    if (data) {
-        this.subCategoryOptions = data.values.map(item => ({
-            label: item.label,
-            value: item.value
-        }));
-
-        console.log(
-            'Sub Category Options:',
-            JSON.stringify(this.subCategoryOptions)
-        );
-    } else if (error) {
-        console.error(
-            'Sub Category Picklist Error:',
-            JSON.stringify(error)
-        );
-    }
-}
-
-handleCompanyEntityNameChange(event) {
-    this.companyEntityName = event.target.value;
-}
 
     handleStepClick(event) {
         const selectedStep = event.target.value;
@@ -299,11 +228,6 @@ handleCompanyEntityNameChange(event) {
             this.opportunityId = data.Opportunity__c;
             this.recordProjectId = data.Project__c;
             this.recordBuildingId = data.Building__c;
-            this.category = data.Category__c;
-this.subCategory = data.SubCategory__c;
-this.fitOutDays = data.FitOutdays__c;
-this.unitHandOverDate = data.UnitHandOverDate__c;
-this.permittedUse = data.PermittedUse__c;
             this.recordUnitId = data.Unit__c;
             this.selectedBedrooms = data.Unit__r.NumberOfBedrooms__c ? String(data.Unit__r.NumberOfBedrooms__c) : '';
             this.selectedPropertyType = data.Unit__r.PropertyUsage__c || '';
@@ -330,8 +254,6 @@ this.permittedUse = data.PermittedUse__c;
             this.originalExtraChequeFee = this.extraChequeFee;
             this.fitOutSecurityDeposit = data.FitOutSecurityDeposit__c;
             this.relatedPartyBloomHolding = data.RelatedPartyBloomHolding__c;
-            this.isCompanyEntity =  data.IsCompanyEntity__c || false;
-this.companyEntityName = data.CompanyEntityName__c || '';
             //this.gracePeriod = data.GracePeriod__c;
             this.gracePeriod = (data.GracePeriod__c/30).toString();
             this.leasingContractMonths_ = this.leasingContractMonths - (data.GracePeriod__c/30);
@@ -589,11 +511,6 @@ this.companyEntityName = data.CompanyEntityName__c || '';
     get showCommercialFields() {
         return this.selectedUnit?.PropertyUsage__c === 'Commercial';
     }
-
-     get showCommercialRetailFields() {
-    return this.selectedPropertyType === 'Commercial' ||
-           this.selectedPropertyType === 'Retail';
-}
 
     handleProjectChange(event) {
         this.selectedProject = event.detail.value;
@@ -1000,8 +917,6 @@ this.companyEntityName = data.CompanyEntityName__c || '';
         }
         const updatedData = {
             opportunityId: this.oppId,
-            isCompanyEntity: this.isCompanyEntity,
-companyEntityName: this.companyEntityName,
             unitId: this.selectedUnit.Id,
             name: this.leasingContractName,
             project: this.selectedProject,
@@ -1033,11 +948,6 @@ companyEntityName: this.companyEntityName,
             adminFee: this.adminFee,
             ejariFee: this.ejariFee,
             serviceCharge: this.serviceCharge,
-            category: this.category,
-    subCategory: this.subCategory,
-    fitOutDays: this.fitOutDays,
-    unitHandOverDate: this.unitHandOverDate,
-    permittedUse: this.permittedUse,
             projectName: this.projectName,
         };
 

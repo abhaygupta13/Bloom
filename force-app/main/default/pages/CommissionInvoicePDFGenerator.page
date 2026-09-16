@@ -141,23 +141,23 @@
     <table style="width: 100%; border-collapse: collapse; border: 1px solid;">
       <tr>
         <th style="background-color: #8B0000;width:30% ; border: 1px solid black;  color: white; text-align: left; padding: 10px;">Bank Name:</th>
-        <td style="border: 1px solid ;  padding: 10px; width:70%;"></td>
+        <td style="border: 1px solid ;  padding: 10px; width:70%;">{!bankName}</td>
       </tr>
       <tr>
-        <th style="background-color: #8B0000;width:30% ; border: 1px solid black; color: white; text-align: left; padding: 10px;">Account Name</th>
-        <td style="border: 1px solid ;  padding: 10px;width:70%;"></td>
+        <th style="background-color: #8B0000;width:30% ; border: 1px solid black; color: white; text-align: left; padding: 10px;">Account Name:</th>
+        <td style="border: 1px solid ;  padding: 10px;width:70%;">{!accountName}</td>
       </tr>
       <tr>
         <th style="background-color: #8B0000;width:30% ; border: 1px solid black; color: white; text-align: left; padding: 10px;">Account Number:</th>
-        <td style="border: 1px solid ;  padding: 10px;width:70%;"></td>
+        <td style="border: 1px solid ;  padding: 10px;width:70%;">{!accountNumber}</td>
       </tr>
       <tr>
         <th style="background-color: #8B0000;width:30% ;border: 1px solid black;  color: white; text-align: left; padding: 10px;">IBAN Number:</th>
-        <td style="border: 1px solid ;  padding: 10px;width:70%;"></td>
+        <td style="border: 1px solid ;  padding: 10px;width:70%;">{!ibanNumber}</td>
       </tr>
       <tr>
         <th style="background-color: #8B0000; width:30% ; border: 1px solid black; color: white; text-align: left; padding: 10px;"> Swift Code:</th>
-        <td style="border: 1px solid ;  padding: 10px;width:70%;"></td>
+        <td style="border: 1px solid ;  padding: 10px;width:70%;">{!swiftCode}</td>
       </tr>
     </table>
   </div>

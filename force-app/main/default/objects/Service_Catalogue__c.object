@@ -1,0 +1,1574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>Category__c</fullName>
+        <label>Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Civil</fullName>
+                    <default>false</default>
+                    <label>Civil</label>
+                </value>
+                <value>
+                    <fullName>MEP</fullName>
+                    <default>false</default>
+                    <label>MEP</label>
+                </value>
+                <value>
+                    <fullName>Emergency / General</fullName>
+                    <default>false</default>
+                    <label>Emergency / General</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Closure_Reason__c</fullName>
+        <label>Closure Reason</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Customer not available</fullName>
+                    <default>false</default>
+                    <label>Customer not available</label>
+                </value>
+                <value>
+                    <fullName>Out of Scope</fullName>
+                    <default>false</default>
+                    <label>Out of Scope</label>
+                </value>
+                <value>
+                    <fullName>Work Completed</fullName>
+                    <default>false</default>
+                    <label>Work Completed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Definition__c</fullName>
+        <label>Definition</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Bulk SR creation per villa based on</fullName>
+                    <default>false</default>
+                    <label>Bulk SR creation per villa based on</label>
+                </value>
+                <value>
+                    <fullName>General Requests related to maintenance</fullName>
+                    <default>false</default>
+                    <label>General Requests related to maintenance</label>
+                </value>
+                <value>
+                    <fullName>New SR created</fullName>
+                    <default>false</default>
+                    <label>New SR created</label>
+                </value>
+                <value>
+                    <fullName>SR created based on repeated request</fullName>
+                    <default>false</default>
+                    <label>SR created based on repeated request</label>
+                </value>
+                <value>
+                    <fullName>Warraty related cases post DLP expiry</fullName>
+                    <default>false</default>
+                    <label>Warraty related cases post DLP expiry</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Incident_description__c</fullName>
+        <label>Incident description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>AC Function-AC leaking</fullName>
+                    <default>false</default>
+                    <label>AC Function-AC leaking</label>
+                </value>
+                <value>
+                    <fullName>AC Function-Humidity/condensation</fullName>
+                    <default>false</default>
+                    <label>AC Function-Humidity/condensation</label>
+                </value>
+                <value>
+                    <fullName>AC Function-Noisy</fullName>
+                    <default>false</default>
+                    <label>AC Function-Noisy</label>
+                </value>
+                <value>
+                    <fullName>AC Function-Not cooling</fullName>
+                    <default>false</default>
+                    <label>AC Function-Not cooling</label>
+                </value>
+                <value>
+                    <fullName>AC Function-Overcooling</fullName>
+                    <default>false</default>
+                    <label>AC Function-Overcooling</label>
+                </value>
+                <value>
+                    <fullName>AC Function-Thermostat not working</fullName>
+                    <default>false</default>
+                    <label>AC Function-Thermostat not working</label>
+                </value>
+                <value>
+                    <fullName>AC Function-Tripping</fullName>
+                    <default>false</default>
+                    <label>AC Function-Tripping</label>
+                </value>
+                <value>
+                    <fullName>AL-Accessories-Rusted</fullName>
+                    <default>false</default>
+                    <label>AL-Accessories-Rusted</label>
+                </value>
+                <value>
+                    <fullName>AL-Kitchen Sink-Rusted</fullName>
+                    <default>false</default>
+                    <label>AL-Kitchen Sink-Rusted</label>
+                </value>
+                <value>
+                    <fullName>AL-Kitchen Sink-Water leaking</fullName>
+                    <default>false</default>
+                    <label>AL-Kitchen Sink-Water leaking</label>
+                </value>
+                <value>
+                    <fullName>Accessories-Accessories rusted / Damaged</fullName>
+                    <default>false</default>
+                    <label>Accessories-Accessories rusted / Damaged</label>
+                </value>
+                <value>
+                    <fullName>Accessories-Door brush damage</fullName>
+                    <default>false</default>
+                    <label>Accessories-Door brush damage</label>
+                </value>
+                <value>
+                    <fullName>Accessories-Hanger broken</fullName>
+                    <default>false</default>
+                    <label>Accessories-Hanger broken</label>
+                </value>
+                <value>
+                    <fullName>Accessories-Rubber peeling</fullName>
+                    <default>false</default>
+                    <label>Accessories-Rubber peeling</label>
+                </value>
+                <value>
+                    <fullName>Architrave-Cracked</fullName>
+                    <default>false</default>
+                    <label>Architrave-Cracked</label>
+                </value>
+                <value>
+                    <fullName>Architrave-Discoloration</fullName>
+                    <default>false</default>
+                    <label>Architrave-Discoloration</label>
+                </value>
+                <value>
+                    <fullName>Architrave-Joinery Termites</fullName>
+                    <default>false</default>
+                    <label>Architrave-Joinery Termites</label>
+                </value>
+                <value>
+                    <fullName>Architrave-Mould</fullName>
+                    <default>false</default>
+                    <label>Architrave-Mould</label>
+                </value>
+                <value>
+                    <fullName>Architrave-Peeling off veneer</fullName>
+                    <default>false</default>
+                    <label>Architrave-Peeling off veneer</label>
+                </value>
+                <value>
+                    <fullName>Balcony -Delaminated</fullName>
+                    <default>false</default>
+                    <label>Balcony -Delaminated</label>
+                </value>
+                <value>
+                    <fullName>Balcony -Shattered</fullName>
+                    <default>false</default>
+                    <label>Balcony -Shattered</label>
+                </value>
+                <value>
+                    <fullName>Balcony -loose panel</fullName>
+                    <default>false</default>
+                    <label>Balcony -loose panel</label>
+                </value>
+                <value>
+                    <fullName>Bathroom Accessories-Rusted</fullName>
+                    <default>false</default>
+                    <label>Bathroom Accessories-Rusted</label>
+                </value>
+                <value>
+                    <fullName>Bathroom Sink-Water leaking</fullName>
+                    <default>false</default>
+                    <label>Bathroom Sink-Water leaking</label>
+                </value>
+                <value>
+                    <fullName>Ceiling Access Hatch-Does not open properly</fullName>
+                    <default>false</default>
+                    <label>Ceiling Access Hatch-Does not open properly</label>
+                </value>
+                <value>
+                    <fullName>Ceiling Access Hatch-Leaking</fullName>
+                    <default>false</default>
+                    <label>Ceiling Access Hatch-Leaking</label>
+                </value>
+                <value>
+                    <fullName>Ceiling Leakage-Minor leak</fullName>
+                    <default>false</default>
+                    <label>Ceiling Leakage-Minor leak</label>
+                </value>
+                <value>
+                    <fullName>Cooker Hood-Cooker Hood not working</fullName>
+                    <default>false</default>
+                    <label>Cooker Hood-Cooker Hood not working</label>
+                </value>
+                <value>
+                    <fullName>Cooker-Not working</fullName>
+                    <default>false</default>
+                    <label>Cooker-Not working</label>
+                </value>
+                <value>
+                    <fullName>Dishwasher-Dishwasher not working</fullName>
+                    <default>false</default>
+                    <label>Dishwasher-Dishwasher not working</label>
+                </value>
+                <value>
+                    <fullName>Dishwasher-Water leaking from Dishwasher</fullName>
+                    <default>false</default>
+                    <label>Dishwasher-Water leaking from Dishwasher</label>
+                </value>
+                <value>
+                    <fullName>Door -Doesn&apos;t Open/Close properly</fullName>
+                    <default>false</default>
+                    <label>Door -Doesn&apos;t Open/Close properly</label>
+                </value>
+                <value>
+                    <fullName>Door -Water leaking</fullName>
+                    <default>false</default>
+                    <label>Door -Water leaking</label>
+                </value>
+                <value>
+                    <fullName>Doors-Alignment</fullName>
+                    <default>false</default>
+                    <label>Doors-Alignment</label>
+                </value>
+                <value>
+                    <fullName>Doors-Cracked</fullName>
+                    <default>false</default>
+                    <label>Doors-Cracked</label>
+                </value>
+                <value>
+                    <fullName>Doors-Discoloration</fullName>
+                    <default>false</default>
+                    <label>Doors-Discoloration</label>
+                </value>
+                <value>
+                    <fullName>Doors-Joinery Termites</fullName>
+                    <default>false</default>
+                    <label>Doors-Joinery Termites</label>
+                </value>
+                <value>
+                    <fullName>Doors-Mould</fullName>
+                    <default>false</default>
+                    <label>Doors-Mould</label>
+                </value>
+                <value>
+                    <fullName>Doors-Peeling off veneer</fullName>
+                    <default>false</default>
+                    <label>Doors-Peeling off veneer</label>
+                </value>
+                <value>
+                    <fullName>Drain Covers-Rusted</fullName>
+                    <default>false</default>
+                    <label>Drain Covers-Rusted</label>
+                </value>
+                <value>
+                    <fullName>E-Electrical-No electricity full blackout</fullName>
+                    <default>false</default>
+                    <label>E-Electrical-No electricity full blackout</label>
+                </value>
+                <value>
+                    <fullName>E-Gas-Gas Leak</fullName>
+                    <default>false</default>
+                    <label>E-Gas-Gas Leak</label>
+                </value>
+                <value>
+                    <fullName>E-Plumbing -Major leak / Flooding</fullName>
+                    <default>false</default>
+                    <label>E-Plumbing -Major leak / Flooding</label>
+                </value>
+                <value>
+                    <fullName>E-Plumbing -No hot water full unit (Winter Only)</fullName>
+                    <default>false</default>
+                    <label>E-Plumbing -No hot water full unit (Winter Only)</label>
+                </value>
+                <value>
+                    <fullName>E-Plumbing -No water full unit</fullName>
+                    <default>false</default>
+                    <label>E-Plumbing -No water full unit</label>
+                </value>
+                <value>
+                    <fullName>Exhaust Fan-Noisy</fullName>
+                    <default>false</default>
+                    <label>Exhaust Fan-Noisy</label>
+                </value>
+                <value>
+                    <fullName>Exhaust Fan-not working</fullName>
+                    <default>false</default>
+                    <label>Exhaust Fan-not working</label>
+                </value>
+                <value>
+                    <fullName>False Ceiling-Collapse</fullName>
+                    <default>false</default>
+                    <label>False Ceiling-Collapse</label>
+                </value>
+                <value>
+                    <fullName>False Ceiling-Humidity</fullName>
+                    <default>false</default>
+                    <label>False Ceiling-Humidity</label>
+                </value>
+                <value>
+                    <fullName>Fire Alarm -Tripping / Noise</fullName>
+                    <default>false</default>
+                    <label>Fire Alarm -Tripping / Noise</label>
+                </value>
+                <value>
+                    <fullName>Fridge-Not working</fullName>
+                    <default>false</default>
+                    <label>Fridge-Not working</label>
+                </value>
+                <value>
+                    <fullName>Fridge-Rubber seal damaged/loose</fullName>
+                    <default>false</default>
+                    <label>Fridge-Rubber seal damaged/loose</label>
+                </value>
+                <value>
+                    <fullName>Gas Detector -Not working</fullName>
+                    <default>false</default>
+                    <label>Gas Detector -Not working</label>
+                </value>
+                <value>
+                    <fullName>Gas Detector -Tripping</fullName>
+                    <default>false</default>
+                    <label>Gas Detector -Tripping</label>
+                </value>
+                <value>
+                    <fullName>Glass panels-Delaminated</fullName>
+                    <default>false</default>
+                    <label>Glass panels-Delaminated</label>
+                </value>
+                <value>
+                    <fullName>Glass panels-Shattered</fullName>
+                    <default>false</default>
+                    <label>Glass panels-Shattered</label>
+                </value>
+                <value>
+                    <fullName>Grouting-Discoloration</fullName>
+                    <default>false</default>
+                    <label>Grouting-Discoloration</label>
+                </value>
+                <value>
+                    <fullName>Grouting-Peeling off</fullName>
+                    <default>false</default>
+                    <label>Grouting-Peeling off</label>
+                </value>
+                <value>
+                    <fullName>Interlock-Slope</fullName>
+                    <default>false</default>
+                    <label>Interlock-Slope</label>
+                </value>
+                <value>
+                    <fullName>Interlock-salt accumulation</fullName>
+                    <default>false</default>
+                    <label>Interlock-salt accumulation</label>
+                </value>
+                <value>
+                    <fullName>Interlock-settlement</fullName>
+                    <default>false</default>
+                    <label>Interlock-settlement</label>
+                </value>
+                <value>
+                    <fullName>Kitchen Cabinets-Joinery Termites</fullName>
+                    <default>false</default>
+                    <label>Kitchen Cabinets-Joinery Termites</label>
+                </value>
+                <value>
+                    <fullName>Kitchen Cabinets-Mould</fullName>
+                    <default>false</default>
+                    <label>Kitchen Cabinets-Mould</label>
+                </value>
+                <value>
+                    <fullName>Kitchen Cabinets-Peeling off veneer</fullName>
+                    <default>false</default>
+                    <label>Kitchen Cabinets-Peeling off veneer</label>
+                </value>
+                <value>
+                    <fullName>Leakage-Mixer/faucet leaking</fullName>
+                    <default>false</default>
+                    <label>Leakage-Mixer/faucet leaking</label>
+                </value>
+                <value>
+                    <fullName>Leakage-Shattaf Leaking</fullName>
+                    <default>false</default>
+                    <label>Leakage-Shattaf Leaking</label>
+                </value>
+                <value>
+                    <fullName>Leakage-Sink Leaking</fullName>
+                    <default>false</default>
+                    <label>Leakage-Sink Leaking</label>
+                </value>
+                <value>
+                    <fullName>Light Fittings-Loose</fullName>
+                    <default>false</default>
+                    <label>Light Fittings-Loose</label>
+                </value>
+                <value>
+                    <fullName>Light Fittings-Not working</fullName>
+                    <default>false</default>
+                    <label>Light Fittings-Not working</label>
+                </value>
+                <value>
+                    <fullName>Light Fittings-Tripping</fullName>
+                    <default>false</default>
+                    <label>Light Fittings-Tripping</label>
+                </value>
+                <value>
+                    <fullName>MEP -Drainage-Blocked</fullName>
+                    <default>false</default>
+                    <label>MEP -Drainage-Blocked</label>
+                </value>
+                <value>
+                    <fullName>MEP -Drainage-Overflow</fullName>
+                    <default>false</default>
+                    <label>MEP -Drainage-Overflow</label>
+                </value>
+                <value>
+                    <fullName>Marble-salt accumulation</fullName>
+                    <default>false</default>
+                    <label>Marble-salt accumulation</label>
+                </value>
+                <value>
+                    <fullName>Mixers-Not working / Leaking</fullName>
+                    <default>false</default>
+                    <label>Mixers-Not working / Leaking</label>
+                </value>
+                <value>
+                    <fullName>Mixers-Rusted</fullName>
+                    <default>false</default>
+                    <label>Mixers-Rusted</label>
+                </value>
+                <value>
+                    <fullName>Odours-A/C Mould smell</fullName>
+                    <default>false</default>
+                    <label>Odours-A/C Mould smell</label>
+                </value>
+                <value>
+                    <fullName>Odours-Cooking smell</fullName>
+                    <default>false</default>
+                    <label>Odours-Cooking smell</label>
+                </value>
+                <value>
+                    <fullName>Odours-Sewage smell</fullName>
+                    <default>false</default>
+                    <label>Odours-Sewage smell</label>
+                </value>
+                <value>
+                    <fullName>Other-Other</fullName>
+                    <default>false</default>
+                    <label>Other-Other</label>
+                </value>
+                <value>
+                    <fullName>Oven-Not working</fullName>
+                    <default>false</default>
+                    <label>Oven-Not working</label>
+                </value>
+                <value>
+                    <fullName>Pump-Fluctuation pressure</fullName>
+                    <default>false</default>
+                    <label>Pump-Fluctuation pressure</label>
+                </value>
+                <value>
+                    <fullName>Pump-Noisy</fullName>
+                    <default>false</default>
+                    <label>Pump-Noisy</label>
+                </value>
+                <value>
+                    <fullName>Rain-Balcony flooding</fullName>
+                    <default>false</default>
+                    <label>Rain-Balcony flooding</label>
+                </value>
+                <value>
+                    <fullName>Rain-Leakage from the roof</fullName>
+                    <default>false</default>
+                    <label>Rain-Leakage from the roof</label>
+                </value>
+                <value>
+                    <fullName>Rain-Leakage from the sliding door</fullName>
+                    <default>false</default>
+                    <label>Rain-Leakage from the sliding door</label>
+                </value>
+                <value>
+                    <fullName>Rain-Leakage from the window</fullName>
+                    <default>false</default>
+                    <label>Rain-Leakage from the window</label>
+                </value>
+                <value>
+                    <fullName>Shower Glass-Shattered</fullName>
+                    <default>false</default>
+                    <label>Shower Glass-Shattered</label>
+                </value>
+                <value>
+                    <fullName>Shower Glass-Water leaking</fullName>
+                    <default>false</default>
+                    <label>Shower Glass-Water leaking</label>
+                </value>
+                <value>
+                    <fullName>Staircase rail-loose</fullName>
+                    <default>false</default>
+                    <label>Staircase rail-loose</label>
+                </value>
+                <value>
+                    <fullName>Staircase-Shattered</fullName>
+                    <default>false</default>
+                    <label>Staircase-Shattered</label>
+                </value>
+                <value>
+                    <fullName>Staircase-loose panel</fullName>
+                    <default>false</default>
+                    <label>Staircase-loose panel</label>
+                </value>
+                <value>
+                    <fullName>Switches/Socket-Loose</fullName>
+                    <default>false</default>
+                    <label>Switches/Socket-Loose</label>
+                </value>
+                <value>
+                    <fullName>Switches/Socket-Not working</fullName>
+                    <default>false</default>
+                    <label>Switches/Socket-Not working</label>
+                </value>
+                <value>
+                    <fullName>Switches/Socket-Tripping</fullName>
+                    <default>false</default>
+                    <label>Switches/Socket-Tripping</label>
+                </value>
+                <value>
+                    <fullName>Tiles -Faling out</fullName>
+                    <default>false</default>
+                    <label>Tiles -Faling out</label>
+                </value>
+                <value>
+                    <fullName>Tiles Slopes-Wrong slope causing water accumulation</fullName>
+                    <default>false</default>
+                    <label>Tiles Slopes-Wrong slope causing water accumulation</label>
+                </value>
+                <value>
+                    <fullName>Toilet Flush Tank-Continuous water dripping</fullName>
+                    <default>false</default>
+                    <label>Toilet Flush Tank-Continuous water dripping</label>
+                </value>
+                <value>
+                    <fullName>Toilet Flush Tank-Leaking</fullName>
+                    <default>false</default>
+                    <label>Toilet Flush Tank-Leaking</label>
+                </value>
+                <value>
+                    <fullName>Toilet Flush Tank-Not working</fullName>
+                    <default>false</default>
+                    <label>Toilet Flush Tank-Not working</label>
+                </value>
+                <value>
+                    <fullName>Underground Leakage-ADDC high water consumption</fullName>
+                    <default>false</default>
+                    <label>Underground Leakage-ADDC high water consumption</label>
+                </value>
+                <value>
+                    <fullName>Wall-Ceiling-Cracks</fullName>
+                    <default>false</default>
+                    <label>Wall-Ceiling-Cracks</label>
+                </value>
+                <value>
+                    <fullName>Wall-Ceiling-Humidity / leak</fullName>
+                    <default>false</default>
+                    <label>Wall-Ceiling-Humidity / leak</label>
+                </value>
+                <value>
+                    <fullName>Wall-Ceiling-Mould</fullName>
+                    <default>false</default>
+                    <label>Wall-Ceiling-Mould</label>
+                </value>
+                <value>
+                    <fullName>Wall-Ceiling-Paint Peeling off</fullName>
+                    <default>false</default>
+                    <label>Wall-Ceiling-Paint Peeling off</label>
+                </value>
+                <value>
+                    <fullName>Wardrobes-Joinery Termites</fullName>
+                    <default>false</default>
+                    <label>Wardrobes-Joinery Termites</label>
+                </value>
+                <value>
+                    <fullName>Wardrobes-Mould</fullName>
+                    <default>false</default>
+                    <label>Wardrobes-Mould</label>
+                </value>
+                <value>
+                    <fullName>Wardrobes-Peeling off veneer</fullName>
+                    <default>false</default>
+                    <label>Wardrobes-Peeling off veneer</label>
+                </value>
+                <value>
+                    <fullName>Washing Machine-Washing Machine not working</fullName>
+                    <default>false</default>
+                    <label>Washing Machine-Washing Machine not working</label>
+                </value>
+                <value>
+                    <fullName>Washing Machine-Water leaking from washing machine</fullName>
+                    <default>false</default>
+                    <label>Washing Machine-Water leaking from washing machine</label>
+                </value>
+                <value>
+                    <fullName>Water Heater-No hot water</fullName>
+                    <default>false</default>
+                    <label>Water Heater-No hot water</label>
+                </value>
+                <value>
+                    <fullName>Water Heater-Water is too hot</fullName>
+                    <default>false</default>
+                    <label>Water Heater-Water is too hot</label>
+                </value>
+                <value>
+                    <fullName>Water Heater-Yellow water</fullName>
+                    <default>false</default>
+                    <label>Water Heater-Yellow water</label>
+                </value>
+                <value>
+                    <fullName>Water Tank-Water overflow</fullName>
+                    <default>false</default>
+                    <label>Water Tank-Water overflow</label>
+                </value>
+                <value>
+                    <fullName>Water Tank-Water tank is leaking</fullName>
+                    <default>false</default>
+                    <label>Water Tank-Water tank is leaking</label>
+                </value>
+                <value>
+                    <fullName>Window-Doesn&apos;t Open/Close properly</fullName>
+                    <default>false</default>
+                    <label>Window-Doesn&apos;t Open/Close properly</label>
+                </value>
+                <value>
+                    <fullName>Window-Water leaking</fullName>
+                    <default>false</default>
+                    <label>Window-Water leaking</label>
+                </value>
+                <value>
+                    <fullName>Power trip</fullName>
+                    <default>false</default>
+                    <label>Power trip</label>
+                </value>
+                <value>
+                    <fullName>Water coming from Sockets</fullName>
+                    <default>false</default>
+                    <label>Water coming from Sockets</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Location__c</fullName>
+        <label>Location</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Balcony</fullName>
+                    <default>false</default>
+                    <label>Balcony</label>
+                </value>
+                <value>
+                    <fullName>Bedroom</fullName>
+                    <default>false</default>
+                    <label>Bedroom</label>
+                </value>
+                <value>
+                    <fullName>Garden</fullName>
+                    <default>false</default>
+                    <label>Garden</label>
+                </value>
+                <value>
+                    <fullName>Guest Bathroom</fullName>
+                    <default>false</default>
+                    <label>Guest Bathroom</label>
+                </value>
+                <value>
+                    <fullName>Kitchen</fullName>
+                    <default>false</default>
+                    <label>Kitchen</label>
+                </value>
+                <value>
+                    <fullName>Laundry Room</fullName>
+                    <default>false</default>
+                    <label>Laundry Room</label>
+                </value>
+                <value>
+                    <fullName>Living room</fullName>
+                    <default>false</default>
+                    <label>Living room</label>
+                </value>
+                <value>
+                    <fullName>Maid&apos;s Bathroom</fullName>
+                    <default>false</default>
+                    <label>Maid&apos;s Bathroom</label>
+                </value>
+                <value>
+                    <fullName>Maid&apos;s Bedroom</fullName>
+                    <default>false</default>
+                    <label>Maid&apos;s Bedroom</label>
+                </value>
+                <value>
+                    <fullName>Master bathroom</fullName>
+                    <default>false</default>
+                    <label>Master bathroom</label>
+                </value>
+                <value>
+                    <fullName>Master Bedroom</fullName>
+                    <default>false</default>
+                    <label>Master Bedroom</label>
+                </value>
+                <value>
+                    <fullName>Parking</fullName>
+                    <default>false</default>
+                    <label>Parking</label>
+                </value>
+                <value>
+                    <fullName>Powder Room</fullName>
+                    <default>false</default>
+                    <label>Powder Room</label>
+                </value>
+                <value>
+                    <fullName>Roof</fullName>
+                    <default>false</default>
+                    <label>Roof</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Priority__c</fullName>
+        <label>Priority</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>P1</fullName>
+                    <default>false</default>
+                    <label>P1</label>
+                </value>
+                <value>
+                    <fullName>P2</fullName>
+                    <default>false</default>
+                    <label>P2</label>
+                </value>
+                <value>
+                    <fullName>P3</fullName>
+                    <default>false</default>
+                    <label>P3</label>
+                </value>
+                <value>
+                    <fullName>P4</fullName>
+                    <default>false</default>
+                    <label>P4</label>
+                </value>
+                <value>
+                    <fullName>P5</fullName>
+                    <default>false</default>
+                    <label>P5</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Problem_Code__c</fullName>
+        <label>Problem Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>ac function</fullName>
+                    <default>false</default>
+                    <label>ac function</label>
+                </value>
+                <value>
+                    <fullName>accessories</fullName>
+                    <default>false</default>
+                    <label>accessories</label>
+                </value>
+                <value>
+                    <fullName>al-accessories</fullName>
+                    <default>false</default>
+                    <label>al-accessories</label>
+                </value>
+                <value>
+                    <fullName>al-kitchen sink</fullName>
+                    <default>false</default>
+                    <label>al-kitchen sink</label>
+                </value>
+                <value>
+                    <fullName>architrave</fullName>
+                    <default>false</default>
+                    <label>architrave</label>
+                </value>
+                <value>
+                    <fullName>balcony</fullName>
+                    <default>false</default>
+                    <label>balcony</label>
+                </value>
+                <value>
+                    <fullName>bathroom accessories</fullName>
+                    <default>false</default>
+                    <label>bathroom accessories</label>
+                </value>
+                <value>
+                    <fullName>bathroom sink</fullName>
+                    <default>false</default>
+                    <label>bathroom sink</label>
+                </value>
+                <value>
+                    <fullName>cc-pqa-mep-light fittings</fullName>
+                    <default>false</default>
+                    <label>cc-pqa-mep-light fittings</label>
+                </value>
+                <value>
+                    <fullName>ceiling access hatch</fullName>
+                    <default>false</default>
+                    <label>ceiling access hatch</label>
+                </value>
+                <value>
+                    <fullName>cm-pqa_rain related</fullName>
+                    <default>false</default>
+                    <label>cm-pqa_rain related</label>
+                </value>
+                <value>
+                    <fullName>cooker</fullName>
+                    <default>false</default>
+                    <label>cooker</label>
+                </value>
+                <value>
+                    <fullName>cooker hood</fullName>
+                    <default>false</default>
+                    <label>cooker hood</label>
+                </value>
+                <value>
+                    <fullName>dishwasher</fullName>
+                    <default>false</default>
+                    <label>dishwasher</label>
+                </value>
+                <value>
+                    <fullName>door</fullName>
+                    <default>false</default>
+                    <label>door</label>
+                </value>
+                <value>
+                    <fullName>doors</fullName>
+                    <default>false</default>
+                    <label>doors</label>
+                </value>
+                <value>
+                    <fullName>drain covers</fullName>
+                    <default>false</default>
+                    <label>drain covers</label>
+                </value>
+                <value>
+                    <fullName>e-ac</fullName>
+                    <default>false</default>
+                    <label>e-ac</label>
+                </value>
+                <value>
+                    <fullName>e-electrical</fullName>
+                    <default>false</default>
+                    <label>e-electrical</label>
+                </value>
+                <value>
+                    <fullName>e-gas</fullName>
+                    <default>false</default>
+                    <label>e-gas</label>
+                </value>
+                <value>
+                    <fullName>e-plumbing</fullName>
+                    <default>false</default>
+                    <label>e-plumbing</label>
+                </value>
+                <value>
+                    <fullName>exhaust fan</fullName>
+                    <default>false</default>
+                    <label>exhaust fan</label>
+                </value>
+                <value>
+                    <fullName>false ceiling</fullName>
+                    <default>false</default>
+                    <label>false ceiling</label>
+                </value>
+                <value>
+                    <fullName>fire alarm</fullName>
+                    <default>false</default>
+                    <label>fire alarm</label>
+                </value>
+                <value>
+                    <fullName>fire extinguisher/blanket</fullName>
+                    <default>false</default>
+                    <label>fire extinguisher/blanket</label>
+                </value>
+                <value>
+                    <fullName>freezer</fullName>
+                    <default>false</default>
+                    <label>freezer</label>
+                </value>
+                <value>
+                    <fullName>fridge</fullName>
+                    <default>false</default>
+                    <label>fridge</label>
+                </value>
+                <value>
+                    <fullName>g-accessories</fullName>
+                    <default>false</default>
+                    <label>g-accessories</label>
+                </value>
+                <value>
+                    <fullName>gas detector</fullName>
+                    <default>false</default>
+                    <label>gas detector</label>
+                </value>
+                <value>
+                    <fullName>glass panels</fullName>
+                    <default>false</default>
+                    <label>glass panels</label>
+                </value>
+                <value>
+                    <fullName>grouting</fullName>
+                    <default>false</default>
+                    <label>grouting</label>
+                </value>
+                <value>
+                    <fullName>interlock</fullName>
+                    <default>false</default>
+                    <label>interlock</label>
+                </value>
+                <value>
+                    <fullName>kitchen cabinets</fullName>
+                    <default>false</default>
+                    <label>kitchen cabinets</label>
+                </value>
+                <value>
+                    <fullName>marble</fullName>
+                    <default>false</default>
+                    <label>marble</label>
+                </value>
+                <value>
+                    <fullName>mep -drainage</fullName>
+                    <default>false</default>
+                    <label>mep -drainage</label>
+                </value>
+                <value>
+                    <fullName>mep- switches/socket</fullName>
+                    <default>false</default>
+                    <label>mep- switches/socket</label>
+                </value>
+                <value>
+                    <fullName>mep-ceiling leakage</fullName>
+                    <default>false</default>
+                    <label>mep-ceiling leakage</label>
+                </value>
+                <value>
+                    <fullName>mep-leakage</fullName>
+                    <default>false</default>
+                    <label>mep-leakage</label>
+                </value>
+                <value>
+                    <fullName>mep-toilet flush tank</fullName>
+                    <default>false</default>
+                    <label>mep-toilet flush tank</label>
+                </value>
+                <value>
+                    <fullName>mep-underground leakage</fullName>
+                    <default>false</default>
+                    <label>mep-underground leakage</label>
+                </value>
+                <value>
+                    <fullName>mixers</fullName>
+                    <default>false</default>
+                    <label>mixers</label>
+                </value>
+                <value>
+                    <fullName>noise</fullName>
+                    <default>false</default>
+                    <label>noise</label>
+                </value>
+                <value>
+                    <fullName>odours</fullName>
+                    <default>false</default>
+                    <label>odours</label>
+                </value>
+                <value>
+                    <fullName>oven</fullName>
+                    <default>false</default>
+                    <label>oven</label>
+                </value>
+                <value>
+                    <fullName>pests</fullName>
+                    <default>false</default>
+                    <label>pests</label>
+                </value>
+                <value>
+                    <fullName>pump</fullName>
+                    <default>false</default>
+                    <label>pump</label>
+                </value>
+                <value>
+                    <fullName>shower glass</fullName>
+                    <default>false</default>
+                    <label>shower glass</label>
+                </value>
+                <value>
+                    <fullName>skirting</fullName>
+                    <default>false</default>
+                    <label>skirting</label>
+                </value>
+                <value>
+                    <fullName>smoke detector</fullName>
+                    <default>false</default>
+                    <label>smoke detector</label>
+                </value>
+                <value>
+                    <fullName>staircase</fullName>
+                    <default>false</default>
+                    <label>staircase</label>
+                </value>
+                <value>
+                    <fullName>staircase rail</fullName>
+                    <default>false</default>
+                    <label>staircase rail</label>
+                </value>
+                <value>
+                    <fullName>tiles</fullName>
+                    <default>false</default>
+                    <label>tiles</label>
+                </value>
+                <value>
+                    <fullName>tiles slopes</fullName>
+                    <default>false</default>
+                    <label>tiles slopes</label>
+                </value>
+                <value>
+                    <fullName>wall-ceiling</fullName>
+                    <default>false</default>
+                    <label>wall-ceiling</label>
+                </value>
+                <value>
+                    <fullName>wardrobes</fullName>
+                    <default>false</default>
+                    <label>wardrobes</label>
+                </value>
+                <value>
+                    <fullName>washing machine</fullName>
+                    <default>false</default>
+                    <label>washing machine</label>
+                </value>
+                <value>
+                    <fullName>waste disposal</fullName>
+                    <default>false</default>
+                    <label>waste disposal</label>
+                </value>
+                <value>
+                    <fullName>water heater</fullName>
+                    <default>false</default>
+                    <label>water heater</label>
+                </value>
+                <value>
+                    <fullName>water tank</fullName>
+                    <default>false</default>
+                    <label>water tank</label>
+                </value>
+                <value>
+                    <fullName>window</fullName>
+                    <default>false</default>
+                    <label>window</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Repair__c</fullName>
+        <label>Repair</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>1 Day</fullName>
+                    <default>false</default>
+                    <label>1 Day</label>
+                </value>
+                <value>
+                    <fullName>2 Days</fullName>
+                    <default>false</default>
+                    <label>2 Days</label>
+                </value>
+                <value>
+                    <fullName>5 Days</fullName>
+                    <default>false</default>
+                    <label>5 Days</label>
+                </value>
+                <value>
+                    <fullName>Within 2 hours</fullName>
+                    <default>false</default>
+                    <label>Within 2 hours</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Replace__c</fullName>
+        <label>Replace</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Within 14 Days</fullName>
+                    <default>false</default>
+                    <label>Within 14 Days</label>
+                </value>
+                <value>
+                    <fullName>Within 2 Day</fullName>
+                    <default>false</default>
+                    <label>Within 2 Day</label>
+                </value>
+                <value>
+                    <fullName>Within 5 Days</fullName>
+                    <default>false</default>
+                    <label>Within 5 Days</label>
+                </value>
+                <value>
+                    <fullName>Within 7 Days</fullName>
+                    <default>false</default>
+                    <label>Within 7 Days</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Resolution_Priority__c</fullName>
+        <label>Resolution Priority</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>P1</fullName>
+                    <default>false</default>
+                    <label>P1</label>
+                </value>
+                <value>
+                    <fullName>P2</fullName>
+                    <default>false</default>
+                    <label>P2</label>
+                </value>
+                <value>
+                    <fullName>P3</fullName>
+                    <default>false</default>
+                    <label>P3</label>
+                </value>
+                <value>
+                    <fullName>PE</fullName>
+                    <default>false</default>
+                    <label>PE</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Resolution_Typology__c</fullName>
+        <label>Resolution Typology</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Repair</fullName>
+                    <default>false</default>
+                    <label>Repair</label>
+                </value>
+                <value>
+                    <fullName>Replace</fullName>
+                    <default>false</default>
+                    <label>Replace</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Sub_category__c</fullName>
+        <label>Sub-category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Aluminium</fullName>
+                    <default>false</default>
+                    <label>Aluminium</label>
+                </value>
+                <value>
+                    <fullName>Appliances</fullName>
+                    <default>false</default>
+                    <label>Appliances</label>
+                </value>
+                <value>
+                    <fullName>Electrical</fullName>
+                    <default>false</default>
+                    <label>Electrical</label>
+                </value>
+                <value>
+                    <fullName>Fire fighting &amp; Safety</fullName>
+                    <default>false</default>
+                    <label>Fire fighting &amp; Safety</label>
+                </value>
+                <value>
+                    <fullName>Flooring</fullName>
+                    <default>false</default>
+                    <label>Flooring</label>
+                </value>
+                <value>
+                    <fullName>General</fullName>
+                    <default>false</default>
+                    <label>General</label>
+                </value>
+                <value>
+                    <fullName>General-Accessories</fullName>
+                    <default>false</default>
+                    <label>General-Accessories</label>
+                </value>
+                <value>
+                    <fullName>Glass</fullName>
+                    <default>false</default>
+                    <label>Glass</label>
+                </value>
+                <value>
+                    <fullName>HVAC</fullName>
+                    <default>false</default>
+                    <label>HVAC</label>
+                </value>
+                <value>
+                    <fullName>Joinery</fullName>
+                    <default>false</default>
+                    <label>Joinery</label>
+                </value>
+                <value>
+                    <fullName>Mechanical</fullName>
+                    <default>false</default>
+                    <label>Mechanical</label>
+                </value>
+                <value>
+                    <fullName>Plumbing</fullName>
+                    <default>false</default>
+                    <label>Plumbing</label>
+                </value>
+                <value>
+                    <fullName>Rain</fullName>
+                    <default>false</default>
+                    <label>Rain</label>
+                </value>
+                <value>
+                    <fullName>Wall Tiles</fullName>
+                    <default>false</default>
+                    <label>Wall Tiles</label>
+                </value>
+                <value>
+                    <fullName>Walls/Ceiling</fullName>
+                    <default>false</default>
+                    <label>Walls/Ceiling</label>
+                </value>
+                <value>
+                    <fullName>Gas</fullName>
+                    <default>false</default>
+                    <label>Gas</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Type_of_Incident__c</fullName>
+        <label>Type of Incident</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>false</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>Out of Scope</fullName>
+                    <default>false</default>
+                    <label>Out of Scope</label>
+                </value>
+                <value>
+                    <fullName>Repeated</fullName>
+                    <default>false</default>
+                    <label>Repeated</label>
+                </value>
+                <value>
+                    <fullName>Transferred snag</fullName>
+                    <default>false</default>
+                    <label>Transferred snag</label>
+                </value>
+                <value>
+                    <fullName>Warranty  post DLP</fullName>
+                    <default>false</default>
+                    <label>Warranty  post DLP</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Service Catalogue</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>CREATED_DATE</columns>
+        <columns>NAME</columns>
+        <columns>Category__c</columns>
+        <columns>Resolution_Priority__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Problem_Code__c</columns>
+        <columns>Repair__c</columns>
+        <columns>Replace__c</columns>
+        <columns>Resolution_Typology__c</columns>
+        <columns>Sub_category__c</columns>
+        <columns>Type_of_Incident__c</columns>
+        <columns>Closure_Reason__c</columns>
+        <columns>Incident_description__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Service Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Service Catalogues</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

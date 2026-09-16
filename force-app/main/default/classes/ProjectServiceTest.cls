@@ -53,6 +53,8 @@ public class ProjectServiceTest {
         Obj.getProjectsByIds(new set<Id>{proj.Id});
         Obj.getProjectWithUnits(proj.Id,'');
         Obj.getProjectWithSoldUnits(proj.Id,'');
+        Obj.getProjectForUnitRegistration(proj.Id);
+        Obj.getAvailableHandoverProject();
         //Obj.fetchProjects();
         Obj.getCommunityAppProjects();
         // --- Static methods ---
@@ -67,11 +69,8 @@ public class ProjectServiceTest {
     static void testGetADHAProjectById() {
         
         Test.startTest();
-        
         ProjectService obj = ProjectService.getInstance();
-        
         Project__c project = obj.getADHAProjectById('H-42-41-01');
-        
         Test.stopTest();
         
         System.assertNotEquals(null, project);

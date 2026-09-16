@@ -36,7 +36,10 @@ private class UserServiceTest {
 		objUserService.hasBypassTrigger();
 		objUserService.getUsersByIds(userIds);
 		objUserService.getUsersByEmails(salesManagerEmailSet);
+        objUserService.getUsersByEmail('Zaki Al Bakri');
+        objUserService.getUsersByTitles(new list<String>{'Salesforce Manager'});
 		objUserService.getUsersById(userRecord.Id);
+        objUserService.getActiveUsersWithEmailByIds(new set<id>{userRecord.Id});
 		objUserService.getUserIdByUserName(userRecord.Username);
 		
 		Test.stopTest();

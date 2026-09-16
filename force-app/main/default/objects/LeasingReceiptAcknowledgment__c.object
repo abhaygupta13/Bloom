@@ -1,0 +1,1939 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Leasing_Receipt_Acknowledgment_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Leasing_Receipt_Acknowledgment_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>AccountName__c</fullName>
+        <externalId>false</externalId>
+        <label>Account Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Leasing Receipt Acknowledgment s</relationshipLabel>
+        <relationshipName>Leasing_Receipt_Acknowledgment_s</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ActualBounceReversalDate__c</fullName>
+        <label>Actual Bounce / Reversal Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>AllocateTo__c</fullName>
+        <label>Allocate To</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Rent Installment</fullName>
+                    <default>false</default>
+                    <label>Rent Installment</label>
+                </value>
+                <value>
+                    <fullName>Service charges</fullName>
+                    <default>false</default>
+                    <label>Service charges</label>
+                </value>
+                <value>
+                    <fullName>Admin</fullName>
+                    <default>false</default>
+                    <label>Admin</label>
+                </value>
+                <value>
+                    <fullName>Transfer fee</fullName>
+                    <default>false</default>
+                    <label>Transfer fee</label>
+                </value>
+                <value>
+                    <fullName>Leasing Advance</fullName>
+                    <default>false</default>
+                    <label>Leasing Advance</label>
+                </value>
+                <value>
+                    <fullName>Tenants Security Deposits</fullName>
+                    <default>false</default>
+                    <label>Tenants Security Deposits</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>AllocationMethod__c</fullName>
+        <label>Allocation Method</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>FIFO</fullName>
+                    <default>false</default>
+                    <label>FIFO</label>
+                </value>
+                <value>
+                    <fullName>LIFO</fullName>
+                    <default>false</default>
+                    <label>LIFO</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Amount__c</fullName>
+        <label>Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>AppliedAmount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Applied Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BankAccount__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Bank Account</label>
+        <referenceTo>BankAccount__c</referenceTo>
+        <relationshipLabel>Leasing Receipt Acknowledgment s</relationshipLabel>
+        <relationshipName>LeasingReceiptAcknowledgment_s</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>BankChargesApplicable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Bank Charges Applicable</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>BankCharges__c</fullName>
+        <externalId>false</externalId>
+        <label>Bank Charges</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>BankName__c</fullName>
+        <label>Bank Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>BankName</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>BeingTowards__c</fullName>
+        <label>Being Towards</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Rent Installment</fullName>
+                    <default>false</default>
+                    <label>Rent Installment</label>
+                </value>
+                <value>
+                    <fullName>Service charges</fullName>
+                    <default>false</default>
+                    <label>Service charges</label>
+                </value>
+                <value>
+                    <fullName>Admin</fullName>
+                    <default>false</default>
+                    <label>Admin</label>
+                </value>
+                <value>
+                    <fullName>Transfer fee</fullName>
+                    <default>false</default>
+                    <label>Transfer fee</label>
+                </value>
+                <value>
+                    <fullName>Leasing Advance</fullName>
+                    <default>false</default>
+                    <label>Leasing Advance</label>
+                </value>
+                <value>
+                    <fullName>Tenants Security Deposits</fullName>
+                    <default>false</default>
+                    <label>Tenants Security Deposits</label>
+                </value>
+                <value>
+                    <fullName>Renewal Fees</fullName>
+                    <default>false</default>
+                    <label>Renewal Fees</label>
+                </value>
+                <value>
+                    <fullName>Ejari/Tawtheeq Fee</fullName>
+                    <default>false</default>
+                    <label>Ejari/Tawtheeq Fee</label>
+                </value>
+                <value>
+                    <fullName>Delay Payment Fee</fullName>
+                    <default>false</default>
+                    <label>Delay Payment Fee</label>
+                </value>
+                <value>
+                    <fullName>Abu Dh Tawteeq renwl</fullName>
+                    <default>false</default>
+                    <label>Abu Dh Tawteeq renwl</label>
+                </value>
+                <value>
+                    <fullName>Additional Security Deposit Amount</fullName>
+                    <default>false</default>
+                    <label>Additional Security Deposit Amount</label>
+                </value>
+                <value>
+                    <fullName>Admin Fee</fullName>
+                    <default>false</default>
+                    <label>Admin Fee</label>
+                </value>
+                <value>
+                    <fullName>AD Tawteeq renewal</fullName>
+                    <default>false</default>
+                    <label>AD Tawteeq renewal</label>
+                </value>
+                <value>
+                    <fullName>Base Rent Residential</fullName>
+                    <default>false</default>
+                    <label>Base Rent Residential</label>
+                </value>
+                <value>
+                    <fullName>Cheque Bounce Fees</fullName>
+                    <default>false</default>
+                    <label>Cheque Bounce Fees</label>
+                </value>
+                <value>
+                    <fullName>cheque replace fee</fullName>
+                    <default>false</default>
+                    <label>cheque replace fee</label>
+                </value>
+                <value>
+                    <fullName>Delay Payement Fee</fullName>
+                    <default>false</default>
+                    <label>Delay Payement Fee</label>
+                </value>
+                <value>
+                    <fullName>Discount - Resi.</fullName>
+                    <default>false</default>
+                    <label>Discount - Resi.</label>
+                </value>
+                <value>
+                    <fullName>EIPS-Admin Fee</fullName>
+                    <default>false</default>
+                    <label>EIPS-Admin Fee</label>
+                </value>
+                <value>
+                    <fullName>Extra Cheque Fee</fullName>
+                    <default>false</default>
+                    <label>Extra Cheque Fee</label>
+                </value>
+                <value>
+                    <fullName>Fit Out Security Deposit</fullName>
+                    <default>false</default>
+                    <label>Fit Out Security Deposit</label>
+                </value>
+                <value>
+                    <fullName>Installment Increase</fullName>
+                    <default>false</default>
+                    <label>Installment Increase</label>
+                </value>
+                <value>
+                    <fullName>Legal Fee</fullName>
+                    <default>false</default>
+                    <label>Legal Fee</label>
+                </value>
+                <value>
+                    <fullName>Maintenance Charge</fullName>
+                    <default>false</default>
+                    <label>Maintenance Charge</label>
+                </value>
+                <value>
+                    <fullName>Notice penalty - Res</fullName>
+                    <default>false</default>
+                    <label>Notice penalty - Res</label>
+                </value>
+                <value>
+                    <fullName>Other Charge</fullName>
+                    <default>false</default>
+                    <label>Other Charge</label>
+                </value>
+                <value>
+                    <fullName>Overstay - Residenti</fullName>
+                    <default>false</default>
+                    <label>Overstay - Residenti</label>
+                </value>
+                <value>
+                    <fullName>Parking Card Access</fullName>
+                    <default>false</default>
+                    <label>Parking Card Access</label>
+                </value>
+                <value>
+                    <fullName>Parking Fee</fullName>
+                    <default>false</default>
+                    <label>Parking Fee</label>
+                </value>
+                <value>
+                    <fullName>Penalties</fullName>
+                    <default>false</default>
+                    <label>Penalties</label>
+                </value>
+                <value>
+                    <fullName>Penalty Charge</fullName>
+                    <default>false</default>
+                    <label>Penalty Charge</label>
+                </value>
+                <value>
+                    <fullName>Recovery of Utility</fullName>
+                    <default>false</default>
+                    <label>Recovery of Utility</label>
+                </value>
+                <value>
+                    <fullName>Security Deposit</fullName>
+                    <default>false</default>
+                    <label>Security Deposit</label>
+                </value>
+                <value>
+                    <fullName>Security Deposit Amount</fullName>
+                    <default>false</default>
+                    <label>Security Deposit Amount</label>
+                </value>
+                <value>
+                    <fullName>Securty Deposit</fullName>
+                    <default>false</default>
+                    <label>Securty Deposit</label>
+                </value>
+                <value>
+                    <fullName>Service Charge</fullName>
+                    <default>false</default>
+                    <label>Service Charge</label>
+                </value>
+                <value>
+                    <fullName>Service Charge Fee</fullName>
+                    <default>false</default>
+                    <label>Service Charge Fee</label>
+                </value>
+                <value>
+                    <fullName>Short Term Renewal F</fullName>
+                    <default>false</default>
+                    <label>Short Term Renewal F</label>
+                </value>
+                <value>
+                    <fullName>Sr. Leasing Admin</fullName>
+                    <default>false</default>
+                    <label>Sr. Leasing Admin</label>
+                </value>
+                <value>
+                    <fullName>Staff Commission</fullName>
+                    <default>false</default>
+                    <label>Staff Commission</label>
+                </value>
+                <value>
+                    <fullName>Staff Comm -Renewals</fullName>
+                    <default>false</default>
+                    <label>Staff Comm -Renewals</label>
+                </value>
+                <value>
+                    <fullName>Tawteeq Renewal fees</fullName>
+                    <default>false</default>
+                    <label>Tawteeq Renewal fees</label>
+                </value>
+                <value>
+                    <fullName>Tenancy Registration</fullName>
+                    <default>false</default>
+                    <label>Tenancy Registration</label>
+                </value>
+                <value>
+                    <fullName>Utilities</fullName>
+                    <default>false</default>
+                    <label>Utilities</label>
+                </value>
+                <value>
+                    <fullName>CheckoutDamage Recovery Charge</fullName>
+                    <default>false</default>
+                    <label>CheckoutDamage Recovery Charge</label>
+                </value>
+                <value>
+                    <fullName>Cooling fee</fullName>
+                    <default>false</default>
+                    <label>Cooling fee</label>
+                </value>
+                <value>
+                    <fullName>Design &amp; Review Fee</fullName>
+                    <default>false</default>
+                    <label>Design &amp; Review Fee</label>
+                </value>
+                <value>
+                    <fullName>Chilled Water Charge</fullName>
+                    <default>false</default>
+                    <label>Chilled Water Charge</label>
+                </value>
+                <value>
+                    <fullName>Marketing fund</fullName>
+                    <default>false</default>
+                    <label>Marketing fund</label>
+                </value>
+                <value>
+                    <fullName>Break Lease fees</fullName>
+                    <default>false</default>
+                    <label>Break Lease Fees</label>
+                </value>
+                <value>
+                    <fullName>colling fee</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>colling fee</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>BeneficiaryName__c</fullName>
+        <externalId>false</externalId>
+        <label>Beneficiary Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChequeBounceNotificationSentDate__c</fullName>
+        <label>Cheque Bounce Notification Sent Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ChequeBounced__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Cheque Bounced</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ChequeDate__c</fullName>
+        <label>Cheque Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ChequeNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Cheque Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ClearedDate__c</fullName>
+        <label>Cleared Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>CustomerBankAccount__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Bank Account #</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CustomerClearingDocument__c</fullName>
+        <externalId>true</externalId>
+        <label>Customer Clearing Document</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CustomerTransferReference__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Transfer Reference #</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Decision__c</fullName>
+        <externalId>false</externalId>
+        <label>Decision</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DefaultPropertyBankAccountId__c</fullName>
+        <externalId>false</externalId>
+        <formula>LeasingOrder__r.Project__r.LeasingBankAccount__r.Id</formula>
+        <label>Default Property Bank Account Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DefaultPropertyBank__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Default Property Bank</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Drawloop_Next__c</fullName>
+        <externalId>false</externalId>
+        <label>Drawloop Next</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ErrorReason__c</fullName>
+        <label>Error Reason</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ExternalId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>FullAmountAllocation__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Full Amount Allocation?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>FundingEntity__c</fullName>
+        <externalId>false</externalId>
+        <formula>LeasingOrder__r.Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Funding Entity</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HoldDate__c</fullName>
+        <label>Hold Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>IntegrationMessage__c</fullName>
+        <label>Integration Message</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>IntegrationStatus__c</fullName>
+        <label>Integration Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Integrated</fullName>
+                    <default>false</default>
+                    <label>Not Integrated</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Success</fullName>
+                    <default>false</default>
+                    <label>Success</label>
+                </value>
+                <value>
+                    <fullName>Failed</fullName>
+                    <default>false</default>
+                    <label>Failed</label>
+                </value>
+                <value>
+                    <fullName>Data Migration</fullName>
+                    <default>false</default>
+                    <label>Data Migration</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>IntegrationTriggeredDate__c</fullName>
+        <label>Integration Triggered Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>IsAdvancePayment__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Advance Payment</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsBounceChequeActionTaken__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Stop Bounce Cheque Reminder</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsBounceChequeFeeCreated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Bounce Cheque Fee Created</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsCreatedFromLink__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Created From Link</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsIntercompanyTransaction__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Is Intercompany Transaction</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LeasingOrder__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Leasing Order</label>
+        <referenceTo>LeasingOrder__c</referenceTo>
+        <relationshipLabel>Leasing Receipt Acknowledgments</relationshipLabel>
+        <relationshipName>LeasingReceiptAcknowledgment_s</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>LeasingSAPContractNumber__c</fullName>
+        <externalId>false</externalId>
+        <formula>LeasingOrder__r.LeasingSAPContractId__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Leasing SAP Contract Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LeasingStartDate__c</fullName>
+        <formula>LeasingOrder__r.LeasingStartDate__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Leasing Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LeasingUnitNumber__c</fullName>
+        <externalId>false</externalId>
+        <formula>LeasingOrder__r.Unit__r.UnitNumber__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Leasing Unit Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MarkDeleteReverse__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Mark Delete/Reverse</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>MaturityDate__c</fullName>
+        <label>Maturity Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>MortgageCheque__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Mortgage Cheque</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>NewMaturityDate__c</fullName>
+        <label>New Maturity Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Note__c</fullName>
+        <label>Note</label>
+        <length>1000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>OnHold__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>On Hold</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PaidBy__c</fullName>
+        <externalId>false</externalId>
+        <label>Paid By</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PaymentRefNumber__c</fullName>
+        <externalId>false</externalId>
+        <formula>If( ISPICKVAL( PaymentType__c , &apos;Cheque&apos;) , ChequeNumber__c , ReferenceNumber__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>PaymentRefNumber</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PaymentType__c</fullName>
+        <label>Payment Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Link Payment</fullName>
+                    <default>false</default>
+                    <label>Link Payment</label>
+                </value>
+                <value>
+                    <fullName>Credit Card</fullName>
+                    <default>false</default>
+                    <label>Credit Card</label>
+                </value>
+                <value>
+                    <fullName>Wire Transfer</fullName>
+                    <default>false</default>
+                    <label>Wire Transfer</label>
+                </value>
+                <value>
+                    <fullName>Cheque</fullName>
+                    <default>false</default>
+                    <label>Cheque</label>
+                </value>
+                <value>
+                    <fullName>Credit Note</fullName>
+                    <default>false</default>
+                    <label>Credit Note</label>
+                </value>
+                <value>
+                    <fullName>POS</fullName>
+                    <default>false</default>
+                    <label>POS</label>
+                </value>
+                <value>
+                    <fullName>Mortgage Cheque</fullName>
+                    <default>false</default>
+                    <label>Mortgage Cheque</label>
+                </value>
+                <value>
+                    <fullName>Security Cheque</fullName>
+                    <default>false</default>
+                    <label>Security Cheque</label>
+                </value>
+                <value>
+                    <fullName>Cash</fullName>
+                    <default>false</default>
+                    <label>Cash</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Percentage__c</fullName>
+        <label>Percentage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Project__c</fullName>
+        <externalId>false</externalId>
+        <formula>LeasingOrder__r.Project__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Project</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReasonCode__c</fullName>
+        <externalId>false</externalId>
+        <label>Reason Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Reason__c</fullName>
+        <label>Reason</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Cheque Presented by Mistake</fullName>
+                    <default>false</default>
+                    <label>Cheque Presented by Mistake</label>
+                </value>
+                <value>
+                    <fullName>Poor Quality</fullName>
+                    <default>false</default>
+                    <label>Poor Quality</label>
+                </value>
+                <value>
+                    <fullName>Irregular Signature</fullName>
+                    <default>false</default>
+                    <label>Irregular Signature</label>
+                </value>
+                <value>
+                    <fullName>Overwriting</fullName>
+                    <default>false</default>
+                    <label>Overwriting</label>
+                </value>
+                <value>
+                    <fullName>Altered</fullName>
+                    <default>false</default>
+                    <label>Altered</label>
+                </value>
+                <value>
+                    <fullName>Amount in words not matching with number</fullName>
+                    <default>false</default>
+                    <label>Amount in words not matching with number</label>
+                </value>
+                <value>
+                    <fullName>Swift Confirmation Awaited</fullName>
+                    <default>false</default>
+                    <label>Swift Confirmation Awaited</label>
+                </value>
+                <value>
+                    <fullName>Insufficient Fund</fullName>
+                    <default>false</default>
+                    <label>Insufficient Fund</label>
+                </value>
+                <value>
+                    <fullName>Closed Account</fullName>
+                    <default>false</default>
+                    <label>Closed Account</label>
+                </value>
+                <value>
+                    <fullName>Frozen Account</fullName>
+                    <default>false</default>
+                    <label>Frozen Account</label>
+                </value>
+                <value>
+                    <fullName>Signature Missing</fullName>
+                    <default>false</default>
+                    <label>Signature Missing</label>
+                </value>
+                <value>
+                    <fullName>Cheque replacement</fullName>
+                    <default>false</default>
+                    <label>Cheque replacement</label>
+                </value>
+                <value>
+                    <fullName>Unit under resale</fullName>
+                    <default>false</default>
+                    <label>Unit under resale</label>
+                </value>
+                <value>
+                    <fullName>Advance paid</fullName>
+                    <default>false</default>
+                    <label>Advance paid</label>
+                </value>
+                <value>
+                    <fullName>Postponement</fullName>
+                    <default>false</default>
+                    <label>Postponement</label>
+                </value>
+                <value>
+                    <fullName>Milestone withdrawal/ PP change with approval</fullName>
+                    <default>false</default>
+                    <label>Milestone withdrawal/ PP change with approval</label>
+                </value>
+                <value>
+                    <fullName>Others</fullName>
+                    <default>false</default>
+                    <label>Others</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ReceiptDate__c</fullName>
+        <label>Receipt Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ReceiptReferenceNumber__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+    ISBLANK(SAPDocumentNumber__c),
+    
+    LeasingOrder__r.SAPCompanyCode__c &amp; &apos;/&apos; &amp;
+    RIGHT(Name, 8) &amp; &apos;/&apos; &amp;
+    TEXT(YEAR(TODAY())) &amp;
+    
+    IF(OnHold__c, &quot;-OH&quot;,
+        IF(Withdrawal__c, &quot;-WD&quot;,
+            IF(Replacement__c, &quot;-Replacement&quot;, &quot;&quot;)
+        )
+    ),
+    
+    SAPDocumentNumber__c &amp;
+    IF(OnHold__c, &quot;-OH&quot;,
+        IF(Withdrawal__c, &quot;-WD&quot;,
+            IF(Replacement__c, &quot;-Replacement&quot;, &quot;&quot;)
+        )
+    )
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Receipt Reference Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReceiptReversalCategory__c</fullName>
+        <label>Receipt Reversal Category</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Bounced Cheque</fullName>
+                    <default>false</default>
+                    <label>Bounced Cheque</label>
+                </value>
+                <value>
+                    <fullName>Withdrawal</fullName>
+                    <default>false</default>
+                    <label>Withdrawal</label>
+                </value>
+                <value>
+                    <fullName>Reversal of installment receipt entry</fullName>
+                    <default>false</default>
+                    <label>Reversal of installment receipt entry</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Receipt__c</fullName>
+        <externalId>false</externalId>
+        <label>Receipt #</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReceivedDateFinance__c</fullName>
+        <label>Received Date Finance</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ReceivedFromCompanyType__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Company Type</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReceivedFromEmiratesID__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Emirates ID</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReceivedFromIncorporatedIn__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Incorporated In</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReceivedFromName__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Name</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReceivedFromPassport__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Passport #</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReceivedFromRegisteredOffice__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Registered Office</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReceivedFromTradeLicense__c</fullName>
+        <externalId>false</externalId>
+        <label>Received From Trade License #</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReceivedFromType__c</fullName>
+        <label>Received From Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Individual</fullName>
+                    <default>false</default>
+                    <label>Individual</label>
+                </value>
+                <value>
+                    <fullName>Company</fullName>
+                    <default>false</default>
+                    <label>Company</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Received_from_Nationality__c</fullName>
+        <label>Received from Nationality</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Nationality_Name_Values</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ReceivedbyFinance__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Received by Finance</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ReceivingEntity__c</fullName>
+        <externalId>false</externalId>
+        <label>Receiving Entity</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReferenceNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Reference Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RejectedbyFinance__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Rejected by Finance</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Remarks__c</fullName>
+        <label>Remarks</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Replacement__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Replacement</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ReversalApprovalRejectionDate__c</fullName>
+        <label>Reversal Approval/Rejection Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>ReversalApprovalRejectionRemarks__c</fullName>
+        <label>Reversal Approval/Rejection Remarks</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>ReversalComments__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Please enter the reason for cheque bounce.</inlineHelpText>
+        <label>Reversal Comments</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReversalStatusReason__c</fullName>
+        <label>Reversal Status Reason</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>01</fullName>
+                    <default>false</default>
+                    <label>Reversal in current period</label>
+                </value>
+                <value>
+                    <fullName>02</fullName>
+                    <default>false</default>
+                    <label>Reversal in Subsequent period</label>
+                </value>
+                <value>
+                    <fullName>03</fullName>
+                    <default>false</default>
+                    <label>Actual reversal in current period</label>
+                </value>
+                <value>
+                    <fullName>04</fullName>
+                    <default>false</default>
+                    <label>Actual reversal in closed period</label>
+                </value>
+                <value>
+                    <fullName>05</fullName>
+                    <default>false</default>
+                    <label>Accrual/deferral posting</label>
+                </value>
+                <value>
+                    <fullName>06</fullName>
+                    <default>false</default>
+                    <label>Return Cheque from Customer</label>
+                </value>
+                <value>
+                    <fullName>07</fullName>
+                    <default>false</default>
+                    <label>PDC Withdrawal</label>
+                </value>
+                <value>
+                    <fullName>08</fullName>
+                    <default>false</default>
+                    <label>Incorrect Entry</label>
+                </value>
+                <value>
+                    <fullName>Account Closed</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Account Closed</label>
+                </value>
+                <value>
+                    <fullName>Cheque Error</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Cheque Error</label>
+                </value>
+                <value>
+                    <fullName>Cheque Expired</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Cheque Expired</label>
+                </value>
+                <value>
+                    <fullName>Cheque Replaced</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Cheque Replaced</label>
+                </value>
+                <value>
+                    <fullName>Customer Requested</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Customer Requested</label>
+                </value>
+                <value>
+                    <fullName>Insufficient Funds</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Insufficient Funds</label>
+                </value>
+                <value>
+                    <fullName>Irregular Signature</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Irregular Signature</label>
+                </value>
+                <value>
+                    <fullName>Wrong Data</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Wrong Data</label>
+                </value>
+                <value>
+                    <fullName>Wrong Data Entry</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                    <label>Wrong Data Entry</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Reversal_Approval_Rejection_Status__c</fullName>
+        <label>Reversal Approval/Rejection Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending</fullName>
+                    <default>false</default>
+                    <label>Pending</label>
+                </value>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                    <label>Approved</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>SAPBankClearingDoc__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Bank Clearing Doc</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPDataMigrationKey__c</fullName>
+        <externalId>true</externalId>
+        <label>SAP Data Migration Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPDocumentNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Document Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPReversalDocumentNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Reversal Document Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SAPSpecialGLIndicator__c</fullName>
+        <externalId>false</externalId>
+        <label>SAP Special GL Indicator</label>
+        <length>1</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SalesManagerEmail__c</fullName>
+        <externalId>false</externalId>
+        <label>Sales Manager Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SendtoSAP__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>SendtoSAP</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>StatusReason__c</fullName>
+        <label>Status Reason</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Customer Requested</fullName>
+                    <default>false</default>
+                    <label>Customer Requested</label>
+                </value>
+                <value>
+                    <fullName>Cheque Replaced</fullName>
+                    <default>false</default>
+                    <label>Cheque Replaced</label>
+                </value>
+                <value>
+                    <fullName>Account Closed</fullName>
+                    <default>false</default>
+                    <label>Account Closed</label>
+                </value>
+                <value>
+                    <fullName>Amount In Words and Num Mismatch</fullName>
+                    <default>false</default>
+                    <label>Amount In Words and Num Mismatch</label>
+                </value>
+                <value>
+                    <fullName>Credit Card Chargeback Reversed or Amount Changed</fullName>
+                    <default>false</default>
+                    <label>Credit Card Chargeback Reversed or Amount Changed</label>
+                </value>
+                <value>
+                    <fullName>Credit Card Error - Payment Reversal</fullName>
+                    <default>false</default>
+                    <label>Credit Card Error - Payment Reversal</label>
+                </value>
+                <value>
+                    <fullName>Credit Card Refund Reversed or Amount Changed</fullName>
+                    <default>false</default>
+                    <label>Credit Card Refund Reversed or Amount Changed</label>
+                </value>
+                <value>
+                    <fullName>Expired Cheques</fullName>
+                    <default>false</default>
+                    <label>Expired Cheques</label>
+                </value>
+                <value>
+                    <fullName>Insufficient Funds</fullName>
+                    <default>false</default>
+                    <label>Insufficient Funds</label>
+                </value>
+                <value>
+                    <fullName>Irregular Signature</fullName>
+                    <default>false</default>
+                    <label>Irregular Signature</label>
+                </value>
+                <value>
+                    <fullName>NSF</fullName>
+                    <default>false</default>
+                    <label>NSF</label>
+                </value>
+                <value>
+                    <fullName>Payment Reversal</fullName>
+                    <default>false</default>
+                    <label>Payment Reversal</label>
+                </value>
+                <value>
+                    <fullName>Resubmit Check</fullName>
+                    <default>false</default>
+                    <label>Resubmit Check</label>
+                </value>
+                <value>
+                    <fullName>Uncollectable</fullName>
+                    <default>false</default>
+                    <label>Uncollectable</label>
+                </value>
+                <value>
+                    <fullName>Wrong Amount</fullName>
+                    <default>false</default>
+                    <label>Wrong Amount</label>
+                </value>
+                <value>
+                    <fullName>Wrong Customer</fullName>
+                    <default>false</default>
+                    <label>Wrong Customer</label>
+                </value>
+                <value>
+                    <fullName>Wrong Invoice</fullName>
+                    <default>false</default>
+                    <label>Wrong Invoice</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <label>Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Entered</fullName>
+                    <default>false</default>
+                    <label>Entered</label>
+                </value>
+                <value>
+                    <fullName>Received</fullName>
+                    <default>false</default>
+                    <label>Received</label>
+                </value>
+                <value>
+                    <fullName>Cleared</fullName>
+                    <default>false</default>
+                    <label>Cleared</label>
+                </value>
+                <value>
+                    <fullName>Reversed</fullName>
+                    <default>false</default>
+                    <label>Reversed</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <label>Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>PaymentMode</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>UnappliedAmount__c</fullName>
+        <externalId>false</externalId>
+        <formula>Amount__c -  AppliedAmount__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unapplied Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>UnitNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>Unit Number</label>
+        <length>200</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>VerifiedbyFinance__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Verified by Finance</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>VerifyDate__c</fullName>
+        <label>Verify Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Withdrawal__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Withdrawal</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Leasing Receipt Acknowledgment</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>LRA-{00000000}</displayFormat>
+        <label>Leasing Receipt Acknowledgment  Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Leasing Receipt Acknowledgments</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>ChequenumbeReferenceNumbervalidation</fullName>
+        <active>true</active>
+        <errorConditionFormula>OR(
+AND(
+ISPICKVAL(PaymentType__c , &quot;Cheque&quot;),
+ISBLANK(ChequeNumber__c)
+),
+AND(
+ISPICKVAL(PaymentType__c , &quot;Wire Transfer&quot;),
+ISBLANK(ReferenceNumber__c)
+)
+)</errorConditionFormula>
+        <errorMessage>Please enter Cheque Number for Cheque payments and Reference Number for Wire Transfer payments.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>PreventEditWhenSyncedToSAP</fullName>
+        <active>true</active>
+        <description>Restricts modifications to SAP-synced receipts to maintain data integrity between Salesforce and SAP. Only reversal is permitted.</description>
+        <errorConditionFormula>AND(
+    NOT(ISNEW()),
+    NOT(ISBLANK(SAPDocumentNumber__c)),
+    $Profile.Name &lt;&gt; &apos;System Administrator&apos;,
+    $Profile.Name &lt;&gt; &apos;Support Administrator&apos;,
+    $Profile.Name &lt;&gt; &apos;System Integration&apos;,
+    OR(
+        ISCHANGED(Amount__c),
+        ISCHANGED(BankName__c),
+        ISCHANGED(BankAccount__c),
+        ISCHANGED(ChequeNumber__c),
+        ISCHANGED(ReferenceNumber__c),
+        ISCHANGED(PaymentType__c),
+        ISCHANGED(ReceiptDate__c),
+        ISCHANGED(ChequeDate__c),
+        ISCHANGED(VerifyDate__c),
+        ISCHANGED(Remarks__c),
+        ISCHANGED(BeingTowards__c),
+        ISCHANGED(IsAdvancePayment__c),
+        ISCHANGED(DefaultPropertyBank__c),
+        ISCHANGED(ReceivingEntity__c),
+        ISCHANGED(FundingEntity__c),
+        ISCHANGED(LeasingOrder__c),
+        ISCHANGED(OnHold__c),
+        ISCHANGED(HoldDate__c),
+        ISCHANGED(Withdrawal__c),
+        ISCHANGED(Replacement__c)
+    )
+)</errorConditionFormula>
+        <errorMessage>This receipt is already synced with SAP. Editing receipt details is not allowed. Please submit for Reversal if changes are required.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>ValidateHoldDateEntry</fullName>
+        <active>true</active>
+        <errorConditionFormula>HoldDate__c != Null &amp;&amp; ChequeDate__c != null &amp;&amp; (HoldDate__c &lt; ChequeDate__c )</errorConditionFormula>
+        <errorMessage>Hold date should be greater than Cheque date.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -40,7 +40,7 @@ public  inherited sharing  class LeasingOtherChargesService {
         return [
             SELECT Id, LeasingOrder__c 
             FROM LeasingOrdersOtherCharges__c 
-            WHERE LeasingOrder__c IN :leasingOrderIds
+            WHERE LeasingOrder__c IN :leasingOrderIds order by dueDate__c ASC
         ];
     }
     
@@ -101,7 +101,7 @@ public  inherited sharing  class LeasingOtherChargesService {
         }
         if ((!leasingOrderOtherCharge.IsReversed__c && leasingOrderOtherCharge.DueDate__c <= System.Today()) || (leasingOrderOtherCharge.IsPosting__c )) {
             paramMap.put('Param6', 'X');
-        } else {
+        }  else {
             paramMap.put('Param6', '');
             //paramMap.put('Param15',  '');
         }
@@ -122,7 +122,7 @@ public  inherited sharing  class LeasingOtherChargesService {
         paramMap.put('Param13',  String.valueOf(leasingOrderOtherCharge.ReversalCategory__c ));
         paramMap.put('Param14',  String.valueOf(leasingOrderOtherCharge.Refdocno__c ));
         paramMap.put('Param15',  String.valueOf(leasingOrderOtherCharge.Paymentdoc__c ));
-        paramMap.put('Param16',  String.valueOf(leasingOrderOtherCharge.CalculationToDate__c ));
+        paramMap.put('Param16', String.valueOf(leasingOrderOtherCharge.CalculationToDate__c ));
         paramMap.put('Param17',  String.valueOf(leasingOrderOtherCharge.DueDate__c ));
         paramMap.put('Param18',UserInfo.getUserEmail());
         if (leasingOrderOtherCharge.RelatedPartyBloomHolding__c) {
@@ -160,7 +160,7 @@ public  inherited sharing  class LeasingOtherChargesService {
     }
     
     public LeasingOrdersOtherCharges__c getOtherChargesById(Id otherChargeId){
-        return [SELECT Name, ChargeAmount__c, DueDate__c,Type__c, RefDocno__c, isVATApplied__c, VATAmount__c,
+        return [SELECT Name, ChargeAmount__c, DueDate__c,Type__c, RefDocno__c,isVATApplied__c, VATAmount__c,
                 LeasingOrder__r.Account__r.Name, LeasingOrder__r.SAPBPNumber__c,
                 LeasingOrder__r.Project__r.Leasing_Company__r.Name,
                 LeasingOrder__r.Project__r.Leasing_Company__r.LeasingCompanyVATRegistrationNumber__c,

@@ -13,7 +13,7 @@
 public  class BCAPP_Utility { 
     
     private static BCAPP_Utility instance;
-    
+    public static final String DOC_AVAILABLE = 'Document Available';
     public static BCAPP_Utility getInstance() {
         if(instance == null) {
             instance = new BCAPP_Utility();
@@ -135,21 +135,20 @@ return recordType != null ? recordType.Id : null;
                 ));
                 cd.add(new ContentDistribution(
                     ContentVersionId  = cv.Id, 
-                    PreferencesAllowPDFDownload = true,
+                    //PreferencesAllowPDFDownload = true,
                     Name = cv.Title
                     
                 ));
             }
             // Insert ContentDocumentLinks
             Database.insert(contentDocumentLinks, false);
-            insert cd;
+            //insert cd;
             //check all documents 
             //CustomerDocumentService cdService = new CustomerDocumentService();
             Integer customerDocumentCount = cdService.getDocumentsCountOnCase(parentId);
             result.put('docId', contentDocumentLinks[0].ContentDocumentId);
             if(!cVs.isEmpty()){
-                List<ContentDistribution> cds = [select DistributionPublicUrl from ContentDistribution where Id =:cd[0].Id];
-                result.put('url', cds[0].DistributionPublicUrl);
+                result.put('url', DOC_AVAILABLE);
             }
             
         }
@@ -191,7 +190,7 @@ return recordType != null ? recordType.Id : null;
         List<User__c> customer;
         if(!String.isBlank(userCode)){
             customer =  [select Request_for_Mobile_Amendment__c,Request_for_Email_Amendment__c,deviceRegistrationId__c,
-                         User_Account__r.Owner__c,User_Account__r.Holiday_Homes__c,User_Account__r.Tenant__c,
+                         User_Account__r.Owner__c,User_Account__r.Holiday_Homes__c,User_Account__r.Tenant__c,User_Account__r.PersonEmail,
                          Forget_Password_Request_OTP__c,Azure_UserId__c,Last_Login__c,Mobile_Number__c,User_Account__r.Emergency_contact_01__c,
                          Customer_Code__c, Account__c, Is_Azure_Active__c,Name, Username__c ,Email__c,User_Type__c ,User_Account__r.Emergency_contact_02__c,
                          User_Principal_Name__c,User_Account__r.FirstName,User_Account__r.LastName,User_Account__r.Mobile__c,User_Account__r.Emirates_ID_number__c,
@@ -263,16 +262,10 @@ return recordType != null ? recordType.Id : null;
         ContentDocumentService codService = new ContentDocumentService();
         List<ContentDocumentLink> documentLinks = codService.fetchContentDocLinksByLinkEntityIds(recordIds);
         for (ContentDocumentLink link : documentLinks) {
-            cdIds.add(link.ContentDocumentId);
-            cdVsLId.put(link.ContentDocumentId,link.LinkedEntityId);
-        }
-        List<ContentDistribution> cds = [select ContentDocumentID,ContentVersion.FileExtension,ContentVersionId,DistributionPublicUrl,ContentDownloadUrl from ContentDistribution where ContentDocumentID =:cdVsLId.keySet()];
-        for (ContentDistribution link : cds) {
-            // String fileUrl = '/sfc/servlet.shepherd/document/download/' + link.ContentDocumentId;
-            if (cdVsLId.containsKey(link.ContentDocumentID)) {
-                recordFileUrlsMap.put(cdVsLId.get(link.ContentDocumentID), link);
-            }
-            
+
+            String jsonStr = '{"ContentDownloadUrl":"Document Available","DistributionPublicUrl":"Document Available"}';
+            ContentDistribution cdDummy = (ContentDistribution) JSON.deserialize(jsonStr, ContentDistribution.class);
+            recordFileUrlsMap.put(link.LinkedEntityId, cdDummy);
         }
         return recordFileUrlsMap;
         

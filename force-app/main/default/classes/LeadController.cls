@@ -73,8 +73,7 @@ public class LeadController {
                         objLead.IsCreatedFromAccount__c = true;
                         objLead.Gender__c = objAcc.Gender__pc ;
                         objLead.GenderIdentity = objAcc.PersonGenderIdentity ;
-                        //objLead.AnnualIncome__c = objAcc.AnnualIncome__pc ;
-                        objLead.AnnualIncome__c = String.valueOf(objAcc.AnnualIncome__pc);
+                        objLead.AnnualIncome__c = objAcc.AnnualIncome__pc ;
                         objLead.SourceOfFunds__c = objAcc.SourceofFunds__pc ;
                         objLead.POAExist__c = objAcc.PoaExist__c ;
                         objLead.LeadSource = NULL;
@@ -83,7 +82,6 @@ public class LeadController {
                         objLead.Project__c = NULL;
                         objLead.BuyRent__c = NULL;
                         objLead.PropertyUsage__c = NULL;
-                       // objLead.MaritalStatus__c = objAcc.MaritalStatus__pc; //added new ps 
                     }
                     else if(objAcc.RecordTypeID== Utility.getRecordTypeIdByDevName(Account.SObjectType, ACCOUNT_RT_DEV_NAME_ORGANIZATION_ACCOUNT)){
                         List<Contact> conList = ConService.getContactByAccountId(objAcc.id);
@@ -342,7 +340,7 @@ throw new Auraexception(errorMessage);
             if(String.isBlank(objLead.MobilePhoneNumber__c)){
                 missingFields.add('Mobile Phone Number');
             }
-            if(String.isBlank(objLead.PreferredCommunicationMethodology__c  )){
+            if(String.isBlank(objLead.PreferredCommunicationMethodology__c	)){
                 missingFields.add('Preferred Communication Methodology');
             }
             if(String.isBlank(objLead.LeadSource)){

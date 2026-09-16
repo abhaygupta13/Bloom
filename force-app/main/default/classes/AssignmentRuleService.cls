@@ -82,45 +82,24 @@ public inherited sharing class AssignmentRuleService {
     }
     
     public List<AssignmentUser__c> getAvailableAssignmentUsers(List<AssignmentUser__c> assignmentUserList){
-        System.debug('assignmentUserList ::::: '+assignmentUserList);
-        
         List<AssignmentUser__c> availableAssignmentUserList = new List<AssignmentUser__c>(); 
         DateTime currentDateTime = System.now();
         for(AssignmentUser__c objAssignmentUser :assignmentUserList){
-            System.debug('--------------------------------');
-        System.debug('User: ' + objAssignmentUser.User__r.Name);
-        System.debug('Business Hours: ' + objAssignmentUser.BusinessHours__c);
-        System.debug('BH Active: ' + objAssignmentUser.BusinessHours__r.IsActive);
-        System.debug('Current Time: ' + currentDateTime);
-        System.debug('Is Within: ' + BusinessHours.isWithin(objAssignmentUser.BusinessHours__c, currentDateTime));
             if(objAssignmentUser.BusinessHours__r.IsActive && BusinessHours.isWithin(objAssignmentUser.BusinessHours__c, currentDateTime)){
                 availableAssignmentUserList.add(objAssignmentUser); 
             }
         }
-        System.debug('availableAssignmentUserList ::::: '+ availableAssignmentUserList);
         return availableAssignmentUserList;
     }
     
     public Map<Id, AssignmentUser__c> getAvailableAssignmentUserMap(List<AssignmentUser__c> assignmentUserList){
         Map<Id, AssignmentUser__c> availableAssignmentUserMap = new  Map<Id, AssignmentUser__c>(); 
-        System.debug('Incoming Assignment Users = ' + assignmentUserList.size());
         DateTime currentDateTime = System.now();
         for(AssignmentUser__c objAssignmentUser :assignmentUserList){
-            
-          // System.debug('User = ' + objAssignmentUser.User__c);
-           // System.debug('BH Id = ' + objAssignmentUser.BusinessHours__c);
-           // System.debug('BH Active = ' + objAssignmentUser.BusinessHours__r.IsActive);
-          // System.debug('Is Within = ' + BusinessHours.isWithin(objAssignmentUser.BusinessHours__c,currentDateTime));
-            
-          // System.debug('currentDateTime = ' + currentDateTime);
-          
             if(objAssignmentUser.BusinessHours__r.IsActive && BusinessHours.isWithin(objAssignmentUser.BusinessHours__c, currentDateTime)){
                 availableAssignmentUserMap.put(objAssignmentUser.User__c, objAssignmentUser); 
-              //  System.debug('Added User = ' + objAssignmentUser.User__c);
-                
             }
         }
-       // System.debug('Final Map Size = ' + availableAssignmentUserMap.size());
         return availableAssignmentUserMap;
     }
     
@@ -144,6 +123,28 @@ public inherited sharing class AssignmentRuleService {
                 }
             }
         }
+        return sObjectList;
+    }
+    
+    public List<Handover__c> assignCRMTeamUserToHandover(List<Handover__c> sObjectList, AssignmentRule__c assignmentRule, List<AssignmentUser__c> assignmentUserList) {
+        if (sObjectList == null || sObjectList.isEmpty() || assignmentRule == null) {
+            return sObjectList;
+        }
+        
+		Integer roundRobinIndex = 0;
+        Boolean hasUsers = (assignmentUserList != null && !assignmentUserList.isEmpty());
+        for (Handover__c obj : sObjectList) {
+            if (hasUsers) {
+                Integer targetIndex = Math.mod(roundRobinIndex, assignmentUserList.size());
+                obj.CRM_Team_Assigned_User__c = assignmentUserList[targetIndex].User__c;
+                roundRobinIndex++;
+            } else if (String.isNotBlank(assignmentRule.DefaultQueueID__c)) {
+                obj.CRM_Team_Assigned_User__c = assignmentRule.DefaultQueueID__c;
+            } else if (String.isNotBlank(assignmentRule.DefaultUser__c)) {
+                obj.CRM_Team_Assigned_User__c = assignmentRule.DefaultUser__c;
+            }
+        }
+    
         return sObjectList;
     }
 }

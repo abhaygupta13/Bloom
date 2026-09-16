@@ -1,8 +1,8 @@
 /*****************************************************************************************
-Class       : SalesOrderRebateTriggerHelper
-Author      : Dhanraj Poojary
-Description : SalesOrderRebateTriggerHelper
-Test Class  : SalesOrderRebateTriggerHandlerTest
+Class       : SalesOrderRebateTriggerHandler
+Author      : Dhanraj
+Description : SalesOrderRebateTriggerHandler
+Test Class  : 
 Created Date: 10 JUL 2026 
 *****************************************************************************************/
 
@@ -11,7 +11,7 @@ public without sharing class SalesOrderRebateTriggerHelper {
     private static final String INSERT_STR = 'Insert';
     private static final String UPDATE_STR = 'Update';
     private static final Map<String, String> CHARGE_VS_CONDITION_TYPE = new Map<String, String>{
-        'Salesorder Rebate' => 'RebateConditionType__c' };
+        'Salesorder Rebate' => 'RebateConditionType__c'};
 
     public static void handleBeforeInsert(List<SalesOrderRebate__c> newList){
         Set<Id> orderIds = new Set<Id>();
