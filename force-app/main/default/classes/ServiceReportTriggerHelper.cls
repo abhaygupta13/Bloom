@@ -1,5 +1,15 @@
-public class ServiceReportHelper {
-    public static void updateDocumentOnWorkOrder(List<ServiceReport> ServiceReports){
+/*
+*********************************************************
+Apex Class Name    : ServiceReportTriggerHelper 
+Created Date       : Sept 21, 2026
+@description       : This is helper class for Service Report trigger.
+Modification Log   :
+Ver   Date         : Author                               Modification
+1.0   21-09-2026   : Abhay Gupta                          Created Trigger Helper class for Service Report object
+*********************************************************
+*/
+public without sharing class ServiceReportTriggerHelper {
+    public static void updateDocumentOnWorkOrder(List<ServiceReport> ServiceReports) {
         Set<Id> serviceAppointmentIds = new Set<Id>();
         
         for(ServiceReport sr : ServiceReports) {
@@ -7,11 +17,9 @@ public class ServiceReportHelper {
                 serviceAppointmentIds.add(sr.ParentId);
             }
         }
-        ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance(); 
-        List<ServiceAppointment> serviceAppointments = objServiceAppointmentService.getServiceAppointmentsByIds(serviceAppointmentIds);
+        List<ServiceAppointment> serviceAppointments = ServiceAppointmentService.getInstance().getServiceAppointmentsByIds(serviceAppointmentIds);
         
         Map<Id, Id> serviceAppointmentToWorkOrderMap = new Map<Id, Id>();
-        
         for (ServiceAppointment sa : serviceAppointments) {
             serviceAppointmentToWorkOrderMap.put(sa.Id, sa.ParentRecordId);
         }
@@ -36,6 +44,6 @@ public class ServiceReportHelper {
             }
         }        
         
-        updatedContentLinks = objContentDocumentLinkService.insertContentDocumentLinkWithTrigger(updatedContentLinks);       
+        objContentDocumentLinkService.insertContentDocumentLinkWithTrigger(updatedContentLinks);       
     }
 }

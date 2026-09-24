@@ -316,4 +316,91 @@ public class EmailServiceTest {
         emailService.getEmailTemplatesByName(new Set<String>{'Customer Not Available'});
         emailService.makeTable(1, baseSalesOrder, 'Test');
     }
+    
+    @isTest
+    static void testSendDLPEmail() {
+        EmailTemplate mailTemplateCustomerNotAvailable = EmailUtil.getEmailTemplateByName('Customer Not Available');
+        
+        Profile profileCC = [SELECT Id FROM Profile WHERE Name = 'Contractor' LIMIT 1];
+        
+        // Generate a unique username
+        String orgId = UserInfo.getOrganizationId();
+        String dateString = String.valueOf(Datetime.now()).replace(' ','').replace(':','').replace('-','');
+        Integer randomInt = Integer.valueOf(Math.rint(Math.random() * 1000000));
+        String uniqueName = orgId + dateString + randomInt;
+        
+        // Create a new User record
+        User userRecord = new User();
+        userRecord.Username = uniqueName + '@mail.com';
+        userRecord.LastName = 'Zaki Al Bakri';
+        userRecord.Email = 'Zakial@gmail.com';
+        userRecord.Alias = 'Zaki';
+        userRecord.TimeZoneSidKey = 'Asia/Dubai';
+        userRecord.LocaleSidKey = 'en_US';
+        userRecord.EmailEncodingKey = 'UTF-8';
+        userRecord.ProfileId = profileCC.Id;  
+        userRecord.LanguageLocaleKey = 'en_US';        
+        insert userRecord;         
+        
+        Project__c prj = new Project__c();
+        prj.Name = 'Test Project';    
+        prj.Contractor__c = userRecord.Id; //cnt.Id;
+        insert prj;
+        
+        Unit__c unt = new Unit__c(Name = 'C-1233',Project__c = prj.Id, Location__Longitude__s = 98.345445, Location__Latitude__s = 22.22222, Is_Property_keys_given__c = true);
+        insert unt;
+        
+        WorkOrder wrk = new WorkOrder(
+            Subject = 'New work order is created.',
+            Description = 'This description is for test class.',
+            Closure_Reason__c = 'Out Of Scope',
+            Type_of_Incident__c = 'Out of Scope',
+            Resolution_Priority__c = 'Priority 1',
+            Resolution_Typology__c = 'Repair',
+            Category__c = 'Civil',
+            Location__c = 'Master Bedroom',
+            Priority = 'Low',
+            Status = 'Closed',
+            Check_In__c = true,
+            Customer_Availability__c = 'Customer not available',
+            Incident_description__c = 'Paint Peeling off',
+            Problem_Code__c = 'CM-PQA-Wall-Ceiling',
+            Sub_category__c = 'walls/ceiling',
+            Repair__c = '2 Days',
+            Replace__c = 'Within 2 Day',
+            Unit__c = unt.Id
+        );
+        insert wrk;
+        
+        ServiceAppointment newSA = new ServiceAppointment(
+            ParentRecordId = wrk.Id,
+            Status = 'None',
+            EarliestStartTime = System.now().addDays(-1),
+            DueDate = System.now().addDays(7),
+            Subject = wrk.Subject,
+            Description = wrk.Description
+        );
+        insert newSA;
+        
+        String fileContent = 'This is a test file content';
+        ContentVersion contentVersionObj = new ContentVersion(
+            Title = 'Test File',
+            PathOnClient = 'TestFile.txt',
+            VersionData = Blob.valueOf(fileContent),
+            ContentLocation = 'S'
+        );
+        insert contentVersionObj;
+        
+        WorkOrder wo = [SELECT Id, CaseId, Case.CaseNumber, Customer_Email__c, Contractor__c,Customer_Phone__c, Customer_Name__c, Unit__r.Name, Unit__r.SAP_Unit_Number__c,
+                        Project__r.Office_Location__c, Status, Project__r.Name, EndDate, StartDate, Unit__c, WorkOrderNumber, Project__r.ProjectNameArabic__c,
+                        Owner.Name,Owner.Email, Contractor_Name__c,Contractor_Email__c, New_Requester_Phone__c, New_Requester_Name__c, New_Requester_Email__c, Requester_Name__c, Requester_Comment__c, Requester_Phone__c, Requester_Email__c, Is_Tenet_Request__c FROM WorkOrder LIMIT 1];
+        ServiceAppointment sa = [SELECT Id, Status, ParentRecordId, SchedStartTime, SchedEndTime, EarliestStartTime, DueDate FROM ServiceAppointment LIMIT 1];
+        
+        Test.startTest();
+        OrgWideEmailAddress orgWideEmail = [SELECT Id FROM OrgWideEmailAddress LIMIT 1];
+        EmailService.getInstance().sendDLPEmail(
+            mailTemplateCustomerNotAvailable, wo, newSA, new List<String>{wo.Customer_Email__c}, null, orgWideEmail
+        );
+        Test.stopTest();
+    }
 }

@@ -25,21 +25,23 @@ public class ServiceAppointmentTriggerHelper {
     private static String NOT_CHECKED_IN = 'Not Checked-In';
     private static String BLOOM_NO_REPLY_LABEL = 'Bloom No Reply';
     private static String DLP_LABEL = 'DLP';
+    private static String WO_ID_PREFIX = '0WO';
+    private static String SA_RESCHEDULE_NOTIF_DEV_NAME = 'Service_Appointment_Reschedule';
 
-    public static void updateFirstAppointment(List<ServiceAppointment> newServiceAppointments) {
+    public static void populateSAFieldsFromWorkOrder(List<ServiceAppointment> newServiceAppointments) {
         Set<Id> workOrderIds = new Set<Id>();
         Map<Id, Integer> workOrderToSAcount = new Map<Id, Integer>();
         Map<Id, WorkOrder> workOrderMap;
         
         for(ServiceAppointment sa : newServiceAppointments) {
-            if(sa.ParentRecordId != null && String.valueOf(sa.ParentRecordId).startsWith('0WO')) {
+            if(sa.ParentRecordId != null && String.valueOf(sa.ParentRecordId).startsWith(WO_ID_PREFIX)) {
                 sa.Work_Order__c = sa.ParentRecordId;
                 workOrderIds.add(sa.ParentRecordId);               
             }            
         }
 
         if(!workOrderIds.isEmpty()) {
-            List<AggregateResult> groupedResults = ServiceAppointmentService.getInstance().getSACountByParentRecordIds(workOrderIds);
+            List<AggregateResult> groupedResults = ServiceAppointmentService.getInstance().getSACountByParentIds(workOrderIds);
             for(AggregateResult ar : groupedResults) {
                 workOrderToSAcount.put((Id) ar.get('ParentRecordId'), (Integer) ar.get('total'));
             }
@@ -57,12 +59,70 @@ public class ServiceAppointmentTriggerHelper {
                 saObj.Project__c = workOrderObj.Project__c;                 
             }
         }
-    }    
+    }
     
-    public static void updateWorkOrderField(List<ServiceAppointment> newList, Map<Id, ServiceAppointment> oldMap) {
+    public static void sendNewFSLAppointmentNotification(List<ServiceAppointment> newList) {
+        List<ServiceAppointment> newFromMobileSAs = new List<ServiceAppointment>();
+
+        for (ServiceAppointment sa : newList) {
+            if (sa.Status == DISPATCHED && sa.Created_By_DLP_Agent__c && !String.isBlank(sa.OwnerId)) {
+                newFromMobileSAs.add(sa);
+            }
+        }
+
+        if (newFromMobileSAs.isEmpty()) { return; }
+        CustomNotificationType notification = CustomNotificationService.getInstance().getCustomNotificationTypeByName(SA_RESCHEDULE_NOTIF_DEV_NAME);
+        if (notification != null) {
+            for (ServiceAppointment sa: newFromMobileSAs) {
+				CustomNotificationService.sendCustomNotification(new Set<String>{ sa.OwnerId }, sa.Id, notification, sa.AppointmentNumber, 'New Service Appointment is assigned to you.');
+            }
+        }
+    }
+    
+    public static void validateServiceAppointmentBeforeUpdate(List<ServiceAppointment> newList, Map<Id, ServiceAppointment> oldMap) {
+        isSARescheduledWhileInProgress(newList, oldMap);
+        
+    }
+    
+    private static void isSARescheduledWhileInProgress(List<ServiceAppointment> newList, Map<Id, ServiceAppointment> oldMap) {
+        Set<Id> workOrderIds = new Set<Id>();
+        
+        for(ServiceAppointment saObj :newList) {
+            if(saObj.status == IN_PROGRESS && saObj.SchedStartTime != null && saObj.SchedStartTime != oldMap.get(saObj.Id).SchedStartTime && saObj.SchedEndTime != null && saObj.SchedEndTime != oldMap.get(saObj.Id).SchedEndTime && String.isNotBlank(saObj.ParentRecordId) ) {
+                workOrderIds.add(saObj.ParentRecordId);
+            }
+        }
+        
+        if(!workOrderIds.isEmpty()) {
+            Map<Id, WorkOrder> workOrderMap = new Map<Id, WorkOrder>(WorkOrderService.getInstance().getWorkOrdersByIds(workOrderIds));            
+            
+            for(ServiceAppointment saObj : newList) {
+                WorkOrder workOrderObj = workOrderMap.get(saObj.ParentRecordId);
+                if(workOrderObj.status == IN_PROGRESS && workOrderObj.Check_In__c == true && workOrderObj.Check_In_Time__c != null && workOrderObj.Check_Out__c == false) {
+                    saObj.addError('You can not Re-scheduled Appintment after check In.');                    
+                }               
+            }
+        }
+    }
+    
+    public static void populateSAFields(List<ServiceAppointment> newList, Map<Id, ServiceAppointment> oldMap) {
+        Set<Id> workOrderIds = new Set<Id>();
         for(ServiceAppointment sa : newList) {
-            if(sa.ParentRecordId != null && oldMap.get(sa.Id).ParentRecordId != sa.ParentRecordId && String.valueOf(sa.ParentRecordId).startsWith('0WO')) {
+            if(sa.ParentRecordId != null && oldMap.get(sa.Id).ParentRecordId != sa.ParentRecordId && String.valueOf(sa.ParentRecordId).startsWith(WO_ID_PREFIX)) {
                 sa.Work_Order__c = sa.ParentRecordId;
+                workOrderIds.add(sa.ParentRecordId);
+            }
+        }
+        
+        if(!workOrderIds.isEmpty()) {
+            Map<Id, WorkOrder> workOrderMap = new Map<Id, WorkOrder>(WorkOrderService.getInstance().getWorkOrdersByIds(workOrderIds));
+            
+            for(ServiceAppointment saObj : newList) {
+                if(workOrderMap != null && workOrderMap.containsKey(saObj.ParentRecordId)) {
+                    WorkOrder workOrderObj = workOrderMap.get(saObj.ParentRecordId);
+                    saObj.WorkOrder_Unit__c = workOrderObj.Unit__c;
+                    saObj.Project__c = workOrderObj.Project__c;                 
+                }
             }
         }
     }       
@@ -102,24 +162,24 @@ public class ServiceAppointmentTriggerHelper {
             //Send email to contractor when service appointment is created (booked).
             if(String.isNotBlank(workOrderObj.Contractor_Email__c) && srvApp != null && mailTemplateContractor != null &&
                 String.isNotBlank(srvApp.ParentRecordId) && String.isNotBlank(srvApp.Status) && srvApp.Status != saOldMap.get(srvApp.Id).Status &&
-                srvApp.Status == SCHEDULED) {                  
-                    mailList.add(DLPEmailHandler.sendEmailProcess(mailTemplateContractor, workOrderObj, srvApp, new List<String>{workOrderObj.Contractor_Email__c}, contentVersionObj, orgWideEmail));
+                srvApp.Status == DISPATCHED) {                  
+                    mailList.add(objEmailService.sendDLPEmail(mailTemplateContractor, workOrderObj, srvApp, new List<String>{workOrderObj.Contractor_Email__c}, contentVersionObj, orgWideEmail));
             }
             
             //Send email to customer when service appointment is created (booked).
-            if(workOrderObj.New_Requester_Email__c != null && srvApp != null && mailTemplateCustomer != null && String.isNotBlank(srvApp.ParentRecordId) && String.isNotBlank(srvApp.Status) && srvApp.Status != saOldMap.get(srvApp.Id).Status && srvApp.Status == SCHEDULED) {
-                mailList.add(DLPEmailHandler.sendEmailProcess(mailTemplateCustomer, workOrderObj, srvApp, new List<String>{workOrderObj.New_Requester_Email__c}, contentVersionObj, orgWideEmail));                        
+            if(workOrderObj.New_Requester_Email__c != null && srvApp != null && mailTemplateCustomer != null && String.isNotBlank(srvApp.ParentRecordId) && String.isNotBlank(srvApp.Status) && srvApp.Status != saOldMap.get(srvApp.Id).Status && srvApp.Status == DISPATCHED) {
+                mailList.add(objEmailService.sendDLPEmail(mailTemplateCustomer, workOrderObj, srvApp, new List<String>{workOrderObj.New_Requester_Email__c}, contentVersionObj, orgWideEmail));                        
             }       
             
             //Send email to owner (DLP agent) when service appointment is created (booked).
-            if(String.isNotBlank(workOrderObj.Owner.Email) && srvApp != null && mailTemplateDLP != null && String.isNotBlank(srvApp.ParentRecordId) && String.isNotBlank(srvApp.Status) && srvApp.Status != saOldMap.get(srvApp.Id).Status && srvApp.Status == SCHEDULED) {                    
-                mailList.add(DLPEmailHandler.sendEmailProcess(mailTemplateDLP, workOrderObj, srvApp, new List<String>{workOrderObj.Owner.Email}, contentVersionObj, orgWideEmail));
+            if(String.isNotBlank(workOrderObj.Owner.Email) && srvApp != null && mailTemplateDLP != null && String.isNotBlank(srvApp.ParentRecordId) && String.isNotBlank(srvApp.Status) && srvApp.Status != saOldMap.get(srvApp.Id).Status && srvApp.Status == DISPATCHED) {                    
+                mailList.add(objEmailService.sendDLPEmail(mailTemplateDLP, workOrderObj, srvApp, new List<String>{workOrderObj.Owner.Email}, contentVersionObj, orgWideEmail));
             }
             
             //Send email to contractor when service appointment is rescheduled.
             if(String.isNotBlank(workOrderObj.Contractor_Email__c) && srvApp != null && rescheduledTemplateContractor != null && srvApp.SchedStartTime != null && srvApp.SchedStartTime != saOldMap.get(srvApp.Id).SchedStartTime && srvApp.SchedEndTime != null && srvApp.SchedEndTime != saOldMap.get(srvApp.Id).SchedEndTime && String.isNotBlank(srvApp.ParentRecordId) && 
                 String.isNotBlank(srvApp.Status) && (srvApp.Status == DISPATCHED || srvApp.Status == NOT_CHECKED_IN)) {                  
-                    mailList.add(DLPEmailHandler.sendEmailProcess(rescheduledTemplateContractor, workOrderObj, srvApp, new List<String>{workOrderObj.Contractor_Email__c}, contentVersionObj, orgWideEmail));
+                    mailList.add(objEmailService.sendDLPEmail(rescheduledTemplateContractor, workOrderObj, srvApp, new List<String>{workOrderObj.Contractor_Email__c}, contentVersionObj, orgWideEmail));
             }
             
             //Send email to customer when service appointment is rescheduled
@@ -127,7 +187,7 @@ public class ServiceAppointmentTriggerHelper {
                 srvApp.SchedStartTime != null && srvApp.SchedStartTime != saOldMap.get(srvApp.Id).SchedStartTime && srvApp.SchedEndTime != null && 
                 srvApp.SchedEndTime != saOldMap.get(srvApp.Id).SchedEndTime && String.isNotBlank(srvApp.ParentRecordId) && 
                 String.isNotBlank(srvApp.Status) && (srvApp.Status == DISPATCHED || srvApp.Status == NOT_CHECKED_IN)) {
-                    mailList.add(DLPEmailHandler.sendEmailProcess(rescheduledTemplateCustomer, workOrderObj, srvApp, new List<String>{workOrderObj.New_Requester_Email__c}, contentVersionObj, orgWideEmail));                        
+                    mailList.add(objEmailService.sendDLPEmail(rescheduledTemplateCustomer, workOrderObj, srvApp, new List<String>{workOrderObj.New_Requester_Email__c}, contentVersionObj, orgWideEmail));                        
             }       
             
             //Send email to owner (DLP agent) when service appointment is rescheduled
@@ -135,26 +195,26 @@ public class ServiceAppointmentTriggerHelper {
                 srvApp.SchedStartTime != null && srvApp.SchedStartTime != saOldMap.get(srvApp.Id).SchedStartTime && srvApp.SchedEndTime != null && 
                 srvApp.SchedEndTime != saOldMap.get(srvApp.Id).SchedEndTime && String.isNotBlank(srvApp.ParentRecordId) && 
                 String.isNotBlank(srvApp.Status) && (srvApp.Status == DISPATCHED || srvApp.Status == NOT_CHECKED_IN)) {                    
-                    mailList.add(DLPEmailHandler.sendEmailProcess(rescheduledTemplateDLP, workOrderObj, srvApp, new List<String>{workOrderObj.Owner.Email}, contentVersionObj, orgWideEmail));
+                    mailList.add(objEmailService.sendDLPEmail(rescheduledTemplateDLP, workOrderObj, srvApp, new List<String>{workOrderObj.Owner.Email}, contentVersionObj, orgWideEmail));
             } 
         }
 
-        List<Messaging.SendEmailResult> results = objEmailService.sendEmail(mailList);
+        objEmailService.sendEmail(mailList);
     }
     
     public static void addContractor(List<ServiceAppointment> ServiceAppointmentList, Map<Id,ServiceAppointment> oldServiceAppointment) {
+        AssignedResourceService objAssignedResourceService = AssignedResourceService.getInstance();
         Set<Id> workOrderIds = new Set<Id>();
         set<Id> userIds = new Set<Id>();
-        Set<Id> saIds = new Set<Id>();
+        Map<Id, ServiceAppointment> toConsiderSAMap = new Map<Id, ServiceAppointment>();
         for(ServiceAppointment sa: ServiceAppointmentList) {
-            if(String.isNotBlank(sa.ParentRecordId) && sa.Status != COMPLETED) {
+            if(String.isNotBlank(sa.ParentRecordId) && sa.Status == SCHEDULED && sa.Status != oldServiceAppointment.get(sa.Id).Status) {
                 workOrderIds.add(sa.ParentRecordId);
-                saIds.add(sa.Id);
+                toConsiderSAMap.put(sa.Id, sa);
             }
         }
 
-        WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
-        Map<Id, WorkOrder> workOrderMap = workOrderIds.isEmpty() ? new Map<Id, WorkOrder>() : new Map<Id, WorkOrder>(objWorkOrderService.getWorkOrdersByIds(workOrderIds));
+        Map<Id, WorkOrder> workOrderMap = workOrderIds.isEmpty() ? new Map<Id, WorkOrder>() : new Map<Id, WorkOrder>(WorkOrderService.getInstance().getWorkOrdersByIds(workOrderIds));
        
         for(Id key : workOrderMap.keySet()) {
             userIds.add(workOrderMap.get(key).Contractor__c);
@@ -164,7 +224,7 @@ public class ServiceAppointmentTriggerHelper {
         List<ServiceResource> serviceResourceList = objServiceResourceService.getServiceResourcesByRelatedRecordIds(userIds);                
                        
         List<AssignedResource> assignedResourceList = new List<AssignedResource>();
-        List<AssignedResource> existingARs = [SELECT Id, ServiceAppointmentId, ServiceResourceId,ServiceResource.Is_Contractor__c  FROM AssignedResource WHERE ServiceAppointmentId IN :saIds];
+        List<AssignedResource> existingARs = objAssignedResourceService.getAssignedResourcesByServiceAppointmentIds(toConsiderSAMap.keySet());
       
         Map<Id, Id> contractorAssignedMap = new Map<Id, Id>();
         if(!existingARs.isEmpty()) {     
@@ -175,8 +235,8 @@ public class ServiceAppointmentTriggerHelper {
             }
         }
 
-        for(ServiceAppointment sa: ServiceAppointmentList) {
-            if(sa.Status == SCHEDULED && sa.Status != oldServiceAppointment.get(sa.Id).Status && serviceResourceList != null  && !contractorAssignedMap.containsKey(sa.Id) ) {                
+        for(ServiceAppointment sa: toConsiderSAMap.values()) {
+            if(serviceResourceList != null && !contractorAssignedMap.containsKey(sa.Id)) {                
                 for(ServiceResource sr : serviceResourceList) {
                     if(sr.RelatedRecordId == workOrderMap.get(sa.ParentRecordId).Contractor__c) {
                         AssignedResource assRes = new AssignedResource();
@@ -188,150 +248,122 @@ public class ServiceAppointmentTriggerHelper {
             }
         }
        
-        AssignedResourceService objAssignedResourceService = AssignedResourceService.getInstance();
-        assignedResourceList = objAssignedResourceService.insertAssignedResourcesWithoutTrigger(assignedResourceList);
+        objAssignedResourceService.insertAssignedResources(assignedResourceList);
     }    
     
-    //Update the new owner on Service Appointment and Work Order on after update.
-    public static void newAppontmentSchedule(List<ServiceAppointment> allAppointments, Map<Id,ServiceAppointment> oldMap) {
-        if(allAppointments == null || allAppointments.isEmpty()) {
-            return; 
-        }
-        
-        Set<Id> serviceAppointmentIds = new Map<Id, ServiceAppointment>(allAppointments).keySet();
+    public static void populateOwnerIdOnSA(List<ServiceAppointment> newList, Map<Id, ServiceAppointment> oldMap) {
+        Set<Id> serviceAppointmentIds = getScheduledAppointmentIds(newList, oldMap);
+
         if(!serviceAppointmentIds.isEmpty()) {
-            updateOwner(serviceAppointmentIds);
-        }
-    }
-    
-    @future
-    public static void updateOwner(Set<Id> serviceAppointmentIds) {
-        ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance(); 
-        List<ServiceAppointment> serApp = objServiceAppointmentService.getServiceAppointmentsByIds(serviceAppointmentIds);
-        
-        Set<Id> serviceAppointmentIdsSet = new Set<Id>();
-        Set<Id> workOrderIds = new Set<Id>();
-        
-        for(ServiceAppointment sa : serApp) {  
-            if(String.isNotBlank(sa.Status) && String.isNotBlank(sa.ParentRecordId) && 
-               (sa.Status == SCHEDULED || sa.Status == DISPATCHED)) 
-            {
-                serviceAppointmentIdsSet.add(sa.Id);
-                workOrderIds.add(sa.ParentRecordId);
-            }
-        }
-        
-        if(serviceAppointmentIdsSet.isEmpty() || workOrderIds.isEmpty()) {
-            return; 
-        }
-        
-        // Get all Assigned Resources related to Service Appointments
-        AssignedResourceService objAssignedResourceService = AssignedResourceService.getInstance();
-        Map<Id, AssignedResource> assRes = new Map<Id, AssignedResource>(
-            objAssignedResourceService.getAssignedResourcesByServiceAppointmentIds(serviceAppointmentIdsSet)
-        );
-        
-        // Collect ServiceResourceIds
-        Set<Id> serviceResourceIds = new Set<Id>();
-        for(AssignedResource ar : assRes.values()) {
-            if(ar.ServiceResourceId != null) {
-                serviceResourceIds.add(ar.ServiceResourceId);
-            }           
-        }
-        
-        // Query ServiceResource Names and Related User IDs
-        ServiceResourceService objServiceResourceService = ServiceResourceService.getInstance();
-        Map<Id, ServiceResource> serviceResourceMap = new Map<Id, ServiceResource>(
-            objServiceResourceService.getServiceResourcesBySetIds(serviceResourceIds)
-        );                
-        
-        // Get all Work Orders related to the Service Appointments
-        WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
-        Map<Id, WorkOrder> workOrderMap = new Map<Id, WorkOrder>(
-            objWorkOrderService.getWorkOrdersByIds(workOrderIds)
-        );
-        
-        Map<Id,ServiceAppointment> appointmentsToUpdate = new Map<Id,ServiceAppointment>();
-        Map<Id,WorkOrder> workOrdersToUpdate = new Map<Id,WorkOrder>();
-        
-        for(ServiceAppointment sa : serApp) { 
-            for(AssignedResource asr : assRes.Values()) {
-                Id newOwnerId;
-                if(serviceResourceMap.get(asr.ServiceResourceId).Is_Contractor__c == false) {
-                    newOwnerId = serviceResourceMap.get(asr.ServiceResourceId).RelatedRecordId;
-                    if(newOwnerId != null) {
-                        sa.OwnerId = newOwnerId; // Update Service Appointment Owner
-                        appointmentsToUpdate.put(sa.Id,sa);
-                        
-                        WorkOrder workOrder = workOrderMap.get(sa.ParentRecordId);
-                        if(workOrder != null) {
-                            workOrder.OwnerId = newOwnerId; // Update Work Order Owner
-                            workOrder.Status = SCHEDULED;
-                            workOrdersToUpdate.put(workOrder.Id, workOrder);
-                        }
-                    }
+            Map<Id, Id> appointmentOwnerMap = getSAIdVsOwnerIdMap(serviceAppointmentIds);
+
+            for (ServiceAppointment sa : newList) {
+                Id ownerId = appointmentOwnerMap.get(sa.Id);
+                if (ownerId != null) {
+                    sa.OwnerId = ownerId;
                 }
-            }            
-        }
-        
-        // Perform updates safely
-        if(!workOrdersToUpdate.isEmpty()) { 
-            objWorkOrderService.updateWorkOrdersWithoutTrigger(workOrdersToUpdate.values());
-        }
-        if(!appointmentsToUpdate.isEmpty()) {
-            objServiceAppointmentService.updateServiceAppointmentsWithoutTrigger(appointmentsToUpdate.values());
-        }               
-    }
-    
-    //after Update
-    public static void statusUpdate(List<ServiceAppointment> allAppointments, Map<Id, ServiceAppointment> oldMap) {
-        WorkType wrkTypeObj = new WorkType();
-        wrkTypeObj = WorkTypeService.getWorkTypeRecord(DLP_LABEL);
-        
-        List<ServiceAppointment> appointmentsToUpdate = new List<ServiceAppointment>();
-        for(ServiceAppointment sa : allAppointments) {
-            if(String.isNotBlank(sa.Status) && sa.Status != oldMap.get(sa.Id).Status && sa.Status == SCHEDULED && oldMap.get(sa.Id).Status != DISPATCHED && String.isNotBlank(sa.ParentRecordId)) {  
-                ServiceAppointment srv = new ServiceAppointment(Id = sa.Id);
-                srv.Status = DISPATCHED;
-                if(wrkTypeObj != null) {
-                    srv.WorkTypeId = wrkTypeObj.Id;
-                }
-                appointmentsToUpdate.add(srv);
-            }
-        }
-        
-        if(!appointmentsToUpdate.isEmpty()) {
-            ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
-            appointmentsToUpdate = objServiceAppointmentService.updateServiceAppointmentsWithoutTrigger(appointmentsToUpdate);
-        }
-    }
-    
-    public static void throwErrorOnUpdate(List<ServiceAppointment> newAppointments, Map<Id, ServiceAppointment> oldMap) {
-        Set<Id> workOrderIds = new Set<Id>();
-        
-        for(ServiceAppointment saObj :newAppointments) {
-            if(saObj.status == IN_PROGRESS && saObj.SchedStartTime != null && saObj.SchedStartTime != oldMap.get(saObj.Id).SchedStartTime && saObj.SchedEndTime != null && saObj.SchedEndTime != oldMap.get(saObj.Id).SchedEndTime && String.isNotBlank(saObj.ParentRecordId) ) {
-                workOrderIds.add(saObj.ParentRecordId);
-            }
-        }
-        
-        if(!workOrderIds.isEmpty()) {
-            Map<Id, WorkOrder> workOrderMap = new Map<Id, WorkOrder>(WorkOrderService.getInstance().getWorkOrdersByIds(workOrderIds));            
-            
-            for(ServiceAppointment saObj : newAppointments) {
-                WorkOrder workOrderObj = workOrderMap.get(saObj.ParentRecordId);
-                if(workOrderObj.status == IN_PROGRESS && workOrderObj.Check_In__c == true && workOrderObj.Check_In_Time__c != null && workOrderObj.Check_Out__c == false) {
-                    saObj.addError('You can not Re-scheduled Appintment after check In.');                    
-                }               
             }
         }
     }
 
-    public static void updateCancelledFlag(List<ServiceAppointment> Appointments, Map<Id, ServiceAppointment> saOldMap) {
+    public static void updateStatusAndOwnerIdonWorkOrder(List<ServiceAppointment> newList, Map<Id, ServiceAppointment> oldMap) {
+        Set<Id> serviceAppointmentIds = getScheduledAppointmentIds(newList, oldMap);
+
+        if (!serviceAppointmentIds.isEmpty()) {
+            updateStatusAndOwnerIdonWO(serviceAppointmentIds);
+        }
+    }
+
+    private static Set<Id> getScheduledAppointmentIds(List<ServiceAppointment> newList, Map<Id, ServiceAppointment> oldMap) {
+        Set<Id> serviceAppointmentIds = new Set<Id>();
+
+        for(ServiceAppointment sa : newList) {
+            ServiceAppointment oldSA = oldMap.get(sa.Id);
+
+            if (sa.ParentRecordId != null && (sa.Status == SCHEDULED || sa.Status == DISPATCHED) && oldSA.Status != sa.Status) {
+                serviceAppointmentIds.add(sa.Id);
+            }
+        }
+        return serviceAppointmentIds;
+    }
+
+    private static Map<Id, Id> getSAIdVsOwnerIdMap(Set<Id> serviceAppointmentIds) {
+        List<AssignedResource> assignedResources = AssignedResourceService.getInstance().getAssignedResourcesByServiceAppointmentIds(serviceAppointmentIds);
+
+        Set<Id> serviceResourceIds = new Set<Id>();
+        Map<Id, Set<Id>> appointmentResourceMap = new Map<Id, Set<Id>>();
+
+        for(AssignedResource ar : assignedResources) {
+            if (ar.ServiceResourceId != null) {
+                serviceResourceIds.add(ar.ServiceResourceId);
+                if(!appointmentResourceMap.containsKey(ar.ServiceAppointmentId)) {
+                	appointmentResourceMap.put(ar.ServiceAppointmentId, new Set<Id>());
+                }
+                appointmentResourceMap.get(ar.ServiceAppointmentId).add(ar.ServiceResourceId);
+            }
+        }
+
+        if (!serviceResourceIds.isEmpty()) {
+            Map<Id, ServiceResource> serviceResourceMap = new Map<Id, ServiceResource>(ServiceResourceService.getInstance().getServiceResourceByIds(serviceResourceIds));
+
+            Map<Id, Id> appointmentOwnerMap = new Map<Id, Id>();
+            for (Id appointmentId : appointmentResourceMap.keySet()) {
+                Set<Id> serviceResourcesIds = appointmentResourceMap.get(appointmentId);
+                
+                for(Id srId: serviceResourcesIds) {
+                    ServiceResource sr = serviceResourceMap.get(srId);
+                    if (sr != null && !sr.Is_Contractor__c && sr.RelatedRecordId != null) {
+                        appointmentOwnerMap.put(appointmentId, sr.RelatedRecordId);
+                        continue;
+                    }
+                }
+            }
+            return appointmentOwnerMap;
+        }
+
+        return new Map<Id, Id>();
+    }
+
+    private static void updateStatusAndOwnerIdonWO(Set<Id> serviceAppointmentIds) {
+        WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
+
+        List<ServiceAppointment> appointments = ServiceAppointmentService.getInstance().getServiceAppointmentsByIds(serviceAppointmentIds);
+        Map<Id, Id> appointmentOwnerMap = getSAIdVsOwnerIdMap(serviceAppointmentIds);
+        Set<Id> workOrderIds = new Set<Id>();
+
+        Map<Id, WorkOrder> workOrdersToUpdate = new Map<Id, WorkOrder>();
+        for (ServiceAppointment sa : appointments) {
+            Id ownerId = appointmentOwnerMap.get(sa.Id);
+
+            if (ownerId != null && sa.ParentRecordId != null) {
+                workOrdersToUpdate.put(sa.ParentRecordId, new WorkOrder(Id = sa.ParentRecordId, OwnerId = ownerId, Status = SCHEDULED));
+            }
+        }
+
+        if (!workOrdersToUpdate.isEmpty()) {
+            objWorkOrderService.updateWorkOrdersWithoutTrigger(workOrdersToUpdate.values());
+        }
+    }
+    
+    public static void populateWorkTypeIdOnSA(List<ServiceAppointment> allAppointments, Map<Id, ServiceAppointment> oldMap) {
+        WorkType wrkTypeObj = new WorkType();
+        wrkTypeObj = WorkTypeService.getWorkTypeRecord(DLP_LABEL);
+        
+        for(ServiceAppointment sa : allAppointments) {
+            if(sa.Status != oldMap.get(sa.Id).Status && sa.Status == SCHEDULED && oldMap.get(sa.Id).Status != DISPATCHED && String.isNotBlank(sa.ParentRecordId)) {  
+                sa.Status = DISPATCHED;
+                if(wrkTypeObj != null) {
+                    sa.WorkTypeId = wrkTypeObj.Id;
+                }
+            }
+        }
+    }
+
+    public static void cancelWorkOrder(List<ServiceAppointment> newList, Map<Id, ServiceAppointment> oldMap) {
         Set<Id> workOrderIds = new Set<Id>();
         WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
-        for(ServiceAppointment sa : Appointments) {
-            if(sa.ParentRecordId != null && sa.Status != saOldMap.get(sa.Id).Status && sa.Status == CANCELED) {
+        for(ServiceAppointment sa : newList) {
+            if(sa.ParentRecordId != null && sa.Status != oldMap.get(sa.Id).Status && sa.Status == CANCELED) {
                 workOrderIds.add(sa.ParentRecordId);
             }
         }
@@ -359,7 +391,7 @@ public class ServiceAppointmentTriggerHelper {
         }
     }
 
-    public static void onReschedule(List<ServiceAppointment> allAppointments, Map<Id, ServiceAppointment> oldMap) {
+    public static void resetMilestoneOnWorkOrder(List<ServiceAppointment> allAppointments, Map<Id, ServiceAppointment> oldMap) {
         Set<Id> workOrderIds = new Set<Id>();
         WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
 
@@ -392,6 +424,32 @@ public class ServiceAppointmentTriggerHelper {
                 woListToUpdateTWO.add(wo);
             }  
             objWorkOrderService.updateWorkOrders(woListToUpdateTWO);
+        }
+    }
+
+    public static void sendSARescheduleNotification(List<ServiceAppointment> newList, Map<Id, ServiceAppointment> oldMap) {
+        List<ServiceAppointment> rescheduledSAs   = new List<ServiceAppointment>();
+
+        for (ServiceAppointment sa : newList) {
+            ServiceAppointment oldSA = oldMap.get(sa.Id);
+
+            Boolean isRescheduledStatus = (sa.Status == DISPATCHED || sa.Status == NOT_CHECKED_IN);
+            Boolean schedStartChanged = (sa.SchedStartTime != oldSA.SchedStartTime);
+            Boolean schedEndChanged = (sa.SchedEndTime   != oldSA.SchedEndTime);
+
+            if (isRescheduledStatus && schedStartChanged && schedEndChanged) {
+                rescheduledSAs.add(sa);
+            }
+        }
+
+        if (rescheduledSAs.isEmpty()) { return; }
+        CustomNotificationType notification = CustomNotificationService.getInstance().getCustomNotificationTypeByName(SA_RESCHEDULE_NOTIF_DEV_NAME);
+        if (notification != null) {
+            for (ServiceAppointment sa : rescheduledSAs) {
+                if (!String.isBlank(sa.OwnerId)) {
+                    CustomNotificationService.sendCustomNotification(new Set<String>{ sa.OwnerId }, sa.Id, notification, sa.AppointmentNumber, 'Your Service Appointment is Rescheduled.');
+                }
+            }
         }
     }
 }

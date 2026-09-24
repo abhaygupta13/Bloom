@@ -1,4 +1,14 @@
-public class ServiceReportHandler implements ITriggerHandler{
+/*
+*********************************************************
+Apex Class Name    : ServiceReportTriggerHandler
+Created Date       : Sept 21, 2026
+@description       : This is handler class for Service Report Object
+Modification Log   :
+Ver   Date         Author                               Modification
+1.0   21-09-2026   Abhay Gupta                          Created Trigger Handler class for Service Report
+*********************************************************
+*/
+public without sharing class ServiceReportTriggerHandler implements ITriggerHandler {
     
     //Use this variable to disable this trigger from transaction
     public static Boolean isTriggerDisabled = false;
@@ -13,7 +23,7 @@ public class ServiceReportHandler implements ITriggerHandler{
     }
     
     public void afterInsert(List<sObject> newList , Map<Id, sObject> newMap) {        
-        ServiceReportHelper.updateDocumentOnWorkOrder((List<ServiceReport>) newList);     
+        ServiceReportTriggerHelper.updateDocumentOnWorkOrder((List<ServiceReport>) newList);     
     }
     
     public void beforeUpdate(List<sObject> newList, Map<Id, sObject> newMap, List<sObject> oldList, Map<Id, sObject> oldMap) {

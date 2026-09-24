@@ -63,11 +63,7 @@ public class AssignedResourceServiceTest {
         AssignedResource assRes3 = new AssignedResource(ServiceResourceId=sr.Id, ServiceAppointmentId=sa.Id);
         AssignedResourceService aa = AssignedResourceService.getInstance();
         Test.startTest();
-        aa.insertAssignedResourcesWithoutTrigger(new List<AssignedResource>{assRes3});
-        assRes3.Transaction = 'test';
-        aa.updateServiceAppointmentsWithoutTrigger(new List<AssignedResource>{assRes3});
-        assRes3.Transaction = 'test 2';
-        aa.updateUnits(new List<AssignedResource>{assRes3});
+        aa.insertAssignedResources(new List<AssignedResource>{assRes3});
         Test.stopTest();
     }
 }

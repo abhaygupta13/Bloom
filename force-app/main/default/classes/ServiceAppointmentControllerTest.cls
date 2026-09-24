@@ -166,6 +166,42 @@ public class ServiceAppointmentControllerTest {
     }
 
     @IsTest
+    static void testCreateServiceAppointmentSelf() {
+        Id workOrderId = [SELECT Id FROM WorkOrder WHERE Subject = 'Test Work Order' LIMIT 1].Id;
+        WorkOrder woRec = new WorkOrder(Id=workOrderId, Status = 'In Progress');
+        update woRec;
+        DateTime startDateTime = DateTime.now().addDays(1);
+        DateTime endDateTime = DateTime.now().addDays(1).addHours(2);
+        system.debug('startDateTime-->'+startDateTime);
+
+        ServiceResource sr = [SELECT Id FROM ServiceResource WHERE Is_Contractor__c = FALSE];
+        Test.startTest();
+        ServiceAppointment sa = new ServiceAppointment();
+        sa.Status = Constants.IN_PROGRESS;
+        sa.ParentRecordId = workOrderId;
+        sa.EarliestStartTime = DateTime.now().addHours(-2);
+        sa.SchedStartTime = DateTime.now().addHours(-3);
+        sa.Is_First_Appointment__c = false;
+        sa.SchedEndTime = DateTime.now().addHours(1);
+        sa.DueDate = DateTime.now().addHours(-1);
+        insert sa;
+
+        AssignedResource assRes = new AssignedResource();
+        assRes.ServiceResourceId = sr.Id;
+        assRes.ServiceAppointmentId = sa.Id;
+        insert assRes;
+        system.debug('ServiceResourceId--->'+sr.id);
+
+        String result = ServiceAppointmentController.createServiceAppointment(startDateTime, endDateTime, 'Self', workOrderId);
+        Test.stopTest();
+
+        ServiceAppointment sa1 = [SELECT Id, Status, ParentRecordId, SchedStartTime, SchedEndTime FROM ServiceAppointment WHERE ParentRecordId = :workOrderId ORDER BY CreatedDate DESC LIMIT 1];
+        system.debug('ServiceAppointment------>'+sa1);
+        System.assertNotEquals(null, sa1);
+	    System.assertEquals('Success', result);
+    }
+
+    @IsTest
     static void testCreateServiceAppointmentContractor() {
         Id workOrderId = [SELECT Id FROM WorkOrder LIMIT 1].Id;
         DateTime startDateTime = DateTime.now().addDays(1);
@@ -240,7 +276,7 @@ public class ServiceAppointmentControllerTest {
 
         String result = ServiceAppointmentController.checkIn(contentDocumentId, customerAvailability, 'testAgentComment', workOrderObj.Id);
         String result1 = ServiceAppointmentController.checkIn(contentDocumentId, 'Not Available', 'testAgentComment', workOrderObj.Id);
-        ServiceAppointmentController.updateDueDate(new List<WorkOrder>{workOrderObj});
+        //ServiceAppointmentController.updateDueDate(new List<WorkOrder>{workOrderObj});
         Test.stopTest();
 
         System.assertEquals('Success', result);
@@ -358,7 +394,7 @@ public class ServiceAppointmentControllerTest {
 
         Test.startTest();
         sa.status = 'Scheduled';
-        ServiceAppointmentController.createServiceAppointmentWhenCustomerNotAvailable(workOrderIds);
+        ServiceAppointmentController.createSAWhenCustomerAvailable(workOrderObj.Id);
         Test.stopTest();
         System.assertEquals('Scheduled', sa.Status);
     }

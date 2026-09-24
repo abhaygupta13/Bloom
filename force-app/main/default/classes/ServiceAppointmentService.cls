@@ -46,20 +46,27 @@ public inherited sharing class ServiceAppointmentService {
         }
         return serviceAppointmentList;
     }
+
+    public List<ServiceAppointment> deleteServiceAppointments(List<ServiceAppointment> serviceAppointmentList) {
+        if(serviceAppointmentList != null && !serviceAppointmentList.isEmpty()) {
+            delete serviceAppointmentList;
+        }
+        return serviceAppointmentList;
+    }
     
     public List<ServiceAppointment> getServiceAppointmentsByIds(Set<Id> serviceAppointmentSetIds) {
         return [SELECT Id, Status, OwnerId, (SELECT Id FROM ServiceResources), ParentRecordId, SchedStartTime, SchedEndTime FROM ServiceAppointment WHERE Id IN: serviceAppointmentSetIds];
     }
     
-    public List<ServiceAppointment> getServiceAppointmentsByParentRecordSetIds(Set<Id> parentRecordIds) {
+    public List<ServiceAppointment> getServiceAppointmentsByParentIds(Set<Id> parentRecordIds) {
         return [SELECT Id, ParentRecordId, SchedStartTime, SchedEndTime, Work_Order__r.Scope__c, Status, Job_Status__c, Closure_Reason__c FROM ServiceAppointment WHERE ParentRecordId IN: parentRecordIds ORDER BY CreatedDate ASC];
     }
 
-    public List<ServiceAppointment> getSAByParentRecordIdsOrderByCreatedDateDesc(Set<Id> parentRecordIds) {
+    public List<ServiceAppointment> getSAByParentIdsOrderByCreatedDateDesc(Set<Id> parentRecordIds) {
         return [SELECT Id, Job_Status__c, Status, Closure_Reason__c FROM ServiceAppointment WHERE ParentRecordId IN :parentRecordIds ORDER BY CreatedDate DESC];
     }
 
-    public List<AggregateResult> getSACountByParentRecordIds(Set<Id> parentRecordIds) {
+    public List<AggregateResult> getSACountByParentIds(Set<Id> parentRecordIds) {
         return [SELECT ParentRecordId, COUNT(Id) total FROM ServiceAppointment WHERE ParentRecordId IN :parentRecordIds GROUP BY ParentRecordId];
     }
 }

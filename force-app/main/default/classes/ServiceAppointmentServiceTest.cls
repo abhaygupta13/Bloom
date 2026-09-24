@@ -64,7 +64,7 @@ public class ServiceAppointmentServiceTest {
         Test.startTest();
         ss.insertServiceAppointmentsWithoutTrigger(new List<ServiceAppointment>{sa});
         sa.Status = 'Completed';
-        ss.getServiceAppointmentsByParentRecordSetIds(new Set<Id>{wo.Id});
+        ss.getServiceAppointmentsByParentIds(new Set<Id>{wo.Id});
         Test.stopTest();
     }
     @IsTest
@@ -85,9 +85,9 @@ public class ServiceAppointmentServiceTest {
         List<ServiceAppointment> updatedWithoutTrigger = service.updateServiceAppointmentsWithoutTrigger(new List<ServiceAppointment>{sa1});
         System.assertEquals(1, updatedWithoutTrigger.size());
         List<ServiceAppointment> byIds = service.getServiceAppointmentsByIds(new Set<Id>{sa1.Id});
-        List<ServiceAppointment> byParent = service.getServiceAppointmentsByParentRecordSetIds(new Set<Id>{wo.Id});
-        List<ServiceAppointment> byParentDesc = service.getSAByParentRecordIdsOrderByCreatedDateDesc(new Set<Id>{wo.Id});
-        List<AggregateResult> countByParent = service.getSACountByParentRecordIds(new Set<Id>{wo.Id});
+        List<ServiceAppointment> byParent = service.getServiceAppointmentsByParentIds(new Set<Id>{wo.Id});
+        List<ServiceAppointment> byParentDesc = service.getSAByParentIdsOrderByCreatedDateDesc(new Set<Id>{wo.Id});
+        List<AggregateResult> countByParent = service.getSACountByParentIds(new Set<Id>{wo.Id});
         Test.stopTest();
         System.assertEquals(1, byIds.size());
         System.assert(byParent.size() > 0);

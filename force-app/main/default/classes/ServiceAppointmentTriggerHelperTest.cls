@@ -285,27 +285,12 @@ static void addContractor_Test() {
     ServiceAppointmentTriggerHelper.addContractor(new List<ServiceAppointment>{sa}, oldServiceAppointment);
     Test.stopTest();
 }
-
     
     @isTest
-    static void newAppontmentSchedule_Test() {
-        List<ServiceAppointment> appointments = [SELECT Id, Status, ParentRecordId FROM ServiceAppointment LIMIT 1];
-        system.debug('appointments===111=>'+appointments);
-         Map<Id, ServiceAppointment> oldMap = new Map<Id, ServiceAppointment>();
-        for (ServiceAppointment sa : appointments) {
-            oldMap.put(sa.Id, sa.clone(false, true, false, false));
-        }
+    static void populateSAFieldsFromWorkOrder_Test() {
         
         Test.startTest();
-        ServiceAppointmentTriggerHelper.newAppontmentSchedule(appointments,oldMap);
-        Test.stopTest();
-    }
-    
-    @isTest
-    static void updateFirstAppointment_Test() {
-        
-        Test.startTest();
-        ServiceAppointmentTriggerHelper.updateFirstAppointment(new List<ServiceAppointment>());
+        ServiceAppointmentTriggerHelper.populateSAFieldsFromWorkOrder(new List<ServiceAppointment>());
         Test.stopTest();
         
     }
@@ -313,7 +298,7 @@ static void addContractor_Test() {
     @isTest
     static void statusUpdate_Test() {
         Test.startTest();
-        ServiceAppointmentTriggerHelper.statusUpdate(new List<ServiceAppointment>(), new Map<Id, ServiceAppointment>());
+        ServiceAppointmentTriggerHelper.populateWorkTypeIdOnSA(new List<ServiceAppointment>(), new Map<Id, ServiceAppointment>());
         Test.stopTest();
         
     }

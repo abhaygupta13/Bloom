@@ -15,39 +15,14 @@ public inherited sharing class AssignedResourceService {
         return new AssignedResourceService();
     }
     
-    public List<AssignedResource> insertAssignedResourcesWithoutTrigger(List<AssignedResource> AssignedResourceList){
-        if(AssignedResourceList != null && !AssignedResourceList.isEmpty()){
-            //AssignedResourceTriggerHandler.isTriggerDisabled = true;
-            insert AssignedResourceList;
-            //AssignedResourceTriggerHandler.isTriggerDisabled = false;
-        }
-        return AssignedResourceList;
-    }
-    
     public List<AssignedResource> insertAssignedResources(List<AssignedResource> AssignedResourceList) {
         if(AssignedResourceList != null && !AssignedResourceList.isEmpty()){
             insert AssignedResourceList;
         }
         return AssignedResourceList;
-    }
-    
-    public List<AssignedResource> updateServiceAppointmentsWithoutTrigger(List<AssignedResource> AssignedResourceList){
-        if(AssignedResourceList != null && !AssignedResourceList.isEmpty()) {
-            //AssignedResourceTriggerHandler.isTriggerDisabled = true;
-            update AssignedResourceList;
-            //AssignedResourceTriggerHandler.isTriggerDisabled = false;
-        }
-        return AssignedResourceList;
-    }    
-    
-    public List<AssignedResource> updateUnits(List<AssignedResource> AssignedResourceList) {
-        if(AssignedResourceList != null && !AssignedResourceList.isEmpty()){
-            update AssignedResourceList;
-        }
-        return AssignedResourceList;
-    } 
+    }  
     
     public List<AssignedResource> getAssignedResourcesByServiceAppointmentIds(Set<Id> serviceAppointmentIds) {
-        return [SELECT Id, ServiceResource.RelatedRecordId,ServiceResource.ResourceType, ServiceAppointmentId, ServiceResource.Is_Contractor__c FROM AssignedResource WHERE ServiceAppointmentId IN :serviceAppointmentIds];
+        return [SELECT Id, ServiceResourceId, ServiceResource.RelatedRecordId,ServiceResource.ResourceType, ServiceAppointmentId, ServiceResource.Is_Contractor__c FROM AssignedResource WHERE ServiceAppointmentId IN :serviceAppointmentIds];
     }
 }

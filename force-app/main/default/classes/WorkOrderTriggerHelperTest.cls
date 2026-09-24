@@ -119,7 +119,7 @@ public class WorkOrderTriggerHelperTest {
     
         Unit__c unt = new Unit__c(
             Name = 'C-1233',
-            Project__c = prj.Id, 
+            Project__c = prj.Id,
             Is_Property_keys_given__c = true
         );
         insert unt;

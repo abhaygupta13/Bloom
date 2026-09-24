@@ -38,89 +38,90 @@ public without sharing class ServiceAppointmentController {
 
     @AuraEnabled
     public static String createServiceAppointment(DateTime startDateTime, DateTime endDateTime, String resType, Id workOrderId) {
-        WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
-        ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
-        AssignedResourceService objAssignedResourceService = AssignedResourceService.getInstance();
+        try {
+            WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
+            ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
+            AssignedResourceService objAssignedResourceService = AssignedResourceService.getInstance();
 
-        WorkOrder wo = new WorkOrder();
-        List<WorkOrder> woList = objWorkOrderService.getWorkOrdersByIds(new Set<Id> { workOrderId });
-        if(woList != null && !woList.isEmpty()) {
-            wo = woList[0];
-        } else {
-            return 'WorkOrder not found';
-        }
-        wo.Check_In__c = false;
-        wo.Check_In_Time__c = null;
-        objWorkOrderService.updateWorkOrders(new List<WorkOrder> { wo });
-                
-        ServiceAppointment sa = createServiceAppointment(wo, startDateTime, endDateTime);
-        objServiceAppointmentService.insertServiceAppointments(new List<ServiceAppointment> { sa });
-        
-        List<ServiceAppointment> serviceAppointments = objServiceAppointmentService.getServiceAppointmentsByParentRecordSetIds(new Set<Id> { workOrderId });
-        
-        String serviceAppointmentId;
-        for (ServiceAppointment serviceAppointment : serviceAppointments) {
-            if (serviceAppointment.Status == IN_PROGRESS && serviceAppointment.Work_Order__r.Scope__c == UNDER_SCOPE) {
-                serviceAppointmentId = serviceAppointment.Id;
-                break;
+            List<WorkOrder> woList = objWorkOrderService.getWorkOrdersByIds(new Set<Id> { workOrderId });
+            WorkOrder wo = woList != null && !woList.isEmpty() ? woList[0] : null;
+            if(wo == null) {
+                return 'WorkOrder not found';
             }
-        }
-        
-        if (String.isBlank(serviceAppointmentId)) {
-            delete sa;
-            return 'already created';
-        }
-        
-        List<AssignedResource> assignedResource = AssignedResourceService.getInstance().getAssignedResourcesByServiceAppointmentIds(new Set<Id> { serviceAppointmentId });
-        
-        List<AssignedResource> assResource = new List<AssignedResource>();
-        for (AssignedResource ar : assignedResource) {
-            if ((ar.ServiceResource.Is_Contractor__c == false && resType == SELF) 
-                || (ar.ServiceResource.Is_Contractor__c == true && resType == CONTRACTOR) 
-                || resType == 'Both'
-            ) {
-                AssignedResource assRes = new AssignedResource();
-                assRes.ServiceAppointmentId = sa.Id;
-                assRes.ServiceResourceId = ar.ServiceResourceId;
-                assResource.add(assRes);
+            wo.Check_In__c = false;
+            wo.Check_In_Time__c = null;
+            objWorkOrderService.updateWorkOrders(new List<WorkOrder> { wo });
+                    
+            ServiceAppointment sa = buildServiceAppointment(wo, startDateTime, endDateTime);
+            objServiceAppointmentService.insertServiceAppointments(new List<ServiceAppointment> { sa });
+            
+            List<ServiceAppointment> serviceAppointments = objServiceAppointmentService.getServiceAppointmentsByParentIds(new Set<Id> { workOrderId });
+            
+            String serviceAppointmentId;
+            for (ServiceAppointment serviceAppointment : serviceAppointments) {
+                if (serviceAppointment.Status == IN_PROGRESS && serviceAppointment.Work_Order__r.Scope__c == UNDER_SCOPE) {
+                    serviceAppointmentId = serviceAppointment.Id;
+                    break;
+                }
             }
-        }
-        
-        if (assResource.isEmpty()) {
-            return 'empty';
-        }
-        TriggerControl.bypassStatusUpdate = true;
-        objAssignedResourceService.insertAssignedResources(assResource);
-        
-        Boolean shouldUpdateEntitlementId = false;
-        for (ServiceAppointment serviceAppointment : serviceAppointments) {
-            if (serviceAppointment.Status == NONE) {
-                serviceAppointment.Status = SCHEDULED;
+            
+            if (String.isBlank(serviceAppointmentId)) {
+                objServiceAppointmentService.deleteServiceAppointments(new List<ServiceAppointment> { sa });
+                return 'already created';
             }
-            if (serviceAppointment.Status == IN_PROGRESS) {
-                serviceAppointment.Status = COMPLETED;
-                serviceAppointment.Job_Status__c= SCHEDULE_APPOINTMENT;
-                serviceAppointment.Closure_Reason__c = 'Re Scheduled';
-                shouldUpdateEntitlementId = true;
+            
+            List<AssignedResource> assignedResource = objAssignedResourceService.getAssignedResourcesByServiceAppointmentIds(new Set<Id> { serviceAppointmentId });
+            
+            List<AssignedResource> assResource = new List<AssignedResource>();
+            for (AssignedResource ar : assignedResource) {
+                if ((ar.ServiceResource.Is_Contractor__c == false && resType == SELF) 
+                    || (ar.ServiceResource.Is_Contractor__c == true && resType == CONTRACTOR) 
+                    || resType == 'Both'
+                ) {
+                    assResource.add(new AssignedResource(ServiceAppointmentId = sa.Id, ServiceResourceId = ar.ServiceResourceId));
+                }
+            }
+            
+            if (assResource.isEmpty()) {
+                return 'empty';
+            }
+            TriggerControl.bypassStatusUpdate = true;
+            objAssignedResourceService.insertAssignedResources(assResource);
+            
+            Boolean shouldUpdateEntitlementId = false;
+            serviceAppointments = objServiceAppointmentService.getServiceAppointmentsByParentIds(new Set<Id> { workOrderId });
+            for (ServiceAppointment serviceAppointment : serviceAppointments) {
+                if (serviceAppointment.Status == NONE) {
+                    serviceAppointment.Status = SCHEDULED;
+                }
+                if (serviceAppointment.Status == IN_PROGRESS) {
+                    serviceAppointment.Status = COMPLETED;
+                    serviceAppointment.Job_Status__c= SCHEDULE_APPOINTMENT;
+                    serviceAppointment.Closure_Reason__c = 'Re Scheduled';
+                    shouldUpdateEntitlementId = true;
+                } 
+            }
+            
+            serviceAppointments = objServiceAppointmentService.updateServiceAppointmentsWithoutTrigger(serviceAppointments);
+            for (ServiceAppointment serviceAppointment : serviceAppointments) {
+                if (serviceAppointment.Status == 'Scheduled') {
+                    serviceAppointment.Status = 'Dispatched';
+                }                
+            }
+            objServiceAppointmentService.updateServiceAppointments(serviceAppointments);
+
+            if(shouldUpdateEntitlementId) {
+                updateEntitlementIdOnWorkOrder(new Set<Id>{ workOrderId });
             } 
+            TriggerControl.bypassStatusUpdate = false;
+            return 'Success';
+
+        } catch (Exception ex) {
+            throw new AuraHandledException('Error: ' + ex.getMessage());
         }
-                 
-        serviceAppointments = objServiceAppointmentService.updateServiceAppointmentsWithoutTrigger(serviceAppointments);
-        for (ServiceAppointment serviceAppointment : serviceAppointments) {
-            if (serviceAppointment.Status == 'Scheduled') {
-                serviceAppointment.Status = 'Dispatched';
-            }                
-        }
-        update serviceAppointments;
-        
-        if(shouldUpdateEntitlementId) {
-            updateEntitlementIdOnWorkOrder(new Set<Id>{ workOrderId });
-        } 
-        TriggerControl.bypassStatusUpdate = false;
-        return 'Success';
     }
 
-    private static ServiceAppointment createServiceAppointment(WorkOrder wo, Datetime startDateTime, Datetime endDateTime) {
+    private static ServiceAppointment buildServiceAppointment(WorkOrder wo, Datetime startDateTime, Datetime endDateTime) {
         ServiceAppointment sa = new ServiceAppointment();
         sa.Status = NONE;
         sa.Duration = 1;
@@ -136,7 +137,7 @@ public without sharing class ServiceAppointmentController {
         return sa;
     }
 
-    public static void updateEntitlementIdOnWorkOrder(Set<Id> woIds) {
+    private static void updateEntitlementIdOnWorkOrder(Set<Id> woIds) {
         if (woIds == null || woIds.isEmpty()) {
             return;
         }
@@ -161,33 +162,38 @@ public without sharing class ServiceAppointmentController {
     
     @AuraEnabled
     public static String checkIn(String contentDocumentId, String customerAvailablity, String agentComments, Id workOrderId) {
-        WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
-        ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
-        Boolean isCustomerNotAvailable = customerAvailablity == NOT_AVAILABLE;
-        Datetime checkInTime = System.now();
+        try {
+            WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
+            ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
+            Boolean isCustomerNotAvailable = customerAvailablity == NOT_AVAILABLE;
+            Datetime checkInTime = System.now();
 
-        WorkOrder wo = buildCheckInWorkOrder(contentDocumentId, customerAvailablity, agentComments, workOrderId, checkInTime);
-        
-        String entitlementRecordId = '';
-        if(isCustomerNotAvailable) {
-            entitlementRecordId = objWorkOrderService.getWorkOrdersByIds(new Set<Id>{workOrderId})[0].EntitlementId;
-            wo.ScheduledAppointmentTimeStarted__c = false;
-            wo.EntitlementId = null;
+            WorkOrder wo = buildCheckInWorkOrder(contentDocumentId, customerAvailablity, agentComments, workOrderId, checkInTime);
+            
+            String entitlementRecordId = '';
+            if(isCustomerNotAvailable) {
+                entitlementRecordId = objWorkOrderService.getWorkOrdersByIds(new Set<Id>{workOrderId})[0].EntitlementId;
+                wo.ScheduledAppointmentTimeStarted__c = false;
+                wo.EntitlementId = null;
+            }
+            objWorkOrderService.updateWorkOrders(new List<WorkOrder>{wo});
+
+            List<ServiceAppointment> saList = objServiceAppointmentService.getSAByParentIdsOrderByCreatedDateDesc(new Set<Id>{ workOrderId });
+            ServiceAppointment serviceAppointment = saList != null && !saList.isEmpty() ? saList[0] : null;
+
+            List<WorkOrder> workOrderList = objWorkOrderService.getWorkOrdersByIds(new Set<Id>{ workOrderId });
+            if(isCustomerNotAvailable) {
+                processCustomerNotAvailableCheckIn(serviceAppointment, wo, entitlementRecordId);
+
+            } else if(customerAvailablity == STATUS_AVAILABLE) {
+                processCustomerAvailableCheckIn(serviceAppointment, workOrderId);
+            }
+            
+            return SUCCESS;
+
+        } catch (Exception ex) {
+            throw new AuraHandledException('Error: ' + ex.getMessage());
         }
-        objWorkOrderService.updateWorkOrders(new List<WorkOrder>{wo});
-
-        List<ServiceAppointment> saList = objServiceAppointmentService.getSAByParentRecordIdsOrderByCreatedDateDesc(new Set<Id>{ workOrderId });
-        ServiceAppointment serviceAppointment = saList != null && !saList.isEmpty() ? saList[0] : null;
-
-        List<WorkOrder> workOrderList = objWorkOrderService.getWorkOrdersByIds(new Set<Id>{ workOrderId });
-        if(isCustomerNotAvailable) {
-            processCustomerNotAvailableCheckIn(serviceAppointment, wo, entitlementRecordId);
-
-        } else if(customerAvailablity == STATUS_AVAILABLE) {
-            processCustomerAvailableCheckIn(serviceAppointment, workOrderId);
-        }
-        
-        return SUCCESS;
     }
 
     private static WorkOrder buildCheckInWorkOrder(String contentDocumentId, String customerAvailablity, String agentComments, Id workOrderId, Datetime checkInTime) {
@@ -225,7 +231,7 @@ public without sharing class ServiceAppointmentController {
         }
     }
 
-    public static void updateDueDate(List<WorkOrder> workOrderList) {
+    private static void updateDueDate(List<WorkOrder> workOrderList) {
         Map<String, DLP_Resolution_Settings__mdt> metadataMap = new Map<String, DLP_Resolution_Settings__mdt>();
         for (DLP_Resolution_Settings__mdt meta : MetadataService.getInstance().getDLPResolutionSettings()) {
             metadataMap.put(meta.Resolution_Priority__c, meta);
@@ -244,9 +250,7 @@ public without sharing class ServiceAppointmentController {
             }
         }
         
-        if (!updatedWorkOrders.isEmpty()) {
-            WorkOrderService.getInstance().updateWorkOrdersWithoutTrigger(updatedWorkOrders);
-        }
+        WorkOrderService.getInstance().updateWorkOrdersWithoutTrigger(updatedWorkOrders);
     }
 
     private static String calculateDueDate(WorkOrder wo, DLP_Resolution_Settings__mdt meta) {
@@ -277,202 +281,222 @@ public without sharing class ServiceAppointmentController {
     
     @AuraEnabled
     public static String checkScope(String contentDocumentId, String agentComments, String scope, Id workOrderId, String resolutionTypology) {
-        WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
-        ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
-        List<ServiceAppointment> saList = objServiceAppointmentService.getServiceAppointmentsByParentRecordSetIds(new Set<Id>{ workOrderId });
-        ServiceAppointment serviceAppointment = (saList != null && !saList.isEmpty()) ? saList[0] : null;
+        try {
+            WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
+            ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
+            List<ServiceAppointment> saList = objServiceAppointmentService.getServiceAppointmentsByParentIds(new Set<Id>{ workOrderId });
+            ServiceAppointment serviceAppointment = (saList != null && !saList.isEmpty()) ? saList[0] : null;
 
-        WorkOrder wo = new WorkOrder();
-        wo.Id = workOrderId;
-        String entitlementRecordId = '';
-        if(scope == OUTSIDE_SCOPE) {
-            entitlementRecordId = objWorkOrderService.getWorkOrdersByIds(new Set<Id>{workOrderId})[0].EntitlementId;
-            wo.ScheduledAppointmentTimeStarted__c = false;
-            wo.EntitlementId = null; 
-            List<WorkOrder> updatedWoList = objWorkOrderService.updateWorkOrders(new List<WorkOrder>{wo});
-        }
-
-        if(scope == OUTSIDE_SCOPE) {
-            wo.Status = CLOSED;
-            wo.AgentsComments__c = agentComments;
-            wo.Type_of_Incident__c = OUT_OF_SCOPE; 
-            wo.Closure_Reason__c = OUT_OF_SCOPE;
-            wo.Closure_Comment__c = OUT_OF_SCOPE;
-            wo.Scope__c = OUTSIDE_SCOPE;
-            wo.EntitlementId = entitlementRecordId;
-
-        } else if(scope == UNDER_SCOPE) {
-            wo.Rectification__c = PENDING;
-            wo.Scope__c = UNDER_SCOPE;
-            if(String.isNotBlank(resolutionTypology)) {
-                wo.Resolution_Typology__c = resolutionTypology;
+            WorkOrder wo = new WorkOrder();
+            wo.Id = workOrderId;
+            String entitlementRecordId = '';
+            if(scope == OUTSIDE_SCOPE) {
+                entitlementRecordId = objWorkOrderService.getWorkOrdersByIds(new Set<Id>{workOrderId})[0].EntitlementId;
+                wo.ScheduledAppointmentTimeStarted__c = false;
+                wo.EntitlementId = null; 
+                List<WorkOrder> updatedWoList = objWorkOrderService.updateWorkOrders(new List<WorkOrder>{wo});
             }
-            serviceAppointment.Job_Status__c = UNDER_SCOPE;
-            objServiceAppointmentService.updateServiceAppointments(new List<ServiceAppointment>{serviceAppointment});
-        }
-        
-        List<WorkOrder> updatedWo = objWorkOrderService.updateWorkOrders(new List<WorkOrder>{wo});
-        if(scope == OUTSIDE_SCOPE) {
-            WorkOrderImageController.generateAndAttachPdf(workOrderId); 
-        }
 
-        return SUCCESS;       
+            if(scope == OUTSIDE_SCOPE) {
+                wo.Status = CLOSED;
+                wo.AgentsComments__c = agentComments;
+                wo.Type_of_Incident__c = OUT_OF_SCOPE; 
+                wo.Closure_Reason__c = OUT_OF_SCOPE;
+                wo.Closure_Comment__c = OUT_OF_SCOPE;
+                wo.Scope__c = OUTSIDE_SCOPE;
+                wo.EntitlementId = entitlementRecordId;
+
+            } else if(scope == UNDER_SCOPE) {
+                wo.Rectification__c = PENDING;
+                wo.Scope__c = UNDER_SCOPE;
+                if(String.isNotBlank(resolutionTypology)) {
+                    wo.Resolution_Typology__c = resolutionTypology;
+                }
+                serviceAppointment.Job_Status__c = UNDER_SCOPE;
+                objServiceAppointmentService.updateServiceAppointments(new List<ServiceAppointment>{serviceAppointment});
+            }
+            
+            List<WorkOrder> updatedWo = objWorkOrderService.updateWorkOrders(new List<WorkOrder>{wo});
+            if(scope == OUTSIDE_SCOPE) {
+                WorkOrderImageController.generateAndAttachPdf(workOrderId); 
+            }
+
+            return SUCCESS;
+
+        } catch (Exception ex) {
+            throw new AuraHandledException('Error: ' + ex.getMessage());
+        }
     }
     
     @AuraEnabled
     public static String checkRectification(String contentDocumentId, String agentComments, Id workOrderId) {
-        WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
-        ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
+        try {
+            WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
+            ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
 
-        WorkOrder wo = new WorkOrder();
-        wo.Id = workOrderId;
-        wo.Rectification__c = COMPLETED_LABEL;
-        wo.AgentsComments__c = agentComments;
-        List<WorkOrder> updatedWo = objWorkOrderService.updateWorkOrders(new List<WorkOrder>{ wo });
+            WorkOrder wo = new WorkOrder();
+            wo.Id = workOrderId;
+            wo.Rectification__c = COMPLETED_LABEL;
+            wo.AgentsComments__c = agentComments;
+            List<WorkOrder> updatedWo = objWorkOrderService.updateWorkOrders(new List<WorkOrder>{ wo });
 
-        List<ServiceAppointment> saList = objServiceAppointmentService.getSAByParentRecordIdsOrderByCreatedDateDesc(new Set<Id>{ workOrderId });
-        ServiceAppointment sa = (saList != null && !saList.isEmpty()) ? saList[0] : null;
+            List<ServiceAppointment> saList = objServiceAppointmentService.getSAByParentIdsOrderByCreatedDateDesc(new Set<Id>{ workOrderId });
+            ServiceAppointment sa = (saList != null && !saList.isEmpty()) ? saList[0] : null;
 
-        if(sa != null) {
-            sa.Job_Status__c = AFTER_RECTIFICATION;
-            objServiceAppointmentService.updateServiceAppointments(new List<ServiceAppointment>{sa});
+            if(sa != null) {
+                sa.Job_Status__c = AFTER_RECTIFICATION;
+                objServiceAppointmentService.updateServiceAppointments(new List<ServiceAppointment>{sa});
+            }
+            return SUCCESS;
+
+        } catch (Exception ex) {
+            throw new AuraHandledException('Error: ' + ex.getMessage());
         }
-        return SUCCESS; 
     }
     
     @AuraEnabled
     public static String checkOut(String rating, String comment, Id workOrderId, String signedBy) {
-        WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
-        ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
+        try {
+            WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
+            ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
 
-        List<ServiceAppointment> saList = objServiceAppointmentService.getSAByParentRecordIdsOrderByCreatedDateDesc(new Set<Id>{ workOrderId });
-        ServiceAppointment serviceAppointment = (saList != null && !saList.isEmpty()) ? saList[0] : null;
+            List<ServiceAppointment> saList = objServiceAppointmentService.getSAByParentIdsOrderByCreatedDateDesc(new Set<Id>{ workOrderId });
+            ServiceAppointment serviceAppointment = (saList != null && !saList.isEmpty()) ? saList[0] : null;
 
-        if(serviceAppointment != null && serviceAppointment.Status == COMPLETED) {
-            return ALREADY_CHECKED_OUT;
+            if(serviceAppointment != null && serviceAppointment.Status == COMPLETED) {
+                return ALREADY_CHECKED_OUT;
+            }
+
+            WorkOrder wo = new WorkOrder();
+            wo.Id = workOrderId;
+            wo.Customer_Comment__c = comment;
+            wo.Rating__c = rating;
+            wo.Signed_By__c = signedBy;
+            wo.Closure_Comment__c = WORK_COMPLETED;
+            wo.Closure_Reason__c = WORK_COMPLETED;
+
+            List<WorkOrder> updatedWo = objWorkOrderService.updateWorkOrders(new List<WorkOrder>{ wo });        
+            serviceAppointment.Job_Status__c = CHECK_OUT;
+            objServiceAppointmentService.updateServiceAppointments(new List<ServiceAppointment>{serviceAppointment});
+            
+            return SUCCESS;
+            
+        } catch (Exception ex) {
+            throw new AuraHandledException('Error: ' + ex.getMessage());
         }
-
-        WorkOrder wo = new WorkOrder();
-        wo.Id = workOrderId;
-        wo.Customer_Comment__c = comment;
-        wo.Rating__c = rating;
-        wo.Signed_By__c = signedBy;
-        wo.Closure_Comment__c = WORK_COMPLETED;
-        wo.Closure_Reason__c = WORK_COMPLETED;
-
-        List<WorkOrder> updatedWo = objWorkOrderService.updateWorkOrders(new List<WorkOrder>{ wo });        
-        serviceAppointment.Job_Status__c = CHECK_OUT;
-        objServiceAppointmentService.updateServiceAppointments(new List<ServiceAppointment>{serviceAppointment});
-        
-        return SUCCESS;        
     }  
-    
-    @InvocableMethod
-    public static void createServiceAppointmentWhenCustomerNotAvailable(List<String> workOrderIds) {
-        WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
-        ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
-
-        Set<Id> workOrderIdSet = new Set<Id>();
-        for (String workOrderId : workOrderIds) {
-            workOrderIdSet.add(Id.valueOf(workOrderId));
-        }
-
-        ServiceAppointment saObj;
-        List<ServiceAppointment> saList = objServiceAppointmentService.getSAByParentRecordIdsOrderByCreatedDateDesc(workOrderIdSet);
-        if (!saList.isEmpty()) {
-            saObj = saList[0];
-        }
-        if(saObj != null && saObj.Status != NONE) {
-            Set<Id> projectIds = new Set<Id>();
-            Set<Id> unitIdSet = new Set<Id>();
-            List<WorkOrder> workOrders = objWorkOrderService.getWorkOrdersByIds(workOrderIdSet);
-            List<ServiceAppointment> serviceAppointmentList = new List<ServiceAppointment>();
-            
-            for(workOrder wo: workOrders) {
-                if(String.isNotBlank(wo.Project__c)) {
-                    projectIds.add(wo.Project__c);
-                }
-                if(String.isNotBlank(wo.Unit__c)) {
-                    unitIdSet.add(wo.Unit__c);                
-                }
-            }
-            Map<Id, Unit__c> unitMap = new Map<Id, Unit__c>();
-            if(UnitService.getAllUnitsById(unitIdSet) != null) {
-                unitMap = new Map<Id, Unit__c>(UnitService.getAllUnitsById(unitIdSet)); 
-            }
-            
-            ServiceTerritoryService objServiceTerritoryService = ServiceTerritoryService.getInstance();
-            Map<Id, ServiceTerritory> relatedStMap = new Map<Id, ServiceTerritory>();
-            if(objServiceTerritoryService.getServiceTerritorysByProjectIds(projectIds) != null){
-                relatedStMap = new Map<Id, ServiceTerritory>(objServiceTerritoryService.getServiceTerritorysByProjectIds(projectIds));     
-            }
-            Map<String, ServiceTerritory> sortedStMap2 = new Map<String, ServiceTerritory>();
-            
-            for(ServiceTerritory st: relatedStMap.values()) {
-                sortedStMap2.put(st.Project__c, st);
-            }   
-            
-            for(workOrder wrkObj: workOrders) {
-                if( wrkObj.hasappointmentcanceled__c == true) {
-                    wrkObj.hasappointmentcanceled__c = false;
-                    wrkObj.Cancel_Time__c = null;
-                }
-                
-                ServiceAppointment newSA = new ServiceAppointment();
-                if (String.isNotBlank(wrkObj.Project__c) && sortedStMap2.containsKey(wrkObj.Project__c)) {
-                    newSA.ServiceTerritoryId = sortedStMap2.get(wrkObj.Project__c).Id;
-                } 
-                
-                newSA.FSL__Emergency__c = wrkObj.Is_Emergency__c;
-                newSA.ParentRecordId = wrkObj.Id;            
-                newSA.WorkOrderSubCatagory__c = wrkObj.Sub_category__c;
-                newSA.Status = NONE;  
-                newSA.Duration = 1;
-                newSA.Incident_description__c = wrkObj.Incident_description__c;
-                newSA.EarliestStartTime = System.now();            
-                newSA.DueDate = System.now().addDays(7); 
-                newSA.Longitude = unitMap.get(wrkObj.Unit__c).Location__Longitude__s;
-                newSA.Latitude = unitMap.get(wrkObj.Unit__c).Location__Latitude__s;
-                if (String.isNotBlank(wrkObj.Unit_Number__c)) {
-                  newSA.Unit_Number__c = wrkObj.Unit_Number__c;
-                }
-               
-                if (String.isNotBlank(wrkObj.Subject)) {
-                    newSA.Subject = wrkObj.Subject;
-                }
-                if (String.isNotBlank(wrkObj.Description)) {
-                    newSA.Description = wrkObj.Description;
-                }                
-                serviceAppointmentList.add(newSA); 
-            }      
-            
-            serviceAppointmentList = objServiceAppointmentService.insertServiceAppointments(serviceAppointmentList);
-            if(workOrders.size()>0){
-                update workOrders;
-            }
-        }
-    }
     
     @AuraEnabled
     public static void saveSign(Id recordId, String strSignElement) {
-        ContentService objContentVersion = ContentService.getInstance();
-        Blob decodedData = EncodingUtil.base64Decode(strSignElement);
-        
-        ContentVersion cv = new ContentVersion();
-        cv.Title = 'Signature';
-        cv.PathOnClient = 'Signature.png';
-        cv.VersionData = decodedData;
-        cv.IsMajorVersion = true;
-        objContentVersion.insertContentVersion(cv);
-        
-        // Query ContentDocumentId from ContentVersion
-        ContentDocumentLink cdl = new ContentDocumentLink();
-        cdl.ContentDocumentId = [SELECT ContentDocumentId FROM ContentVersion WHERE Id = :cv.Id].ContentDocumentId;
-        cdl.LinkedEntityId = recordId; // Link to the specified record
-        cdl.ShareType = 'V';
-        cdl.Visibility = 'AllUsers';
-        objContentVersion.insertContentDocumentLink(new List<ContentDocumentLink>{cdl});
+        try {
+            ContentService objContentVersion = ContentService.getInstance();
+            Blob decodedData = EncodingUtil.base64Decode(strSignElement);
+            
+            ContentVersion cv = new ContentVersion();
+            cv.Title = 'Signature';
+            cv.PathOnClient = 'Signature.png';
+            cv.VersionData = decodedData;
+            cv.IsMajorVersion = true;
+            objContentVersion.insertContentVersion(cv);
+            
+            // Query ContentDocumentId from ContentVersion
+            ContentDocumentLink cdl = new ContentDocumentLink();
+            cdl.ContentDocumentId = [SELECT ContentDocumentId FROM ContentVersion WHERE Id = :cv.Id].ContentDocumentId;
+            cdl.LinkedEntityId = recordId; // Link to the specified record
+            cdl.ShareType = 'V';
+            cdl.Visibility = 'AllUsers';
+            objContentVersion.insertContentDocumentLink(new List<ContentDocumentLink>{cdl});
 
-        WorkOrderImageController.generateAndAttachPdf(recordId);        
+            WorkOrderImageController.generateAndAttachPdf(recordId);
+
+        } catch (Exception ex) {
+            throw new AuraHandledException('Error: ' + ex.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static String createSAWhenCustomerAvailable(Id recordId) {
+        System.debug('Record: '+recordId);
+        try {
+            WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
+            ServiceAppointmentService objServiceAppointmentService = ServiceAppointmentService.getInstance();
+
+            Set<Id> workOrderIdSet = new Set<Id>{recordId};
+            List<ServiceAppointment> saList = objServiceAppointmentService.getSAByParentIdsOrderByCreatedDateDesc(workOrderIdSet);
+
+            if (saList == null || saList.isEmpty() || saList[0].Status == NONE) { return 'SA_ALREADY_PRESENT'; }
+
+            List<WorkOrder> workOrders = objWorkOrderService.getWorkOrdersByIds(workOrderIdSet);
+            Set<Id> projectIds = new Set<Id>();
+            Set<Id> unitIdSet = new Set<Id>();
+
+            for (WorkOrder wo : workOrders) {
+                if (wo.Project__c != null) {
+                    projectIds.add(wo.Project__c);
+                }
+                if (wo.Unit__c != null) {
+                    unitIdSet.add(wo.Unit__c);
+                }
+            }
+
+            Map<Id, Unit__c> unitMap = new Map<Id, Unit__c>();
+            if(!unitIdSet.isEmpty()) {
+                List<Unit__c> units = UnitService.getAllUnitsById(unitIdSet);
+                if (units != null) {
+                    unitMap = new Map<Id, Unit__c>(units);
+                }
+            }
+
+            Map<Id, ServiceTerritory> serviceTerritoryMap = new Map<Id, ServiceTerritory>();
+            if(!projectIds.isEmpty()) {
+                List<ServiceTerritory> serviceTerritories = ServiceTerritoryService.getInstance().getServiceTerritorysByProjectIds(projectIds);
+                if (serviceTerritories != null) {
+                    for (ServiceTerritory st : serviceTerritories) {
+                        serviceTerritoryMap.put(st.Project__c, st);
+                    }
+                }
+            }
+
+            Datetime now = System.now();
+            List<ServiceAppointment> serviceAppointmentList = new List<ServiceAppointment>();
+            for (WorkOrder wo : workOrders) {
+                if (wo.hasappointmentcanceled__c) {
+                    wo.hasappointmentcanceled__c = false;
+                    wo.Cancel_Time__c = null;
+                }
+
+                ServiceAppointment newSA = new ServiceAppointment();
+                newSA.FSL__Emergency__c = wo.Is_Emergency__c;
+                newSA.ParentRecordId = wo.Id;
+                newSA.WorkOrderSubCatagory__c = wo.Sub_category__c;
+                newSA.Status = NONE;
+                newSA.Duration = 1;
+                newSA.Incident_description__c = wo.Incident_description__c;
+                newSA.EarliestStartTime = now;
+                newSA.DueDate = now.addDays(7);
+                newSA.Subject = wo.Subject;
+                newSA.Description = wo.Description;
+                newSA.Unit_Number__c = wo.Unit_Number__c;
+
+                Unit__c unit = unitMap.get(wo.Unit__c);
+                if(unit != null) {
+                    newSA.Longitude = unit.Location__Longitude__s;
+                    newSA.Latitude = unit.Location__Latitude__s;
+                }
+
+                ServiceTerritory serviceTerritory = serviceTerritoryMap.get(wo.Project__c);
+                if (serviceTerritory != null) {
+                    newSA.ServiceTerritoryId = serviceTerritory.Id;
+                }
+
+                serviceAppointmentList.add(newSA);
+            }
+            objServiceAppointmentService.insertServiceAppointments(serviceAppointmentList);
+            objWorkOrderService.updateWorkOrders(workOrders);
+            return 'SA_CREATED';
+            
+        } catch(Exception ex) {
+            throw new AuraHandledException('Error: ' + ex.getMessage());
+        }
     }
 }

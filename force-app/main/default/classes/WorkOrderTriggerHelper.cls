@@ -274,7 +274,7 @@ public without sharing class WorkOrderTriggerHelper {
         
         Set<Id> contentDocumentIdSet = new Set<Id>();
         for(ContentDocumentLink cdl: contentDocumentLinkMap.Values()) {
-            if(String.isNotBlank(cdl.ContentDocumentId)) {
+            if(cdl.ContentDocumentId != null) {
                 contentDocumentIdSet.add(cdl.ContentDocumentId);
             }
         }
@@ -298,7 +298,7 @@ public without sharing class WorkOrderTriggerHelper {
         List<ServiceAppointment> saList = new List<ServiceAppointment>();
         if(newWorkOrders != null && !newWorkOrders.isEmpty()) {
             Map<Id, WorkOrder> woIdVsworkOrderMap = new Map<Id, WorkOrder>(newWorkOrders);
-            saList = objServiceAppointmentService.getServiceAppointmentsByParentRecordSetIds(woIdVsworkOrderMap.keySet());            
+            saList = objServiceAppointmentService.getServiceAppointmentsByParentIds(woIdVsworkOrderMap.keySet());            
         }
         
         for(ServiceAppointment sa: saList) {
@@ -319,17 +319,17 @@ public without sharing class WorkOrderTriggerHelper {
             }
 
             if (isCustomerNotAvailableWhenCheckedIn(wo, oldWO) && mailTemplateCustomerNotAvailable != null) {
-                mailList.add(DLPEmailHandler.sendEmailProcess(mailTemplateCustomerNotAvailable, workOrderObj, servApp, new List<String>{wo.New_Requester_Email__c}, contentVersionObj, orgWideEmail));                        
+                mailList.add(objEmailService.sendDLPEmail(mailTemplateCustomerNotAvailable, workOrderObj, servApp, new List<String>{wo.New_Requester_Email__c}, contentVersionObj, orgWideEmail));                        
             }
 
             if(isCustomerNotAvailableAndWOClosed(wo) && mailTemplateCustomerNotAvailableWorkOrderClose != null) {
-                mailList.add(DLPEmailHandler.sendEmailProcess(mailTemplateCustomerNotAvailableWorkOrderClose, workOrderObj, servApp, new List<String>{wo.New_Requester_Email__c}, contentVersionObj, orgWideEmail));                        
+                mailList.add(objEmailService.sendDLPEmail(mailTemplateCustomerNotAvailableWorkOrderClose, workOrderObj, servApp, new List<String>{wo.New_Requester_Email__c}, contentVersionObj, orgWideEmail));                        
                 
             } else if(isDLPOutOfScopeAndWOClosed(wo) && mailTemplateDlpOutOfScopeForCustomer != null) {
-                mailList.add(DLPEmailHandler.sendEmailProcess(mailTemplateDlpOutOfScopeForCustomer, workOrderObj, servApp, new List<String>{wo.New_Requester_Email__c}, contentVersionObj, orgWideEmail));                        
+                mailList.add(objEmailService.sendDLPEmail(mailTemplateDlpOutOfScopeForCustomer, workOrderObj, servApp, new List<String>{wo.New_Requester_Email__c}, contentVersionObj, orgWideEmail));                        
                 
             } else if(isWorkCompletedAndWOClosed(wo) && mailTemplateWorkOrderClosedForCustomer != null) {
-                mailList.add(DLPEmailHandler.sendEmailProcess(mailTemplateWorkOrderClosedForCustomer, workOrderObj, servApp, new List<String>{wo.New_Requester_Email__c, workOrderObj.Owner.Email}, null, orgWideEmail));
+                mailList.add(objEmailService.sendDLPEmail(mailTemplateWorkOrderClosedForCustomer, workOrderObj, servApp, new List<String>{wo.New_Requester_Email__c, workOrderObj.Owner.Email}, null, orgWideEmail));
             }
         }
                 
@@ -346,7 +346,7 @@ public without sharing class WorkOrderTriggerHelper {
 
         if(newWorkOrders != null && !newWorkOrders.isEmpty()) {
             Map<Id, WorkOrder> workOrderMap = new Map<Id, WorkOrder>(newWorkOrders);
-            saMap = new Map<Id, ServiceAppointment>(objServiceAppointmentService.getServiceAppointmentsByParentRecordSetIds(workOrderMap.keySet()));            
+            saMap = new Map<Id, ServiceAppointment>(objServiceAppointmentService.getServiceAppointmentsByParentIds(workOrderMap.keySet()));            
         }
         
         for(ServiceAppointment sa: saMap.Values()) {

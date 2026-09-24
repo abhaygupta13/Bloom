@@ -9,7 +9,7 @@
 * 2.0           Jayprakash  20AUG2024        Implemented GIS Integration
 * 3.0           Abhay       09SEP2026        Optimized the class and removed uncommented code
 *****************************************************************************************************/
-public class WorkOrderTriggerHandler implements ITriggerHandler {
+public without sharing class WorkOrderTriggerHandler implements ITriggerHandler {
     
     //Use this variable to disable this trigger from transaction
     public static Boolean isTriggerDisabled = false;

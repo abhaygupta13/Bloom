@@ -1,24 +1,25 @@
-public class ServiceResourceService {
+/*
+*********************************************************
+Apex Class Name    : ServiceResourceService
+@description       : This class handles record retrieval and DML operations.
+Modification Log   :
+Ver   Date         : Author                               Modification
+1.2   18-09-2026   : Abhay Gupta                          Optimised the class and removed uncommented code
+*********************************************************
+*/
+public inherited sharing class ServiceResourceService {
     private ServiceResourceService() {}
     
     public static ServiceResourceService getInstance() {
         return new ServiceResourceService();
     }
     
-    //get ServiceResource by parentRecordIds
-    public List<ServiceResource> getServiceResourcesByRelatedRecordIds(Set<Id> relatedRecordIds){
-        if(!relatedRecordIds.isEmpty() && relatedRecordIds.size() > 0){
-            return [SELECT Id, RelatedRecordId FROM ServiceResource WHERE RelatedRecordId IN: relatedRecordIds];            
-        } 
-        return null;
+    public List<ServiceResource> getServiceResourcesByRelatedRecordIds(Set<Id> relatedRecordIds) {
+        return [SELECT Id, RelatedRecordId FROM ServiceResource WHERE RelatedRecordId IN: relatedRecordIds];            
     }
     
-    //get ServiceResource by Set Ids
-    public List<ServiceResource> getServiceResourcesBySetIds(Set<Id> serviceResourceIds){
-        if(!serviceResourceIds.isEmpty() && serviceResourceIds.size() > 0){
-            return [SELECT Id, Name, RelatedRecordId, Is_Contractor__c FROM ServiceResource WHERE Id IN :serviceResourceIds];            
-        } 
-        return null;
+    public List<ServiceResource> getServiceResourceByIds(Set<Id> serviceResourceIds) {
+        return [SELECT Id, Name, RelatedRecordId, Is_Contractor__c FROM ServiceResource WHERE Id IN :serviceResourceIds];            
     }
     
 }

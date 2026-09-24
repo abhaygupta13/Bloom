@@ -9,9 +9,11 @@ Test Apex: EmailServiceTest
 * 1.0           Biswajeet   07AUG2024        Initial draft 
 * 1.1           Dhanraj     28JAN2025        New methods for Quaterly Payment Notification
 * 1.2           Dhanraj     13FEB2025        New method for Handover Notice Notification to include CC and BCC Address
+* 1.3           Abhay       22SEP2026        Added methods for DLP EMails
 *****************************************************************************************************/
 public inherited sharing class EmailService {
-    
+    private static final String TEXT_TEMPLATE_TYPE = 'text';
+    private static final String CONTENT_TYPE_APPLICATION_PDF = 'application/pdf';
     private static final String BASE_URL = URL.getOrgDomainUrl().toExternalForm(); 
     
     private static EmailService instance;
@@ -780,6 +782,151 @@ sendEmail(new Messaging.SingleEmailMessage[] { mail });
         }
 
         return templateNameVsEmailTemplateMap;
+    }
+
+    public Messaging.SingleEmailMessage buildSingleEmailMessage(EmailWrapper wrapper) {
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        if(wrapper.shouldSetToAddress) {
+            mail.setToAddresses(wrapper.toAddressList);
+        }
+        if(wrapper.shouldSetCcAddress) {
+            mail.setCcAddresses(wrapper.ccAddressList);
+        }
+        if(wrapper.shouldSetBccAddress) {
+            mail.setBccAddresses(wrapper.bccAddressList);
+        }
+        if(wrapper.shouldSetSubject) {
+            mail.setSubject(wrapper.subject);
+        }
+        if(wrapper.shouldSetPlainTextBody) {
+            mail.setPlainTextBody(wrapper.plainTextBody);
+        }
+        if(wrapper.shouldSetHtmlBody) {
+            mail.setHtmlBody(wrapper.htmlBody);
+        }
+        if(wrapper.shouldSetwhatId) {
+            mail.setWhatId(wrapper.whatId);
+        }
+        if(wrapper.shouldSetTargetObjectId) {
+            mail.setTargetObjectId(wrapper.targetObjectId);
+        }
+        if(wrapper.shouldSetSaveAsActivity) {
+            mail.setSaveAsActivity(wrapper.shoudlSaveAsActivity);
+        }
+        if(wrapper.shouldSetOrgWideEmailAddressId) {
+            mail.setOrgWideEmailAddressId(wrapper.orgWideEmailAddressId);
+        }
+        if(wrapper.shouldSetUseSignature) {
+            mail.setUseSignature(wrapper.shouldUseSignature);
+        }
+        return mail;
+    }
+
+    public Messaging.SingleEmailMessage sendDLPEmail(EmailTemplate mailTemplate, WorkOrder workOrder, ServiceAppointment ServiceAppointmentObj, List<String> toAddress, ContentVersion contentVersionObj, OrgWideEmailAddress orgWideEmail) {
+        String meetingDate = '';
+        String meetingTime = '';
+
+        Boolean isTextTemplate = mailTemplate.TemplateType == TEXT_TEMPLATE_TYPE;
+        EmailWrapper wrapper = new EmailWrapper(true, false, false, true, true, true, true, true, isTextTemplate, !isTextTemplate, false );
+        wrapper.toAddressList = toAddress != null && !toAddress.isEmpty() ? toAddress : new List<String>{workOrder.Customer_Email__c};
+        wrapper.orgWideEmailAddressId = orgWideEmail.Id;
+        wrapper.subject = getDynamicSubject(mailTemplate.Subject, workOrder);
+        if(isTextTemplate) {
+            wrapper.plainTextBody = String.valueOf(mailTemplate.Body);
+        } else {
+            wrapper.htmlBody = getDynamicBody(mailTemplate.HtmlValue, workOrder, ServiceAppointmentObj);
+        }
+        wrapper.whatId = workOrder.Id;
+        wrapper.shoudlSaveAsActivity = true;
+        wrapper.shouldUseSignature = true;
+
+        Messaging.SingleEmailMessage mail = buildSingleEmailMessage(wrapper);
+        setAttachment(mail, contentVersionObj);
+        return mail;
+    }
+
+    public void setAttachment(Messaging.SingleEmailMessage mail, ContentVersion contentVersionRecord) {
+        if (contentVersionRecord != null && contentVersionRecord.Title != null && contentVersionRecord.VersionData != null) {
+            Messaging.EmailFileAttachment attachment = new Messaging.EmailFileAttachment();
+            attachment.setFileName(contentVersionRecord.Title);
+            attachment.setBody(contentVersionRecord.VersionData);
+            attachment.setContentType(CONTENT_TYPE_APPLICATION_PDF);
+            mail.setFileAttachments(new List<Messaging.EmailFileAttachment>{attachment});
+        }
+    }
+
+    private String getDynamicSubject(String subject, WorkOrder workOrder) {
+        subject = subject.replace('[Unit_Number]',String.isNotBlank(workOrder.Unit__r.Name) ? workOrder.Unit__r.Name :'N/A');
+        subject = subject.replace('[WorkOrder_Number]', String.isNotBlank(workOrder.WorkOrderNumber) ? workOrder.WorkOrderNumber : 'N/A');
+        subject = subject.replace('[Unit_Code_Arabic]',String.isNotBlank(workOrder.Unit__r.Name) ? workOrder.Unit__r.Name :'N/A');
+        subject = subject.replace('[Project_Name_Arabic]',String.isNotBlank(workOrder.Project__r.ProjectNameArabic__c) ? workOrder.Project__r.ProjectNameArabic__c : String.isNotBlank(workOrder.Project__r.Name) ? workOrder.Project__r.Name : 'N/A');
+        subject = subject.replace('[Project_Name]',String.isNotBlank(workOrder.Project__r.Name) ? workOrder.Project__r.Name : 'N/A');
+        return subject;
+    }
+    
+    private String getDynamicBody(String body, WorkOrder workOrder, ServiceAppointment ServiceAppointmentObj) {
+        body = body.replace('[WorkOrder_Number]', String.isNotBlank(workOrder.WorkOrderNumber) ? workOrder.WorkOrderNumber : 'N/A');
+        body = body.replace('[Unit_Number]', String.isNotBlank(workOrder.Unit__r.Name) ? workOrder.Unit__r.Name : 'N/A');
+        body = body.replace('[Date_and_Time]', ServiceAppointmentObj.SchedStartTime != null ? ServiceAppointmentObj.SchedStartTime.format('yyyy-MM-dd HH:mm:ss') : 'N/A');
+        body = body.replace('[Closed_Date]', ServiceAppointmentObj.SchedEndTime != null ? ServiceAppointmentObj.SchedEndTime.format('yyyy-MM-dd HH:mm:ss') : 'N/A');
+        body = body.replace('[DLP_Agent_Name]', String.isNotBlank(workOrder.Owner.Name) ? workOrder.Owner.Name : 'N/A');
+        body = body.replace('[Project_Name]', String.isNotBlank(workOrder.Project__r.Name) ? workOrder.Project__r.Name : 'N/A');
+        body = body.replace('[Contractor_Name]',String.isNotBlank(workOrder.Contractor_Name__c) ? workOrder.Contractor_Name__c : 'N/A');
+        body = body.replace('[Customer_Name]',String.isNotBlank(workOrder.New_Requester_Name__c) ? workOrder.New_Requester_Name__c : 'N/A');
+        //body = body.replace('[DD-MM-YYYY]',String.isNotBlank(meetingDate) ? meetingDate : 'N/A');
+        //body = body.replace('[TIME_SLOT_FROM_TO]',String.isNotBlank(meetingTime) ? meetingTime : 'N/A');
+        body = body.replace('[Location]',String.isNotBlank(workOrder.Project__r.Office_Location__c) ? workOrder.Project__r.Office_Location__c : 'N/A');
+        
+        // arabic
+        body = body.replace('[Customer_Name_Arabic]',String.isNotBlank(workOrder.New_Requester_Name__c) ? workOrder.New_Requester_Name__c :  String.isNotBlank(workOrder.New_Requester_Name__c) ? workOrder.New_Requester_Name__c : 'N/A');
+        body = body.replace('[Project_Name_Arabic]',String.isNotBlank(workOrder.Project__r.ProjectNameArabic__c) ? workOrder.Project__r.ProjectNameArabic__c : String.isNotBlank(workOrder.Project__r.Name)? workOrder.Project__r.Name : 'N/A');
+        body = body.replace('[Unit_Code_Arabic]',String.isNotBlank(workOrder.Unit__r.Name) ? workOrder.Unit__r.Name :'N/A');//workOrder.Unit__r.SAP_Unit_Number__c
+        //body = body.replace('[DD-MM-YYYY_Arabic]',String.isNotBlank(meetingDate) ? meetingDate : 'N/A');
+        //body = body.replace('[TIME_SLOT_FROM_TO_Arabic]',String.isNotBlank(meetingTime) ? meetingTime : 'N/A');
+        body = body.replace('[Location_Arabic]',String.isNotBlank(workOrder.Project__r.Office_Location__c) ? workOrder.Project__r.Office_Location__c : 'N/A');
+        body = body.replace('[BloomPhone]', System.Label.HandoverBloomPhone);
+        body = body.replace('[BloomEmail]', System.Label.HandoverBloomEmail); 
+        return body;
+    }
+
+    public class EmailWrapper {
+        public Boolean shouldSetToAddress = false;
+        public Boolean shouldSetCcAddress = false;
+        public Boolean shouldSetBccAddress = false;
+        public Boolean shouldSetOrgWideEmailAddressId = false;
+        public Boolean shouldSetSubject = false;
+        public Boolean shouldSetUseSignature = false;
+        public Boolean shouldSetwhatId = false;
+        public Boolean shouldSetSaveAsActivity = false;
+        public Boolean shouldSetPlainTextBody = false;
+        public Boolean shouldSetHtmlBody = false;
+        public Boolean shouldSetTargetObjectId = false;
+
+        public Boolean shoudlSaveAsActivity = false;
+        public Boolean shouldUseSignature = false;
+        public List<String> toAddressList;
+        public List<String> ccAddressList;
+        public List<String> bccAddressList;
+        public String subject;
+        public String plainTextBody;
+        public String htmlBody;
+        public Id orgWideEmailAddressId;
+        public Id whatId;
+        public Id targetObjectId;
+
+        public EmailWrapper(Boolean shouldSetToAddress, Boolean shouldSetCcAddress, Boolean shouldSetBccAddress, Boolean shouldSetOrgWideEmailAddressId, Boolean shouldSetSubject, Boolean shouldSetUseSignature, Boolean shouldSetWhatId, Boolean shouldSetSaveAsActivity, Boolean shouldSetPlainTextBody, Boolean shouldSetHtmlBody, Boolean shouldSetTargetObjectId) {
+            this.shouldSetToAddress = shouldSetToAddress;
+            this.shouldSetCcAddress = shouldSetCcAddress;
+            this.shouldSetBccAddress = shouldSetBccAddress;
+            this.shouldSetOrgWideEmailAddressId = shouldSetOrgWideEmailAddressId;
+            this.shouldSetSubject = shouldSetSubject;
+            this.shouldSetUseSignature = shouldSetUseSignature;
+            this.shouldSetWhatId = shouldSetWhatId;
+            this.shouldSetSaveAsActivity = shouldSetSaveAsActivity;
+            this.shouldSetPlainTextBody = shouldSetPlainTextBody;
+            this.shouldSetHtmlBody = shouldSetHtmlBody;
+            this.shouldSetTargetObjectId = shouldSetTargetObjectId;
+        }
     }
 
 }
