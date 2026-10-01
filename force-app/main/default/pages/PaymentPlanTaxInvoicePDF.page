@@ -1,10 +1,23 @@
 <apex:page controller="PaymentPlanInvoicePDFHandler"
-           renderAs="pdf"
+           renderAs="{!IF(hasError, null, 'pdf')}"
            showHeader="false"
            sidebar="false">
 
+<apex:outputPanel rendered="{!hasError}">
+    <div style="font-family: Arial, sans-serif; margin: 60px auto; max-width: 650px; padding: 30px; border: 2px solid #c23934; border-radius: 8px; background-color: #fdf3f2; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div style="color: #c23934; font-size: 20px; font-weight: bold; margin-bottom: 15px;">
+            {!$Label.BL_TaxInvoiceCannotGenerateTitle}
+        </div>
+        <div style="color: #333; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
+            {!errorMessage}
+        </div>
+        <div style="color: #706e6b; font-size: 13px;">
+            {!$Label.BL_TaxInvoicePaymentPlanHelpText}
+        </div>
+    </div>
+</apex:outputPanel>
 
-
+<apex:outputPanel rendered="{!!hasError}">
 <!-- TITLE -->
 <table width="100%" style="border:none;">
     <tr>
@@ -392,4 +405,5 @@
     A National Holding Company.
     </div>
 </div>
+</apex:outputPanel>
 </apex:page>

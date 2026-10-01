@@ -162,6 +162,14 @@
                 <behavior>Readonly</behavior>
                 <field>NOCDateFormatted__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Tammfeesamount__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>is_Tamm_Fees_Collected__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

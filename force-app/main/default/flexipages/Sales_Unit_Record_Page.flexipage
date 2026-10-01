@@ -399,6 +399,12 @@
                 <identifier>RecordOriginalSalesOrder__cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.ADHAUnitNumber__c</fieldItem>
+                <identifier>RecordADHAUnitNumber__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-943b9298-7e0c-41c2-b0a0-fb868bef8baf</name>
         <type>Facet</type>
     </flexiPageRegions>

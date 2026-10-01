@@ -155,6 +155,8 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
         List<Id> approvedCaseIds = new List<Id>();
         List<Id> bfmCommonAreaBLCCaseIds = new List<Id>();
         List<Id> bfmCommonAreaDLPCaseIds = new List<Id>();
+        List<Id> commonAreaAssignedTeamCaseIds = new List<Id>();
+
         List<Id> tawtheeqEnrollmentCaseIds = new List<Id>();
         List<Id> submittedCaseIds = new List<Id>();
           List<Id> complaintRequestCaseIds = new List<Id>();
@@ -326,6 +328,10 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
                         else if(event.AssignTeam__c == 'DLP Team'){
                             bfmCommonAreaDLPCaseIds.addAll(header.getRecordIds());
                         }
+                        //trigger SR acknowledgement email/SMS only once the case is assigned to a team
+                        if(event.AssignTeam__c == 'BFM Team' || event.AssignTeam__c == 'BLC Team' || event.AssignTeam__c == 'DLP Team'){
+                            commonAreaAssignedTeamCaseIds.addAll(header.getRecordIds());
+                        }
                     }
                     //Community Case Assignemnt only when status is submitted
                     if(header.changedFields.contains('Status') && event.Status == 'Submitted'){
@@ -378,6 +384,10 @@ public without sharing class CaseAsyncTriggerHandler implements IAsyncTriggerHan
         }
         if(!bfmCommonAreaDLPCaseIds.isEmpty()){
             AssignmentRuleHandler.bfmCommonAreaDLPCaseAssignment(bfmCommonAreaDLPCaseIds);
+        }
+        if(!commonAreaAssignedTeamCaseIds.isEmpty()){
+            List<Case> commonAreaAssignedTeamCaseList = CaseService.getInstance().getCaseByIds(new Set<Id>(commonAreaAssignedTeamCaseIds));
+            ServiceRequestHandler.getInstance().serviceRequestAcknowledgementEmailNotification(commonAreaAssignedTeamCaseList);
         }
 
         if(!anprCaseIds.isEmpty()){

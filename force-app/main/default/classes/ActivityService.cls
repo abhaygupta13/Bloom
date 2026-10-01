@@ -305,8 +305,8 @@ public inherited sharing class ActivityService {
     public Task updateTask(Task tsk){
         return updateTasks(new List<Task>{tsk})[0];
     }
-
-    public Event createEventObj(Id whoId, Id appointmentSlotId, String status, DateTime startDateTime, DateTime endDateTime, String subject, String type){
+    
+    public Event createEventObj(Id whoId, Id appointmentSlotId, String status, DateTime startDateTime, DateTime endDateTime, String subject, String type, String mode){
         Event objEvent = new Event();
         objEvent.WhoId = whoId;
         objEvent.AppointmentSlot__c = appointmentSlotId;
@@ -315,6 +315,11 @@ public inherited sharing class ActivityService {
         objEvent.EndDateTime = endDateTime;
         objEvent.Subject = subject;
         objEvent.Type = type;
+        objEvent.AppointmentMode__c = String.isNotBlank(mode) ? mode : 'Offline';
+        if(whoId != null && whoId.getSObjectType() == Lead.SObjectType){
+            Lead objLead = LeadService.getInstance().getLeadById(whoId);
+            objEvent.OwnerId = objLead.OwnerId;
+        }
         return objEvent;
     }
 
@@ -324,20 +329,88 @@ public inherited sharing class ActivityService {
         }
         return eventList; 
     }
-          
-    public Messaging.SingleEmailMessage createAppointmentNotificationEmail(EmailTemplate emailTemplate, Event eventRec, Map<String, String> templateFieldValues){
-        EmailService objEmailService = EmailService.getInstance();
-            String emailBody = emailTemplate.HtmlValue;
-            String emailSubject = emailTemplate.Subject;
-            String appointmentDate = eventRec.StartDateTime != null ? eventRec.StartDateTime.format('yyyy-MM-dd') : '';
-            String appointmentTime = (eventRec.StartDateTime != null && eventRec.EndDateTime != null) ? eventRec.StartDateTime.format('HH:mm a') + ' - ' + eventRec.EndDateTime.format('HH:mm a') : '';
-            String body = emailBody.replace('[Customer_Name]', templateFieldValues.get('customerName'))
-                .replace('[Customer_Name_Arabic]', templateFieldValues.get('customerNameArabic'))
-                .replace('[Date]', appointmentDate)
-                .replace('[Slot_Time]', appointmentTime)
-                .replace('[Location]', String.isBlank(eventRec.Location) ? '' : eventRec.Location)
-                .replace('[Manager_Name]', String.isBlank(templateFieldValues.get('accountManagerName')) ? '' : templateFieldValues.get('accountManagerName'))
-                .replace('[Manager_Number]', String.isBlank(templateFieldValues.get('accountManagerPhone')) ? '' : templateFieldValues.get('accountManagerPhone'));
-            return objEmailService.getSingleEmailMessage(null, null, eventRec.WhoId, emailSubject, body, templateFieldValues.get('NoReplyBloomEmail'));
+    
+/**
+ * Creates an appointment notification email using the provided email template
+ * and replaces the template placeholders with customer, appointment, and
+ * account manager details.
+ *
+ * @param emailTemplate      Email template used to generate the email subject and body.
+ * @param objEvent           Event record containing the appointment date, time, location, owner, and recipient.
+ * @param customerName       Customer name used to replace the customer name placeholder.
+ * @param customerNameArabic Customer name in Arabic used to replace the Arabic customer name placeholder.
+ * @param noReplyBloomOWDId  ID of the no-reply email address used as the sender.
+ * @return                   Configured Messaging.SingleEmailMessage for the appointment notification.
+ */
+    public Messaging.SingleEmailMessage createAppointmentNotificationEmail(EmailTemplate emailTemplate, Event objEvent, String customerName, 
+    String customerNameArabic, Id noReplyBloomOWDId, User accountManager){
+        Messaging.SingleEmailMessage renderedEmail = Messaging.renderStoredEmailTemplate(emailTemplate.Id, objEvent.WhoId, null);
+        String emailBody = renderedEmail.getHtmlBody();
+        String emailSubject = renderedEmail.getSubject();
+        String appointmentDate = objEvent.StartDateTime != null ? objEvent.StartDateTime.format('yyyy MMMM dd') : '';
+        String appointmentTime = (objEvent.StartDateTime != null && objEvent.EndDateTime != null) ? objEvent.StartDateTime.format('h:mm a') + ' - ' + objEvent.EndDateTime.format('h:mm a') : '';
+        
+        String body = emailBody.replace('[Customer_Name]', customerName)
+            .replace('[Customer_Name_Arabic]', customerNameArabic)
+            .replace('[Date]', appointmentDate)
+            .replace('[Slot_Time]', appointmentTime)
+            .replace('[Location]', String.isBlank(objEvent.Location) ? '' : objEvent.Location)
+            .replace('[Manager_Name]', String.isBlank(accountManager?.Name) ? '' : accountManager.Name)
+            .replace('[Manager_Number]', String.isBlank(accountManager?.Phone) ? '' : accountManager.Phone)
+            .replace('[Type]', String.isNotBlank(objEvent.AppointmentMode__c) ? objEvent.AppointmentMode__c : '')
+			.replace('[Link]', String.isNotBlank(objEvent.MeetingLink__c) ? '<a href="' + objEvent.MeetingLink__c + '">Click here</a>' : '');
+        return EmailService.getInstance().getSingleEmailMessage(null, null, objEvent.WhoId, emailSubject, body, noReplyBloomOWDId);
+    }    
+    
+    public Boolean hasExistingAppointment(Id whoId) {
+        if (whoId != null) {
+            return [ SELECT COUNT() FROM Event WHERE WhoId = :whoId AND StartDateTime >= :System.now() AND Type = 'Appointment' AND AppointmentStatus__c IN ('Scheduled')] > 0;
+        } 
+        return false;
+    }
+
+    public Set<Id> getExistingAppointmentWhoIds(Set<Id> whoIds) {
+        Set<Id> existingWhoIds = new Set<Id>();
+        if(whoIds != null && !whoIds.isEmpty()) {
+
+            for(Event objEvent : [SELECT WhoId FROM Event WHERE WhoId IN :whoIds AND StartDateTime >= :System.now() AND Type = 'Appointment' AND AppointmentStatus__c = 'Scheduled']) 
+            { 
+                existingWhoIds.add(objEvent.WhoId); 
+            }
+        }
+        return existingWhoIds;
+    }
+
+/**
+ * @description Creates an IntegrationRecord__c for Microsoft Teams appointment integration based on the Event appointment status. The method prepares the required integration parameters, 
+ * including ADHA lead email, timezone, appointment start and end date/time, subject, meeting ID, description, and attendee email, and delegates record creation to IntegrationRecordService.
+ *
+ * @param objEvent The Event record containing appointment and Microsoft Teams meeting details.
+ * @param adhaLeadEmailId The email address of the ADHA lead/account manager used for the Teams integration.
+ * @param adhaLeadTimeZone The timezone associated with the ADHA lead/account manager.
+ *
+ * @return IntegrationRecord__c The prepared integration record for Microsoft Teams meeting scheduling or cancellation.
+ */
+    public IntegrationRecord__c getEventIntegrationRecord(Event objEvent, String adhaLeadEmailId, String adhaLeadTimeZone) {
+        Map<String, String> paramMap = new Map<String, String>();
+        String actionType;
+        String objectApiName = 'Event';
+        String recordId = objEvent.Id;
+        
+        if(objEvent.AppointmentStatus__c == 'Scheduled') {
+            actionType = 'SCHEDULE';
+        }else if(objEvent.AppointmentStatus__c == 'Cancelled') {
+            actionType = 'CANCEL';
+        }
+        paramMap.put('Param1', adhaLeadEmailId);
+        paramMap.put('Param2', adhaLeadTimeZone);
+        paramMap.put('Param3', objEvent.StartDateTime.format('yyyy MM dd, HH:mm'));
+        paramMap.put('Param4', objEvent.EndDateTime.format('yyyy MM dd, HH:mm'));
+        paramMap.put('Param5', objEvent.Subject);
+        paramMap.put('Param6', objEvent.MeetingId__c);
+        paramMap.put('LongTextParam1', objEvent.Description);
+        paramMap.put('LongTextParam2', objEvent.AttendeeEmail__c);
+    
+        return IntegrationRecordService.getInstance().getIntegrationRecord('MICROSOFT_TEAMS_MEETING', actionType, objectApiName, recordId, paramMap);
     }
 }

@@ -1150,6 +1150,15 @@ ISPICKVAL(Unit__r.PropertyUsage__c, &apos;Retail&apos;)) &amp;&amp; isVATApplied
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>OccupantName__c</fullName>
+        <description>Occupant Name</description>
+        <label>Occupant Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>OfferValidityDays__c</fullName>
         <externalId>false</externalId>
         <label>Offer Validity Days</label>
@@ -1486,6 +1495,15 @@ ISPICKVAL(Unit__r.PropertyUsage__c, &apos;Retail&apos;)) &amp;&amp; isVATApplied
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SOAIntegrationMessage__c</fullName>
+        <label>SOA Integration Message</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
     </fields>
     <fields>
         <fullName>SecurityDepositPercent__c</fullName>

@@ -1,31 +1,45 @@
-@isTest
+@istest
 public class LeadAsyncTriggerHandlerTest {
 
-    @isTest
+    @TestSetup
+    static void setupData() {
+        List<PushNotificationTemplate__c> templates =new List<PushNotificationTemplate__c>();
+        templates.add(new PushNotificationTemplate__c(Name = 'Lead Created', Title__c = 'Lead Created', Body__c = 'New lead created: {0}', NotificationType__c = '1', SenderBloomPartnersID__c = 'Test'));
+        templates.add(new PushNotificationTemplate__c(Name = 'Lead Closure', Title__c = 'Lead Closure', Body__c = 'Lead {0} has been closed successfully.', NotificationType__c = '1', SenderBloomPartnersID__c = 'Test'));
+        templates.add(new PushNotificationTemplate__c(Name = 'Booking Form Sent', Title__c = 'Booking Form Sent', Body__c = 'Booking form sent: {0}', NotificationType__c = '1', SenderBloomPartnersID__c = 'Test'));        
+        insert templates;
+        
+        DocumentType__c dt = new DocumentType__c(Type__c = 'Booking Form', Active__c = true);
+        insert dt;
+    }
+
+    @istest
     static void TestMethod1(){
         Test.enableChangeDataCapture();
         List<Lead> Llist = new List<Lead>();
-        Lead l = new Lead();
+        Lead l = new lead();
         l.LastName = 'Testclass';
         l.MobileCountryCode__c = '971';
         l.Status = 'New';
         l.MobilePhone = '37829292020';
         l.Email = 'Testclass@gmail.com';
+        // l.Lead_Channel__c = 'Online'; 
         Llist.add(l);
         insert Llist;
-        
-        update l;
+        //  l.LastName = 'testlead1';
+        //  Llist.add(l);
+        Update l;
         Test.getEventBus().deliver();
         
-        // Delete the record
+        //Delete the record
         Test.enableChangeDataCapture();
-        delete l;
+        DELETE l;
+        Test.getEventBus().deliver();
+        //UnDelete the record
+        Test.enableChangeDataCapture();
+        UNDELETE l;
         Test.getEventBus().deliver();
         
-        // UnDelete the record
-        Test.enableChangeDataCapture();
-        undelete l;
-        Test.getEventBus().deliver();
         
         User adminUser = [SELECT Id FROM User WHERE Profile.Name = 'System Administrator' AND IsActive = true LIMIT 1];
         AssignmentRule__c assr = new AssignmentRule__c();
@@ -34,7 +48,7 @@ public class LeadAsyncTriggerHandlerTest {
         assr.IsActive__c = true;
         insert assr;
         
-        Time startime = Time.newInstance(9, 30, 0, 0);
+        time startime = Time.newInstance(9, 30, 0, 0);
         Time Endtime = Time.newInstance(20, 30, 0, 0);
         AssignmentUser__c assru = new AssignmentUser__c();
         assru.IsActive__c = true;
@@ -43,177 +57,290 @@ public class LeadAsyncTriggerHandlerTest {
         assru.MondayEndTime__c = Endtime;
         assru.TuesdayStartTime__c  = startime;
         assru.TuesdayEndTime__c = Endtime;
-        assru.AssignmentRule__c = assr.Id;
-        assru.User__c = adminUser.Id;
+        assru.AssignmentRule__c = assr.id;
+        assru.User__c = adminUser.id;
         assru.MaximumCapacity__c = 100;
         insert assru;
         
+        
+        
+        
         LeadChangeEvent event = new LeadChangeEvent();
+        
+        // Set the ChangeEventHeader
         EventBus.ChangeEventHeader header = new EventBus.ChangeEventHeader();
-        header.changeType = 'CREATE';
+        header.changeType = 'CREATE'; // Change to 'UPDATE', 'DELETE', or 'UNDELETE' to test other scenarios
         event.ChangeEventHeader = header;
+        //  EventBus.Publish(event);
         
+        
+        // Set the ChangeEventHeader
         EventBus.ChangeEventHeader header2 = new EventBus.ChangeEventHeader();
-        header2.changeType = 'UPDATE';
+        header2.changeType = 'UPDATE'; // Change to 'UPDATE', 'DELETE', or 'UNDELETE' to test other scenarios
         event.ChangeEventHeader = header2;
-        
         EventBus.ChangeEventHeader header3 = new EventBus.ChangeEventHeader();
-        header3.changeType = 'DELETE';
+        header3.changeType = 'DELETE'; // Change to 'UPDATE', 'DELETE', or 'UNDELETE' to test other scenarios
         event.ChangeEventHeader = header3;
-        
         EventBus.ChangeEventHeader header4 = new EventBus.ChangeEventHeader();
-        header4.changeType = 'UNDELETE';
+        header4.changeType = 'UNDELETE'; // Change to 'UPDATE', 'DELETE', or 'UNDELETE' to test other scenarios
         event.ChangeEventHeader = header4;
+        test.starttest();
         
-        Test.startTest();
+        
         LeadAsyncTriggerHandler ias = new LeadAsyncTriggerHandler(); 
+        //ias.changeTypeCreate(new List<Id>{Llist[0].Id});
+        //ias.changeTypeDelete(new List<Id>{Llist[0].Id});
+       // ias.changeTypeUndelete(new List<Id>{Llist[0].Id});
+       // ias.changeTypeUpdate(new List<Id>{Llist[0].Id});
+        
         ias.isDisabled();
         AsyncTriggerDispatcher.disableAllAsyncTriggers();
         AsyncTriggerDispatcher.enableAllAsyncTriggers();
+        //AsyncTriggerDispatcher.run(null);
+        
+        test.stoptest();
+    }
+
+      @IsTest
+  static void testSendMobileAppPushNotification_LeadCreated() {
+
+    Lead testLead = TestDataFactory.createADHATestLead();
+    testLead.Status = 'New';
+
+    insert testLead;
+
+    Test.startTest();
+      LeadAsyncTriggerHelper.sendMobilAppPushNotification(new Set<Id>{ testLead.Id }, 'Lead Created', new Set<String>{'Lead Created'});
+    Test.stopTest();
+
+    List<PushNotification__c> notifications = [
+      SELECT Id, Type__c, NotificationType__c, ObjectAPIName__c FROM PushNotification__c
+      WHERE RecordId__c = :testLead.Id AND NotificationType__c = '1'
+    ];
+
+    System.assertEquals(1, notifications.size(), 'Lead Created push notification should be created.');
+    System.assertEquals('Lead', notifications[0].ObjectAPIName__c);
+  }
+
+  @IsTest
+  static void testSendMobileAppPushNotification_LeadCancelled() {
+    Lead testLead = TestDataFactory.createADHATestLead();
+    testLead.Status = 'Closed';
+
+    insert testLead;
+
+    Test.startTest();
+    LeadAsyncTriggerHelper.sendMobilAppPushNotification(new Set<Id>{ testLead.Id }, 'Lead Closure', new Set<String>{'Lead Closure'});
+    Test.stopTest();
+
+    List<PushNotification__c> notifications = [
+      SELECT Id, Type__c, NotificationType__c, ObjectAPIName__c FROM PushNotification__c
+      WHERE RecordId__c = :testLead.Id AND NotificationType__c = '1'
+    ];
+
+  }
+
+    @IsTest
+    static void testLeadOwnerChanged() {
+    
+      Test.enableChangeDataCapture();
+    
+      Lead testLead = TestDataFactory.createLead('Test Customer','0501234567','testcustomer@example.com');
+      insert testLead;
+    
+      String profileId = UserInfo.getProfileId();
+    
+      User anotherUser = TestDataFactory.createUser(profileId,'anotheruser@test.com','anotheruser' + System.currentTimeMillis() + '@test.com','Another','User');
+      insert anotherUser;
+      Test.getEventBus().deliver();
+      Test.startTest();
+      testLead.OwnerId = anotherUser.Id;
+      update testLead;
+      Test.getEventBus().deliver();
+      Test.stopTest();
+    } 
+
+    @IsTest
+    static void testADHALeadClosed() {
+
+        Test.enableChangeDataCapture();
+
+        Lead testLead = TestDataFactory.createADHATestLead();
+        insert testLead;
+        Test.getEventBus().deliver();
+        Test.startTest();
+        testLead.Status = 'Closed';
+        update testLead;
+        Test.getEventBus().deliver();
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void testADHABookingFormSent() {
+
+        Test.enableChangeDataCapture();
+
+        Lead testLead = TestDataFactory.createADHATestLead();
+        insert testLead;
+        Test.getEventBus().deliver();
+        Test.startTest();
+        testLead.BookingStatus__c = 'Booking Form Sent';
+        update testLead;
+        Test.getEventBus().deliver();
+        Test.stopTest();
+    }
+
+
+    @IsTest
+    static void testADHABookingFormSigned() {
+
+        Test.enableChangeDataCapture();
+
+        Lead testLead = TestDataFactory.createADHATestLead();
+        insert testLead;
+        Test.getEventBus().deliver();
+        Test.startTest();
+        testLead.BookingStatus__c = 'Booking Form Signed';
+        update testLead;
+        Test.getEventBus().deliver();
+        Test.stopTest();
+    }
+
+
+    @IsTest
+    static void testADHABookingCancelled() {
+
+        Test.enableChangeDataCapture();
+
+        Lead testLead = TestDataFactory.createADHATestLead();
+        insert testLead;
+        Test.getEventBus().deliver();
+        Test.startTest();
+        testLead.BookingStatus__c = 'Booking Cancelled';
+        update testLead;
+        Test.getEventBus().deliver();
+        Test.stopTest();
+    }
+
+
+    @IsTest
+    static void testADHAOpportunityCreated() {
+
+        Test.enableChangeDataCapture();
+
+        Lead testLead = TestDataFactory.createADHATestLead();
+        insert testLead;
+        Test.getEventBus().deliver();
+        Test.startTest();
+        testLead.BookingStatus__c = 'Opportunity Created';
+        update testLead;
+        Test.getEventBus().deliver();
         Test.stopTest();
     }
     
-    @isTest
-    static void testLeadEmailNotification(){
-        Map<String, Id> profileMap = new Map<String, Id>();
-        for(Profile p : [SELECT Id, Name FROM Profile WHERE Name IN ('Reception Team', 'Sales Manager', 'Contact Centre Team')]){
-            profileMap.put(p.Name, p.Id);
-        }
+    @IsTest
+    static void testLeadInternalEmailNotification() {
+        Test.enableChangeDataCapture();
+        Lead testLead = TestDataFactory.createADHATestLead();
+        insert testLead;
         
-        String uniqueKey = String.valueOf(System.currentTimeMillis());
-        
-        // Create Broker Agency Account & Broker Contact
-        Id agencyRtId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Broker_Agency') != null 
-            ? Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Broker_Agency').getRecordTypeId() 
-            : null;
-        Account brokerAgency = new Account(Name = 'Test Agency ' + uniqueKey);
-        if(agencyRtId != null){
-            brokerAgency.RecordTypeId = agencyRtId;
-        }
-        TriggerDispatcher.disableAllTriggers();
-        insert brokerAgency;
-        
-        Id brokerContactRtId = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Broker') != null 
-            ? Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName().get('Broker').getRecordTypeId() 
-            : null;
-        Contact brokerAgent = new Contact(LastName = 'Agent ' + uniqueKey, AccountId = brokerAgency.Id);
-        if(brokerContactRtId != null){
-            brokerAgent.RecordTypeId = brokerContactRtId;
-        }
-        insert brokerAgent;
-        TriggerDispatcher.enableAllTriggers();
-
-        List<Lead> leadsToInsert = new List<Lead>();
-        
-        // 1. Normal Lead (falls to default template)
-        Lead normalLead = new Lead(
-            LastName = 'Normal Lead',
-            Status = 'New',
-            MobileCountryCode__c = '971',
-            MobilePhone = '971501111111',
-            Email = 'normal@test.com',
-            Lead_Channel__c = 'Walk in'
-        );
-        leadsToInsert.add(normalLead);
-        
-        // 2. Broker Portal Lead (skips default template)
-        Lead brokerPortalLead = new Lead(
-            LastName = 'Broker Portal Lead',
-            Status = 'New',
-            MobileCountryCode__c = '971',
-            MobilePhone = '971502222222',
-            Email = 'broker@test.com',
-            Lead_Channel__c = 'Broker Portal'
-        );
-        leadsToInsert.add(brokerPortalLead);
-        
-        insert leadsToInsert;
-        
-        List<Id> leadIds = new List<Id>{ normalLead.Id, brokerPortalLead.Id };
-        
-        // 3. Reception Team User Leads (with broker and without broker)
-        if(profileMap.containsKey('Reception Team')){
-            User recUser = new User(
-                FirstName = 'Rec', LastName = 'User', Email = 'rec@test.com',
-                Username = 'rec' + uniqueKey + '@test.com', Alias = 'recu',
-                TimeZoneSidKey = 'Asia/Dubai', LocaleSidKey = 'en_US', EmailEncodingKey = 'UTF-8',
-                LanguageLocaleKey = 'en_US', ProfileId = profileMap.get('Reception Team')
-            );
-            System.runAs(recUser){
-                Lead recLeadWithBroker = new Lead(
-                    LastName = 'Rec Lead Broker', Status = 'New', 
-                    MobileCountryCode__c = '971', MobilePhone = '971503333331', 
-                    Email = 'rec1@test.com',
-                    BrokerAgency__c = brokerAgency.Id, BrokerAgent__c = brokerAgent.Id
-                );
-                Lead recLeadWithoutBroker = new Lead(
-                    LastName = 'Rec Lead No Broker', Status = 'New', 
-                    MobileCountryCode__c = '971', MobilePhone = '971503333332', 
-                    Email = 'rec2@test.com'
-                );
-                insert new List<Lead>{ recLeadWithBroker, recLeadWithoutBroker };
-                leadIds.add(recLeadWithBroker.Id);
-                leadIds.add(recLeadWithoutBroker.Id);
-            }
-        }
-        
-        // 4. Sales Manager User Leads (with broker and without broker)
-        if(profileMap.containsKey('Sales Manager')){
-            User smUser = new User(
-                FirstName = 'SM', LastName = 'User', Email = 'sm@test.com',
-                Username = 'sm' + uniqueKey + '@test.com', Alias = 'smu',
-                TimeZoneSidKey = 'Asia/Dubai', LocaleSidKey = 'en_US', EmailEncodingKey = 'UTF-8',
-                LanguageLocaleKey = 'en_US', ProfileId = profileMap.get('Sales Manager')
-            );
-            System.runAs(smUser){
-                Lead smLeadWithBroker = new Lead(
-                    LastName = 'SM Lead Broker', Status = 'New', 
-                    MobileCountryCode__c = '971', MobilePhone = '971504444441', 
-                    Email = 'sm1@test.com',
-                    BrokerAgency__c = brokerAgency.Id, BrokerAgent__c = brokerAgent.Id
-                );
-                Lead smLeadWithoutBroker = new Lead(
-                    LastName = 'SM Lead No Broker', Status = 'New', 
-                    MobileCountryCode__c = '971', MobilePhone = '971504444442', 
-                    Email = 'sm2@test.com'
-                );
-                //insert new List<Lead>{ smLeadWithBroker, smLeadWithoutBroker };
-                leadIds.add(smLeadWithBroker.Id);
-                leadIds.add(smLeadWithoutBroker.Id);
-            }
-        }
-        
-        // 5. Contact Centre Team User Leads (Sales and Leasing)
-        if(profileMap.containsKey('Contact Centre Team')){
-            User ccUser = new User(
-                FirstName = 'CC', LastName = 'User', Email = 'cc@test.com',
-                Username = 'cc' + uniqueKey + '@test.com', Alias = 'ccu',
-                TimeZoneSidKey = 'Asia/Dubai', LocaleSidKey = 'en_US', EmailEncodingKey = 'UTF-8',
-                LanguageLocaleKey = 'en_US', ProfileId = profileMap.get('Contact Centre Team')
-            );
-            System.runAs(ccUser){
-                Lead ccSales = new Lead(
-                    LastName = 'CC Sales', Status = 'New', 
-                    MobileCountryCode__c = '971', MobilePhone = '971505555551', 
-                    Email = 'cc1@test.com', LeadTeam__c = 'Sales'
-                );
-                Lead ccLeasing = new Lead(
-                    LastName = 'CC Leasing', Status = 'New', 
-                    MobileCountryCode__c = '971', MobilePhone = '971505555552', 
-                    Email = 'cc2@test.com', LeadTeam__c = 'Leasing'
-                );
-                insert new List<Lead>{ ccSales, ccLeasing };
-                leadIds.add(ccSales.Id);
-                leadIds.add(ccLeasing.Id);
-            }
-        }
-        
+        Test.getEventBus().deliver();
         Test.startTest();
-        try {
-            LeadAsyncTriggerHelper.leadEmailNotificationToCustomer(leadIds);
-        } catch(Exception ex) {
-            System.debug('Exception in testLeadEmailNotification: ' + ex.getMessage());
-        }
+        testLead.LeadManagerStatus__c = 'Waiting List';
+        testLead.Lead_Channel__c = 'API Integration';
+        testLead.LeadSource = 'Government Entity';
+        testLead.leadsubsource__c = 'ADHA';
+        testLead.Status = 'Closed';
+        update testLead;
+        Test.getEventBus().deliver();
         Test.stopTest();
     }
+    
+    @IsTest
+    static void testLeadInternalEmailNotification2() {
+        Test.enableChangeDataCapture();
+        Lead testLead = TestDataFactory.createADHATestLead();
+        insert testLead;
+        
+        Test.getEventBus().deliver();
+        Test.startTest();
+        testLead.LeadManagerStatus__c = 'Waiting List';
+        testLead.LeadTeam__c = 'Leasing';
+        update testLead;
+        Test.getEventBus().deliver();
+        Test.stopTest();
+    }
+    
+    @IsTest
+    static void testCreateSMTask() {
+        Test.enableChangeDataCapture();
+        Lead testLead = TestDataFactory.createADHATestLead();
+        insert testLead;
+        
+        // insert new Document__c(Lead__c = testLead.Id, Document_Name__c = 'Booking Form');
+        Test.getEventBus().deliver();
+        Test.startTest();
+        testLead.LeadManagerStatus__c = 'In Progress';
+        testLead.FollowUpDate__c = Date.valueOf('2026-09-21');
+        testLead.LeadTeam__c = 'Sales';
+        update testLead;
+        
+        //LeadAsyncTriggerHelper.createADHAFirstFollowUpTask(new List<Id>{ testLead.Id });
+        // LeadAsyncTriggerHelper.generateBookingForm(new Set<Id>{ testLead.Id });
+        LeadAsyncTriggerHelper.sendLeadOwnerCustomNotification(new List<Lead>{ testLead });
+        Test.getEventBus().deliver();
+        Test.stopTest();
+        
+        // LeadAsyncTriggerHelper.createSMTask(new List<Id>{ testLead.Id });
+    }
+    
+    @IsTest
+    static void testLeadCustomerEmailBankLoan() {
+        AssignmentRule__c ar = new AssignmentRule__c(IsActive__c = true, ProcessName__c = 'ADHA Lead Assignment', RecordType__c = 'Lead', ProcessType__c = 'Sales');
+        insert ar;
+        
+        Test.enableChangeDataCapture();
+        Lead testLead = TestDataFactory.createADHATestLead();
+        insert testLead;
+        
+        Test.getEventBus().deliver();
+        Test.startTest();
+        testLead.TopUpType__c = 'Bank Loan Top-up';
+        testLead.leadsubsource__c = 'ADHA';
+        update testLead;
+        Test.getEventBus().deliver();
+        Test.stopTest();
+    }
+    
+    @IsTest
+    static void testUnitReservationOnADHALead() {
+        Project__c objProject = TestDataFactory.createProject('Test Project');
+        objProject.GIS_Service_URL__c='URL';
+        insert objProject;
+        
+        List<unit__c> unitLst = new List<unit__c>();
+        for(integer i =0;i<3;i++){          
+            unitLst.add(TestDataFactory.createUnit(objProject.Id, 'J1A1-G01'+i,'Available'));  
+        }
+        insert unitLst;
+        
+        AssignmentRule__c ar = new AssignmentRule__c(IsActive__c = true, ProcessName__c = 'ADHA Lead Assignment', RecordType__c = 'Lead', ProcessType__c = 'Sales');
+        insert ar;
+        
+        Test.enableChangeDataCapture();
+        Lead testLead = TestDataFactory.createADHATestLead();
+        testLead.ProjectLookup__c = objProject.Id;
+        insert testLead;
+        
+        unitLst[0].BlockedForLead__c = testLead.Id;
+        update unitLst[0];
+        
+        Test.getEventBus().deliver();
+        Test.startTest();
+        testLead.Unit__c = unitLst[0].Id;
+        update testLead;
+        Test.getEventBus().deliver();
+        Test.stopTest();
+    }
+    
 }

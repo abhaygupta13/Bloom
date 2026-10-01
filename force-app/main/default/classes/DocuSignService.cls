@@ -1092,104 +1092,253 @@ public inherited sharing class DocuSignService {
         }
         return allrecipients;
     }   
-    
-    public static List<dfsle.Recipient> CaseGetRecipientsforCIS(Id caseId, String documentoutputname) {
+  public static List<dfsle.Recipient> CaseGetRecipientsforCIS(Id caseId, String documentoutputname) {
         List<dfsle.Recipient> allrecipients = new List<dfsle.Recipient> () ;
-        Case cs = [SELECT Id,AccountId,Account.CompanyEmail__c,Account.Name,Sales_Order__c FROM Case Where Id =:caseId];
+        Case cs = [SELECT Id,AccountId,Account.CompanyEmail__c,Account.Name,Sales_Order__c,NewCustomerAccount__c,NewSalesOrder__c,RecordType.DeveloperName FROM Case Where Id =:caseId];
         
-        
-        List<Contact> Contactlst = [SELECT id, Name, MobileCountryCode__c, MobilePhone, Email From Contact Where AccountId IN (select AccountId from Case where id = :caseId) ];
-        
-        List<Contact> JOContactlst = [SELECT id, Name, MobileCountryCode__c, MobilePhone, Email From Contact Where Accountid IN (SELECT Account__c from JointOwner__c where SalesOrder__c = :cs.Sales_Order__c)];
-        integer i = 1; 
-        integer j = 1;
-        
-        for (Contact MainBuyerrec : Contactlst) {   
-            // Create a Sign Here tab
-            dfsle.Tab mainbuyerSignHereTab = new dfsle.SignHereTab()
-                .withScale(1) // 1.5 scale
-                .withRequired(true) // Signing mandatory
-                .withAnchor(new dfsle.Tab.Anchor(
-                    'MainBuyer:', // Anchor string
-                    false, // Do not allow white space in anchor string
-                    false, // Anchor string is not case sensitive
-                    'right', // Horizontal alignment in relation to the anchor text
-                    true, // Ignore if the anchor text is not present in the document
-                    true, // Must match the value of the anchor string in its entirety
-                    'pixels', // Unit of the x and y offset properties
-                    0, // X offset
-                    0))// Y offset
-                .withPosition(new dfsle.Tab.Position(
-                    1, 
-                    null,
-                    null,
-                    null,
-                    null,
-                    null));
-            
-            dfsle.Tab initialHereTab = new dfsle.InitialHereTab()
-                .withScale(1) // 1.5 scale
-                .withRequired(true) // Signing mandatory
-                .withAnchor(new dfsle.Tab.Anchor(
-                    'MBIni:', // Anchor string
-                    false, // Do not allow white space in anchor string
-                    false, // Anchor string is not case sensitive
-                    'right', // Horizontal alignment in relation to the anchor text
-                    true, // Ignore if the anchor text is not present in the document
-                    true, // Must match the value of the anchor string in its entirety
-                    'pixels', // Unit of the x and y offset properties
-                    0, // X offset
-                    0))// Y offset
-                ;
-            
-            dfsle.Tab mainCustomerDateSignedTab = new dfsle.DateSignedTab()
-                .withAnchor(new dfsle.Tab.Anchor(
-                    'MainBuyerSignedDate:',
-                    false,
-                    false,
-                    'right',
-                    true,
-                    true,
-                    'pixels',
-                    0,
-                    0))
-                .withPosition(new dfsle.Tab.Position(
-                    1,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null));
-            
-            string mainbuyermobilenum = MainBuyerrec.MobileCountryCode__c + MainBuyerrec.MobilePhone ;
-            
-            if (System.Label.DocusignInitialsReqd == 'True') {
-                dfsle.Recipient mainbuyerRecipient = dfsle.Recipient.fromSource(
-                MainBuyerrec.Name,
-                MainBuyerrec.Email,
-                mainbuyermobilenum , 
-                'MainBuyer:',
-                null)
-                .withTabs(new List<dfsle.Tab> {
-                    mainbuyerSignHereTab, mainCustomerDateSignedTab, initialHereTab
-                        }).withRoutingOrder(i);
-
-                allrecipients.add (mainbuyerRecipient);
-            
-            } else {
-                dfsle.Recipient mainbuyerRecipient = dfsle.Recipient.fromSource(
-                    MainBuyerrec.Name,
-                    MainBuyerrec.Email,
-                    mainbuyermobilenum , 
-                    'MainBuyer:',
-                    null)
-                    .withTabs(new List<dfsle.Tab> {
-                        mainbuyerSignHereTab, mainCustomerDateSignedTab
-                            }).withRoutingOrder(i);
-
-                allrecipients.add (mainbuyerRecipient);
+        if(cs.RecordType.DeveloperName == 'KYCUpdateRequest'){
+            integer i = 1; 
+            List<Contact> Contactlst = [SELECT id, Name, MobileCountryCode__c, MobilePhone, Email From Contact Where AccountId IN (select AccountId from Case where id = :caseId) ];
+            for (Contact MainBuyerrec : Contactlst) {   
+                // Create a Sign Here tab
+                dfsle.Tab mainbuyerSignHereTab = new dfsle.SignHereTab()
+                    .withScale(1) // 1.5 scale
+                    .withRequired(true) // Signing mandatory
+                    .withAnchor(new dfsle.Tab.Anchor(
+                        'MainBuyer:', // Anchor string
+                        false, // Do not allow white space in anchor string
+                        false, // Anchor string is not case sensitive
+                        'right', // Horizontal alignment in relation to the anchor text
+                        true, // Ignore if the anchor text is not present in the document
+                        true, // Must match the value of the anchor string in its entirety
+                        'pixels', // Unit of the x and y offset properties
+                        0, // X offset
+                        0))// Y offset
+                    .withPosition(new dfsle.Tab.Position(
+                        1, 
+                        null,
+                        null,
+                        null,
+                        null,
+                        null));
+                
+                dfsle.Tab initialHereTab = new dfsle.InitialHereTab()
+                    .withScale(1) // 1.5 scale
+                    .withRequired(true) // Signing mandatory
+                    .withAnchor(new dfsle.Tab.Anchor(
+                        'MBIni:', // Anchor string
+                        false, // Do not allow white space in anchor string
+                        false, // Anchor string is not case sensitive
+                        'right', // Horizontal alignment in relation to the anchor text
+                        true, // Ignore if the anchor text is not present in the document
+                        true, // Must match the value of the anchor string in its entirety
+                        'pixels', // Unit of the x and y offset properties
+                        0, // X offset
+                        0))// Y offset
+                    ;
+                
+                dfsle.Tab mainCustomerDateSignedTab = new dfsle.DateSignedTab()
+                    .withAnchor(new dfsle.Tab.Anchor(
+                        'MainBuyerSignedDate:',
+                        false,
+                        false,
+                        'right',
+                        true,
+                        true,
+                        'pixels',
+                        0,
+                        0))
+                    .withPosition(new dfsle.Tab.Position(
+                        1,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null));
+                
+                string mainbuyermobilenum = MainBuyerrec.MobileCountryCode__c + MainBuyerrec.MobilePhone ;
+                
+                if (System.Label.DocusignInitialsReqd == 'True') {
+                    dfsle.Recipient mainbuyerRecipient = dfsle.Recipient.fromSource(
+                        MainBuyerrec.Name,
+                        MainBuyerrec.Email,
+                        mainbuyermobilenum , 
+                        'MainBuyer:',
+                        null)
+                        .withTabs(new List<dfsle.Tab> {
+                            mainbuyerSignHereTab, mainCustomerDateSignedTab, initialHereTab
+                                }).withRoutingOrder(i);
+                    
+                    allrecipients.add (mainbuyerRecipient);
+                    
+                } else {
+                    dfsle.Recipient mainbuyerRecipient = dfsle.Recipient.fromSource(
+                        MainBuyerrec.Name,
+                        MainBuyerrec.Email,
+                        mainbuyermobilenum , 
+                        'MainBuyer:',
+                        null)
+                        .withTabs(new List<dfsle.Tab> {
+                            mainbuyerSignHereTab, mainCustomerDateSignedTab
+                                }).withRoutingOrder(i);
+                    
+                    allrecipients.add (mainbuyerRecipient);
+                }
             }
         }
+        else{
+            integer i = 1; 
+            List<Contact> Contactlst = [SELECT id, Name, MobileCountryCode__c, MobilePhone, Email From Contact Where AccountId IN (select NewCustomerAccount__c from Case where id = :caseId) ];
+            List<Contact> JOContactlst = [SELECT id, Name, MobileCountryCode__c, MobilePhone, Email From Contact Where Accountid IN (SELECT Account__c from JointOwner__c where SalesOrder__c = :cs.NewSalesOrder__c)];
+            for (Contact MainBuyerrec : Contactlst) {   
+                // Create a Sign Here tab
+                dfsle.Tab mainbuyerSignHereTab = new dfsle.SignHereTab()
+                    .withScale(1) // 1.5 scale
+                    .withRequired(true) // Signing mandatory
+                    .withAnchor(new dfsle.Tab.Anchor(
+                        'MainBuyer:', // Anchor string
+                        false, // Do not allow white space in anchor string
+                        false, // Anchor string is not case sensitive
+                        'right', // Horizontal alignment in relation to the anchor text
+                        true, // Ignore if the anchor text is not present in the document
+                        true, // Must match the value of the anchor string in its entirety
+                        'pixels', // Unit of the x and y offset properties
+                        0, // X offset
+                        0))// Y offset
+                    .withPosition(new dfsle.Tab.Position(
+                        1, 
+                        null,
+                        null,
+                        null,
+                        null,
+                        null));
+                
+                dfsle.Tab initialHereTab = new dfsle.InitialHereTab()
+                    .withScale(1) // 1.5 scale
+                    .withRequired(true) // Signing mandatory
+                    .withAnchor(new dfsle.Tab.Anchor(
+                        'MBIni:', // Anchor string
+                        false, // Do not allow white space in anchor string
+                        false, // Anchor string is not case sensitive
+                        'right', // Horizontal alignment in relation to the anchor text
+                        true, // Ignore if the anchor text is not present in the document
+                        true, // Must match the value of the anchor string in its entirety
+                        'pixels', // Unit of the x and y offset properties
+                        0, // X offset
+                        0))// Y offset
+                    ;
+                
+                dfsle.Tab mainCustomerDateSignedTab = new dfsle.DateSignedTab()
+                    .withAnchor(new dfsle.Tab.Anchor(
+                        'MainBuyerSignedDate:',
+                        false,
+                        false,
+                        'right',
+                        true,
+                        true,
+                        'pixels',
+                        0,
+                        0))
+                    .withPosition(new dfsle.Tab.Position(
+                        1,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null));
+                
+                string mainbuyermobilenum = MainBuyerrec.MobileCountryCode__c + MainBuyerrec.MobilePhone ;
+                
+                if (System.Label.DocusignInitialsReqd == 'True') {
+                    dfsle.Recipient mainbuyerRecipient = dfsle.Recipient.fromSource(
+                        MainBuyerrec.Name,
+                        MainBuyerrec.Email,
+                        mainbuyermobilenum , 
+                        'MainBuyer:',
+                        null)
+                        .withTabs(new List<dfsle.Tab> {
+                            mainbuyerSignHereTab, mainCustomerDateSignedTab, initialHereTab
+                                }).withRoutingOrder(i);
+                    
+                    allrecipients.add (mainbuyerRecipient);
+                    
+                } else {
+                    dfsle.Recipient mainbuyerRecipient = dfsle.Recipient.fromSource(
+                        MainBuyerrec.Name,
+                        MainBuyerrec.Email,
+                        mainbuyermobilenum , 
+                        'MainBuyer:',
+                        null)
+                        .withTabs(new List<dfsle.Tab> {
+                            mainbuyerSignHereTab, mainCustomerDateSignedTab
+                                }).withRoutingOrder(i);
+                    
+                    allrecipients.add (mainbuyerRecipient);
+                }
+            }
+             integer j = 1;
+            for (Contact JOContactrec : JOContactlst) {
+                i = i + 1;
+                
+                string jobuyermobilenum = JOContactrec.MobileCountryCode__c + JOContactrec.MobilePhone ;
+                string jobuyeranchor = 'JointOwner' + j + ':' ;
+                string jobuyeranchorsigneddate = 'JointOwner' + j + 'SignedDate:' ;
+                j++;
+                
+                dfsle.Tab JointOwnertab = new dfsle.SignHereTab()
+                    .withScale(1) // 1.5 scale
+                    .withRequired(true) // Signing mandatory
+                    .withAnchor(new dfsle.Tab.Anchor(
+                        jobuyeranchor, // Anchor string
+                        false, // Do not allow white space in anchor string
+                        false, // Anchor string is not case sensitive
+                        'right', // Horizontal alignment in relation to the anchor text
+                        true, // Ignore if the anchor text is not present in the document
+                        true, // Must match the value of the anchor string in its entirety
+                        'pixels', // Unit of the x and y offset properties
+                        0, // X offset
+                        0)).withPosition(new dfsle.Tab.Position(
+                            1, 
+                            null,
+                            null,
+                            null,
+                            null,
+                            null)); // Y offset
+                
+                dfsle.Tab JOCustomerDateSignedTab = new dfsle.DateSignedTab()
+                    .withAnchor(new dfsle.Tab.Anchor(
+                        jobuyeranchorsigneddate,
+                        false,
+                        false,
+                        'right',
+                        true,
+                        true,
+                        'pixels',
+                        0,
+                        0))
+                    .withPosition(new dfsle.Tab.Position(
+                        1,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null));            
+                
+                dfsle.Recipient myJORecipient = dfsle.Recipient.fromSource(
+                    JOContactrec.Name,
+                    JOContactrec.Email,
+                    jobuyermobilenum, 
+                    jobuyeranchor,
+                    null)
+                    .withTabs(new List<dfsle.Tab> {
+                        JointOwnertab, JOCustomerDateSignedTab
+                            }).withRoutingOrder(i);
+                
+                allrecipients.add (myJORecipient);
+            }
+        }
+        
+        
         return allrecipients;
     }
 }

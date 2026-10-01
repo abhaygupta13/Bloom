@@ -31,6 +31,8 @@ public without sharing class LeadConversionController {
     private static final string BLOOM_NO_REPLY_LEASING_OW_EMAIL_ID { get { return 'BloomNoReplyLeasingOWEmailId'; } }
     private static final string BAPP_BROKER_AGENT_CONVERT_EMAIL_TEMPLATE { get { return 'BAPP_BROKER_AGENT_CONVERT_EMAIL_TEMPLATE'; } }
     private static final string BAPP_ORG_WIDE_EMAIL_ADDRESS { get { return 'BAPPOrgWideEmailAddress'; } }
+
+    private static final string LEAD_BOOKING_STATUS_OPPORTUNITY_CREATED { get { return 'Opportunity Created'; } }
     
     @AuraEnabled
     public static String vaidateLead(Id leadId){
@@ -206,6 +208,18 @@ public without sharing class LeadConversionController {
             }
             if(!String.isBlank(objLead.Passport_Number__c ) && objLead.PassportIssueDate__c == NULL ){
                 missingFields.add('Passport Issue Date');
+            }
+            if(!String.isBlank(objLead.ApplicationNumber__c ) && objLead.Unit__c == NULL){
+                missingFields.add('Unit');
+            }
+            if(!String.isBlank(objLead.ApplicationNumber__c) && String.isBlank(objLead.AlternateContactName__c)){
+                missingFields.add('Alternate Contact Name');
+            }
+            if(!String.isBlank(objLead.ApplicationNumber__c) && String.isBlank(objLead.AlternateContactNumber__c)){
+                missingFields.add('Alternate Contact Number');
+            }
+            if(!String.isBlank(objLead.ApplicationNumber__c) && String.isBlank(objLead.AlternateContactRelationship__c)){
+                missingFields.add('Alternate Contact Relationship');
             }
         }else if(objLead.RecordTypeId == organizationLeadRecordTypeId){
             if(String.isBlank(objLead.FirstName)){
@@ -425,6 +439,7 @@ public without sharing class LeadConversionController {
         opp.Lead__c = objLead.Id;
         opp.StageName = 'Assigned';
         opp.OpportunityType__c = objLead.LeadTeam__c;
+        opp.LoanAmount__c = objLead.LoanAmount__c;
         objOpportunityService.updateOpportunityWithoutTrigger(opp);
         //Send Leasing Email to Customer if the opp type is Leasing 
         if(opp.OpportunityType__c == 'Leasing' && objLead.LeasingDocumentsReceived__c == 'No'){
@@ -454,7 +469,23 @@ public without sharing class LeadConversionController {
         }
         objActivityService.updateTasks(taskUpdateList);
     }
-    
+
+    private static void updateLeadBookingStatus(Lead objLead){
+        if(String.isNotBlank(objLead.ApplicationNumber__c)){
+            LeadService objLeadService = LeadService.getInstance();
+            Lead leadToUpdate = new Lead(Id = objLead.Id, BookingStatus__c = LEAD_BOOKING_STATUS_OPPORTUNITY_CREATED);
+            objLeadService.updateLeadWithoutTrigger(leadToUpdate);
+        }
+    }
+
+    private static void updateUnitBlockedForCustomer(Lead objLead, Id accountId){
+        if(objLead.Unit__c != null && accountId != null){
+            UnitService objUnitService = UnitService.getInstance();
+            Unit__c unitToUpdate = new Unit__c(Id = objLead.Unit__c, BlockedForCustomer__c = accountId);
+            objUnitService.updateUnitWithoutTrigger(unitToUpdate);
+        }
+    }
+
     @AuraEnabled
     public static String convertLead(Id leadId, Id accountId){
         String jsonData;
@@ -491,6 +522,8 @@ public without sharing class LeadConversionController {
                 }
                 updateOpportunity(objLead, lcr.getContactId(), lcr.getOpportunityId());
                 updateTask(objLead);
+                updateLeadBookingStatus(objLead);
+                updateUnitBlockedForCustomer(objLead, lcr.getAccountId());
                 obj.message = 'Lead was converted successfully.';
                 obj.opportunityId = lcr.getOpportunityId();
                 sendEmailToLeadOwner(objLead, obj.opportunityId);

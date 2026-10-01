@@ -28,18 +28,18 @@ public inherited sharing  class LeadService {
                 City, Country, Latitude, Longitude, CountryCode, State, StateCode, 
                 BrokerAgency__c, BrokerAgency__r.Name, BrokerAgent__c, BrokerAgent__r.Name,BudgetRangeFrom__c,
                 LeadSource, Phone, GenderIdentity, Birthdate__c, CreatedById,BudgetRangeTo__c,
-                OwnerId, Owner.Name, Owner.Email, Owner.Profile.Name, Owner.Profile.Id, ConvertedDate,
+                OwnerId, Owner.Name, Owner.Email, Owner.Profile.Name, Owner.Phone, Owner.Profile.Id, ConvertedDate,
                 IsConverted, ConvertedOpportunity.OpportunityNumber__c, RoundRobinNumber__c, LeadTeam__c,
-                MobileCountryCode__c, MobilePhoneNumber__c, PhoneCountryCode__c,Lead_Channel__c,
-                PhoneNumber__c,IsDraftLead__c,LastModifiedById,Project__c, ContactCentreLeadStatus__c,
-                LeadManagerStatus__c, LeasingDocumentsReceived__c,MaritalStatus__c
+                MobileCountryCode__c, MobilePhoneNumber__c, PhoneCountryCode__c,
+                PhoneNumber__c,IsDraftLead__c,LastModifiedById,Project__c, ContactCentreLeadStatus__c, ProjectLookup__c, Unit__r.Name, Unit__r.UnitNumber__c,
+                LeadManagerStatus__c, LeasingDocumentsReceived__c,MaritalStatus__c,Lead_Channel__c,Email__c,leadsubsource__c, ApplicationNumber__c, TopUpType__c
                 FROM Lead WHERE Id IN :leadIds ORDER BY CreatedDate DESC];
     }
     
     public Lead getLeadById(Id leadId){
-        return [SELECT Id,Salutation,FirstName,MiddleName, LastName, Name, Email, MobilePhone, nationality__c, RecordTypeId,EmploymentStatus__c,CompanyIndustry__c,YearsOfEmployment__c,CompanyEmirates__c,
-                TradeLicenseNumber__c, RegistrationAuthority__c, EmiratesID__c, Gender__c,AnnualIncome__c,CompanyName__c, BPType__c,SourceOfFunds__c,
-                Passport_Number__c, Emirates_Id__c, CreatedDate, CreatedBy.Name,CreatedBy.Profile.Name, Status, PropertyUsage__c, Comments__c,TaxRegistrationNumber__c,
+        return [SELECT Id,Salutation,FirstName,MiddleName, LastName, Name, Email, MobilePhone, nationality__c, RecordTypeId,Unit__r.Name,EmploymentStatus__c,CompanyIndustry__c,YearsOfEmployment__c,CompanyEmirates__c,
+                TradeLicenseNumber__c, RegistrationAuthority__c, EmiratesID__c, Gender__c,AnnualIncome__c,CompanyName__c,BPType__c,SourceOfFunds__c,
+                Passport_Number__c, Emirates_Id__c, CreatedDate, CreatedBy.Name, CreatedBy.Profile.Name, Status, PropertyUsage__c, Comments__c,TaxRegistrationNumber__c,
                 CustomerType__c,  EmiratesIDExpiryDate__c, Company, Project__c, BuyRent__c, UnitType__c, SecondaryLeadSource__c,
                 ResidentStatus__c, CustomerSubType__c, Street, NameArabic__c, PostalCode, CustomerBudget__c, SecondaryLeadSubSource__c,
                 City, Country, Latitude, Longitude, CountryCode, State, StateCode, AreaSqmt__c, BrokerAgent__c,LeadNumber__c,
@@ -47,7 +47,9 @@ public inherited sharing  class LeadService {
                 OwnerId, Owner.Name, Owner.Email, Owner.Profile.Name, ConvertedDate, PropertyReadiness__c, leadsubsource__c,
                 IsConverted,ConvertedOpportunity.OpportunityNumber__c,MobileCountryCode__c, PreferredCommunicationMethodology__c,
                 MobilePhoneNumber__c, PhoneCountryCode__c, PhoneNumber__c,LeadTeam__c,Position__c,ContactCentreLeadStatus__c, LeadManagerStatus__c,LeasingDocumentsReceived__c,MaritalStatus__c,
-                EmiratesIDIssueDate__c, PassportExpiryDate__c, PassportIssueDate__c, TradeLicenseExpiryDate__c, TradeLicenseIssueDate__c
+                EmiratesIDIssueDate__c, PassportExpiryDate__c, PassportIssueDate__c, TradeLicenseExpiryDate__c, TradeLicenseIssueDate__c,
+                ApplicationNumber__c, Unit__c, TopUpType__c, LoanAmount__c,
+                AlternateContactName__c, AlternateContactNumber__c, AlternateContactRelationship__c
                 FROM Lead WHERE Id = :leadId];
     }
     
@@ -409,8 +411,34 @@ public inherited sharing  class LeadService {
         
         return result;
     }
+    
+    public List<Lead> getADHALeadByEID(String eid){
+        return [SELECT Id, Name, Email, MobilePhone, nationality__c,LeadNumber__c,Passport_Number__c, Emirates_Id__c,Status,ApplicationNumber__c,
+                CreatedDate,FirstName, LastName, City, Country, Latitude, Longitude, CountryCode, State, StateCode,UUID__c,
+                LeadSource, Phone, GenderIdentity, Birthdate__c, CreatedById,OwnerId, Owner.Name, Owner.Email, Owner.Phone, Owner.Profile.Name,
+                PhoneCountryCode__c,PhoneNumber__c,LastModifiedById, LoanAmount__c,ProjectLookup__c,ProjectLookup__r.TentativeHandoverTimeline__c, ProjectLookup__r.Name,
+                Unit__c, Unit__r.Name, BookingStatus__c, Unit__r.Block_Till__c,Unit__r.BlockedDate__c
+                FROM Lead 
+                WHERE Emirates_Id__c =: eid AND IsConverted = false AND LeadSource = 'Government Entity' AND leadsubsource__c = 'ADHA' AND  Status != 'Closed' AND ApplicationNumber__c != null
+                ORDER BY CreatedDate DESC
+            ];
+    }
+
+    public List<Lead> getADHALeadByIds(Set<Id> leadIds){
+        return [SELECT Id, Name, Email, MobilePhone, nationality__c,LeadNumber__c,Passport_Number__c, Emirates_Id__c,Status,ApplicationNumber__c,
+                CreatedDate,FirstName, LastName, City, Country, Latitude, Longitude, CountryCode, State, StateCode,UUID__c, LeadTeam__c,
+                LeadSource, Phone, GenderIdentity, Birthdate__c, CreatedById,OwnerId, Owner.Name, Owner.Email, Owner.Phone, Owner.Profile.Name,
+                PhoneCountryCode__c,PhoneNumber__c,LastModifiedById, LoanAmount__c,ProjectLookup__c,ProjectLookup__r.TentativeHandoverTimeline__c, ProjectLookup__r.Name, leadsubsource__c,
+                Unit__c, Unit__r.Name, BookingStatus__c, Unit__r.Block_Till__c,Unit__r.BlockedDate__c, Unit__r.UnitNumber__c, BrokerAgent__c, Lead_Channel__c
+                FROM Lead 
+                WHERE Id IN :leadIds AND IsConverted = false AND Lead_Channel__c = 'API Integration' AND LeadSource = 'Government Entity' AND leadsubsource__c = 'ADHA' AND ApplicationNumber__c != null
+                ORDER BY CreatedDate DESC
+            ];
+    }
 
     public Map<Id, Lead> getLeadsByIds(Set<Id> leadIds) {
-        return new Map<Id, Lead>([SELECT Id, Name, Email,NameArabic__c FROM Lead WHERE Id IN :leadIds]);
+          if(leadIds == null || leadIds.isEmpty())
+            return new Map<Id, Lead>();
+            return new Map<Id, Lead>([SELECT Id, Name, Email, NameArabic__c, Lead_Channel__c, LeadSource, leadsubsource__c, ApplicationNumber__c, OwnerId, Owner.Email, Owner.Name, BrokerAgent__c, MobilePhone FROM Lead WHERE Id IN :leadIds]);
     }
 }

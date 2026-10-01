@@ -152,7 +152,7 @@
             }
             //paramMap.put('Param9',  String.valueOf(leasingPaymentPlan.IsReversed__c ));
             paramMap.put('Param10',  String.valueOf(leasingPaymentPlan.ReversedDate__c ));
-            paramMap.put('Param11',  String.valueOf(leasingPaymentPlan.ReversedReason__c));
+            paramMap.put('Param11', leasingPaymentPlan.ReversedReason__c != Null ? leasingPaymentPlan.ReversedReason__c : '');
             paramMap.put('Param12',  String.valueOf(leasingPaymentPlan.ReversedRemarks__c));
             paramMap.put('Param14',  String.valueOf(leasingPaymentPlan.Refdocno__c ));
             paramMap.put('Param15',  String.valueOf(leasingPaymentPlan.Paymentdoc__c ));

@@ -253,10 +253,16 @@
                 <fieldItem>Record.Account__c</fieldItem>
                 <identifier>RecordAccount_cField</identifier>
                 <visibilityRule>
+                    <booleanFilter>1 OR 2</booleanFilter>
                     <criteria>
                         <leftValue>{!$User.ProfileName__c}</leftValue>
                         <operator>EQUAL</operator>
                         <rightValue>Data Administrator</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!$User.Alias}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>vredd</rightValue>
                     </criteria>
                 </visibilityRule>
             </fieldInstance>

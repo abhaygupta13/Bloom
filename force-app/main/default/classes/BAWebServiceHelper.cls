@@ -18,6 +18,11 @@ public class BAWebServiceHelper {
     private static final string SALES_ORDER_STATUS_BOOKED { get { return 'Booked'; } }
     private static final string SALES_ORDER_STATUS_RESERVED { get { return 'Reserved'; } }
     private static final string SALES_ORDER_STATUS_SOLD { get { return 'Sold'; } }
+    private static final string SCHEDULED_STR { get { return 'Scheduled'; } }
+    private static final string RESCHEDULED_STR { get { return 'Rescheduled'; } }
+    private static final string CANCELLED_STR { get { return 'Cancelled'; } }
+    private static final string APPOINTMENT_STR { get { return 'Appointment'; } }
+    private static final string MEETING_STR { get { return 'Meeting'; } }
     
     private static BAWebServiceHelper instance;
     
@@ -123,7 +128,7 @@ public class BAWebServiceHelper {
     }
 
     public Boolean isValidCustomer(String customerId){
-        Contact con = ContactService.getInstance().getContactById(customerId);
+        Contact con = String.isNotBlank(customerId) ? ContactService.getInstance().getContactById(customerId) : null;
         if(con == NULL ||  con.AccountId == NULL){
             return false;
         }
@@ -199,13 +204,82 @@ public class BAWebServiceHelper {
         Id organizationAccountRecordTypeId = Utility.getRecordTypeIdByDevName(Account.SObjectType, ACCOUNT_RT_DEV_NAME_ORGANIZATION_ACCOUNT);
         
         List<Contact> objContactList = new List<Contact>();
+        List<Lead> objLeadList = new List<Lead>();
         if(idType == 'EID'){
             objContactList = objContactService.getContactByEmiratesId(idValue);
         }else if (idType == 'AB2CID'){
             objContactList = objContactService.getContactByActiveDirectoryId(idValue);
         }
-        
-        if(!objContactList.isEmpty()){
+        else if (idType == 'UAEPASS'){
+            objLeadList = LeadService.getInstance().getADHALeadByEID(idValue);
+
+            if(objLeadList.isEmpty()){
+                objContactList = objContactService.getContactByEmiratesId(idValue);
+            }
+        }
+
+        if(!objLeadList.isEmpty()){
+            Lead objLead = objLeadList[0];
+            data.put('customer_id', objLead.Id);
+            data.put('customer_number', objLead.ApplicationNumber__c);
+            data.put('full_name', objLead.Name);
+            data.put('date_of_birth', objLead.Birthdate__c);
+            data.put('nationality', objLead.nationality__c);
+            data.put('primary_country_code', objLead.PhoneCountryCode__c);
+            data.put('primary_phone', objLead.MobilePhone);
+            data.put('email', objLead.Email);
+            data.put('passport_number', objLead.Passport_Number__c);
+            data.put('emairates_id', objLead.Emirates_Id__c);
+            data.put('loan_Amount', objLead.LoanAmount__c);
+
+            if(objLead.ProjectLookup__c != null){
+                data.put('project_id', objLead.ProjectLookup__c);
+                data.put('project_name', objLead.ProjectLookup__r.Name);
+                data.put('handover_date', objLead.ProjectLookup__r.TentativeHandoverTimeline__c);
+            }
+            else{
+                data.put('project_id', null);
+                data.put('project_name', null);
+                data.put('handover_date', null);
+            }
+
+            if(objLead.Unit__c != null){
+                data.put('unit_id', objLead.Unit__c);
+                data.put('unit_name', objLead.Unit__r.Name);
+                data.put('booking_date', objLead.Unit__r.BlockedDate__c);
+                data.put('booking_expiry_date', objLead.Unit__r.Block_Till__c);
+            }
+            else{
+                data.put('unit_id', null);
+                data.put('unit_name', null);
+                data.put('booking_date', null);
+                data.put('booking_expiry_date', null);
+            }
+            data.put('current_status', objLead.BookingStatus__c);
+
+            Map<String, Object> salesAgentDetailObj = new Map<String, Object>();
+            salesAgentDetailObj.put('agent_id', objLead.OwnerId);
+            salesAgentDetailObj.put('name', objLead.Owner.Name);
+            salesAgentDetailObj.put('email', objLead.Owner.Email);
+            salesAgentDetailObj.put('phone_number', objLead.Owner.Phone);
+
+            data.put('sales_agent_details', salesAgentDetailObj);
+
+            Map<String, Object> bankDetailObj = new Map<String, Object>();
+            if(objLead.ProjectLookup__c != null){
+                List<BuildingSection__c> buildingSectionList = BuildingSectionService.getInstance().getBuildingSectionWithBankDetailsByProjectId(objLead.ProjectLookup__c);
+                if(!buildingSectionList.isEmpty() && buildingSectionList[0].Primary_Account_Installment__r != null){
+                    BankAccount__c objBankAccount = buildingSectionList[0].Primary_Account_Installment__r;
+                    bankDetailObj.put('bank_name', objBankAccount.BankNameCorporate__c);
+                    bankDetailObj.put('beneficiary_name', objBankAccount.BeneficiaryNameCorporate__c);
+                    bankDetailObj.put('account_number', objBankAccount.AccountNumberCorporate__c);
+                    bankDetailObj.put('IBAN_number', objBankAccount.IBANNoCorporate__c);
+                    bankDetailObj.put('swift_code', objBankAccount.SwiftCodeCorporate__c);
+                }
+            }
+            data.put('bank_details', bankDetailObj);
+        }
+        else if(!objContactList.isEmpty()){
             Contact objContact = objContactList[0];
             if(individualAccountRecordTypeId == objContact.Account.RecordTypeId){
                 customerDocList = objDocumentService.getAppDocumentsByParentId(objContact.AccountId);
@@ -241,6 +315,8 @@ public class BAWebServiceHelper {
                 soData.put('number_of_bathrooms', objSalesOrder.Unit__r.NumberOfBathrooms__c);
                 soData.put('handover_date', objSalesOrder.Handover_Date__c);
                 soData.put('spa_status', objSalesOrder.SPA_Collection_Status__c);
+                soData.put('status', objSalesOrder.SubStatus__c);
+                soData.put('isADHAUnit', String.isNotBlank(objSalesOrder.ADHAApplicationNumber__c));
                 soData.put('total_price', objSalesOrder.NetAmount__c);
                 if(objSalesOrder.NetAmount__c != NULL && objSalesOrder.Sales_Order_Cleared_Amount__c != NULL){
                     soData.put('outstanding_amount', objSalesOrder.NetAmount__c - objSalesOrder.Sales_Order_Cleared_Amount__c);
@@ -316,7 +392,7 @@ public class BAWebServiceHelper {
         List<Object> installmentDataList = new List<Object>();
         List<Object> saleOrderOtherChargeDataList = new List<Object>();
 
-        Contact con = ContactService.getInstance().getContactById(customerId);
+        Contact con = String.isNotBlank(customerId) ? ContactService.getInstance().getContactById(customerId) : null;
         if(con == NULL ||  con.AccountId == NULL){
             return data;
         }
@@ -545,6 +621,7 @@ public class BAWebServiceHelper {
                     Map<String, Object> objMap = new Map<String, Object>();
                     objMap.put('Id', objServiceCatlog.Id);
                     objMap.put('Name', nameValue);
+                    objMap.put('isAvailableForADHACustomer', objServiceCatlog.IsAvailableForADHACustomer__c);
                     serviceCatalogList.add(objMap);
                 }
             }
@@ -556,7 +633,12 @@ public class BAWebServiceHelper {
     public Map<String, Object> getSRs(Id customerId) {
         Map<String, Object> data = new Map<String, Object>();
         CaseService objCaseService = CaseService.getInstance();
-        List<Case> objCaseList = objCaseService.getBloomAppCasesByCustomerId(new Set<Id>{customerId}, SUPER_APP_STR);
+        List<Case> objCaseList = new List<Case>();
+        if(customerId.getSObjectType() == Contact.SObjectType){
+            objCaseList = objCaseService.getBloomAppCasesByCustomerId(new Set<Id>{customerId}, SUPER_APP_STR);
+        }else if(customerId.getSObjectType() == Lead.SObjectType){
+            objCaseList = objCaseService.getBloomAppCasesByLeadId(new Set<Id>{customerId}, SUPER_APP_STR);
+        }
         List<Object> serviceRequestList = new List<Object>();
         for (Case caseObj : objCaseList) {
             Map<String, Object> objMap = new Map<String, Object>();
@@ -613,6 +695,11 @@ public class BAWebServiceHelper {
         if(String.isNotBlank(parentId)){
             objCase.Sales_Order__c = Id.valueOf(parentId).getSObjectType() == SalesOrder__c.SobjectType ? parentId : null;
             objCase.Unit__c = Id.valueOf(parentId).getSObjectType() == Unit__c.SobjectType ? parentId : null;
+            objCase.Lead__c = Id.valueOf(parentId).getSObjectType() == Lead.SobjectType ? parentId : null;
+            if(objCase.Lead__c != null){
+                Lead objLead = LeadService.getInstance().getLeadById(objCase.Lead__c);
+                objCase.SuppliedEmail = objLead.Email;
+            }
         }
         objCase = CaseService.getInstance().insertCase(objCase);
         data.put('srid', objCase.Id);
@@ -633,6 +720,102 @@ public class BAWebServiceHelper {
         OTPHandler objOTPHandler = OTPHandler.getInstance();
         Boolean isValid = objOTPHandler.verifySuperAppOTP(parentId, otp, transactionId);
         data.put('isValid', isValid);
+        return data;
+    }
+
+
+    public Map<String, Object> getAuthorizedUAEPassLoginUser(String eid, String uuid, String phoneNumber, String email){
+        
+        Map<String, Object> data = new Map<String, Object>();
+        data.put('isValid', false);
+
+        List<Lead> leadList = LeadService.getInstance().getADHALeadByEID(eid);
+        
+        if(!leadList.isEmpty()){
+
+            Lead objLead = leadList[0];
+
+            if(objLead.UUID__c != uuid){
+                objLead.UUID__c = uuid;
+                LeadService.getInstance().updateLead(objLead);
+            }
+
+            data.put('uuid', uuid);
+            data.put('isValid', true);
+            data.put('customer_id', objLead.Id);
+            return data;
+        }
+
+        //if EID not found on lead check for the contact record
+
+        List<Contact> objContactList = new List<Contact>();
+        objContactList = ContactService.getInstance().getContactByEmiratesId(eid);
+
+        if(!objContactList.isEmpty()){
+
+            Contact objContact = objContactList[0];
+            data.put('isValid', true);
+            data.put('customer_id', objContact.Id);
+
+            if(objContact.User__c != null){
+
+                User__c objUser = objContact.User__r;
+                if (objUser.UUID__c != uuid) {
+                    objUser.UUID__c = uuid;
+                    CustomUserService.getInstance().updateUser(objUser);
+                }
+                data.put('uuid', uuid);
+                data.put('isValid', true);
+            }
+        }
+        return data;
+    }
+
+    public Map<String, Object> manageAppointment(String customerId, String appointmentSlotId, String actionType, String reason, String eventId, String mode){
+        
+        Map<String, Object> data = new Map<String, Object>();
+
+        ActivityService objActivityService = ActivityService.getInstance();
+        AppointmentSlotService objAppointmentSlotService = AppointmentSlotService.getInstance();
+        
+        List<AppointmentSlot__c> appointmentSlots = new List<AppointmentSlot__c>();
+
+        if(actionType == SCHEDULED_STR && String.isNotBlank(appointmentSlotId)){
+
+            appointmentSlots = objAppointmentSlotService.getAppointmentSlotsByIds(new Set<Id>{appointmentSlotId});
+            Event objEvent = objActivityService.createEventObj(customerId, appointmentSlotId, SCHEDULED_STR, appointmentSlots[0].StartDateTime__c, appointmentSlots[0].EndDateTime__c, MEETING_STR, APPOINTMENT_STR, mode);
+            objActivityService.insertEvents(new List<Event>{objEvent});
+            
+            data.put('event_id', objEvent.Id);
+            data.put('meeting_link', objEvent.MeetingLink__c);
+
+        }
+        else if(actionType == CANCELLED_STR && String.isNotBlank(eventId)){
+
+            Event objEvent = new Event();
+            objEvent.Id = eventId;
+            objEvent.AppointmentStatus__c = CANCELLED_STR;
+            objEvent.RescheduledCancellationReason__c = reason;
+            objActivityService.updateEvents(new List<Event>{objEvent});
+            data.put('event_id', objEvent.Id);
+            
+        }
+        else if(actionType == RESCHEDULED_STR && String.isNotBlank(appointmentSlotId) && String.isNotBlank(eventId)){
+
+            appointmentSlots = objAppointmentSlotService.getAppointmentSlotsByIds(new Set<Id>{appointmentSlotId});
+            Event oldEvent = new Event();
+            oldEvent.Id = eventId;
+            oldEvent.AppointmentStatus__c = RESCHEDULED_STR;
+            oldEvent.RescheduledCancellationReason__c = reason;
+            objActivityService.updateEvents(new List<Event>{oldEvent});
+
+            //new event
+            Event newEvent = objActivityService.createEventObj(customerId, appointmentSlotId, SCHEDULED_STR, appointmentSlots[0].StartDateTime__c, appointmentSlots[0].EndDateTime__c, MEETING_STR, APPOINTMENT_STR, mode);
+            objActivityService.insertEvents(new List<Event>{newEvent});
+            data.put('event_id', newEvent.Id);
+            data.put('meeting_link', newEvent.MeetingLink__c);
+        }
+
         return data;
     }
 }

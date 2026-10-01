@@ -286,7 +286,6 @@ public without sharing class CaseTriggerHelper {
         Id bnkAccDtlRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,BANK_ACC_DTAIL_SR_RT);//Pranav
         Id salesOperationRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,SALES_OPERATION_RT);
         Id tawtheeqEnrollmentRTID = Utility.getRecordTypeIdByDevName(Case.SObjectType,TAWTHEEQ_ENROLLMENT_RT); 
-        Id commonAreaRequestRTId = Utility.getRecordTypeIdByDevName(Case.SObjectType,COMMON_AREA_REQUEST_RT); 
          Id complaintRequestID = Utility.getRecordTypeIdByDevName(Case.SObjectType,COMPLAINT_REQUEST_RT);
         Id brokergeneralRequestID = Utility.getRecordTypeIdByDevName(Case.SObjectType,BROKER_GENERAL_REQUEST_RT);
         
@@ -333,7 +332,6 @@ public without sharing class CaseTriggerHelper {
                 || objCase.RecordTypeId == popShareSRRTID
                 || objCase.RecordTypeId == bnkAccDtlRTID
                 || objCase.RecordTypeId == tawtheeqEnrollmentRTID
-                || objCase.RecordTypeId == commonAreaRequestRTId
               || objCase.RecordTypeId == complaintRequestID
                 ){
                    serviceRequestAcknowledgementList.add(objCase);

@@ -36,6 +36,11 @@
         <label>Bloom Living - Cordoba</label>
     </customValue>
     <customValue>
+        <fullName>Al Metlaa</fullName>
+        <default>false</default>
+        <label>Al Metlaa</label>
+    </customValue>
+    <customValue>
         <fullName>Jumeirah Village Triangle</fullName>
         <default>false</default>
         <isActive>false</isActive>

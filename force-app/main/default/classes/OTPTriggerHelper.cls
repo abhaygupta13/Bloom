@@ -11,7 +11,8 @@ public class OTPTriggerHelper {
     
     private static final String MTD_OTP_PROCESS_TYPE_BLOOM_APP_REGISTRATION { get { return 'Bloom App Registration'; } }
     private static final String MTD_OTP_PROCESS_TYPE_BLOOM_APP_FORGOT_PASSWORD { get { return 'Bloom App Forgot Password'; } }
-    
+    private static final String MTD_OTP_PROCESS_TYPE_ADHA_LOGIN_VERIFICATION { get { return 'ADHA Login Verification'; } }
+
     public static void sendSuperAppOTP(List<OTP__c> newList){
         
         OTPService objOTPService = OTPService.getInstance();
@@ -20,7 +21,8 @@ public class OTPTriggerHelper {
         
         for(OTP__c objOTP :newList){
             if(objOTP.ProcessType__c == MTD_OTP_PROCESS_TYPE_BLOOM_APP_REGISTRATION
-              || objOTP.ProcessType__c == MTD_OTP_PROCESS_TYPE_BLOOM_APP_FORGOT_PASSWORD){
+              || objOTP.ProcessType__c == MTD_OTP_PROCESS_TYPE_BLOOM_APP_FORGOT_PASSWORD
+              || objOTP.ProcessType__c == MTD_OTP_PROCESS_TYPE_ADHA_LOGIN_VERIFICATION){
                 if(objOTP.CommunicationType__c != NULL && objOTP.CommunicationType__c.contains('Email')){
                     superAppEmailOTPList.add(objOTP);
                 }

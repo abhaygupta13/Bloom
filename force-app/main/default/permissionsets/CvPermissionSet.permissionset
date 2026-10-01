@@ -1683,6 +1683,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Handover__c.FinanceTeamAssingedUser__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Handover__c.HasDLPExpiryEmailSent__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2028,6 +2033,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>LeasingOfficerCommission__c.PostingDate__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>LeasingOfficerCommission__c.RelatedPartyBloomHolding__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2068,6 +2078,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>LeasingOrder__c.ContractPeriod__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>LeasingOrder__c.RelatedPartyBloomHolding__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2079,6 +2094,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>LeasingOrder__c.TotalRentForPeriod__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>LeasingOrder__c.UnitHandOverDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

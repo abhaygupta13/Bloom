@@ -106,7 +106,7 @@ public class SalesCommissionBatchTest {
             Database.executeBatch(batchJob);
         Test.StopTest();
         List<BrokerCommission__c> brokerCommissionList = [SELECT Id, CommissionAmount__c FROM BrokerCommission__c];
-        Assert.areEqual(4,brokerCommissionList.size(),'Their should be 4 records');
+        Assert.areEqual(5,brokerCommissionList.size(),'Their should be 5 records');
     }
 
     @isTest

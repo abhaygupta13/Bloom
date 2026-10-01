@@ -1,39 +1,45 @@
-/*
-*********************************************************
-Apex Class Name    : CancelWorkOrderBatch
-Created Date       : Nov 03, 2025
-@description       : This batch class cancels the Work Orders
-Modification Log   :
-Ver   Date         : Author                               Modification
-2.0   21-09-2026   : Abhay Gupta                          Optimised the class
-*********************************************************
-*/
-public class CancelWorkOrderBatch extends SobjectBatch implements Schedulable {
-    private static final String MTD_WORKORDER_CANCEL_TIME = 'WorkorderCancelTime';
-    private static final String CANCELED = 'Canceled';
+public class CancelWorkOrderBatch implements Database.Batchable<sObject>, Schedulable{
+     private static final string MTD_WORKORDER_CANCEL_TIME { get { return 'WorkorderCancelTime'; } }
 
-    public CancelWorkOrderBatch() {
-        String workOrderCancelTime = MetadataService.getInstance().getAppSettingTextValue(MTD_WORKORDER_CANCEL_TIME);
+    public Database.QueryLocator start(Database.BatchableContext BC) {
+     MetadataService objMetadataService = MetadataService.getInstance();
+     String workOrderCancelTime = objMetadataService.getAppSettingTextValue(MTD_WORKORDER_CANCEL_TIME);
+     Set<String> excludedStatuses = new Set<String>{'Closed', 'Canceled'};
+     String excludedStatusStr = '\'' + String.join(new List<String>(excludedStatuses), '\',\'') + '\'';
         
-        String baseQuery = Database.getQueryLocator([SELECT Id FROM WorkOrder WHERE hasappointmentcanceled__c = true AND Status NOT IN ('Closed', 'Canceled')]).getQuery();
-        this.query = baseQuery + ' AND Cancel_Time__c < LAST_N_DAYS:' + workOrderCancelTime;
-        this.fieldValueMap = new Map<SObjectField, Object>{ WorkOrder.Status => CANCELED };
+       String query =
+            'SELECT Id FROM WorkOrder ' +
+            'WHERE hasappointmentcanceled__c = true ' +
+            'AND Cancel_Time__c < LAST_N_DAYS:' + workOrderCancelTime + ' ' +
+            'AND Status NOT IN (' + excludedStatusStr + ')';
+        
+        return Database.getQueryLocator(query);
     }
 
-	public override void performAction(List<sObject> records, Database.BatchableContext bc) {
+    // Execute method to perform the update
+    public void execute(Database.BatchableContext BC, List<SObject> scope) {
         List<WorkOrder> workOrdersToUpdate = new List<WorkOrder>();
-        for (SObject record : records) {
-            for (SObjectField field : fieldValueMap.keySet()) {
-                record.put(field, fieldValueMap.get(field));
-            }
-            workOrdersToUpdate.add((WorkOrder) record);
+        
+        for (SObject sObj : scope) {
+            WorkOrder wo = (WorkOrder) sObj;
+            wo.Status = 'Canceled'; // Update the status to 'Closed'
+           
+            workOrdersToUpdate.add(wo);
         }
+        
+        // Update the WorkOrders
         if (!workOrdersToUpdate.isEmpty()) {
-            WorkOrderService.getInstance().updateWorkOrdersWithoutTrigger(workOrdersToUpdate);
+            WorkOrderService objWorkOrderService = WorkOrderService.getInstance();
+            objWorkOrderService.updateWorkOrdersWithoutTrigger(workOrdersToUpdate);
         }
+       
     }
-    
-    public void execute(SchedulableContext sc) {
+
+    // Finish method (optional)
+    public void finish(Database.BatchableContext BC) {
+        // Optional: Send email notification or perform other actions when batch is done
+    }
+      public void execute(SchedulableContext sc) {
         Database.executeBatch(new CancelWorkOrderBatch(), 200);
     }
 }

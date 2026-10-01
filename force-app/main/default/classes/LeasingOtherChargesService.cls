@@ -117,7 +117,7 @@ public  inherited sharing  class LeasingOtherChargesService {
         }
         //paramMap.put('Param9',  String.valueOf(leasingOrderOtherCharge.IsReversed__c ));
         paramMap.put('Param10',  String.valueOf(leasingOrderOtherCharge.ReversedDate__c ));
-        paramMap.put('Param11',  String.valueOf(leasingOrderOtherCharge.ReversedReason__c));
+        paramMap.put('Param11', leasingOrderOtherCharge.ReversedReason__c != Null ? leasingOrderOtherCharge.ReversedReason__c : '');
         paramMap.put('Param12',  String.valueOf(leasingOrderOtherCharge.ReversedRemarks__c));
         paramMap.put('Param13',  String.valueOf(leasingOrderOtherCharge.ReversalCategory__c ));
         paramMap.put('Param14',  String.valueOf(leasingOrderOtherCharge.Refdocno__c ));

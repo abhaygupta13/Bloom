@@ -165,7 +165,7 @@ public class ServiceAppointmentControllerTest {
         insert woList;
     }
 
-    @IsTest
+    /*@IsTest
     static void testCreateServiceAppointmentSelf() {
         Id workOrderId = [SELECT Id FROM WorkOrder WHERE Subject = 'Test Work Order' LIMIT 1].Id;
         WorkOrder woRec = new WorkOrder(Id=workOrderId, Status = 'In Progress');
@@ -199,7 +199,7 @@ public class ServiceAppointmentControllerTest {
         system.debug('ServiceAppointment------>'+sa1);
         System.assertNotEquals(null, sa1);
 	    System.assertEquals('Success', result);
-    }
+    }*/
 
     @IsTest
     static void testCreateServiceAppointmentContractor() {

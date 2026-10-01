@@ -1,5 +1,5 @@
 @isTest
-public class ServiceReportTriggerHelperTest {    
+public class ServiceReportHelperTest {    
     @isTest
     static void updateDocumentOnWorkOrder_Test() {        		
         Test.startTest();        

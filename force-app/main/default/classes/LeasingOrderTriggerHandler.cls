@@ -26,6 +26,7 @@ public class LeasingOrderTriggerHandler implements ITriggerHandler{
     public void afterInsert(List<sObject> newList , Map<Id, sObject> newMap) {
         LeasingOrderTriggerHelper.createDocuments((List<LeasingOrder__c>)newList ,(Map<Id,LeasingOrder__c>)newMap );
         LeasingOrderTriggerHelper.afterFieldUpdates((List<LeasingOrder__c>)newList,null);
+        LeasingOrderTriggerHelper.createSalesEntries((List<LeasingOrder__c>)newList);
     }
     
     public void beforeUpdate(List<sObject> newList, Map<Id, sObject> newMap, List<sObject> oldList, Map<Id, sObject> oldMap) {
@@ -36,8 +37,7 @@ public class LeasingOrderTriggerHandler implements ITriggerHandler{
     
     public void afterUpdate(List<sObject> newList, Map<Id, sObject> newMap,  List<sObject> oldList, Map<Id, sObject> oldMap) {
         LeasingOrderTriggerHelper.afterFieldUpdates((List<LeasingOrder__c>)newList,(Map<Id,LeasingOrder__c>)oldMap);
-        // LeasingOrderTriggerHelper.sendApprovedLeasingOfferForSigning((List<LeasingOrder__c>)newList,(Map<Id,LeasingOrder__c>)oldMap);
-         LeasingOrderTriggerHelper.createSalesEntriesOnTORUpdate((List<LeasingOrder__c>)newList,(Map<Id,LeasingOrder__c>)oldMap);
+        LeasingOrderTriggerHelper.sendApprovedLeasingOfferForSigning((List<LeasingOrder__c>)newList,(Map<Id,LeasingOrder__c>)oldMap);
         LeasingOrderTriggerHelper.adjustSalesEntries((List<LeasingOrder__c>)newList,(Map<Id,LeasingOrder__c>)oldMap);
     }
     

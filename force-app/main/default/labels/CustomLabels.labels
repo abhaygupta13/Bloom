@@ -1206,6 +1206,46 @@
         <value>security@yopmail.com</value>
     </labels>
     <labels>
+        <fullName>BL_TaxInvoiceCannotGenerateTitle</fullName>
+        <categories>Leasing</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BL_TaxInvoiceCannotGenerateTitle</shortDescription>
+        <value>Cannot Generate Tax Invoice</value>
+    </labels>
+    <labels>
+        <fullName>BL_TaxInvoiceOtherChargeHelpText</fullName>
+        <categories>Leasing</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BL_TaxInvoiceOtherChargeHelpText</shortDescription>
+        <value>Please ensure this Other Charge record is synced with SAP before generating Tax Invoice.</value>
+    </labels>
+    <labels>
+        <fullName>BL_TaxInvoiceOtherChargeNotSynced</fullName>
+        <categories>Leasing</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BL_TaxInvoiceOtherChargeNotSynced</shortDescription>
+        <value>Tax Invoice cannot be generated or printed because this charge has not been synced with SAP.</value>
+    </labels>
+    <labels>
+        <fullName>BL_TaxInvoicePaymentPlanHelpText</fullName>
+        <categories>Leasing</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BL_TaxInvoicePaymentPlanHelpText</shortDescription>
+        <value>Please ensure this Payment Plan installment is synced with SAP before generating Tax Invoice.</value>
+    </labels>
+    <labels>
+        <fullName>BL_TaxInvoicePaymentPlanNotSynced</fullName>
+        <categories>Leasing</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BL_TaxInvoicePaymentPlanNotSynced</shortDescription>
+        <value>Tax Invoice cannot be generated or printed because this payment plan installment has not been synced with SAP.</value>
+    </labels>
+    <labels>
         <fullName>BillInstallmentReminder</fullName>
         <language>en_US</language>
         <protected>false</protected>

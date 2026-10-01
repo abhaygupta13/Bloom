@@ -17,6 +17,7 @@ public class ActivityControllerTest {
         Contact c = new Contact();
         c.LastName = 'test conatat';
         c.AccountId = a.id;
+        c.Email = 'test@test.com';
         insert c;
         Lead testLead = TestDataFactory.createLead('Test', '9843216782', 'test@gmail.com');
         insert testLead;
@@ -45,7 +46,7 @@ public class ActivityControllerTest {
     static void testCreateNewFollowupTask() {
         // Retrieve test task
         Task testTask = [SELECT Id, Status, Subject, OwnerId, WhoId FROM Task LIMIT 1];
-        Lead objLead = [SELECT Id,ContactCentreLeadStatus__c FROM Lead];
+        Lead objLead = [SELECT Id,lead_channel__c, ContactCentreLeadStatus__c FROM Lead];
         // Set status to Qualified to trigger follow-up mapping
         testTask.Status = 'Qualified';
         update testTask;

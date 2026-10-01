@@ -390,6 +390,13 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>IsAvailableForADHACustomer__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Available For ADHA Customer</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>IsAvailableForSuperApp__c</fullName>
         <defaultValue>false</defaultValue>
         <label>Available For Super App</label>

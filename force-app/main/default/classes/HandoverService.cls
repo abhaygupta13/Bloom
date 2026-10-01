@@ -276,7 +276,7 @@ public inherited sharing class HandoverService {
     }
     
      public List<Handover__c> getHandoversByUnitIdForResale(Set<Id> unitIds) {
-        return [SELECT Id, Name,Sales_Order__c,Unit__r.SAP_Unit_Number__c,Unit__r.Status__c,Unit__r.Project__c,Unit__r.BuildingSectionName__r.Project__c,Unit__r.Active_Sales_Order__r.Account__c, Unit__r.Active_Sales_Order__c, Sub_Status__c, Unit__c FROM Handover__c WHERE Unit__c IN :unitIds and Is_Property_keys_given__c=:false];
+        return [SELECT Id, Name,Previous_HO_Status__c,Sales_Order__c,Unit__r.SAP_Unit_Number__c,Unit__r.Status__c,Unit__r.Project__c,Unit__r.BuildingSectionName__r.Project__c,Unit__r.Active_Sales_Order__r.Account__c, Unit__r.Active_Sales_Order__c, Sub_Status__c, Unit__c FROM Handover__c WHERE Unit__c IN :unitIds and Is_Property_keys_given__c=:false];
     }
     
       public List<Handover__c> updateHandoversWithoutTrigger(List<Handover__c> handoverList){

@@ -969,7 +969,8 @@ ISPICKVAL(IsActive__c,&apos;Yes&apos;),
 OR( BrokerPayout__c &lt; 1.0 ,
 BrokerPayout__c &gt; 1.0
 ) ,
-NOT(ISPICKVAL(Classification__c ,&apos;MEMO&apos;))
+NOT(ISPICKVAL(Classification__c ,&apos;MEMO&apos;)),
+NOT( Project__r.IsADHAProject__c)
 )</errorConditionFormula>
         <errorDisplayField>IsActive__c</errorDisplayField>
         <errorMessage>Sum of Broker Payout should be 100% to activate the payment plan.</errorMessage>
@@ -983,7 +984,8 @@ ISPICKVAL(IsActive__c,&apos;Yes&apos;),
 OR( TotalInstallment__c  &lt; 1.0 ,
 TotalInstallment__c &gt; 1.0
 ) ,
-NOT(ISPICKVAL(Classification__c ,&apos;MEMO&apos;))
+NOT(ISPICKVAL(Classification__c ,&apos;MEMO&apos;)),
+NOT( Project__r.IsADHAProject__c)
 )</errorConditionFormula>
         <errorDisplayField>IsActive__c</errorDisplayField>
         <errorMessage>Sum of Payment Installments should be 100% to activate the payment plan.</errorMessage>

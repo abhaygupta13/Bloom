@@ -64,17 +64,11 @@
         <active>true</active>
         <default>false</default>
         <fridayEndTime>20:30:00.000Z</fridayEndTime>
-        <fridayStartTime>15:00:00.000Z</fridayStartTime>
-        <mondayEndTime>19:00:00.000Z</mondayEndTime>
-        <mondayStartTime>10:30:00.000Z</mondayStartTime>
+        <fridayStartTime>12:00:00.000Z</fridayStartTime>
         <name>CC Team - Imran</name>
-        <thursdayEndTime>20:30:00.000Z</thursdayEndTime>
-        <thursdayStartTime>15:00:00.000Z</thursdayStartTime>
+        <thursdayEndTime>16:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>10:00:00.000Z</thursdayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
-        <tuesdayEndTime>19:00:00.000Z</tuesdayEndTime>
-        <tuesdayStartTime>10:30:00.000Z</tuesdayStartTime>
-        <wednesdayEndTime>20:30:00.000Z</wednesdayEndTime>
-        <wednesdayStartTime>15:00:00.000Z</wednesdayStartTime>
     </businessHours>
     <businessHours>
         <active>true</active>
@@ -163,14 +157,12 @@
     <businessHours>
         <active>true</active>
         <default>false</default>
-        <mondayEndTime>20:30:00.000Z</mondayEndTime>
-        <mondayStartTime>15:00:00.000Z</mondayStartTime>
+        <fridayEndTime>17:00:00.000Z</fridayEndTime>
+        <fridayStartTime>10:00:00.000Z</fridayStartTime>
         <name>CC Team - Haya</name>
+        <thursdayEndTime>17:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>10:00:00.000Z</thursdayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
-        <tuesdayEndTime>20:30:00.000Z</tuesdayEndTime>
-        <tuesdayStartTime>15:00:00.000Z</tuesdayStartTime>
-        <wednesdayEndTime>17:00:00.000Z</wednesdayEndTime>
-        <wednesdayStartTime>10:00:00.000Z</wednesdayStartTime>
     </businessHours>
     <businessHours>
         <active>true</active>
@@ -191,16 +183,12 @@
     <businessHours>
         <active>true</active>
         <default>false</default>
-        <mondayEndTime>20:30:00.000Z</mondayEndTime>
-        <mondayStartTime>12:00:00.000Z</mondayStartTime>
+        <fridayEndTime>17:00:00.000Z</fridayEndTime>
+        <fridayStartTime>10:00:00.000Z</fridayStartTime>
         <name>CC Team - Ahmad Obaid</name>
         <thursdayEndTime>17:00:00.000Z</thursdayEndTime>
         <thursdayStartTime>10:00:00.000Z</thursdayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
-        <tuesdayEndTime>20:30:00.000Z</tuesdayEndTime>
-        <tuesdayStartTime>12:00:00.000Z</tuesdayStartTime>
-        <wednesdayEndTime>17:00:00.000Z</wednesdayEndTime>
-        <wednesdayStartTime>10:00:00.000Z</wednesdayStartTime>
     </businessHours>
     <businessHours>
         <active>true</active>
@@ -221,9 +209,9 @@
     <businessHours>
         <active>true</active>
         <default>false</default>
-        <fridayEndTime>20:01:00.000Z</fridayEndTime>
-        <fridayStartTime>20:00:00.000Z</fridayStartTime>
         <name>CC Team - Eslam</name>
+        <saturdayEndTime>20:01:00.000Z</saturdayEndTime>
+        <saturdayStartTime>20:00:00.000Z</saturdayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
     </businessHours>
     <businessHours>
@@ -261,32 +249,18 @@
     <businessHours>
         <active>true</active>
         <default>false</default>
-        <fridayEndTime>20:30:00.000Z</fridayEndTime>
-        <fridayStartTime>15:00:00.000Z</fridayStartTime>
         <name>CC Team - Sherbeeny</name>
-        <saturdayEndTime>20:30:00.000Z</saturdayEndTime>
-        <saturdayStartTime>15:00:00.000Z</saturdayStartTime>
-        <sundayEndTime>20:30:00.000Z</sundayEndTime>
-        <sundayStartTime>15:00:00.000Z</sundayStartTime>
-        <thursdayEndTime>20:30:00.000Z</thursdayEndTime>
-        <thursdayStartTime>15:00:00.000Z</thursdayStartTime>
+        <saturdayEndTime>20:01:00.000Z</saturdayEndTime>
+        <saturdayStartTime>20:00:00.000Z</saturdayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
-        <wednesdayEndTime>20:30:00.000Z</wednesdayEndTime>
-        <wednesdayStartTime>15:00:00.000Z</wednesdayStartTime>
     </businessHours>
     <businessHours>
         <active>true</active>
         <default>false</default>
-        <mondayEndTime>17:00:00.000Z</mondayEndTime>
-        <mondayStartTime>10:00:00.000Z</mondayStartTime>
+        <fridayEndTime>16:00:00.000Z</fridayEndTime>
+        <fridayStartTime>10:00:00.000Z</fridayStartTime>
         <name>CC Team - Amir</name>
-        <saturdayEndTime>17:00:00.000Z</saturdayEndTime>
-        <saturdayStartTime>10:00:00.000Z</saturdayStartTime>
-        <sundayEndTime>17:00:00.000Z</sundayEndTime>
-        <sundayStartTime>10:00:00.000Z</sundayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
-        <tuesdayEndTime>17:00:00.000Z</tuesdayEndTime>
-        <tuesdayStartTime>10:00:00.000Z</tuesdayStartTime>
     </businessHours>
     <businessHours>
         <active>true</active>
@@ -431,26 +405,20 @@
     <businessHours>
         <active>true</active>
         <default>false</default>
-        <fridayEndTime>17:00:00.000Z</fridayEndTime>
-        <fridayStartTime>10:00:00.000Z</fridayStartTime>
-        <mondayEndTime>17:00:00.000Z</mondayEndTime>
-        <mondayStartTime>10:00:00.000Z</mondayStartTime>
+        <fridayEndTime>20:30:00.000Z</fridayEndTime>
+        <fridayStartTime>14:00:00.000Z</fridayStartTime>
         <name>CC Team - Noon</name>
-        <saturdayEndTime>17:00:00.000Z</saturdayEndTime>
-        <saturdayStartTime>10:00:00.000Z</saturdayStartTime>
-        <sundayEndTime>17:00:00.000Z</sundayEndTime>
-        <sundayStartTime>10:00:00.000Z</sundayStartTime>
+        <thursdayEndTime>20:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>15:00:00.000Z</thursdayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
-        <tuesdayEndTime>17:00:00.000Z</tuesdayEndTime>
-        <tuesdayStartTime>10:00:00.000Z</tuesdayStartTime>
     </businessHours>
     <businessHours>
         <active>true</active>
         <default>false</default>
         <name>CC Team - Yahia</name>
+        <saturdayEndTime>20:01:00.000Z</saturdayEndTime>
+        <saturdayStartTime>20:00:00.000Z</saturdayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
-        <wednesdayEndTime>19:00:00.000Z</wednesdayEndTime>
-        <wednesdayStartTime>10:30:00.000Z</wednesdayStartTime>
     </businessHours>
     <businessHours>
         <active>true</active>
@@ -513,41 +481,25 @@
     <businessHours>
         <active>true</active>
         <default>false</default>
-        <fridayEndTime>17:00:00.000Z</fridayEndTime>
-        <fridayStartTime>10:00:00.000Z</fridayStartTime>
-        <mondayEndTime>20:30:00.000Z</mondayEndTime>
-        <mondayStartTime>12:00:00.000Z</mondayStartTime>
         <name>CC Team - Hussien</name>
-        <thursdayEndTime>17:00:00.000Z</thursdayEndTime>
-        <thursdayStartTime>10:00:00.000Z</thursdayStartTime>
+        <saturdayEndTime>20:01:00.000Z</saturdayEndTime>
+        <saturdayStartTime>20:00:00.000Z</saturdayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
-        <tuesdayEndTime>20:30:00.000Z</tuesdayEndTime>
-        <tuesdayStartTime>12:00:00.000Z</tuesdayStartTime>
-        <wednesdayEndTime>17:00:00.000Z</wednesdayEndTime>
-        <wednesdayStartTime>10:00:00.000Z</wednesdayStartTime>
     </businessHours>
     <businessHours>
         <active>true</active>
         <default>false</default>
-        <fridayEndTime>20:30:00.000Z</fridayEndTime>
-        <fridayStartTime>12:00:00.000Z</fridayStartTime>
         <name>CC Team - Abdullah</name>
-        <saturdayEndTime>20:30:00.000Z</saturdayEndTime>
-        <saturdayStartTime>12:00:00.000Z</saturdayStartTime>
-        <sundayEndTime>20:30:00.000Z</sundayEndTime>
-        <sundayStartTime>12:00:00.000Z</sundayStartTime>
+        <saturdayEndTime>20:01:00.000Z</saturdayEndTime>
+        <saturdayStartTime>20:00:00.000Z</saturdayStartTime>
+        <timeZoneId>Asia/Dubai</timeZoneId>
+    </businessHours>
+    <businessHours>
+        <active>true</active>
+        <default>false</default>
+        <name>CC Team - Farah</name>
         <thursdayEndTime>20:30:00.000Z</thursdayEndTime>
         <thursdayStartTime>12:00:00.000Z</thursdayStartTime>
-        <timeZoneId>Asia/Dubai</timeZoneId>
-        <wednesdayEndTime>20:30:00.000Z</wednesdayEndTime>
-        <wednesdayStartTime>12:00:00.000Z</wednesdayStartTime>
-    </businessHours>
-    <businessHours>
-        <active>true</active>
-        <default>false</default>
-        <fridayEndTime>20:01:00.000Z</fridayEndTime>
-        <fridayStartTime>20:00:00.000Z</fridayStartTime>
-        <name>CC Team - Farah</name>
         <timeZoneId>Asia/Dubai</timeZoneId>
     </businessHours>
     <businessHours>
@@ -573,18 +525,12 @@
     <businessHours>
         <active>true</active>
         <default>false</default>
-        <fridayEndTime>17:00:00.000Z</fridayEndTime>
-        <fridayStartTime>10:00:00.000Z</fridayStartTime>
-        <mondayEndTime>17:00:00.000Z</mondayEndTime>
-        <mondayStartTime>10:00:00.000Z</mondayStartTime>
+        <fridayEndTime>20:30:00.000Z</fridayEndTime>
+        <fridayStartTime>15:00:00.000Z</fridayStartTime>
         <name>CC Team - Alaa</name>
-        <thursdayEndTime>17:00:00.000Z</thursdayEndTime>
-        <thursdayStartTime>10:00:00.000Z</thursdayStartTime>
+        <thursdayEndTime>20:30:00.000Z</thursdayEndTime>
+        <thursdayStartTime>14:00:00.000Z</thursdayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
-        <tuesdayEndTime>17:00:00.000Z</tuesdayEndTime>
-        <tuesdayStartTime>10:00:00.000Z</tuesdayStartTime>
-        <wednesdayEndTime>20:30:00.000Z</wednesdayEndTime>
-        <wednesdayStartTime>12:00:00.000Z</wednesdayStartTime>
     </businessHours>
     <businessHours>
         <active>true</active>
@@ -603,9 +549,9 @@
     <businessHours>
         <active>true</active>
         <default>false</default>
-        <fridayEndTime>20:01:00.000Z</fridayEndTime>
-        <fridayStartTime>20:00:00.000Z</fridayStartTime>
         <name>CC Team - Ruwida</name>
+        <saturdayEndTime>20:01:00.000Z</saturdayEndTime>
+        <saturdayStartTime>20:00:00.000Z</saturdayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
     </businessHours>
     <businessHours>
@@ -627,26 +573,32 @@
     <businessHours>
         <active>true</active>
         <default>false</default>
-        <fridayEndTime>20:01:00.000Z</fridayEndTime>
-        <fridayStartTime>20:00:00.000Z</fridayStartTime>
+        <fridayEndTime>18:25:00.000Z</fridayEndTime>
+        <fridayStartTime>09:30:00.000Z</fridayStartTime>
         <name>CC Team - Mohamed Khalil</name>
+        <thursdayEndTime>18:25:00.000Z</thursdayEndTime>
+        <thursdayStartTime>09:30:00.000Z</thursdayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
     </businessHours>
     <businessHours>
         <active>true</active>
         <default>false</default>
-        <fridayEndTime>17:30:00.000Z</fridayEndTime>
-        <fridayStartTime>08:30:00.000Z</fridayStartTime>
-        <mondayEndTime>17:30:00.000Z</mondayEndTime>
-        <mondayStartTime>08:30:00.000Z</mondayStartTime>
+        <fridayEndTime>00:00:00.000Z</fridayEndTime>
+        <fridayStartTime>00:00:00.000Z</fridayStartTime>
+        <mondayEndTime>00:00:00.000Z</mondayEndTime>
+        <mondayStartTime>00:00:00.000Z</mondayStartTime>
         <name>Al Ain Sales Manager Business Hours</name>
-        <thursdayEndTime>17:30:00.000Z</thursdayEndTime>
-        <thursdayStartTime>08:30:00.000Z</thursdayStartTime>
+        <saturdayEndTime>00:00:00.000Z</saturdayEndTime>
+        <saturdayStartTime>00:00:00.000Z</saturdayStartTime>
+        <sundayEndTime>00:00:00.000Z</sundayEndTime>
+        <sundayStartTime>00:00:00.000Z</sundayStartTime>
+        <thursdayEndTime>00:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>00:00:00.000Z</thursdayStartTime>
         <timeZoneId>Asia/Dubai</timeZoneId>
-        <tuesdayEndTime>17:30:00.000Z</tuesdayEndTime>
-        <tuesdayStartTime>08:30:00.000Z</tuesdayStartTime>
-        <wednesdayEndTime>17:30:00.000Z</wednesdayEndTime>
-        <wednesdayStartTime>08:30:00.000Z</wednesdayStartTime>
+        <tuesdayEndTime>00:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>00:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>00:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>00:00:00.000Z</wednesdayStartTime>
     </businessHours>
     <holidays>
         <activityDate>2025-06-06</activityDate>

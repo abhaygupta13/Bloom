@@ -187,6 +187,16 @@
                 <identifier>RecordEmirates_Id_of_the_Purchaser_s_cField2</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.SAP_BP_No__c</fieldItem>
+                <identifier>RecordSAP_BP_No_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-5afea195-69be-4fbf-8307-b9365ef87d49</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -1302,6 +1312,58 @@
                     <name>uiBehavior</name>
                     <value>readonly</value>
                 </fieldInstanceProperties>
+                <fieldItem>Record.SAP_BP_No__c</fieldItem>
+                <identifier>RecordSAP_BP_No_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-2a2f5e20-6b9b-4229-b35f-6892cf8d2a95</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.SAP_Company_Code__c</fieldItem>
+                <identifier>RecordSAP_Company_Code_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-1fcd67ea-c919-47a3-9b12-30613030c8dd</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-2a2f5e20-6b9b-4229-b35f-6892cf8d2a95</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column15</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-1fcd67ea-c919-47a3-9b12-30613030c8dd</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column16</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-ee8c0c6a-dfba-4703-85eb-b6cfffc2d5bb</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Integration_Status__c</fieldItem>
                 <identifier>RecordIntegration_Status_cField</identifier>
             </fieldInstance>
@@ -1927,6 +1989,24 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection5</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-ee8c0c6a-dfba-4703-85eb-b6cfffc2d5bb</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>ERP Information</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection8</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>

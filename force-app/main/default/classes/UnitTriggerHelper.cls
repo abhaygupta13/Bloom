@@ -8,10 +8,9 @@
 * 1.0           Biswajeet   	07AUG2024        Initial draft                                                                 
 * 2.0           Jayprakash   	12AUG2024        Added sendDetatoGIS() method
 *****************************************************************************************************/
-public class UnitTriggerHelper {
+public without sharing class UnitTriggerHelper {
     
     private static final string INSTALLMENT_LINE_INTEGRATION_STATUS_IN_PROGRESS { get { return 'In Progress'; } }
-    private static final string MTD_ENABLE_GIS_PE_INTEGRATION { get { return 'EnableGISPEIntegration'; } }
     private static final string UNIT_INACTIVE_STATUS_CHANGE_RESPONSIBLE_TO { get { return 'FadiUsernameForSendNotifications'; } }
     private static final string UNIT_INACTIVE_STATUS_NOTIFICATION_EMAIL { get { return 'UnitInactiveNotification'; } }
     
@@ -20,22 +19,14 @@ public class UnitTriggerHelper {
         MetadataService objMetadataService = MetadataService.getInstance();
         UnitService objUnitService = UnitService.getInstance();
         IntegrationRecordService objIntegrationRecordService = IntegrationRecordService.getInstance();
-        Boolean isEnableGISPEIntegration = objMetadataService.getAppSettingBooleanValue(MTD_ENABLE_GIS_PE_INTEGRATION);
         List<IntegrationRecord__c> objIntegrationRecordList = new List<IntegrationRecord__c>();
-        Set<Unit__c> unitsToPushGIS = new Set<Unit__c>();
         for (Unit__c record : newList){
             if(record.Send_to_GIS__c && record.Send_to_GIS__c != oldMap.get(record.Id).Send_to_GIS__c){
-                unitsToPushGIS.add(record);
                 objIntegrationRecordList.add(objUnitService.getUnitGISIntegrationRecord(record));
             }
         }
         
-        if(!unitsToPushGIS.isEmpty() && isEnableGISPEIntegration){
-            IntegrationService igService = IntegrationService.getInstance();
-            igService.handleIntegrations('GIS','Update',new List<Unit__c>(unitsToPushGIS), Unit__c.getSObjectType());
-        }else{
-            objIntegrationRecordService.insertIntegrationRecords(objIntegrationRecordList);
-        }
+        objIntegrationRecordService.insertIntegrationRecords(objIntegrationRecordList);
     } 
     
     public static void assignHandoverToHOAgent(List<Unit__c> newUnitList, Map<Id,Unit__c> oldUnitMap){
@@ -93,7 +84,7 @@ public class UnitTriggerHelper {
             }
         }
     }
-
+    
     public static void handleAfterUpdate(List<Unit__c> newList, Map<Id, Unit__c> oldMap) {
         Set<Id> unitIds = new Set<Id>();
         for (Unit__c newUnit : newList) {
@@ -102,27 +93,27 @@ public class UnitTriggerHelper {
                 unitIds.add(newUnit.Id);
         }
         if (unitIds.isEmpty()) return;
-
+        
         MetadataService metadataService = MetadataService.getInstance();
         EmailService emailService =  EmailService.getInstance();
         UserService userService = UserService.getInstance();
         Id templateId = metadataService.getAppSettingTextValue(UNIT_INACTIVE_STATUS_NOTIFICATION_EMAIL);
         String username = metadataService.getAppSettingTextValue(UNIT_INACTIVE_STATUS_CHANGE_RESPONSIBLE_TO);
-
+        
         List<User> unserIds = userService.getUserIdByUserName(username);
         if(unserIds.size() == 0)
             return;
-            
+        
         List<User> users = userService.getUsersByIds(new Set<Id>{unserIds[0].Id});
         if(users.size() == 0)
             return;
         if (templateId == null || users.isEmpty() || String.isBlank(users[0].Email)) return;
-
+        
         List<Messaging.SingleEmailMessage> emailList = new List<Messaging.SingleEmailMessage>();
         for (Id unitId : unitIds) {
             Messaging.SingleEmailMessage renderedMail = Messaging.renderStoredEmailTemplate(templateId, users[0].Id, unitId);
             Messaging.SingleEmailMessage mail = emailService.getSingleEmailMessage(new List<String>{users[0].Email}, unitId, users[0].Id, renderedMail.getSubject(), renderedMail.getHtmlBody());
-             mail.setSaveAsActivity(false);
+            mail.setSaveAsActivity(false);
             emailList.add(mail);
         }
         emailService.sendEmail(emailList);

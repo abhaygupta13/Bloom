@@ -1408,6 +1408,15 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>IsADHAProject__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>only for Adha project</description>
+        <label>Is ADHA Project</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>IsActive__c</fullName>
         <formula>(EndDate__c &gt;= Today()  ||  ISBLANK(EndDate__c ) )&amp;&amp; (StartDate__c &lt;=Today()  ||  ISBLANK(StartDate__c ))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -2758,6 +2767,17 @@
         <length>40</length>
         <required>false</required>
         <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>TentativeHandoverTimeline__c</fullName>
+        <externalId>false</externalId>
+        <label>Tentative Handover Timeline</label>
+        <length>200</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>

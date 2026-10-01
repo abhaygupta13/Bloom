@@ -697,5 +697,85 @@ static void testIsSameDepartment() {
             ServiceRequestTaskHandler.getInstance() .processCasesAndHandleNextActions( new List<Case>{kycCase}, nextMap, currentMap );
         Test.stopTest();
     }
+      
+  
+    @isTest
+    static void testCloseAllOpenTasks() {
+
+        Case c = [SELECT Id FROM Case LIMIT 1];
+
+        Task t = new Task(
+            WhatId = c.Id,
+            Subject = 'Open Task Coverage',
+            Status = 'Open',
+            Priority = 'Normal'
+        );
+        insert t;
+
+        Test.startTest();
+
+        ServiceRequestTaskHandler.getInstance()
+            .closeAllOpenTasks(new Set<Id>{c.Id});
+
+        Test.stopTest();
+
+        Task updatedTask = [
+            SELECT Id, Status
+            FROM Task
+            WHERE Id = :t.Id
+        ];
+
+        System.assertEquals(
+            'Completed',
+            updatedTask.Status,
+            'Open task should have been completed'
+        );
+    }
+
+
+    @isTest
+    static void testCloseAllOpenTasksOnCancelEmptySet() {
+
+        Test.startTest();
+
+        ServiceRequestTaskHandler.getInstance()
+            .closeAllOpenTasksOnCancel(new Set<Id>());
+
+        Test.stopTest();
+
+        System.assert(true);
+    }
+
+
+    
+    @isTest
+    static void testCloseAllOpenTasksOnCancelNull() {
+
+        Test.startTest();
+
+        ServiceRequestTaskHandler.getInstance()
+            .closeAllOpenTasksOnCancel(null);
+
+        Test.stopTest();
+
+        System.assert(true);
+    }
+    @isTest
+    static void testCloseAllOpenTasksEmptySet() {
+
+        Test.startTest();
+
+        ServiceRequestTaskHandler.getInstance()
+            .closeAllOpenTasks(new Set<Id>());
+
+        Test.stopTest();
+
+        System.assert(true);
+    }
+
+
+    
+
+
 
 }

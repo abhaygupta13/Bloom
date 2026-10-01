@@ -1057,6 +1057,16 @@
             <field>NOCDateFormatted__c</field>
             <table>Handover__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Tammfeesamount__c</field>
+            <table>Handover__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>is_Tamm_Fees_Collected__c</field>
+            <table>Handover__c</table>
+        </columns>
         <masterLabel>Handovers</masterLabel>
     </sections>
     <sections>

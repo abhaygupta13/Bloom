@@ -1271,6 +1271,17 @@
             <group>BAPP_BBM_Team</group>
         </sharedTo>
     </listViews>
+    <listViews>
+        <fullName>PendingwithBL</fullName>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>InApproval__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Pending with BL</label>
+    </listViews>
     <nameField>
         <label>Agency Name</label>
         <trackHistory>true</trackHistory>

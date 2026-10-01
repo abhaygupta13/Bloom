@@ -211,19 +211,17 @@ export default class AppointmentAction extends LightningElement {
     if (!this.validateReqFields()) return;
 
     if (this.selectedSlotId === "" || !this.selectedSlotId) {
-      this.startDateTime = new Date(
-        `${this.startDate}T${this.startTime}`
-      ).toISOString();
-      this.endDateTime = new Date(
-        `${this.endDate}T${this.endTime}`
-      ).toISOString();
+      this.startDateTime = new Date(`${this.startDate}T${this.startTime}`).toISOString();
+      this.endDateTime = new Date(`${this.endDate}T${this.endTime}`).toISOString();
     }
     if (!this.startDateTime || !this.endDateTime) {
       this.errorMessage = "Please provide a valid start and end date/time.";
+      return;
     }
 
     if (new Date(this.endDateTime) <= new Date(this.startDateTime)) {
       this.errorMessage = "End date/time must be after start date/time.";
+      return;
     }
 
     const appointmentPayload = {

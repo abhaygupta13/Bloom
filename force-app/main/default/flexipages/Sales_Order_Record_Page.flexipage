@@ -57,9 +57,6 @@
                             <value>SalesOrder__c.NewRequestComplaint</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>SalesOrder__c.Raise_Service</value>
-                        </valueListItems>
-                        <valueListItems>
                             <value>SalesOrder__c.Initiate_Post_Sale_Cancellation2</value>
                             <visibilityRule>
                                 <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
@@ -157,10 +154,16 @@
                         <valueListItems>
                             <value>SalesOrder__c.StopLPFCalculation</value>
                             <visibilityRule>
+                                <booleanFilter>1 AND 2</booleanFilter>
                                 <criteria>
                                     <leftValue>{!$User.Profile.Name}</leftValue>
                                     <operator>EQUAL</operator>
                                     <rightValue>Finance Team</rightValue>
+                                </criteria>
+                                <criteria>
+                                    <leftValue>{!$User.Profile.Name}</leftValue>
+                                    <operator>EQUAL</operator>
+                                    <rightValue>CRM Finance Operation Team</rightValue>
                                 </criteria>
                             </visibilityRule>
                         </valueListItems>

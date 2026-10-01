@@ -51,36 +51,57 @@ export default class CaseDocuSignGenerator extends LightningElement {
                 );
             });
 
-        getDocumentTypeRecords({ recordId: this.recordId })
-            .then((result) => {
-                console.log('getDocumentTypeRecords result:', JSON.stringify(result));
-                this.records = result; 
-                this.options = [
-                ...result.map(doc => ({
-        label: doc.Type__c,
-        value: doc.Id
-    })),
-    {
-        label: 'Send for Signature (last generated)',
-        value: 'Send for Customer Signature (last generated)'
-    }
-];               
-            })
-            .catch((error) => {
-                console.error(error);
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Error retrieving document types',
-                        message: error.body.message,
-                        variant: 'error',
-                    })
-                );
-            })
-            .finally(() => {
-                this.isLoading = false;
-            });
-    }
+       getDocumentTypeRecords({ recordId: this.recordId })
+    .then((result) => {
+        console.log(
+            'getDocumentTypeRecords result:',
+            JSON.stringify(result)
+        );
 
+        // Keep only ONE DocumentType per Type__c
+        const uniqueDocumentTypes = [];
+        const seenTypes = new Set();
+
+        result.forEach(doc => {
+            if (!seenTypes.has(doc.Type__c)) {
+                seenTypes.add(doc.Type__c);
+                uniqueDocumentTypes.push(doc);
+            }
+        });
+
+        this.records = uniqueDocumentTypes;
+
+        this.options = [
+            ...uniqueDocumentTypes.map(doc => ({
+                label: doc.Type__c,
+                value: doc.Id
+            })),
+            {
+                label: 'Send for Signature (last generated)',
+                value: 'Send for Customer Signature (last generated)'
+            }
+        ];
+
+        console.log(
+            'Unique DocumentTypes:',
+            JSON.stringify(uniqueDocumentTypes)
+        );
+    })
+    .catch((error) => {
+        console.error(error);
+
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: 'Error retrieving document types',
+                message: error.body?.message || error.message,
+                variant: 'error'
+            })
+        );
+    })
+    .finally(() => {
+        this.isLoading = false;
+    });
+    }
     handleCheckboxChange(event) {
         const selectedValue = event.target.value;
         // Handle individual checkbox selection

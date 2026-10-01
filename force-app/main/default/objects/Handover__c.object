@@ -1026,7 +1026,7 @@ TEXT(YEAR(TODAY()))</formula>
     <fields>
         <fullName>HO_Agent_Assigned_User__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
-        <label>HO Agent</label>
+        <label>Handover Agent</label>
         <referenceTo>User</referenceTo>
         <relationshipName>Handovers3</relationshipName>
         <required>false</required>
@@ -2967,6 +2967,17 @@ TEXT(YEAR(NOC_Date__c))</formula>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Tammfeesamount__c</fullName>
+        <label>Tamm Fees Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
         <fullName>ThirdPaymentReminderEmail_Date__c</fullName>
         <label>Third Payment Reminder Email Date</label>
         <required>false</required>
@@ -3152,6 +3163,15 @@ TEXT(YEAR(NOC_Date__c))</formula>
         <formula>$User.Id == HO_Agent_Assigned_User__r.Id</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>is Current User HO Agent</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>is_Tamm_Fees_Collected__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Tamm Fees Collected</label>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>

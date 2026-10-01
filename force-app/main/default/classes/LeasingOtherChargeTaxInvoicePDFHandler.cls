@@ -24,16 +24,27 @@ public with sharing class LeasingOtherChargeTaxInvoicePDFHandler {
     public String swiftCode {get; set;}
     public String unit {get; set;}
     
+    public Boolean hasError { get; set; }
+    public String errorMessage { get; set; }
+    
     private static final Decimal VAT_PERCENT = 5;
     public Decimal vatRate { get; set; }
     public Boolean showVat { get; set; }
     private static final String DOC_NAME = 'Tax Invoice';
 
     public LeasingOtherChargeTaxInvoicePDFHandler() {
+        hasError = false;
+        errorMessage = '';
         Id ocId = ApexPages.currentPage().getParameters().get('id');
         if (ocId == null) return;
         
         LeasingOrdersOtherCharges__c oc = LeasingOtherChargesService.getInstance().getOtherChargesById(ocId) ;
+        
+        if (oc == null || String.isBlank(oc.RefDocno__c)) {
+            hasError = true;
+            errorMessage = Label.BL_TaxInvoiceOtherChargeNotSynced;
+            return;
+        }
         
         invoiceNo   = oc.RefDocno__c;
         //invoiceDate = formatDate(Date.today());
@@ -73,6 +84,10 @@ public with sharing class LeasingOtherChargeTaxInvoicePDFHandler {
 
     @AuraEnabled
     public static String generateAndAttachPdf(Id ocId) {
+        LeasingOrdersOtherCharges__c oc = LeasingOtherChargesService.getInstance().getOtherChargesById(ocId);
+        if (oc == null || String.isBlank(oc.RefDocno__c)) {
+            throw new AuraHandledException(Label.BL_TaxInvoiceOtherChargeNotSynced);
+        }
         
         PageReference pdfPage = Page.LeasingOtherChargeTaxInvoice;
         pdfPage.getParameters().put('id', ocId);

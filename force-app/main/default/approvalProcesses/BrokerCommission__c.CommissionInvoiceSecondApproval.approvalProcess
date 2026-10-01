@@ -3,11 +3,18 @@
     <active>true</active>
     <allowRecall>true</allowRecall>
     <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
         <submitter>fbtarkh@bloomholding.com</submitter>
         <type>user</type>
     </allowedSubmitters>
     <allowedSubmitters>
         <submitter>khamid@bloomholding.com</submitter>
+        <type>user</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>zelkanzi@bloomholding.com</submitter>
         <type>user</type>
     </allowedSubmitters>
     <approvalPageFields>

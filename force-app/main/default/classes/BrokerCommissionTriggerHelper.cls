@@ -181,6 +181,7 @@ public without sharing class BrokerCommissionTriggerHelper {
                 broker.ERPConditionCreatedDate__c = System.now();
                 broker.FirstIntegrationDate__c = System.now();
                 broker.IntegrationStatus__c = 'In Progress';
+                brokerCommissionList.add(broker);
             }
             else if(broker.SecondApprovalStatus__c == APPROVED_STR && oldMap.get(broker.Id).FinalApprovalStatus__c != APPROVED_STR && broker.FinalApprovalStatus__c == APPROVED_STR){
                 broker.ERPPostedDate__c = System.now();

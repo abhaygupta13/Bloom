@@ -5,7 +5,7 @@
         <label>CreateNewAppointment</label>
         <locationX>182</locationX>
         <locationY>242</locationY>
-        <actionName>ServiceAppointmentController</actionName>
+        <actionName>01pJ7000000D4YfNotFound</actionName>
         <actionType>apex</actionType>
         <connector>
             <targetReference>Check_if_record_created</targetReference>
@@ -17,7 +17,6 @@
                 <elementReference>recordId</elementReference>
             </value>
         </inputParameters>
-        <nameSegment>ServiceAppointmentController</nameSegment>
         <offset>0</offset>
     </actionCalls>
     <apiVersion>62.0</apiVersion>

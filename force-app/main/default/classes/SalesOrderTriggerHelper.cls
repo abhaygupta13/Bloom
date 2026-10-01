@@ -39,37 +39,47 @@ public without sharing class SalesOrderTriggerHelper {
         }
     }
     
-  public static void updateSalesorderOnHandover(List<SalesOrder__c> newList, Map<Id, SalesOrder__c> oldMap) {
+   public static void updateSalesorderOnHandover(List<SalesOrder__c> newList, Map<Id, SalesOrder__c> oldMap) {
         HandoverService objHandoverService = HandoverService.getInstance();
-        List<Handover__c> handoversToUpdate = new list<Handover__c>();
+        List<Handover__c> handoversToUpdate = new List<Handover__c>();
         Set<Id> salesorderUnitIds = new Set<Id>();
+        Map<Id, SalesOrder__c> unitToSoldSOMap = new Map<Id, SalesOrder__c>();
         for (SalesOrder__c slsObj : newList) {
             if (slsObj.Status__c != oldMap.get(slsObj.Id).Status__c && slsObj.Status__c == SO_STATUS_SOLD) {
                 salesorderUnitIds.add(slsObj.Unit__c);
+                unitToSoldSOMap.put(slsObj.Unit__c, slsObj);
+                
             }
         }
+        
         if(!salesorderUnitIds.isEmpty()){
             handoversToUpdate = objHandoverService.getHandoversByUnitIdForResale(salesorderUnitIds); 
-           
-        }  
+        }
+        
         List<Handover__c> updatedHandovers = new List<Handover__c>();
-        if(handoversToUpdate != null && !handoversToUpdate.isEmpty()){
-            for (Handover__c ho : handoversToUpdate) {
-                if (ho.Unit__r != null) {
-                    Id activeSOId = ho.Unit__r.Active_Sales_Order__c;
-                    if (ho.Sales_Order__c != activeSOId ) {
-                        ho.Sales_Order__c = activeSOId;
-                        ho.Account__c = ho.Unit__r.Active_Sales_Order__r.Account__c;
-                    }
-                    if(ho.Sub_Status__c == 'Under Resale'){
-                        ho.Sub_Status__c = ho.Previous_HO_Status__c;
-                        ho.Previous_HO_Status__c = 'Under Resale';
-                    }
-                    updatedHandovers.add(ho);
+        for (Handover__c ho: handoversToUpdate) {
+            if (ho.Unit__r != null && unitToSoldSOMap.containsKey(ho.Unit__c)) {
+                SalesOrder__c currentSo = unitToSoldSOMap.get(ho.Unit__c);
+                Boolean shouldUpdateRecord = false;
+                Id activeSOId = ho.Unit__r.Active_Sales_Order__c;
+                if (ho.Sales_Order__c != currentSo.Id) {
+                    ho.Sales_Order__c = currentSo.Id;
+                    ho.Account__c = currentSo.Account__c;
+                    shouldUpdateRecord = true;
+                    
+                }   if (ho.Sub_Status__c == 'Under Resale') {
+                    ho.Sub_Status__c = ho.Previous_HO_Status__c;
+                    ho.Previous_HO_Status__c = 'Under Resale';
+                    shouldUpdateRecord = true;
+                    
                 }
+                
+               if (shouldUpdateRecord) {
+                updatedHandovers.add(ho);
+            }
+                
             }
         }
-        //objHandoverService.updateHandoversWithoutTrigger(updatedHandovers);
         objHandoverService.updateHandovers(updatedHandovers);
     }
     

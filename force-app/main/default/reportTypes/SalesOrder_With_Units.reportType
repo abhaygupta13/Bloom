@@ -23,6 +23,11 @@
             <table>SalesOrder__c</table>
         </columns>
         <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>IsDraftOrder__c</field>
+            <table>SalesOrder__c</table>
+        </columns>
+        <columns>
             <checkedByDefault>true</checkedByDefault>
             <displayNameOverride>Order Number</displayNameOverride>
             <field>Name</field>
@@ -3338,6 +3343,21 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>DoNotSendPaymentReminder__c</field>
+            <table>SalesOrder__c.UnitsRelatedOpportunityUnit__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ADHAUnitNumber__c</field>
+            <table>SalesOrder__c.UnitsRelatedOpportunityUnit__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FacadeOption__c</field>
+            <table>SalesOrder__c.UnitsRelatedOpportunityUnit__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Typology__c</field>
             <table>SalesOrder__c.UnitsRelatedOpportunityUnit__r</table>
         </columns>
         <masterLabel>Units</masterLabel>

@@ -36,11 +36,11 @@ public class MetadataService {
     }
     
     public String getAppSettingTextValue(string developerName){
-        return AppSetting__mdt.getInstance(developerName).TextValue__c; 
+        return AppSetting__mdt.getInstance(developerName)?.TextValue__c; 
     }
     
     public Integer getAppSettingNumberValue(string developerName){
-        return Integer.valueOf(AppSetting__mdt.getInstance(developerName).NumberValue__c); 
+        return Integer.valueOf(AppSetting__mdt.getInstance(developerName)?.NumberValue__c); 
     }
     
     public Boolean getAppSettingBooleanValue(string developerName){

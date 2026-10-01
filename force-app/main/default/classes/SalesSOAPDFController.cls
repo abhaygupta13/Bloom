@@ -1,21 +1,21 @@
 /***
 Class       : SalesSOAPDFController
-Author      : Dhanraj Poojary
-Description : 
-TestClass   : SalesSOAPDFControllerTest
-----------------------------------------------------------------------------------------------------------------
--- History --
-----------------------------------------------------------------------------------------------------------------
-Sr.No.  version    ¯          Date                Details
-1.          V1.0              20/11/25           Initial Version 
-****************************************************************************************************************/
-public class SalesSOAPDFController {
+    Author      : Dhanraj Poojary
+    Description :
+    TestClass   : SalesSOAPDFControllerTest
+    ----------------------------------------------------------------------------------------------------------------
+    -- History --
+    ----------------------------------------------------------------------------------------------------------------
+    Sr.No.  version    ¯          Date                Details
+    1.          V1.0              20/11/25           Initial Version
+     ****************************************************************************************************************/
+
+public without sharing class SalesSOAPDFController {
     
     private static final string MTD_OTHER_CHARGES_EXCLUDED_TYPES { get { return 'SOAOtherChargesExcludedTypes'; } }
     public List<SalesOrderWrapper> salesOrderWrapperList { get; set; }
     public String propertyType { get; set; }
     public String totalBalanceInstallment { get; set; }
-    
     
     public SalesSOAPDFController() {
         SalesOrderService objSalesOrderService = SalesOrderService.getInstance();
@@ -29,6 +29,34 @@ public class SalesSOAPDFController {
         
         Salesorder__c objSalesOrder = objSalesOrderService.getSalesOrderWithInstallmentAndReceiptAllocation(soId);
         if (objSalesOrder == null) return;
+        
+        List<Salesorder__c> lstSOAccount = objSalesOrderService.getAccountWithJointOwners(objSalesOrder.Id);
+        
+        List<String> customerNameList = new List<String>();
+        
+        if (lstSOAccount != null && !lstSOAccount.isEmpty()) {
+            // Primary account holder name
+            String primaryName = lstSOAccount[0].Account__r.Name;
+            
+            if (String.isNotBlank(primaryName)) {
+                customerNameList.add(primaryName.trim());
+            }
+            
+            // Joint owners
+            if (lstSOAccount[0].Joint_OwnersSalesOrder__r != null) {
+                for (JointOwner__c jo : lstSOAccount[0].Joint_OwnersSalesOrder__r) {
+                    String jointName;
+                    if (String.isNotBlank(jo.Account__r.Name)) {
+                        jointName = (jo.Account__r.Name);
+                    } 
+                    if (String.isNotBlank(jointName)) {
+                        customerNameList.add(jointName.trim());
+                    }
+                }
+            }
+        }
+        
+        String customerNamesFormatted = String.join(customerNameList, '<br/><br/>');
         
         propertyType = objSalesOrder.Tax_Percentage__c > 0 ? 'Commercial' : 'Residential';
         // Flags for ADM/Waiver logic
@@ -48,6 +76,8 @@ public class SalesSOAPDFController {
         Decimal totalDisplayedBalance = 0;
         Decimal admFee = 0;
         Map<String, Decimal> admMap = new Map<String, Decimal>();
+        Map<String, Decimal> admClearedMap = new Map<String, Decimal>();
+        Map<String, Decimal> admReceivedMap = new Map<String, Decimal>();
         String admReceiptReference = null;
         
         // Prepare installments map and allocated receipt tracking
@@ -134,9 +164,9 @@ public class SalesSOAPDFController {
                     Boolean isInstallmentReceipt = (r.InstallmentLine__c != null);
                     Boolean isOtherCharge = (r.SalesOrderOtherCharges__c != null);
                     
-                    if (isInstallmentReceipt && !isOtherCharge && r.ReceiptStatus__c == 'Received') {
+                    if (isInstallmentReceipt && r.ReceiptStatus__c == 'Received') {
                         Decimal existingReceived = receivedAppliedByInstallment.containsKey(r.InstallmentLine__c) ? receivedAppliedByInstallment.get(r.InstallmentLine__c) : 0;
-                        receivedAppliedByInstallment.put(r.InstallmentLine__c, existingReceived + applied);
+                        receivedAppliedByInstallment.put(r.InstallmentLine__c,existingReceived + applied);
                     }
                     
                     // === Total Collected ===
@@ -177,7 +207,7 @@ public class SalesSOAPDFController {
                             installmentReceiptReferences.add(r.Receipt_Reference__c);
                     }
                     
-                    // Sales Order Other Charges handling 
+                    // Sales Order Other Charges handling
                     if (r.SalesOrderOtherCharges__c != null) {
                         String otherChargeType = r.SalesOrderOtherCharges__r != null ? r.SalesOrderOtherCharges__r.TypeOfCharge__c : null;
                         // Exclude configured Other Charge types from SOA
@@ -188,16 +218,21 @@ public class SalesSOAPDFController {
                         Boolean isADMCharge = (r.InstallmentNumberOrChargeType__c == 'ADM Fee' || r.InstallmentNumberOrChargeType__c == 'ADM');
                         // === Track ADM receipts ===
                         if (admIncluded && isADMCharge) {
-                            
                             admFee += applied;
-                            
                             if (r.Receipt_Reference__c != null) {
                                 admMap.put(r.Receipt_Reference__c, applied);
+                                if (r.ReceiptStatus__c == 'Cleared') {
+                                    admClearedMap.put(r.Receipt_Reference__c, applied);   // NEW
+                                }
+                                else if (r.ReceiptStatus__c == 'Received') {
+                                    Decimal existingReceived = admReceivedMap.containsKey(r.Receipt_Reference__c) ? admReceivedMap.get(r.Receipt_Reference__c) : 0;
+                                    admReceivedMap.put(r.Receipt_Reference__c,existingReceived + applied);
+                                }
                                 if (admReceiptReference == null) {
                                     admReceiptReference = r.Receipt_Reference__c;
                                 }
-                            }                            
-                            admFeeReceipts.add(r); 
+                            }
+                            admFeeReceipts.add(r);
                         }
                         else if(!admIncluded && isADMCharge){
                             admFee += applied;
@@ -207,7 +242,6 @@ public class SalesSOAPDFController {
                             // allow only non-ADM OR when ADM not included
                             salesOrderReceipts.add(r);
                         }
-                        System.debug('salesOrderReceipts'+salesOrderReceipts);
                         
                         if (!admIncluded || !isADMCharge) {
                             Id ocId = r.SalesOrderOtherCharges__c;
@@ -239,9 +273,9 @@ public class SalesSOAPDFController {
                             // RV Date
                             Date rvDate = null;
                             rvDate = r.DateOfApplication__c != null ? r.DateOfApplication__c : (r.ReceiptAcknowledgement__c != null && r.ReceiptAcknowledgement__r.MaturityDate__c != null
-                                                                                                ? r.ReceiptAcknowledgement__r.MaturityDate__c : null);
-                                                                                                    
-                                                                                                    rv.rvDate = rvDate;
+                                ? r.ReceiptAcknowledgement__r.MaturityDate__c : null);
+                            
+                            rv.rvDate = rvDate;
                             rv.rvDateFormatted = Utility.formatDate(rvDate);
                             
                             // Add RV row
@@ -325,7 +359,7 @@ public class SalesSOAPDFController {
             InstallmentLines__c inst = mapInstallment.get(instId);
             Decimal pendingAmount = Utility.getOrDefault(inst.PendingAmount__c);
             Boolean isFutureInstallment = inst.Due_Date__c != null && inst.Due_Date__c > Date.today();
-
+            
             if (!allocatedInstallmentIds.contains(instId)) {
                 // No receipt allocated to the installment.
                 ReceiptAllocation__c dummy = new ReceiptAllocation__c();
@@ -348,6 +382,19 @@ public class SalesSOAPDFController {
                 if (!isFutureInstallment && outstandingForInst > 0) {
                     totalDisplayedBalance += outstandingForInst;
                 }
+            }
+        }
+        
+        // NEW: ADM received-but-not-cleared adds to installment 1's outstanding total
+        Decimal admReceivedGrandTotal = 0;
+        for (Decimal v : admReceivedMap.values()) {
+            admReceivedGrandTotal += v;
+        }
+        if (admIncluded && admReceivedGrandTotal > 0 && firstInstallment != null) {
+            Boolean firstInstIsFuture = firstInstallment.Due_Date__c != null && firstInstallment.Due_Date__c > Date.today();
+            totalBalance += admReceivedGrandTotal;
+            if (!firstInstIsFuture) {
+                totalDisplayedBalance += admReceivedGrandTotal;
             }
         }
         
@@ -379,7 +426,8 @@ public class SalesSOAPDFController {
             if (inst.Due_Date__c != null && inst.Due_Date__c > Date.today()) {
                 ci.pendingAmount = 0;
             } else {
-                ci.pendingAmount = Utility.getOrDefault(inst.PendingAmount__c);
+                Decimal receivedNotClearedForInst = receivedAppliedByInstallment.containsKey(inst.Id) ? receivedAppliedByInstallment.get(inst.Id) : 0;
+                ci.pendingAmount = Utility.getOrDefault(inst.PendingAmount__c) + receivedNotClearedForInst;
             }
             ci.reversalDate = null;
             ci.rvDetails = new List<RVDetail>();
@@ -403,7 +451,9 @@ public class SalesSOAPDFController {
                 if (r.InstallmentLine__r != null && r.InstallmentLine__r.Due_Date__c != null && r.InstallmentLine__r.Due_Date__c > Date.today()) {
                     ci.pendingAmount = 0;
                 } else {
-                    ci.pendingAmount = (r.InstallmentLine__r != null) ? Utility.getOrDefault(r.InstallmentLine__r.PendingAmount__c) : 0;
+                    Decimal basePending = (r.InstallmentLine__r != null) ? Utility.getOrDefault(r.InstallmentLine__r.PendingAmount__c) : 0;
+                    Decimal receivedNotClearedForInst = (r.InstallmentLine__c != null && receivedAppliedByInstallment.containsKey(r.InstallmentLine__c)) ? receivedAppliedByInstallment.get(r.InstallmentLine__c) : 0;
+                    ci.pendingAmount = basePending + receivedNotClearedForInst;
                 }
                 ci.rvDetails = new List<RVDetail>();
                 consMap.put(r.InstallmentLine__c, ci);
@@ -413,24 +463,24 @@ public class SalesSOAPDFController {
             rv.rvNo = r.Receipt_Reference__c;
             Date rvDate = null;
             rvDate = r.ReceiptAcknowledgement__r.MaturityDate__c != null ? r.ReceiptAcknowledgement__r.MaturityDate__c : (r.ReceiptAcknowledgement__c != null && r.ReceiptAcknowledgement__r.MaturityDate__c != null
-                                                                                                                          ? r.ReceiptAcknowledgement__r.MaturityDate__c : null);
-                                                                                                                              rv.rvDate = rvDate;
+                ? r.ReceiptAcknowledgement__r.MaturityDate__c : null);
+            rv.rvDate = rvDate;
             rv.rvDateFormatted = Utility.formatDate(rvDate);
             rv.mode = r.Receipt_Type__c;
             rv.status = r.ReceiptStatus__c;
             // Collected: if cleared -> amount applied less refund
             Decimal collectedAmt = (r.ReceiptStatus__c == 'Cleared') ? Utility.getOrDefault(r.AmountApplied__c) : 0;
             if (r.ReceiptAcknowledgement__c != null && refundAgainstCollectedByReceiptId.containsKey(r.ReceiptAcknowledgement__c)) {
-                    Decimal refundAgainstCollected = refundAgainstCollectedByReceiptId.get(r.ReceiptAcknowledgement__c);
-                    collectedAmt -= refundAgainstCollected;
-                    if (collectedAmt < 0) {
-                        collectedAmt = 0;
-                    }
+                Decimal refundAgainstCollected = refundAgainstCollectedByReceiptId.get(r.ReceiptAcknowledgement__c);
+                collectedAmt -= refundAgainstCollected;
+                if (collectedAmt < 0) {
+                    collectedAmt = 0;
                 }
+            }
             
             // === MERGE ADM INTO INSTALLMENT 1 AT RECEIPT LEVEL ===
-            if (admIncluded && r.InstallmentNumberOrChargeType__c == '1' && r.Receipt_Reference__c != null && admMap.containsKey(r.Receipt_Reference__c)) {
-                collectedAmt += admMap.get(r.Receipt_Reference__c);
+            if (admIncluded && r.InstallmentNumberOrChargeType__c == '1' && r.Receipt_Reference__c != null && admClearedMap.containsKey(r.Receipt_Reference__c)) {
+                collectedAmt += admClearedMap.get(r.Receipt_Reference__c);
             }
             
             rv.collected = collectedAmt;
@@ -441,7 +491,14 @@ public class SalesSOAPDFController {
             if (isFutureInstallment) {
                 rv.outstanding = 0;
             } else {
-                rv.outstanding = (r.InstallmentLine__r != null) ? Utility.getOrDefault(r.InstallmentLine__r.PendingAmount__c) : 0;
+                Decimal basePending = (r.InstallmentLine__r != null) ? Utility.getOrDefault(r.InstallmentLine__r.PendingAmount__c) : 0;
+                Decimal receivedNotClearedForInst = (r.InstallmentLine__c != null && receivedAppliedByInstallment.containsKey(r.InstallmentLine__c)) ? receivedAppliedByInstallment.get(r.InstallmentLine__c) : 0;
+                rv.outstanding = basePending + receivedNotClearedForInst;
+                
+                // NEW: ADM received-but-not-cleared belongs to installment 1's outstanding
+                if (admIncluded && r.InstallmentNumberOrChargeType__c == '1' && r.Receipt_Reference__c != null && admReceivedMap.containsKey(r.Receipt_Reference__c)) {
+                    rv.outstanding += admReceivedMap.get(r.Receipt_Reference__c);
+                }
             }
             ci.rvDetails.add(rv);
             ci.amount += collectedAmt;
@@ -506,14 +563,22 @@ public class SalesSOAPDFController {
             if (firstInst != null) {
                 for (RVDetail rv : firstInst.rvDetails) {
                     for (ReceiptAllocation__c admR : admFeeReceipts) {
-                        if (admR.Receipt_Reference__c != null && rv.rvNo == admR.Receipt_Reference__c) {
+                        if (admR.Receipt_Reference__c != null && rv.rvNo == admR.Receipt_Reference__c && admR.ReceiptStatus__c == 'Cleared') {
                             firstInst.amount += Utility.getOrDefault(admR.AmountApplied__c); // increase total for installment 1
                         }
                     }
                 }
+                // NEW: fold received-not-cleared ADM into installment 1's pendingAmount
+                Decimal admReceivedTotal = 0;
+                for (Decimal v : admReceivedMap.values()) {
+                    admReceivedTotal += v;
+                }
+                if (admReceivedTotal > 0) {
+                    firstInst.pendingAmount += admReceivedTotal;
+                }
             }
         }
-
+        
         // Create sorted consolidatedInstallments list (sort by reversalDate ascending; nulls last)
         List<ConsolidatedInstallment> consolidatedInstallments = new List<ConsolidatedInstallment>(consMap.values());
         consolidatedInstallments.sort(new InstallmentNumberComparator ());
@@ -546,7 +611,7 @@ public class SalesSOAPDFController {
                 Decimal unappliedAmount = Utility.getOrDefault(ra.Amount__c) - Utility.getOrDefault(ra.AmountApplied__c);
                 if (unappliedAmount < 0) {
                     unappliedAmount = 0;
-                }                
+                }
                 // Refund should first consume the unapplied amount.
                 if (refundAmountByReceiptAcknowledgementId.containsKey(ra.Id)) {
                     Decimal refundAmount = refundAmountByReceiptAcknowledgementId.get(ra.Id);
@@ -577,9 +642,9 @@ public class SalesSOAPDFController {
                     rv.outstanding = 0;
                     rv.status = ra.Status__c;
                     specialRowInst.rvDetails.add(rv);
-                } 
+                }
                 // Logic for Other Charges "On Account"
-                else {    
+                else {
                     if (unappliedAmount <= 0) continue;
                     String fakeId = 'ONACC-' + ra.Id;
                     if (!consOtherChargeMap.containsKey(fakeId)) {
@@ -613,8 +678,9 @@ public class SalesSOAPDFController {
                 consolidatedInstallments.add(specialRowInst);
             }
         }
-        SalesOrderWrapper wrapper = new SalesOrderWrapper(objSalesOrder,installmentReceipts,salesOrderReceipts,admFee,admIncluded,totalCollected,totalBalance,totalDisplayedBalance,admFee,admReceiptReference,isWaiver,isADM,isRegular,isVAT,admMap,refundAgainstCollectedByReceiptId);
+        SalesOrderWrapper wrapper = new SalesOrderWrapper(objSalesOrder,installmentReceipts,salesOrderReceipts,admFee,admIncluded,totalCollected,totalBalance,totalDisplayedBalance,admFee,admReceiptReference,isWaiver,isADM,isRegular,isVAT,admMap,admClearedMap,admReceivedMap,refundAgainstCollectedByReceiptId,receivedAppliedByInstallment);
         wrapper.consolidatedInstallments = consolidatedInstallments;
+        wrapper.customerNamesFormatted = customerNamesFormatted;
         // Include "On Account" receipts in Installment Collected Total
         for (ConsolidatedInstallment ci : wrapper.consolidatedInstallments) {
             if (ci.installmentNumber == 'On Account' && ci.rvDetails != null) {
@@ -647,7 +713,7 @@ public class SalesSOAPDFController {
                     appliedSum += (rv.applied != null ? rv.applied : 0);
                 }
                 totalAppliedOC += appliedSum;
-            } 
+            }
             else {
                 totalAppliedOC += (oc.applied != null ? oc.applied : 0);
             }
@@ -683,7 +749,7 @@ public class SalesSOAPDFController {
         public Salesorder__c salesOrder { get; set; }
         public List<ReceiptWrapper> installmentReceiptWrappers { get; set; }
         public List<ReceiptWrapper> salesOrderReceiptWrappers { get; set; }
-        public List<ConsolidatedInstallment> consolidatedInstallments { get; set; } 
+        public List<ConsolidatedInstallment> consolidatedInstallments { get; set; }
         public List<ConsolidatedOtherCharge> consolidatedOtherCharges { get; set; }
         public List<ConsolidatedRebate> consolidatedRebates { get; set; }
         public List<ConsolidatedRefund> consolidatedRefunds { get; set; }
@@ -717,123 +783,133 @@ public class SalesSOAPDFController {
         public Decimal totalAmountWithVAT { get; set; }
         public String totalAmountWithVATFormatted { get; set; }
         public Map<String, Decimal> admMap;
+        public Map<String, Decimal> admClearedMap;
+        public Map<String, Decimal> admReceivedMap;   // NEW
         public Decimal installmentOutstandingAmount { get; set; }
         public Decimal otherChargesOutstandingAmount { get; set; }
         public Decimal totalOutstandingAmount { get; set; }
         public Boolean hasRebates { get; set; }
         public Boolean hasRefunds { get; set; }
+        public String customerNamesFormatted { get; set; }
         
         public SalesOrderWrapper(Salesorder__c so,List<ReceiptAllocation__c> instReceipts,List<ReceiptAllocation__c> soReceipts,Decimal otherChargeAdmFeeAmt,Boolean admFeeIncluded,
-                                 Decimal totalCollected,Decimal totalBalance,Decimal totalDisplayedBalance,Decimal admAmount,String admReceiptReference,Boolean isWaiver,Boolean isADM,Boolean isRegular,Boolean isVAT,Map<String, Decimal> admMap, Map<Id, Decimal> refundAmountByReceiptAcknowledgementId) {
-                                     this.salesOrder = so;
-                                     this.installmentReceiptWrappers = new List<ReceiptWrapper>();
-                                     this.salesOrderReceiptWrappers = new List<ReceiptWrapper>();
-                                     this.consolidatedInstallments = new List<ConsolidatedInstallment>();
-                                     this.consolidatedOtherCharges = new List<ConsolidatedOtherCharge>();
-                                     this.consolidatedRebates = new List<ConsolidatedRebate>();
-                                     this.consolidatedRefunds = new List<ConsolidatedRefund>();
-                                     this.totalCollectedAmt = Utility.getOrDefault(totalCollected);
-                                     this.totalBalanceInstallment = Utility.getOrDefault(totalDisplayedBalance);
-                                     this.totalRebateAmount = 0;
-                                     this.totalRefundAmount = 0;
-                                     this.admAmount = Utility.getOrDefault(admAmount);
-                                     this.admMap = admMap != null ? admMap : new Map<String,Decimal>();
-                                     this.admReceiptReference = admReceiptReference;
-                                     this.isWaiver = isWaiver;
-                                     this.isADM = isADM;
-                                     this.isRegular = isRegular;
-                                     this.isVAT = isVAT;
-                                     this.admFeeIncludedValue = admFeeIncluded;
-                                     this.todayDate = DateTime.now().format('dd-MMM-yy');
-                                     this.bookingDateFormatted = Utility.formatDate(so.SoldDate__c);
-                                     this.hasRebates = false;
-                                     this.hasRefunds = false;
-                                     totalAmount = 0;
-                                     totalAppliedAmtInstallment = 0;
-                                     totalPendingAmtInstallment = 0;
-                                     totalInstallmentAmount = 0;
-                                     totalInstallmentPercentage = 0;
-                                     installmentCollectedAmount = 0;
-                                     totalAmtOtherCharge = 0;
-                                     totalAppliedAmtOtherCharge = 0;
-                                     totalPendingAmtOtherCharge = 0;
-                                     
-                                     if(so.InstallmentLines__r != null){
-                                         for(InstallmentLines__c objInst : so.InstallmentLines__r){
-                                             totalInstallmentAmount += objInst.InstallmentAmount__c;
-                                             totalInstallmentPercentage += objInst.InstallmentPercentage__c != null ? objInst.InstallmentPercentage__c : 0;
-                                         }
-                                     }
-                                     
-                                     if (instReceipts != null) {
-                                         for (ReceiptAllocation__c r : instReceipts) {
-                                             this.installmentReceiptWrappers.add(new ReceiptWrapper(r, otherChargeAdmFeeAmt, admFeeIncluded, admReceiptReference, admMap));
-                                         }
-                                     }
-                                     
-                                     if (soReceipts != null) {
-                                         for (ReceiptAllocation__c r : soReceipts) {
-                                             this.salesOrderReceiptWrappers.add(new ReceiptWrapper(r, otherChargeAdmFeeAmt, admFeeIncluded, admReceiptReference, admMap));
-                                         }
-                                     }
-                                     
-                                     this.installmentReceiptWrappers.sort(new ReceiptWrapperComparator());
-                                     // Calculate totals (preserve existing behavior)
-                                     if (installmentReceiptWrappers != null) {
-                                         for (ReceiptWrapper rw : installmentReceiptWrappers) {
-                                             if (rw != null) {
-                                                 totalAmount += Utility.getOrDefault(rw.adjustedAmount);
-                                                 totalAppliedAmtInstallment += Utility.getOrDefault(rw.adjustedAmount);
-                                                 totalPendingAmtInstallment += Utility.getOrDefault(rw.getPendingAmount());
-                                                 if (rw.isCleared()) {
-                                                     Decimal collectedAmount = Utility.getOrDefault(rw.receipt.AmountApplied__c);
-                                                     // Deduct refund linked to this ReceiptAcknowledgement
-                                                     if (rw.receipt.ReceiptAcknowledgement__c != null && refundAmountByReceiptAcknowledgementId != null && refundAmountByReceiptAcknowledgementId.containsKey(rw.receipt.ReceiptAcknowledgement__c)) {
-                                                         collectedAmount -= refundAmountByReceiptAcknowledgementId.get(rw.receipt.ReceiptAcknowledgement__c);
-                                                         if (collectedAmount < 0) {
-                                                             collectedAmount = 0;
-                                                         }
-                                                     }
-                                                     installmentCollectedAmount += collectedAmount;
-                                                 }
-                                             }
-                                         }
-                                     }
-                                     
-                                     if (salesOrderReceiptWrappers != null) {
-                                         Set<Id> processedReceiptIds = new Set<Id>();
-                                         
-                                         for (ReceiptWrapper rw : salesOrderReceiptWrappers) {
-                                             if (rw != null && rw.receipt != null && rw.receipt.Id != null) {
-                                                 
-                                                 // Check uniqueness
-                                                 if (!processedReceiptIds.contains(rw.receipt.Id)) {
-                                                     
-                                                     processedReceiptIds.add(rw.receipt.Id);
-                                                     
-                                                     totalAmtOtherCharge += Utility.getOrDefault(rw.getOtherChargeAmount());
-                                                     totalAppliedAmtOtherCharge += Utility.getOrDefault(rw.receipt.AmountApplied__c);
-                                                     totalPendingAmtOtherCharge += Utility.getOrDefault(rw.getOtherChargePending());
-                                                 }
-                                             }
-                                         }
-                                         
-                                     }
-                                     
-                                     this.totalAmountFormatted = Utility.formatCurrency(totalAmount);
-                                     this.totalAmountInWords = Utilities.amountInWords(totalAmount, 'Dirham', 'Fils');
-                                     // === VAT CALCULATION ===
-                                     if (Utility.getOrDefault(so.Tax_Percentage__c) > 0) {
-                                         totalAmountWithVAT = (Utility.getOrDefault(so.Amount_Payable_Excluding_ADM__c) + Utility.getOrDefault(so.TaxableAmount__c));
-                                         totalAmountWithVATFormatted = Utility.formatCurrency(totalAmountWithVAT);
-                                     } else {
-                                         totalAmountWithVAT = Utility.getOrDefault(so.NetAmount__c);
-                                         totalAmountWithVATFormatted = Utility.formatCurrency(totalAmountWithVAT);
-                                     }
-                                     this.installmentOutstandingAmount = Utility.getOrDefault(totalBalance);                      
-                                     this.otherChargesOutstandingAmount = Utility.getOrDefault(this.totalPendingAmtOtherCharge);
-                                     this.totalOutstandingAmount = this.installmentOutstandingAmount;
-                                 }
+        Decimal totalCollected,Decimal totalBalance,Decimal totalDisplayedBalance,Decimal admAmount,String admReceiptReference,Boolean isWaiver,Boolean isADM,Boolean isRegular,Boolean isVAT,Map<String, Decimal> admMap,Map<String, Decimal> admClearedMap,Map<String, Decimal> admReceivedMap,Map<Id, Decimal> refundAmountByReceiptAcknowledgementId,Map<Id, Decimal> receivedAppliedByInstallment) {
+            this.salesOrder = so;
+            this.installmentReceiptWrappers = new List<ReceiptWrapper>();
+            this.salesOrderReceiptWrappers = new List<ReceiptWrapper>();
+            this.consolidatedInstallments = new List<ConsolidatedInstallment>();
+            this.consolidatedOtherCharges = new List<ConsolidatedOtherCharge>();
+            this.consolidatedRebates = new List<ConsolidatedRebate>();
+            this.consolidatedRefunds = new List<ConsolidatedRefund>();
+            this.totalCollectedAmt = Utility.getOrDefault(totalCollected);
+            this.totalBalanceInstallment = Utility.getOrDefault(totalDisplayedBalance);
+            this.totalRebateAmount = 0;
+            this.totalRefundAmount = 0;
+            this.admAmount = Utility.getOrDefault(admAmount);
+            this.admMap = admMap != null ? admMap : new Map<String,Decimal>();
+            this.admClearedMap = admClearedMap != null ? admClearedMap : new Map<String,Decimal>();
+            this.admReceivedMap = admReceivedMap != null ? admReceivedMap : new Map<String,Decimal>();
+            this.admReceiptReference = admReceiptReference;
+            this.isWaiver = isWaiver;
+            this.isADM = isADM;
+            this.isRegular = isRegular;
+            this.isVAT = isVAT;
+            this.admFeeIncludedValue = admFeeIncluded;
+            this.todayDate = DateTime.now().format('dd-MMM-yy');
+            this.bookingDateFormatted = Utility.formatDate(so.SoldDate__c);
+            this.hasRebates = false;
+            this.hasRefunds = false;
+            totalAmount = 0;
+            totalAppliedAmtInstallment = 0;
+            totalPendingAmtInstallment = 0;
+            totalInstallmentAmount = 0;
+            totalInstallmentPercentage = 0;
+            installmentCollectedAmount = 0;
+            totalAmtOtherCharge = 0;
+            totalAppliedAmtOtherCharge = 0;
+            totalPendingAmtOtherCharge = 0;
+            
+            if(so.InstallmentLines__r != null){
+                for(InstallmentLines__c objInst : so.InstallmentLines__r){
+                    totalInstallmentAmount += objInst.InstallmentAmount__c;
+                    totalInstallmentPercentage += objInst.InstallmentPercentage__c != null ? objInst.InstallmentPercentage__c : 0;
+                }
+            }
+            
+            if (instReceipts != null) {
+                for (ReceiptAllocation__c r : instReceipts) {
+                    this.installmentReceiptWrappers.add(new ReceiptWrapper(r, otherChargeAdmFeeAmt, admFeeIncluded, admReceiptReference, admMap, admClearedMap, admReceivedMap, receivedAppliedByInstallment));
+                }
+            }
+            
+            if (soReceipts != null) {
+                for (ReceiptAllocation__c r : soReceipts) {
+                    this.salesOrderReceiptWrappers.add(new ReceiptWrapper(r, otherChargeAdmFeeAmt, admFeeIncluded, admReceiptReference, admMap, admClearedMap, admReceivedMap, null));
+                }
+            }
+            
+            this.installmentReceiptWrappers.sort(new ReceiptWrapperComparator());
+            // Calculate totals (preserve existing behavior)
+            Set<Id> processedInstallmentIdsForPending = new Set<Id>();
+            if (installmentReceiptWrappers != null) {
+                for (ReceiptWrapper rw : installmentReceiptWrappers) {
+                    if (rw != null) {
+                        totalAmount += Utility.getOrDefault(rw.adjustedAmount);
+                        totalAppliedAmtInstallment += Utility.getOrDefault(rw.adjustedAmount);
+                        Id instId = (rw.receipt != null) ? rw.receipt.InstallmentLine__c : null;
+                        if (instId == null || !processedInstallmentIdsForPending.contains(instId)) {
+                            if (instId != null) processedInstallmentIdsForPending.add(instId);
+                            totalPendingAmtInstallment += Utility.getOrDefault(rw.getPendingAmount());
+                        }
+                        if (rw.isCleared()) {
+                            Decimal collectedAmount = Utility.getOrDefault(rw.receipt.AmountApplied__c);
+                            // Deduct refund linked to this ReceiptAcknowledgement
+                            if (rw.receipt.ReceiptAcknowledgement__c != null && refundAmountByReceiptAcknowledgementId != null && refundAmountByReceiptAcknowledgementId.containsKey(rw.receipt.ReceiptAcknowledgement__c)) {
+                                collectedAmount -= refundAmountByReceiptAcknowledgementId.get(rw.receipt.ReceiptAcknowledgement__c);
+                                if (collectedAmount < 0) {
+                                    collectedAmount = 0;
+                                }
+                            }
+                            installmentCollectedAmount += collectedAmount;
+                        }
+                    }
+                }
+            }
+            
+            if (salesOrderReceiptWrappers != null) {
+                Set<Id> processedReceiptIds = new Set<Id>();
+                
+                for (ReceiptWrapper rw : salesOrderReceiptWrappers) {
+                    if (rw != null && rw.receipt != null && rw.receipt.Id != null) {
+                        
+                        // Check uniqueness
+                        if (!processedReceiptIds.contains(rw.receipt.Id)) {
+                            
+                            processedReceiptIds.add(rw.receipt.Id);
+                            
+                            totalAmtOtherCharge += Utility.getOrDefault(rw.getOtherChargeAmount());
+                            totalAppliedAmtOtherCharge += Utility.getOrDefault(rw.receipt.AmountApplied__c);
+                            totalPendingAmtOtherCharge += Utility.getOrDefault(rw.getOtherChargePending());
+                        }
+                    }
+                }
+                
+            }
+            
+            this.totalAmountFormatted = Utility.formatCurrency(totalAmount);
+            this.totalAmountInWords = Utilities.amountInWords(totalAmount, 'Dirham', 'Fils');
+            // === VAT CALCULATION ===
+            if (Utility.getOrDefault(so.Tax_Percentage__c) > 0) {
+                totalAmountWithVAT = (Utility.getOrDefault(so.Amount_Payable_Excluding_ADM__c) + Utility.getOrDefault(so.TaxableAmount__c));
+                totalAmountWithVATFormatted = Utility.formatCurrency(totalAmountWithVAT);
+            } else {
+                totalAmountWithVAT = Utility.getOrDefault(so.NetAmount__c);
+                totalAmountWithVATFormatted = Utility.formatCurrency(totalAmountWithVAT);
+            }
+            this.installmentOutstandingAmount = Utility.getOrDefault(totalBalance);
+            this.otherChargesOutstandingAmount = Utility.getOrDefault(this.totalPendingAmtOtherCharge);
+            this.totalOutstandingAmount = this.installmentOutstandingAmount;
+        }
     }
     
     public class ReceiptWrapper {
@@ -844,39 +920,51 @@ public class SalesSOAPDFController {
         public String otherChargeDueDateFormatted { get; set; }
         public String admReceiptReference { get; set; }
         public Map<String, Decimal> admMap { get; set; }
+        public Map<String, Decimal> admClearedMap { get; set; }
+        public Map<String, Decimal> admReceivedMap { get; set; }
         public String displayReceiptReference { get; set; }
         public String displayReceiptType { get; set; }
         public String displayReceiptStatus { get; set; }
+        public Map<Id, Decimal> receivedAppliedByInstallmentMap { get; set; }
         
-        public ReceiptWrapper(ReceiptAllocation__c r,Decimal otherChargeAdmFeeAmt,Boolean admFeeIncluded,String admReceiptReference,Map<String, Decimal> admMap) {
+        public ReceiptWrapper(ReceiptAllocation__c r,Decimal otherChargeAdmFeeAmt,Boolean admFeeIncluded,String admReceiptReference,Map<String, Decimal> admMap,Map<String, Decimal> admClearedMap,Map<String, Decimal> admReceivedMap,Map<Id, Decimal> receivedAppliedByInstallment) {
             this.receipt = r;
             this.admMap = admMap != null ? admMap : new Map<String, Decimal>();
+            this.admClearedMap = admClearedMap != null ? admClearedMap : new Map<String, Decimal>();
             this.admReceiptReference = admReceiptReference;
             this.installmentDueDateFormatted = Utility.formatDate(r.InstallmentLine__r != null ? r.InstallmentLine__r.Due_Date__c : null);
             Date rvDate = null;
             rvDate = r.DateOfApplication__c != null ? r.DateOfApplication__c : (r.ReceiptAcknowledgement__c != null && r.ReceiptAcknowledgement__r.MaturityDate__c != null
-                                                                                ? r.ReceiptAcknowledgement__r.MaturityDate__c : null);
-                                                                                    this.rvDateFormatted = Utility.formatDate(rvDate);
+                ? r.ReceiptAcknowledgement__r.MaturityDate__c : null);
+            this.rvDateFormatted = Utility.formatDate(rvDate);
             this.otherChargeDueDateFormatted = Utility.formatDate(r.SalesOrderOtherCharges__r != null ? r.SalesOrderOtherCharges__r.Due_Date__c : null);
             // Adjusted amount logic: preserve original ADM add-to-installment-1 behavior
             Decimal baseAmount = Utility.getOrDefault(r.AmountApplied__c);
-            if (admFeeIncluded && r.InstallmentNumberOrChargeType__c == '1' && r.Receipt_Reference__c != null && this.admMap.containsKey(r.Receipt_Reference__c)) {
-                baseAmount += this.admMap.get(r.Receipt_Reference__c);
+            if (admFeeIncluded && r.InstallmentNumberOrChargeType__c == '1' && r.Receipt_Reference__c != null && this.admClearedMap.containsKey(r.Receipt_Reference__c)) {
+                baseAmount += this.admClearedMap.get(r.Receipt_Reference__c);
                 if (r.AmountApplied__c == null) r.AmountApplied__c = 0;
-                r.AmountApplied__c = r.AmountApplied__c + this.admMap.get(r.Receipt_Reference__c);
+                r.AmountApplied__c = r.AmountApplied__c + this.admClearedMap.get(r.Receipt_Reference__c);
             }
             this.adjustedAmount = baseAmount;
+            this.receivedAppliedByInstallmentMap = receivedAppliedByInstallment != null ? receivedAppliedByInstallment : new Map<Id, Decimal>();
+            this.admReceivedMap = admReceivedMap != null ? admReceivedMap : new Map<String, Decimal>();
         }
         
         public ReceiptWrapper(ReceiptAllocation__c r,Decimal otherChargeAdmFeeAmt,Boolean admFeeIncluded,String admReceiptReference,Map<String, Decimal> admMap,String displayRef,String displayType,String displayStatus) {
-            this(r,otherChargeAdmFeeAmt,admFeeIncluded,admReceiptReference,admMap);
+            this(r,otherChargeAdmFeeAmt,admFeeIncluded,admReceiptReference,admMap,(Map<String, Decimal>)null,(Map<String, Decimal>)null,(Map<Id, Decimal>)null);
             this.displayReceiptReference = displayRef;
             this.displayReceiptType = displayType;
             this.displayReceiptStatus = displayStatus;
         }
         
         public Boolean isCleared() { return receipt != null && receipt.ReceiptStatus__c == 'Cleared'; }
-        public Decimal getPendingAmount() { return (receipt != null && receipt.InstallmentLine__r != null) ? Utility.getOrDefault(receipt.InstallmentLine__r.PendingAmount__c) : 0; }
+        public Decimal getPendingAmount() {
+            if (receipt == null || receipt.InstallmentLine__r == null) return 0;
+            Decimal basePending = Utility.getOrDefault(receipt.InstallmentLine__r.PendingAmount__c);
+            Decimal receivedNotCleared = (receipt.InstallmentLine__c != null && receivedAppliedByInstallmentMap != null && receivedAppliedByInstallmentMap.containsKey(receipt.InstallmentLine__c)) ? receivedAppliedByInstallmentMap.get(receipt.InstallmentLine__c) : 0;
+            Decimal admReceivedForThisReceipt = (admReceivedMap != null && receipt.InstallmentNumberOrChargeType__c == '1' && receipt.Receipt_Reference__c != null && admReceivedMap.containsKey(receipt.Receipt_Reference__c)) ? admReceivedMap.get(receipt.Receipt_Reference__c) : 0;
+            return basePending + receivedNotCleared + admReceivedForThisReceipt;
+        }
         public Decimal getOtherChargeAmount() { return (receipt != null && receipt.SalesOrderOtherCharges__r != null) ? Utility.getOrDefault(receipt.SalesOrderOtherCharges__r.Amount__c) : 0; }
         public Decimal getOtherChargePending() { return (receipt != null && receipt.SalesOrderOtherCharges__r != null) ? Utility.getOrDefault(receipt.SalesOrderOtherCharges__r.PendingAmount__c) : 0; }
     }
@@ -884,7 +972,7 @@ public class SalesSOAPDFController {
     public class ReceiptWrapperComparator implements Comparator<ReceiptWrapper> {
         public Integer compare(ReceiptWrapper a, ReceiptWrapper b) {
             Integer aNum = (a.receipt.InstallmentLine__r != null && a.receipt.InstallmentLine__r.InstallmentNumber__c != null)
-                ? Integer.valueOf(a.receipt.InstallmentLine__r.InstallmentNumber__c) : 0;        
+                ? Integer.valueOf(a.receipt.InstallmentLine__r.InstallmentNumber__c) : 0;
             Integer bNum = (b.receipt.InstallmentLine__r != null && b.receipt.InstallmentLine__r.InstallmentNumber__c != null)
                 ? Integer.valueOf(b.receipt.InstallmentLine__r.InstallmentNumber__c) : 0;
             if (aNum == bNum) return 0;
@@ -894,10 +982,10 @@ public class SalesSOAPDFController {
     }
     
     /* =========================
-* ConsolidatedInstallment + RVDetail
-* ConsolidatedInstallment represents one single installment row (Due Date / Inst# / Amount / %)
-* rvDetails is the list of payment rows (RV No / RV Date / Mode / Status / Collected / Outstanding / LPF)
-* ========================= */
+     * ConsolidatedInstallment + RVDetail
+     * ConsolidatedInstallment represents one single installment row (Due Date / Inst# / Amount / %)
+     * rvDetails is the list of payment rows (RV No / RV Date / Mode / Status / Collected / Outstanding / LPF)
+     * ========================= */
     public class ConsolidatedInstallment {
         public Id installmentLineId { get; set; }
         public Date dueDate { get; set; }
@@ -973,7 +1061,7 @@ public class SalesSOAPDFController {
         public Decimal pending { get; set; }
     }
     
-    // Comparator for consolidated installments (by reversalDate ascending; nulls last)
+    //Comparator for consolidated installments (by reversalDate ascending; nulls last)
     public class ConsolidatedInstallmentComparator implements Comparator<ConsolidatedInstallment> {
         public Integer compare(ConsolidatedInstallment a, ConsolidatedInstallment b) {
             if (a == null || b == null) return 0;
@@ -987,7 +1075,7 @@ public class SalesSOAPDFController {
         }
     }
     
-    // Comparator for consolidated installments by Installment Number
+    //Comparator for consolidated installments by Installment Number
     public class InstallmentNumberComparator implements Comparator<ConsolidatedInstallment> {
         public Integer compare(ConsolidatedInstallment a, ConsolidatedInstallment b) {
             if (a == null || b == null) return 0;
@@ -1007,8 +1095,7 @@ public class SalesSOAPDFController {
         }
     }
     
-    
-    // Comparator for rvDetails by rvDate asc (nulls last)
+    //Comparator for rvDetails by rvDate asc (nulls last)
     public class RVDetailComparator implements Comparator<RVDetail> {
         public Integer compare(RVDetail a, RVDetail b) {
             if (a == null || b == null) return 0;
@@ -1034,6 +1121,7 @@ public class SalesSOAPDFController {
             return ad < bd ? -1 : 1;
         }
     }
+    
     @AuraEnabled
     public static String generateAndAttachPdf(Id salesOrderId) {
         

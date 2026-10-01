@@ -2981,6 +2981,21 @@
             <field>DoNotSendPaymentReminder__c</field>
             <table>SalesOrder__c.Units__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ADHAUnitNumber__c</field>
+            <table>SalesOrder__c.Units__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FacadeOption__c</field>
+            <table>SalesOrder__c.Units__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Typology__c</field>
+            <table>SalesOrder__c.Units__r</table>
+        </columns>
         <masterLabel>Units</masterLabel>
     </sections>
 </ReportType>

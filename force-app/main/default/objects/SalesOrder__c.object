@@ -505,7 +505,15 @@
     <fields>
         <fullName>AbuDhabiMunicipalityFees__c</fullName>
         <externalId>false</externalId>
-        <formula>IF( Discount_Percent__c=0 , (Sales_Price_Excluding_ADM__c*2/100) , Sales_Price_Excluding_ADM__c * (Discount_Percent__c/100))</formula>
+        <formula>IF(
+    ISBLANK(Offer__c),
+     NetAmount__c  * Unit__r.Project__r.ADM_Fee_Charged_Percentage__c * 100,
+    IF(
+        Discount_Percent__c = 0,
+        Sales_Price_Excluding_ADM__c * 2 / 100,
+        Sales_Price_Excluding_ADM__c * Unit__r.Project__r.ADM_Fee_Charged_Percentage__c * 100
+    )
+)</formula>
         <label>Abu Dhabi Municipality Fees</label>
         <precision>18</precision>
         <required>false</required>

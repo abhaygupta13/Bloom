@@ -574,4 +574,8 @@ public inherited sharing  class CaseService {
         }
         return new Map<Id, Case>([SELECT Id FROM Case WHERE Id IN :caseIds AND RecordType.DeveloperName = :recordTypeDevName]).keySet();
     }
+
+    public List<Case> getBloomAppCasesByLeadId(Set<Id> leadIds, String origin){
+        return [SELECT Id,CaseNumber,Sales_Order__c, Sales_Order__r.Unit__r.Name, Status, Case_Contact_Name__c,CreatedDate,LastModifiedDate,SubStatus__c,Description,Subject,ClosedDate  FROM Case WHERE Origin = :origin AND Lead__c IN :leadIds];
+    }
 }

@@ -68,8 +68,8 @@ public class SalesCommissionBatch implements Database.Batchable<sObject>, Schedu
         for(InstallmentLines__c installmentLine : installmentLineList){
             for(CommissionSchedule__c commissionSchedule : scope){
                 // Retrieve Sales Order from salesOrderMap
-                SalesOrder__c salesOrder = salesOrderMap.get(installmentLine.SalesOrder__c);
-                if(salesOrder == null || salesOrder.ADM_DLD_Pre_Registered_Date__c == null){
+                SalesOrder__c salesOrder = installmentLine.SalesOrder__r.PreviousSalesOrder__c != null ? salesOrderMap.get(installmentLine.SalesOrder__r.PreviousSalesOrder__c) : salesOrderMap.get(installmentLine.SalesOrder__c);
+                if(salesOrder == null || salesOrder.Unit__r.Project__r.ProjectRegistrationDate__c == null){
                     continue;
                 }
                 Decimal taxableAmount = salesOrder.TaxableAmount__c != null && salesOrder.TaxableAmount__c > 0 ? salesOrder.TaxableAmount__c : 0; 

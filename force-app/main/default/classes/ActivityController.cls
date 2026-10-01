@@ -20,7 +20,8 @@ public class ActivityController {
     private static final string LEASING_TASK_SUBJECT { get { return 'LO'; } }
     private static final string CONTACT_CENTRE_TASK_SUBJECT { get { return 'CC'; } }
     private static final string RECORD_SUCCESS_MESSAGE { get { return 'Record Has Been Updated Successfully.'; } }
-    
+    private static final string MTD_NO_REPLY_OWEID_SETTING { get { return 'BloomNoReplyOWEmailId'; } }
+
     @AuraEnabled
     public static String markTaskComplete(Id recordId) {
         LeadService objLeadService = LeadService.getInstance();
@@ -56,18 +57,18 @@ public class ActivityController {
         Date nextDate = Date.today().addDays(1);
         String subject = '';
         Date dueDate; 
-        
+        Boolean isADHALead = objLead.Lead_Channel__c == 'API Integration' && objLead.LeadSource == 'Government Entity' && objLead.leadsubsource__c == 'ADHA' && objLead.ApplicationNumber__c != null;
         Map<String, String> followUpMapping = new Map<String, String>{TASK_SUBJECT_DAY_1_CALL_1 => TASK_SUBJECT_DAY_2_CALL_1,
             TASK_SUBJECT_DAY_2_CALL_1 => TASK_SUBJECT_DAY_3_CALL_1
             };
                 
                 for (String key : followUpMapping.keySet()) {
                     if (objTask.Subject.contains(key)) {
-                        if (objLead.ContactCentreLeadStatus__c == TASK_QUALIFIED_STATUS) {
+                       if (objLead.ContactCentreLeadStatus__c == TASK_QUALIFIED_STATUS && !isADHALead) {
                             subject = objTask.Subject.startsWith(SALES_TASK_SUBJECT) ? SALES_TASK_SUBJECT + ' - ' + followUpMapping.get(key) : LEASING_TASK_SUBJECT + + ' - ' + followUpMapping.get(key);
                             dueDate = nextBusinessDate;
                         }
-                        if(objLead.ContactCentreLeadStatus__c != TASK_QUALIFIED_STATUS){
+                        if(objLead.ContactCentreLeadStatus__c != TASK_QUALIFIED_STATUS  && !isADHALead){
                             subject = objTask.Subject.startsWith(CONTACT_CENTRE_TASK_SUBJECT) ? CONTACT_CENTRE_TASK_SUBJECT + ' - ' + followUpMapping.get(key) : '';
                             dueDate = nextDate; 
                         }

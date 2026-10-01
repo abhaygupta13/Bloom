@@ -635,6 +635,11 @@
             <field>RentForPeriod__c</field>
             <table>LeasingOrder__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>OccupantName__c</field>
+            <table>LeasingOrder__c</table>
+        </columns>
         <masterLabel>Leasing Orders</masterLabel>
     </sections>
     <sections>

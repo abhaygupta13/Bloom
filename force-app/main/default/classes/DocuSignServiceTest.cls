@@ -317,4 +317,39 @@ private class DocuSignServiceTest {
         System.assertNotEquals(null, recipients, 'Recipients list should not be null');
         System.assertEquals(2, recipients.size(), 'Should return 2 recipients (BloomSigner1 and BloomSigner2)');
     }
+    @isTest
+static void testCaseGetRecipients_KYCUpdateRequest() {
+
+    Account testAccount = [
+        SELECT Id, Name
+        FROM Account
+        LIMIT 1
+    ];
+
+    Id kycRecordTypeId = Schema.SObjectType.Case
+        .getRecordTypeInfosByDeveloperName()
+        .get('KYCUpdateRequest')
+        .getRecordTypeId();
+
+    Case testCase = new Case(
+        AccountId = testAccount.Id,
+        RecordTypeId = kycRecordTypeId,
+        Origin = 'Web',
+        Status = 'New',
+        Subject = 'KYC Test Case'
+    );
+    insert testCase;
+
+    Test.startTest();
+
+    List<dfsle.Recipient> recipients =
+        DocuSignService.CaseGetRecipientsforCIS(
+            testCase.Id,
+            'KYC Document'
+        );
+
+    Test.stopTest();
+
+    System.assertNotEquals(null, recipients);
+}
 }

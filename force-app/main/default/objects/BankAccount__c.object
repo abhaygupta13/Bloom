@@ -419,6 +419,11 @@
                     <default>false</default>
                     <label>Post Handover</label>
                 </value>
+                <value>
+                    <fullName>Current Account</fullName>
+                    <default>false</default>
+                    <label>Current Account</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
     </fields>

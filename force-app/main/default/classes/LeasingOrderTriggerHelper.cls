@@ -78,13 +78,13 @@ public class LeasingOrderTriggerHelper {
                    && contract.IntegrationStatus__c == 'Success'){
                        contract.Status__c = LEASING_STATUS_LEASED;
                    }
-                   
+                
                 // Added for Termination Amendment Requirement
                 if (oldMap.get(contract.Id).IntegrationStatus__c != contract.IntegrationStatus__c &&
                     contract.IntegrationStatus__c == 'Success' &&
                     contract.LeaseType__c == 'Termination') {
                         contract.Status__c = 'Terminated';
-                }
+                    }
             }
             contract.SAPCompanyCode__c = projectByProjectIdMap.containsKey(contract.Project__c) ?
                 projectByProjectIdMap.get(contract.Project__c).Leasing_Company__r.LeasingSAPCompanyCode__c : null ;
@@ -221,11 +221,11 @@ public class LeasingOrderTriggerHelper {
                }
         }
         
-         if (!welcomeLetterIds.isEmpty()) {
-      System.enqueueJob(
-        new WelcomeLetterQueueable(welcomeLetterIds)
-      );
-    }
+        if (!welcomeLetterIds.isEmpty()) {
+            System.enqueueJob(
+                new WelcomeLetterQueueable(welcomeLetterIds)
+            );
+        }
         
         if (!accountIdsToUpdate.isEmpty()) {
             List<Account> accountsToUpdate = new List<Account>();
@@ -505,8 +505,16 @@ AccountService.getInstance().updateAccounts(accountsToUpdate);
     public static void sendApprovedLeasingOfferForSigning(List<LeasingOrder__c> newList , Map<Id,LeasingOrder__c> oldMap){
         LeasingOrder__c leasingOrderToSend ;
         for(LeasingOrder__c order : newList ){
-            if(order.InitiateOfferSignature__c == true && order.BloomTeamApprovalStatus__c == 'Approved' && 
-               order.BloomTeamApprovalStatus__c != oldMap.get(order.Id).BloomTeamApprovalStatus__c){
+            LeasingOrder__c oldOrder = oldMap.get(order.Id);
+            Boolean isApprovedNow = (order.BloomTeamApprovalStatus__c == 'Approved' && order.BloomTeamApprovalStatus__c != oldOrder.BloomTeamApprovalStatus__c);
+            Boolean isInitiateCheckedNow = (order.InitiateOfferSignature__c == true && order.InitiateOfferSignature__c != oldOrder.InitiateOfferSignature__c && order.BloomTeamApprovalStatus__c == 'Approved');
+            
+            // Only send Offer Letter for New Leases when approved and not already signed
+            if(order.InitiateOfferSignature__c == true && 
+               order.BloomTeamApprovalStatus__c == 'Approved' && 
+               order.LeaseType__c == 'New' && 
+               order.isLeasingOfferSigned__c != true && 
+               (isApprovedNow || isInitiateCheckedNow)){
                    leasingOrderToSend = order ;
                    break;// Break because it process only one record - as docusign bulk signing allows only Single signer
                    // Ref : https://developers.docusign.com/docs/salesforce/apex-toolkit-reference/bulksendservice.html
@@ -528,78 +536,44 @@ AccountService.getInstance().updateAccounts(accountsToUpdate);
         }
     }
     
- public static void createSalesEntriesOnTORUpdate(
-    List<LeasingOrder__c> newList,
-    Map<Id, LeasingOrder__c> oldMap
-  ){
-    Set<Id> orderIds = new Set<Id>();
-    for(LeasingOrder__c order : newList){
-      
-      LeasingOrder__c oldOrder = oldMap.get(order.Id);
-      
-      if(order.TOR__c != oldOrder.TOR__c &&
-        order.TOR__c != null && order.TOR__c != 0 &&
-        order.LeasingStartDate__c != null &&
-        order.LeasingEndDate__c != null &&
-        (order.PropertyUsage__c == 'Retail' ||
-        order.PropertyUsage__c == 'Commercial')){
-          
-          orderIds.add(order.Id);
+    public static void createSalesEntries(List<LeasingOrder__c> leasingOrders) {
+        
+        List<SalesEntrie__c> salesEntries = new List<SalesEntrie__c>();
+        
+        for (LeasingOrder__c order : leasingOrders) {
+            
+            if (order.LeasingStartDate__c == null || order.LeasingEndDate__c == null || (order.PropertyUsage__c != 'Retail' && order.PropertyUsage__c != 'Commercial')) {
+                continue;
+            }
+            
+            Date currentMonth = Date.newInstance(
+                order.LeasingStartDate__c.year(),
+                order.LeasingStartDate__c.month(),
+                1
+            );
+            
+            Date endMonth = Date.newInstance(
+                order.LeasingEndDate__c.year(),
+                order.LeasingEndDate__c.month(),
+                1
+            );
+            
+            while (currentMonth <= endMonth) {
+                
+                salesEntries.add(new SalesEntrie__c(
+                    LeasingOrder__c = order.Id,
+                    Year__c = currentMonth.year(),
+                    Month__c = currentMonth.month()
+                ));
+                
+                currentMonth = currentMonth.addMonths(1);
+            }
+        }
+        
+        if (!salesEntries.isEmpty()) {
+            insert salesEntries;
         }
     }
-    
-    if(orderIds.isEmpty()){
-      return;
-    }
-    Set<Id> existingOrderIds = new Set<Id>();
-    
-    for(SalesEntrie__c se : [
-      SELECT Id, LeasingOrder__c
-      FROM SalesEntrie__c
-      WHERE LeasingOrder__c IN :orderIds
-    ]){
-      existingOrderIds.add(se.LeasingOrder__c);
-    }
-    
-    List<SalesEntrie__c> salesEntries = new List<SalesEntrie__c>();
-    
-    for(LeasingOrder__c order : newList){
-      
-      if(!orderIds.contains(order.Id)){
-        continue;
-      }
-      if(existingOrderIds.contains(order.Id)){
-        continue;
-      }
-      
-      Date currentMonth = Date.newInstance(
-        order.LeasingStartDate__c.year(),
-        order.LeasingStartDate__c.month(),
-        1
-      );
-      
-      Date endMonth = Date.newInstance(
-        order.LeasingEndDate__c.year(),
-        order.LeasingEndDate__c.month(),
-        1
-      );
-      
-      while(currentMonth <= endMonth){
-        
-        salesEntries.add(new SalesEntrie__c(
-          LeasingOrder__c = order.Id,
-          Year__c = currentMonth.year(),
-          Month__c = currentMonth.month()
-        ));
-        
-        currentMonth = currentMonth.addMonths(1);
-      }
-    }
-    
-    if(!salesEntries.isEmpty()){
-      insert salesEntries;
-    }
-  }
     
     public static void adjustSalesEntries(
         List<LeasingOrder__c> newList,

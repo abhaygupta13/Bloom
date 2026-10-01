@@ -13,6 +13,10 @@
         <submitter>khamid@bloomholding.com</submitter>
         <type>user</type>
     </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>zelkanzi@bloomholding.com</submitter>
+        <type>user</type>
+    </allowedSubmitters>
     <approvalPageFields>
         <field>Name</field>
         <field>Owner</field>

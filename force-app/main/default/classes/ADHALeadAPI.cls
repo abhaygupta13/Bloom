@@ -76,27 +76,41 @@ global without sharing class ADHALeadAPI {
                 newLead.Lead_Channel__c = 'API Integration';
                 newLead.ApplicationNumber__c = applicationNumber;
                 newLead.LeadTeam__c = 'Sales';
+                newLead.nationality__c = 'Emirati';
+                newLead.ResidentStatus__c = 'Resident';
+                newLead.CustomerType__c = 'UAE National';
+                newLead.CustomerSubType__c = 'NORMAL';
+                newLead.UnitType__c = 'Villa';
+                newLead.AreaSqmt__c = 'Not Disclosed';
+                newLead.PropertyReadiness__c = 'Offplan';
+                newLead.SecondaryLeadSubSource__c = 'ADHA';
+                newLead.SecondaryLeadSource__c = 'Government Entity';
+                newLead.SecondaryLeadChannel__c = 'API Integration';
                 if (applicant != null) {
-                    newLead.FirstName = (String) applicant.get('Name');
-                    newLead.LastName = (String) applicant.get('FamilyName');
+                    String applicantName = (String) applicant.get('Name');
+                    String familyName = (String) applicant.get('FamilyName');
+                    String lastName = String.isNotBlank(familyName) ? familyName : applicantName;
+                    newLead.FirstName = applicantName != null ? applicantName.left(40) : '';
+                    newLead.LastName = lastName != null ? lastName.left(80) : '';
                     newLead.Emirates_Id__c = (String) applicant.get('EID');
                     newLead.MobilePhone = (String) applicant.get('PhoneNumber');
+                    // newLead.MobileCountryCode__c = '971';
                     newLead.Email = (String) applicant.get('Email');
                     newLead.Tribe__c = (String) applicant.get('Tribe');
                     newLead.GenderIdentity = (String) applicant.get('Gender');
                     if (applicant.containsKey('DOB') && String.isNotBlank((String) applicant.get('DOB'))) {
-                        newLead.Birthdate__c = Date.valueOf((String) applicant.get('DOB'));
+                        newLead.Birthdate__c = applicant.get('DOB') != null ? Date.valueOf((String) applicant.get('DOB')) : null;
                     }
-                    newLead.MaritalStatus__c = (String) applicant.get('MaritalStatus');
-                    newLead.NumberOfWives__c = (Integer) applicant.get('NumberOfWives');
-                    newLead.NumberOfChildren__c = (Integer) applicant.get('NumberOfChildren');
+                    newLead.MaritalStatus__c = String.valueOf(applicant.get('MaritalStatus'));
+                    newLead.NumberOfWives__c = applicant.get('NumberOfWives') != null ? Integer.valueOf(String.valueOf(applicant.get('NumberOfWives'))) : null;
+                    newLead.NumberOfChildren__c = applicant.get('NumberOfChildren') != null ? Integer.valueOf(String.valueOf(applicant.get('NumberOfChildren'))) : null;
                     newLead.AnnualRevenue = Decimal.valueOf(String.valueOf(applicant.get('Salary')));
                     newLead.City = (String) applicant.get('TownName');
                     Map<String, Object> passport = (Map<String, Object>) applicant.get('Passport');
                     if (passport != null) {
                         newLead.Passport_Number__c =(String) passport.get('Number');
-                        newLead.PassportIssueDate__c =Date.valueOf(String.valueOf(passport.get('IssueDate')));
-                        newLead.PassportExpiryDate__c = Date.valueOf(String.valueOf(passport.get('ExpiryDate')));
+                        newLead.PassportIssueDate__c = passport.get('IssueDate') != null ? Date.valueOf(String.valueOf(passport.get('IssueDate'))) : null;
+                        newLead.PassportExpiryDate__c = passport.get('ExpiryDate') != null ? Date.valueOf(String.valueOf(passport.get('ExpiryDate'))) : null;
                     }
                 }
                 if(inputMap != null && inputMap.containsKey('LoanValue')){
@@ -139,7 +153,7 @@ global without sharing class ADHALeadAPI {
         }
         catch (System.Exception ex) {
             objResponse.code = 500;
-            objResponse.message = ex.getMessage();
+            objResponse.message = ex.getStackTraceString();
         }
         return objResponse;
     }

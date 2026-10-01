@@ -2773,6 +2773,16 @@
             <field>NOCDateFormatted__c</field>
             <table>SalesOrder__c.Handovers__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Tammfeesamount__c</field>
+            <table>SalesOrder__c.Handovers__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>is_Tamm_Fees_Collected__c</field>
+            <table>SalesOrder__c.Handovers__r</table>
+        </columns>
         <masterLabel>Handovers</masterLabel>
     </sections>
     <sections>

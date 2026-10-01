@@ -30,26 +30,23 @@ loadSalesEntries() {
     return getSalesEntries({
         leasingOrderId: this.recordId
     })
-   .then(result => {
+    .then(result => {
 
-    this.masterSalesEntries = JSON.parse(
-        JSON.stringify(result.masterSalesEntries)
-    );
+        this.masterSalesEntries = JSON.parse(
+            JSON.stringify(result.masterSalesEntries)
+        );
 
-    this.salesEntries = JSON.parse(
-        JSON.stringify(result.currentSalesEntries)
-    );
+        this.salesEntries = JSON.parse(
+            JSON.stringify(result.currentSalesEntries)
+        );
 
-    this.salesEntries.forEach(row => {
-        row.isActualLocked = row.ActualSalesLock__c;
-        row.isAuditedLocked = row.AuditedSalesLock__c;
-    });
+        this.originalData = JSON.parse(
+            JSON.stringify(this.salesEntries)
+        );
 
-    this.originalData = JSON.parse(JSON.stringify(this.salesEntries));
-
-    this.changedRecords.clear();
-    this.disableSave = true;
-})
+        this.changedRecords.clear();
+        this.disableSave = true;
+    })
     .catch(error => {
 
         this.showToast(
@@ -64,66 +61,68 @@ loadSalesEntries() {
         this.isLoading = false;
 
     });
-
 }
 
-    handleChange(event) {
+handleChange(event) {
 
-        const recordId = event.target.dataset.id;
-        const fieldName = event.target.dataset.field;
-        let value;
+    const recordId = event.target.dataset.id;
+    const fieldName = event.target.dataset.field;
 
-if (
-    fieldName === 'ActualSalesLock__c' ||
-    fieldName === 'AuditedSalesLock__c'
-) {
-    value = event.target.checked;
-} else {
-    value = event.target.value === '' ? null : Number(event.target.value);
-}
+    let value;
 
-        
-this.salesEntries = this.salesEntries.map(row => {
-
-    if (row.Id === recordId) {
-
-        return {
-            ...row,
-            [fieldName]: value
-        };
+    if (
+        fieldName === 'ActualSalesLock__c' ||
+        fieldName === 'AuditedSalesLock__c'
+    ) {
+        value = event.target.checked;
+    } else {
+        value = event.target.value === ''
+            ? null
+            : Number(event.target.value);
     }
 
-    return row;
-});
+    this.salesEntries = this.salesEntries.map(row => {
 
-        const currentRecord = this.salesEntries.find(r => r.Id === recordId);
-        const originalRecord = this.originalData.find(r => r.Id === recordId);
+        if (row.Id === recordId) {
 
-        const isChanged =
-    currentRecord.ActualSales__c !== originalRecord.ActualSales__c ||
-    currentRecord.AuditedSales__c !== originalRecord.AuditedSales__c ||
-    currentRecord.ActualSalesLock__c !== originalRecord.ActualSalesLock__c ||
-    currentRecord.AuditedSalesLock__c !== originalRecord.AuditedSalesLock__c;
-
-        if (isChanged) {
-
-           this.changedRecords.set(recordId, {
-    Id: currentRecord.Id,
-    ActualSales__c: currentRecord.ActualSales__c,
-    AuditedSales__c: currentRecord.AuditedSales__c,
-    ActualSalesLock__c: currentRecord.ActualSalesLock__c,
-    AuditedSalesLock__c: currentRecord.AuditedSalesLock__c
-});
-
-        } else {
-
-            this.changedRecords.delete(recordId);
-
+            return {
+                ...row,
+                [fieldName]: value
+            };
         }
 
-        this.disableSave = this.changedRecords.size === 0;
+        return row;
+    });
 
+    const currentRecord =
+        this.salesEntries.find(r => r.Id === recordId);
+
+    const originalRecord =
+        this.originalData.find(r => r.Id === recordId);
+
+    const isChanged =
+        currentRecord.ActualSales__c !== originalRecord.ActualSales__c ||
+        currentRecord.AuditedSales__c !== originalRecord.AuditedSales__c ||
+        currentRecord.ActualSalesLock__c !== originalRecord.ActualSalesLock__c ||
+        currentRecord.AuditedSalesLock__c !== originalRecord.AuditedSalesLock__c;
+
+    if (isChanged) {
+
+        this.changedRecords.set(recordId, {
+            Id: currentRecord.Id,
+            ActualSales__c: currentRecord.ActualSales__c,
+            AuditedSales__c: currentRecord.AuditedSales__c,
+            ActualSalesLock__c: currentRecord.ActualSalesLock__c,
+            AuditedSalesLock__c: currentRecord.AuditedSalesLock__c
+        });
+
+    } else {
+
+        this.changedRecords.delete(recordId);
     }
+
+    this.disableSave = this.changedRecords.size === 0;
+}
 
 handleSave() {
 
@@ -161,12 +160,9 @@ handleSave() {
 
 handleCancel() {
 
-    this.salesEntries = JSON.parse(JSON.stringify(this.originalData));
-
-    this.salesEntries.forEach(row => {
-        row.isActualLocked = row.ActualSalesLock__c;
-        row.isAuditedLocked = row.AuditedSalesLock__c;
-    });
+    this.salesEntries = JSON.parse(
+        JSON.stringify(this.originalData)
+    );
 
     this.changedRecords.clear();
     this.disableSave = true;
@@ -246,14 +242,6 @@ bulkUpdateLock(fieldName, value) {
 
     this.salesEntries = this.salesEntries.map(row => {
 
-        
-        if (
-            (fieldName === 'ActualSalesLock__c' && row.isActualLocked) ||
-            (fieldName === 'AuditedSalesLock__c' && row.isAuditedLocked)
-        ) {
-            return row;
-        }
-
         const updatedRow = {
             ...row,
             [fieldName]: value
@@ -279,6 +267,7 @@ bulkUpdateLock(fieldName, value) {
             });
 
         } else {
+
             this.changedRecords.delete(updatedRow.Id);
         }
 

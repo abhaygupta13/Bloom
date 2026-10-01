@@ -41,6 +41,7 @@ public inherited sharing class ServiceRequestTaskHandler {
     private static final string SUPER_APP_OPERATION_TEAM_CASE_ASSIGNMENT { get { return 'Super App Operation Team Case Assignment'; } }
     private static final string PROCESS_TYPE_SALES { get { return 'Sales'; } }
      private static final string VEHICLE_PARKING_REQUEST_RT_DEV_NAME { get { return 'VehicleParkingRequest'; } }
+    private static final string POST_SALE_PAYMENT_DEFERRAL_RT { get { return 'Post_Sale_Payment_Deferral'; } }
 
     
     private static ServiceRequestTaskHandler instance; 
@@ -170,6 +171,7 @@ public inherited sharing class ServiceRequestTaskHandler {
         attachmentCaseIds.add(Utility.getRecordTypeIdByDevName(Case.SObjectType,POP_SHARE_SR_RT));
         attachmentCaseIds.add(Utility.getRecordTypeIdByDevName(Case.SObjectType,BANK_ACC_DTAIL_SR_RT));
         attachmentCaseIds.add(Utility.getRecordTypeIdByDevName(Case.SObjectType,GENERAL_ENQUIRY_RT));
+        attachmentCaseIds.add(Utility.getRecordTypeIdByDevName(Case.SObjectType,POST_SALE_PAYMENT_DEFERRAL_RT));
         
         List<Case> casesToUpdate = new List<Case>();
         List<Messaging.SingleEmailMessage> emailList = new list<Messaging.SingleEmailMessage>(); 
@@ -376,7 +378,26 @@ public inherited sharing class ServiceRequestTaskHandler {
                                         }                             
                                     }
                                 }
+                                 else if(caseObj.RecordTypeId == Utility.getRecordTypeIdByDevName(Case.SObjectType,POST_SALE_PAYMENT_DEFERRAL_RT) ){
+                                PostSalePaymentDeferalCaseHandler postSaleObj = PostSalePaymentDeferalCaseHandler.getInstance();
+                                List<Messaging.EmailFileAttachment> filteredAttachments = new List<Messaging.EmailFileAttachment>();
+                                email = objEmailService.getSingleEmailMessageWithoutTargetObjectId(emailTemplateId,noReplyOWDId,caseobj.Id,toAddress,null,null);
+                                
+                                for(Messaging.EmailFileAttachment att : attachments){
+                                    if(att != null && att.getFileName() != null && 
+                                       att.getFileName().toLowerCase().contains('payment deferral fees receipt')){
+                                           filteredAttachments.add(att);
+                                       }
+                                }
+                                
+                                if(!filteredAttachments.isEmpty()){
+                                    email.setFileAttachments(filteredAttachments);
+                                }
+                                
+                                
                             }
+                            }
+                           
                         } else if(((caseObj.RecordTypeId == Utility.getRecordTypeIdByDevName(Case.SObjectType,CHEQUE_REPLACEMENT_REQUEST_RT)) ) ){
                             //&& caseObj.PreviousChequeInOffice__c == 'Yes'){
                             System.debug('::::: Email with Attachment ::::: ');
@@ -399,7 +420,8 @@ public inherited sharing class ServiceRequestTaskHandler {
                         }
                         else if((caseObj.RecordTypeId == Utility.getRecordTypeIdByDevName(Case.SObjectType,LPF_WAIVER_REQUEST_RT) && caseObj.LPFWaiverRequestApprovalStatus__c == 'Approved')) {
                             Id emailTempId = objMetadataService.getAppSettingTextValue(SERVICE_REQUEST_CUSTOMER_CLOSURE_EMAIL_TEMPLATE_ID);
-                             ChequeReplacementRequestCaseHandler.getInstance().createDocuments(new List<Case>{caseObj},caseObj.Sales_Order__c);
+                            if(caseObj.FinanceDocumentsUploadedManually__c != 'Yes'){
+                                ChequeReplacementRequestCaseHandler.getInstance().createDocuments(new List<Case>{caseObj},caseObj.Sales_Order__c);}
                             List<Messaging.EmailFileAttachment> attachments = objEmailService.getCaseAttachmentsByDocName(caseobj.Id, new List<String>{'Statement of Account'});
                             if(attachments != null){
                                 ChequeReplacementRequestCaseHandler objChequeReplacementRequestHandler = ChequeReplacementRequestCaseHandler.getInstance();
@@ -409,7 +431,9 @@ public inherited sharing class ServiceRequestTaskHandler {
                         } else if((caseObj.RecordTypeId == Utility.getRecordTypeIdByDevName(Case.SObjectType,SOA_REQUEST_RT)) 
                                   || (caseObj.RecordTypeId == Utility.getRecordTypeIdByDevName(Case.SObjectType,LPF_WAIVER_REQUEST_RT) && caseObj.LPFWaiverRequestApprovalStatus__c == 'Approved')) {
                             Id emailTempId = objMetadataService.getAppSettingTextValue(SERVICE_REQUEST_CUSTOMER_CLOSURE_EMAIL_TEMPLATE_ID);
-                              SOARequestCaseHandler.getInstance().createDocuments(new List<Case>{caseObj},caseObj.Sales_Order__c);
+                              if(caseObj.FinanceDocumentsUploadedManually__c != 'Yes'){
+                                      SOARequestCaseHandler.getInstance().createDocuments(new List<Case>{caseObj},caseObj.Sales_Order__c);
+                              }
                              List<Messaging.EmailFileAttachment> attachments = objEmailService.getCaseAttachmentsByDocName(caseobj.Id, new List<String>{'Statement of Account'});
                             if(attachments != null){
                                 SOARequestCaseHandler objChequeReplacementRequestHandler = SOARequestCaseHandler.getInstance(); 
@@ -425,6 +449,7 @@ public inherited sharing class ServiceRequestTaskHandler {
                         } else if (caseObj.RecordTypeId != Utility.getRecordTypeIdByDevName(Case.SObjectType,SALES_OPERATION_CATEGORY)){
                             email = objEmailService.getSingleEmailMessageWithoutTargetObjectId(emailTemplateId, noReplyOWDId, caseobj.Id, toAddress, null, null);
                         }
+                       
 
                         if(caseObj.RecordTypeId == Utility.getRecordTypeIdByDevName(Case.SObjectType,TAWTHEEQ_ENROLLMENT_RT)) {
                             Id emailTempId = objMetadataService.getAppSettingTextValue(TAWTHEEQ_ENROLLMENT_SR_CLOSURE_LEASING_ETID);

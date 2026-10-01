@@ -9,7 +9,7 @@ Ver   Date         : Author                               Modification
 6.3  10-09-2026   : Abhay Gupta                           Optimized code
 *********************************************************
 */
-public class ServiceAppointmentTriggerHelper {
+public without sharing class ServiceAppointmentTriggerHelper {
     private static String WORKORDER_CREATION_NOTIFICATION_FOR_CUSTOMER = 'WorkOrder Creation Notification for Customer';
     private static String SERVICE_APPOINTMENT_BOOKED_NOTIFICATION_FOR_CONTRACTOR = 'Service Appointment Booked Notification for Contractor';
     private static String SERVICE_APPOINTMENT_BOOKED_NOTIFICATION_FOR_DLP_AGENT = 'Service Appointment Booked Notification for DLP Agent';
@@ -29,6 +29,7 @@ public class ServiceAppointmentTriggerHelper {
     private static String SA_RESCHEDULE_NOTIF_DEV_NAME = 'Service_Appointment_Reschedule';
 
     public static void populateSAFieldsFromWorkOrder(List<ServiceAppointment> newServiceAppointments) {
+        
         Set<Id> workOrderIds = new Set<Id>();
         Map<Id, Integer> workOrderToSAcount = new Map<Id, Integer>();
         Map<Id, WorkOrder> workOrderMap;

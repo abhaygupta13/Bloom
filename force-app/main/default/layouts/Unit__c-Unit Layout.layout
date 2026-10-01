@@ -433,6 +433,10 @@
                 <behavior>Edit</behavior>
                 <field>DoNotSendPaymentReminder__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>ADHAUnitNumber__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

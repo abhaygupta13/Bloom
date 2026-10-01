@@ -7,7 +7,7 @@
  * Version       Author      Date             Comment
  * 1.0           Vishwas   06AUG2026        Initial draft
  *****************************************************************************************************/
-public with sharing class AppointmentController {
+public without sharing class AppointmentController {
     
     private static final string APPOINTMENT_STR { get { return 'Appointment'; } }
     private static final string AVAILABLE_STR { get { return 'Available'; } }
@@ -28,6 +28,10 @@ public with sharing class AppointmentController {
             appointment.Type = APPOINTMENT_STR;
             appointment.WhoId = getAppointmentPrefillContext(recordId).get('whoId');
             appointment.WhatId = getAppointmentPrefillContext(recordId).get('whatId');
+
+            if (ActivityService.getInstance().hasExistingAppointment(appointment.WhoId)) {
+                throw new AuraHandledException('An appointment already exists for this customer.');
+            }
             
             return ActivityService.getInstance().insertEvent(appointment);
             

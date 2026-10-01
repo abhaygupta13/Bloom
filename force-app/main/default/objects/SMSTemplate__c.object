@@ -191,6 +191,11 @@
                     <default>false</default>
                     <label>QMS Token SMS Closed</label>
                 </value>
+                <value>
+                    <fullName>SMS_NOTIFICATION_INTEGRATION</fullName>
+                    <default>false</default>
+                    <label>SMS_NOTIFICATION_INTEGRATION</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
     </fields>

@@ -16,6 +16,9 @@ public  without sharing class TaskTriggerHelper {
     private static final string TASK_SUBJECT_CC_DAY_1_CALL_1 { get { return 'CC - Day 1 Call 1 - Follow Up'; } }
     private static final string TASK_SUBJECT_SM_DAY_1_CALL_1 { get { return 'SM - Day 1 Call 1 - Follow Up'; } }
     private static final string TASK_SUBJECT_LO_DAY_1_CALL_1 { get { return 'LO - Day 1 Call 1 - Follow Up'; } }
+    private static final string CUSTOMER_NOT_REACHABLE { get { return 'Customer Not Reachable'; } }
+    private static final string MTD_NO_REPLY_OWEID_SETTING { get { return 'BloomNoReplyOWEmailId'; } }
+    private static final string MTD_ADHA_NOT_ANSWERING_EMAIL_TEMPLATE { get { return 'ADHACustomerNotAnsweringBloomCalls'; } }
     
     public static void updatLeadStatusOnTaskComplete(List<Task>newTasks){
         Set<Id>leadIds = new Set<Id>();
@@ -138,6 +141,77 @@ public  without sharing class TaskTriggerHelper {
                 newTsk.ServiceRequestType__c = caseObj.RecordType != null ? caseObj.RecordType.Name : null;
                 newTsk.Unit__c = caseObj.Unit__c;
             }
+        }
+    }
+
+/**
+ * @description Handles Task records after insert and identifies ADHA Lead-related activities
+ *              where the customer response is marked as not reachable.
+ *              The related Lead Ids are collected and passed for creation of the first follow-up task.
+ *
+ * @param newTaskList List of newly inserted Task records.
+ */
+    public static void handleAfterInsert(List<Task> newTaskList) {
+        List<Id> leadIds = new List<Id>();
+        for (Task objTask : newTaskList) {
+            if(objTask.CustomerResponse__c == CUSTOMER_NOT_REACHABLE && objTask.WhoId.getSObjectType() == Lead.SObjectType) {
+                leadIds.add(objTask.WhoId);
+            }
+        }
+
+        if(!leadIds.isEmpty()) {
+            sendADHAUnreachableNotifications(leadIds);
+        }
+    }
+
+    /**
+ * @description Creates the first follow-up Task for ADHA Leads.
+ * The Task is created as an SM or LO follow-up based on the Lead Team, with the Task Owner set same as Lead Owner. Business Hours, SLA,
+ * due date, subject, and subtype are calculated and assigned accordingly.
+ *
+ * @param leadIds List of ADHA Lead record IDs for which the first follow-up Task needs to be created.
+ */
+    private static void sendADHAUnreachableNotifications(List<Id> leadIds) {
+
+        List<Lead> adhaLeads = LeadService.getInstance().getADHALeadByIds(new Set<Id>(leadIds));
+        Set<Id> adhaLeadIds = new Set<Id>();
+
+        if (!adhaLeads.isEmpty()) {
+            MetadataService objMetadataService = MetadataService.getInstance();
+            EmailService objEmailService = EmailService.getInstance();
+
+            Id noReplyOWDId = objMetadataService.getAppSettingTextValue(MTD_NO_REPLY_OWEID_SETTING);
+            Id notAnsweringEmailTemplateId = objMetadataService.getAppSettingTextValue(MTD_ADHA_NOT_ANSWERING_EMAIL_TEMPLATE);
+
+            List<Messaging.SingleEmailMessage> emailList = new List<Messaging.SingleEmailMessage>();
+            EmailTemplate et = objEmailService.getEmailTemplateById(notAnsweringEmailTemplateId);
+
+            for (Lead objADHALead : adhaLeads) {
+                adhaLeadIds.add(objADHALead.Id);
+
+                if (String.isNotBlank(objADHALead.Email)) {
+                    String body = et.HtmlValue;
+                    body = body.replace('[AM Name]', objADHALead.OwnerId != null ? objADHALead.Owner.Name : '');
+                    body = body.replace('[AM Number]', objADHALead.OwnerId != null && String.isNotBlank(objADHALead.Owner.Phone) ? objADHALead.Owner.Phone : '');
+                    
+                    EmailService.EmailWrapper wrapper = new EmailService.EmailWrapper(false, false, false, true, true, false, false, true, false, true, true);
+                    wrapper.subject = et.Subject;
+                    wrapper.htmlBody = body;
+                    wrapper.orgWideEmailAddressId = noReplyOWDId;
+                    wrapper.shoudlSaveAsActivity = true;
+                    wrapper.targetObjectId = objADHALead.Id;
+                    wrapper.shouldSetTreatTargetObjectAsRecipient = true;
+                    wrapper.shouldTreatTargetObjectAsRecipient = true;
+                    emailList.add(objEmailService.buildSingleEmailMessage(wrapper));
+                }
+            }
+
+            if (!emailList.isEmpty()) {
+                objEmailService.sendEmail(emailList);
+            }
+            if (!adhaLeadIds.isEmpty()) {
+                LeadAsyncTriggerHelper.sendADHALeadSMSNotification(adhaLeadIds, 'ADHA Lead Not Answering Bloom Calls SMS Notification');
+            }   
         }
     }
     

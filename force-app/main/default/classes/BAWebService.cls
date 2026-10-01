@@ -92,6 +92,12 @@ global class BAWebService {
                 when 'doPostSRFollowUp' {
                     objBAWebServiceHandler.doPostSRFollowUp((Map<String, Object>)JSON.deserializeUntyped(requestBodyString));
                 } 
+                when 'manageAppointment'{
+                    objBAWebServiceHandler.manageAppointment((Map<String, Object>)JSON.deserializeUntyped(requestBodyString));
+                }
+                when 'getAuthorizedUAEPassLoginUser'{
+                    objBAWebServiceHandler.getAuthorizedUAEPassLoginUser((Map<String, Object>)JSON.deserializeUntyped(requestBodyString));
+                }
             }
         }catch(Exception e){
             returnValue.put('status', 'error');

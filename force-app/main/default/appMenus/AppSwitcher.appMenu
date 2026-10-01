@@ -424,4 +424,16 @@
         <name>Bloom_Landscape</name>
         <type>CustomApplication</type>
     </appMenuItems>
+    <appMenuItems>
+        <name>MS_Teams_Integration_App</name>
+        <type>ExternalClientApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>Super_App_Integration_App</name>
+        <type>ExternalClientApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>Property_Website_Integration_App</name>
+        <type>ExternalClientApplication</type>
+    </appMenuItems>
 </AppMenu>

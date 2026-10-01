@@ -80,8 +80,8 @@ public inherited sharing class ContactService {
         return [ SELECT Id, FirstName, MiddleName, LastName, Email, PassportNumber__c, Emirates_Id__c, EID_Expiry_Date__c, Name,Phone FROM Contact WHERE accountID = :accountId ORDER BY CreatedDate ASC];
     }
     
-    public List<Contact> getActiveBrokerContactByAccountId(Id accountId, List<String> brokerContactRole) {
-        return [ SELECT Id, FirstName, MiddleName, LastName, Email, PassportNumber__c, Emirates_Id__c, EID_Expiry_Date__c, Name,Phone FROM Contact WHERE accountID = :accountId AND IsActive__c = true AND BrokerContactRole__c IN: brokerContactRole ORDER BY CreatedDate ASC];
+    public List<Contact> getActiveBrokerContactByAccountId(Id accountId) {
+        return [ SELECT Id, FirstName, MiddleName, LastName, Email, PassportNumber__c, Emirates_Id__c, EID_Expiry_Date__c, Name,Phone,BrokerContactRole__c FROM Contact WHERE accountID = :accountId AND IsActive__c = true ORDER BY CreatedDate ASC];
     }
     
     public List<Contact> getActiveContactByAccountId(Set <Id> accountId) {
@@ -155,7 +155,7 @@ public inherited sharing class ContactService {
                 UniqueIdentifierNumber__c, AccountId, Birthdate, Nationality__c,
                 PrimaryMobileCountryCode__c, SecondaryMobileCountryCode__c, TertiaryMobileCountryCode__c,
                 PrimaryMobilePhone__c, SecondaryMobilePhone__c, TertiaryMobilePhone__c, PassportNumber__c,
-                SecondaryEmail__c, TertiaryEmail__c,
+                SecondaryEmail__c, TertiaryEmail__c,User__c,User__r.UUID__c,
                 Emirates_Id__c FROM Contact WHERE Emirates_Id__c = :emiratesId];
     }
     

@@ -25,6 +25,9 @@ public with sharing class PaymentPlanInvoicePDFHandler {
     public String swiftCode {get; set;}
     public String unit {get; set;}
     
+    public Boolean hasError { get; set; }
+    public String errorMessage { get; set; }
+    
     private static final Decimal VAT_PERCENT = 5;
     //private static final Decimal VAT_PERCENT = 5;
     public Decimal vatRate { get; set; }
@@ -32,11 +35,18 @@ public with sharing class PaymentPlanInvoicePDFHandler {
     private static final String DOC_NAME = 'Tax Invoice';
     
     public PaymentPlanInvoicePDFHandler() {
-        
+        hasError = false;
+        errorMessage = '';
         Id ppsId = ApexPages.currentPage().getParameters().get('id');
         if (ppsId == null) return;
         
         PaymentPlanSchedule__c pps = LeasingPaymentScheduleService.getInstance().getpaymentPlanById(ppsId);
+        
+        if (pps == null || String.isBlank(pps.RefDocno__c)) {
+            hasError = true;
+            errorMessage = Label.BL_TaxInvoicePaymentPlanNotSynced;
+            return;
+        }
         
         invoiceNo   = pps.RefDocno__c;
         invoiceDate = formatDate(pps.PaymentStartDate__c);
@@ -71,6 +81,10 @@ public with sharing class PaymentPlanInvoicePDFHandler {
     
     @AuraEnabled
     public static String generateAndAttachPdf(Id paymentPlanScheduleId) {
+        PaymentPlanSchedule__c pps = LeasingPaymentScheduleService.getInstance().getpaymentPlanById(paymentPlanScheduleId);
+        if (pps == null || String.isBlank(pps.RefDocno__c)) {
+            throw new AuraHandledException(Label.BL_TaxInvoicePaymentPlanNotSynced);
+        }
         
         PageReference pdfPage = Page.PaymentPlanTaxInvoicePDF;
         pdfPage.getParameters().put('id', paymentPlanScheduleId);

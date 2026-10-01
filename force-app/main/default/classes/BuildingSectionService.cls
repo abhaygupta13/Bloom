@@ -41,4 +41,10 @@ public inherited sharing class BuildingSectionService {
         return Database.query(query);
     }
 
+    public List<BuildingSection__c> getBuildingSectionWithBankDetailsByProjectId(String projectId){
+        return [SELECT Id, Name, Primary_Account_Installment__r.BankNameCorporate__c, Primary_Account_Installment__r.BeneficiaryNameCorporate__c,
+                Primary_Account_Installment__r.AccountNumberCorporate__c, Primary_Account_Installment__r.IBANNoCorporate__c, Primary_Account_Installment__r.SwiftCodeCorporate__c
+                FROM BuildingSection__c WHERE Project__c =: projectId];
+    }
+
 }

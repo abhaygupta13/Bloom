@@ -128,16 +128,22 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
-        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Appointment_Slot_Record_Page</content>
         <formFactor>Large</formFactor>
-        <type>Default</type>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Appointment_Slot_Record_Page</content>
         <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
     <allowInChatterGroups>false</allowInChatterGroups>
@@ -181,9 +187,9 @@
                     <label>Bloom Central</label>
                 </value>
                 <value>
-                    <fullName>Al Heel</fullName>
+                    <fullName>Almetlaa Sales Office, Airport Street, Al Nabbagh 3, Al Ain, Abu Dhabi, United Arab Emirates</fullName>
                     <default>false</default>
-                    <label>Al Heel</label>
+                    <label>Almetlaa Sales Office, Airport Street, Al Nabbagh 3, Al Ain, Abu Dhabi, United Arab Emirates</label>
                 </value>
             </valueSetDefinition>
         </valueSet>

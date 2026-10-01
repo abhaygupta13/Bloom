@@ -2158,6 +2158,11 @@
             <field>RentForPeriod__c</field>
             <table>Lead.Opportunities__r.Leasing_Contracts__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>OccupantName__c</field>
+            <table>Lead.Opportunities__r.Leasing_Contracts__r</table>
+        </columns>
         <masterLabel>Leasing Orders</masterLabel>
     </sections>
 </ReportType>

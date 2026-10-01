@@ -255,106 +255,64 @@
 </td>
 
                                     <!-- Actual Sales -->
-                                    <td>
+                                   <!-- Actual Sales -->
+<td>
 
-                                       <template lwc:if={row.isActualLocked}>
+    <lightning-input
+        type="number"
+        variant="label-hidden"
+        step="0.01"
+        value={row.ActualSales__c}
+        data-id={row.Id}
+        data-field="ActualSales__c"
+        onchange={handleChange}
+        disabled={row.ActualSalesLock__c}>
+    </lightning-input>
 
-                                            <lightning-formatted-number
-                                                value={row.ActualSales__c}
-                                                format-style="currency">
-                                            </lightning-formatted-number>
+</td>
 
-                                        </template>
+<!-- Actual Sales Lock -->
+<td class="slds-text-align_center">
 
-                                        <template lwc:else>
-
-                                            <lightning-input
-                                                type="number"
-                                                variant="label-hidden"
-                                                step="0.01"
-                                                value={row.ActualSales__c}
-                                                data-id={row.Id}
-                                                data-field="ActualSales__c"
-                                                onchange={handleChange}>
-                                            </lightning-input>
-
-                                        </template>
-
-                                    </td>
-
-                                    <td class="slds-text-align_center">
-
-    <template lwc:if={row.isActualLocked}>
-        <lightning-input
-            type="checkbox"
-            checked
-            disabled
-            variant="label-hidden">
-        </lightning-input>
-    </template>
-
-    <template lwc:else>
-        <lightning-input
-            type="checkbox"
-            checked={row.ActualSalesLock__c}
-            data-id={row.Id}
-            data-field="ActualSalesLock__c"
-            variant="label-hidden"
-            onchange={handleChange}>
-        </lightning-input>
-    </template>
+    <lightning-input
+        type="checkbox"
+        checked={row.ActualSalesLock__c}
+        data-id={row.Id}
+        data-field="ActualSalesLock__c"
+        variant="label-hidden"
+        onchange={handleChange}>
+    </lightning-input>
 
 </td>
 
                                     <!-- Audited Sales -->
-                                    <td>
+                                    <!-- Audited Sales -->
+<td>
 
-                                       <template lwc:if={row.isAuditedLocked}>
+    <lightning-input
+        type="number"
+        variant="label-hidden"
+        step="0.01"
+        value={row.AuditedSales__c}
+        data-id={row.Id}
+        data-field="AuditedSales__c"
+        onchange={handleChange}
+        disabled={row.AuditedSalesLock__c}>
+    </lightning-input>
 
-                                            <lightning-formatted-number
-                                                value={row.AuditedSales__c}
-                                                format-style="currency">
-                                            </lightning-formatted-number>
+</td>
 
-                                        </template>
+<!-- Audited Sales Lock -->
+<td class="slds-text-align_center">
 
-                                        <template lwc:else>
-
-                                            <lightning-input
-                                                type="number"
-                                                variant="label-hidden"
-                                                step="0.01"
-                                                value={row.AuditedSales__c}
-                                                data-id={row.Id}
-                                                data-field="AuditedSales__c"
-                                                onchange={handleChange}>
-                                            </lightning-input>
-
-                                        </template>
-
-                                    </td>
-
-                                    <td class="slds-text-align_center">
-
-    <template lwc:if={row.isAuditedLocked}>
-        <lightning-input
-            type="checkbox"
-            checked
-            disabled
-            variant="label-hidden">
-        </lightning-input>
-    </template>
-
-    <template lwc:else>
-        <lightning-input
-            type="checkbox"
-            checked={row.AuditedSalesLock__c}
-            data-id={row.Id}
-            data-field="AuditedSalesLock__c"
-            variant="label-hidden"
-            onchange={handleChange}>
-        </lightning-input>
-    </template>
+    <lightning-input
+        type="checkbox"
+        checked={row.AuditedSalesLock__c}
+        data-id={row.Id}
+        data-field="AuditedSalesLock__c"
+        variant="label-hidden"
+        onchange={handleChange}>
+    </lightning-input>
 
 </td>
 

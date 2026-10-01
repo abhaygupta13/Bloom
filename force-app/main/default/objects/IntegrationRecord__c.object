@@ -194,6 +194,16 @@
                     <default>false</default>
                     <label>U</label>
                 </value>
+                <value>
+                    <fullName>SCHEDULE</fullName>
+                    <default>false</default>
+                    <label>SCHEDULE</label>
+                </value>
+                <value>
+                    <fullName>CANCEL</fullName>
+                    <default>false</default>
+                    <label>CANCEL</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
     </fields>
@@ -677,6 +687,21 @@
                     <fullName>COMMON_AREA_SR</fullName>
                     <default>false</default>
                     <label>COMMON_AREA_SR</label>
+                </value>
+                <value>
+                    <fullName>LEASING_SOA_SAP_INTEGRATION</fullName>
+                    <default>false</default>
+                    <label>LEASING_SOA_SAP_INTEGRATION</label>
+                </value>
+                <value>
+                    <fullName>PUSH_NOTIFICATION_INTEGRATION</fullName>
+                    <default>false</default>
+                    <label>PUSH_NOTIFICATION_INTEGRATION</label>
+                </value>
+                <value>
+                    <fullName>MICROSOFT_TEAMS_MEETING</fullName>
+                    <default>false</default>
+                    <label>MICROSOFT_TEAMS_MEETING</label>
                 </value>
             </valueSetDefinition>
         </valueSet>

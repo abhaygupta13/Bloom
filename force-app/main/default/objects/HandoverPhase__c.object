@@ -487,6 +487,11 @@
                     <default>false</default>
                     <label>HO Undertaking Letter</label>
                 </value>
+                <value>
+                    <fullName>Handover Signing Document</fullName>
+                    <default>false</default>
+                    <label>Handover Signing Document</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
         <visibleLines>4</visibleLines>

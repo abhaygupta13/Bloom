@@ -1,10 +1,23 @@
 <apex:page controller="LeasingOtherChargeTaxInvoicePDFHandler"
-           renderAs="pdf"
+           renderAs="{!IF(hasError, null, 'pdf')}"
            showHeader="false"
            sidebar="false">
 
+<apex:outputPanel rendered="{!hasError}">
+    <div style="font-family: Arial, sans-serif; margin: 60px auto; max-width: 650px; padding: 30px; border: 2px solid #c23934; border-radius: 8px; background-color: #fdf3f2; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div style="color: #c23934; font-size: 20px; font-weight: bold; margin-bottom: 15px;">
+            {!$Label.BL_TaxInvoiceCannotGenerateTitle}
+        </div>
+        <div style="color: #333; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
+            {!errorMessage}
+        </div>
+        <div style="color: #706e6b; font-size: 13px;">
+            {!$Label.BL_TaxInvoiceOtherChargeHelpText}
+        </div>
+    </div>
+</apex:outputPanel>
 
-
+<apex:outputPanel rendered="{!!hasError}">
 <!-- TITLE -->
 <table width="100%" style="border:none;">
     <tr>
@@ -148,11 +161,9 @@
                 <apex:param value="{!amount}" />
             </apex:outputText><!--{!amount}-->
         </td>
-        <td style="border:1px solid black; text-align:center;">5.00%</td>
+        <td style="border:1px solid black; text-align:center;"><apex:outputPanel rendered="{!showVat}"><apex:outputText value="{0,number,#0.00}"><apex:param value="{!vatRate}" /></apex:outputText>%</apex:outputPanel><apex:outputPanel rendered="{!NOT(showVat)}">-</apex:outputPanel></td>
         <td style="border:1px solid black; text-align:right;">
-            <apex:outputText value="{0,number,###,###.00}">
-                <apex:param value="{!vatAmount}" />
-            </apex:outputText><!--{!amount}-->
+            <apex:outputPanel rendered="{!showVat}"><apex:outputText value="{0,number,###,###.00}"><apex:param value="{!vatAmount}" /></apex:outputText></apex:outputPanel><apex:outputPanel rendered="{!NOT(showVat)}" style="display:block; text-align:center;">-</apex:outputPanel>
         </td>
         <td style="border:1px solid black; text-align:right;">
             <apex:outputText value="{0,number,###,###.00}">
@@ -173,10 +184,7 @@
         </td>
         <td style="border:1px solid black;"></td>
         <td style="border:1px solid black; text-align:right; font-weight:bold;">
-            <apex:outputText value="{0,number,###,###.00}">
-                <apex:param value="{!vatAmount}" />
-            </apex:outputText><!--{!amount}-->
-            <!-- {!vatAmount} -->
+            <apex:outputPanel rendered="{!showVat}"><apex:outputText value="{0,number,###,###.00}"><apex:param value="{!vatAmount}" /></apex:outputText></apex:outputPanel><apex:outputPanel rendered="{!NOT(showVat)}" style="display:block; text-align:center;">-</apex:outputPanel>
         </td>
         <td style="border:1px solid black; text-align:right; font-weight:bold;">
             <apex:outputText value="{0,number,###,###.00}">
@@ -223,10 +231,7 @@
             Total VAT Charged for the period
         </td>
         <td style="border-top:1px solid black; text-align:right; font-weight:bold;">
-            <apex:outputText value="{0,number,###,###.00}">
-                <apex:param value="{!vatAmount}" />
-            </apex:outputText><!--{!amount}-->
-            <!-- {!vatAmount} -->
+           <apex:outputPanel rendered="{!showVat}"><apex:outputText value="{0,number,###,###.00}"><apex:param value="{!vatAmount}" /></apex:outputText></apex:outputPanel><apex:outputPanel rendered="{!NOT(showVat)}" style="display:block; text-align:center;">-</apex:outputPanel>
         </td>
     </tr>
 </table>
@@ -330,4 +335,5 @@
     A National Holding Company.
     </div>
 </div>
+</apex:outputPanel>
 </apex:page>

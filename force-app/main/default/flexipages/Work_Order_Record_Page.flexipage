@@ -10,7 +10,7 @@
                             <value>GeneratePdf</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>WorkOrder.Make_New_Appointment</value>
+                            <value>WorkOrder.Make_New_Appointment_v2</value>
                             <visibilityRule>
                                 <booleanFilter>(1 OR 4) AND (2 OR 3)</booleanFilter>
                                 <criteria>

@@ -45,6 +45,10 @@
                     <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>hideSlackAction</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>numVisibleActions</name>
                     <value>3</value>
                 </componentInstanceProperties>
@@ -307,6 +311,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Door_Number__c</fieldItem>
                 <identifier>RecordDoor_Number__cField</identifier>
             </fieldInstance>
@@ -909,6 +917,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.MarketLeaseRent__c</fieldItem>
                 <identifier>RecordMarketLeaseRent_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Occupancy_Type__c</fieldItem>
+                <identifier>RecordOccupancy_Type_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-59965e42-3d3d-4821-b775-dbfbb8c53c45</name>

@@ -6,7 +6,7 @@ test Class: LeadTriggerHandlerTest
 Created Date: 29 AUG 2024
 *****************************************************************************************/
 
-public class LeadTriggerHelper {
+public without sharing class LeadTriggerHelper {
     
     private static final string LEAD_SOURCE_SOCIAL_MEDIA_CAMPAIGN { get { return 'Social Media'; } }
     private static final string MARKETING_LEAD_CREATED_BY_IDS { get { return 'MarketingLeadCreatedByIds'; } }
@@ -48,6 +48,7 @@ public class LeadTriggerHelper {
     private static final string LEASING_LEAD_TEAM {get { return 'Leasing';}}
     
     public static DateTime getduedateTime;
+    private static Map<Id, Id> unitAvailabilityLastValidatedFor = new Map<Id, Id>();
     
     public static void createNewContactCenterLeadTask(List<Lead> newList, Map<Id, Lead> oldMap){
         
@@ -95,8 +96,9 @@ public class LeadTriggerHelper {
         List<Task> taskList = new List<Task>();
         Task objTask;
         for(Lead objLead :newList){
+            Boolean isADHALead = objLead.Lead_Channel__c == 'API Integration' && objLead.LeadSource == 'Government Entity' && objLead.leadsubsource__c == 'ADHA' && objLead.ApplicationNumber__c != null;
             if(objLead.Status == LEAD_STATUS_INPROGRESS && objLead.OwnerId != oldMap.get(objLead.Id).OwnerId
-               && !taskMap.containsKey(objLead.Id) && objLead.OwnerId.getsObjectType() == User.SobjectType){
+               && !taskMap.containsKey(objLead.Id) && objLead.OwnerId.getsObjectType() == User.SobjectType && !isADHALead){
                    objTask = objActivityService.getActivity(TASK_SUBJECT_CC_DAY_1_CALL_1, System.today(), 
                                                             Date.today(), TASK_DESCRIPTION, 
                                                             TASK_STATUS, TASK_TYPE, TASK_PRIORITY, 1, objLead.OwnerId, objLead.Id); 
@@ -145,7 +147,8 @@ public class LeadTriggerHelper {
         String currentUserProfileId = UserInfo.getProfileId().substring(0,15);
         for(Lead objLead :newList){
             objLead.Emirates_Id__c = Utility.formatEmiratesId(objLead.Emirates_Id__c);
-            if(marketingLeadCreatedByUserIds.contains(currentUserId) && objLead.lead_channel__c != 'Broker Portal'){
+            Boolean isADHALead = objLead.Lead_Channel__c == 'API Integration' && objLead.LeadSource == 'Government Entity' && objLead.leadsubsource__c == 'ADHA' && objLead.ApplicationNumber__c != null;
+            if(marketingLeadCreatedByUserIds.contains(currentUserId) && objLead.lead_channel__c != 'Broker Portal' && !isADHALead){
                 objLead.OwnerId = contactCenterLeadQueueId;
             }
             if(marketingLeadCreatedByUserIds.contains(currentUserId) && String.IsBlank(objLead.leadTeam__c)){
@@ -229,11 +232,24 @@ public class LeadTriggerHelper {
         List<Id> salesmanagerProfileIdsList = salesManagerProfileIds.split(',');
         Set<Id> userOwnerIds = new Set<Id>();
         Map<String, LeadCategoryMapping__mdt> mappingData = objMetadataService.getLeadCategoryMapping();
+        
+        Set<Id> unitIds = new Set<Id>();
+
+        for (Lead objLead : newList) {
+            if (objLead.Unit__c != oldMap.get(objLead.Id).Unit__c && objLead.Unit__c != null) {
+                unitIds.add(objLead.Unit__c);
+            }
+        }
+        Map<Id, Unit__c> unitMap = new Map<Id, Unit__c>();
+        if (!unitIds.isEmpty()) {
+            unitMap = new Map<Id, Unit__c>(UnitService.getInstance().getUnitsByIds(unitIds));
+        }
+        
         for(Lead objLead :newList){
             if(objLead.Emirates_Id__c != oldMap.get(objLead.Id).Emirates_Id__c){
                 objLead.Emirates_Id__c = Utility.formatEmiratesId(objLead.Emirates_Id__c);
             }
-             if(String.isNotEmpty(objLead.FirstName) && objLead.FirstName != oldMap.get(objLead.Id).FirstName){
+            if(String.isNotEmpty(objLead.FirstName) && objLead.FirstName != oldMap.get(objLead.Id).FirstName){
                 objLead.FirstName = Utility.doStandardizeText(objLead.FirstName);
             }
             if(String.isNotEmpty(objLead.MiddleName) && objLead.MiddleName != oldMap.get(objLead.Id).MiddleName){
@@ -276,6 +292,21 @@ public class LeadTriggerHelper {
                 } else {
                     objLead.LeadCategory__c = 'Direct';
                     objLead.Lead_Type__c = 'Company Lead';
+                }
+            }
+
+            Boolean alreadyValidatedForThisUnit = unitAvailabilityLastValidatedFor.containsKey(objLead.Id) && unitAvailabilityLastValidatedFor.get(objLead.Id) == objLead.Unit__c;
+
+            if(objLead.Unit__c != oldMap.get(objLead.Id).Unit__c && !alreadyValidatedForThisUnit){
+                unitAvailabilityLastValidatedFor.put(objLead.Id, objLead.Unit__c);
+
+                if (objLead.Unit__c != null && unitMap.containsKey(objLead.Unit__c) && unitMap.get(objLead.Unit__c).Status__c != 'Available') {
+                    objLead.addError( 'The selected Unit is no longer available for booking.' );
+                } else {
+                    if(objLead.Unit__c != null){
+                        objLead.LastUnitBookedDate__c = System.now();
+                    }
+                    objLead.BookingStatus__c = objLead.Unit__c != null ? 'Booked' : null;
                 }
             }
         }
@@ -365,12 +396,12 @@ public class LeadTriggerHelper {
         for(Lead objLead : leadWithTaskList){
             for(Task objTask : objLead.Tasks){
                 if(objTask != null){
-                    if(objTask.Subject.contains('CC - Day') && (objLead.ContactCentreLeadStatus__c == LEAD_CC_STATUS_QUALIFIED || objLead.ContactCentreLeadStatus__c == LEAD_CC_STATUS_DISQUALIFIED)){
+                    if(objTask.Subject != null && objTask.Subject.contains('CC - Day') && (objLead.ContactCentreLeadStatus__c == LEAD_CC_STATUS_QUALIFIED || objLead.ContactCentreLeadStatus__c == LEAD_CC_STATUS_DISQUALIFIED)){
                         objTask.Description = TASK_COMPLETED_DESCRIPTION;
                         objTask.Status = TASK_COMPLETED_STATUS;
                         taskUpdateList.add(objTask);
                     } 
-                    else if ((objTask.Subject.contains('LO - Day') || objTask.Subject.contains('SM - Day')) && (objLead.LeadManagerStatus__c == LEAD_LM_STATUS_CONVERTED || objLead.LeadManagerStatus__c == LEAD_LM_STATUS_RETIRED)){
+                    else if ((objTask.Subject != null && (objTask.Subject.contains('LO - Day') || objTask.Subject.contains('SM - Day'))) && (objLead.LeadManagerStatus__c == LEAD_LM_STATUS_CONVERTED || objLead.LeadManagerStatus__c == LEAD_LM_STATUS_RETIRED)){
                         objTask.Description = TASK_COMPLETED_DESCRIPTION;
                         objTask.Status = TASK_COMPLETED_STATUS;
                         taskUpdateList.add(objTask);    
@@ -381,81 +412,39 @@ public class LeadTriggerHelper {
         objActivityService.updateTasks(taskUpdateList);
     }    
     
-    public static void sendEmailToLeadOwner(Map<Id, Lead> newMap){
-        MetadataService objMetadataService = MetadataService.getInstance();
-        EmailService objEmailService = EmailService.getInstance();
-        LeadService objLeadService = LeadService.getInstance();
-        String marketingLeadCreatedByIds = objMetadataService.getAppSettingTextValue(MARKETING_LEAD_CREATED_BY_IDS);
-        Id leadCreatedNotificationEmailTemplateId = objMetadataService.getAppSettingTextValue(MTD_LEAD_NOTIFICATION_EMAIL_TEMPLATE_ID);
-        Id noReplySalesITOWDId = objMetadataService.getAppSettingTextValue(MTD_NO_REPLY_SALESIT_OWEID_SETTING);
-        List<Messaging.SingleEmailMessage> emailList = new list<Messaging.SingleEmailMessage>();
-        List<Lead> leadList = objLeadService.getLeadByIds(newMap.keyset());
-        List<Id> marketingLeadCreatedByUserIds = marketingLeadCreatedByIds.split(',');
-        Id currentUserId = UserInfo.getUserId();
-        for(Lead objLead: leadList){
-            if(objLead.OwnerId.getSObjectType() == User.SObjectType  && objLead.Owner.Email!= NULL && !marketingLeadCreatedByUserIds.contains(currentUserId)) {
-                emailList.add(objEmailService.getSingleEmailMessageWithoutTargetObjectAsRecipient(new List<String>{objLead.Owner.Email}, leadCreatedNotificationEmailTemplateId, null, objLead.Id, noReplySalesITOWDId)); 
-            }
-        }
-        objEmailService.sendEmail(emailList);
-    }
-    
-    public static void sendEmailOnOwnerUpdate(List<Lead> newList, Map<Id, Lead> oldMap){
-        MetadataService objMetadataService = MetadataService.getInstance();
-        EmailService objEmailService = EmailService.getInstance();
-        LeadService objLeadService = LeadService.getInstance();
-        Id leadAssignedNotificationEmailTemplateId = objMetadataService.getAppSettingTextValue(MTD_LEAD_ASSIGNED_EMAIL_TEMPLATE_ID);
-        Id noReplySalesITOWDId = objMetadataService.getAppSettingTextValue(MTD_NO_REPLY_SALESIT_OWEID_SETTING);
-        List<Messaging.SingleEmailMessage> emailList = new list<Messaging.SingleEmailMessage>();
-        Set<Id> leadIds = new Set<Id>();
-        for(Lead objLead :newList){
-            if(objLead.OwnerId != oldMap.get(objLead.Id).OwnerId && objLead.OwnerId.getSObjectType() == User.SObjectType){
-                leadIds.add(objLead.Id);
-            } 
-        }
-        
-        if(!leadIds.isEmpty() && leadIds != NULL){
-            List<Lead> leadList = objLeadService.getLeadByIds(leadIds);
-            for(Lead objLead: leadList){
-                if(objLead.Owner.Email!=null)
-                    emailList.add(objEmailService.getSingleEmailMessageWithoutTargetObjectAsRecipient(new List<String>{objLead.Owner.Email}, leadAssignedNotificationEmailTemplateId, null, objLead.Id, noReplySalesITOWDId)); 
-            }
-            objEmailService.sendEmail(emailList);
-        }
-    }
-    
-    public static void sendWaitingListUpdateEmail(List<Lead> newList, Map<Id, Lead> oldMap){
-        MetadataService objMetadataService = MetadataService.getInstance();
-        EmailService objEmailService = EmailService.getInstance();
-        LeadService objLeadService = LeadService.getInstance();
-        Id managerStatusUpdateNotification = objMetadataService.getAppSettingTextValue(LEAD_WAITING_LIST_UPDATE_EMAIL);
-        Id noReplySalesITOWDId = objMetadataService.getAppSettingTextValue(MTD_NO_REPLY_LEASING_OWEID_SETTING );
-        List<Messaging.SingleEmailMessage> emailList = new list<Messaging.SingleEmailMessage>();
-        Set<Id> leadIds = new Set<Id>();
-        for(Lead objLead :newList){
-            if(objLead.LeadTeam__c == LEASING_LEAD_TEAM && objLead.LeadManagerStatus__c != Null && 
-               objLead.LeadManagerStatus__c != oldMap.get(objLead.Id).LeadManagerStatus__c && 
-               objLead.LeadManagerStatus__c == LEAD_LM_STATUS_WAITINGLIST
-              ){
-                leadIds.add(objLead.Id);
-            } 
-        }
-        if(!leadIds.isEmpty() && leadIds != NULL){
-            List<Lead> leadList = objLeadService.getLeadByIds(leadIds);
-            String orgUrl = System.Url.getOrgDomainUrl().toExternalForm();
-            for(Lead objLead: leadList){
-                if(objLead.Owner.Email!=null){
-                    //Messaging.SingleEmailMessage mail = objEmailService.getSingleEmailMessageWithoutTargetObjectAsRecipient(new List<String>{objLead.Owner.Email}, managerStatusUpdateNotification, null, objLead.Id, noReplySalesITOWDId);
-                    Messaging.SingleEmailMessage mail = Messaging.renderStoredEmailTemplate(managerStatusUpdateNotification, null, null );
-                    mail.setOrgWideEmailAddressId(noReplySalesITOWDId);
-                    mail.setToAddresses(new List<String>{objLead.Owner.Email});
-                    mail.htmlBody = mail.htmlBody.replace('{LeadOwner}',objLead.Owner.Name);
-                    mail.htmlBody = mail.htmlBody.replace('{LeadName}','<a href="'+orgUrl+'/'+objLead.Id+'">'+objLead.Name+'</a>');
-                    emailList.add(mail); 
-            
+    public static void blockLeadUnit(List<Lead> newList, Map<Id, Lead> oldMap){
+        UnitService objUnitService = UnitService.getInstance();
+        List<Unit__c> unitsToUpdate = new List<Unit__c>();
+
+        for(Lead objLead : newList){
+            Id oldUnitId = oldMap.get(objLead.Id).Unit__c;
+
+            if(objLead.Unit__c != oldUnitId){
+                if(objLead.Unit__c != null){
+                    Unit__c unitObj = new Unit__c(Id = objLead.Unit__c);
+                    unitObj.Status__c = 'Blocked';
+                    unitObj.BlockedForLead__c = objLead.Id;
+                    unitObj.BlockedReason__c = 'ADHA Customer';
+                    unitObj.BlockedDate__c = System.now();
+                    unitObj.Block_Till__c = System.now().addDays(14);
+                    unitObj.BlockedBy__c = (objLead.OwnerId != null && objLead.OwnerId.getSObjectType() == User.SObjectType) ? objLead.OwnerId : null;
+                    unitsToUpdate.add(unitObj);
+                }
+
+                if(oldUnitId != null){
+                    unitsToUpdate.add(new Unit__c(
+                        Id = oldUnitId,
+                        Status__c = 'Available',
+                        BlockedForLead__c = null,
+                        BlockedReason__c = null,
+                        BlockedDate__c = null,
+                        Block_Till__c = null,
+                        BlockedBy__c = null
+                    ));
                 }
             }
-            objEmailService.sendEmail(emailList);
         }
+
+        objUnitService.updateUnits(unitsToUpdate);
     }
 }

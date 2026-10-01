@@ -118,7 +118,7 @@
     </classAccesses>
     <classAccesses>
         <apexClass>AppointmentController</apexClass>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>AppointmentControllerTest</apexClass>
@@ -3089,6 +3089,26 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>PushNotificationService</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PushNotificationServiceTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PushNotificationTriggerHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PushNotificationTriggerHelper</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PushNotificationTriggerHelperTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>QMSTokenAssignmentTriggerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -3701,6 +3721,18 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>ServiceReportTriggerHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ServiceReportTriggerHelper</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ServiceReportTriggerHelperTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ServiceRequestController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -3754,6 +3786,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>SlaProcessService</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SobjectBatch</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SobjectBatchTest</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -9034,6 +9074,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Handover__c.Tammfeesamount__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Handover__c.ThirdPaymentReminderEmail_Date__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -9101,6 +9146,11 @@
         <editable>false</editable>
         <field>Handover__c.isCurrentUserHOAgent__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Handover__c.is_Tamm_Fees_Collected__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -10843,6 +10893,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>LeasingOfficerCommission__c.PostingDate__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>LeasingOfficerCommission__c.RefDocno__c</field>
         <readable>true</readable>
@@ -11238,6 +11293,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>LeasingOrder__c.OccupantName__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>LeasingOrder__c.OfferValidityDays__c</field>
         <readable>true</readable>
@@ -11376,6 +11436,11 @@
         <editable>true</editable>
         <field>LeasingOrder__c.SAPConditionFrequency__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>LeasingOrder__c.SOAIntegrationMessage__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -14333,6 +14398,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Project__c.IsADHAProject__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Project__c.IsActive__c</field>
         <readable>false</readable>
@@ -14964,6 +15034,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Project__c.TentativeHandoverTimeline__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Project__c.ThirdPaymentReminder__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -15075,6 +15150,86 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Prospect__c.Title__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotificationTemplate__c.Body__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotificationTemplate__c.DynamicParams__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotificationTemplate__c.Language__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotificationTemplate__c.NotificationType__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotificationTemplate__c.SenderBloomPartnersID__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotificationTemplate__c.TemplateAPIName__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotificationTemplate__c.Title__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotification__c.Body__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotification__c.Contact__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotification__c.Email__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotification__c.NotificationType__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotification__c.ObjectAPIName__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotification__c.RecordId__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotification__c.SenderBloomPartnersID__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotification__c.Title__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PushNotification__c.Type__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -19194,6 +19349,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ServiceCatalog__c.IsAvailableForADHACustomer__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ServiceCatalog__c.IsAvailableForSuperApp__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -20139,6 +20299,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Unit__c.ADHAUnitNumber__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Unit__c.ADMAddressingNumber__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -20310,6 +20475,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Unit__c.BlockedForCustomer__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Unit__c.BlockedForLead__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -20550,6 +20720,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Unit__c.External_Saleable_Area__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Unit__c.FacadeOption__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -21384,6 +21559,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Unit__c.Typology__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Unit__c.UnitCategory__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -21631,6 +21811,11 @@
         <editable>true</editable>
         <field>User__c.Temporary_Password__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>User__c.UUID__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -22566,6 +22751,9 @@
         <layout>Contact-Contact Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>ContactRequest-Contact Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>ContentAsset-Asset File Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -22994,6 +23182,12 @@
         <layout>Prospect__c-Prospect Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>PushNotificationTemplate__c-Push Notification Template Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PushNotification__c-Push Notification Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>QMSTokenAssignment__c-QMS Token Assignment Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -23298,6 +23492,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>VehicleParking__c-Vehicle Parking Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>VideoCall-Video Call Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Visitor_Log__c-Visitor Log Layout</layout>
@@ -24181,6 +24378,14 @@
     <tabVisibilities>
         <tab>Prospect__c</tab>
         <visibility>DefaultOff</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>PushNotificationTemplate__c</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>PushNotification__c</tab>
+        <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>QMSToken__c</tab>

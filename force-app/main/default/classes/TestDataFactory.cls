@@ -611,6 +611,17 @@ public class TestDataFactory {
         insert slots;
         return slots;
     }
+    
+    
+    public static Event buildEvent(Id slotId, String appointmentStatus, DateTime startDateTime) {
+        return new Event(
+        Subject = 'Test Appointment',
+        StartDateTime = startDateTime,
+        EndDateTime = startDateTime.addHours(1),
+        AppointmentStatus__c = appointmentStatus,
+        AppointmentSlot__c = slotId
+            );
+    }
 
     public static Event createEvent(Id whoId, DateTime startDateTime, DateTime endDateTime, String location) {
         Event evt = new Event(
@@ -650,4 +661,17 @@ public class TestDataFactory {
         insert evt;
         return evt;
     }
+
+    public static Lead createADHATestLead() {
+        Lead testLead = TestDataFactory.createLead('Test Lead','0501234567','testlead@example.com');
+
+        testLead.Lead_Channel__c = 'API Integration';
+        testLead.LeadSource = 'Government Entity';
+        testLead.leadsubsource__c = 'ADHA';
+        testLead.ApplicationNumber__c = 'APP-001';
+
+        return testLead;
+    }
+    
+    
 }

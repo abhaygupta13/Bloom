@@ -182,14 +182,14 @@ public without sharing class UnitService {
     //Get unit records by unit ids
     public List<Unit__c> getUnitsByIds(set<Id> unitIds){
         return [SELECT Id, Name,SAP_Unit_Number__c,Project__c,BuildingSectionName__r.Project__c,Active_Sales_Order__r.Account__c,Active_Sales_Order__c,GIS_Plot_No__c,UnitType__c,UnitModel__c,PlotArea__c,ADMPlotNumber__c,
-                GIS_Object_Id__c,Status__c,SaleableArea__c,SellingPrice__c,Send_to_GIS__c,Net_Amount_Selling_Price__c,HandoverPhase__c,
+                GIS_Object_Id__c,Status__c,SaleableArea__c,SellingPrice__c,Send_to_GIS__c,Net_Amount_Selling_Price__c,HandoverPhase__c,ADHAUnitNumber__c,
                 Project__r.Name,Project__r.GIS_Service_URL__c,Customer_Name__c, Location__Longitude__s, Location__Latitude__s FROM Unit__c WHERE Id IN :unitIds];
     }
     
     //Get unit records by unit names
     public List<Unit__c> getUnitsByNames(set<String> unitNames){
         return [SELECT Id, Name,GIS_Plot_No__c,UnitType__c,UnitModel__c,PlotArea__c,ADMPlotNumber__c,
-                GIS_Object_Id__c,Status__c,SaleableArea__c,SellingPrice__c,Send_to_GIS__c,
+                GIS_Object_Id__c,Status__c,SaleableArea__c,SellingPrice__c,Send_to_GIS__c,ADHAUnitNumber__c,
                 Project__r.Name,Project__r.GIS_Service_URL__c,Customer_Name__c, Location__Longitude__s, Location__Latitude__s FROM Unit__c WHERE name IN :unitNames];
     } 
     
@@ -398,7 +398,7 @@ public without sharing class UnitService {
         paramsMap.put('Param10',String.valueof(unit.SaleableArea__c));
         paramsMap.put('Param11',unit.GISServiceURL__c);
         paramsMap.put('Param12',unit.GIS_Plot_No__c);
-        paramsMap.put('Param13',unit.Name);
+        paramsMap.put('Param13', String.isNotBlank(unit.ADHAUnitNumber__c) ? unit.ADHAUnitNumber__c : unit.Name);
         return objIntegrationRecordService.getIntegrationRecord('Insert', 'Unit__c', unit.Id, paramsMap);
     }
     

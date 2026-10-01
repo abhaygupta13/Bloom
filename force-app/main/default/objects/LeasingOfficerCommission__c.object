@@ -189,7 +189,11 @@
     </fields>
     <fields>
         <fullName>DueDate__c</fullName>
-        <formula>LeasingOrder__r.LeasingStartDate__c</formula>
+        <formula>IF(
+NOT(ISBLANK(PostingDate__c)),
+PostingDate__c,
+LeasingOrder__r.LeasingStartDate__c
+)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Due Date</label>
         <required>false</required>
@@ -284,6 +288,13 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PostingDate__c</fullName>
+        <label>Posting Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>RefDocno__c</fullName>

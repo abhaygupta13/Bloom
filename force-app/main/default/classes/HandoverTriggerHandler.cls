@@ -23,6 +23,7 @@ public class HandoverTriggerHandler implements ITriggerHandler{
         HandoverTriggerHelper.beforeInsert((List<Handover__c>) newList);  
         HandoverTriggerHelper.updateContactId((List<Handover__c>) newList, null);
         HandoverTriggerHelper.updateHoAgentAssignedUser(null, (List<Handover__c>) newList);
+        HandoverTriggerHelper.updateStatus((List<Handover__c>) newList, null);
     }
     
     public void afterInsert(List<sObject> newList , Map<Id, sObject> newMap) { 
@@ -43,6 +44,7 @@ public class HandoverTriggerHandler implements ITriggerHandler{
         //HandoverTriggerHelper.createDeveloperNocTask((Map<Id, Handover__c>)oldMap, (List<Handover__c>) newList);
         //HandoverTriggerHelper.validationErrorForHOStatus((Map<Id, Handover__c>) newMap, (Map<Id, Handover__c>)oldMap);
         HandoverTriggerHelper.updateHoAgentAssignedUser((Map<Id, Handover__c>)oldMap, (List<Handover__c>) newList);
+        HandoverTriggerHelper.updateStatus((List<Handover__c>) newList, (Map<Id, Handover__c>)oldMap);
     }
     
     public void afterUpdate(List<sObject> newList, Map<Id, sObject> newMap,  List<sObject> oldList, Map<Id, sObject> oldMap) {

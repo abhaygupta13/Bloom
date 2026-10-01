@@ -68,11 +68,15 @@ export default class LeasingDocGenAction extends NavigationMixin(LightningElemen
                 this.records = result;
                 console.log('result ::::: ' + JSON.stringify(result));
                 // Add "Run All" and filter "Broker Acknowledgement Form" if necessary
-                this.options = [...result.map((doc) => ({
-                            label: doc.Type__c, // Use Type__c as label
-                            value: doc.Id, // Use Id as value
+                this.options = [
+                    ...result
+                        .filter(doc => doc.Type__c !== 'Leasing Exit Letter')
+                        .map(doc => ({
+                            label: doc.Type__c,
+                            value: doc.Id,
                         })),
                 ];
+
             })
             .catch((error) => {
                 console.error(error);

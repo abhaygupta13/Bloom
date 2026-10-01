@@ -172,8 +172,8 @@ public inherited sharing class InstallmentLineService {
 	* Get Installment Lines records by Installment Number (1,2) and Broker Commission not created and have Broker Agency on Parent Sales Order
 	*/
     public List<InstallmentLines__c> getFirstNSecInstallmentByCommissionCreated(Boolean isBrokerCommissionCreated, Set<Integer> installmentNumberSet, String status){
-        return [SELECT Id, InstallmentNumber__c , BrokerCommissionCreated__c, InstallmentAmount__c, ClearedAmount__c, SalesOrder__c,SalesOrder__r.Broker_Agency__c 
-                ,SalesOrder__r.Opportunity__r.BrokerAgencyAccount__c,SalesOrder__r.Unit__r.Project__c
+        return [SELECT Id, InstallmentNumber__c , BrokerCommissionCreated__c, InstallmentAmount__c, ClearedAmount__c, SalesOrder__c,SalesOrder__r.Broker_Agency__c, 
+                SalesOrder__r.Opportunity__r.BrokerAgencyAccount__c,SalesOrder__r.Unit__r.Project__c,SalesOrder__r.PreviousSalesOrder__c
         FROM InstallmentLines__c WHERE ClearedAmount__c > 0 AND  BrokerCommissionCreated__c =: isBrokerCommissionCreated AND InstallmentNumber__c IN :installmentNumberSet 
         AND SalesOrder__r.Broker_Agency__c != null AND SalesOrder__r.Status__c =: status AND SalesOrder__r.SoldDate__c != null AND SalesOrder__r.Resale__c = FALSE];
     }

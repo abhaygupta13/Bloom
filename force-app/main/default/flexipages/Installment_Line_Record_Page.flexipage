@@ -12,7 +12,7 @@
                         <valueListItems>
                             <value>InstallmentLines__c.StopLPFCalculation</value>
                             <visibilityRule>
-                                <booleanFilter>1 OR 2</booleanFilter>
+                                <booleanFilter>1 OR 2 OR 3</booleanFilter>
                                 <criteria>
                                     <leftValue>{!$User.Profile.Name}</leftValue>
                                     <operator>EQUAL</operator>
@@ -22,6 +22,11 @@
                                     <leftValue>{!$User.Profile.Name}</leftValue>
                                     <operator>EQUAL</operator>
                                     <rightValue>CRM Team</rightValue>
+                                </criteria>
+                                <criteria>
+                                    <leftValue>{!$User.Profile.Name}</leftValue>
+                                    <operator>EQUAL</operator>
+                                    <rightValue>CRM Finance Operation Team</rightValue>
                                 </criteria>
                             </visibilityRule>
                         </valueListItems>
@@ -127,6 +132,10 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.TotalRebateAmount__c</fieldItem>
                 <identifier>RecordTotalRebateAmount__cField</identifier>
             </fieldInstance>
@@ -193,6 +202,23 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.OriginalPPAmount__c</fieldItem>
                 <identifier>RecordOriginalPPAmount_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.SalesOrder__c</fieldItem>
+                <identifier>RecordSalesOrder_cField</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!$User.Alias}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>dmigr</rightValue>
+                    </criteria>
+                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <name>Facet-1d2845b6-af07-4df3-8c9d-55f7a7867713</name>

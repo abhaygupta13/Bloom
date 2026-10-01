@@ -9,7 +9,7 @@ TestClass   : LeadTriggerHandlerTest
 Sr.No.     version              Date                Details
 1.          V1.0                                Initial Version 
 ****************************************************************************************************************/
-public class LeadTriggerHandler  implements ITriggerHandler{
+public without sharing class LeadTriggerHandler  implements ITriggerHandler{
     
     //Use this variable to disable this trigger from transaction
     public static Boolean isTriggerDisabled = false;
@@ -24,7 +24,7 @@ public class LeadTriggerHandler  implements ITriggerHandler{
     }
     
     public void afterInsert(List<sObject> newList , Map<Id, sObject> newMap) {
-        LeadTriggerHelper.sendEmailToLeadOwner((Map<Id, Lead>) newMap);
+
     }
     
     public void beforeUpdate(List<sObject> newList, Map<Id, sObject> newMap, List<sObject> oldList, Map<Id, sObject> oldMap) {
@@ -35,9 +35,8 @@ public class LeadTriggerHandler  implements ITriggerHandler{
         LeadTriggerHelper.createNewContactCenterLeadTask((List<Lead>)newList,(Map<Id,Lead>)oldMap); 
         LeadTriggerHelper.createQualifiedLeadTask((List<Lead>)newList,(Map<Id,Lead>)oldMap);
         LeadTriggerHelper.createLeadManagerTask((List<Lead>)newList,(Map<Id,Lead>)oldMap);
-        LeadTriggerHelper.sendEmailOnOwnerUpdate((List<Lead>)newList,(Map<Id,Lead>)oldMap); 
         LeadTriggerHelper.markTaskComplete((List<Lead>)newList, (Map<Id,Lead>)oldMap); 
-        LeadTriggerHelper.sendWaitingListUpdateEmail((List<Lead>)newList,(Map<Id,Lead>)oldMap); 
+        LeadTriggerHelper.blockLeadUnit((List<Lead>)newList,(Map<Id,Lead>)oldMap);
     }
     
     public void beforeDelete(List<sObject> oldList , Map<Id, sObject> oldMap) {

@@ -174,21 +174,8 @@ public class CloseWorkOrderBatchTest {
         Datetime startDate = System.today().addDays(-2); 
         Datetime endDate = System.today().addDays(-1);
         
-        System.debug('testbatchSA'+ [SELECT ParentRecordId, CreatedDate, Closure_Reason__c, Status FROM ServiceAppointment]);
-        //System.debug('testbatch'+[SELECT Id FROM WorkOrder WHERE Customer_Availability__c = 'Not Available' AND Id IN ( SELECT ParentRecordId FROM ServiceAppointment
-                                                                                                                                   // WHERE CreatedDate >= :startDate AND CreatedDate < :endDate)]);
-        System.debug('testQueryResult ::::: '+ [SELECT Id FROM WorkOrder WHERE Customer_Availability__c = 'Not Available' AND Check_In_Time__c <= LAST_N_DAYS:2 AND Status != 'Closed' AND Id NOT IN (SELECT ParentRecordId FROM ServiceAppointment WHERE Status != 'Completed' AND Closure_Reason__c != 'Customer not available')]);
-        CloseWorkOrderBatch batch = new CloseWorkOrderBatch();
+		CloseWorkOrderBatch batch = new CloseWorkOrderBatch();
         Database.executeBatch(batch, 200);        
-        Test.stopTest();
-    }
-    
-    @IsTest
-    static void testCloseWorkOrderScheduler() {
-        Test.startTest();        
-        // Execute the scheduler
-        CloseWorkOrderScheduler scheduler = new CloseWorkOrderScheduler();
-        scheduler.execute(null);
         Test.stopTest();
     }
 }

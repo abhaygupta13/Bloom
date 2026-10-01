@@ -472,6 +472,19 @@ const finalRent = appliedRent;
         const unitId = event.target.dataset.id;
         this.selectedUnits[unitId] = event.target.checked;
         this.selectedUnit = this.unitDataTable.find(unit => unit.unitDetails.Id === unitId)?.unitDetails || null;
+
+        // Validation: Check if SAP Unit Number is missing
+        if (this.selectedUnit && (!this.selectedUnit.SAP_Unit_Number__c || this.selectedUnit.SAP_Unit_Number__c.trim() === '')) {
+            this.dispatchEvent(new ShowToastEvent({
+                title: "Missing SAP Unit Number",
+                message: "SAP Unit Number is missing for this unit (" + (this.selectedUnit.LeasingUnitNumber__c || this.selectedUnit.Name) + "). Please update the SAP Unit Number before selecting.",
+                variant: "error"
+            }));
+            event.target.checked = false;
+            this.selectedUnits[unitId] = false;
+            this.selectedUnit = null;
+            return;
+        }
         this.isBloomEmployeeChecked = false
         this.isBloomSisterEmployeeChecked = false;
 
@@ -555,6 +568,14 @@ const finalRent = appliedRent;
     handleNext(event) {
         if (!this.selectedUnit) {
             this.dispatchEvent(new ShowToastEvent({ title: "Error", message: "Please select a unit!", variant: "error" }));
+            return;
+        }
+        if (!this.selectedUnit.SAP_Unit_Number__c || this.selectedUnit.SAP_Unit_Number__c.trim() === '') {
+            this.dispatchEvent(new ShowToastEvent({ 
+                title: "Validation Error", 
+                message: "Selected unit does not have an SAP Unit Number. Please update the SAP Unit Number before proceeding.", 
+                variant: "error" 
+            }));
             return;
         }
         if(this.propertyType == 'Residential' && this.bedrooms <= 3 ){

@@ -142,9 +142,9 @@ export default class ReceiptAllocation extends NavigationMixin(LightningElement)
             if (checkSame) {
                 let unique = allocation.account + '_' + allocation.unitNumber + '_' + allocation.installmentNoOtherCharge;
                 if (uniqueList.length > 0 && uniqueList.includes(unique)) {
-                    isError = true;
-                    errorMessage = 'Please do not select the same Installment number or other changes. Kindly use the existing one.'
-                    break;
+                   /* isError = true;
+                    errorMessage = 'Please do not select the same Installment number or other changes. Kindly use the existing one.' 
+                    break; */
                 } else {
                     uniqueList.push(unique);
                 }

@@ -9,7 +9,7 @@ Sr.No.  version              Date                Details
 1.      V1.0             	 11/06/2024           Initial Version  
 ****************************************************************************************************************/ 
 
-public class EventTriggerHandler implements ITriggerHandler{
+public without sharing class EventTriggerHandler implements ITriggerHandler{
     
     //Use this variable to disable this trigger from transaction
     public static Boolean isTriggerDisabled = false;
@@ -20,7 +20,8 @@ public class EventTriggerHandler implements ITriggerHandler{
     }
     
     public void beforeInsert(List<sObject> newList) {
-        EventTriggerHelper.checkValidationAndUpdateHandover((List<Event>) newList);        
+        EventTriggerHelper.checkValidationAndUpdateHandover((List<Event>) newList);    
+        EventTriggerHelper.handleBeforeInsert((List<Event>) newList);    
         
     }
     
@@ -33,6 +34,7 @@ public class EventTriggerHandler implements ITriggerHandler{
     
     public void beforeUpdate(List<sObject> newList, Map<Id, sObject> newMap, List<sObject> oldList, Map<Id, sObject> oldMap) {
         EventTriggerHelper.updateServiceResourceAbsenceOnEventChange((List<Event>) newList,(Map<id,Event>)oldMap);
+        EventTriggerHelper.handleBeforeUpdate((List<Event>) newList, (Map<Id, Event>) oldMap);
     }
     
     public void afterUpdate(List<sObject> newList, Map<Id, sObject> newMap,  List<sObject> oldList, Map<Id, sObject> oldMap) {

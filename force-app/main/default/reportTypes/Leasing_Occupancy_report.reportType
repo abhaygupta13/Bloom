@@ -66,6 +66,21 @@
             <field>DoNotSendPaymentReminder__c</field>
             <table>Unit__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ADHAUnitNumber__c</field>
+            <table>Unit__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FacadeOption__c</field>
+            <table>Unit__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Typology__c</field>
+            <table>Unit__c</table>
+        </columns>
         <masterLabel>Units</masterLabel>
     </sections>
     <sections>
@@ -147,6 +162,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>RentForPeriod__c</field>
+            <table>Unit__c.Leasing_Contracts__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>OccupantName__c</field>
             <table>Unit__c.Leasing_Contracts__r</table>
         </columns>
         <masterLabel>Leasing Orders</masterLabel>

@@ -369,14 +369,14 @@ public without sharing class WorkOrderTriggerHelper {
                         if(wo.Type_of_Incident__c == OUT_OF_SCOPE) {
                             servAppRec.Job_Status__c = UNDER_SCOPE;
                         }
+                        serviceAppointmentListToUpdate.add(servAppRec);
                     }
-                    serviceAppointmentListToUpdate.add(servAppRec);
                 }
             }
         }
         
         if(!serviceAppointmentListToUpdate.isEmpty()) {
-            serviceAppointmentListToUpdate = objServiceAppointmentService.updateServiceAppointmentsWithoutTrigger(serviceAppointmentListToUpdate);
+            objServiceAppointmentService.updateServiceAppointmentsWithoutTrigger(serviceAppointmentListToUpdate);
         }
     }
     
@@ -430,7 +430,7 @@ public without sharing class WorkOrderTriggerHelper {
     }
     
     private static Boolean isCustomerNotAvailableWhenCheckedIn(WorkOrder wo, WorkOrder oldWO) { 
-        return oldWO != null && wo.Check_In__c == true && wo.Customer_Availability__c == NOT_AVAILABLE && oldWO.Check_In__c != wo.Check_In__c && wo.Status != CLOSED; 
+        return oldWO != null && wo.Check_In__c && wo.Customer_Availability__c == NOT_AVAILABLE && oldWO.Check_In_Time__c != wo.Check_In_Time__c && wo.Status != CLOSED; 
     }
 
     private static Boolean isCustomerNotAvailableAndWOClosed(WorkOrder wo) { 

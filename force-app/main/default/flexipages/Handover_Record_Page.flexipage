@@ -7,16 +7,13 @@
                     <name>actionNames</name>
                     <valueList>
                         <valueListItems>
-                            <value>Edit</value>
-                        </valueListItems>
-                        <valueListItems>
                             <value>Handover__c.Complete_KHO_Process</value>
                             <visibilityRule>
                                 <booleanFilter>1 OR 2</booleanFilter>
                                 <criteria>
                                     <leftValue>{!Record.Sub_Status__c}</leftValue>
                                     <operator>EQUAL</operator>
-                                    <rightValue>Schedule KHO Appointment</rightValue>
+                                    <rightValue>Handover Signing Document (KHO) Appointment</rightValue>
                                 </criteria>
                                 <criteria>
                                     <leftValue>{!Record.Sub_Status__c}</leftValue>
@@ -45,7 +42,7 @@
                                     <rightValue>tawadh@bloomholding.com</rightValue>
                                 </criteria>
                                 <criteria>
-                                    <leftValue>{!$User.Profile.Name}</leftValue>
+                                    <leftValue>{!$User.Username}</leftValue>
                                     <operator>EQUAL</operator>
                                     <rightValue>System Administrator</rightValue>
                                 </criteria>
@@ -990,6 +987,16 @@
                 <identifier>RecordEvaluationFees_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Tammfeesamount__c</fieldItem>
+                <identifier>RecordTammfeesamount_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-c4f2e64d-4afe-47a4-ac87-55d7bc518447</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -1142,6 +1149,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Payment_Date__c</fieldItem>
                 <identifier>RecordPayment_Date_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.is_Tamm_Fees_Collected__c</fieldItem>
+                <identifier>Recordis_Tamm_Fees_Collected_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-37f16cf0-62c0-418d-b8d5-40a07710c4a0</name>
@@ -2006,6 +2023,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Operation_Team_Assigned_User__c</fieldItem>
                 <identifier>RecordOperation_Team_Assigned_User_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.FinanceTeamAssingedUser__c</fieldItem>
+                <identifier>RecordFinanceTeamAssingedUser_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>

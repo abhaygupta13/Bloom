@@ -54,6 +54,8 @@ public class LeasingSOAPDFHandler {
     public Decimal totalInvoice {get; set;}
     public Decimal totalReceipt {get; set;}
     public Decimal totalBalance {get; set;}
+    private static final string INTEGRATION_TYPE_SOA_PDF_SAP { get { return 'LEASING_SOA_SAP_INTEGRATION'; } }  
+    private static final string LEASINGORDER_OBJECT_API_NAME { get { return 'LeasingOrder__c'; } }  
 
     public class PaymentPlanWrapper{
         public String installmentDueDate {get; set;}
@@ -61,7 +63,7 @@ public class LeasingSOAPDFHandler {
         public Decimal formattedAmount {get; set;}
         public Decimal formattedCollectedAmount {get; set;}
         public Decimal formattedOustandingAmount {get; set;}
-        public String installmentDocNumber {get; set;}  
+        public String installmentDocNumber {get; set;}
     }
 
     public class OtherChargeWrapper{
@@ -487,6 +489,55 @@ public class LeasingSOAPDFHandler {
     //     statementRows.sort(new StatementRowComparator());
     //     return statementRows;
     // }
+    @AuraEnabled
+    public static void generateSOA_SAP_PDF(Id leasingOrderId,Date statementDate){
+        LeasingOrderService leasingService = LeasingOrderService.getInstance();
+        LeasingOrder__c leasingOrder = leasingService.getLeasingOrderById(leasingOrderId);
+        
+        IntegrationRecord__c integrationRec = getIntegrationRecordForSOAPDF(leasingOrder,statementDate);
+
+        IntegrationRecordService integService = IntegrationRecordService.getInstance();
+        List<IntegrationRecord__c> integratedRec = integService.insertIntegrationRecords(new List<IntegrationRecord__c>{integrationRec});
+    }
+
+    public static IntegrationRecord__c getIntegrationRecordForSOAPDF(LeasingOrder__c leasingOrder,Date statementDate){
+        Map<String,String> paramsMap = new Map<String,String>();
+        IntegrationRecordService integService = IntegrationRecordService.getInstance();
+
+
+        paramsMap.put('Param1','LSOA');
+        
+        paramsMap.put('Param2', leasingOrder.Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c);
+
+        paramsMap.put('Param3',leasingOrder.LeasingSAPContractId__c);
+
+        paramsMap.put('Param4', leasingOrder.SAPBPNumber__c);
+
+        paramsMap.put('Param5', String.valueOf(leasingOrder.Unit__r.SAP_Business_Entity_No__c));
+
+        paramsMap.put('Param6', leasingOrder.Unit__r.LeasingUnitNumber__c );
+
+        Date selectedDate = statementDate != null ? statementDate : System.today();
+        paramsMap.put('Param7',String.valueOf(Utility.formatDateToYYYYMMDD(selectedDate)));
+        paramsMap.put('Param8', 'X');
+        paramsMap.put('Param9', 'X'); 
+        paramsMap.put('Param10', 'X');
+
+        paramsMap.put('Param11', leasingOrder.Opportunity__r.Account.Name + ' - Statement of Account');
+        paramsMap.put('Param12', leasingOrder.Opportunity__r.Account.Name + '_SOA.pdf');
+
+        DocumentService docService = DocumentService.getInstance();
+        List<Document__c> leasingOrderDocs = docService.getDocumentsByLeasingOrderId(leasingOrder.Id);
+        Id docId;
+        for(Document__c doc : leasingOrderDocs){
+            if(doc.Document_Name__c == 'Statement of Account - Full SAP'){
+                docId = doc.Id;
+            }
+        }
+        paramsMap.put('Param13',docId);
+       
+        return integService.getIntegrationRecord(INTEGRATION_TYPE_SOA_PDF_SAP, '','','', LEASINGORDER_OBJECT_API_NAME, leasingOrder.Id,paramsMap);
+    }
 
     public class StatementRowComparator implements Comparator<StatementRowWrapper> {
         public Integer compare(StatementRowWrapper a, StatementRowWrapper b) {

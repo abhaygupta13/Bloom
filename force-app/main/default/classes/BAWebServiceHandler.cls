@@ -204,6 +204,32 @@ public class BAWebServiceHandler {
         String message = '';
         getSuccessResponse(response, message);
     }
+
+    public void getAuthorizedUAEPassLoginUser(Map<String, Object> data){
+        Map<String, Object> response = new Map<String, Object>();
+        String eid = (String)data.get('eid');
+        String uuid = (String)data.get('uuid');
+        String phoneNumber = (String)data.get('phone_number');
+        String email = (String)data.get('email');
+
+        response = BAWebServiceHelper.getInstance().getAuthorizedUAEPassLoginUser(eid, uuid, phoneNumber, email);
+        String message = '';
+        getSuccessResponse(response, message);
+    }
+
+     public void manageAppointment(Map<String, Object> data) {
+        Map<String, Object> response = new Map<String, Object>();
+        String customerId = (String)data.get('customer_id');
+        String actionType = (String)data.get('action_type');
+        String reason = (String)data.get('reason');
+        String appointmentSlotId = (String)data.get('appointment_slot_id');
+        String eventId = (String)data.get('event_id');
+        String mode = (String)data.get('mode');
+
+        response = BAWebServiceHelper.getInstance().manageAppointment(customerId, appointmentSlotId, actionType, reason, eventId, mode);
+        String message = '';
+        getSuccessResponse(response, message);
+    }
     
     public void getSuccessResponse(Map<String, Object> response) {
         Map<String, Object> result = new Map<String, Object>();
@@ -223,12 +249,14 @@ public class BAWebServiceHandler {
     public void getSuccessResponse(Map<String, Object> response, string message) {
         Map<String, Object> result = new Map<String, Object>();
         RestResponse res = RestContext.response;
-        res.statusCode = 200; // HTTP 200 OK
-        res.headers.put('Content-Type', 'application/json');
-        result.put('data', response);
-        result.put('message', message);
-        result.put('status', 'success');
-        res.responseBody = Blob.valueOf(JSON.serialize(result));
+        if(res != null) {
+            res.statusCode = 200; // HTTP 200 OK
+            res.headers.put('Content-Type', 'application/json');
+            result.put('data', response);
+            result.put('message', message);
+            result.put('status', 'success');
+            res.responseBody = Blob.valueOf(JSON.serialize(result));
+        }
     }
     
     public void getServerErrorResponse(Map<String, Object> response) {

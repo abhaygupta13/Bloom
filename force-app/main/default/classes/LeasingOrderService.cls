@@ -57,18 +57,18 @@ public inherited sharing class LeasingOrderService {
             Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.BranchCorporate__c,
             Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.AccountNumberCorporate__c,
             Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.SwiftCodeCorporate__c,
-            Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.IBANNoCorporate__c,
-            (SELECT Id,Name, DueDate__c, ClearedAmount__c, DueAmount__c, TotalInstallmentAmount__c,RefDocno__c
+            Unit__r.BuildingSectionName__r.Primary_Account_Installment__r.IBANNoCorporate__c, Opportunity__r.Account.Name,Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c, Unit__r.SAP_Business_Entity_No__c, 
+            (SELECT Id,Name, DueDate__c, ClearedAmount__c, DueAmount__c, TotalInstallmentAmount__c,RefDocno__c, (SELECT Id, SAPDocumentNo__c FROM Leasing_Receipt_Allocations__r)
              FROM Payment_Plan_Schedules__r 
              ORDER BY ID ASC),
-            (SELECT Id, Duedate__c, ClearedAmount__c, DueAmount__c, Type__c,Name, TotalAmount__c,RefDocno__c
+            (SELECT Id, Duedate__c, ClearedAmount__c, DueAmount__c, Type__c,Name, TotalAmount__c,RefDocno__c, (SELECT Id, SAPDocumentNo__c FROM Leasing_Receipt_Allocations__r)
              FROM Leasing_Orders_Other_Charges__r
              ORDER BY ID ASC),
             (SELECT Id, Name,UnappliedAmount__c, Amount__c, ChequeDate__c,SAPDocumentNumber__c  
              FROM LeasingReceiptAcknowledgment_s__r
              ORDER BY ID ASC),SAPBPNumber__c,CustomerName__c,
             LeaseType__c,Project__r.Leasing_Company__r.Name ,Project__r.Leasing_Company__r.LeasingBankAccountName__c,Project__r.Leasing_Company__r.LeasingBankAccountNumber__c,
-            Project__r.Leasing_Company__r.LeasingBankName__c,Project__r.Leasing_Company__r.LeasingIBAN__c,Project__r.Leasing_Company__r.LeasingSWIFTCode__c, Project__r.Leasing_Company__r.LeasingSAPCompanyCode__c FROM LeasingOrder__c WHERE Id = :recordId
+            Project__r.Leasing_Company__r.LeasingBankName__c,Project__r.Leasing_Company__r.LeasingIBAN__c,Project__r.Leasing_Company__r.LeasingSWIFTCode__c FROM LeasingOrder__c WHERE Id = :recordId
         ];
     }
     
@@ -356,13 +356,13 @@ paramsMap.put('Param26', String.valueOf(leasingOrder.AdminFee__c));
             SELECT Id, LeasingOrderNumber__c, OwnerId, Owner.Email, Owner.Name, Name, Unit__r.UnitNumber__c 
             FROM LeasingOrder__c 
             WHERE OwnerId IN :userIds
-                AND RERANumber__c = NULL 
-                AND Owner.Email != NULL 
-                AND Status__c NOT IN ('Cancelled','Terminated','Leased')
-                AND LeasingSAPContractId__c != NULL 
-                AND IntegrationStatus__c = 'Success' 
-                AND PropertyUsage__c = 'Residential' 
-                AND LeasingStartDate__c <= TODAY
+            AND RERANumber__c = NULL 
+            AND Owner.Email != NULL 
+            AND Status__c NOT IN ('Cancelled','Terminated','Leased')
+            AND LeasingSAPContractId__c != NULL 
+            AND IntegrationStatus__c = 'Success' 
+            AND PropertyUsage__c = 'Residential' 
+            AND LeasingStartDate__c <= TODAY
         ];
     }
     public Map<Id, Unit__c> getUnitsWithPropertyUsage(Set<Id> unitIds) {

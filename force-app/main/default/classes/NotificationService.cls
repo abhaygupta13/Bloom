@@ -86,10 +86,13 @@ public inherited sharing class NotificationService {
         else if (objectApiName == 'QMSToken__c') {
             phoneNumber = ((QMSToken__c)sObj).MobileNumber__c;
         }
+        else if (objectApiName == 'Lead') {
+            phoneNumber = ((Lead)sObj).MobilePhone;
+        }
 
-        paramMap.put('Param1', template.SenderNumber__c);
+        paramMap.put('Param1', template?.SenderNumber__c);
         paramMap.put('Param2', Utility.formatPhoneNumberWithCountryCode(phoneNumber));
-        paramMap.put('LongTextParam1',replaceTemplateParams(template.Body__c, values));
+        paramMap.put('LongTextParam1',replaceTemplateParams(template?.Body__c, values));
        
         return integService.getIntegrationRecord(integrationType, action, objectApiName, sObj.Id, paramMap);
     }
@@ -157,6 +160,17 @@ public inherited sharing class NotificationService {
             mapData.put(temp.Name, temp);
         }
 
+        return mapData;
+    }
+    
+        public Map<String, PushNotificationTemplate__c> getPushNotificationTemplates(Set<String> templateNames) {
+        Map<String, PushNotificationTemplate__c> mapData = new Map<String, PushNotificationTemplate__c>();
+        
+        for (PushNotificationTemplate__c temp : [SELECT Id,DynamicParams__c,Body__c,Name,Language__c,NotificationType__c,SenderBloomPartnersID__c,Title__c 
+                                                 FROM PushNotificationTemplate__c WHERE Name IN :templateNames]) {
+                                                     mapData.put(temp.Name, temp);
+                                                 }
+        
         return mapData;
     }
 

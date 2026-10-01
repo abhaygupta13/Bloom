@@ -261,6 +261,17 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>ADHAUnitNumber__c</fullName>
+        <externalId>false</externalId>
+        <label>ADHA Unit Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>ADMAddressingNumber__c</fullName>
         <externalId>false</externalId>
         <label>Door Number</label>
@@ -622,7 +633,7 @@
         <fullName>Block_Till__c</fullName>
         <label>Block Till</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>DateTime</type>
     </fields>
@@ -673,6 +684,18 @@
         <referenceTo>Account</referenceTo>
         <relationshipLabel>Units</relationshipLabel>
         <relationshipName>PropertiesBlockedForCustomer</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>BlockedForLead__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Blocked for Lead</label>
+        <referenceTo>Lead</referenceTo>
+        <relationshipLabel>Units</relationshipLabel>
+        <relationshipName>Units</relationshipName>
         <required>false</required>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
@@ -745,6 +768,21 @@
                     <fullName>SALES CANCELLATION</fullName>
                     <default>false</default>
                     <label>SALES CANCELLATION</label>
+                </value>
+                <value>
+                    <fullName>ADHA Customer</fullName>
+                    <default>false</default>
+                    <label>ADHA Customer</label>
+                </value>
+                <value>
+                    <fullName>Blocked by Bloom Management</fullName>
+                    <default>false</default>
+                    <label>Blocked by Bloom Management</label>
+                </value>
+                <value>
+                    <fullName>Blocked by ADHA Team</fullName>
+                    <default>false</default>
+                    <label>Blocked by ADHA Team</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -1302,6 +1340,40 @@ LEN(ADMAddressingNumber__c)
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FacadeOption__c</fullName>
+        <label>Facade Option</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Type 1</fullName>
+                    <default>false</default>
+                    <label>Type 1</label>
+                </value>
+                <value>
+                    <fullName>Type 2</fullName>
+                    <default>false</default>
+                    <label>Type 2</label>
+                </value>
+                <value>
+                    <fullName>Type 3</fullName>
+                    <default>false</default>
+                    <label>Type 3</label>
+                </value>
+                <value>
+                    <fullName>Type 4</fullName>
+                    <default>false</default>
+                    <label>Type 4</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>FloorNumber__c</fullName>
@@ -4217,6 +4289,40 @@ LEN(ADMAddressingNumber__c)
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Typology__c</fullName>
+        <label>Typology</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Villa 3BR</fullName>
+                    <default>false</default>
+                    <label>Villa 3BR</label>
+                </value>
+                <value>
+                    <fullName>Villa 4BR</fullName>
+                    <default>false</default>
+                    <label>Villa 4BR</label>
+                </value>
+                <value>
+                    <fullName>Villa 5BR</fullName>
+                    <default>false</default>
+                    <label>Villa 5BR</label>
+                </value>
+                <value>
+                    <fullName>Villa 6BR</fullName>
+                    <default>false</default>
+                    <label>Villa 6BR</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>UnitCategory__c</fullName>
         <description>Field to capture the Unit Category</description>
         <externalId>false</externalId>
@@ -4480,6 +4586,76 @@ LEN(ADMAddressingNumber__c)
         <type>Checkbox</type>
     </fields>
     <label>Unit</label>
+    <listViews>
+        <fullName>Al_Metlaa_All_Availble_Units</fullName>
+        <columns>NAME</columns>
+        <columns>Building_Phase_Name__c</columns>
+        <columns>IsPublic__c</columns>
+        <columns>ADM_Fee_Included__c</columns>
+        <columns>UnitNumber__c</columns>
+        <columns>SellingPrice__c</columns>
+        <columns>NumberOfBedrooms__c</columns>
+        <columns>Direct_Indirect__c</columns>
+        <columns>Status__c</columns>
+        <columns>BlockedReason__c</columns>
+        <columns>BlockedBy__c</columns>
+        <columns>BlockedComments__c</columns>
+        <columns>StartDate__c</columns>
+        <columns>ADMPlotNumber__c</columns>
+        <columns>IsActive__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Al Metlaa</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Available</value>
+        </filters>
+        <label>Al Metlaa All Availble Units</label>
+        <sharedTo>
+            <group>Inventory_Management</group>
+            <group>Inventory_Management_Group</group>
+            <group>System_Administrator</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Al_metlaa_Unassigned_Units</fullName>
+        <columns>NAME</columns>
+        <columns>BuildingSectionName__c</columns>
+        <columns>ADM_Fee_Included__c</columns>
+        <columns>UnitNumber__c</columns>
+        <columns>SellingPrice__c</columns>
+        <columns>NumberOfBedrooms__c</columns>
+        <columns>Direct_Indirect__c</columns>
+        <columns>Status__c</columns>
+        <columns>BlockedReason__c</columns>
+        <columns>BlockedBy__c</columns>
+        <columns>BlockedComments__c</columns>
+        <columns>BlockedDate__c</columns>
+        <columns>Virtual_Bank_Account_number__c</columns>
+        <columns>StartDate__c</columns>
+        <columns>ADMPlotNumber__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Al Metlaa</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Unassigned</value>
+        </filters>
+        <label>Al Metlaa Unassigned Units</label>
+        <sharedTo>
+            <group>Inventory_Management</group>
+            <group>Inventory_Management_Group</group>
+            <group>System_Administrator</group>
+        </sharedTo>
+    </listViews>
     <listViews>
         <fullName>Alhambra_All_Availble_Units</fullName>
         <columns>NAME</columns>
@@ -4858,6 +5034,71 @@ LEN(ADMAddressingNumber__c)
         <label>Almeria Inventory Allocation</label>
         <sharedTo>
             <group>Inventory_Management</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Almetlaa_All_Blocked_Units</fullName>
+        <columns>NAME</columns>
+        <columns>Building_Phase_Name__c</columns>
+        <columns>ADM_Fee_Included__c</columns>
+        <columns>UnitNumber__c</columns>
+        <columns>SellingPrice__c</columns>
+        <columns>NumberOfBedrooms__c</columns>
+        <columns>Direct_Indirect__c</columns>
+        <columns>Status__c</columns>
+        <columns>BlockedReason__c</columns>
+        <columns>BlockedBy__c</columns>
+        <columns>BlockedComments__c</columns>
+        <columns>BlockedDate__c</columns>
+        <columns>Virtual_Bank_Account_number__c</columns>
+        <columns>StartDate__c</columns>
+        <columns>ADMPlotNumber__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Al Metlaa</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Blocked</value>
+        </filters>
+        <label>Al Metlaa All Blocked Units</label>
+        <sharedTo>
+            <group>Inventory_Management</group>
+            <group>Inventory_Management_Group</group>
+            <group>System_Administrator</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Almetlaa_All_Units</fullName>
+        <columns>NAME</columns>
+        <columns>Building_Phase_Name__c</columns>
+        <columns>ADM_Fee_Included__c</columns>
+        <columns>UnitNumber__c</columns>
+        <columns>SellingPrice__c</columns>
+        <columns>NumberOfBedrooms__c</columns>
+        <columns>Direct_Indirect__c</columns>
+        <columns>Status__c</columns>
+        <columns>BlockedReason__c</columns>
+        <columns>BlockedBy__c</columns>
+        <columns>BlockedComments__c</columns>
+        <columns>BlockedDate__c</columns>
+        <columns>Virtual_Bank_Account_number__c</columns>
+        <columns>StartDate__c</columns>
+        <columns>ADMPlotNumber__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Project__c</field>
+            <operation>equals</operation>
+            <value>Al metlaa</value>
+        </filters>
+        <label>Al Metlaa All Units</label>
+        <sharedTo>
+            <group>Inventory_Management</group>
+            <group>Inventory_Management_Group</group>
+            <group>System_Administrator</group>
         </sharedTo>
     </listViews>
     <listViews>

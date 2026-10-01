@@ -301,6 +301,11 @@ Example: OTP generation for Email verification during the &apos;registration&apo
                     <default>false</default>
                     <label>Forgot Password</label>
                 </value>
+                <value>
+                    <fullName>ADHA Login Verification</fullName>
+                    <default>false</default>
+                    <label>ADHA Login Verification</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
     </fields>

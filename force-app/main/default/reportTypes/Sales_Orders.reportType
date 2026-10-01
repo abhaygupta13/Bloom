@@ -1576,6 +1576,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>IsDraftOrder__c</field>
+            <table>Account.Opportunities.OpportunityUnitsOpportunity__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Owner</field>
             <table>Account.Opportunities.OpportunityUnitsOpportunity__r</table>
         </columns>

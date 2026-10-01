@@ -9,8 +9,8 @@ Sr.No.  version              Date                Details
 1.      V1.0             	 11/06/2024           Initial Version  
 ****************************************************************************************************************/ 
 
-public class EventTriggerHelper {
-     
+public without sharing class EventTriggerHelper {
+    
     private static final String VALIDATION_Please_UploadLeasing_ADDC_NOC_KHO = 'Please Upload Leasing ADDC NOC before Scheduling KHO Appointment';
     private static final String VALIDATION_Please_UploadLeasing_ADDC_NOC_PHPP = 'Please Upload Leasing ADDC NOC before Scheduling KHO Appointment';
     private static final string ABSENCE_RT_DEV_NAME_Non_Availability { get { return 'Non_Availability'; } }
@@ -37,11 +37,17 @@ public class EventTriggerHelper {
     private static final String STATUS_RESCHEDULED_STR { get { return 'Rescheduled'; } }
     private static final String STATUS_AVAILABLE_STR { get { return 'Available'; } }
     private static final string APPOINTMENT_STR { get { return 'Appointment'; } }
+    private static final String APPOINTMENT_SCHEDULED_STR { get { return 'Appointment Scheduled'; } }
+    private static final String APPOINTMENT_CANCELLED_STR { get { return 'Appointment Cancelled'; } }
+    private static final String APPOINTMENT_RESCHEDULED_STR { get { return 'Appointment Rescheduled'; } }
+    private static final String APPOINTMENT_LEAD_SMS_NOTIFICATION { get { return 'Lead Appointment Confirmation SMS'; } }
+    private static final String APPOINTMENT_DETAILS_CHANGED_STR { get { return 'Appointment Details Changed'; } }
     private static final string MTD_OWE_NO_REPLY_BLOOM_EMAIL_ID { get { return 'BloomNoReplyOWEmailId'; } }
     private static final String APPOINTMENT_SCHEDULED_EMAIL_TEMPLATE_ID = 'AppointmentScheduledEmailTemplateId';
     private static final String APPOINTMENT_RESCHEDULED_EMAIL_TEMPLATE_ID = 'AppointmentRescheduledEmailTemplateId';
     private static final String APPOINTMENT_CANCELLED_EMAIL_TEMPLATE_ID = 'AppointmentCancelledEmailTemplateId';
-    
+    private static final String MTD_Lead_Appointment_Booked_EMAIL_TEMPLATE_ID = 'LeadAppointmentBookedEmailTemplateId';
+    private static final String MTD_Lead_Appointment_Cancelled_EMAIL_TEMPLATE_ID = 'LeadAppointmentCancelledEmailTemplateId';
     
     public static void checkValidationAndUpdateHandover(List<Event> newEventList) {
         DocumentService objDocumentService = DocumentService.getInstance();
@@ -370,137 +376,376 @@ public class EventTriggerHelper {
         }
     }
     
+    public static void handleBeforeInsert(List<Event> newEventList) {
+        Set<Id> leadIds = new Set<Id>();
+        Set<Id> contactIds = new Set<Id>();
+        Set<Id> accountIds = new Set<Id>();
+        Map<Id, Lead> leadMap = new Map<Id, Lead>();
+        Map<Id, Contact> contactMap = new Map<Id, Contact>();
+        Map<Id, Account> accountMap = new Map<Id, Account>();
+        Map<Id, User> userMap = new Map<Id, User>();
+        Map<Id, String> attendeeEmailMap = new Map<Id, String>();
+        Set<Id> appointmentWhoIds = new Set<Id>();
+        
+        for(Event newEvent : newEventList) {
+            if(newEvent.Type == APPOINTMENT_STR && newEvent.AppointmentStatus__c == STATUS_SCHEDULED_STR && newEvent.WhoId != null) {
+                appointmentWhoIds.add(newEvent.WhoId);
+                if(newEvent.AppointmentMode__c == 'Online' && newEvent.StartDateTime > System.now()) {
+                    newEvent.IntegrationStatus__c = 'In Progress';
+                }
+                if (newEvent.WhoId.getSObjectType() == Lead.SObjectType) {
+                    leadIds.add(newEvent.WhoId);
+                } else if (newEvent.WhoId.getSObjectType() == Contact.SObjectType) {
+                    contactIds.add(newEvent.WhoId);
+                } else if (newEvent.WhatId != null && newEvent.WhatId.getSObjectType() == Account.SObjectType) {
+                    accountIds.add(newEvent.WhatId);
+                }
+            }
+        }
+        if (!leadIds.isEmpty()) {
+            leadMap = new Map<Id, Lead>(LeadService.getInstance().getLeadByIds(leadIds));
+        }
+        
+        if (!contactIds.isEmpty()) {
+            contactMap = ContactService.getInstance().getContactsByIds(contactIds);
+        }
+        
+        if (!accountIds.isEmpty()) {
+           accountMap = new Map<Id, Account>(AccountService.getInstance().getAccountsByIds(accountIds));
+        }
+        
+        Set<Id> existingAppointmentWhoIds = ActivityService.getInstance().getExistingAppointmentWhoIds(appointmentWhoIds);
+        for(Event newEvent : newEventList) {
+            if(newEvent.WhoId != null && existingAppointmentWhoIds.contains(newEvent.WhoId)) {
+                newEvent.addError('An appointment already exists for this customer.'); 
+            }
+            if(newEvent.WhoId != null && newEvent.WhoId.getSObjectType() == Lead.SObjectType && leadMap != NULL && leadMap.containskey(newEvent.WhoId)){
+                newEvent.AttendeeEmail__c = leadMap.get(newEvent.WhoId).Email;
+            }
+            if(newEvent.WhoId != null && newEvent.WhoId.getSObjectType() == Contact.SObjectType && contactMap != NULL && contactMap.containskey(newEvent.WhoId)){
+                newEvent.AttendeeEmail__c = contactMap.get(newEvent.WhoId).Email;
+            }
+            if (newEvent.WhatId != null && newEvent.WhatId.getSObjectType() == Account.SObjectType && accountMap != null && accountMap.containsKey(newEvent.WhatId) && accountMap.get(newEvent.WhatId).IsPersonAccount) {
+                newEvent.AttendeeEmail__c = accountMap.get(newEvent.WhatId).PersonEmail;
+            }
+        }
+    }
+    
+    public static void handleBeforeUpdate(List<Event> newEventList, Map<Id, Event> oldEventMap) {
+        for (Event newEvent : newEventList) {
+            Event oldEvent = oldEventMap.get(newEvent.Id);
+            
+            if (newEvent.Type == APPOINTMENT_STR && newEvent.AppointmentStatus__c == STATUS_CANCELLED_STR
+                && newEvent.AppointmentStatus__c != oldEvent.AppointmentStatus__c
+                && newEvent.AppointmentMode__c == 'Online' && newEvent.StartDateTime > System.now()
+                && newEvent.WhoId != null) {
+                    
+                    newEvent.IntegrationStatus__c = 'In Progress';
+                }
+        }
+    }
+    
     /**
-     * @description - Common entry point for Event after-insert processing.
-     * Events are evaluated once and routed to the appropriate
-     * feature-specific handler.
-     *
-     * @param newEventList Newly inserted Event records.
-     */
-    public static void handleAfterInsert(List<Event> newEventList){
+* @description Handles Event after-insert processing for scheduled appointments.
+* Updates the related Appointment Slot status to Scheduled and sends the
+* scheduled appointment notification for newly created appointment Events.
+*
+* @param newEventList Newly inserted Event records.
+*/
+    public static void handleAfterInsert(List<Event> newEventList) {
         List<AppointmentSlot__c> slotsToUpdate = new List<AppointmentSlot__c>();
         List<Event> appointmentEvents = new List<Event>();
-        Set<Id> usersIds = new Set<Id>();
+        List<Event> onlineAppointmentEvents = new List<Event>();
         
-        for(Event event : newEventList){
-
-            if(event.Type == APPOINTMENT_STR && event.AppointmentSlot__c != null && event.AppointmentStatus__c == STATUS_SCHEDULED_STR){
-                slotsToUpdate.add( new AppointmentSlot__c(Id = event.AppointmentSlot__c, Status__c = STATUS_SCHEDULED_STR));
-            }
+        for(Event newEvent : newEventList){
             
-            if(event.Type == APPOINTMENT_STR && event.AppointmentStatus__c == STATUS_SCHEDULED_STR){
-                usersIds.add(event.OwnerId);
-                appointmentEvents.add(event);
+            if(newEvent.Type == APPOINTMENT_STR && newEvent.AppointmentStatus__c == STATUS_SCHEDULED_STR && newEvent.WhoId != null){
+
+                if (newEvent.StartDateTime >= newEvent.EndDateTime) {
+                    newEvent.addError('Appointment start time must be earlier than the end time.');
+                } else if (newEvent.StartDateTime < System.now()) {
+                    newEvent.addError('Appointment start time must be in the future.');
+                }else {
+                    appointmentEvents.add(newEvent);
+                }
+          
+                if(newEvent.AppointmentSlot__c != null){
+                    slotsToUpdate.add( new AppointmentSlot__c(Id = newEvent.AppointmentSlot__c, Status__c = STATUS_SCHEDULED_STR));
+                }
+
+                if(newEvent.AppointmentMode__c == 'Online'){
+                    onlineAppointmentEvents.add(newEvent);
+                }
             }
         }
         AppointmentSlotService.getInstance().updateAppointmentSlots(slotsToUpdate);
         
-        if (!appointmentEvents.isEmpty())
-            sendAppointmentStatusNotificationEmail(appointmentEvents, usersIds);
-        
-        
+        if (!appointmentEvents.isEmpty()) {
+            sendAppointmentNotification(appointmentEvents, null);
+        }
+        if (!onlineAppointmentEvents.isEmpty()) {
+            createEventIntegrationRecords(appointmentEvents);
+        }
     }
     
     /**
-     * @description - Handles appointment status changes.
-     * When an appointment is cancelled or rescheduled, the related
-     *  slot is updated based on whether the appointment is in the future or has already started/passed.
-     *
-     *  Future cancelled or rescheduled appointments make the slot available. Past or current appointments are marked according to their new status.
-     *
-     * @param newEventList Updated appointments.
-     * @param oldEventMap Previous versions of the appointments, keyed by Id.
-     */
+* @description - Handles appointment status changes.
+* When an appointment is cancelled or rescheduled, the related
+*  slot is updated based on whether the appointment is in the future or has already started/passed.
+*
+*  Future cancelled or rescheduled appointments make the slot available. Past or current appointments are marked according to their new status.
+*
+* @param newEventList Updated appointments.
+* @param oldEventMap Previous versions of the appointments, keyed by Id.
+*/
     public static void handleAfterUpdate(List<Event> newEventList, Map<Id, Event> oldEventMap) {
         List<AppointmentSlot__c> slotsToUpdate = new List<AppointmentSlot__c>();
-        Set<Id> userIds = new Set<Id>();
         List<Event> appointmentEvents = new List<Event>();
+        List<Event> onlineCancelledEvents = new List<Event>();
         
         for (Event newEvent : newEventList){
-            Boolean validAppointmentStatus = newEvent.AppointmentStatus__c == STATUS_RESCHEDULED_STR || newEvent.AppointmentStatus__c == STATUS_CANCELLED_STR;
-            if (newEvent.Type == APPOINTMENT_STR && newEvent.AppointmentSlot__c != null && newEvent.AppointmentStatus__c != oldEventMap.get(newEvent.Id).AppointmentStatus__c) {
-                slotsToUpdate.add(new AppointmentSlot__c(Id = newEvent.AppointmentSlot__c, Status__c = newEvent.StartDateTime > System.now() ? STATUS_AVAILABLE_STR : newEvent.AppointmentStatus__c));
-            }
-            
-            if(newEvent.Type == APPOINTMENT_STR && newEvent.AppointmentStatus__c != oldEventMap.get(newEvent.Id).AppointmentStatus__c && validAppointmentStatus){
-                appointmentEvents.add(newEvent);
-                userIds.add(newEvent.OwnerId);
+            Event oldEvent = oldEventMap.get(newEvent.Id);
+            if(newEvent.Type == APPOINTMENT_STR && newEvent.WhoId != null) {
+                if (newEvent.AppointmentSlot__c != null && newEvent.AppointmentStatus__c != oldEvent.AppointmentStatus__c) {
+                    slotsToUpdate.add(new AppointmentSlot__c(Id = newEvent.AppointmentSlot__c, Status__c = newEvent.StartDateTime > System.now() ? STATUS_AVAILABLE_STR : newEvent.AppointmentStatus__c));
+                }
+                Boolean hasAppointmentDetailsChanged = (newEvent.AppointmentStatus__c != oldEvent.AppointmentStatus__c) || (newEvent.OwnerId != oldEvent.OwnerId && newEvent.OwnerId.getSObjectType() == User.SObjectType) 
+                    || (newEvent.StartDateTime != oldEvent.StartDateTime) || (newEvent.EndDateTime != oldEvent.EndDateTime);
+                
+                if(hasAppointmentDetailsChanged){
+                    appointmentEvents.add(newEvent);
+                }
+                if(newEvent.AppointmentMode__c == 'Online' && String.isNotBlank(newEvent.MeetingLink__c) && newEvent.MeetingLink__c != oldEvent.MeetingLink__c){ 
+                    appointmentEvents.add(newEvent);
+                }
+                
+                if(newEvent.AppointmentStatus__c == STATUS_CANCELLED_STR && newEvent.AppointmentStatus__c != oldEvent.AppointmentStatus__c && newEvent.AppointmentMode__c == 'Online') {
+                    onlineCancelledEvents.add(newEvent);
+                }
             }
         }
         AppointmentSlotService.getInstance().updateAppointmentSlots(slotsToUpdate);
-        if (!appointmentEvents.isEmpty())
-            sendAppointmentStatusNotificationEmail(appointmentEvents, userIds);
+        if (!appointmentEvents.isEmpty()) {
+            sendAppointmentNotification(appointmentEvents, oldEventMap);
+        }
+        if(!onlineCancelledEvents.isEmpty()) {
+            createEventIntegrationRecords(onlineCancelledEvents);
+        }
     }
     
     /**
-     * @description - Sends an email notification to the customer based on the appointment status. Determines whether the appointment is scheduled,
-     * cancelled, or rescheduled, retrieves the customer details from the related Contact or Lead, renders the corresponding email template,
-     * replaces appointment and customer information in the email body, and sends the notification to the customer.
-     *
-     * @param events  Updated appointment events for which notifications should be sent.
-     * @param userIds IDs of the appointment owners used to retrieve account manager details.
-     */
-    public static void sendAppointmentStatusNotificationEmail(List<Event> events, Set<Id> userIds){
+* @description Sends appointment email and push notifications based on the appointment status and appointment changes. For newly inserted appointments, sends the scheduled notification.
+* For updated appointments, handles cancelled, rescheduled, owner changed, and start/end date-time changed scenarios. Retrieves the related Contact or Lead details, prepares the required
+* notification values, and sends the applicable email and/or push notification.
+*
+* @param events Appointment Event records that require notification processing.
+* @param oldEventMap Previous versions of the Event records, keyed by Id. This parameter is null for after-insert processing.
+*/
+    public static void sendAppointmentNotification(List<Event> events, Map<Id, Event> oldEventMap){
         
-        Map<String, String> templateFieldValues = new Map<String, String>();
         Map<Id, Contact> contactMap = new Map<Id, Contact>();
         Map<Id, Lead> leadMap = new Map<Id, Lead>();
         Map<Id, Account> accountMap = new Map<Id, Account>();
         Set<Id> contactIds = new Set<Id>();
         Set<Id> leadIds = new Set<Id>();
+        Set<Id> userIds = new Set<Id>();
         
         EmailService objEmailService = EmailService.getInstance();
         MetadataService objMetadataService = MetadataService.getInstance();
-        Map<Id, User> userMap = UserService.getInstance().getActiveUsersByIds(userIds);
-        
+        Id leadAppointmentBookedEmailTemplateId = objMetadataService.getAppSettingTextValue(MTD_Lead_Appointment_Booked_EMAIL_TEMPLATE_ID);
+        Id leadAppointmentCancelledEmailTemplateId = objMetadataService.getAppSettingTextValue(MTD_Lead_Appointment_Cancelled_EMAIL_TEMPLATE_ID);
         EmailTemplate appointmentScheduledTemplate = objEmailService.getEmailTemplateById(objMetadataService.getAppSettingTextValue(APPOINTMENT_SCHEDULED_EMAIL_TEMPLATE_ID));
         EmailTemplate appointmentCancelledTemplate = objEmailService.getEmailTemplateById(objMetadataService.getAppSettingTextValue(APPOINTMENT_CANCELLED_EMAIL_TEMPLATE_ID));
         EmailTemplate appointmentRescheduledTemplate = objEmailService.getEmailTemplateById(objMetadataService.getAppSettingTextValue(APPOINTMENT_RESCHEDULED_EMAIL_TEMPLATE_ID));
+        
         Id noReplyBloomOWDId = objMetadataService.getAppSettingTextValue(MTD_OWE_NO_REPLY_BLOOM_EMAIL_ID);
-        templateFieldValues.put('NoReplyBloomEmail', noReplyBloomOWDId);
-
-        for (Event eventRec : events) {
-            if (eventRec.WhoId != null) {
-                if (eventRec.WhoId.getSObjectType() == Contact.SObjectType) {
-                    contactIds.add(eventRec.WhoId);
-                }else if (eventRec.WhoId.getSObjectType() == Lead.SObjectType) {
-                    leadIds.add(eventRec.WhoId);
-                }
-            }
-        }
-        if (!contactIds.isEmpty())
-            contactMap = ContactService.getInstance().getContactsByIds(contactIds);
-        if (!leadIds.isEmpty())
-            leadMap = LeadService.getInstance().getLeadsByIds(leadIds);
         
-        EmailTemplate emailTemplate = null;
-        List<Messaging.SingleEmailMessage> emailList = new List<Messaging.SingleEmailMessage>();
+        Set<String> notificationTypes = new Set<String>{APPOINTMENT_SCHEDULED_STR, APPOINTMENT_CANCELLED_STR, APPOINTMENT_RESCHEDULED_STR, APPOINTMENT_DETAILS_CHANGED_STR};
+            
+        NotificationService objNotificationService = NotificationService.getInstance();
+        Map<String, SMSTemplate__c> smsTemplateMap = objNotificationService.getSMSTemplates(new Set<String>{APPOINTMENT_LEAD_SMS_NOTIFICATION});
+        Map<String, PushNotificationTemplate__c> templateMap = NotificationService.getInstance().getPushNotificationTemplates(notificationTypes);
         
-        for(Event eventRec : events) {
-            if (eventRec.Type == APPOINTMENT_STR) {
-                if (eventRec.AppointmentStatus__c == STATUS_SCHEDULED_STR) {
-                emailTemplate = appointmentScheduledTemplate;
-            }else if(eventRec.AppointmentStatus__c == STATUS_CANCELLED_STR){
-                emailTemplate = appointmentCancelledTemplate;
-            }else if(eventRec.AppointmentStatus__c == STATUS_RESCHEDULED_STR){
-                emailTemplate = appointmentRescheduledTemplate;
+        for (Event objEvent : events) {
+            if (objEvent.WhoId.getSObjectType() == Contact.SObjectType) {
+                contactIds.add(objEvent.WhoId);
+            }else if (objEvent.WhoId.getSObjectType() == Lead.SObjectType) {
+                leadIds.add(objEvent.WhoId);
             }
             
-            if (eventRec.WhoId.getSObjectType() == Contact.SObjectType) {
-                Contact contactRec = contactMap.get(eventRec.WhoId);
-                templateFieldValues.put('customerName', String.isBlank(contactRec.Name) ? '' : contactRec.Name);
-                templateFieldValues.put('customerNameArabic',  String.isBlank(contactRec.Account.NameinArabic__c) ? contactRec.Name : contactRec.Account.NameinArabic__c);
-            } else if (eventRec.WhoId.getSObjectType() == Lead.SObjectType) {
-                Lead leadRec = leadMap.get(eventRec.WhoId);
-                templateFieldValues.put('customerName', String.isBlank(leadRec.Name) ? '' : leadRec.Name);
-                templateFieldValues.put('customerNameArabic', String.isBlank(leadRec.NameArabic__c) ? leadRec.Name : leadRec.NameArabic__c);
+            if(objEvent.OwnerId.getSObjectType() == User.SObjectType) {
+               userIds.add(objEvent.OwnerId); 
             }
-            User accountManager = userMap.get(eventRec.OwnerId);
-            templateFieldValues.put('accountManagerName', accountManager?.Name);
-            templateFieldValues.put('accountManagerPhone', accountManager?.MobilePhone);
-            emailList.add(ActivityService.getInstance().createAppointmentNotificationEmail(emailTemplate, eventRec, templateFieldValues));
         }
-    }
+        if (!contactIds.isEmpty()) {
+            contactMap = ContactService.getInstance().getContactsByIds(contactIds);
+        }
+        if (!leadIds.isEmpty()) {
+            leadMap = LeadService.getInstance().getLeadsByIds(leadIds);
+        }
+        
+        Map<Id, User> userMap = UserService.getInstance().getActiveUsersByIds(userIds);
+        EmailTemplate emailTemplate = null;
+        PushNotificationTemplate__c notificationTemplate = null;    
+        List<Messaging.SingleEmailMessage> emailList = new List<Messaging.SingleEmailMessage>();
+        List<PushNotification__c> pushNotificationRecords = new List<PushNotification__c>();
+        List<IntegrationRecord__c> integrationRecords = new List<IntegrationRecord__c>();
+        String customerName = '';
+        String customerNameArabic = '';
+        for(Event newEvent : events) {
+            Messaging.SingleEmailMessage internalEmail;
+            Event oldEvent = oldEventMap != null ? oldEventMap.get(newEvent.Id) : null;
+            if (oldEvent == null && newEvent.AppointmentStatus__c == STATUS_SCHEDULED_STR) {
+                emailTemplate = appointmentScheduledTemplate;
+                notificationTemplate =  templateMap.get(APPOINTMENT_SCHEDULED_STR);
+            }else if(oldEvent != null && newEvent.AppointmentStatus__c == STATUS_CANCELLED_STR && newEvent.AppointmentStatus__c != oldEvent.AppointmentStatus__c){
+                emailTemplate = appointmentCancelledTemplate;
+                notificationTemplate =  templateMap.get(APPOINTMENT_CANCELLED_STR);
+            }else if(oldEvent != null && newEvent.AppointmentStatus__c == STATUS_RESCHEDULED_STR && newEvent.AppointmentStatus__c != oldEvent.AppointmentStatus__c){
+                emailTemplate = appointmentRescheduledTemplate;
+                notificationTemplate =  templateMap.get(APPOINTMENT_RESCHEDULED_STR);
+            }else if(oldEvent != null && (newEvent.OwnerId != oldEvent.OwnerId || newEvent.StartDateTime != oldEvent.StartDateTime || newEvent.EndDateTime != oldEvent.EndDateTime)) {
+                notificationTemplate =  templateMap.get(APPOINTMENT_DETAILS_CHANGED_STR);
+            }
+            else if(String.isNotBlank(newEvent.MeetingLink__c) && newEvent.MeetingLink__c != oldEvent.MeetingLink__c){
+                emailTemplate = appointmentScheduledTemplate;
+            }
+
+            if (newEvent.WhoId.getSObjectType() == Contact.SObjectType) {
+                
+                Contact contactRec = contactMap.get(newEvent.WhoId);
+                if (notificationTemplate != null) {
+                    pushNotificationRecords.add(sendMobileAppPushNotification(newEvent, notificationTemplate, contactRec, userMap));
+                }
+                customerName = String.isBlank(contactRec.Name) ? '' : contactRec.Name;
+                customerNameArabic = String.isBlank(contactRec.Account.NameinArabic__c) ? contactRec.Name : contactRec.Account.NameinArabic__c;
+                
+            } else if (newEvent.WhoId.getSObjectType() == Lead.SObjectType) {
+                Lead leadRec = leadMap.get(newEvent.WhoId);
+                if (notificationTemplate != null) {
+                    pushNotificationRecords.add(sendMobileAppPushNotification(newEvent, notificationTemplate, leadRec, userMap));
+                }
+                if (newEvent.AppointmentStatus__c == STATUS_SCHEDULED_STR && oldEvent == null) { 
+                    
+                        List<String> notificationValues = new List<String>();
+                        notificationValues.add(newEvent.StartDateTime != null ? newEvent.StartDateTime.format('EEEE, dd/MMM') : '');
+                        notificationValues.add(newEvent.StartDateTime != null ? newEvent.StartDateTime.format('hh:mm a') : '');
+                        integrationRecords.add(objNotificationService.getSMSIntegrationRecord(leadRec, smsTemplateMap.get(APPOINTMENT_LEAD_SMS_NOTIFICATION), notificationValues));
+                        
+                    if(leadRec.LeadSource == 'Government Entity' && leadRec.leadsubsource__c == 'ADHA' && leadRec.ApplicationNumber__c != null){
+                        internalEmail = Messaging.renderStoredEmailTemplate(leadAppointmentBookedEmailTemplateId, leadRec.Id, null);
+                        internalEmail.setTreatTargetObjectAsRecipient(false);
+                        internalEmail.setSaveAsActivity(true);
+                        internalEmail.setOrgWideEmailAddressId(noReplyBloomOWDId);
+                        internalEmail.setToAddresses(new List<String>{ leadRec.Owner.Email });
+                        internalEmail.htmlBody = internalEmail.htmlBody.replace('{LeadOwner}', leadRec.Owner.Name);
+                        internalEmail.htmlBody = internalEmail.htmlBody.replace('{Date}', newEvent.StartDateTime != null ? newEvent.StartDateTime.format('EEEE, dd/MMMM') : '');
+                        internalEmail.htmlBody = internalEmail.htmlBody.replace('{Time}', newEvent.StartDateTime != null ? newEvent.StartDateTime.format('hh:mm a') : '');
+                        emailList.add(internalEmail);
+                    }
+                }
+                if (newEvent.AppointmentStatus__c == STATUS_CANCELLED_STR) { 
+                    if(leadRec.LeadSource == 'Government Entity' && leadRec.leadsubsource__c == 'ADHA' && leadRec.ApplicationNumber__c != null){
+                        internalEmail = Messaging.renderStoredEmailTemplate(leadAppointmentCancelledEmailTemplateId, leadRec.Id, null);
+                        internalEmail.setTreatTargetObjectAsRecipient(false);
+                        internalEmail.setSaveAsActivity(true);
+                        internalEmail.setOrgWideEmailAddressId(noReplyBloomOWDId);
+                        internalEmail.setToAddresses(new List<String>{ leadRec.Owner.Email });
+                        internalEmail.htmlBody = internalEmail.htmlBody.replace('{LeadOwner}', leadRec.Owner.Name);
+                        internalEmail.htmlBody = internalEmail.htmlBody.replace('{Date}', newEvent.StartDateTime != null ? newEvent.StartDateTime.format('EEEE, dd/MMMM') : '');
+                        internalEmail.htmlBody = internalEmail.htmlBody.replace('{Time}', newEvent.StartDateTime != null ? newEvent.StartDateTime.format('hh:mm a') : '');
+                        emailList.add(internalEmail);
+                        
+                    }
+                }
+                
+                customerName = String.isBlank(leadRec.Name) ? '' : leadRec.Name;
+                customerNameArabic = String.isBlank(leadRec.NameArabic__c) ? leadRec.Name : leadRec.NameArabic__c;
+                if(newEvent.AppointmentMode__c == 'Online' && String.isBlank(newEvent.MeetingLink__c)) {
+                    continue;
+                }
+            }
+            
+            if(emailTemplate != null) {
+                System.debug('emailTemplate'+emailTemplate);
+                User accountManager = userMap.get(newEvent.OwnerId);
+                emailList.add(ActivityService.getInstance().createAppointmentNotificationEmail(emailTemplate, newEvent, customerName, customerNameArabic, noReplyBloomOWDId, accountManager));
+            }
+            
+        }
         objEmailService.sendEmail(emailList);
+        PushNotificationService.getInstance().insertPushNotifications(pushNotificationRecords);
+        IntegrationRecordService.getInstance().insertIntegrationRecords(integrationRecords);
+    }
+    
+    /**
+* Creates a push notification record for an appointment based on the specified notification type and populates the notification values with the relevant
+* appointment date, time, and location.
+*
+* @param objEvent     Event record containing the appointment details.
+* @param notificationTemplate Push notification template.
+* @param objectType  Type of object associated with the appointment.
+* @param userMap  Map of User records keyed by User Id, used to retrieve the assigned user name.
+* @return   PushNotification__c record containing the notification details.
+*/
+    private static PushNotification__c sendMobileAppPushNotification(Event objEvent, PushNotificationTemplate__c notificationTemplate, sObject objectType, Map<Id, User> userMap) {
+        List<String> notificationValues = new List<String>();
+        
+        String appointmentDate = objEvent.StartDateTime != null ? objEvent.StartDateTime.format('yyyy-MMM-dd') : '';
+        String appointmentTime = (objEvent.StartDateTime != null && objEvent.EndDateTime != null) ? objEvent.StartDateTime.format('h:mm a') : '';
+        String agentName = userMap.get(objEvent.OwnerId).Name;
+        
+        if (notificationTemplate.Name == APPOINTMENT_SCHEDULED_STR) {
+            notificationValues.add(appointmentDate);
+            notificationValues.add(appointmentTime);
+            notificationValues.add(agentName);
+        } else if (notificationTemplate.Name == APPOINTMENT_CANCELLED_STR) {
+            notificationValues.add(appointmentDate);
+            notificationValues.add(appointmentTime);
+        } else if (notificationTemplate.Name == APPOINTMENT_RESCHEDULED_STR) {
+            notificationValues.add(appointmentDate);
+            notificationValues.add(appointmentTime);
+            notificationValues.add(agentName);
+        } else if (notificationTemplate.Name == APPOINTMENT_DETAILS_CHANGED_STR) {
+            notificationValues.add(agentName);
+            notificationValues.add(appointmentDate);
+            notificationValues.add(appointmentTime);
+        }
+        
+        return PushNotificationService.getInstance().getPushNotificationRecord(objectType, notificationTemplate, notificationValues);
+    }
+    
+    /**
+* @description Creates integration records for the provided Event records.
+*
+* The method collects the Event owner IDs, retrieves the corresponding active User records, prepares an integration record for each Event
+* using ActivityService, and inserts all generated integration records in a single bulk operation.
+*
+* @param events List of Event records for which integration records need to be created.
+*/
+    public static void createEventIntegrationRecords(List<Event> events) {
+        List<IntegrationRecord__c> integrationRecordsToInsert = new List<IntegrationRecord__c>();
+        Set<Id> userIds = new Set<Id>();
+        Map<Id, User> userMap = new Map<Id, User>();
+        
+        for (Event objEvent : events) {
+            userIds.add(objEvent.OwnerId);
+        }
+        
+        if (!userIds.isEmpty()) {
+            userMap = UserService.getInstance().getActiveUsersByIds(userIds);
+        }
+        
+        for (Event objEvent : events) {
+            String emailId = objEvent.OwnerId != null ? userMap.get(objEvent.OwnerId).Email : null;
+            String timeZone = objEvent.OwnerId != null ? userMap.get(objEvent.OwnerId).TimeZoneSidKey : null;
+            
+            integrationRecordsToInsert.add(ActivityService.getInstance().getEventIntegrationRecord(objEvent, emailId, timeZone));
+        }
+        
+        if (!integrationRecordsToInsert.isEmpty()) 
+        {
+            IntegrationRecordService.getInstance().insertIntegrationRecords(integrationRecordsToInsert);
+        }
     }
 }

@@ -1,5 +1,12 @@
 @istest
 public class TaskTriggerHandlerTest {
+
+    @TestSetup
+    static void setupData() {
+        SMSTemplate__c smsTemplate = new SMSTemplate__c(Name = 'ADHA Lead Not Answering Bloom Calls SMS Notification', SenderNumber__c = '12233', Body__c = 'Test SMS');
+        insert smsTemplate;
+    }
+
     @istest
     static void Testmethod1(){
         Lead lead = new Lead(
@@ -303,6 +310,30 @@ public class TaskTriggerHandlerTest {
         );
         insert crmTask;
     } 
+
+    @IsTest
+    static void testHandleAfterInsert_ADHAUnreachable() {
+        String profileId = UserInfo.getProfileId();
+        User testOwner = TestDataFactory.createUser(profileId, 'adhaowner@test.com', 'adhaowner' + System.currentTimeMillis() + '@test.com', 'ADHA', 'Owner');
+        testOwner.Phone = '0501234567';
+        insert testOwner;
+
+        Lead testLead = TestDataFactory.createADHATestLead();
+        testLead.OwnerId = testOwner.Id;
+        insert testLead;
+
+        SMSTemplate__c smsTemplate = new SMSTemplate__c(Name = 'ADHA Lead Not Answering Bloom Calls SMS Notification', SenderNumber__c = '12233', Body__c = 'Test SMS');
+        insert smsTemplate;
+
+        Task testTask = new Task(WhoId = testLead.Id, Subject = 'Call Customer', Status = 'Completed', Priority = 'Normal', CustomerResponse__c = 'Customer Not Reachable');
+
+        Test.startTest();
+        insert testTask;
+        System.assert(Limits.getEmailInvocations() > 0, 'Unreachable ADHA Lead email should be sent.');
+        Test.stopTest();
+        List<IntegrationRecord__c> smsRecords = [SELECT Id, Type__c, RecordId__c FROM IntegrationRecord__c WHERE RecordId__c = :testLead.Id];
+        System.assert(!smsRecords.isEmpty(), 'SMS integration record should be created.');
+    }
     
     
 }

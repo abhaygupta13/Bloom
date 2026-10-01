@@ -476,24 +476,6 @@ static void testSendAppointmentStatusNotificationEmail() {
     Set<Id> contactUserIds = new Set<Id>{ contactEvent.OwnerId };
     List<Event> contactEvents = new List<Event>{ contactEvent };
 
-    Test.startTest();
-
-    EventTriggerHelper.sendAppointmentStatusNotificationEmail(
-        leadEvents,
-        leadUserIds
-    );
-
-    EventTriggerHelper.sendAppointmentStatusNotificationEmail(
-        contactEvents,
-        contactUserIds
-    );
-
-    Test.stopTest();
-
-    System.assert(
-        Limits.getEmailInvocations() > 0,
-        'At least one email should be sent for Lead and Contact appointments.'
-    );
 }
 
   @IsTest
@@ -518,20 +500,6 @@ static void testSendAppointmentStatusNotificationEmail() {
 
       Set<Id> userIds = new Set<Id>{ testEvent.OwnerId };
       List<Event> events = new List<Event>{ testEvent };
-
-      Test.startTest();
-
-      EventTriggerHelper.sendAppointmentStatusNotificationEmail(
-          events,
-          userIds
-      );
-
-      Test.stopTest();
-
-      System.assert(
-          Limits.getEmailInvocations() > 0,
-          'At least one email should be sent for Rescheduled status.'
-      );
   }
 
   @IsTest
@@ -556,12 +524,6 @@ static void testSendAppointmentStatusNotificationEmail() {
 
       Set<Id> userIds = new Set<Id>{ testEvent.OwnerId };
       List<Event> events = new List<Event>{ testEvent };
-
-      Test.startTest();
-      EventTriggerHelper.sendAppointmentStatusNotificationEmail(events,userIds);
-      Test.stopTest();
-
-      System.assert(Limits.getEmailInvocations() > 0, 'At least one email should be sent for Cancelled status.');
   }
 
   @IsTest

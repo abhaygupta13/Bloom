@@ -335,6 +335,16 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
+                <fieldItem>Record.OccupantName__c</fieldItem>
+                <identifier>RecordOccupantName__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.RERAIndex__c</fieldItem>
                 <identifier>RecordRERAIndex__cField</identifier>
             </fieldInstance>
@@ -2309,10 +2319,16 @@
                 <componentName>flexipage:tab</componentName>
                 <identifier>flexipage_tab14</identifier>
                 <visibilityRule>
+                    <booleanFilter>1 OR 2</booleanFilter>
                     <criteria>
-                        <leftValue>{!Record.TOR__c}</leftValue>
-                        <operator>GT</operator>
-                        <rightValue>0</rightValue>
+                        <leftValue>{!Record.PropertyUsage__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Commercial</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.PropertyUsage__c}</leftValue>
+                        <operator>EQUAL</operator>
+                        <rightValue>Retail</rightValue>
                     </criteria>
                 </visibilityRule>
             </componentInstance>

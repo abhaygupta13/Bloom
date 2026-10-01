@@ -20,6 +20,6 @@
     </values>
     <values>
         <field>TextValue__c</field>
-        <value xsi:type="xsd:string">00G8d000001CXON</value>
+        <value xsi:type="xsd:string">00GJ7000000YdhM</value>
     </values>
 </CustomMetadata>

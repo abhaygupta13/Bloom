@@ -4220,6 +4220,21 @@
             <field>DoNotSendPaymentReminder__c</field>
             <table>Account.Opportunity_Units__r.UnitsRelatedOpportunityUnit__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ADHAUnitNumber__c</field>
+            <table>Account.Opportunity_Units__r.UnitsRelatedOpportunityUnit__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FacadeOption__c</field>
+            <table>Account.Opportunity_Units__r.UnitsRelatedOpportunityUnit__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Typology__c</field>
+            <table>Account.Opportunity_Units__r.UnitsRelatedOpportunityUnit__r</table>
+        </columns>
         <masterLabel>Units</masterLabel>
     </sections>
 </ReportType>

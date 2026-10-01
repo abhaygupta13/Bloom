@@ -43,7 +43,7 @@ public inherited sharing class SalesOrderOtherChargesService {
     
     public  List<SalesOrderOtherCharges__c> getSalesOrderChargesByInstallment(Set<Id> setInstallmentIds, String chargeType){
         return [SELECT Id, Installment_Line__c, Name, Due_Date__c, StartDate__c, EndDate__c, TotalLatePaymentFee__c, TypeOfCharge__c, SendtoSAP__c
-                FROM SalesOrderOtherCharges__c WHERE Installment_Line__c IN :setInstallmentIds AND TypeOfCharge__c =: chargeType];
+                FROM SalesOrderOtherCharges__c WHERE Installment_Line__c IN :setInstallmentIds AND TypeOfCharge__c =: chargeType AND Status__c != 'Reversed'];
     }
     
     public  List<SalesOrderOtherCharges__c> getSalesOrderChargesByProjectIds(Set<Id> projectIdList, List<String> salesOrderStatusValueList, String chargeType){

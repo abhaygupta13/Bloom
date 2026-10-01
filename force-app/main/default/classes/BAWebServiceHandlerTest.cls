@@ -147,4 +147,11 @@ public class BAWebServiceHandlerTest {
         Test.stopTest();
         System.assert(true);
     }
+    
+    @IsTest
+    static void testGetAuthorizedUAEPassLoginUser() {
+        Test.startTest();
+        BAWebServiceHandler.getInstance().getAuthorizedUAEPassLoginUser(new Map<String, Object>{'eid' => '123', 'uuid' => '122', 'phone_number' => '1222', 'email' => 'Test@yahoo.com'});
+        Test.stopTest();
+    }
 }

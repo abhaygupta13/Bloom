@@ -269,5 +269,12 @@
     <pluralLabel>Follow Up</pluralLabel>
     <searchLayouts/>
     <sharingModel>Read</sharingModel>
+    <validationRules>
+        <fullName>Comment_Required</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISBLANK(Comments__c)</errorConditionFormula>
+        <errorDisplayField>Comments__c</errorDisplayField>
+        <errorMessage>Comments are required.</errorMessage>
+    </validationRules>
     <visibility>Public</visibility>
 </CustomObject>

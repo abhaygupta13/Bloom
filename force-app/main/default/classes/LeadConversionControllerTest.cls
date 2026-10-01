@@ -461,7 +461,8 @@ public class LeadConversionControllerTest {
             Status = 'Qualified',                   
             Project__c = 'Abu Dhabi',
             UnitType__c = 'Apartment',
-            NumberOfBedrooms__c = '5BHK'
+            NumberOfBedrooms__c = '5BHK',
+            ApplicationNumber__c = '112233'
         );
         insert testLead;
         

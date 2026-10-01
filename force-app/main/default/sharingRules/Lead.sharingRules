@@ -45,6 +45,34 @@
         <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
     </sharingCriteriaRules>
     <sharingCriteriaRules>
+        <fullName>Share_With_ADHA_Sales_Manager_Team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share With ADHA Sales Manager Team</label>
+        <sharedTo>
+            <group>ADHA_Sales_Manager_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>ApplicationNumber__c</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_With_Contact_Center_Team</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share With Contact Center Team</label>
+        <sharedTo>
+            <group>CC_Agent_Public_Group</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>LastName</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
         <fullName>Share_With_Lead_Manager</fullName>
         <accessLevel>Edit</accessLevel>
         <label>Share With Lead Manager</label>

@@ -7,13 +7,13 @@ public class LeasingOtherChargeTaxInvoicePDFHdlrTest {
         Account acc = new Account(Name = 'Test Account', UAEVATRegisterNumber__c = 'VAT-OC-123');
         insert acc;
 
-        Company__c lc = new Company__c(Name = 'Test Leasing Company', LeasingVAT__c = 5);
+         Company__c lc = new Company__c(Name = 'Test Leasing Company', LeasingVAT__c = 5);
         insert lc;
 
         Project__c proj = new Project__c(Name = 'Test Project', Leasing_Company__c = lc.Id);
         insert proj;
 
-        Unit__c unitRec = new Unit__c( Name = 'Test Unit');
+        Unit__c unitRec = new Unit__c(Name = 'Test Unit', SAP_Unit_Number__c = 'SAP-U-001');
         insert unitRec;
 
         LeasingOrder__c order = new LeasingOrder__c(Name = 'Test Leasing Order', Status__c = 'Leased',Account__c = acc.Id,
@@ -44,6 +44,7 @@ public class LeasingOtherChargeTaxInvoicePDFHdlrTest {
         Test.stopTest();
 
         // Assertions – constructor logic
+        System.assertEquals(false, handler.hasError);
         System.assertEquals('OC-INV-001', handler.invoiceNo);
         System.assertNotEquals(null, handler.invoiceDate);
         System.assertEquals(500, handler.amount);
@@ -68,5 +69,28 @@ public class LeasingOtherChargeTaxInvoicePDFHdlrTest {
         System.assertNotEquals(null,contentVersionId,'ContentVersion should be created');
         ContentVersion cv = [SELECT Id, Title FROM ContentVersion WHERE Id = :contentVersionId];
         System.assertEquals('Tax Invoice', cv.Title);
+    }
+
+    @IsTest
+    static void testValidationWithoutRefDocno() {
+        LeasingOrdersOtherCharges__c oc = [SELECT Id, RefDocno__c FROM LeasingOrdersOtherCharges__c LIMIT 1];
+        oc.RefDocno__c = null;
+        update oc;
+
+        Test.setCurrentPage(Page.LeasingOtherChargeTaxInvoice);
+        ApexPages.currentPage().getParameters().put('id', oc.Id);
+
+        Test.startTest();
+        LeasingOtherChargeTaxInvoicePDFHandler handler = new LeasingOtherChargeTaxInvoicePDFHandler();
+        System.assertEquals(true, handler.hasError);
+        System.assert(String.isNotBlank(handler.errorMessage));
+
+        try {
+            LeasingOtherChargeTaxInvoicePDFHandler.generateAndAttachPdf(oc.Id);
+            System.assert(false, 'Expected AuraHandledException was not thrown');
+        } catch (AuraHandledException e) {
+            System.assert(e.getMessage() != null);
+        }
+        Test.stopTest();
     }
 }

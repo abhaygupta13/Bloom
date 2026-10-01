@@ -19,10 +19,21 @@ public without sharing class BrokerCommissionController {
             BrokerCommissionService objBrokerCommissionServ = BrokerCommissionService.getInstance();
             MetadataService objMetadataService = MetadataService.getInstance();
             BrokerCommission__c broker = objBrokerCommissionServ.getBrokerCommissionById(recordId);
+            List<Contact> contacts = new List<Contact>();
             String brokerContactRole = objMetadataService.getAppSettingTextValue(MTD_BC_BROKER_CONTACT_ROLE_VALUE);
             List<String> brokerContactRoleValueList = brokerContactRole.split(',');
-            List<Contact> conList = objContactService.getActiveBrokerContactByAccountId(broker.Agency__c,brokerContactRoleValueList);
-            return conList;
+            List<Contact> conList = objContactService.getActiveBrokerContactByAccountId(broker.Agency__c);
+            for(Contact con : conList){
+                if (con.BrokerContactRole__c != null) {
+                    for (String role : brokerContactRoleValueList) {
+                        if (con.BrokerContactRole__c.split(';').contains(role)) {
+                            contacts.add(con);
+                            break;
+                        }
+                    }
+                }
+            }
+            return contacts;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }

@@ -18,6 +18,7 @@ public inherited sharing class LeasingReceiptAcknowledgementService {
     private static final String LContractDoc {get{ return 'Leasing Receipt document';} }
 
     public static Boolean bypassIntegration = false;
+    public static Set<Id> processedReceiptIdsInContext = new Set<Id>();
     
     private LeasingReceiptAcknowledgementService() {
         
@@ -59,8 +60,15 @@ public inherited sharing class LeasingReceiptAcknowledgementService {
                 continue;
             }
             if((bypassIntegration && receiptAck.SAPDocumentNumber__c != Null) || (receiptAck.VerifyDate__c > Date.Today() && !receiptAck.MarkDeleteReverse__c))
-            continue;
+                continue;
+
+            // Prevent duplicate 'U' integration in the same transaction if the receipt has already initiated integration (e.g. 'C' on insert)
+            if(action == 'U' && processedReceiptIdsInContext.contains(receiptAck.Id)){
+                continue;
+            }
+
             objIntegrationRecordList.add(createReceiptAckIntegrationRecObj(action, receiptAck, Type));
+            processedReceiptIdsInContext.add(receiptAck.Id);
         }
         objIntegrationRecordService.insertIntegrationRecords(objIntegrationRecordList);
     }

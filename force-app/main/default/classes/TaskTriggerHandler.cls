@@ -24,6 +24,7 @@ public without sharing class TaskTriggerHandler  implements ITriggerHandler{
     }
     
     public void afterInsert(List<sObject> newList , Map<Id, sObject> newMap) {
+         TaskTriggerHelper.handleAfterInsert((List<Task>) newList);
     }
     
     public void beforeUpdate(List<sObject> newList, Map<Id, sObject> newMap, List<sObject> oldList, Map<Id, sObject> oldMap) {

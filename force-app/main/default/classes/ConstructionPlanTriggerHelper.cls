@@ -15,20 +15,14 @@ public class ConstructionPlanTriggerHelper {
     
     private static final string MTD_NO_REPLY_SALESIT_OWEID_SETTING { get { return 'NoReplySalesIT'; } }
     private static final string MTD_Construction_Plan_Email_Template_Id { get { return 'ConstructionPlanETId'; } }
-    private static final string MTD_Finance_Group_Id { get { return 'Finance_Group_Id'; } }
-    private static final string MTD_Operation_Group_Id { get { return 'Operation_Group_Id'; } }
-    private static final string MTD_CRM_Operation_Group_Id { get { return 'CRM_Operation_Group_Id'; } }
-    private static final string MTD_ProjectTeam_Group_Id { get { return 'Project_Update_Group_Id'; } }
+    private static final string MTD_Construction_Plan_Email_Recipients { get { return 'Construction_Plan_Email_Recipients'; } }
+    
     
     public static void sendProjectUpdateEmail(List<Construction_Plan__c> constructionPlanList) {
         if (!constructionPlanList.isEmpty()) {
             MetadataService objMetadataService = MetadataService.getInstance();
             EmailService objEmailService = EmailService.getInstance();
             Id orgWideEmailAddressId = objMetadataService.getAppSettingTextValue(MTD_NO_REPLY_SALESIT_OWEID_SETTING);
-            Id financeGrpId = objMetadataService.getAppSettingTextValue(MTD_Finance_Group_Id);
-            Id operationGrpId = objMetadataService.getAppSettingTextValue(MTD_Operation_Group_Id);
-            Id crmOperationGrpId = objMetadataService.getAppSettingTextValue(MTD_CRM_Operation_Group_Id);
-            Id projectTeamGrpid = objMetadataService.getAppSettingTextValue(MTD_ProjectTeam_Group_Id);
             
             String constructionPlanEmailTemplateId = objMetadataService.getAppSettingTextValue(MTD_Construction_Plan_Email_Template_Id);
             
@@ -36,7 +30,12 @@ public class ConstructionPlanTriggerHelper {
             
             EmailTemplate emailTemplate = objEmailService.getEmailTemplateById(constructionPlanEmailTemplateId);
             
-            toAddresses = Utility.getUserEmailsFromPublicGroupIds(new Set<Id>{FinanceGrpId,OperationGrpId,CrmOperationGrpId,ProjectTeamGrpid});
+            
+            //added by ranjan
+            String constructionPlanGroupEmailRecipients = objMetadataService.getAppSettingTextValue(MTD_Construction_Plan_Email_Recipients);
+            if (String.isNotBlank(constructionPlanGroupEmailRecipients)) {
+                toAddresses.addAll(constructionPlanGroupEmailRecipients.split(','));
+            }
             
             // Initialize placeholders
             String emailSubject = emailTemplate.Subject;

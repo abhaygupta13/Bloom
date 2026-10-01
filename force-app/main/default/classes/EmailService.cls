@@ -819,6 +819,9 @@ sendEmail(new Messaging.SingleEmailMessage[] { mail });
         if(wrapper.shouldSetUseSignature) {
             mail.setUseSignature(wrapper.shouldUseSignature);
         }
+        if(wrapper.shouldSetTreatTargetObjectAsRecipient) {
+            mail.setTreatTargetObjectAsRecipient(wrapper.shouldTreatTargetObjectAsRecipient);
+        }
         return mail;
     }
 
@@ -866,9 +869,9 @@ sendEmail(new Messaging.SingleEmailMessage[] { mail });
     
     private String getDynamicBody(String body, WorkOrder workOrder, ServiceAppointment ServiceAppointmentObj) {
         body = body.replace('[WorkOrder_Number]', String.isNotBlank(workOrder.WorkOrderNumber) ? workOrder.WorkOrderNumber : 'N/A');
-        body = body.replace('[Unit_Number]', String.isNotBlank(workOrder.Unit__r.Name) ? workOrder.Unit__r.Name : 'N/A');
-        body = body.replace('[Date_and_Time]', ServiceAppointmentObj.SchedStartTime != null ? ServiceAppointmentObj.SchedStartTime.format('yyyy-MM-dd HH:mm:ss') : 'N/A');
-        body = body.replace('[Closed_Date]', ServiceAppointmentObj.SchedEndTime != null ? ServiceAppointmentObj.SchedEndTime.format('yyyy-MM-dd HH:mm:ss') : 'N/A');
+        body = body.replace('[Unit_Number]', String.isNotBlank(workOrder.Unit__r.Name) ? workOrder?.Unit__r.Name : 'N/A');
+        body = body.replace('[Date_and_Time]', ServiceAppointmentObj?.SchedStartTime != null ? ServiceAppointmentObj.SchedStartTime.format('yyyy-MM-dd HH:mm:ss') : 'N/A');
+        body = body.replace('[Closed_Date]', ServiceAppointmentObj?.SchedEndTime != null ? ServiceAppointmentObj.SchedEndTime.format('yyyy-MM-dd HH:mm:ss') : 'N/A');
         body = body.replace('[DLP_Agent_Name]', String.isNotBlank(workOrder.Owner.Name) ? workOrder.Owner.Name : 'N/A');
         body = body.replace('[Project_Name]', String.isNotBlank(workOrder.Project__r.Name) ? workOrder.Project__r.Name : 'N/A');
         body = body.replace('[Contractor_Name]',String.isNotBlank(workOrder.Contractor_Name__c) ? workOrder.Contractor_Name__c : 'N/A');
@@ -888,6 +891,31 @@ sendEmail(new Messaging.SingleEmailMessage[] { mail });
         body = body.replace('[BloomEmail]', System.Label.HandoverBloomEmail); 
         return body;
     }
+    
+    public Messaging.SingleEmailMessage replaceTokens(Messaging.SingleEmailMessage email, Map<String, String> replacements) {
+        if (email != null && replacements != null && !replacements.isEmpty()) {
+            String body = email.getHtmlBody();
+            String subject = email.getSubject();
+
+            for(String token : replacements.keySet()) {
+                String val = replacements.get(token);
+                if (body != null) {
+                    body = body.replace(token, val);
+                }
+                if (subject != null) {
+                    subject = subject.replace(token, val);
+                }
+            }
+
+            if (body != null) {
+                email.setHtmlBody(body);
+            }
+            if (subject != null) {
+                email.setSubject(subject);
+            }
+        }
+        return email;
+    }
 
     public class EmailWrapper {
         public Boolean shouldSetToAddress = false;
@@ -901,9 +929,11 @@ sendEmail(new Messaging.SingleEmailMessage[] { mail });
         public Boolean shouldSetPlainTextBody = false;
         public Boolean shouldSetHtmlBody = false;
         public Boolean shouldSetTargetObjectId = false;
+        public Boolean shouldSetTreatTargetObjectAsRecipient = false;
 
         public Boolean shoudlSaveAsActivity = false;
         public Boolean shouldUseSignature = false;
+        public Boolean shouldTreatTargetObjectAsRecipient = false;
         public List<String> toAddressList;
         public List<String> ccAddressList;
         public List<String> bccAddressList;

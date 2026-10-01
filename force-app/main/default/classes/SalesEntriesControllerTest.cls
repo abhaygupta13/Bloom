@@ -318,11 +318,8 @@ private class SalesEntriesControllerTest {
         
         Test.startTest();
         
-        LeasingOrderTriggerHelper.createSalesEntriesOnTORUpdate(
-            new List<LeasingOrder__c>{ order },
-            new Map<Id, LeasingOrder__c>{
-                order.Id => oldOrder
-                    }
+        LeasingOrderTriggerHelper.createSalesEntries(
+            new List<LeasingOrder__c>{ order }
         );
         
         Test.stopTest();
@@ -376,11 +373,8 @@ private class SalesEntriesControllerTest {
         Test.startTest();
         
         // First call - should create 3 Sales Entries
-        LeasingOrderTriggerHelper.createSalesEntriesOnTORUpdate(
-            new List<LeasingOrder__c>{ order },
-            new Map<Id, LeasingOrder__c>{
-                order.Id => oldOrder
-                    }
+        LeasingOrderTriggerHelper.createSalesEntries(
+            new List<LeasingOrder__c>{ order }
         );
         
         // Simulate TOR being updated again
@@ -394,11 +388,8 @@ private class SalesEntriesControllerTest {
         order.TOR__c = 15;
         
         // Second call - should NOT create duplicate Sales Entries
-        LeasingOrderTriggerHelper.createSalesEntriesOnTORUpdate(
-            new List<LeasingOrder__c>{ order },
-            new Map<Id, LeasingOrder__c>{
-                order.Id => secondOldOrder
-                    }
+        LeasingOrderTriggerHelper.createSalesEntries(
+            new List<LeasingOrder__c>{ order }
         );
         
         Test.stopTest();

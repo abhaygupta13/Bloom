@@ -296,6 +296,10 @@ FROM SalesOrder__c WHERE ID IN :salesOrderId]);  */
                 Account__r.Emirates_Id__pc,ADHACancellationReason__c FROM SalesOrder__c 
                 WHERE Id In :salesOrderIds AND ADHAApplicationNumber__c != null AND Opportunity__r.ADHAStatus__c != 'PC_Rejected' ];
     }
+
+    public List<SalesOrder__c> getAccountWithJointOwners(Id salesorderId){
+        return [SELECT Id,Account__r.Name,(SELECT Name,Account__r.Name FROM Joint_OwnersSalesOrder__r) FROM SalesOrder__c WHERE Id = :salesorderId];
+    }
     
     public IntegrationRecord__c prepareIntegrationRecord(SalesOrder__c salesOrder){
         Map<String,String> paramsMap = new Map<String,String>();
@@ -435,11 +439,11 @@ CUSTOMER_SIGNED_SUB_STATUS => SALES_ORDER_MULE_STATUS_DEV_SPA_SIGNED
     
     public List<SalesOrder__c> getMobileAppActiveSalesOrdersByAccountId(Id accountId){
         Set<String> statuses = new Set<String>{SALES_ORDER_STATUS_BOOKED, SALES_ORDER_STATUS_RESERVED, SALES_ORDER_STATUS_SOLD};
-            return [SELECT Id, Unit__c, Unit__r.ADMAddressingNumber__c, Unit__r.Name, Status__c,
+            return [SELECT Id, Unit__c, Unit__r.ADMAddressingNumber__c, Unit__r.Name, Status__c,SubStatus__c,
                     Unit__r.Project__r.Name, Handover_Date__c, Account__r.Name, Unit__r.BuildingSectionName__r.Name,
                     Unit__r.Project__r.Amenities__c, Unit__r.Location__Latitude__s, Unit__r.Location__Longitude__s,
                     Unit__r.SaleableArea__c, NetAmount__c, Sales_Order_Cleared_Amount__c, Unit__r.NumberOfBedrooms__c,
-                    Unit__r.NumberOfBathrooms__c,SPA_Collection_Status__c,
+                    Unit__r.NumberOfBathrooms__c,SPA_Collection_Status__c, ADHAApplicationNumber__c,
                     (SELECT Id,Account__r.Name,RelationshipType__c,SharePercentage__c FROM Joint_OwnersSalesOrder__r),
                     (SELECT Id,Name, ContentDocumentId__c,Content_Version_Id__c, DocumentType__c,DocumentType__r.Type__c FROM Documents__r
                      WHERE DocumentType__r.IsAvailableForApp__c = true AND ContentDocumentId__c != null)

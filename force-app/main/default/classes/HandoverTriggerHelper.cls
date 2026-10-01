@@ -20,6 +20,8 @@ public without sharing class HandoverTriggerHelper {
     private static final String Task_Subject = 'Please generate the Bank NOC for Unit';
     private static final String STATUS_IN_PROGRESS = 'In Progress';
     private static final String STATUS_COMPLETED = 'Completed';
+     private static final String STATUS_HANDOVER_COMPLETED = 'Handover Completed';
+    private static final String STATUS_NEW = 'New';
     private static final String Please_assign_the_handover_to_Treasury_Team = 'Please assign the handover to Treasury Team';
     private static final String Task_SubjectForDeveloperNOC = 'Please Upload the Developer NOC for Unit';
     private static final String UNIT_TYPE_APARTMENT = 'Apartment';
@@ -771,4 +773,20 @@ public without sharing class HandoverTriggerHelper {
         }
         objSalesOrderService.updateSalesOrdersWithoutTrigger(salesOrdersToUpdate);
     }
+      public static void updateStatus(List<Handover__c> newList, Map<Id, Handover__c> oldMap) {
+        for (Handover__c ho : newList) {
+            if (oldMap == null || ho.Sub_Status__c != oldMap.get(ho.Id).Sub_Status__c) {
+                if (ho.Sub_Status__c == null) {
+                    ho.Status__c = null;
+                } else if (ho.Sub_Status__c == STATUS_NEW) {
+                    ho.Status__c = STATUS_NEW;
+                } else if (ho.Sub_Status__c == STATUS_HANDOVER_COMPLETED) {
+                    ho.Status__c = STATUS_COMPLETED;
+                } else {
+                    ho.Status__c = STATUS_IN_PROGRESS;
+                }
+            }
+        }
+    }
+
 }

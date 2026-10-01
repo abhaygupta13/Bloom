@@ -48,6 +48,9 @@
                                 </criteria>
                             </visibilityRule>
                         </valueListItems>
+                        <valueListItems>
+                            <value>Case.Cancel</value>
+                        </valueListItems>
                     </valueList>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
@@ -134,10 +137,10 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>none</value>
+                    <value>readonly</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Category__c</fieldItem>
-                <identifier>RecordCategory_cField</identifier>
+                <fieldItem>Record.SubType__c</fieldItem>
+                <identifier>RecordSubType_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -195,10 +198,10 @@
             <fieldInstance>
                 <fieldInstanceProperties>
                     <name>uiBehavior</name>
-                    <value>readonly</value>
+                    <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.SubType__c</fieldItem>
-                <identifier>RecordSubType_cField</identifier>
+                <fieldItem>Record.Category__c</fieldItem>
+                <identifier>RecordCategory_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -236,6 +239,58 @@
             </componentInstance>
         </itemInstances>
         <name>Facet-0496247a-fcd5-4cc8-90ba-600ff9aef802</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.CancellationReason__c</fieldItem>
+                <identifier>RecordCancellationReason_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-e0114a06-7299-414a-8cf1-d311b30dbbef</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.CancellationRemarks__c</fieldItem>
+                <identifier>RecordCancellationRemarks_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-a6ed9965-9886-4ba9-8e25-68e349c5ff40</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-e0114a06-7299-414a-8cf1-d311b30dbbef</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column4</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-a6ed9965-9886-4ba9-8e25-68e349c5ff40</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column5</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-6c82ad6d-2aa3-4b2b-a2ed-882257433562</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -335,6 +390,24 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-6c82ad6d-2aa3-4b2b-a2ed-882257433562</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Case Cancellation Details</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection3</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>

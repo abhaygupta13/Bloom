@@ -166,8 +166,34 @@ export default class LeasingReceipt extends LightningElement {
         this.filterRows();
     }
 
+    checkIfAdvanceDate() {
+        if (this.leasingStartDate) {
+            const leasingStart = new Date(this.leasingStartDate);
+            leasingStart.setHours(0, 0, 0, 0);
+
+            if (this.chequeDate) {
+                const cDate = new Date(this.chequeDate);
+                cDate.setHours(0, 0, 0, 0);
+                if (cDate < leasingStart) {
+                    this.isAdvance = true;
+                    return true;
+                }
+            }
+            if (this.verifyDate) {
+                const pDate = new Date(this.verifyDate);
+                pDate.setHours(0, 0, 0, 0);
+                if (pDate < leasingStart) {
+                    this.isAdvance = true;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     handleChequeDate(event) {
         this.chequeDate = event.target.value;
+        this.checkIfAdvanceDate();
         
         // Clear custom validity when user changes the date
         const chequeDateField = this.template.querySelector('.date-field');
@@ -180,6 +206,7 @@ export default class LeasingReceipt extends LightningElement {
     handleVerifyDate(event) {
         this.verifyDate = event.target.value;
         this.receiptDate = this.verifyDate;
+        this.checkIfAdvanceDate();
         
         // Clear custom validity when user changes the date
         const dateFields = this.template.querySelectorAll('.date-field');
@@ -231,6 +258,7 @@ export default class LeasingReceipt extends LightningElement {
 
                 this.allRows = result?.rows;
                 this.filterRows();
+                this.checkIfAdvanceDate();
 
                 if (!this.rows || this.rows.length === 0) {
                     this.isAdvance = true;
@@ -304,13 +332,14 @@ export default class LeasingReceipt extends LightningElement {
     }
 
     handleSave() {
+        this.checkIfAdvanceDate();
 
         if (this.verifyDate && this.leasingStartDate) {
 
             const postingDate = new Date(this.verifyDate);
             const leasingStart = new Date(this.leasingStartDate);
             console.log('274');
-            if (postingDate < leasingStart) {
+            if (postingDate < leasingStart && !this.isAdvance) {
                 console.log('true');
 
                 this.dispatchEvent(
@@ -380,8 +409,8 @@ export default class LeasingReceipt extends LightningElement {
                 dateFields[1].setCustomValidity('');
             }
 
-            // Restrict allocation to future due dates when cheque date is today
-            if (this.chequeDate) {
+            // Restrict allocation to future due dates when cheque date is today (Only if NOT advance payment)
+            if (this.chequeDate && !this.isAdvance) {
                 const chequeDate = new Date(this.chequeDate);
                 chequeDate.setHours(0, 0, 0, 0);
 
@@ -575,7 +604,11 @@ export default class LeasingReceipt extends LightningElement {
                         )
                     ];
                 }
-                this.isAdvance = !this.rows || this.rows.length === 0;
+                if (!this.rows || this.rows.length === 0) {
+                    this.isAdvance = true;
+                } else {
+                    this.checkIfAdvanceDate();
+                }
             } catch (e) {
                 console.log(e.body.message)
             }

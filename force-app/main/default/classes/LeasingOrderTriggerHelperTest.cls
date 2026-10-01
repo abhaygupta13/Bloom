@@ -296,6 +296,8 @@ private class LeasingOrderTriggerHelperTest {
             Name = 'SigningTest',
             Opportunity__c = opp.Id,
             Unit__c = unit.Id,
+            LeaseType__c = 'New',
+            InitiateOfferSignature__c = true,
             BloomTeamApprovalStatus__c = 'Pending'
         );
         insert lo;
@@ -506,11 +508,8 @@ static void testSalesEntries_Comprehensive() {
 
     queriedLo.TOR__c = 5;
 
-    LeasingOrderTriggerHelper.createSalesEntriesOnTORUpdate(
-        new List<LeasingOrder__c>{ queriedLo },
-        new Map<Id, LeasingOrder__c>{
-            queriedLo.Id => oldLo
-        }
+    LeasingOrderTriggerHelper.createSalesEntries(
+        new List<LeasingOrder__c>{ queriedLo }
     );
 
     /*
@@ -525,11 +524,8 @@ static void testSalesEntries_Comprehensive() {
 
     queriedLo.TOR__c = 10;
 
-    LeasingOrderTriggerHelper.createSalesEntriesOnTORUpdate(
-        new List<LeasingOrder__c>{ queriedLo },
-        new Map<Id, LeasingOrder__c>{
-            queriedLo.Id => secondOldLo
-        }
+    LeasingOrderTriggerHelper.createSalesEntries(
+        new List<LeasingOrder__c>{ queriedLo }
     );
 
     /*

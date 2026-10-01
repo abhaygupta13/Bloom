@@ -690,57 +690,57 @@ LeasingOrder__r.Unit__r.PropertyUsage__c,
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>Client got approval</fullName>
+                    <fullName>13</fullName>
                     <default>false</default>
                     <label>Client got approval</label>
                 </value>
                 <value>
-                    <fullName>Wrong allocation of payment</fullName>
+                    <fullName>14</fullName>
                     <default>false</default>
                     <label>Wrong allocation of payment</label>
                 </value>
                 <value>
-                    <fullName>Wrong calculation of charges</fullName>
+                    <fullName>15</fullName>
                     <default>false</default>
                     <label>Wrong calculation of charges</label>
                 </value>
                 <value>
-                    <fullName>Wrong calculation of fees because of wrong input</fullName>
+                    <fullName>16</fullName>
                     <default>false</default>
                     <label>Wrong calculation of fees because of wrong input</label>
                 </value>
                 <value>
-                    <fullName>Wrong client charged</fullName>
+                    <fullName>17</fullName>
                     <default>false</default>
                     <label>Wrong client charged</label>
                 </value>
                 <value>
-                    <fullName>Charged because of delay in booking receipts</fullName>
+                    <fullName>18</fullName>
                     <default>false</default>
                     <label>Charged because of delay in booking receipts</label>
                 </value>
                 <value>
-                    <fullName>Clearing/ Allocation issues</fullName>
+                    <fullName>19</fullName>
                     <default>false</default>
                     <label>Clearing/ Allocation issues</label>
                 </value>
                 <value>
-                    <fullName>As per approval from management</fullName>
+                    <fullName>20</fullName>
                     <default>false</default>
                     <label>As per approval from management</label>
                 </value>
                 <value>
-                    <fullName>Closed/ ended contract</fullName>
+                    <fullName>21</fullName>
                     <default>false</default>
                     <label>Closed/ ended contract</label>
                 </value>
                 <value>
-                    <fullName>Cancellation/ Termination of unit</fullName>
+                    <fullName>22</fullName>
                     <default>false</default>
                     <label>Cancellation/ Termination of unit</label>
                 </value>
                 <value>
-                    <fullName>Miscellaneous amount reversal</fullName>
+                    <fullName>23</fullName>
                     <default>false</default>
                     <label>Miscellaneous amount reversal</label>
                 </value>

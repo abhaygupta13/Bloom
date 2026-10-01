@@ -59,7 +59,10 @@ public without sharing class LeasingReceiptAllocationTriggerHelper {
         LeasingReceiptAcknowledgementService service = LeasingReceiptAcknowledgementService.getInstance();
         for(LeasingReceiptAllocation__c alloc : newList){
             if(alloc.LeasingReceiptAcknowledgment__c != Null && !alloc.ReceiptHold__c){
-                acknowledgementIds.add(alloc.LeasingReceiptAcknowledgment__c);
+                // Skip triggering 'U' if parent receipt has already initiated integration in this transaction (e.g. 'C' on insert)
+                if(!LeasingReceiptAcknowledgementService.processedReceiptIdsInContext.contains(alloc.LeasingReceiptAcknowledgment__c)){
+                    acknowledgementIds.add(alloc.LeasingReceiptAcknowledgment__c);
+                }
             }
         }
         if(!acknowledgementIds.isEmpty() && acknowledgementIds.size()>0){

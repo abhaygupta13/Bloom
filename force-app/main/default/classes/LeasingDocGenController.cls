@@ -33,7 +33,7 @@ public class LeasingDocGenController {
             if(recordId != null && recordId.getSObjectType() == LeasingOrder__c.SObjectType){
                 LeasingOrderService leaseOrderService = LeasingOrderService.getInstance();
                 Leasingorder__c lo = leaseOrderService.getLeasingOrderById(recordId);
-                if(lo.MasterLeasingOrder__c != null && documentName != 'Leasing Exit Letter'){
+                if(lo.MasterLeasingOrder__c != null && documentName != 'Leasing Exit Letter' && documentName != 'Move Out Request Form'){
                     DocumentType__c doctype = [Select Id, DeliveryOption__c, DocGenPackage__c from Documenttype__c where ObjectType__c = 'LeasingOrder__c' and Type__c='Leasing Contract' and Customer_Type__c= null];
                     deliveryOptionId = doctype.DeliveryOption__c;
                     templateId = doctype.DocGenPackage__c;

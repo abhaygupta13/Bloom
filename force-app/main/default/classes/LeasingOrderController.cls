@@ -509,7 +509,7 @@ public with Sharing class LeasingOrderController {
         
         String baseQuery = 'SELECT Id, Name, NumberOfBedrooms__c, Internal_Saleable_Area__c, LeasingUnitSizesqm__c,' +
             ' UnitType__c, PropertyUsage__c, UnitCategory__c, LeasingAnnualRent__c,' +
-            ' External_Saleable_Area__c, LeasingUnitNumber__c, Project__c, Project__r.Name FROM Unit__c WHERE ';
+            ' External_Saleable_Area__c, LeasingUnitNumber__c, Project__c, Project__r.Name, SAP_Unit_Number__c FROM Unit__c WHERE ';
         
         String whereClause = '';
         

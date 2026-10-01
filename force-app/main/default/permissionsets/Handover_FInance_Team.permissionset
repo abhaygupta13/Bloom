@@ -443,6 +443,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Handover__c.Tammfeesamount__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Handover__c.Title_Deed_Fee__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -454,6 +459,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Handover__c.Unit__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Handover__c.is_Tamm_Fees_Collected__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
